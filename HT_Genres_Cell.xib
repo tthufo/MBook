@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="HT_Genres_Cell" id="4xs-Y0-2GY">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4xs-Y0-2GY" id="MPE-la-p15">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" tag="11" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="---" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7br-iw-9XY">
+                        <rect key="frame" x="8" y="4" width="260" height="36"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="36" id="Zr1-cz-Apk"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="17"/>
+                        <color key="textColor" red="0.0" green="0.50980392159999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" tag="12" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fIV-nE-qT2">
+                        <rect key="frame" x="276" y="4" width="36" height="36"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="36" id="Obx-Hf-pvl"/>
+                            <constraint firstAttribute="width" constant="36" id="Zin-Oj-2Zp"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                <constraints>
+                    <constraint firstItem="7br-iw-9XY" firstAttribute="leading" secondItem="MPE-la-p15" secondAttribute="leading" constant="8" id="5kh-hg-udG"/>
+                    <constraint firstItem="fIV-nE-qT2" firstAttribute="leading" secondItem="7br-iw-9XY" secondAttribute="trailing" constant="8" id="C7S-JB-0QV"/>
+                    <constraint firstItem="7br-iw-9XY" firstAttribute="top" secondItem="MPE-la-p15" secondAttribute="top" constant="4" id="bsc-9x-cML"/>
+                    <constraint firstAttribute="trailing" secondItem="fIV-nE-qT2" secondAttribute="trailing" constant="8" id="jQ4-pR-BFf"/>
+                    <constraint firstItem="fIV-nE-qT2" firstAttribute="top" secondItem="MPE-la-p15" secondAttribute="top" constant="4" id="qxX-1N-OmO"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <point key="canvasLocation" x="603" y="294"/>
+        </tableViewCell>
+    </objects>
+</document>

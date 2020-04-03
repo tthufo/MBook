@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="M_Detail_ViewController">
+            <connections>
+                <outlet property="tableView" destination="Pfc-Mm-Dm4" id="Tlo-Kk-6lW"/>
+                <outlet property="topView" destination="zcx-Ob-zsR" id="H4n-bZ-TRA"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Pfc-Mm-Dm4">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                    <color key="backgroundColor" red="0.92941176469999998" green="0.93333333330000001" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="separatorColor" red="0.93725490199999995" green="0.3803921569" blue="0.16078431369999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="yIk-o3-83F"/>
+                        <outlet property="delegate" destination="-1" id="hC7-Ic-HOe"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="Pfc-Mm-Dm4" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="CZK-9o-akt"/>
+                <constraint firstAttribute="bottom" secondItem="Pfc-Mm-Dm4" secondAttribute="bottom" id="X1a-q9-hjn"/>
+                <constraint firstAttribute="trailing" secondItem="Pfc-Mm-Dm4" secondAttribute="trailing" id="pr2-X7-RZc"/>
+                <constraint firstItem="Pfc-Mm-Dm4" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="rrs-OB-iHr"/>
+            </constraints>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="347" y="298"/>
+        </view>
+        <view contentMode="scaleToFill" id="zcx-Ob-zsR">
+            <rect key="frame" x="0.0" y="0.0" width="187" height="41"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <button opaque="NO" tag="11" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Edc-Xu-vtj">
+                    <rect key="frame" x="0.0" y="5" width="187" height="33"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                    <state key="normal" title="---">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                </button>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_drop_down" translatesAutoresizingMaskIntoConstraints="NO" id="yhF-jr-cqg">
+                    <rect key="frame" x="88" y="34" width="10" height="5"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="5" id="BYb-R1-7Nw"/>
+                        <constraint firstAttribute="width" constant="10" id="RDr-M6-8Os"/>
+                    </constraints>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="yhF-jr-cqg" firstAttribute="centerX" secondItem="zcx-Ob-zsR" secondAttribute="centerX" id="DSP-SZ-4T5"/>
+                <constraint firstAttribute="bottom" secondItem="yhF-jr-cqg" secondAttribute="bottom" constant="2" id="Dse-rG-UWR"/>
+                <constraint firstAttribute="trailing" secondItem="Edc-Xu-vtj" secondAttribute="trailing" id="Kkv-vn-rpn"/>
+                <constraint firstItem="Edc-Xu-vtj" firstAttribute="leading" secondItem="zcx-Ob-zsR" secondAttribute="leading" id="LMf-GY-gAC"/>
+                <constraint firstItem="Edc-Xu-vtj" firstAttribute="top" secondItem="zcx-Ob-zsR" secondAttribute="top" constant="5" id="bGt-TR-NP1"/>
+                <constraint firstItem="Edc-Xu-vtj" firstAttribute="centerX" secondItem="zcx-Ob-zsR" secondAttribute="centerX" id="xXP-eZ-WmF"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="280.5" y="645.5"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="ic_drop_down" width="29" height="17"/>
+    </resources>
+</document>

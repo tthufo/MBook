@@ -1,0 +1,35 @@
+//
+//  Navigation_ViewController.m
+//  HearThis
+//
+//  Created by Thanh Hai Tran on 4/2/20.
+//  Copyright © 2020 Thanh Hai Tran. All rights reserved.
+//
+
+#import "Navigation_ViewController.h"
+
+#import "HT_Player_ViewController.h"
+
+@interface Navigation_ViewController ()
+
+@end
+
+@implementation Navigation_ViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    HT_Player_ViewController * player = [HT_Player_ViewController new];
+    
+    [self addChildViewController:player];
+    
+    player.view.frame = CGRectMake(0, screenHeight1 - 0 , screenWidth1, 57);
+
+    [self.view addSubview:player.view];
+
+    [player didMoveToParentViewController:self];
+    
+//    NSLog(@"%@", self.viewControllers);
+}
+
+@end

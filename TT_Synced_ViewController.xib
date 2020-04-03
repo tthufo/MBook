@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TT_Synced_ViewController">
+            <connections>
+                <outlet property="control" destination="zEr-Jt-R3m" id="gSl-fi-H6a"/>
+                <outlet property="playList" destination="oPI-L9-5mn" id="SwT-ay-uFH"/>
+                <outlet property="tableView" destination="UNA-ls-Z3k" id="FTR-OP-KR6"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="UNA-ls-Z3k">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="separatorColor" red="0.0" green="0.50980392159999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    <color key="sectionIndexColor" red="0.0" green="0.50980392156862742" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="EoG-1K-OB3"/>
+                        <outlet property="delegate" destination="-1" id="xzv-hU-3Mp"/>
+                    </connections>
+                </tableView>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="oPI-L9-5mn">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="separatorColor" red="0.0" green="0.50980392159999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="EtF-bb-jBD"/>
+                        <outlet property="delegate" destination="-1" id="HbZ-Rd-UHQ"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="UNA-ls-Z3k" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="0hC-Dn-FcO"/>
+                <constraint firstAttribute="trailing" secondItem="UNA-ls-Z3k" secondAttribute="trailing" id="66h-5T-JAJ"/>
+                <constraint firstAttribute="bottom" secondItem="UNA-ls-Z3k" secondAttribute="bottom" id="Ei2-Xf-gCL"/>
+                <constraint firstItem="oPI-L9-5mn" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="L0P-I2-fz1"/>
+                <constraint firstItem="UNA-ls-Z3k" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="g4H-tx-4zb"/>
+                <constraint firstAttribute="bottom" secondItem="oPI-L9-5mn" secondAttribute="bottom" id="poN-ZR-Ac6"/>
+                <constraint firstAttribute="trailing" secondItem="oPI-L9-5mn" secondAttribute="trailing" id="rb8-ku-dry"/>
+                <constraint firstItem="oPI-L9-5mn" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="zGB-rM-2ce"/>
+            </constraints>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-48" y="8"/>
+        </view>
+        <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" id="zEr-Jt-R3m">
+            <rect key="frame" x="0.0" y="0.0" width="186" height="30"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <segments>
+                <segment title="Library"/>
+                <segment title="Playlist"/>
+            </segments>
+            <connections>
+                <action selector="didPressSegment:" destination="-1" eventType="valueChanged" id="sCx-3M-X1o"/>
+            </connections>
+            <point key="canvasLocation" x="-34" y="394"/>
+        </segmentedControl>
+    </objects>
+</document>

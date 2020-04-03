@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<dict>
+		<key>title</key>
+		<string>Hot &amp; Trend</string>
+		<key>img</key>
+		<string></string>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>Find</string>
+		<key>img</key>
+		<string></string>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>Recent / List</string>
+		<key>img</key>
+		<string></string>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>Extras</string>
+		<key>img</key>
+		<string></string>
+	</dict>
+	<dict>
+		<key>title</key>
+		<string>Synced</string>
+		<key>img</key>
+		<string></string>
+	</dict>
+</array>
+</plist>

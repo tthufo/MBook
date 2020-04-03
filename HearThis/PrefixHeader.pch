@@ -1,0 +1,146 @@
+//
+//  PrefixHeader.pch
+//  SoundC
+//
+//  Created by thanhhaitran on 9/5/16.
+//  Copyright © 2016 thanhhaitran. All rights reserved.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+#ifndef APPDELEGATE
+#define APPDELEGATE ((AppDelegate *)[[UIApplication sharedApplication] delegate])
+#endif
+
+#define screenHeight1 [UIScreen mainScreen].bounds.size.height
+#define screenWidth1 [UIScreen mainScreen].bounds.size.width
+
+#define DegreesToRadians(x) ((x) * M_PI / 180.0)
+
+#define SYSTEM_VERSION_EQUAL_TO(v)                  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedSame)
+#define SYSTEM_VERSION_GREATER_THAN(v)              ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedDescending)
+#define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
+#define SYSTEM_VERSION_LESS_THAN(v)                 ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] == NSOrderedAscending)
+#define SYSTEM_VERSION_LESS_THAN_OR_EQUAL_TO(v)     ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedDescending)
+#define RAND_FROM_TO(min, max) (min + arc4random_uniform(max - min + 1))
+
+#define SCREEN_WIDTH ([[UIScreen mainScreen] bounds].size.width)
+#define SCREEN_HEIGHT ([[UIScreen mainScreen] bounds].size.height)
+#define SCREEN_MAX_LENGTH (MAX(SCREEN_WIDTH, SCREEN_HEIGHT))
+#define SCREEN_MIN_LENGTH (MIN(SCREEN_WIDTH, SCREEN_HEIGHT))
+#define IS_IPHONE_4_OR_LESS (SCREEN_MAX_LENGTH < 568.0)
+
+#define IS_IPHONE_5 (SCREEN_MAX_LENGTH == 568.0)
+#define IS_IPHONE_6 (SCREEN_MAX_LENGTH == 667.0)
+#define IS_IPHONE_6P (SCREEN_MAX_LENGTH == 736.0)
+
+#define dDeviceOrientation [[UIDevice currentDevice] orientation]
+#define isPortrait  UIDeviceOrientationIsPortrait(dDeviceOrientation)
+#define isLandScape UIDeviceOrientationIsLandscape(dDeviceOrientation)
+#define isFaceUp    dDeviceOrientation == UIDeviceOrientationFaceUp   ? YES : NO
+#define isFaceDown  dDeviceOrientation == UIDeviceOrientationFaceDown ? YES : NO
+
+#define ShowNetworkActivityIndicator() [UIApplication sharedApplication].networkActivityIndicatorVisible = YES
+#define HideNetworkActivityIndicator() [UIApplication sharedApplication].networkActivityIndicatorVisible = NO
+
+#define alphabet @[@"A", @"B", @"C", @"D", @"E", @"F", @"G", @"H", @"I", @"J", @"K", @"L", @"M", @"N", @"O", @"P", @"Q", @"R", @"S", @"T", @"U", @"V", @"W", @"X", @"Y", @"Z", @"#"]
+
+
+#define kAvatar [UIImage imageNamed:@"disc"]
+
+#define purchaseKey @"removeAds"
+
+#define productId @"remove_again_now_ads"
+
+//#define kColor @"#EF6129"
+
+//#define kColor @"#FF004B"
+
+#define kColor @"#0082FF"
+
+
+
+#define maxR @"20"
+
+
+#define appLink @"https://itunes.apple.com/us/app/cloud-music-player-free-songs/id997667203?ls=1&mt=8"
+
+#define appTitle @"Let's Hear It Now! Link: https://itunes.apple.com/us/app/cloud-music-player-free-songs/id997667203?ls=1&mt=8"
+
+#define iapSecret @"70b7be9fbfec409f9511af2020cdf874"
+
+
+
+#define kStartAppId @"209643710"
+
+#define kStartAppDev @"101179665"
+
+
+
+#define serverKey1 @"AIzaSyB9IuIAwAJQhhSOQY3rn4bc9A2EjpdG_7c"
+
+#define serverKey2 @"AIzaSyBJp4RNqdhxaQndIoZZxRJKo6SM0WTJ3Ro"
+
+#define serverKey3 @"AIzaSyDaTOrfVrxpNCEe2qNuDqeu0Qv2pck11x4"
+
+#define cloudId @"e886c57c696d6a7e117b4e45efd49e7b"
+
+
+///Header
+
+#import <AVFoundation/AVFoundation.h>
+
+#import <JSONKit.h>
+
+#import <UIImageView+WebCache.h>
+
+#import <AVHexColor.h>
+
+#import "XCDYouTubeClient.h"
+
+///Category
+
+#import "AppDelegate.h"
+
+#import "AllPlugInHeader.h"
+
+#import "NSDate+TimeAgo.h"
+
+#import "UIViewController+Additional.h"
+
+#import "JASidePanelController.h"
+
+#import "XMLReader.h"
+
+//#import "MarqueeLabel.h"
+
+#import "YouTube.h"
+
+#import "M_Menu.h"
+
+#import "History.h"
+
+#import "List.h"
+
+#import "Item.h"
+
+#import "DownloadManager.h"
+
+#import "DownLoad.h"
+
+#import "Records.h"
+
+#import "EM_MenuView.h"
+
+#import "IAPHelper.h"
+
+#import "IAPShare.h"
+
+#import "CRToast.h"
+
+#import "ItemCell.h"
+
+#import "FirePush.h"
+
+#endif /* PrefixHeader_pch */
