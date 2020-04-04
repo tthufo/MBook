@@ -95,7 +95,7 @@
     
     panel.centerPanel = nav;
         
-    panel.leftPanel = [SC_Menu_ViewController new];
+    panel.leftPanel = [TG_Intro_ViewController new];//[SC_Menu_ViewController new];
 
     return panel;
 }

@@ -61,6 +61,10 @@
 		FC78397E2438F42400470148 /* PC_ChangePass_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC78397C2438F42300470148 /* PC_ChangePass_ViewController.xib */; };
 		FC78397F2438F42400470148 /* PC_ChangePass_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC78397D2438F42400470148 /* PC_ChangePass_ViewController.swift */; };
 		FC7839812438F91600470148 /* PC_Info_Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC7839802438F91500470148 /* PC_Info_Cell.xib */; };
+		FC78398424391F6700470148 /* TG_Intro_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC78398224391F6700470148 /* TG_Intro_ViewController.xib */; };
+		FC78398524391F6700470148 /* TG_Intro_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC78398324391F6700470148 /* TG_Intro_ViewController.swift */; };
+		FC7839872439204C00470148 /* PC_Header_Tab.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC7839862439204C00470148 /* PC_Header_Tab.xib */; };
+		FC783989243922C100470148 /* Province_Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC783988243922C100470148 /* Province_Cell.xib */; };
 		FC91B731243120F400AA6671 /* GUISlider.m in Sources */ = {isa = PBXBuildFile; fileRef = FC91B72E243120F400AA6671 /* GUISlider.m */; };
 		FC91B732243120F400AA6671 /* GUIPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC91B72F243120F400AA6671 /* GUIPlayerView.m */; };
 		FC91B7352431217F00AA6671 /* XMLReader.m in Sources */ = {isa = PBXBuildFile; fileRef = FC91B7332431217F00AA6671 /* XMLReader.m */; };
@@ -171,6 +175,10 @@
 		FC78397C2438F42300470148 /* PC_ChangePass_ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PC_ChangePass_ViewController.xib; sourceTree = "<group>"; };
 		FC78397D2438F42400470148 /* PC_ChangePass_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PC_ChangePass_ViewController.swift; sourceTree = "<group>"; };
 		FC7839802438F91500470148 /* PC_Info_Cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PC_Info_Cell.xib; sourceTree = "<group>"; };
+		FC78398224391F6700470148 /* TG_Intro_ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TG_Intro_ViewController.xib; sourceTree = "<group>"; };
+		FC78398324391F6700470148 /* TG_Intro_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TG_Intro_ViewController.swift; sourceTree = "<group>"; };
+		FC7839862439204C00470148 /* PC_Header_Tab.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PC_Header_Tab.xib; sourceTree = "<group>"; };
+		FC783988243922C100470148 /* Province_Cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Province_Cell.xib; sourceTree = "<group>"; };
 		FC91B72D243120F400AA6671 /* GUIPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUIPlayerView.h; sourceTree = SOURCE_ROOT; };
 		FC91B72E243120F400AA6671 /* GUISlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GUISlider.m; sourceTree = SOURCE_ROOT; };
 		FC91B72F243120F400AA6671 /* GUIPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GUIPlayerView.m; sourceTree = SOURCE_ROOT; };
@@ -452,6 +460,10 @@
 		FCAD4AA22434FCFA00387AF6 /* Leff_Menu_ */ = {
 			isa = PBXGroup;
 			children = (
+				FC78398324391F6700470148 /* TG_Intro_ViewController.swift */,
+				FC78398224391F6700470148 /* TG_Intro_ViewController.xib */,
+				FC7839862439204C00470148 /* PC_Header_Tab.xib */,
+				FC783988243922C100470148 /* Province_Cell.xib */,
 				FCAD4AA62434FD1A00387AF6 /* SC_Menu_ViewController.h */,
 				FCAD4AA52434FD1A00387AF6 /* SC_Menu_ViewController.m */,
 				FC78396B2438EC9400470148 /* SC_Menu_ViewController.xib */,
@@ -607,7 +619,9 @@
 				FC0A8FB12437770E001A75AF /* PC_Forgot_ViewController.xib in Resources */,
 				FCAD4AA92434FD1A00387AF6 /* SC_Menu.xib in Resources */,
 				FC640A901DAAAE2800DAEF55 /* TT_Sync_Header.xib in Resources */,
+				FC7839872439204C00470148 /* PC_Header_Tab.xib in Resources */,
 				FCB3CD6A1DA4DDE9002FABDD /* HT_Genres_ViewController.xib in Resources */,
+				FC783989243922C100470148 /* Province_Cell.xib in Resources */,
 				FC7550E41DAC85DE007992DF /* HT_Feed_ViewController.xib in Resources */,
 				FCC965AB1DA5F4200025971E /* HT_Player_ViewController.xib in Resources */,
 				FC7839812438F91600470148 /* PC_Info_Cell.xib in Resources */,
@@ -623,6 +637,7 @@
 				FCAD4AA82434FD1A00387AF6 /* MenuList.plist in Resources */,
 				FC78396A2438EA6400470148 /* First_Tab_ViewController.xib in Resources */,
 				FCC965B01DA75BF60025971E /* HT_Player_Cell.xib in Resources */,
+				FC78398424391F6700470148 /* TG_Intro_ViewController.xib in Resources */,
 				FC1AD7DE1DA40CA8002BA7EC /* LaunchScreen.storyboard in Resources */,
 				FC7839722438F17F00470148 /* Detail_ViewController.xib in Resources */,
 				FCD36BFC2437BE2D009BB530 /* GoogleService-Info.plist in Resources */,
@@ -714,6 +729,7 @@
 				FC7550E91DAC869B007992DF /* HT_More_ViewController.m in Sources */,
 				FC0A8FB52437770E001A75AF /* PC_Forgot_ViewController.swift in Sources */,
 				FC640A811DAAAD8B00DAEF55 /* CoreModel.xcdatamodel in Sources */,
+				FC78398524391F6700470148 /* TG_Intro_ViewController.swift in Sources */,
 				FCB3CD711DA4E3FA002FABDD /* ItemCell.m in Sources */,
 				FC1AD7D61DA40CA8002BA7EC /* ViewController.m in Sources */,
 				FC7839792438F37F00470148 /* PC_Inner_Info_ViewController.swift in Sources */,

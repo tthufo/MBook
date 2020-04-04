@@ -29,7 +29,7 @@ class Information: NSObject {
     
     @objc static func saveToken() {
         if self.getValue("token") != nil {
-            token = "Bearer %@".format(parameters: self.getValue("token"))
+            token = "%@".format(parameters: self.getValue("token"))
         } else {
             token = nil
         }

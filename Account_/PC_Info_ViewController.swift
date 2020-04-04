@@ -11,30 +11,15 @@ import UIKit
 import MarqueeLabel
 
 class PC_Info_ViewController: UIViewController {
-    
-    @IBOutlet var bg: UIImageView!
-        
-    @IBOutlet var bottom: MarqueeLabel!
-    
+                
     @IBOutlet var tableView: UITableView!
     
     var dataList: NSMutableArray!
-
-    @IBOutlet var headerImg: UIImageView!
-
-    @IBOutlet var logoLeft: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if Information.check != "0" {
-            logoLeft.image = UIImage(named: "logo_tc")
-        }
-      
-      if Information.check == "0" {
-          headerImg.image = UIImage(named: "bg_text_dms")
-      }
-        
+
         dataList = NSMutableArray.init(array: [["title":"Thông tin tài khoản", "image":"user_info"],
                                                ["title":"Đổi mật khẩu", "image":"change_pass"],
 //                                               ["title":"Đóng góp ý tưởng", "image":"contribution"],
@@ -58,8 +43,8 @@ class PC_Info_ViewController: UIViewController {
         let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
     }
     
-    @IBAction func didPressBack() {
-        self.navigationController?.popViewController(animated: true)
+    @IBAction func didPressMenu() {
+        self.root()?.toggleLeftPanel(nil)
     }
     
     func didPressLogout() {
@@ -76,8 +61,8 @@ class PC_Info_ViewController: UIViewController {
 //            }
 //
             Information.removeInfo()
-
-            self.navigationController?.popToRootViewController(animated: true)
+        
+        (UIApplication.shared.delegate as! AppDelegate).changeRoot(true)
 //        })
     }
     
