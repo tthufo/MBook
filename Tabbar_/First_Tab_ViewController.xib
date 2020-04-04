@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_0" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="First_Tab_ViewController">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kFS-mh-T3b">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aDz-qA-ppq">
+                            <rect key="frame" x="8" y="10" width="44" height="44"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="44" id="0vD-Sf-eCY"/>
+                                <constraint firstAttribute="height" constant="44" id="64F-1h-mZE"/>
+                            </constraints>
+                            <state key="normal" image="icon_pass"/>
+                            <connections>
+                                <action selector="didPressMenu:" destination="-1" eventType="touchUpInside" id="xq1-K2-wOe"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Kho sách" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vnC-ha-d1k">
+                            <rect key="frame" x="120.5" y="22" width="79" height="21"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="21" id="QBa-Yl-o8k"/>
+                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="42" id="RLp-dd-WVt"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="0.0" green="0.60784313729999995" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstItem="vnC-ha-d1k" firstAttribute="top" secondItem="kFS-mh-T3b" secondAttribute="top" constant="22" id="W1L-qF-McP"/>
+                        <constraint firstItem="vnC-ha-d1k" firstAttribute="centerX" secondItem="kFS-mh-T3b" secondAttribute="centerX" id="aTd-8u-ug3"/>
+                        <constraint firstItem="aDz-qA-ppq" firstAttribute="top" secondItem="kFS-mh-T3b" secondAttribute="top" constant="10" id="dfq-p0-Kv4"/>
+                        <constraint firstItem="aDz-qA-ppq" firstAttribute="leading" secondItem="kFS-mh-T3b" secondAttribute="leading" constant="8" id="t5a-cU-d6A"/>
+                        <constraint firstAttribute="height" constant="64" id="zwV-wz-li3"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="kFS-mh-T3b" firstAttribute="trailing" secondItem="Q5M-cg-NOt" secondAttribute="trailing" id="Lgt-1G-HUW"/>
+                <constraint firstItem="kFS-mh-T3b" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" id="sVx-k2-EqX"/>
+                <constraint firstItem="kFS-mh-T3b" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="zUo-lv-Klz"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
+            <point key="canvasLocation" x="138.75" y="115.14084507042254"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="icon_pass" width="13" height="13"/>
+    </resources>
+</document>

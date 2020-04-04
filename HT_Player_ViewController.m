@@ -64,7 +64,7 @@
     
     [self playingState];
     
-    [self previousPlay];
+//    [self previousPlay];
     
     ((UIImageView*)[self playerInfo][@"img"]).hidden = YES;
 }

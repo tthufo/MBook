@@ -27,7 +27,7 @@ class Information: NSObject {
     
     static var log: NSDictionary?
     
-    static func saveToken() {
+    @objc static func saveToken() {
         if self.getValue("token") != nil {
             token = "Bearer %@".format(parameters: self.getValue("token"))
         } else {
@@ -58,7 +58,7 @@ class Information: NSObject {
         }
     }
     
-    static func saveInfo() {
+    @objc static func saveInfo() {
         if self.getObject("info") != nil {
             userInfo = self.getObject("info")! as NSDictionary
         } else {

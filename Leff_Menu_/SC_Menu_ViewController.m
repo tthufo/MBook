@@ -8,15 +8,7 @@
 
 #import "SC_Menu_ViewController.h"
 
-//#import "SC_Trending_ViewController.h"
-//
-//#import "SC_Search_ViewController.h"
-//
-//#import "M_History_ViewController.h"
-//
-//#import "TT_Synced_ViewController.h"
-//
-//#import "TT_More_ViewController.h"
+#import "Detail_ViewController.h"
 
 @interface SC_Menu_ViewController ()
 {
@@ -25,6 +17,8 @@
     IBOutlet UIImageView * blurBack;
     
     NSMutableArray * dataList;
+    
+    IBOutlet NSLayoutConstraint * widthConstant;
 }
 
 @end
@@ -47,6 +41,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    widthConstant.constant = [self screenWidth] * 0.8;
     
     blurBack.image = [[UIImage imageNamed:@"blurBack"] boxblurImageWithBlur:0.5];
     
@@ -112,19 +108,19 @@
 {
     [_tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if(indexPath.row == [[self getValue:@"menuI"] intValue])
-    {
-        [[self ROOT] showCenterPanelAnimated:YES];
-        
-        return;
-    }
+//    if(indexPath.row == [[self getValue:@"menuI"] intValue])
+//    {
+//        [[self ROOT] showCenterPanelAnimated:YES];
+//
+//        return;
+//    }
     
     [self addValue:[NSString stringWithFormat:@"%i",indexPath.row] andKey:@"menuI"];
     
     switch (indexPath.row) {
         case 0:
         {
-//            [[self CENTER] pushViewController:[SC_Trending_ViewController new] animated:NO];
+            [[self CENTER] pushViewController:[Detail_ViewController new] animated:YES];
         }
             break;
         case 1:

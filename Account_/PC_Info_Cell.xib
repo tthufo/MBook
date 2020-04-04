@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PC_Info_Cell" rowHeight="74" id="cHj-c7-4S8">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="74"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cHj-c7-4S8" id="1zM-jD-IRn">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="74"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fnB-s9-688">
+                        <rect key="frame" x="71" y="9" width="176" height="56.5"/>
+                        <constraints>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="56.5" id="wpY-Ci-3Nd"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view alpha="0.69999998807907104" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HS6-9Y-8Do">
+                        <rect key="frame" x="5" y="73.5" width="310" height="0.5"/>
+                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="0.5" id="aTk-ec-3w8"/>
+                        </constraints>
+                    </view>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="11" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vAW-yv-qRZ">
+                        <rect key="frame" x="12" y="15" width="44" height="44"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="44" id="XRF-FY-FmP"/>
+                            <constraint firstAttribute="height" constant="44" id="q61-cR-dat"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <integer key="value" value="22"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </imageView>
+                    <switch opaque="NO" alpha="0.0" tag="3" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tSQ-LS-yEy">
+                        <rect key="frame" x="257" y="26" width="49" height="31"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="47" id="Edd-Ym-K7u"/>
+                            <constraint firstAttribute="height" constant="31" id="qlP-Qm-Osf"/>
+                        </constraints>
+                        <color key="onTintColor" red="0.13725490200000001" green="0.33333333329999998" blue="0.87058823529999996" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="thumbTintColor" red="0.0" green="0.59999999999999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    </switch>
+                    <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" tag="15" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="drop_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="0bt-QE-79P">
+                        <rect key="frame" x="279" y="24" width="25" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="25" id="0ou-uq-R4O"/>
+                            <constraint firstAttribute="width" constant="25" id="Ltj-of-Ycy"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="tSQ-LS-yEy" secondAttribute="trailing" constant="16" id="3eX-6z-1xj"/>
+                    <constraint firstItem="tSQ-LS-yEy" firstAttribute="top" secondItem="1zM-jD-IRn" secondAttribute="top" constant="26" id="3qu-0m-MuF"/>
+                    <constraint firstItem="fnB-s9-688" firstAttribute="leading" secondItem="vAW-yv-qRZ" secondAttribute="trailing" constant="15" id="9ax-Q5-T2R"/>
+                    <constraint firstAttribute="trailing" secondItem="HS6-9Y-8Do" secondAttribute="trailing" constant="5" id="Ezv-Br-aMi"/>
+                    <constraint firstItem="HS6-9Y-8Do" firstAttribute="top" secondItem="fnB-s9-688" secondAttribute="bottom" constant="8" id="GKx-RH-CcD"/>
+                    <constraint firstAttribute="bottom" secondItem="HS6-9Y-8Do" secondAttribute="bottom" id="MmL-Ry-JfB"/>
+                    <constraint firstItem="0bt-QE-79P" firstAttribute="top" secondItem="1zM-jD-IRn" secondAttribute="top" constant="24" id="Ur4-Yd-zkx"/>
+                    <constraint firstAttribute="trailing" secondItem="0bt-QE-79P" secondAttribute="trailing" constant="16" id="bpV-Rv-8dg"/>
+                    <constraint firstItem="fnB-s9-688" firstAttribute="top" secondItem="1zM-jD-IRn" secondAttribute="top" constant="9" id="i9o-m2-MR5"/>
+                    <constraint firstItem="vAW-yv-qRZ" firstAttribute="top" secondItem="1zM-jD-IRn" secondAttribute="top" constant="15" id="ijZ-NR-flA"/>
+                    <constraint firstItem="HS6-9Y-8Do" firstAttribute="leading" secondItem="1zM-jD-IRn" secondAttribute="leading" constant="5" id="qRQ-Rr-64I"/>
+                    <constraint firstItem="vAW-yv-qRZ" firstAttribute="leading" secondItem="1zM-jD-IRn" secondAttribute="leading" constant="12" id="rMG-Hb-TLR"/>
+                    <constraint firstItem="tSQ-LS-yEy" firstAttribute="leading" secondItem="fnB-s9-688" secondAttribute="trailing" constant="10" id="yEk-6V-rjq"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <point key="canvasLocation" x="137.68115942028987" y="-156.02678571428569"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="drop_arrow" width="33" height="33"/>
+    </resources>
+</document>

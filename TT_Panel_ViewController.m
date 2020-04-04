@@ -82,16 +82,16 @@
 
 - (void)displayContentController:(UIViewController*)content
 {
-    NSLog(@"===>%@", [self CENTER]);
-    
-    [[self CENTER] addChildViewController:content];
-    
-    content.view.frame = CGRectMake(0, screenHeight1 - 300 , screenWidth1, 57);
-
-    [[self CENTER].view addSubview:content.view];
-
-    [content didMoveToParentViewController:[self CENTER]];
-    
+//    NSLog(@"===>%@", [self CENTER]);
+//    
+//    [[self CENTER] addChildViewController:content];
+//    
+//    content.view.frame = CGRectMake(0, screenHeight1 - 300 , screenWidth1, 57);
+//
+//    [[self CENTER].view addSubview:content.view];
+//
+//    [content didMoveToParentViewController:[self CENTER]];
+//    
 //    [self.centerPanel.view addSubview:content.view];
 //
 //    [content didMoveToParentViewController:self.centerPanel];
@@ -101,7 +101,7 @@
 {
     [super viewDidLoad];
     
-    self.rightFixedWidth = screenWidth1 * 9 / 16 - 10;
+//    self.rightFixedWidth = screenWidth1 * 9 / 16 - 10;
     
 //    HT_Player_ViewController * player = [HT_Player_ViewController new];
 //    

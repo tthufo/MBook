@@ -20,7 +20,6 @@
 
 @interface AppDelegate ()
 {
-    TT_Panel_ViewController * panel;
 }
 
 @end
@@ -33,6 +32,10 @@
     [[LTRequest sharedInstance] initRequest];
     
     [[FirePush shareInstance] didRegister];
+    
+    [Information saveToken];
+    
+    [Information saveInfo];
     
     if(![self getValue:@"ipod"])
     {
@@ -52,7 +55,7 @@
     }
     
     
-    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDarkContent];
     
     if([UINavigationBar conformsToProtocol:@protocol(UIAppearanceContainer)])
     {

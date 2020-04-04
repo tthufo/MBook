@@ -20,6 +20,86 @@
 
 @synthesize menuCompletion;
 
+- (id)initWithPreviewMenu:(NSDictionary*)info
+{
+    self = [self init];
+    
+    [self setContainerView:[self didCreatePreviewView:info]];
+    
+    [self setUseMotionEffects:true];
+    
+    return self;
+}
+
+- (UIView*)didCreatePreviewView:(NSDictionary*)dict
+{
+    UIView *commentView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.screenWidth, self.screenHeight - 0)];
+    
+    [commentView setBackgroundColor:[UIColor clearColor]];
+    
+    UIView *contentView = [[NSBundle mainBundle] loadNibNamed:@"EM_Menu" owner:self options:nil][7];
+    
+    contentView.frame = CGRectMake(0, 0, commentView.frame.size.width, commentView.frame.size.height);
+    
+    if ([dict[@"image"] isKindOfClass:[NSString class]]) {
+        [(UIImageView*)[self withView:contentView tag:11] sd_setImageWithURL:[NSURL URLWithString:dict[@"image"]] placeholderImage:[UIImage imageNamed:@"ic_avatar"]];
+    } else {
+        ((UIImageView*)[self withView:contentView tag:11]).image = dict[@"image"];
+    }
+    
+    [((UIButton*)[self withView:contentView tag:12]) actionForTouch:@{} and:^(NSDictionary *touchInfo) {
+        [self close];
+    }];
+    
+    [commentView addSubview:contentView];
+    
+    return commentView;
+}
+
+
+- (id)initWithSettingMenu:(NSDictionary*)info
+{
+    self = [self init];
+    
+    [self setContainerView:[self didCreateSettingView:info]];
+    
+    [self setUseMotionEffects:true];
+    
+    return self;
+}
+
+- (UIView*)didCreateSettingView:(NSDictionary*)dict
+{
+    UIView *commentView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 310, 135)];
+    
+    [commentView setBackgroundColor:[UIColor clearColor]];
+    
+    UIView *contentView = [[NSBundle mainBundle] loadNibNamed:@"EM_Menu" owner:self options:nil][8];
+    
+    contentView.frame = CGRectMake(0, 0, commentView.frame.size.width, commentView.frame.size.height);
+    
+    
+    [(UIView*)[self withView:contentView tag:111] actionForTouch:@{} and:^(NSDictionary *touchInfo) {
+        self.menuCompletion(1, @{}, self);
+        [self close];
+    }];
+    
+    
+    [(UIView*)[self withView:contentView tag:222] actionForTouch:@{} and:^(NSDictionary *touchInfo) {
+        self.menuCompletion(2, @{}, self);
+        [self close];
+    }];
+    
+    [(UIView*)[self withView:contentView tag:333] actionForTouch:@{} and:^(NSDictionary *touchInfo) {
+        self.menuCompletion(3, @{}, self);
+        [self close];
+    }];
+  
+    [commentView addSubview:contentView];
+    
+    return commentView;
+}
+
 - (id)initWithWebView:(NSDictionary*)info
 {
     self = [self init];

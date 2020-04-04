@@ -66,9 +66,9 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate {
         
         bottom.text = "MEBOOK © 2020 - Ver %@".format(parameters: appVersion!)
         
-        bottom.action(forTouch: [:]) { (obj) in
+//        bottom.action(forTouch: [:]) { (obj) in
 //            self.callNumber(phoneNumber: Information.phone)
-        }
+//        }
         
        let gradientLayer:CAGradientLayer = CAGradientLayer()
         gradientLayer.frame.size = submit.frame.size
@@ -114,7 +114,7 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate {
     
     func setUp() {
         let logged = Information.token != nil && Information.token != ""
-        
+                
         let bbgg = Information.bbgg != nil && Information.bbgg != ""
         
         var frame = logo.frame
@@ -272,15 +272,12 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func didPressCheck() {
         pass.isSecureTextEntry = isCheck
-        
         check.setImage(UIImage(named: isCheck ? "design_ic_visibility_off" : "design_ic_visibility"), for: .normal)
-        
         isCheck = !isCheck
     }
     
     @IBAction func didPressRegister() {
         self.view.endEditing(true)
-//        self.navigationController?.pushViewController(PC_Register_ViewController.init(), animated: true)
         let forgot = PC_Forgot_ViewController.init();
         forgot.typing = "register"
         self.navigationController?.pushViewController(forgot, animated: true)
@@ -301,35 +298,25 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate {
                                                     "host":self], withCache: { (cacheString) in
         }, andCompletion: { (response, errorCode, error, isValid, object) in
             let result = response?.dictionize() ?? [:]
-                                    
-            print(response)
-            
+                                                
             if result.getValueFromKey("error_code") != "0" {
-                self.showToast(response?.dictionize().getValueFromKey("data") == "" ? "Lỗi xảy ra, mời bạn thử lại" : response?.dictionize().getValueFromKey("data"), andPos: 0)
+                self.showToast(response?.dictionize().getValueFromKey("error_msg") == "" ? "Lỗi xảy ra, mời bạn thử lại" : response?.dictionize().getValueFromKey("error_msg"), andPos: 0)
                 return
             }
+                                    
+            self.add(["name":self.uName.text as Any, "pass":self.pass.text as Any], andKey: "log")
+
+            self.add((response?.dictionize()["result"] as! NSDictionary).reFormat() as? [AnyHashable : Any], andKey: "info")
+
+            Information.saveInfo()
+
+            print(Information.userInfo)
+
+            self.addValue((response?.dictionize()["result"] as! NSDictionary).getValueFromKey("session"), andKey: "token")
+
+            Information.saveToken()
             
             (UIApplication.shared.delegate as! AppDelegate).changeRoot(false)
-            
-//            self.add(["name":self.uName.text as Any, "pass":self.pass.text as Any], andKey: "log")
-//
-//            self.add((response?.dictionize()["data"] as! NSDictionary).reFormat() as? [AnyHashable : Any], andKey: "info")
-//
-//            Information.saveInfo()
-//
-//            print(Information.userInfo)
-//
-//            self.addValue((response?.dictionize()["data"] as! NSDictionary).getValueFromKey("Token"), andKey: "token")
-//
-//            Information.saveToken()
-            
-//            self.navigationController?.pushViewController(PC_Map_ViewController.init(), animated: true)
-            
-//            if Information.userInfo?.getValueFromKey("count_province") == "1" {
-//                self.navigationController?.pushViewController(PC_Station_ViewController.init(), animated: true)
-//            } else {
-//                self.navigationController?.pushViewController(PC_Main_ViewController.init(), animated: true)
-//            }
         })
     }
     

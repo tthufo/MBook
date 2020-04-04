@@ -26,9 +26,11 @@ typedef void (^MenuCompletion)(int index, id object, EM_MenuView * menu);
 
 - (id)initWithSubDetailMenu:(NSDictionary*)info;
 
-
 - (id)initWithSubList_DynamicMenu:(NSDictionary*)info;
 
+- (id)initWithSettingMenu:(NSDictionary*)info;
+
+- (id)initWithPreviewMenu:(NSDictionary*)info;
 
 - (EM_MenuView*)showWithCompletion:(MenuCompletion)_completion;
 

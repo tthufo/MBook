@@ -20,6 +20,10 @@
 
 #import "HT_More_ViewController.h"
 
+#import "First_Tab_ViewController.h"
+
+#import "HearThis-Swift.h"
+
 #import <StoreKit/StoreKit.h>
 
 @interface HT_Root_ViewController ()<SKStoreProductViewControllerDelegate>
@@ -41,89 +45,106 @@
 
 - (void)initTabBar
 {
-    HT_Genres_ViewController * first = [HT_Genres_ViewController new];
+    First_Tab_ViewController * first = [First_Tab_ViewController new];
     
     UINavigationController *nav1 = [[UINavigationController alloc]
                                     initWithRootViewController:first];
-    first.title = @"Genres";
     
-    nav1.tabBarItem.image = [UIImage imageNamed:@"genres"];
+    nav1.navigationBarHidden = YES;
+    
+    first.title = @"Kho sách";
+    
+    nav1.tabBarItem.image = [UIImage imageNamed:@"ic_home_normal"];
     
     HT_Search_ViewController * second = [HT_Search_ViewController new];
     
-    second.title = @"Find";
+    second.title = @"Hiệu sách";
     
     UINavigationController *nav2 = [[UINavigationController alloc]
                                     initWithRootViewController:second];
     
-    nav2.tabBarItem.image = [UIImage imageNamed:@"search"];
+    nav2.navigationBarHidden = YES;
+
+    nav2.tabBarItem.image = [UIImage imageNamed:@"ic_hieusach_normal"];
 
     TT_Synced_ViewController * third = [TT_Synced_ViewController new];
     
-    third.title = @"Playlist";
+    third.title = @"Tủ sách";
     
     UINavigationController *nav3 = [[UINavigationController alloc]
                                     initWithRootViewController:third];
     
-    nav3.tabBarItem.image = [UIImage imageNamed:@"ipod-1"];
+    nav3.navigationBarHidden = YES;
+
+    nav3.tabBarItem.image = [UIImage imageNamed:@"ic_tusach_normal"];
     
 
-    HT_Feed_ViewController * fourth = [HT_Feed_ViewController new];
+    PC_Info_ViewController * fourth = [PC_Info_ViewController new];
     
-    fourth.title = @"New Feed";
+    fourth.title = @"Tài khoản";
     
     UINavigationController *nav4 = [[UINavigationController alloc]
                                     initWithRootViewController:fourth];
     
-    nav4.tabBarItem.image = [UIImage imageNamed:@"albums"];
+    nav4.navigationBarHidden = YES;
+
+    nav4.tabBarItem.image = [UIImage imageNamed:@"ic_account_normal"];
     
     
-    HT_More_ViewController * fifth = [HT_More_ViewController new];
-    
-    fifth.title = @"Extras";
-    
-    UINavigationController *nav5 = [[UINavigationController alloc]
-                                    initWithRootViewController:fifth];
-    
-    nav5.tabBarItem.image = [UIImage imageNamed:@"extras"];
-    
-    self.viewControllers = @[nav1, nav2, nav4, nav3, nav5];
+//    HT_More_ViewController * fifth = [HT_More_ViewController new];
+//
+//    fifth.title = @"Extras";
+//
+//    UINavigationController *nav5 = [[UINavigationController alloc]
+//                                    initWithRootViewController:fifth];
+//
+//    nav5.tabBarItem.image = [UIImage imageNamed:@"extras"];
     
     
     
+    self.viewControllers = @[nav1, nav2, nav3, nav4];
     
-    for(UITabBarItem * button in self.tabBar.items)
-    {
-        [button setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
-                                        [UIFont fontWithName:@"Helvetica" size:8.5], NSFontAttributeName, nil]
-                              forState:UIControlStateNormal];
-    }
+//    self.tabBarItem.imageInsets = UIEdgeInsetsMake(16, 0, 0, 0);
+//    self.title = nil;
+
+//    [self.viewControllers enumerateObjectsUsingBlock:^(UIViewController *vc, NSUInteger idx, BOOL *stop) {
+//           vc.tabBarItem.title = nil;
+//           vc.tabBarItem.imageInsets = UIEdgeInsetsMake(10, 0, 0, 0);
+//       }];
+//
+//
+//    for(UITabBarItem * button in self.tabBar.items)
+//    {
+//        [button setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:
+//                                        [UIFont fontWithName:@"Helvetica" size:8.5], NSFontAttributeName, nil]
+//                              forState:UIControlStateNormal];
+//    }
     
-    UIView * line = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWidth1, 1)];
-    line.backgroundColor = [UIColor redColor];
-    [self.tabBar addSubview: line];
+//    UIView * line = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWidth1, 1)];
+//    line.backgroundColor = [UIColor redColor];
+//    [self.tabBar addSubview: line];
 }
 
 - (void)reAdsAdd
 {
-    [UIView animateWithDuration:0.3 delay:0 usingSpringWithDamping:0.6 initialSpringVelocity:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        
-        CGRect rect = self.tabBar.frame;
-        
-        rect.origin.y = screenHeight1 - 50;
-        
-        self.tabBar.frame = rect;
-        
-    } completion:^(BOOL finished) {
-        
-        if([self isEmbed])
-        {
-            [[self ROOT] embed];
-        }
-        
-        [banner removeFromSuperview];
-        
-    }];
+//    [UIView animateWithDuration:0.3 delay:0 usingSpringWithDamping:0.6 initialSpringVelocity:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+//        
+//        CGRect rect = self.tabBar.frame;
+//        
+//        rect.origin.y = screenHeight1 - 50;
+//        
+//        self.tabBar.frame = rect;
+//        
+//    } completion:^(BOOL finished) {
+//        
+//        if([self isEmbed])
+//        {
+//            [[self ROOT] embed];
+//        }
+//        
+//        [banner removeFromSuperview];
+//        
+//    }];
 }
 
 - (void)didShowBanner
