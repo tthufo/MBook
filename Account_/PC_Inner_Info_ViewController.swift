@@ -25,6 +25,10 @@ class PC_Inner_Info_ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var unit: UITextField!
     
     @IBOutlet var avatar: UIImageView!
+    
+    @IBOutlet var male: UIImageView!
+
+    @IBOutlet var female: UIImageView!
 
     @IBOutlet var avatarTemp: UIImage!
     
@@ -51,9 +55,7 @@ class PC_Inner_Info_ViewController: UIViewController, UITextFieldDelegate {
         self.view.action(forTouch: [:]) { (obj) in
             self.view.endEditing(true)
         }
-                
-        phone.text = Information.userInfo?.getValueFromKey("PhoneNumber")
-        
+                        
         email.text = Information.userInfo?.getValueFromKey("Email")
         
         
@@ -81,6 +83,16 @@ class PC_Inner_Info_ViewController: UIViewController, UITextFieldDelegate {
         
         avatar.action(forTouch: [:]) { (objc) in
             self.didPressPreview(image: self.avatarTemp != nil ? self.avatarTemp as Any: Information.userInfo?.getValueFromKey("Avatar") as Any)
+        }
+        
+        male.action(forTouch: [:]) { (objc) in
+            self.female.image = UIImage.init(named: "radio_in")
+            self.male.image = UIImage.init(named: "radio_ac")
+        }
+        
+        female.action(forTouch: [:]) { (objc) in
+            self.female.image = UIImage.init(named: "radio_ac")
+            self.male.image = UIImage.init(named: "radio_in")
         }
     }
     

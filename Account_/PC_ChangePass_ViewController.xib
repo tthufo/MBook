@@ -44,8 +44,8 @@
                                 <action selector="didPressBack" destination="-1" eventType="touchUpInside" id="3Xc-es-8MF"/>
                             </connections>
                         </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tài khoản" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JYA-Jo-Znz">
-                            <rect key="frame" x="166.5" y="21" width="81.5" height="22"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Đổi mật khẩu" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JYA-Jo-Znz">
+                            <rect key="frame" x="151" y="21" width="112" height="22"/>
                             <constraints>
                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="81.5" id="m3d-sP-lbC"/>
                                 <constraint firstAttribute="height" constant="22" id="z9F-g9-2GF"/>
@@ -75,12 +75,12 @@
                 </tableView>
                 <button opaque="NO" clipsSubviews="YES" alpha="0.5" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tYc-ER-5me">
                     <rect key="frame" x="20" y="774" width="374" height="52"/>
-                    <color key="backgroundColor" red="0.0" green="0.92941176470588238" blue="0.22745098039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="backgroundColor" red="0.0" green="0.60784313729999995" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="52" id="b3a-sT-wy1"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
-                    <state key="normal" title="CẬP NHẬT THÔNG TIN">
+                    <state key="normal" title="Cập nhật thông tin">
                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
                     <userDefinedRuntimeAttributes>

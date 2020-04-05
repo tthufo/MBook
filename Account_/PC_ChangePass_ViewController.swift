@@ -95,19 +95,18 @@ class PC_ChangePass_ViewController: UIViewController, UITextFieldDelegate {
     @IBAction func didPressSubmit() {
         self.view.endEditing(true)
         
-        LTRequest.sharedInstance()?.didRequestInfo(["CMD_CODE":"password",
-                                                    "header":["Authorization":Information.token == nil ? "" : Information.token!],
+        LTRequest.sharedInstance()?.didRequestInfo(["CMD_CODE":"changePassword",
                                                     "old_password":oldPass.text as Any,
                                                     "new_password":newPass.text as Any,
-                                                    "postFix":"auth/password/change",
+                                                    "session":Information.token ?? "",
                                                     "overrideLoading":"1",
                                                     "overrideAlert":"1",
                                                     "host":self], withCache: { (cacheString) in
         }, andCompletion: { (response, errorCode, error, isValid, object) in
             let result = response?.dictionize() ?? [:]
 
-            if result.getValueFromKey("status") != "OK" {
-                self.showToast(response?.dictionize().getValueFromKey("data") == "" ? "Lỗi xảy ra, mời bạn thử lại" : response?.dictionize().getValueFromKey("data"), andPos: 0)
+            if result.getValueFromKey("error_code") != "OK" {
+                self.showToast(response?.dictionize().getValueFromKey("error_msg") == "" ? "Lỗi xảy ra, mời bạn thử lại" : response?.dictionize().getValueFromKey("error_msg"), andPos: 0)
                 return
             }
                         

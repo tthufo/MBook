@@ -89,6 +89,8 @@
     
     TT_Panel_ViewController * panel = [TT_Panel_ViewController new];
     
+    panel.leftFixedWidth = [self screenWidth] * (IS_IPAD ? 0.4 : 0.8);
+    
     Navigation_ViewController * nav = [[Navigation_ViewController alloc] initWithRootViewController: [HT_Root_ViewController new]];
     
     nav.navigationBarHidden = YES;

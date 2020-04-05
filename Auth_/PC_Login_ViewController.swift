@@ -31,6 +31,8 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet var passErr: UILabel!
     
+    @IBOutlet var sumitText: UILabel!
+    
     @IBOutlet var bottom: MarqueeLabel!
 
     var loginCover: UIView!
@@ -65,18 +67,20 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate {
         let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
         
         bottom.text = "MEBOOK © 2020 - Ver %@".format(parameters: appVersion!)
-        
-//        bottom.action(forTouch: [:]) { (obj) in
-//            self.callNumber(phoneNumber: Information.phone)
-//        }
-        
-       let gradientLayer:CAGradientLayer = CAGradientLayer()
-        gradientLayer.frame.size = submit.frame.size
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        let gradientLayer:CAGradientLayer = CAGradientLayer()
+        gradientLayer.frame = submit.bounds
         gradientLayer.colors =
             [UIColor.init(red: 0/255, green: 188/255, blue: 62/255, alpha: 1).cgColor , UIColor.yellow.cgColor]
-        gradientLayer.startPoint = CGPoint(x: 0.0, y: 1.0)
+        gradientLayer.startPoint = CGPoint.zero
         gradientLayer.endPoint = CGPoint(x: 1.0, y: 1.0)
-        submit.layer.addSublayer(gradientLayer)
+        let sublayersCount = submit.layer.sublayers?.count ?? 0
+        submit.layer.insertSublayer(gradientLayer, at: UInt32(sublayersCount))
+
+        submit.layer.layoutSublayers()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -88,7 +92,8 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate {
         
         self.submit.isEnabled = self.uName.text?.count != 0 && self.pass.text?.count != 0
         self.submit.alpha = self.uName.text?.count != 0 && self.pass.text?.count != 0 ? 1 : 0.5
-        
+        self.sumitText.alpha = self.uName.text?.count != 0 && self.pass.text?.count != 0 ? 1 : 0.5
+
         kb.keyboardOff()
     }
     
@@ -164,6 +169,7 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate {
                                     self.pass.text = Information.log!["pass"] as? String
                                     self.submit.isEnabled = self.uName.text?.count != 0 && self.pass.text?.count != 0
                                     self.submit.alpha = self.uName.text?.count != 0 && self.pass.text?.count != 0 ? 1 : 0.5
+                                    self.sumitText.alpha = self.uName.text?.count != 0 && self.pass.text?.count != 0 ? 1 : 0.5
                                     self.didPressSubmit()
                                 }
                                 self.setUpLogin()
@@ -230,6 +236,7 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate {
                                     self.pass.text = Information.log!["pass"] as? String
                                     self.submit.isEnabled = self.uName.text?.count != 0 && self.pass.text?.count != 0
                                     self.submit.alpha = self.uName.text?.count != 0 && self.pass.text?.count != 0 ? 1 : 0.5
+                                    self.sumitText.alpha = self.uName.text?.count != 0 && self.pass.text?.count != 0 ? 1 : 0.5
                                     self.didPressSubmit()
                                 }
                                 self.setUpLogin()

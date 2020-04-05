@@ -10,31 +10,21 @@ import UIKit
 
 import MarqueeLabel
 
-import WebKit
-
 class TG_Intro_ViewController: UIViewController {
-    
-    @IBOutlet var titleLabel: UILabel!
-    
-    @IBOutlet var bottom: MarqueeLabel!
-    
+            
     @IBOutlet var tableView: UITableView!
-    
-    @IBOutlet var back: UIButton!
-
-    @IBOutlet var gap: NSLayoutConstraint!
+        
+    @IBOutlet var widthConstant: NSLayoutConstraint!
 
     var dataList: NSMutableArray!
     
     let refreshControl = UIRefreshControl()
-    
-    @IBOutlet var webView: WKWebView!
-
-    var isIntro: Bool = true
-    
+        
       override func viewDidLoad() {
         super.viewDidLoad()
           
+        widthConstant.constant = CGFloat(self.screenWidth() * (IS_IPAD ? 0.4 : 0.8));
+        
         if #available(iOS 10.0, *) {
            tableView.refreshControl = refreshControl
         } else {
@@ -47,7 +37,7 @@ class TG_Intro_ViewController: UIViewController {
                    
         dataList = NSMutableArray.init()
                 
-        tableView.withCell("Province_Cell")
+        tableView.withCell("PC_Sub_Cell")
         
         tableView.withHeaderOrFooter("PC_Header_Tab")
         
@@ -57,11 +47,8 @@ class TG_Intro_ViewController: UIViewController {
     @objc func didRequestNotification() {
         LTRequest.sharedInstance()?.didRequestInfo(["CMD_CODE":"getBookCategory",
                                                     "session":Information.token ?? "",
-//                                                    "header":["Authorization":Information.token == nil ? "" : Information.token!],
-//                                                    "method":"GET",
                                                     "overrideAlert":"1",
-                                                    "overrideLoading":"1",
-                                                    "host":self], withCache: { (cacheString) in
+                                                    ], withCache: { (cacheString) in
         }, andCompletion: { (response, errorCode, error, isValid, object) in
             let result = response?.dictionize() ?? [:]
                                                          
@@ -112,6 +99,7 @@ extension TG_Intro_ViewController: UITableViewDataSource, UITableViewDelegate {
                 
         (self.withView(head, tag: 11) as! UILabel).text = sec.getValueFromKey("name")
 
+        (self.withView(head, tag: 12) as! UIButton).isHidden = (sec["sub_category"] as! NSArray).count == 0
         
         (self.withView(head, tag: 12) as! UIButton).action(forTouch: [:]) { (obj) in
             sec["open"] = sec.getValueFromKey("open") == "0" ? "1" : "0"
@@ -126,6 +114,8 @@ extension TG_Intro_ViewController: UITableViewDataSource, UITableViewDelegate {
         let angle = sec.getValueFromKey("open") == "0" ? 0 : CGFloat.pi
         
         (self.withView(head, tag: 12) as! UIButton).transform = CGAffineTransform(rotationAngle: angle)
+        
+        (self.withView(head, tag: 10) as! UIImageView).imageUrl(url: sec.getValueFromKey("avatar"))
         
         return head
     }
@@ -147,10 +137,12 @@ extension TG_Intro_ViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
                 
-//        let data = ((dataList![indexPath.section] as! NSDictionary)["data"] as! NSArray)[indexPath.row] as! NSDictionary
+        let data = ((dataList![indexPath.section] as! NSDictionary)["sub_category"] as! NSArray)[indexPath.row] as! NSDictionary
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Province_Cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "PC_Sub_Cell", for: indexPath)
                  
+        (self.withView(cell, tag: 11) as! UILabel).text = data.getValueFromKey("name")
+        
         return cell
     }
     

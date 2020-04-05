@@ -64,7 +64,9 @@
 		FC78398424391F6700470148 /* TG_Intro_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC78398224391F6700470148 /* TG_Intro_ViewController.xib */; };
 		FC78398524391F6700470148 /* TG_Intro_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC78398324391F6700470148 /* TG_Intro_ViewController.swift */; };
 		FC7839872439204C00470148 /* PC_Header_Tab.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC7839862439204C00470148 /* PC_Header_Tab.xib */; };
-		FC783989243922C100470148 /* Province_Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC783988243922C100470148 /* Province_Cell.xib */; };
+		FC783989243922C100470148 /* PC_Sub_Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC783988243922C100470148 /* PC_Sub_Cell.xib */; };
+		FC78398D2439C23700470148 /* Third_Tab_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC78398A2439C23600470148 /* Third_Tab_ViewController.xib */; };
+		FC78398E2439C23700470148 /* Third_Tab_ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC78398C2439C23700470148 /* Third_Tab_ViewController.m */; };
 		FC91B731243120F400AA6671 /* GUISlider.m in Sources */ = {isa = PBXBuildFile; fileRef = FC91B72E243120F400AA6671 /* GUISlider.m */; };
 		FC91B732243120F400AA6671 /* GUIPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC91B72F243120F400AA6671 /* GUIPlayerView.m */; };
 		FC91B7352431217F00AA6671 /* XMLReader.m in Sources */ = {isa = PBXBuildFile; fileRef = FC91B7332431217F00AA6671 /* XMLReader.m */; };
@@ -178,7 +180,10 @@
 		FC78398224391F6700470148 /* TG_Intro_ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TG_Intro_ViewController.xib; sourceTree = "<group>"; };
 		FC78398324391F6700470148 /* TG_Intro_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TG_Intro_ViewController.swift; sourceTree = "<group>"; };
 		FC7839862439204C00470148 /* PC_Header_Tab.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PC_Header_Tab.xib; sourceTree = "<group>"; };
-		FC783988243922C100470148 /* Province_Cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Province_Cell.xib; sourceTree = "<group>"; };
+		FC783988243922C100470148 /* PC_Sub_Cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PC_Sub_Cell.xib; sourceTree = "<group>"; };
+		FC78398A2439C23600470148 /* Third_Tab_ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Third_Tab_ViewController.xib; sourceTree = "<group>"; };
+		FC78398B2439C23600470148 /* Third_Tab_ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Third_Tab_ViewController.h; sourceTree = "<group>"; };
+		FC78398C2439C23700470148 /* Third_Tab_ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Third_Tab_ViewController.m; sourceTree = "<group>"; };
 		FC91B72D243120F400AA6671 /* GUIPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUIPlayerView.h; sourceTree = SOURCE_ROOT; };
 		FC91B72E243120F400AA6671 /* GUISlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GUISlider.m; sourceTree = SOURCE_ROOT; };
 		FC91B72F243120F400AA6671 /* GUIPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GUIPlayerView.m; sourceTree = SOURCE_ROOT; };
@@ -416,6 +421,9 @@
 				FC7839662438EA6400470148 /* First_Tab_ViewController.h */,
 				FC7839672438EA6400470148 /* First_Tab_ViewController.m */,
 				FC7839682438EA6400470148 /* First_Tab_ViewController.xib */,
+				FC78398B2439C23600470148 /* Third_Tab_ViewController.h */,
+				FC78398C2439C23700470148 /* Third_Tab_ViewController.m */,
+				FC78398A2439C23600470148 /* Third_Tab_ViewController.xib */,
 			);
 			path = Tabbar_;
 			sourceTree = "<group>";
@@ -463,7 +471,7 @@
 				FC78398324391F6700470148 /* TG_Intro_ViewController.swift */,
 				FC78398224391F6700470148 /* TG_Intro_ViewController.xib */,
 				FC7839862439204C00470148 /* PC_Header_Tab.xib */,
-				FC783988243922C100470148 /* Province_Cell.xib */,
+				FC783988243922C100470148 /* PC_Sub_Cell.xib */,
 				FCAD4AA62434FD1A00387AF6 /* SC_Menu_ViewController.h */,
 				FCAD4AA52434FD1A00387AF6 /* SC_Menu_ViewController.m */,
 				FC78396B2438EC9400470148 /* SC_Menu_ViewController.xib */,
@@ -621,9 +629,10 @@
 				FC640A901DAAAE2800DAEF55 /* TT_Sync_Header.xib in Resources */,
 				FC7839872439204C00470148 /* PC_Header_Tab.xib in Resources */,
 				FCB3CD6A1DA4DDE9002FABDD /* HT_Genres_ViewController.xib in Resources */,
-				FC783989243922C100470148 /* Province_Cell.xib in Resources */,
+				FC783989243922C100470148 /* PC_Sub_Cell.xib in Resources */,
 				FC7550E41DAC85DE007992DF /* HT_Feed_ViewController.xib in Resources */,
 				FCC965AB1DA5F4200025971E /* HT_Player_ViewController.xib in Resources */,
+				FC78398D2439C23700470148 /* Third_Tab_ViewController.xib in Resources */,
 				FC7839812438F91600470148 /* PC_Info_Cell.xib in Resources */,
 				FC7550FC1DACDB53007992DF /* M_Menu.xib in Resources */,
 				FCB3CD721DA4E3FA002FABDD /* ItemCell.xib in Resources */,
@@ -744,6 +753,7 @@
 				FC1AD7D01DA40CA8002BA7EC /* main.m in Sources */,
 				FC640A821DAAAD8C00DAEF55 /* DownLoad.m in Sources */,
 				FCAD4AAA2434FD1A00387AF6 /* SC_Menu_ViewController.m in Sources */,
+				FC78398E2439C23700470148 /* Third_Tab_ViewController.m in Sources */,
 				FC0A8FB02437770E001A75AF /* PC_Register_ViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

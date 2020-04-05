@@ -10,17 +10,13 @@
 
 #import "HT_Search_ViewController.h"
 
-#import "HT_Genres_ViewController.h"
-
-#import "HT_Player_ViewController.h"
-
-#import "TT_Synced_ViewController.h"
-
 #import "HT_Feed_ViewController.h"
 
 #import "HT_More_ViewController.h"
 
 #import "First_Tab_ViewController.h"
+
+#import "Third_Tab_ViewController.h"
 
 #import "HearThis-Swift.h"
 
@@ -56,6 +52,9 @@
     
     nav1.tabBarItem.image = [UIImage imageNamed:@"ic_home_normal"];
     
+    nav1.tabBarItem.selectedImage = [UIImage imageNamed:@"ic_home_active"];
+
+    
     HT_Search_ViewController * second = [HT_Search_ViewController new];
     
     second.title = @"Hiệu sách";
@@ -66,8 +65,11 @@
     nav2.navigationBarHidden = YES;
 
     nav2.tabBarItem.image = [UIImage imageNamed:@"ic_hieusach_normal"];
+    
+    nav2.tabBarItem.selectedImage = [UIImage imageNamed:@"ic_hieusach_active"];
 
-    TT_Synced_ViewController * third = [TT_Synced_ViewController new];
+
+    Third_Tab_ViewController * third = [Third_Tab_ViewController new];
     
     third.title = @"Tủ sách";
     
@@ -78,6 +80,8 @@
 
     nav3.tabBarItem.image = [UIImage imageNamed:@"ic_tusach_normal"];
     
+    nav3.tabBarItem.selectedImage = [UIImage imageNamed:@"ic_tusach_active"];
+
 
     PC_Info_ViewController * fourth = [PC_Info_ViewController new];
     
@@ -90,7 +94,8 @@
 
     nav4.tabBarItem.image = [UIImage imageNamed:@"ic_account_normal"];
     
-    
+    nav4.tabBarItem.selectedImage = [UIImage imageNamed:@"ic_account_active"];
+
 //    HT_More_ViewController * fifth = [HT_More_ViewController new];
 //
 //    fifth.title = @"Extras";
