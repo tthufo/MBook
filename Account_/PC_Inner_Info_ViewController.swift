@@ -17,22 +17,22 @@ class PC_Inner_Info_ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var cell: UITableViewCell!
     
     @IBOutlet var phone: UITextField!
-
-    @IBOutlet var email: UITextField!
     
     @IBOutlet var name: UITextField!
-
-    @IBOutlet var unit: UITextField!
     
+    @IBOutlet var email: UITextField!
+
+    @IBOutlet var birthday: UITextField!
+    
+    @IBOutlet var address: UITextField!
+
     @IBOutlet var avatar: UIImageView!
     
     @IBOutlet var male: UIImageView!
 
     @IBOutlet var female: UIImageView!
 
-    @IBOutlet var avatarTemp: UIImage!
-    
-    
+    var avatarTemp: UIImage!
     
     @IBOutlet var emailBG: UIView!
 
@@ -44,6 +44,7 @@ class PC_Inner_Info_ViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet var submit: UIButton!
 
+    var sex: String!
     
     var kb: KeyBoard!
     
@@ -55,14 +56,18 @@ class PC_Inner_Info_ViewController: UIViewController, UITextFieldDelegate {
         self.view.action(forTouch: [:]) { (obj) in
             self.view.endEditing(true)
         }
-                        
-        email.text = Information.userInfo?.getValueFromKey("Email")
+                           
+        phone.text = Information.userInfo?.getValueFromKey("phone")
+
+        name.text = Information.userInfo?.getValueFromKey("name")
         
+        email.text = Information.userInfo?.getValueFromKey("email")
+                
+        birthday.text = Information.userInfo?.getValueFromKey("birthday")
+
+        address.text = Information.userInfo?.getValueFromKey("address")
         
-        name.text = Information.userInfo?.getValueFromKey("FullName")
-        
-        unit.text = Information.userInfo?.getValueFromKey("Department")
-        
+        sex = Information.userInfo?.getValueFromKey("sex")
         
         if Information.avatar != nil {
             avatarTemp = Information.avatar
@@ -84,6 +89,9 @@ class PC_Inner_Info_ViewController: UIViewController, UITextFieldDelegate {
         avatar.action(forTouch: [:]) { (objc) in
             self.didPressPreview(image: self.avatarTemp != nil ? self.avatarTemp as Any: Information.userInfo?.getValueFromKey("Avatar") as Any)
         }
+        
+        self.male.image = UIImage.init(named: sex == "1" ? "radio_ac" : "radio_in")
+        self.female.image = UIImage.init(named: sex == "1" ? "radio_in" : "radio_ac")
         
         male.action(forTouch: [:]) { (objc) in
             self.female.image = UIImage.init(named: "radio_in")
@@ -118,9 +126,9 @@ class PC_Inner_Info_ViewController: UIViewController, UITextFieldDelegate {
     @IBAction func didPressImage() {
         EM_MenuView.init(settingMenu: [:]).show(completion: { (indexing, obj, menu) in
             switch indexing {
-//            case 1:
-//                self.didPressPreview(image: self.avatarTemp != nil ? self.avatarTemp as Any: Information.userInfo?.getValueFromKey("Avatar") as Any)
-//                break
+            case 1:
+                self.didPressPreview(image: self.avatarTemp != nil ? self.avatarTemp as Any: Information.userInfo?.getValueFromKey("Avatar") as Any)
+                break
             case 2:
                 Permission.shareInstance()?.askCamera { (camType) in
                     switch (camType) {
@@ -207,25 +215,32 @@ class PC_Inner_Info_ViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func didPressSubmit() {
        self.view.endEditing(true)
-       LTRequest.sharedInstance()?.didRequestMultiPart(["CMD_CODE":"profile",
-                                                   "header":["Authorization":Information.token == nil ? "" : Information.token!],
-                                                   "data":[
-                                                   "Department":unit.text as Any,
-                                                   "Email":email.text as Any,
-                                                   "FullName":name.text as Any,
-                                                   "PhoneNumber":phone.text as Any],
-                                                   "field": avatarTemp != nil ? [["file": avatarTemp.imageString(), "fileName":"avatar.png", "key":"FileAvatar"]] : [],
+       LTRequest.sharedInstance()?.didRequestMultiPart(["CMD_CODE":"updateUserInfo",
+//                                                   "header":["Authorization":Information.token == nil ? "" : Information.token!],
+//                                                   "data":[
+                                                    "session": Information.token ?? "",
+                                                    "avatar": self.avatarTemp != nil ? self.avatarTemp.imageString() : "",
+                                                    "sex": sex ?? "",
+                                                    "email":email.text as Any,
+                                                    "name":name.text as Any,
+                                                    "phone":phone.text as Any,
+                                                    "birthday": birthday.text as Any,
+                                                    "address":address.text as Any,
+//        ],
+//                                                   "field": avatarTemp != nil ? [["file": avatarTemp.imageString(), "fileName":"avatar.png", "key":"FileAvatar"]] : [],
                                                    "overrideAlert":"1",
                                                    "overrideLoading":"1",
-                                                   "postFix":"auth/profile",
+//                                                   "postFix":"auth/profile",
                                                    "host":self], withCache: { (cacheString) in
        }, andCompletion: { (response, errorCode, error, isValid, object) in
            let result = response?.dictionize() ?? [:]
-                                           
-           if result.getValueFromKey("status") != "OK" {
-               self.showToast(response?.dictionize().getValueFromKey("data") == "" ? "Lỗi xảy ra, mời bạn thử lại" : response?.dictionize().getValueFromKey("data"), andPos: 0)
+                                       
+        print(response)
+        
+           if result.getValueFromKey("error_code") != "0" {
+               self.showToast(response?.dictionize().getValueFromKey("error_msg") == "" ? "Lỗi xảy ra, mời bạn thử lại" : response?.dictionize().getValueFromKey("error_msg"), andPos: 0)
                return
-            }
+           }
         
            self.showToast("Cập nhật thông tin thành công", andPos: 0)
            
@@ -238,20 +253,20 @@ class PC_Inner_Info_ViewController: UIViewController, UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-       if textField == phone {
-           email.becomeFirstResponder()
-       } else {
-           self.view.endEditing(true)
-       }
+//       if textField == phone {
+//           email.becomeFirstResponder()
+//       } else {
+//           self.view.endEditing(true)
+//       }
        
        return true
    }
     
     @objc func textEmailIsChanging(_ textField:UITextField) {
-       let isEmail: Bool = email.text?.count != 0 && (email.text?.isValidEmail())!
+        let isEmail: Bool = email.text?.count != 0 && (email.text?.isValidEmail())!
         let isMatch: Bool = phone.text?.count != 0 && phone.text?.count == 10
-          emailBG.backgroundColor = isEmail ? AVHexColor.color(withHexString: "#F2F2F2") : .red
-          emailError.alpha = isEmail ? 0 : 1
+        emailBG.backgroundColor = isEmail ? AVHexColor.color(withHexString: "#F2F2F2") : .red
+        emailError.alpha = isEmail ? 0 : 1
         
         submit.isEnabled = phone.text?.count != 0 && email.text?.count != 0 && isEmail && isMatch
         submit.alpha = phone.text?.count != 0 && email.text?.count != 0 && isEmail && isMatch ? 1 : 0.5
@@ -259,20 +274,19 @@ class PC_Inner_Info_ViewController: UIViewController, UITextFieldDelegate {
     
     @objc func textRePassIsChanging(_ textField:UITextField) {
         let isEmail: Bool = email.text?.count != 0 && (email.text?.isValidEmail())!
-      let isMatch: Bool = phone.text?.count != 0 && phone.text?.count == 10
-            rePassBG.backgroundColor = isMatch ? AVHexColor.color(withHexString: "#F2F2F2") : .red
-            rePassError.alpha = isMatch ? 0 : 1
-        
+        let isMatch: Bool = phone.text?.count != 0 && phone.text?.count == 10
+        rePassBG.backgroundColor = isMatch ? AVHexColor.color(withHexString: "#F2F2F2") : .red
+        rePassError.alpha = isMatch ? 0 : 1
         
         submit.isEnabled = phone.text?.count != 0 && email.text?.count != 0 && isEmail && isMatch
-      submit.alpha = phone.text?.count != 0 && email.text?.count != 0 && isEmail && isMatch ? 1 : 0.5
+        submit.alpha = phone.text?.count != 0 && email.text?.count != 0 && isEmail && isMatch ? 1 : 0.5
     }
 }
 
 extension PC_Inner_Info_ViewController: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 668
+        return 839
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

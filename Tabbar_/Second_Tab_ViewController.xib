@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_0" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="Second_Tab_ViewController">
+            <connections>
+                <outlet property="tableView" destination="Qza-1l-HTV" id="g3G-5y-vCB"/>
+                <outlet property="view" destination="3kU-PG-sYP" id="hKh-BZ-4Pr"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="3kU-PG-sYP">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gur-fu-bRv">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JX1-Fa-cbG">
+                            <rect key="frame" x="8" y="10" width="44" height="44"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="44" id="Yda-Hv-0DO"/>
+                                <constraint firstAttribute="height" constant="44" id="u31-FK-am9"/>
+                            </constraints>
+                            <state key="normal" image="icon_pass"/>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hiệu sách" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vmB-9m-Vta">
+                            <rect key="frame" x="118" y="22" width="84.5" height="21"/>
+                            <constraints>
+                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="42" id="Dlk-pS-RSO"/>
+                                <constraint firstAttribute="height" constant="21" id="XA6-R2-GLh"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="0.0" green="0.60784313729999995" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstItem="vmB-9m-Vta" firstAttribute="top" secondItem="Gur-fu-bRv" secondAttribute="top" constant="22" id="1h1-C9-gQV"/>
+                        <constraint firstAttribute="height" constant="64" id="SOo-ih-HTs"/>
+                        <constraint firstItem="vmB-9m-Vta" firstAttribute="centerX" secondItem="Gur-fu-bRv" secondAttribute="centerX" id="TZF-z7-RM9"/>
+                        <constraint firstItem="JX1-Fa-cbG" firstAttribute="leading" secondItem="Gur-fu-bRv" secondAttribute="leading" constant="8" id="pAq-rj-LWe"/>
+                        <constraint firstItem="JX1-Fa-cbG" firstAttribute="top" secondItem="Gur-fu-bRv" secondAttribute="top" constant="10" id="xbB-d8-Dgj"/>
+                    </constraints>
+                </view>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Qza-1l-HTV">
+                    <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="xYj-Yf-5FQ"/>
+                        <outlet property="delegate" destination="-1" id="WFg-Nv-avS"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="Qza-1l-HTV" firstAttribute="bottom" secondItem="W3e-U0-vWI" secondAttribute="bottom" id="EIA-Ey-7Qo"/>
+                <constraint firstItem="Qza-1l-HTV" firstAttribute="trailing" secondItem="W3e-U0-vWI" secondAttribute="trailing" id="KOo-Sj-YXU"/>
+                <constraint firstItem="Qza-1l-HTV" firstAttribute="top" secondItem="Gur-fu-bRv" secondAttribute="bottom" id="L7c-Z3-sTu"/>
+                <constraint firstItem="Gur-fu-bRv" firstAttribute="leading" secondItem="W3e-U0-vWI" secondAttribute="leading" id="Vdj-Sa-GXr"/>
+                <constraint firstItem="Gur-fu-bRv" firstAttribute="top" secondItem="W3e-U0-vWI" secondAttribute="top" id="pVm-27-p04"/>
+                <constraint firstItem="Gur-fu-bRv" firstAttribute="trailing" secondItem="W3e-U0-vWI" secondAttribute="trailing" id="uMJ-cw-gcO"/>
+                <constraint firstItem="Qza-1l-HTV" firstAttribute="leading" secondItem="W3e-U0-vWI" secondAttribute="leading" id="y2F-Ou-hHW"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="W3e-U0-vWI"/>
+            <point key="canvasLocation" x="138.75" y="115.14084507042254"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="icon_pass" width="13" height="13"/>
+    </resources>
+</document>

@@ -105,7 +105,7 @@ class PC_ChangePass_ViewController: UIViewController, UITextFieldDelegate {
         }, andCompletion: { (response, errorCode, error, isValid, object) in
             let result = response?.dictionize() ?? [:]
 
-            if result.getValueFromKey("error_code") != "OK" {
+            if result.getValueFromKey("error_code") != "0" {
                 self.showToast(response?.dictionize().getValueFromKey("error_msg") == "" ? "Lỗi xảy ra, mời bạn thử lại" : response?.dictionize().getValueFromKey("error_msg"), andPos: 0)
                 return
             }

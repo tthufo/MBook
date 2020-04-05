@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface HT_Search_ViewController : UIViewController
+@interface Second_Tab_ViewController : UIViewController
 
 @end

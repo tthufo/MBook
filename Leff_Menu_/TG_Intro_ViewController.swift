@@ -53,14 +53,12 @@ class TG_Intro_ViewController: UIViewController {
             let result = response?.dictionize() ?? [:]
                                                          
             self.refreshControl.endRefreshing()
-            
+                        
             if (error != nil) || result.getValueFromKey("error_code") != "0" {
                 self.showToast(response?.dictionize().getValueFromKey("error_msg") == "" ? "Lỗi xảy ra, mời bạn thử lại" : response?.dictionize().getValueFromKey("error_msg"), andPos: 0)
                 return
             }
-            
-            print(response)
-            
+                        
             self.dataList.removeAllObjects()
 
             let noti = (result["result"] as! NSArray).withMutable()
@@ -149,6 +147,17 @@ extension TG_Intro_ViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
        
+        let data = ((dataList![indexPath.section] as! NSDictionary)["sub_category"] as! NSArray)[indexPath.row] as! NSDictionary
+
+        let list = List_Book_ViewController.init()
+        
+        list.categoryId = data.getValueFromKey("id")
+                
+        list.topLabel = data.getValueFromKey("name")
+
+        self.center()?.pushViewController(list, animated: true)
+        
+        self.root()?.showCenterPanel(animated: true)
     }
 }
 

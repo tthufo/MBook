@@ -8,7 +8,7 @@
 
 #import "SC_Menu_ViewController.h"
 
-#import "Detail_ViewController.h"
+#import "HearThis-Swift.h"
 
 @interface SC_Menu_ViewController ()
 {
@@ -120,7 +120,7 @@
     switch (indexPath.row) {
         case 0:
         {
-            [[self CENTER] pushViewController:[Detail_ViewController new] animated:YES];
+            [[self CENTER] pushViewController:[List_Book_ViewController new] animated:YES];
         }
             break;
         case 1:

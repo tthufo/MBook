@@ -152,7 +152,7 @@ extension UIImageView {
         }
     }
     
-    func imageUrl (url: String) {
+    @objc func imageUrl (url: String) {
         self.sd_setImage(with: NSURL.init(string: (url as NSString).encodeUrl())! as URL, placeholderImage: UIImage.init(named: "ic_avatar")) { (image, error, cacheType, url) in
             if error != nil {
                 return

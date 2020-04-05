@@ -8,13 +8,13 @@
 
 #import "HT_Root_ViewController.h"
 
-#import "HT_Search_ViewController.h"
-
 #import "HT_Feed_ViewController.h"
 
 #import "HT_More_ViewController.h"
 
 #import "First_Tab_ViewController.h"
+
+#import "Second_Tab_ViewController.h"
 
 #import "Third_Tab_ViewController.h"
 
@@ -55,7 +55,7 @@
     nav1.tabBarItem.selectedImage = [UIImage imageNamed:@"ic_home_active"];
 
     
-    HT_Search_ViewController * second = [HT_Search_ViewController new];
+    Second_Tab_ViewController * second = [Second_Tab_ViewController new];
     
     second.title = @"Hiệu sách";
     

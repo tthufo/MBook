@@ -76,7 +76,7 @@ class PC_Info_ViewController: UIViewController {
                               }, andCompletion: { (response, errorCode, error, isValid, object) in
                                   let result = response?.dictionize() ?? [:]
                                
-                                  if result.getValueFromKey("status") != "OK" {
+                                  if result.getValueFromKey("status") != "0" {
                                       self.showToast(response?.dictionize().getValueFromKey("data") == "" ? "Lỗi xảy ra, mời bạn thử lại" : response?.dictionize().getValueFromKey("data"), andPos: 0)
                                       return
                                   }
