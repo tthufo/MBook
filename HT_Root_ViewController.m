@@ -22,7 +22,7 @@
 
 #import <StoreKit/StoreKit.h>
 
-@interface HT_Root_ViewController ()<SKStoreProductViewControllerDelegate>
+@interface HT_Root_ViewController ()<SKStoreProductViewControllerDelegate, UIGestureRecognizerDelegate>
 {
     UIView * banner;
     
@@ -37,6 +37,21 @@
     [super viewDidLoad];
     
     [self initTabBar];
+    
+    UIScreenEdgePanGestureRecognizer *pan = [[UIScreenEdgePanGestureRecognizer alloc] initWithTarget:self
+                                                                                              action:@selector(handlePan:)];
+    [pan setEdges:UIRectEdgeLeft];
+    [pan setDelegate:self];
+    [self.view addGestureRecognizer:pan];
+}
+
+- (void)handlePan:(id)sender
+{
+    [[self ROOT] toggleLeftPanel:nil];
+}
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    return YES;
 }
 
 - (void)initTabBar

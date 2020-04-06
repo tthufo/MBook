@@ -28,19 +28,6 @@ class List_Book_ViewController: UIViewController, UICollectionViewDataSource, UI
         
     var dataList: NSMutableArray!
     
-//        = Information.check == "1" ?  [["title": "D.sách trạm", "img": "ic_list_station", "category": "1"],
-//                                    ["title": "Bản đồ", "img": "ic_bandonen-1", "category": "2"],
-//                                    ["title": "Cung cấp thông tin", "img": "ic_feedback_home", "category": "3"],
-//                                    ["title": "Cảnh báo", "img": "ic_notification_home", "category": "4"],
-//                                    ["title": "T.tin t.khoản", "img": "ic_user_info_home", "category": "5"],
-//                                    ["title": "Thiết lập", "img": "ic_setting_home", "category": "6"],
-//    ] : [["title": "D.sách trạm", "img": "ic_list_station", "category": "1"],
-//                                    ["title": "Bản đồ", "img": "ic_bandonen-1", "category": "2"],
-//                                    ["title": "Cung cấp thông tin", "img": "ic_feedback_home", "category": "3"],
-//                                    ["title": "Cảnh báo", "img": "ic_notification_home", "category": "4"],
-//                                    ["title": "Thiết lập", "img": "ic_setting_home", "category": "6"],
-//    ]
-        
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -49,9 +36,7 @@ class List_Book_ViewController: UIViewController, UICollectionViewDataSource, UI
         dataList = NSMutableArray.init()
         
         collectionView.withCell("TG_Map_Cell")
-        
-//        collectionView.addSubview(refreshControl)
-        
+                
         collectionView.refreshControl = refreshControl
         
         refreshControl.addTarget(self, action: #selector(didReloadNotification(_:)), for: .valueChanged)

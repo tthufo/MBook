@@ -14,9 +14,13 @@
 {
     IBOutlet UITableView * tableView;
     
-    NSMutableArray * dataList;
+    IBOutlet UIRefreshControl * refreshControl;
     
-    int pageNo;
+    NSMutableArray * dataList;
+        
+    int pageIndex;
+    
+    int totalPage;
     
     BOOL isLoadMore;
 }
@@ -36,37 +40,36 @@
 {
     [super viewDidLoad];
     
-    pageNo = 1;
+    pageIndex = 1;
     
-    __block Second_Tab_ViewController * weakSelf  = self;
-    
-    [tableView addFooterWithBlock:^{
-        
-        [weakSelf didLoadMore];
-        
-    } withIndicatorColor:[UIColor grayColor]];
+    totalPage = 1;
     
     dataList = [NSMutableArray new];
     
     [tableView withCell: @"Book_List_Cell"];
     
-    [self didRequestData];
+    refreshControl = [UIRefreshControl new];
+    
+    tableView.refreshControl = refreshControl;
+    
+    [refreshControl addTarget:self action:@selector(didReloadData) forControlEvents:UIControlEventValueChanged];
+    
+    [self didRequestData:YES];
 }
 
-- (void)didLoadMore
+- (void)didReloadData
 {
-    isLoadMore = YES;
-    
-    pageNo += 1;
-    
-    [self didRequestData];
+    isLoadMore = NO;
+    pageIndex = 1;
+    totalPage = 1;
+    [self didRequestData:YES];
 }
 
-- (void)didRequestData
+- (void)didRequestData:(BOOL)isShow
 {
     [[LTRequest sharedInstance] didRequestInfo:@{@"CMD_CODE":@"getListStory",
                                                  @"session":Information.token,
-                                                 @"page_index": @(pageNo),
+                                                 @"page_index": @(pageIndex),
                                                  @"page_size": @(12),
                                                  @"price": @(0),
                                                  @"sorting": @(1),
@@ -76,23 +79,24 @@
     } withCache:^(NSString *cacheString) {
     } andCompletion:^(NSString *responseString, NSString* errorCode, NSError *error, BOOL isValidated, NSDictionary * object) {
         
+        [refreshControl endRefreshing];
+        
         [tableView performSelector:@selector(footerEndRefreshing) withObject:nil afterDelay:0.5];
                 
         if(isValidated)
         {
             NSDictionary * dict = [responseString objectFromJSONString];
             
+            totalPage = [dict[@"result"][@"total_page"] intValue];
+              
+            pageIndex += 1;
+              
             if(!isLoadMore)
             {
                 [dataList removeAllObjects];
             }
             
             [dataList addObjectsFromArray:dict[@"result"][@"data"]];
-        }
-        
-        if(!isLoadMore)
-        {
-            [tableView setContentOffset:CGPointMake(0, 0) animated:NO];
         }
         
         [tableView reloadData];
@@ -136,6 +140,19 @@
 - (void)tableView:(UITableView *)_tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [_tableView deselectRowAtIndexPath:indexPath animated:YES];
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (pageIndex == 1) {
+        return;
+    }
+    
+    if (indexPath.row == dataList.count - 1) {
+        if (pageIndex <= totalPage) {
+            isLoadMore = YES;
+            [self didRequestData:NO];
+        }
+    }
 }
 
 - (void)didReceiveMemoryWarning
