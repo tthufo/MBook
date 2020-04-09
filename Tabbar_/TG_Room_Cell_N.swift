@@ -24,37 +24,42 @@ class TG_Room_Cell_N: UITableViewCell, UICollectionViewDelegate, UICollectionVie
     
     var callBack: ((_ info: Any)->())?
 
-    let itemHeight = Int(((screenWidth() / 3) - 15) * 1.72)
+    let itemHeight = Int(((screenWidth() / (IS_IPAD ? 5 : 3)) - 15) * 1.72)
     
     override func prepareForReuse() {
         super.prepareForReuse()
         if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
              layout.scrollDirection = config.getValueFromKey("direction") == "vertical" ? .vertical : .horizontal
          }
+        titleLabel.text = config.getValueFromKey("title") != "" ? config.getValueFromKey("title") : ""
+        
+//        didRequestInfo()
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
         collectionView.withCell("TG_Map_Cell")
-        
+                
         dataList = NSMutableArray.init()
+        
+        
         
         didRequestInfo()
     }
     
     func didRequestInfo() {
-       LTRequest.sharedInstance()?.didRequestInfo(["CMD_CODE":"getListBook",
-                                                   "session":Information.token ?? "",
-                                                   "category_id": 62,
-                                                   "page_index": 1,
-                                                   "page_size": 10,
-                                                   "book_type": 0,
-                                                   "price": 0,
-                                                   "sorting": 1,
-                                                   "overrideAlert":"1",
-                                                   "overrideLoading":"1",
-                                                   "host":self], withCache: { (cacheString) in
+//        let request = NSMutableDictionary.init(dictionary: ["session":Information.token ?? "", "overrideAlert":"1"])
+//        request.addEntries(from: self.config["url"] as! [AnyHashable : Any])
+        LTRequest.sharedInstance()?.didRequestInfo([
+            "CMD_CODE":"getListBook",
+            "page_index": 1,
+            "page_size": 24,
+            "book_type": 0,
+            "price": 0,
+            "sorting": 1,
+            "session":Information.token ?? "", "overrideAlert":"1",
+            ], withCache: { (cacheString) in
        }, andCompletion: { (response, errorCode, error, isValid, object) in
            let result = response?.dictionize() ?? [:]
            
@@ -71,7 +76,7 @@ class TG_Room_Cell_N: UITableViewCell, UICollectionViewDelegate, UICollectionVie
            self.collectionView.reloadData()
            
             if self.config.getValueFromKey("direction") == "vertical" {
-                self.returnValue?(Float(self.itemHeight * (self.dataList.count % 3 == 0 ? self.dataList.count / 3 : (self.dataList.count / 3) + 1)) + 60)
+                self.returnValue?(Float(self.itemHeight * (self.dataList.count % (IS_IPAD ? 5 : 3) == 0 ? self.dataList.count / (IS_IPAD ? 5 : 3) : (self.dataList.count / (IS_IPAD ? 5 : 3)) + 1)) + 110)
             } else {
                 self.returnValue?(Float(self.itemHeight) + 60)
             }
@@ -84,7 +89,7 @@ class TG_Room_Cell_N: UITableViewCell, UICollectionViewDelegate, UICollectionVie
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: Int((self.screenWidth() / 3) - 15), height: itemHeight)
+        return CGSize(width: Int((self.screenWidth() / (IS_IPAD ? 5 : 3)) - 15), height: itemHeight)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {

@@ -35,7 +35,40 @@ class First_Tab_ViewController: UIViewController {
 
         dataList = NSMutableArray.init()
         
-        config = NSArray.init(array: [["url": "", "height": 0], ["url": "", "height": 0, "direction": "vertical"], ["url": "", "height": 0, "direction": "horizontal"], ["url": "", "height": 0, "direction": "vertical"], ["url": "", "height": 0, "direction": "horizontal"], ]).withMutable() as NSArray?
+        config = NSArray.init(array: [["url": "", "height": 0],
+                                      ["title":"Mới nhất",
+                                       "url": ["CMD_CODE":"getListBook",
+                                          "page_index": 1,
+                                          "page_size": 24,
+                                          "book_type": 0,
+                                          "price": 0,
+                                          "sorting": 1,
+                                      ], "height": 0, "direction": "vertical"],
+                                      ["title":"Miễn phí HOT",
+                                       "url": ["CMD_CODE":"getListBook",
+                                           "page_index": 1,
+                                           "page_size": 24,
+                                           "book_type": 2,
+                                           "price": 0,
+                                           "sorting": 1,
+                                       ], "height": 0, "direction": "horizontal"],
+                                      ["title":"Khuyên nên đọc",
+                                       "url": ["CMD_CODE":"getListBook",
+                                          "page_index": 1,
+                                          "page_size": 24,
+                                          "book_type": 0,
+                                          "price": 0,
+                                          "sorting": 1,
+                                      ], "height": 0, "direction": "vertical"],
+                                      ["title":"cc",
+                                       "url": ["CMD_CODE":"getListBook",
+                                          "page_index": 1,
+                                          "page_size": 24,
+                                          "book_type": 0,
+                                          "price": 1,
+                                          "sorting": 1,
+                                      ], "height": 0, "direction": "horizontal"],
+        ]).withMutable() as NSArray?
     }
     
     @IBAction func didPressMenu() {

@@ -23,7 +23,7 @@
                             <constraint firstAttribute="width" relation="greaterThanOrEqual" id="AnP-ds-KEV"/>
                             <constraint firstAttribute="height" constant="37" id="hwP-ZQ-Dch"/>
                         </constraints>
-                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
+                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
