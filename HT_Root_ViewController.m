@@ -12,8 +12,6 @@
 
 #import "HT_More_ViewController.h"
 
-#import "First_Tab_ViewController.h"
-
 #import "Second_Tab_ViewController.h"
 
 #import "Third_Tab_ViewController.h"

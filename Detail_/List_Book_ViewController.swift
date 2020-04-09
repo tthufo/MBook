@@ -88,17 +88,6 @@ class List_Book_ViewController: UIViewController, UICollectionViewDataSource, UI
         })
     }
     
-    //{
-    //    "book_type": 0,
-    //    "category_id": 62,
-    //    "cmd_code": "getListBook",
-    //    "page_index": 1,
-    //    "page_size": 12,
-    //    "price": 0,
-    //    "session": "F9E3FB3421758EB0C5E8E5CE10A7A4CA",
-    //    "sorting": 1
-    //}
-    
     @IBAction func didPressBack() {
         self.navigationController?.popViewController(animated: true)
     }
@@ -112,7 +101,7 @@ class List_Book_ViewController: UIViewController, UICollectionViewDataSource, UI
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: Int((self.screenWidth() / 3) - 15), height: 190)
+        return CGSize(width: Int((self.screenWidth() / 3) - 15), height: Int(((self.screenWidth() / 3) - 15) * 1.72))
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -132,6 +121,10 @@ class List_Book_ViewController: UIViewController, UICollectionViewDataSource, UI
         let title = self.withView(cell, tag: 12) as! UILabel
 
         title.text = data.getValueFromKey("name")
+        
+        let description = self.withView(cell, tag: 13) as! UILabel
+
+        description.text = (data["author"] as! NSArray).count > 1 ? "Nhiều tác giả" : (((data["author"] as! NSArray)[0]) as! NSDictionary).getValueFromKey("name")
         
         let image = self.withView(cell, tag: 11) as! UIImageView
         

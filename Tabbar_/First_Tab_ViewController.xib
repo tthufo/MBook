@@ -8,8 +8,9 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="First_Tab_ViewController">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="First_Tab_ViewController" customModule="HearThis" customModuleProvider="target">
             <connections>
+                <outlet property="tableView" destination="JxR-HW-6v5" id="uBb-3h-age"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -29,7 +30,7 @@
                             </constraints>
                             <state key="normal" image="icon_pass"/>
                             <connections>
-                                <action selector="didPressMenu:" destination="-1" eventType="touchUpInside" id="xq1-K2-wOe"/>
+                                <action selector="didPressMenu" destination="-1" eventType="touchUpInside" id="0fx-EV-LXg"/>
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Kho sách" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vnC-ha-d1k">
@@ -52,10 +53,22 @@
                         <constraint firstAttribute="height" constant="64" id="zwV-wz-li3"/>
                     </constraints>
                 </view>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="JxR-HW-6v5" customClass="OwnTableView" customModule="HearThis" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="cup-Hb-3Wn"/>
+                        <outlet property="delegate" destination="-1" id="R9n-qv-Vwd"/>
+                    </connections>
+                </tableView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="JxR-HW-6v5" firstAttribute="top" secondItem="kFS-mh-T3b" secondAttribute="bottom" id="BU7-FH-Xlp"/>
                 <constraint firstItem="kFS-mh-T3b" firstAttribute="trailing" secondItem="Q5M-cg-NOt" secondAttribute="trailing" id="Lgt-1G-HUW"/>
+                <constraint firstItem="JxR-HW-6v5" firstAttribute="trailing" secondItem="Q5M-cg-NOt" secondAttribute="trailing" id="N4j-QO-zTn"/>
+                <constraint firstItem="JxR-HW-6v5" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="OcB-Of-qjC"/>
+                <constraint firstItem="JxR-HW-6v5" firstAttribute="bottom" secondItem="Q5M-cg-NOt" secondAttribute="bottom" id="XgE-nQ-dOU"/>
                 <constraint firstItem="kFS-mh-T3b" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" id="sVx-k2-EqX"/>
                 <constraint firstItem="kFS-mh-T3b" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="zUo-lv-Klz"/>
             </constraints>

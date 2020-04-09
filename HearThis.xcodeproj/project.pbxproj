@@ -26,6 +26,11 @@
 		FC23EB94243A4C8F003E5E1A /* List_Book_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC23EB92243A4C8F003E5E1A /* List_Book_ViewController.xib */; };
 		FC23EB95243A4C8F003E5E1A /* List_Book_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC23EB93243A4C8F003E5E1A /* List_Book_ViewController.swift */; };
 		FC23EB97243A4CB9003E5E1A /* TG_Map_Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC23EB96243A4CB9003E5E1A /* TG_Map_Cell.xib */; };
+		FC40A0FC243EFE5C0096B9DB /* TG_Room_Cell_4.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC40A0F8243EFE5B0096B9DB /* TG_Room_Cell_4.xib */; };
+		FC40A0FD243EFE5C0096B9DB /* TG_Room_Cell_1.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC40A0F9243EFE5B0096B9DB /* TG_Room_Cell_1.xib */; };
+		FC40A0FE243EFE5C0096B9DB /* TG_Room_Cell_3.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC40A0FA243EFE5C0096B9DB /* TG_Room_Cell_3.xib */; };
+		FC40A0FF243EFE5C0096B9DB /* TG_Room_Cell_2.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC40A0FB243EFE5C0096B9DB /* TG_Room_Cell_2.xib */; };
+		FC40A101243EFE680096B9DB /* TG_Room_Cell_5.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC40A100243EFE680096B9DB /* TG_Room_Cell_5.xib */; };
 		FC43399C2436493A00CFD50E /* Navigation_ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC43399B2436493A00CFD50E /* Navigation_ViewController.m */; };
 		FC640A811DAAAD8B00DAEF55 /* CoreModel.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = FC640A721DAAAD8B00DAEF55 /* CoreModel.xcdatamodel */; };
 		FC640A821DAAAD8C00DAEF55 /* DownLoad.m in Sources */ = {isa = PBXBuildFile; fileRef = FC640A741DAAAD8B00DAEF55 /* DownLoad.m */; };
@@ -53,7 +58,6 @@
 		FC7551031DAE4640007992DF /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC7551001DAE4640007992DF /* Default-568h@2x.png */; };
 		FC7551041DAE4640007992DF /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = FC7551011DAE4640007992DF /* Default.png */; };
 		FC7551051DAE4640007992DF /* Default~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = FC7551021DAE4640007992DF /* Default~iphone.png */; };
-		FC7839692438EA6400470148 /* First_Tab_ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC7839672438EA6400470148 /* First_Tab_ViewController.m */; };
 		FC78396A2438EA6400470148 /* First_Tab_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC7839682438EA6400470148 /* First_Tab_ViewController.xib */; };
 		FC78396C2438EC9400470148 /* SC_Menu_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC78396B2438EC9400470148 /* SC_Menu_ViewController.xib */; };
 		FC7839782438F37F00470148 /* PC_Info_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7839742438F37E00470148 /* PC_Info_ViewController.swift */; };
@@ -75,6 +79,11 @@
 		FCAD4AA82434FD1A00387AF6 /* MenuList.plist in Resources */ = {isa = PBXBuildFile; fileRef = FCAD4AA32434FD1A00387AF6 /* MenuList.plist */; };
 		FCAD4AA92434FD1A00387AF6 /* SC_Menu.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCAD4AA42434FD1A00387AF6 /* SC_Menu.xib */; };
 		FCAD4AAA2434FD1A00387AF6 /* SC_Menu_ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCAD4AA52434FD1A00387AF6 /* SC_Menu_ViewController.m */; };
+		FCAD57EB243DB6D800101A47 /* First_Tab_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAD57EA243DB6D800101A47 /* First_Tab_ViewController.swift */; };
+		FCAD57F0243DB7E400101A47 /* TG_Room_Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAD57EC243DB7E300101A47 /* TG_Room_Cell.swift */; };
+		FCAD57F1243DB7E400101A47 /* TG_Room_Cell_0.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCAD57ED243DB7E300101A47 /* TG_Room_Cell_0.xib */; };
+		FCAD57F2243DB7E400101A47 /* TG_Room_Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCAD57EE243DB7E300101A47 /* TG_Room_Cell.xib */; };
+		FCAD57F3243DB7E400101A47 /* TG_Room_Cell_N.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAD57EF243DB7E400101A47 /* TG_Room_Cell_N.swift */; };
 		FCB3CD691DA4DDE9002FABDD /* HT_Genres_ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCB3CD671DA4DDE9002FABDD /* HT_Genres_ViewController.m */; };
 		FCB3CD6A1DA4DDE9002FABDD /* HT_Genres_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCB3CD681DA4DDE9002FABDD /* HT_Genres_ViewController.xib */; };
 		FCB3CD6D1DA4DEC9002FABDD /* UIViewController+Additional.m in Sources */ = {isa = PBXBuildFile; fileRef = FCB3CD6C1DA4DEC9002FABDD /* UIViewController+Additional.m */; };
@@ -91,6 +100,7 @@
 		FCC965B21DA75C060025971E /* HT_Player_Item.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCC965B11DA75C060025971E /* HT_Player_Item.xib */; };
 		FCD0E59F1DA8F93500DF2ABF /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = FCD0E59E1DA8F93500DF2ABF /* libz.tbd */; };
 		FCD36BFC2437BE2D009BB530 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FCD36BFB2437BE2D009BB530 /* GoogleService-Info.plist */; };
+		FCE38C4A243E4B6C003864BC /* OwnTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE38C49243E4B6C003864BC /* OwnTableView.swift */; };
 		FCFB516C1DD075E200D49FB2 /* Action.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCFB516A1DD075E200D49FB2 /* Action.xib */; };
 		FCFB516D1DD075E200D49FB2 /* actions.plist in Resources */ = {isa = PBXBuildFile; fileRef = FCFB516B1DD075E200D49FB2 /* actions.plist */; };
 		FCFB516F1DD086C500D49FB2 /* TT_List_Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCFB516E1DD086C500D49FB2 /* TT_List_Cell.xib */; };
@@ -127,6 +137,11 @@
 		FC23EB92243A4C8F003E5E1A /* List_Book_ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = List_Book_ViewController.xib; sourceTree = "<group>"; };
 		FC23EB93243A4C8F003E5E1A /* List_Book_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = List_Book_ViewController.swift; sourceTree = "<group>"; };
 		FC23EB96243A4CB9003E5E1A /* TG_Map_Cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TG_Map_Cell.xib; sourceTree = "<group>"; };
+		FC40A0F8243EFE5B0096B9DB /* TG_Room_Cell_4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TG_Room_Cell_4.xib; sourceTree = "<group>"; };
+		FC40A0F9243EFE5B0096B9DB /* TG_Room_Cell_1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TG_Room_Cell_1.xib; sourceTree = "<group>"; };
+		FC40A0FA243EFE5C0096B9DB /* TG_Room_Cell_3.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TG_Room_Cell_3.xib; sourceTree = "<group>"; };
+		FC40A0FB243EFE5C0096B9DB /* TG_Room_Cell_2.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TG_Room_Cell_2.xib; sourceTree = "<group>"; };
+		FC40A100243EFE680096B9DB /* TG_Room_Cell_5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TG_Room_Cell_5.xib; sourceTree = "<group>"; };
 		FC43399A2436493A00CFD50E /* Navigation_ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Navigation_ViewController.h; sourceTree = "<group>"; };
 		FC43399B2436493A00CFD50E /* Navigation_ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Navigation_ViewController.m; sourceTree = "<group>"; };
 		FC640A721DAAAD8B00DAEF55 /* CoreModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreModel.xcdatamodel; sourceTree = "<group>"; };
@@ -169,8 +184,6 @@
 		FC7551001DAE4640007992DF /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		FC7551011DAE4640007992DF /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		FC7551021DAE4640007992DF /* Default~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default~iphone.png"; sourceTree = "<group>"; };
-		FC7839662438EA6400470148 /* First_Tab_ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = First_Tab_ViewController.h; sourceTree = "<group>"; };
-		FC7839672438EA6400470148 /* First_Tab_ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = First_Tab_ViewController.m; sourceTree = "<group>"; };
 		FC7839682438EA6400470148 /* First_Tab_ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = First_Tab_ViewController.xib; sourceTree = "<group>"; };
 		FC78396B2438EC9400470148 /* SC_Menu_ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SC_Menu_ViewController.xib; sourceTree = "<group>"; };
 		FC7839742438F37E00470148 /* PC_Info_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PC_Info_ViewController.swift; sourceTree = "<group>"; };
@@ -197,6 +210,11 @@
 		FCAD4AA42434FD1A00387AF6 /* SC_Menu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SC_Menu.xib; sourceTree = "<group>"; };
 		FCAD4AA52434FD1A00387AF6 /* SC_Menu_ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SC_Menu_ViewController.m; sourceTree = "<group>"; };
 		FCAD4AA62434FD1A00387AF6 /* SC_Menu_ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SC_Menu_ViewController.h; sourceTree = "<group>"; };
+		FCAD57EA243DB6D800101A47 /* First_Tab_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = First_Tab_ViewController.swift; sourceTree = "<group>"; };
+		FCAD57EC243DB7E300101A47 /* TG_Room_Cell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TG_Room_Cell.swift; sourceTree = "<group>"; };
+		FCAD57ED243DB7E300101A47 /* TG_Room_Cell_0.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TG_Room_Cell_0.xib; sourceTree = "<group>"; };
+		FCAD57EE243DB7E300101A47 /* TG_Room_Cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TG_Room_Cell.xib; sourceTree = "<group>"; };
+		FCAD57EF243DB7E400101A47 /* TG_Room_Cell_N.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TG_Room_Cell_N.swift; sourceTree = "<group>"; };
 		FCB3CD661DA4DDE9002FABDD /* HT_Genres_ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HT_Genres_ViewController.h; sourceTree = "<group>"; };
 		FCB3CD671DA4DDE9002FABDD /* HT_Genres_ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HT_Genres_ViewController.m; sourceTree = "<group>"; };
 		FCB3CD681DA4DDE9002FABDD /* HT_Genres_ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HT_Genres_ViewController.xib; sourceTree = "<group>"; };
@@ -221,6 +239,7 @@
 		FCC965B11DA75C060025971E /* HT_Player_Item.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HT_Player_Item.xib; sourceTree = "<group>"; };
 		FCD0E59E1DA8F93500DF2ABF /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		FCD36BFB2437BE2D009BB530 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		FCE38C49243E4B6C003864BC /* OwnTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnTableView.swift; sourceTree = "<group>"; };
 		FCFB516A1DD075E200D49FB2 /* Action.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Action.xib; sourceTree = "<group>"; };
 		FCFB516B1DD075E200D49FB2 /* actions.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = actions.plist; sourceTree = "<group>"; };
 		FCFB516E1DD086C500D49FB2 /* TT_List_Cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TT_List_Cell.xib; sourceTree = "<group>"; };
@@ -421,9 +440,17 @@
 		FC7839652438EA3400470148 /* Tabbar_ */ = {
 			isa = PBXGroup;
 			children = (
-				FC7839662438EA6400470148 /* First_Tab_ViewController.h */,
-				FC7839672438EA6400470148 /* First_Tab_ViewController.m */,
+				FCAD57EA243DB6D800101A47 /* First_Tab_ViewController.swift */,
 				FC7839682438EA6400470148 /* First_Tab_ViewController.xib */,
+				FCAD57EF243DB7E400101A47 /* TG_Room_Cell_N.swift */,
+				FCAD57ED243DB7E300101A47 /* TG_Room_Cell_0.xib */,
+				FC40A0F9243EFE5B0096B9DB /* TG_Room_Cell_1.xib */,
+				FC40A0FB243EFE5C0096B9DB /* TG_Room_Cell_2.xib */,
+				FC40A0FA243EFE5C0096B9DB /* TG_Room_Cell_3.xib */,
+				FC40A0F8243EFE5B0096B9DB /* TG_Room_Cell_4.xib */,
+				FC40A100243EFE680096B9DB /* TG_Room_Cell_5.xib */,
+				FCAD57EC243DB7E300101A47 /* TG_Room_Cell.swift */,
+				FCAD57EE243DB7E300101A47 /* TG_Room_Cell.xib */,
 				FCB782E31DA414D400BDF913 /* Second_Tab_ViewController.h */,
 				FCB782E41DA414D400BDF913 /* Second_Tab_ViewController.m */,
 				FCB782E51DA414D400BDF913 /* Second_Tab_ViewController.xib */,
@@ -431,6 +458,7 @@
 				FC78398C2439C23700470148 /* Third_Tab_ViewController.m */,
 				FC78398A2439C23600470148 /* Third_Tab_ViewController.xib */,
 				FC23EB90243A4087003E5E1A /* Book_List_Cell.xib */,
+				FCE38C49243E4B6C003864BC /* OwnTableView.swift */,
 			);
 			path = Tabbar_;
 			sourceTree = "<group>";
@@ -625,10 +653,14 @@
 				FC0A8FB42437770E001A75AF /* PC_Login_ViewController.xib in Resources */,
 				FCB782E71DA414D400BDF913 /* Second_Tab_ViewController.xib in Resources */,
 				FC640A921DAAAE2800DAEF55 /* TT_Synced_ViewController.xib in Resources */,
+				FC40A101243EFE680096B9DB /* TG_Room_Cell_5.xib in Resources */,
 				FCFB516C1DD075E200D49FB2 /* Action.xib in Resources */,
 				FC7550F91DACDB53007992DF /* EM_Menu.xib in Resources */,
 				FC0A8FB32437770E001A75AF /* PC_Register_ViewController.xib in Resources */,
 				FC0A8FB12437770E001A75AF /* PC_Forgot_ViewController.xib in Resources */,
+				FC40A0FE243EFE5C0096B9DB /* TG_Room_Cell_3.xib in Resources */,
+				FC40A0FD243EFE5C0096B9DB /* TG_Room_Cell_1.xib in Resources */,
+				FC40A0FC243EFE5C0096B9DB /* TG_Room_Cell_4.xib in Resources */,
 				FCAD4AA92434FD1A00387AF6 /* SC_Menu.xib in Resources */,
 				FC23EB91243A4087003E5E1A /* Book_List_Cell.xib in Resources */,
 				FC640A901DAAAE2800DAEF55 /* TT_Sync_Header.xib in Resources */,
@@ -639,6 +671,7 @@
 				FCC965AB1DA5F4200025971E /* HT_Player_ViewController.xib in Resources */,
 				FC78398D2439C23700470148 /* Third_Tab_ViewController.xib in Resources */,
 				FC7839812438F91600470148 /* PC_Info_Cell.xib in Resources */,
+				FCAD57F1243DB7E400101A47 /* TG_Room_Cell_0.xib in Resources */,
 				FC7550FC1DACDB53007992DF /* M_Menu.xib in Resources */,
 				FCB3CD721DA4E3FA002FABDD /* ItemCell.xib in Resources */,
 				FC7550EA1DAC869B007992DF /* HT_More_ViewController.xib in Resources */,
@@ -650,12 +683,14 @@
 				FC7551031DAE4640007992DF /* Default-568h@2x.png in Resources */,
 				FCC965B21DA75C060025971E /* HT_Player_Item.xib in Resources */,
 				FC78397A2438F37F00470148 /* PC_Info_ViewController.xib in Resources */,
+				FC40A0FF243EFE5C0096B9DB /* TG_Room_Cell_2.xib in Resources */,
 				FCAD4AA82434FD1A00387AF6 /* MenuList.plist in Resources */,
 				FC78396A2438EA6400470148 /* First_Tab_ViewController.xib in Resources */,
 				FCC965B01DA75BF60025971E /* HT_Player_Cell.xib in Resources */,
 				FC78398424391F6700470148 /* TG_Intro_ViewController.xib in Resources */,
 				FC1AD7DE1DA40CA8002BA7EC /* LaunchScreen.storyboard in Resources */,
 				FCD36BFC2437BE2D009BB530 /* GoogleService-Info.plist in Resources */,
+				FCAD57F2243DB7E400101A47 /* TG_Room_Cell.xib in Resources */,
 				FCFB516F1DD086C500D49FB2 /* TT_List_Cell.xib in Resources */,
 				FCFB51711DD0E72700D49FB2 /* CellView.xib in Resources */,
 				FC78396C2438EC9400470148 /* SC_Menu_ViewController.xib in Resources */,
@@ -723,12 +758,14 @@
 				FCFB51751DD0EFE300D49FB2 /* M_Detail_ViewController.m in Sources */,
 				FC1357DE24377B92001BA5B1 /* Information.swift in Sources */,
 				FC7550FA1DACDB53007992DF /* EM_MenuView.m in Sources */,
-				FC7839692438EA6400470148 /* First_Tab_ViewController.m in Sources */,
+				FCAD57F3243DB7E400101A47 /* TG_Room_Cell_N.swift in Sources */,
 				FC7550FB1DACDB53007992DF /* M_Menu.m in Sources */,
 				FC43399C2436493A00CFD50E /* Navigation_ViewController.m in Sources */,
 				FC640A851DAAAD8C00DAEF55 /* Item.m in Sources */,
 				FC0A8FB7243779F0001A75AF /* Marcro.swift in Sources */,
+				FCAD57F0243DB7E400101A47 /* TG_Room_Cell.swift in Sources */,
 				FC7550E31DAC85DE007992DF /* HT_Feed_ViewController.m in Sources */,
+				FCE38C4A243E4B6C003864BC /* OwnTableView.swift in Sources */,
 				FC640A861DAAAD8C00DAEF55 /* List.m in Sources */,
 				FCC965AA1DA5F4200025971E /* HT_Player_ViewController.m in Sources */,
 				FCC965AE1DA5FD790025971E /* TT_Panel_ViewController.m in Sources */,
@@ -736,6 +773,7 @@
 				FCB3CD691DA4DDE9002FABDD /* HT_Genres_ViewController.m in Sources */,
 				FCB3CD6D1DA4DEC9002FABDD /* UIViewController+Additional.m in Sources */,
 				FC640A911DAAAE2800DAEF55 /* TT_Synced_ViewController.m in Sources */,
+				FCAD57EB243DB6D800101A47 /* First_Tab_ViewController.swift in Sources */,
 				FCB782E61DA414D400BDF913 /* Second_Tab_ViewController.m in Sources */,
 				FC7839782438F37F00470148 /* PC_Info_ViewController.swift in Sources */,
 				FCB782E01DA413E000BDF913 /* HT_Root_ViewController.m in Sources */,

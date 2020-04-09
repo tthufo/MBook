@@ -13,6 +13,6 @@ pod 'CRToast', '~> 0.0.7'
 pod 'IAPHelper'
 pod 'ReachabilitySwift'
 pod 'FireBasePod'
-#pod 'DKImagePickerController'
+pod 'FSPagerView'
 
 end
