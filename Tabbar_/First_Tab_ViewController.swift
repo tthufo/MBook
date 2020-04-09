@@ -16,6 +16,8 @@ class First_Tab_ViewController: UIViewController {
     
     var dataList: NSMutableArray!
     
+    let refreshControl = UIRefreshControl()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -35,7 +37,11 @@ class First_Tab_ViewController: UIViewController {
 
         dataList = NSMutableArray.init()
         
-        config = NSArray.init(array: [["url": "", "height": 0],
+        tableView.refreshControl = refreshControl
+        
+        refreshControl.addTarget(self, action: #selector(didReload(_:)), for: .valueChanged)
+        
+        config = NSArray.init(array: [["url": "", "height": 0, "loaded": false],
                                       ["title":"Mới nhất",
                                        "url": ["CMD_CODE":"getListBook",
                                           "page_index": 1,
@@ -43,7 +49,7 @@ class First_Tab_ViewController: UIViewController {
                                           "book_type": 0,
                                           "price": 0,
                                           "sorting": 1,
-                                      ], "height": 0, "direction": "vertical"],
+                                        ], "height": 0, "direction": "vertical", "loaded": false],
                                       ["title":"Miễn phí HOT",
                                        "url": ["CMD_CODE":"getListBook",
                                            "page_index": 1,
@@ -51,7 +57,7 @@ class First_Tab_ViewController: UIViewController {
                                            "book_type": 2,
                                            "price": 0,
                                            "sorting": 1,
-                                       ], "height": 0, "direction": "horizontal"],
+                                       ], "height": 0, "direction": "horizontal", "loaded": false],
                                       ["title":"Khuyên nên đọc",
                                        "url": ["CMD_CODE":"getListBook",
                                           "page_index": 1,
@@ -59,7 +65,7 @@ class First_Tab_ViewController: UIViewController {
                                           "book_type": 0,
                                           "price": 0,
                                           "sorting": 1,
-                                      ], "height": 0, "direction": "vertical"],
+                                      ], "height": 0, "direction": "vertical", "loaded": false],
                                       ["title":"cc",
                                        "url": ["CMD_CODE":"getListBook",
                                           "page_index": 1,
@@ -67,8 +73,18 @@ class First_Tab_ViewController: UIViewController {
                                           "book_type": 0,
                                           "price": 1,
                                           "sorting": 1,
-                                      ], "height": 0, "direction": "horizontal"],
+                                      ], "height": 0, "direction": "horizontal", "loaded": false],
         ]).withMutable() as NSArray?
+    }
+    
+    @objc func didReload(_ sender: Any) {
+        for dict in self.config {
+            (dict as! NSMutableDictionary)["loaded"] = false
+        }
+        tableView.reloadData()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: {
+            self.refreshControl.endRefreshing()
+        })
     }
     
     @IBAction func didPressMenu() {
@@ -94,17 +110,20 @@ extension First_Tab_ViewController: UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: indexPath.row == 0 ? "TG_Room_Cell" :    "TG_Room_Cell_%i".format(parameters: indexPath.row) , for: indexPath)
         
         if(indexPath.row == 0) {
+            (cell as! TG_Room_Cell).config = (config[indexPath.row] as! NSDictionary)
             (cell as! TG_Room_Cell).returnValue = { value in
                 (self.config[indexPath.row] as! NSMutableDictionary)["height"] = value
+                (self.config[indexPath.row] as! NSMutableDictionary)["loaded"] = true
                 tableView.reloadData()
             }
             (cell as! TG_Room_Cell).callBack = { info in
                 print("--->", info)
-               }
+            }
         } else {
-            (cell as! TG_Room_Cell_N).config = config[indexPath.row] as! NSDictionary
+            (cell as! TG_Room_Cell_N).config = (config[indexPath.row] as! NSDictionary)
             (cell as! TG_Room_Cell_N).returnValue = { value in
                 (self.config[indexPath.row] as! NSMutableDictionary)["height"] = value
+                (self.config[indexPath.row] as! NSMutableDictionary)["loaded"] = true
                 tableView.reloadData()
             }
             (cell as! TG_Room_Cell_N).callBack = { info in

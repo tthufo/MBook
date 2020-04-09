@@ -18,22 +18,25 @@ class TG_Room_Cell_N: UITableViewCell, UICollectionViewDelegate, UICollectionVie
 
     var dataList: NSMutableArray!
     
-    var config = NSDictionary()
+    var config: NSDictionary!
         
     var returnValue: ((_ value: Float)->())?
     
     var callBack: ((_ info: Any)->())?
 
     let itemHeight = Int(((screenWidth() / (IS_IPAD ? 5 : 3)) - 15) * 1.72)
-    
+        
     override func prepareForReuse() {
         super.prepareForReuse()
         if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
              layout.scrollDirection = config.getValueFromKey("direction") == "vertical" ? .vertical : .horizontal
          }
+        
         titleLabel.text = config.getValueFromKey("title") != "" ? config.getValueFromKey("title") : ""
         
-//        didRequestInfo()
+        if !(self.config["loaded"] as! Bool) {
+            didRequestInfo()
+        }
     }
     
     override func awakeFromNib() {
@@ -42,24 +45,13 @@ class TG_Room_Cell_N: UITableViewCell, UICollectionViewDelegate, UICollectionVie
         collectionView.withCell("TG_Map_Cell")
                 
         dataList = NSMutableArray.init()
-        
-        
-        
-        didRequestInfo()
     }
     
     func didRequestInfo() {
-//        let request = NSMutableDictionary.init(dictionary: ["session":Information.token ?? "", "overrideAlert":"1"])
-//        request.addEntries(from: self.config["url"] as! [AnyHashable : Any])
-        LTRequest.sharedInstance()?.didRequestInfo([
-            "CMD_CODE":"getListBook",
-            "page_index": 1,
-            "page_size": 24,
-            "book_type": 0,
-            "price": 0,
-            "sorting": 1,
-            "session":Information.token ?? "", "overrideAlert":"1",
-            ], withCache: { (cacheString) in
+        let request = NSMutableDictionary.init(dictionary: ["session":Information.token ?? "", "overrideAlert":"1"])
+        request.addEntries(from: self.config["url"] as! [AnyHashable : Any])
+        LTRequest.sharedInstance()?.didRequestInfo(request as! [AnyHashable : Any]
+            ,withCache: { (cacheString) in
        }, andCompletion: { (response, errorCode, error, isValid, object) in
            let result = response?.dictionize() ?? [:]
            
@@ -71,6 +63,8 @@ class TG_Room_Cell_N: UITableViewCell, UICollectionViewDelegate, UICollectionVie
                                        
            let data = ((result["result"] as! NSDictionary)["data"] as! NSArray)
 
+           self.dataList.removeAllObjects()
+        
            self.dataList.addObjects(from: data.withMutable())
 
            self.collectionView.reloadData()

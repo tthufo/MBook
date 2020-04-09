@@ -14,6 +14,8 @@ class TG_Room_Cell: UITableViewCell, FSPagerViewDataSource,FSPagerViewDelegate, 
 
     var images: NSMutableArray? = []
         
+    var config: NSDictionary!
+
     @IBOutlet var pageControl: UIPageControl!
     
     var returnValue: ((_ value: Float)->())?
@@ -62,15 +64,19 @@ class TG_Room_Cell: UITableViewCell, FSPagerViewDataSource,FSPagerViewDelegate, 
         super.prepareForReuse()
                 
         self.pageControl.numberOfPages = self.images!.count
+        
+        if !(self.config["loaded"] as! Bool) {
+            requestBanner()
+        }
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        requestAds()
+        requestBanner()
     }
 
-    func requestAds() {
+    func requestBanner() {
         LTRequest.sharedInstance()?.didRequestInfo(["CMD_CODE":"getHomeEvent",
                                                       "session":Information.token ?? "",
                                                       "position":1,
