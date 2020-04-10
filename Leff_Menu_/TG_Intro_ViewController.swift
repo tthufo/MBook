@@ -149,7 +149,7 @@ extension TG_Intro_ViewController: UITableViewDataSource, UITableViewDelegate {
        
         let data = ((dataList![indexPath.section] as! NSDictionary)["sub_category"] as! NSArray)[indexPath.row] as! NSDictionary
 
-        let list = List_Book_ViewController.init()
+        let list = Book_Detail_ViewController.init()
         
         list.config = ["url": ["CMD_CODE":"getListBook",
                         "category_id": Int(data.getValueFromKey("id")) as Any,

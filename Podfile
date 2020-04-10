@@ -14,5 +14,6 @@ pod 'IAPHelper'
 pod 'ReachabilitySwift'
 pod 'FireBasePod'
 pod 'FSPagerView'
+pod 'ParallaxHeader', '~> 3.0.0'
 
 end
