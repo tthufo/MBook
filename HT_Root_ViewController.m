@@ -36,11 +36,11 @@
     
     [self initTabBar];
     
-    UIScreenEdgePanGestureRecognizer *pan = [[UIScreenEdgePanGestureRecognizer alloc] initWithTarget:self
-                                                                                              action:@selector(handlePan:)];
-    [pan setEdges:UIRectEdgeLeft];
-    [pan setDelegate:self];
-    [self.view addGestureRecognizer:pan];
+//    UIScreenEdgePanGestureRecognizer *pan = [[UIScreenEdgePanGestureRecognizer alloc] initWithTarget:self
+//                                                                                              action:@selector(handlePan:)];
+//    [pan setEdges:UIRectEdgeLeft];
+//    [pan setDelegate:self];
+//    [self.view addGestureRecognizer:pan];
 }
 
 - (void)handlePan:(id)sender
@@ -48,9 +48,9 @@
     [[self ROOT] toggleLeftPanel:nil];
 }
 
-- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
-    return YES;
-}
+//- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+//    return YES;
+//}
 
 - (void)initTabBar
 {

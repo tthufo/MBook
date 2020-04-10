@@ -23,7 +23,7 @@
                             <constraint firstAttribute="height" constant="37" id="Nv7-e3-9xD"/>
                             <constraint firstAttribute="width" relation="greaterThanOrEqual" id="mPd-8V-gL7"/>
                         </constraints>
-                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -41,7 +41,7 @@
                             <outlet property="delegate" destination="KGk-i7-Jjw" id="Wtu-uF-bTx"/>
                         </connections>
                     </collectionView>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ipz-09-kIs">
+                    <button opaque="NO" tag="12" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ipz-09-kIs">
                         <rect key="frame" x="233" y="0.0" width="79" height="37"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="37" id="H21-wl-oWg"/>

@@ -9,14 +9,14 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TG_Room_Cell" rowHeight="273" id="3LH-Vt-Hk6" customClass="TG_Room_Cell" customModule="HearThis" customModuleProvider="target">
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TG_Room_Cell_Banner_1" rowHeight="273" id="3LH-Vt-Hk6" customClass="TG_Room_Cell" customModule="HearThis" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="320" height="273"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="3LH-Vt-Hk6" id="HVm-xU-E8K">
                 <rect key="frame" x="0.0" y="0.0" width="320" height="273"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fq7-5y-pxs" customClass="FSPagerView" customModule="FSPagerView">
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fq7-5y-pxs" customClass="FSPagerView" customModule="FSPagerView">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="273"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <connections>
@@ -24,7 +24,7 @@
                             <outlet property="delegate" destination="3LH-Vt-Hk6" id="f10-zG-Hej"/>
                         </connections>
                     </view>
-                    <pageControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" hidesForSinglePage="YES" numberOfPages="1" translatesAutoresizingMaskIntoConstraints="NO" id="nmu-Y9-foe">
+                    <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" hidesForSinglePage="YES" numberOfPages="1" translatesAutoresizingMaskIntoConstraints="NO" id="nmu-Y9-foe">
                         <rect key="frame" x="47" y="225" width="226" height="37"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="37" id="11m-31-pIK"/>

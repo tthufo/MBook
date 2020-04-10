@@ -41,7 +41,7 @@
                             <outlet property="delegate" destination="A2j-Pn-1Qw" id="mTC-6L-Xtm"/>
                         </connections>
                     </collectionView>
-                    <button opaque="NO" tag="99" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="szO-ZB-roc">
+                    <button opaque="NO" tag="12" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="szO-ZB-roc">
                         <rect key="frame" x="233" y="0.0" width="79" height="37"/>
                         <constraints>
                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="46" id="Oib-4X-jPY"/>

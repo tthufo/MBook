@@ -72,17 +72,12 @@ class TG_Room_Cell: UITableViewCell, FSPagerViewDataSource,FSPagerViewDelegate, 
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-        requestBanner()
     }
 
     func requestBanner() {
-        LTRequest.sharedInstance()?.didRequestInfo(["CMD_CODE":"getHomeEvent",
-                                                      "session":Information.token ?? "",
-                                                      "position":1,
-                                                      "overrideAlert":"1",
-                                                      "overrideLoading":"1",
-                                                      "host":self], withCache: { (cacheString) in
+        let request = NSMutableDictionary.init(dictionary: ["session":Information.token ?? "", "overrideAlert":"1"])
+        request.addEntries(from: self.config["url"] as! [AnyHashable : Any])
+        LTRequest.sharedInstance()?.didRequestInfo((request as! [AnyHashable : Any]), withCache: { (cacheString) in
           }, andCompletion: { (response, errorCode, error, isValid, object) in
               let result = response?.dictionize() ?? [:]
               
@@ -101,7 +96,7 @@ class TG_Room_Cell: UITableViewCell, FSPagerViewDataSource,FSPagerViewDelegate, 
 
               self.pageControl.numberOfPages = self.images!.count
             
-              self.returnValue?(Float(self.itemHeight))
+              self.returnValue?(Float(self.images?.count == 0 ? 0 : self.itemHeight - 60))
           })
     }
     

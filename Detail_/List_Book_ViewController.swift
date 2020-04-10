@@ -12,9 +12,7 @@ class List_Book_ViewController: UIViewController, UICollectionViewDataSource, UI
     
     let refreshControl = UIRefreshControl()
     
-    var categoryId: String!
-    
-    var topLabel: String!
+    var config: NSDictionary!
 
     var pageIndex: Int = 1
      
@@ -30,8 +28,8 @@ class List_Book_ViewController: UIViewController, UICollectionViewDataSource, UI
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        titleLabel.text = topLabel
+                
+        titleLabel.text = config.getValueFromKey("title")
         
         dataList = NSMutableArray.init()
         
@@ -39,30 +37,30 @@ class List_Book_ViewController: UIViewController, UICollectionViewDataSource, UI
                 
         collectionView.refreshControl = refreshControl
         
-        refreshControl.addTarget(self, action: #selector(didReloadNotification(_:)), for: .valueChanged)
+        refreshControl.addTarget(self, action: #selector(didReload(_:)), for: .valueChanged)
                 
-        self.didRequestNotification(isShow: true)
+        didRequestData(isShow: true)
     }
     
-    @objc func didReloadNotification(_ sender: Any) {
+    @objc func didReload(_ sender: Any) {
         isLoadMore = false
         pageIndex = 1
         totalPage = 1
-        didRequestNotification(isShow: true)
+        didRequestData(isShow: true)
     }
     
-    func didRequestNotification(isShow: Bool) {
-        LTRequest.sharedInstance()?.didRequestInfo(["CMD_CODE":"getListBook",
-                                                    "session":Information.token ?? "",
-                                                    "category_id": Int(categoryId) ?? 0,
-                                                    "page_index": pageIndex,
-                                                    "page_size": 10,
-                                                    "book_type": 0,
-                                                    "price": 0,
-                                                    "sorting": 1,
-                                                    "overrideAlert":"1",
-                                                    "overrideLoading":isShow ? 1 : 0,
-                                                    "host":self], withCache: { (cacheString) in
+    func didRequestData(isShow: Bool) {
+        let request = NSMutableDictionary.init(dictionary: [
+                                                            "session":Information.token ?? "",
+                                                            "page_index": self.pageIndex,
+                                                            "page_size": 10,
+                                                            "overrideAlert":"1",
+                                                            "overrideLoading":isShow ? 1 : 0,
+                                                            "host":self])
+        
+        request.addEntries(from: self.config["url"] as! [AnyHashable : Any])
+        
+        LTRequest.sharedInstance()?.didRequestInfo((request as! [AnyHashable : Any]), withCache: { (cacheString) in
         }, andCompletion: { (response, errorCode, error, isValid, object) in
             self.refreshControl.endRefreshing()
             let result = response?.dictionize() ?? [:]
@@ -118,7 +116,7 @@ class List_Book_ViewController: UIViewController, UICollectionViewDataSource, UI
         
         let data = dataList[indexPath.item] as! NSDictionary
         
-        let title = self.withView(cell, tag: 12) as! UILabel
+        let title = self.withView(cell, tag: 112) as! UILabel
 
         title.text = data.getValueFromKey("name")
         
@@ -146,7 +144,7 @@ class List_Book_ViewController: UIViewController, UICollectionViewDataSource, UI
         if indexPath.row == dataList.count - 1 {
            if self.pageIndex <= self.totalPage {
                self.isLoadMore = true
-               self.didRequestNotification(isShow: true)
+               self.didRequestData(isShow: false)
            }
         }
     }

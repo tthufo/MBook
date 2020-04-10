@@ -43,6 +43,12 @@
 		FC640A901DAAAE2800DAEF55 /* TT_Sync_Header.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC640A8B1DAAAE2800DAEF55 /* TT_Sync_Header.xib */; };
 		FC640A911DAAAE2800DAEF55 /* TT_Synced_ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC640A8D1DAAAE2800DAEF55 /* TT_Synced_ViewController.m */; };
 		FC640A921DAAAE2800DAEF55 /* TT_Synced_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC640A8E1DAAAE2800DAEF55 /* TT_Synced_ViewController.xib */; };
+		FC69D42E24405879006D57D9 /* TG_Room_Cell_7.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC69D42924405878006D57D9 /* TG_Room_Cell_7.xib */; };
+		FC69D42F24405879006D57D9 /* TG_Room_Cell_8.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC69D42A24405879006D57D9 /* TG_Room_Cell_8.xib */; };
+		FC69D43024405879006D57D9 /* TG_Room_Cell_9.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC69D42B24405879006D57D9 /* TG_Room_Cell_9.xib */; };
+		FC69D43124405879006D57D9 /* TG_Room_Cell_10.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC69D42C24405879006D57D9 /* TG_Room_Cell_10.xib */; };
+		FC69D43224405879006D57D9 /* TG_Room_Cell_6.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC69D42D24405879006D57D9 /* TG_Room_Cell_6.xib */; };
+		FC69D4342440595B006D57D9 /* TG_Room_Cell_Banner_0.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC69D4332440595B006D57D9 /* TG_Room_Cell_Banner_0.xib */; };
 		FC7550E31DAC85DE007992DF /* HT_Feed_ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC7550E11DAC85DE007992DF /* HT_Feed_ViewController.m */; };
 		FC7550E41DAC85DE007992DF /* HT_Feed_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC7550E21DAC85DE007992DF /* HT_Feed_ViewController.xib */; };
 		FC7550E91DAC869B007992DF /* HT_More_ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC7550E71DAC869B007992DF /* HT_More_ViewController.m */; };
@@ -82,7 +88,7 @@
 		FCAD57EB243DB6D800101A47 /* First_Tab_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAD57EA243DB6D800101A47 /* First_Tab_ViewController.swift */; };
 		FCAD57F0243DB7E400101A47 /* TG_Room_Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAD57EC243DB7E300101A47 /* TG_Room_Cell.swift */; };
 		FCAD57F1243DB7E400101A47 /* TG_Room_Cell_0.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCAD57ED243DB7E300101A47 /* TG_Room_Cell_0.xib */; };
-		FCAD57F2243DB7E400101A47 /* TG_Room_Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCAD57EE243DB7E300101A47 /* TG_Room_Cell.xib */; };
+		FCAD57F2243DB7E400101A47 /* TG_Room_Cell_Banner_1.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCAD57EE243DB7E300101A47 /* TG_Room_Cell_Banner_1.xib */; };
 		FCAD57F3243DB7E400101A47 /* TG_Room_Cell_N.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAD57EF243DB7E400101A47 /* TG_Room_Cell_N.swift */; };
 		FCB3CD691DA4DDE9002FABDD /* HT_Genres_ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCB3CD671DA4DDE9002FABDD /* HT_Genres_ViewController.m */; };
 		FCB3CD6A1DA4DDE9002FABDD /* HT_Genres_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCB3CD681DA4DDE9002FABDD /* HT_Genres_ViewController.xib */; };
@@ -163,6 +169,12 @@
 		FC640A8C1DAAAE2800DAEF55 /* TT_Synced_ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TT_Synced_ViewController.h; sourceTree = "<group>"; };
 		FC640A8D1DAAAE2800DAEF55 /* TT_Synced_ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TT_Synced_ViewController.m; sourceTree = "<group>"; };
 		FC640A8E1DAAAE2800DAEF55 /* TT_Synced_ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TT_Synced_ViewController.xib; sourceTree = "<group>"; };
+		FC69D42924405878006D57D9 /* TG_Room_Cell_7.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TG_Room_Cell_7.xib; sourceTree = "<group>"; };
+		FC69D42A24405879006D57D9 /* TG_Room_Cell_8.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TG_Room_Cell_8.xib; sourceTree = "<group>"; };
+		FC69D42B24405879006D57D9 /* TG_Room_Cell_9.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TG_Room_Cell_9.xib; sourceTree = "<group>"; };
+		FC69D42C24405879006D57D9 /* TG_Room_Cell_10.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TG_Room_Cell_10.xib; sourceTree = "<group>"; };
+		FC69D42D24405879006D57D9 /* TG_Room_Cell_6.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TG_Room_Cell_6.xib; sourceTree = "<group>"; };
+		FC69D4332440595B006D57D9 /* TG_Room_Cell_Banner_0.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TG_Room_Cell_Banner_0.xib; sourceTree = "<group>"; };
 		FC7550E01DAC85DE007992DF /* HT_Feed_ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HT_Feed_ViewController.h; sourceTree = "<group>"; };
 		FC7550E11DAC85DE007992DF /* HT_Feed_ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HT_Feed_ViewController.m; sourceTree = "<group>"; };
 		FC7550E21DAC85DE007992DF /* HT_Feed_ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HT_Feed_ViewController.xib; sourceTree = "<group>"; };
@@ -213,7 +225,7 @@
 		FCAD57EA243DB6D800101A47 /* First_Tab_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = First_Tab_ViewController.swift; sourceTree = "<group>"; };
 		FCAD57EC243DB7E300101A47 /* TG_Room_Cell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TG_Room_Cell.swift; sourceTree = "<group>"; };
 		FCAD57ED243DB7E300101A47 /* TG_Room_Cell_0.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TG_Room_Cell_0.xib; sourceTree = "<group>"; };
-		FCAD57EE243DB7E300101A47 /* TG_Room_Cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TG_Room_Cell.xib; sourceTree = "<group>"; };
+		FCAD57EE243DB7E300101A47 /* TG_Room_Cell_Banner_1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TG_Room_Cell_Banner_1.xib; sourceTree = "<group>"; };
 		FCAD57EF243DB7E400101A47 /* TG_Room_Cell_N.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TG_Room_Cell_N.swift; sourceTree = "<group>"; };
 		FCB3CD661DA4DDE9002FABDD /* HT_Genres_ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HT_Genres_ViewController.h; sourceTree = "<group>"; };
 		FCB3CD671DA4DDE9002FABDD /* HT_Genres_ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HT_Genres_ViewController.m; sourceTree = "<group>"; };
@@ -449,8 +461,14 @@
 				FC40A0FA243EFE5C0096B9DB /* TG_Room_Cell_3.xib */,
 				FC40A0F8243EFE5B0096B9DB /* TG_Room_Cell_4.xib */,
 				FC40A100243EFE680096B9DB /* TG_Room_Cell_5.xib */,
+				FC69D42D24405879006D57D9 /* TG_Room_Cell_6.xib */,
+				FC69D42924405878006D57D9 /* TG_Room_Cell_7.xib */,
+				FC69D42A24405879006D57D9 /* TG_Room_Cell_8.xib */,
+				FC69D42B24405879006D57D9 /* TG_Room_Cell_9.xib */,
+				FC69D42C24405879006D57D9 /* TG_Room_Cell_10.xib */,
 				FCAD57EC243DB7E300101A47 /* TG_Room_Cell.swift */,
-				FCAD57EE243DB7E300101A47 /* TG_Room_Cell.xib */,
+				FC69D4332440595B006D57D9 /* TG_Room_Cell_Banner_0.xib */,
+				FCAD57EE243DB7E300101A47 /* TG_Room_Cell_Banner_1.xib */,
 				FCB782E31DA414D400BDF913 /* Second_Tab_ViewController.h */,
 				FCB782E41DA414D400BDF913 /* Second_Tab_ViewController.m */,
 				FCB782E51DA414D400BDF913 /* Second_Tab_ViewController.xib */,
@@ -660,7 +678,9 @@
 				FC0A8FB12437770E001A75AF /* PC_Forgot_ViewController.xib in Resources */,
 				FC40A0FE243EFE5C0096B9DB /* TG_Room_Cell_3.xib in Resources */,
 				FC40A0FD243EFE5C0096B9DB /* TG_Room_Cell_1.xib in Resources */,
+				FC69D42F24405879006D57D9 /* TG_Room_Cell_8.xib in Resources */,
 				FC40A0FC243EFE5C0096B9DB /* TG_Room_Cell_4.xib in Resources */,
+				FC69D43224405879006D57D9 /* TG_Room_Cell_6.xib in Resources */,
 				FCAD4AA92434FD1A00387AF6 /* SC_Menu.xib in Resources */,
 				FC23EB91243A4087003E5E1A /* Book_List_Cell.xib in Resources */,
 				FC640A901DAAAE2800DAEF55 /* TT_Sync_Header.xib in Resources */,
@@ -678,19 +698,23 @@
 				FC78397E2438F42400470148 /* PC_ChangePass_ViewController.xib in Resources */,
 				FC7551051DAE4640007992DF /* Default~iphone.png in Resources */,
 				FC23EB94243A4C8F003E5E1A /* List_Book_ViewController.xib in Resources */,
+				FC69D43024405879006D57D9 /* TG_Room_Cell_9.xib in Resources */,
 				FC23EB97243A4CB9003E5E1A /* TG_Map_Cell.xib in Resources */,
 				FC7550F11DAC959A007992DF /* HT_Detail_ViewController.xib in Resources */,
 				FC7551031DAE4640007992DF /* Default-568h@2x.png in Resources */,
 				FCC965B21DA75C060025971E /* HT_Player_Item.xib in Resources */,
 				FC78397A2438F37F00470148 /* PC_Info_ViewController.xib in Resources */,
+				FC69D4342440595B006D57D9 /* TG_Room_Cell_Banner_0.xib in Resources */,
 				FC40A0FF243EFE5C0096B9DB /* TG_Room_Cell_2.xib in Resources */,
 				FCAD4AA82434FD1A00387AF6 /* MenuList.plist in Resources */,
 				FC78396A2438EA6400470148 /* First_Tab_ViewController.xib in Resources */,
 				FCC965B01DA75BF60025971E /* HT_Player_Cell.xib in Resources */,
+				FC69D43124405879006D57D9 /* TG_Room_Cell_10.xib in Resources */,
 				FC78398424391F6700470148 /* TG_Intro_ViewController.xib in Resources */,
 				FC1AD7DE1DA40CA8002BA7EC /* LaunchScreen.storyboard in Resources */,
 				FCD36BFC2437BE2D009BB530 /* GoogleService-Info.plist in Resources */,
-				FCAD57F2243DB7E400101A47 /* TG_Room_Cell.xib in Resources */,
+				FCAD57F2243DB7E400101A47 /* TG_Room_Cell_Banner_1.xib in Resources */,
+				FC69D42E24405879006D57D9 /* TG_Room_Cell_7.xib in Resources */,
 				FCFB516F1DD086C500D49FB2 /* TT_List_Cell.xib in Resources */,
 				FCFB51711DD0E72700D49FB2 /* CellView.xib in Resources */,
 				FC78396C2438EC9400470148 /* SC_Menu_ViewController.xib in Resources */,

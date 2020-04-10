@@ -29,8 +29,11 @@ class TG_Room_Cell_N: UITableViewCell, UICollectionViewDelegate, UICollectionVie
     override func prepareForReuse() {
         super.prepareForReuse()
         if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-             layout.scrollDirection = config.getValueFromKey("direction") == "vertical" ? .vertical : .horizontal
+            layout.scrollDirection = config.getValueFromKey("direction") == "vertical" ? .vertical : .horizontal
+            collectionView.isScrollEnabled = config.getValueFromKey("direction") != "vertical"
          }
+        
+        titleLabel.font = UIFont.systemFont(ofSize: 17)
         
         titleLabel.text = config.getValueFromKey("title") != "" ? config.getValueFromKey("title") : ""
         
@@ -50,7 +53,7 @@ class TG_Room_Cell_N: UITableViewCell, UICollectionViewDelegate, UICollectionVie
     func didRequestInfo() {
         let request = NSMutableDictionary.init(dictionary: ["session":Information.token ?? "", "overrideAlert":"1"])
         request.addEntries(from: self.config["url"] as! [AnyHashable : Any])
-        LTRequest.sharedInstance()?.didRequestInfo(request as! [AnyHashable : Any]
+        LTRequest.sharedInstance()?.didRequestInfo((request as! [AnyHashable : Any])
             ,withCache: { (cacheString) in
        }, andCompletion: { (response, errorCode, error, isValid, object) in
            let result = response?.dictionize() ?? [:]
@@ -62,7 +65,7 @@ class TG_Room_Cell_N: UITableViewCell, UICollectionViewDelegate, UICollectionVie
         
                                        
            let data = ((result["result"] as! NSDictionary)["data"] as! NSArray)
-
+        
            self.dataList.removeAllObjects()
         
            self.dataList.addObjects(from: data.withMutable())
@@ -70,9 +73,9 @@ class TG_Room_Cell_N: UITableViewCell, UICollectionViewDelegate, UICollectionVie
            self.collectionView.reloadData()
            
             if self.config.getValueFromKey("direction") == "vertical" {
-                self.returnValue?(Float(self.itemHeight * (self.dataList.count % (IS_IPAD ? 5 : 3) == 0 ? self.dataList.count / (IS_IPAD ? 5 : 3) : (self.dataList.count / (IS_IPAD ? 5 : 3)) + 1)) + 110)
+                self.returnValue?(self.dataList.count == 0 ? 0 : Float(self.itemHeight * (self.dataList.count % (IS_IPAD ? 5 : 3) == 0 ? self.dataList.count / (IS_IPAD ? 5 : 3) : (self.dataList.count / (IS_IPAD ? 5 : 3)) + 1)) + 110)
             } else {
-                self.returnValue?(Float(self.itemHeight) + 60)
+                self.returnValue?(self.dataList.count == 0 ? 0 : Float(self.itemHeight) + 60)
             }
         
        })
@@ -100,7 +103,7 @@ class TG_Room_Cell_N: UITableViewCell, UICollectionViewDelegate, UICollectionVie
         
         let data = dataList[indexPath.item] as! NSDictionary
 
-        let title = self.withView(cell, tag: 12) as! UILabel
+        let title = self.withView(cell, tag: 112) as! UILabel
 
         title.text = data.getValueFromKey("name")
 

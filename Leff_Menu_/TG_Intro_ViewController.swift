@@ -151,10 +151,13 @@ extension TG_Intro_ViewController: UITableViewDataSource, UITableViewDelegate {
 
         let list = List_Book_ViewController.init()
         
-        list.categoryId = data.getValueFromKey("id")
+        list.config = ["url": ["CMD_CODE":"getListBook",
+                        "category_id": Int(data.getValueFromKey("id")) as Any,
+                        "book_type": 0,
+                        "price": 0,
+                        "sorting": 1,
+            ], "title": data.getValueFromKey("name") as Any]
                 
-        list.topLabel = data.getValueFromKey("name")
-
         self.center()?.pushViewController(list, animated: true)
         
         self.root()?.showCenterPanel(animated: true)

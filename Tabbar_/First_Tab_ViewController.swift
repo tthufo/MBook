@@ -21,10 +21,12 @@ class First_Tab_ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tableView.withCell("TG_Room_Cell")
+        tableView.withCell("TG_Room_Cell_Banner_0")
+
+        tableView.withCell("TG_Room_Cell_Banner_1")
 
         tableView.withCell("TG_Room_Cell_0")
-        
+
         tableView.withCell("TG_Room_Cell_1")
 
         tableView.withCell("TG_Room_Cell_2")
@@ -34,19 +36,31 @@ class First_Tab_ViewController: UIViewController {
         tableView.withCell("TG_Room_Cell_4")
 
         tableView.withCell("TG_Room_Cell_5")
+                
+        tableView.withCell("TG_Room_Cell_6")
 
+        tableView.withCell("TG_Room_Cell_7")
+
+        tableView.withCell("TG_Room_Cell_8")
+                
+        tableView.withCell("TG_Room_Cell_9")
+
+        tableView.withCell("TG_Room_Cell_10")
+        
         dataList = NSMutableArray.init()
         
         tableView.refreshControl = refreshControl
         
-        refreshControl.addTarget(self, action: #selector(didReload(_:)), for: .valueChanged)
+        refreshControl.addTarget(self, action: #selector(didReload), for: .valueChanged)
         
-        config = NSArray.init(array: [["url": "", "height": 0, "loaded": false],
+        config = NSArray.init(array: [["url": ["CMD_CODE":"getHomeEvent",
+                                          "position": 1,
+                                        ], "height": 0, "loaded": false, "ident": "TG_Room_Cell_Banner_0"],
                                       ["title":"Mới nhất",
                                        "url": ["CMD_CODE":"getListBook",
                                           "page_index": 1,
                                           "page_size": 24,
-                                          "book_type": 0,
+                                          "book_type": 2,
                                           "price": 0,
                                           "sorting": 1,
                                         ], "height": 0, "direction": "vertical", "loaded": false],
@@ -54,11 +68,11 @@ class First_Tab_ViewController: UIViewController {
                                        "url": ["CMD_CODE":"getListBook",
                                            "page_index": 1,
                                            "page_size": 24,
-                                           "book_type": 2,
-                                           "price": 0,
+                                           "book_type": 0,
+                                           "price": 2,
                                            "sorting": 1,
                                        ], "height": 0, "direction": "horizontal", "loaded": false],
-                                      ["title":"Khuyên nên đọc",
+                                      ["title":"Đọc nhiều nhất",
                                        "url": ["CMD_CODE":"getListBook",
                                           "page_index": 1,
                                           "page_size": 24,
@@ -66,18 +80,38 @@ class First_Tab_ViewController: UIViewController {
                                           "price": 0,
                                           "sorting": 1,
                                       ], "height": 0, "direction": "vertical", "loaded": false],
-                                      ["title":"cc",
+                                      ["title":"Sách nói",
+                                       "url": ["CMD_CODE":"getListBook",
+                                          "page_index": 1,
+                                          "page_size": 24,
+                                          "book_type": 3,
+                                          "price": 0,
+                                          "sorting": 1,
+                                      ], "height": 0, "direction": "horizontal", "loaded": false],
+                                      ["title":"Khuyên nên đọc",
                                        "url": ["CMD_CODE":"getListBook",
                                           "page_index": 1,
                                           "page_size": 24,
                                           "book_type": 0,
-                                          "price": 1,
-                                          "sorting": 1,
-                                      ], "height": 0, "direction": "horizontal", "loaded": false],
+                                          "price": 0,
+                                          "sorting": 3,
+                                      ], "height": 0, "direction": "vertical", "loaded": false],
+                                      ["url": ["CMD_CODE":"getHomeEvent",
+                                        "position": 2,
+                                      ], "height": 0, "loaded": false, "ident": "TG_Room_Cell_Banner_1"],
+                                      ["title":"Promotion",
+                                        "url": ["CMD_CODE":"getListPromotionBook",
+                                           "page_index": 1,
+                                           "page_size": 24,
+                                         ], "height": 0, "direction": "horizontal", "loaded": false],
         ]).withMutable() as NSArray?
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+            self.didReload()
+        })
     }
     
-    @objc func didReload(_ sender: Any) {
+    @objc func didReload() {
         for dict in self.config {
             (dict as! NSMutableDictionary)["loaded"] = false
         }
@@ -89,6 +123,12 @@ class First_Tab_ViewController: UIViewController {
     
     @IBAction func didPressMenu() {
         self.root()?.toggleLeftPanel(nil)
+    }
+    
+    func removeKey(info: NSMutableDictionary) -> NSDictionary {
+        (info["url"] as! NSMutableDictionary).removeObjects(forKeys: ["page_index", "page_size"])
+        
+        return info
     }
 }
 
@@ -107,9 +147,10 @@ extension First_Tab_ViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: indexPath.row == 0 ? "TG_Room_Cell" :    "TG_Room_Cell_%i".format(parameters: indexPath.row) , for: indexPath)
+        let conf = config[indexPath.row] as! NSMutableDictionary
+        let cell = tableView.dequeueReusableCell(withIdentifier: conf.getValueFromKey("ident") != "" ? conf.getValueFromKey("ident") : "TG_Room_Cell_%i".format(parameters: indexPath.row) , for: indexPath)
         
-        if(indexPath.row == 0) {
+        if(conf.getValueFromKey("ident") != "") {
             (cell as! TG_Room_Cell).config = (config[indexPath.row] as! NSDictionary)
             (cell as! TG_Room_Cell).returnValue = { value in
                 (self.config[indexPath.row] as! NSMutableDictionary)["height"] = value
@@ -129,6 +170,16 @@ extension First_Tab_ViewController: UITableViewDataSource, UITableViewDelegate {
             (cell as! TG_Room_Cell_N).callBack = { info in
                 print("--->", info)
             }
+            
+            let more = self.withView((cell as! TG_Room_Cell_N), tag: 12) as! UIButton
+            
+            more.action(forTouch:[:]) { (obj) in
+                let list = List_Book_ViewController.init()
+                
+                list.config = self.removeKey(info: conf)
+                       
+                self.center()?.pushViewController(list, animated: true)
+            }
         }
         
         return cell
@@ -139,4 +190,3 @@ extension First_Tab_ViewController: UITableViewDataSource, UITableViewDelegate {
         
     }
 }
-
