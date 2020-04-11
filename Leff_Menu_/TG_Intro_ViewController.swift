@@ -66,8 +66,14 @@ class TG_Intro_ViewController: UIViewController {
             for not in noti! {
                 (not as! NSMutableDictionary)["open"] = "0"
             }
-
+            
             self.dataList.addObjects(from: noti!)
+            
+            self.dataList.add(NSMutableDictionary.init(dictionary:["avatar": "id", "name": "Tác giả", "sub_category": [], "open": "0", "id": "99"]))
+
+            self.dataList.add(NSMutableDictionary.init(dictionary:["avatar": "id", "name": "Tuyển tập chọn lọc", "sub_category": [], "open": "0", "id": "100"]))
+
+            self.dataList.add(NSMutableDictionary.init(dictionary:["avatar": "id", "name": "Nhà xuất bản", "sub_category": [], "open": "0", "id": "101"]))
 
             self.tableView.reloadData()
         })
@@ -114,6 +120,21 @@ extension TG_Intro_ViewController: UITableViewDataSource, UITableViewDelegate {
         (self.withView(head, tag: 12) as! UIButton).transform = CGAffineTransform(rotationAngle: angle)
         
         (self.withView(head, tag: 10) as! UIImageView).imageUrl(url: sec.getValueFromKey("avatar"))
+        
+        let id = sec.getValueFromKey("id")
+        
+        head.action(forTouch: [:]) { (obj) in
+            if id == "99" {
+                self.center()?.pushViewController(Author_ViewController.init(), animated: true)
+            }
+            if id == "100" {
+                
+            }
+            if id == "101" {
+                
+            }
+            self.root()?.showCenterPanel(animated: true)
+        }
         
         return head
     }

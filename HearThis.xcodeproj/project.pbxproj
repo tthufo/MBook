@@ -96,6 +96,13 @@
 		FCB238B92441858D0034B40B /* TG_Book_Detail_Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCB238B82441858D0034B40B /* TG_Book_Detail_Cell.xib */; };
 		FCB238BB244186E10034B40B /* Book_Detail_Title.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCB238BA244186E10034B40B /* Book_Detail_Title.xib */; };
 		FCB238BD2441B6960034B40B /* TG_Book_Chap_Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCB238BC2441B6960034B40B /* TG_Book_Chap_Cell.xib */; };
+		FCB238C1244218DB0034B40B /* Author_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB238BF244218DB0034B40B /* Author_ViewController.swift */; };
+		FCB238C2244218DB0034B40B /* Author_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCB238C0244218DB0034B40B /* Author_ViewController.xib */; };
+		FCB238C424421BC20034B40B /* Author_Filter_Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCB238C324421BC20034B40B /* Author_Filter_Cell.xib */; };
+		FCB238C724422DFB0034B40B /* Author_Detail_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB238C524422DFB0034B40B /* Author_Detail_ViewController.swift */; };
+		FCB238C824422DFB0034B40B /* Author_Detail_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCB238C624422DFB0034B40B /* Author_Detail_ViewController.xib */; };
+		FCB238CA2442329C0034B40B /* Author_Detail_Header.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCB238C92442329C0034B40B /* Author_Detail_Header.xib */; };
+		FCB238CC244235D70034B40B /* Author_Bio_Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCB238CB244235D70034B40B /* Author_Bio_Cell.xib */; };
 		FCB3CD691DA4DDE9002FABDD /* HT_Genres_ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCB3CD671DA4DDE9002FABDD /* HT_Genres_ViewController.m */; };
 		FCB3CD6A1DA4DDE9002FABDD /* HT_Genres_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCB3CD681DA4DDE9002FABDD /* HT_Genres_ViewController.xib */; };
 		FCB3CD6D1DA4DEC9002FABDD /* UIViewController+Additional.m in Sources */ = {isa = PBXBuildFile; fileRef = FCB3CD6C1DA4DEC9002FABDD /* UIViewController+Additional.m */; };
@@ -239,6 +246,13 @@
 		FCB238B82441858D0034B40B /* TG_Book_Detail_Cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TG_Book_Detail_Cell.xib; sourceTree = "<group>"; };
 		FCB238BA244186E10034B40B /* Book_Detail_Title.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Book_Detail_Title.xib; sourceTree = "<group>"; };
 		FCB238BC2441B6960034B40B /* TG_Book_Chap_Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TG_Book_Chap_Cell.xib; sourceTree = "<group>"; };
+		FCB238BF244218DB0034B40B /* Author_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Author_ViewController.swift; sourceTree = "<group>"; };
+		FCB238C0244218DB0034B40B /* Author_ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Author_ViewController.xib; sourceTree = "<group>"; };
+		FCB238C324421BC20034B40B /* Author_Filter_Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Author_Filter_Cell.xib; sourceTree = "<group>"; };
+		FCB238C524422DFB0034B40B /* Author_Detail_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Author_Detail_ViewController.swift; sourceTree = "<group>"; };
+		FCB238C624422DFB0034B40B /* Author_Detail_ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Author_Detail_ViewController.xib; sourceTree = "<group>"; };
+		FCB238C92442329C0034B40B /* Author_Detail_Header.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Author_Detail_Header.xib; sourceTree = "<group>"; };
+		FCB238CB244235D70034B40B /* Author_Bio_Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Author_Bio_Cell.xib; sourceTree = "<group>"; };
 		FCB3CD661DA4DDE9002FABDD /* HT_Genres_ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HT_Genres_ViewController.h; sourceTree = "<group>"; };
 		FCB3CD671DA4DDE9002FABDD /* HT_Genres_ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HT_Genres_ViewController.m; sourceTree = "<group>"; };
 		FCB3CD681DA4DDE9002FABDD /* HT_Genres_ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HT_Genres_ViewController.xib; sourceTree = "<group>"; };
@@ -320,6 +334,7 @@
 		FC1AD7C21DA40CA8002BA7EC = {
 			isa = PBXGroup;
 			children = (
+				FCB238BE244217C30034B40B /* Author_ */,
 				FC7839732438F32700470148 /* Account_ */,
 				FC78396D2438F16500470148 /* Detail_ */,
 				FC7839652438EA3400470148 /* Tabbar_ */,
@@ -552,6 +567,20 @@
 			path = Leff_Menu_;
 			sourceTree = "<group>";
 		};
+		FCB238BE244217C30034B40B /* Author_ */ = {
+			isa = PBXGroup;
+			children = (
+				FCB238BF244218DB0034B40B /* Author_ViewController.swift */,
+				FCB238C0244218DB0034B40B /* Author_ViewController.xib */,
+				FCB238C324421BC20034B40B /* Author_Filter_Cell.xib */,
+				FCB238C524422DFB0034B40B /* Author_Detail_ViewController.swift */,
+				FCB238C624422DFB0034B40B /* Author_Detail_ViewController.xib */,
+				FCB238CB244235D70034B40B /* Author_Bio_Cell.xib */,
+				FCB238C92442329C0034B40B /* Author_Detail_Header.xib */,
+			);
+			path = Author_;
+			sourceTree = "<group>";
+		};
 		FCB3CD651DA4DDCC002FABDD /* Genres */ = {
 			isa = PBXGroup;
 			children = (
@@ -708,11 +737,14 @@
 				FC7839872439204C00470148 /* PC_Header_Tab.xib in Resources */,
 				FCB3CD6A1DA4DDE9002FABDD /* HT_Genres_ViewController.xib in Resources */,
 				FC783989243922C100470148 /* PC_Sub_Cell.xib in Resources */,
+				FCB238C2244218DB0034B40B /* Author_ViewController.xib in Resources */,
 				FC7550E41DAC85DE007992DF /* HT_Feed_ViewController.xib in Resources */,
 				FCC965AB1DA5F4200025971E /* HT_Player_ViewController.xib in Resources */,
 				FC78398D2439C23700470148 /* Third_Tab_ViewController.xib in Resources */,
 				FC7839812438F91600470148 /* PC_Info_Cell.xib in Resources */,
 				FCAD57F1243DB7E400101A47 /* TG_Room_Cell_0.xib in Resources */,
+				FCB238C424421BC20034B40B /* Author_Filter_Cell.xib in Resources */,
+				FCB238C824422DFB0034B40B /* Author_Detail_ViewController.xib in Resources */,
 				FC7550FC1DACDB53007992DF /* M_Menu.xib in Resources */,
 				FCB3CD721DA4E3FA002FABDD /* ItemCell.xib in Resources */,
 				FC7550EA1DAC869B007992DF /* HT_More_ViewController.xib in Resources */,
@@ -727,6 +759,7 @@
 				FCC965B21DA75C060025971E /* HT_Player_Item.xib in Resources */,
 				FC78397A2438F37F00470148 /* PC_Info_ViewController.xib in Resources */,
 				FC69D4342440595B006D57D9 /* TG_Room_Cell_Banner_0.xib in Resources */,
+				FCB238CA2442329C0034B40B /* Author_Detail_Header.xib in Resources */,
 				FC40A0FF243EFE5C0096B9DB /* TG_Room_Cell_2.xib in Resources */,
 				FCAD4AA82434FD1A00387AF6 /* MenuList.plist in Resources */,
 				FC78396A2438EA6400470148 /* First_Tab_ViewController.xib in Resources */,
@@ -734,6 +767,7 @@
 				FC69D4422440D500006D57D9 /* Book_Detail_Header.xib in Resources */,
 				FC69D43124405879006D57D9 /* TG_Room_Cell_10.xib in Resources */,
 				FC78398424391F6700470148 /* TG_Intro_ViewController.xib in Resources */,
+				FCB238CC244235D70034B40B /* Author_Bio_Cell.xib in Resources */,
 				FC1AD7DE1DA40CA8002BA7EC /* LaunchScreen.storyboard in Resources */,
 				FCD36BFC2437BE2D009BB530 /* GoogleService-Info.plist in Resources */,
 				FCAD57F2243DB7E400101A47 /* TG_Room_Cell_Banner_1.xib in Resources */,
@@ -807,6 +841,7 @@
 				FC7550FA1DACDB53007992DF /* EM_MenuView.m in Sources */,
 				FCAD57F3243DB7E400101A47 /* TG_Room_Cell_N.swift in Sources */,
 				FC7550FB1DACDB53007992DF /* M_Menu.m in Sources */,
+				FCB238C1244218DB0034B40B /* Author_ViewController.swift in Sources */,
 				FC43399C2436493A00CFD50E /* Navigation_ViewController.m in Sources */,
 				FC640A851DAAAD8C00DAEF55 /* Item.m in Sources */,
 				FC0A8FB7243779F0001A75AF /* Marcro.swift in Sources */,
@@ -826,6 +861,7 @@
 				FCB782E01DA413E000BDF913 /* HT_Root_ViewController.m in Sources */,
 				FC640A831DAAAD8C00DAEF55 /* DownloadManager.m in Sources */,
 				FC640A841DAAAD8C00DAEF55 /* History.m in Sources */,
+				FCB238C724422DFB0034B40B /* Author_Detail_ViewController.swift in Sources */,
 				FC7550E91DAC869B007992DF /* HT_More_ViewController.m in Sources */,
 				FC0A8FB52437770E001A75AF /* PC_Forgot_ViewController.swift in Sources */,
 				FC640A811DAAAD8B00DAEF55 /* CoreModel.xcdatamodel in Sources */,

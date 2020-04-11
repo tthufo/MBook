@@ -228,7 +228,7 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
                    ["key": "author", "title": "Tác giả"],
                    ["key": "publisher", "title": "Nhà xuất bản"],
                    ["key": "events", "title": "Tuyển tập"],
-                   ["key": "publish_time", "title": "Ngày xuất bản"]]
+                   ["key": "publish_time", "title": "Ngày xuất bản", "arrow": "1"]]
                  
         let tempArray = NSMutableArray()
         for key in keys {
@@ -245,6 +245,7 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
                     dict["value"] = info.getValueFromKey(keying)
                 }
                 dict["title"] = (key as NSDictionary)["title"] as! String
+                dict["arrow"] = (key as NSDictionary).getValueFromKey("arrow") == "" ? "0" : "1"
                 if dict.getValueFromKey("value") != "" {
                     tempArray.add(dict)
                 }
@@ -296,6 +297,10 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
            let description = self.withView(cell, tag: 2) as! UILabel
 
            description.text = detail.getValueFromKey("value")
+            
+           let arrow = self.withView(cell, tag: 3) as! UIImageView
+            
+            arrow.alpha = detail.getValueFromKey("arrow") != "1" ? 1 : 0
         }
         
         if indexPath.section == 1 {
