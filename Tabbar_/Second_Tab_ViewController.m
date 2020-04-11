@@ -104,6 +104,11 @@
     }];
 }
 
+- (NSDictionary *)removeKey:(NSMutableDictionary *)info {
+    [(NSMutableDictionary*)info[@"url"] removeObjectsForKeys:@[@"page_index", @"page_size"]];
+    return info;
+}
+
 #pragma TableView
 
 - (NSInteger)tableView:(UITableView *)_tableView numberOfRowsInSection:(NSInteger)section
@@ -140,6 +145,22 @@
 - (void)tableView:(UITableView *)_tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [_tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    NSMutableDictionary * list = dataList[indexPath.row];
+
+    Book_Detail_ViewController * detail = [Book_Detail_ViewController new];
+        
+    NSLog(@"%@", list);
+    
+//    NSMutableDictionary
+//    let bookDetail = Book_Detail_ViewController.init()
+//
+//    let bookInfo = NSMutableDictionary.init(dictionary: self.removeKey(info: conf))
+//    bookInfo.addEntries(from: info as! [AnyHashable : Any])
+//
+//    bookDetail.config = bookInfo
+//
+//    self.center()?.pushViewController(bookDetail, animated: true)
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
