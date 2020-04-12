@@ -34,11 +34,12 @@ class TG_Room_Cell_N: UITableViewCell, UICollectionViewDelegate, UICollectionVie
          }
         
         titleLabel.font = UIFont.systemFont(ofSize: 17)
-        
-        titleLabel.text = config.getValueFromKey("title") != "" ? config.getValueFromKey("title") : ""
-        
+                
         if !(self.config["loaded"] as! Bool) {
             didRequestInfo()
+        } else {
+            titleLabel.text = config.getValueFromKey("title") != "" ? config.getValueFromKey("title") : ""
+            extraButton.alpha = 1
         }
     }
     
@@ -63,7 +64,6 @@ class TG_Room_Cell_N: UITableViewCell, UICollectionViewDelegate, UICollectionVie
                return
            }
         
-                                       
            let data = ((result["result"] as! NSDictionary)["data"] as! NSArray)
         
            self.dataList.removeAllObjects()

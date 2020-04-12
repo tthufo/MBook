@@ -242,7 +242,7 @@ class Author_Detail_ViewController: UIViewController, UICollectionViewDataSource
 //
             print("--->", bioHeight)
         
-            self.collectionView.reloadSections(IndexSet(integer: 0))
+//            self.collectionView.reloadSections(IndexSet(integer: 0))
             
 //            title.delegate = self
 
