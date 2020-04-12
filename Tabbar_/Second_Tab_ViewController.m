@@ -146,21 +146,17 @@
 {
     [_tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    NSMutableDictionary * list = dataList[indexPath.row];
+    NSDictionary * list = dataList[indexPath.row];
 
-    Book_Detail_ViewController * detail = [Book_Detail_ViewController new];
-        
-    NSLog(@"%@", list);
+    NSMutableDictionary * config = [[NSMutableDictionary alloc] initWithDictionary:list];
     
-//    NSMutableDictionary
-//    let bookDetail = Book_Detail_ViewController.init()
-//
-//    let bookInfo = NSMutableDictionary.init(dictionary: self.removeKey(info: conf))
-//    bookInfo.addEntries(from: info as! [AnyHashable : Any])
-//
-//    bookDetail.config = bookInfo
-//
-//    self.center()?.pushViewController(bookDetail, animated: true)
+    config[@"url"] = @{@"CMD_CODE":@"getListBook"};
+
+    Book_Detail_ViewController * bookDetail = [Book_Detail_ViewController new];
+            
+    bookDetail.config = config;
+    
+    [[self CENTER] pushViewController:bookDetail animated:YES];
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {

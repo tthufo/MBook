@@ -13,7 +13,7 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
     
     let refreshControl = UIRefreshControl()
     
-    var config: NSDictionary!
+    @objc var config: NSDictionary!
     
     var headerView: UIView!
 

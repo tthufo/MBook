@@ -205,7 +205,7 @@ class Event_Detail_ViewController: UIViewController, UICollectionViewDataSource,
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return section == 1 ? dataList.count : section == 2 ? chapList.count : 0//bioHeight == 0 ? 1 : 1
+        return section == 1 ? dataList.count : section == 2 ? chapList.count : bioHeight == 0 ? 1 : 1
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -226,17 +226,19 @@ class Event_Detail_ViewController: UIViewController, UICollectionViewDataSource,
         
         if indexPath.section == 0 {
 
-//           let title = self.withView(cell, tag: 1) as! UILabel
-//
-////            title.text = self.config.getValueFromKey("info")
-////
+           let title = self.withView(cell, tag: 1) as! UILabel
+
+            title.text = self.config.getValueFromKey("description")
+            
+            print(self.config)
+
 //            let data = self.config.getValueFromKey("info").data(using: String.Encoding.unicode)
 //
 //            let attributedText = try! NSAttributedString(data: data!, options: [.documentType:NSAttributedString.DocumentType.html], documentAttributes: nil)
 ////
 //            title.attributedText = attributedText
 ////
-//            bioHeight = title.sizeOfMultiLineLabel().height + 80
+            bioHeight = title.sizeOfMultiLineLabel().height + 0
 ////
 //            print("--->", bioHeight)
         }
@@ -310,7 +312,7 @@ class Event_Detail_ViewController: UIViewController, UICollectionViewDataSource,
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: collectionView.frame.width, height: section == 0 ? 0 : 44)
+        return CGSize(width: collectionView.frame.width, height: section != 2 ? 0 : 44)
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
