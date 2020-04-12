@@ -467,6 +467,12 @@ extension UIViewController {
             }
         }
     }
+    
+    func removeKey(info: NSMutableDictionary) -> NSDictionary {
+        (info["url"] as! NSMutableDictionary).removeObjects(forKeys: ["page_index", "page_size"])
+        
+        return info
+    }
 }
 
 extension UITableView {

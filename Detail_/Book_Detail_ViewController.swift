@@ -128,6 +128,8 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
         
         request.addEntries(from: self.config["url"] as! [AnyHashable : Any])
         
+        print(self.config)
+        
         LTRequest.sharedInstance()?.didRequestInfo((request as! [AnyHashable : Any]), withCache: { (cacheString) in
         }, andCompletion: { (response, errorCode, error, isValid, object) in
             self.refreshControl.endRefreshing()

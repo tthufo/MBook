@@ -12,6 +12,10 @@ import ExpandableLabel
 
 class Author_Detail_ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UIGestureRecognizerDelegate, ExpandableLabelDelegate {
     
+    @IBOutlet var collectionView: UICollectionView!
+
+    var headerView: UIView!
+
     let refreshControl = UIRefreshControl()
     
     var config: NSDictionary!
@@ -23,9 +27,7 @@ class Author_Detail_ViewController: UIViewController, UICollectionViewDataSource
     var isLoadMore: Bool = false
     
     var isCollapse: Bool = true
-    
-    @IBOutlet var collectionView: UICollectionView!
-        
+            
     var dataList: NSMutableArray!
     
     var chapList = NSMutableArray()
@@ -40,9 +42,7 @@ class Author_Detail_ViewController: UIViewController, UICollectionViewDataSource
         super.viewDidLoad()
                         
         dataList = NSMutableArray.init()
-        
-//        chapList = NSMutableArray.init()
-        
+                
         collectionView.withCell("TG_Map_Cell")
                         
         collectionView.withCell("Author_Bio_Cell")
@@ -63,35 +63,33 @@ class Author_Detail_ViewController: UIViewController, UICollectionViewDataSource
     }
         
     private func setupParallaxHeader() {
-        let view = Bundle.main.loadNibNamed("Author_Detail_Header", owner: self, options: nil)![IS_IPAD ? 1 : 0] as! UIView
-        
-//        view.blurView.setup(style: UIBlurEffect.Style.dark, alpha: 1).enable()
-        
-        let back = self.withView(view, tag: 1) as! UIButton
+        headerView = (Bundle.main.loadNibNamed("Author_Detail_Header", owner: self, options: nil)![IS_IPAD ? 1 : 0] as! UIView)
+                
+        let back = self.withView(headerView, tag: 1) as! UIButton
         
         back.action(forTouch: [:]) { (obj) in
             self.navigationController?.popViewController(animated: true)
         }
         
-        let title = self.withView(view, tag: 2) as! UILabel
+        let title = self.withView(headerView, tag: 2) as! UILabel
 
         title.text = self.config.getValueFromKey("name")
 
-        let avatar = self.withView(view, tag: 3) as! UIImageView
-        
+        let avatar = self.withView(headerView, tag: 3) as! UIImageView
+
         avatar.imageUrl(url: self.config.getValueFromKey("avatar"))
-        
-        let name = self.withView(view, tag: 4) as! UILabel
+
+        let name = self.withView(headerView, tag: 4) as! UILabel
 
         name.text = self.config.getValueFromKey("name")
-        
-        let description = self.withView(view, tag: 5) as! UILabel
-        
-        description.text = self.config.getValueFromKey("book_count") + " Tác phẩm"
 
-        let backgroundImage = self.withView(view, tag: 6) as! UIImageView
+        let description = self.withView(headerView, tag: 5) as! UILabel
+
+        description.text = self.config.getValueFromKey("book_count") + " Tác phẩm"
+        
+        let backgroundImage = self.withView(headerView, tag: 6) as! UIImageView
                
-        collectionView.parallaxHeader.view = view
+        collectionView.parallaxHeader.view = headerView
         collectionView.parallaxHeader.height = CGFloat(headerHeight)
         collectionView.parallaxHeader.minimumHeight = 64
         collectionView.parallaxHeader.mode = .centerFill
@@ -103,10 +101,26 @@ class Author_Detail_ViewController: UIViewController, UICollectionViewDataSource
             name.alpha = parallaxHeader.progress
             description.alpha = parallaxHeader.progress
         }
-        
-        self.collectionView.reloadData()
-                  
+                          
         self.collectionView.reloadSections(IndexSet(integer: 0))
+    }
+    
+    func setupInfo() {
+        let title = self.withView(headerView, tag: 2) as! UILabel
+
+        title.text = self.config.getValueFromKey("name")
+
+        let avatar = self.withView(headerView, tag: 3) as! UIImageView
+        
+        avatar.imageUrl(url: self.config.getValueFromKey("avatar"))
+        
+        let name = self.withView(headerView, tag: 4) as! UILabel
+
+        name.text = self.config.getValueFromKey("name")
+        
+        let description = self.withView(headerView, tag: 5) as! UILabel
+        
+        description.text = self.config.getValueFromKey("book_count") + " Tác phẩm"
     }
     
     @objc func didReload(_ sender: Any) {
@@ -196,8 +210,6 @@ class Author_Detail_ViewController: UIViewController, UICollectionViewDataSource
            isCollapse = false
         bioHeight = label.frame.size.width
         self.collectionView.reloadSections(IndexSet(integer: 0))
-
-//        tableView.endUpdates()
     }
    
     func willCollapseLabel(_ label: ExpandableLabel) {
@@ -282,12 +294,27 @@ class Author_Detail_ViewController: UIViewController, UICollectionViewDataSource
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-      
+        if indexPath.section == 1 {
+            let bookDetail = Book_Detail_ViewController.init()
+            let bookInfo = NSMutableDictionary.init(dictionary: ["url": ["CMD_CODE":"getListBook"]])
+            bookInfo.addEntries(from: dataList[indexPath.item] as! [AnyHashable : Any])
+            bookDetail.config = bookInfo
+            self.center()?.pushViewController(bookDetail, animated: true)
+        }
+        
+        if indexPath.section == 2 {
+            self.config = (chapList[indexPath.item] as! NSDictionary)
+            self.setupInfo()
+            collectionView.setContentOffset(CGPoint.init(x: 0, y: -headerHeight), animated: true)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+                self.didReload(self.refreshControl)
+            })
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "Book_Detail_Title", for: indexPath as IndexPath)
-        (self.withView(view, tag: 1) as! UILabel).text = sectionTitle[indexPath.section]
+        (self.withView(view, tag: 1) as! UILabel).text = indexPath.section == 0 ? "" : sectionTitle[indexPath.section]
         return view
     }
     

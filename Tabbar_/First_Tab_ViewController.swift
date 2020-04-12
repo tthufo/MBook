@@ -125,12 +125,6 @@ class First_Tab_ViewController: UIViewController {
         self.root()?.toggleLeftPanel(nil)
     }
     
-    func removeKey(info: NSMutableDictionary) -> NSDictionary {
-        (info["url"] as! NSMutableDictionary).removeObjects(forKeys: ["page_index", "page_size"])
-        
-        return info
-    }
-    
     func gotoBookDetail(config: NSDictionary) {
         let bookDetail = Book_Detail_ViewController.init()
         
