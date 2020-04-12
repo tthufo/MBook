@@ -64,4 +64,11 @@
     }
 }
 
+- (NSAttributedString *)attributeHTML:(NSString*)htmlString {
+    NSString * string = [NSString stringWithFormat:@"<span style=\"font-size: 14;\">%@</span>", htmlString];
+    NSAttributedString * attrStr = [[NSAttributedString alloc] initWithData:[string dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
+
+    return attrStr;
+}
+
 @end

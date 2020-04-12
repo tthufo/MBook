@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Event_Cell" id="1nV-ZD-oVL">
+            <rect key="frame" x="0.0" y="0.0" width="179" height="107"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="1XO-Jj-iEk">
+                <rect key="frame" x="0.0" y="0.0" width="179" height="107"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="11" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rCC-xO-KQ6">
+                        <rect key="frame" x="8" y="8" width="163" height="91"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <integer key="value" value="8"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </imageView>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="12" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GlK-TW-tsY">
+                        <rect key="frame" x="133" y="16" width="30" height="30"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="30" id="eb2-39-dSF"/>
+                            <constraint firstAttribute="height" constant="30" id="hAf-il-DoG"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <integer key="value" value="15"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                <integer key="value" value="1"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="layer.borderUIColor">
+                                <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="GlK-TW-tsY" firstAttribute="top" secondItem="1XO-Jj-iEk" secondAttribute="top" constant="16" id="FWb-IH-pb2"/>
+                    <constraint firstAttribute="bottom" secondItem="rCC-xO-KQ6" secondAttribute="bottom" constant="8" id="KRq-Hg-M6Y"/>
+                    <constraint firstItem="rCC-xO-KQ6" firstAttribute="top" secondItem="1XO-Jj-iEk" secondAttribute="top" constant="8" id="Ove-7Z-pjb"/>
+                    <constraint firstAttribute="trailing" secondItem="rCC-xO-KQ6" secondAttribute="trailing" constant="8" id="S88-v5-Q2f"/>
+                    <constraint firstItem="rCC-xO-KQ6" firstAttribute="leading" secondItem="1XO-Jj-iEk" secondAttribute="leading" constant="8" id="cmI-Pn-69o"/>
+                    <constraint firstAttribute="trailing" secondItem="GlK-TW-tsY" secondAttribute="trailing" constant="16" id="jDj-wE-S2F"/>
+                </constraints>
+            </collectionViewCellContentView>
+            <size key="customSize" width="179" height="107"/>
+            <point key="canvasLocation" x="-87.681159420289859" y="3.0133928571428572"/>
+        </collectionViewCell>
+    </objects>
+</document>

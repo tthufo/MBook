@@ -103,6 +103,15 @@
 		FCB238C824422DFB0034B40B /* Author_Detail_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCB238C624422DFB0034B40B /* Author_Detail_ViewController.xib */; };
 		FCB238CA2442329C0034B40B /* Author_Detail_Header.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCB238C92442329C0034B40B /* Author_Detail_Header.xib */; };
 		FCB238CC244235D70034B40B /* Author_Bio_Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCB238CB244235D70034B40B /* Author_Bio_Cell.xib */; };
+		FCB238D0244354AB0034B40B /* Event_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB238CE244354AA0034B40B /* Event_ViewController.swift */; };
+		FCB238D1244354AB0034B40B /* Event_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCB238CF244354AA0034B40B /* Event_ViewController.xib */; };
+		FCB238D3244355770034B40B /* Event_Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCB238D2244355770034B40B /* Event_Cell.xib */; };
+		FCB238DE24435BF60034B40B /* Publisher_ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCB238DC24435BF60034B40B /* Publisher_ViewController.m */; };
+		FCB238DF24435BF60034B40B /* Publisher_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCB238DD24435BF60034B40B /* Publisher_ViewController.xib */; };
+		FCB238E124435C410034B40B /* Publisher_Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCB238E024435C410034B40B /* Publisher_Cell.xib */; };
+		FCB238E424437D410034B40B /* Event_Detail_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB238E224437D400034B40B /* Event_Detail_ViewController.swift */; };
+		FCB238E524437D410034B40B /* Event_Detail_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCB238E324437D400034B40B /* Event_Detail_ViewController.xib */; };
+		FCB238E724437DB80034B40B /* Event_Detail_Header.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCB238E624437DB80034B40B /* Event_Detail_Header.xib */; };
 		FCB3CD691DA4DDE9002FABDD /* HT_Genres_ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCB3CD671DA4DDE9002FABDD /* HT_Genres_ViewController.m */; };
 		FCB3CD6A1DA4DDE9002FABDD /* HT_Genres_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCB3CD681DA4DDE9002FABDD /* HT_Genres_ViewController.xib */; };
 		FCB3CD6D1DA4DEC9002FABDD /* UIViewController+Additional.m in Sources */ = {isa = PBXBuildFile; fileRef = FCB3CD6C1DA4DEC9002FABDD /* UIViewController+Additional.m */; };
@@ -253,6 +262,16 @@
 		FCB238C624422DFB0034B40B /* Author_Detail_ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Author_Detail_ViewController.xib; sourceTree = "<group>"; };
 		FCB238C92442329C0034B40B /* Author_Detail_Header.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Author_Detail_Header.xib; sourceTree = "<group>"; };
 		FCB238CB244235D70034B40B /* Author_Bio_Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Author_Bio_Cell.xib; sourceTree = "<group>"; };
+		FCB238CE244354AA0034B40B /* Event_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event_ViewController.swift; sourceTree = "<group>"; };
+		FCB238CF244354AA0034B40B /* Event_ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Event_ViewController.xib; sourceTree = "<group>"; };
+		FCB238D2244355770034B40B /* Event_Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Event_Cell.xib; sourceTree = "<group>"; };
+		FCB238DB24435BF60034B40B /* Publisher_ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Publisher_ViewController.h; sourceTree = "<group>"; };
+		FCB238DC24435BF60034B40B /* Publisher_ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Publisher_ViewController.m; sourceTree = "<group>"; };
+		FCB238DD24435BF60034B40B /* Publisher_ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Publisher_ViewController.xib; sourceTree = "<group>"; };
+		FCB238E024435C410034B40B /* Publisher_Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Publisher_Cell.xib; sourceTree = "<group>"; };
+		FCB238E224437D400034B40B /* Event_Detail_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event_Detail_ViewController.swift; sourceTree = "<group>"; };
+		FCB238E324437D400034B40B /* Event_Detail_ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Event_Detail_ViewController.xib; sourceTree = "<group>"; };
+		FCB238E624437DB80034B40B /* Event_Detail_Header.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Event_Detail_Header.xib; sourceTree = "<group>"; };
 		FCB3CD661DA4DDE9002FABDD /* HT_Genres_ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HT_Genres_ViewController.h; sourceTree = "<group>"; };
 		FCB3CD671DA4DDE9002FABDD /* HT_Genres_ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HT_Genres_ViewController.m; sourceTree = "<group>"; };
 		FCB3CD681DA4DDE9002FABDD /* HT_Genres_ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HT_Genres_ViewController.xib; sourceTree = "<group>"; };
@@ -334,6 +353,8 @@
 		FC1AD7C21DA40CA8002BA7EC = {
 			isa = PBXGroup;
 			children = (
+				FCB238D624435BA80034B40B /* Publisher_ */,
+				FCB238CD2443545A0034B40B /* Event_ */,
 				FCB238BE244217C30034B40B /* Author_ */,
 				FC7839732438F32700470148 /* Account_ */,
 				FC78396D2438F16500470148 /* Detail_ */,
@@ -581,6 +602,30 @@
 			path = Author_;
 			sourceTree = "<group>";
 		};
+		FCB238CD2443545A0034B40B /* Event_ */ = {
+			isa = PBXGroup;
+			children = (
+				FCB238CE244354AA0034B40B /* Event_ViewController.swift */,
+				FCB238CF244354AA0034B40B /* Event_ViewController.xib */,
+				FCB238D2244355770034B40B /* Event_Cell.xib */,
+				FCB238E224437D400034B40B /* Event_Detail_ViewController.swift */,
+				FCB238E324437D400034B40B /* Event_Detail_ViewController.xib */,
+				FCB238E624437DB80034B40B /* Event_Detail_Header.xib */,
+			);
+			path = Event_;
+			sourceTree = "<group>";
+		};
+		FCB238D624435BA80034B40B /* Publisher_ */ = {
+			isa = PBXGroup;
+			children = (
+				FCB238DB24435BF60034B40B /* Publisher_ViewController.h */,
+				FCB238DC24435BF60034B40B /* Publisher_ViewController.m */,
+				FCB238DD24435BF60034B40B /* Publisher_ViewController.xib */,
+				FCB238E024435C410034B40B /* Publisher_Cell.xib */,
+			);
+			path = Publisher_;
+			sourceTree = "<group>";
+		};
 		FCB3CD651DA4DDCC002FABDD /* Genres */ = {
 			isa = PBXGroup;
 			children = (
@@ -715,8 +760,10 @@
 			files = (
 				FCFB51761DD0EFE300D49FB2 /* M_Detail_ViewController.xib in Resources */,
 				FCB238BB244186E10034B40B /* Book_Detail_Title.xib in Resources */,
+				FCB238E524437D410034B40B /* Event_Detail_ViewController.xib in Resources */,
 				FCFB516D1DD075E200D49FB2 /* actions.plist in Resources */,
 				FC0A8FB42437770E001A75AF /* PC_Login_ViewController.xib in Resources */,
+				FCB238D3244355770034B40B /* Event_Cell.xib in Resources */,
 				FCB782E71DA414D400BDF913 /* Second_Tab_ViewController.xib in Resources */,
 				FC640A921DAAAE2800DAEF55 /* TT_Synced_ViewController.xib in Resources */,
 				FC40A101243EFE680096B9DB /* TG_Room_Cell_5.xib in Resources */,
@@ -724,6 +771,7 @@
 				FC7550F91DACDB53007992DF /* EM_Menu.xib in Resources */,
 				FC69D4402440D435006D57D9 /* Book_Detail_ViewController.xib in Resources */,
 				FC0A8FB32437770E001A75AF /* PC_Register_ViewController.xib in Resources */,
+				FCB238E724437DB80034B40B /* Event_Detail_Header.xib in Resources */,
 				FC0A8FB12437770E001A75AF /* PC_Forgot_ViewController.xib in Resources */,
 				FC40A0FE243EFE5C0096B9DB /* TG_Room_Cell_3.xib in Resources */,
 				FC40A0FD243EFE5C0096B9DB /* TG_Room_Cell_1.xib in Resources */,
@@ -745,8 +793,10 @@
 				FCAD57F1243DB7E400101A47 /* TG_Room_Cell_0.xib in Resources */,
 				FCB238C424421BC20034B40B /* Author_Filter_Cell.xib in Resources */,
 				FCB238C824422DFB0034B40B /* Author_Detail_ViewController.xib in Resources */,
+				FCB238E124435C410034B40B /* Publisher_Cell.xib in Resources */,
 				FC7550FC1DACDB53007992DF /* M_Menu.xib in Resources */,
 				FCB3CD721DA4E3FA002FABDD /* ItemCell.xib in Resources */,
+				FCB238DF24435BF60034B40B /* Publisher_ViewController.xib in Resources */,
 				FC7550EA1DAC869B007992DF /* HT_More_ViewController.xib in Resources */,
 				FC78397E2438F42400470148 /* PC_ChangePass_ViewController.xib in Resources */,
 				FC7551051DAE4640007992DF /* Default~iphone.png in Resources */,
@@ -754,6 +804,7 @@
 				FC69D43024405879006D57D9 /* TG_Room_Cell_9.xib in Resources */,
 				FC23EB97243A4CB9003E5E1A /* TG_Map_Cell.xib in Resources */,
 				FCB238BD2441B6960034B40B /* TG_Book_Chap_Cell.xib in Resources */,
+				FCB238D1244354AB0034B40B /* Event_ViewController.xib in Resources */,
 				FC7550F11DAC959A007992DF /* HT_Detail_ViewController.xib in Resources */,
 				FC7551031DAE4640007992DF /* Default-568h@2x.png in Resources */,
 				FCC965B21DA75C060025971E /* HT_Player_Item.xib in Resources */,
@@ -850,6 +901,7 @@
 				FCE38C4A243E4B6C003864BC /* OwnTableView.swift in Sources */,
 				FC640A861DAAAD8C00DAEF55 /* List.m in Sources */,
 				FCC965AA1DA5F4200025971E /* HT_Player_ViewController.m in Sources */,
+				FCB238E424437D410034B40B /* Event_Detail_ViewController.swift in Sources */,
 				FCC965AE1DA5FD790025971E /* TT_Panel_ViewController.m in Sources */,
 				FC23EB95243A4C8F003E5E1A /* List_Book_ViewController.swift in Sources */,
 				FCB3CD691DA4DDE9002FABDD /* HT_Genres_ViewController.m in Sources */,
@@ -868,7 +920,9 @@
 				FC78398524391F6700470148 /* TG_Intro_ViewController.swift in Sources */,
 				FCB3CD711DA4E3FA002FABDD /* ItemCell.m in Sources */,
 				FC1AD7D61DA40CA8002BA7EC /* ViewController.m in Sources */,
+				FCB238D0244354AB0034B40B /* Event_ViewController.swift in Sources */,
 				FC7839792438F37F00470148 /* PC_Inner_Info_ViewController.swift in Sources */,
+				FCB238DE24435BF60034B40B /* Publisher_ViewController.m in Sources */,
 				FC640A881DAAAD8C00DAEF55 /* Records.m in Sources */,
 				FC7550FF1DACDD78007992DF /* YouTube.m in Sources */,
 				FC91B7352431217F00AA6671 /* XMLReader.m in Sources */,

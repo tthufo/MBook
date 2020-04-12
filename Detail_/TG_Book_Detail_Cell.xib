@@ -42,11 +42,7 @@
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yld-Au-NRG">
-                        <rect key="frame" x="138" y="14.5" width="0.0" height="21"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="21" id="7d0-Wd-5r6"/>
-                            <constraint firstAttribute="width" relation="greaterThanOrEqual" id="EoP-Q5-aXQ"/>
-                        </constraints>
+                        <rect key="frame" x="138" y="15" width="138" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -55,15 +51,17 @@
             </view>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
+                <constraint firstItem="nNd-0h-i5Q" firstAttribute="top" secondItem="yld-Au-NRG" secondAttribute="bottom" constant="13" id="4KZ-Kg-x2l"/>
                 <constraint firstItem="4Zo-us-tex" firstAttribute="centerY" secondItem="wX3-7p-UCN" secondAttribute="centerY" id="8tH-jb-hLP"/>
-                <constraint firstItem="yld-Au-NRG" firstAttribute="centerY" secondItem="wX3-7p-UCN" secondAttribute="centerY" id="CxW-n1-vQK"/>
                 <constraint firstItem="nNd-0h-i5Q" firstAttribute="leading" secondItem="wX3-7p-UCN" secondAttribute="leading" constant="10" id="GQU-30-gEN"/>
                 <constraint firstAttribute="trailing" secondItem="GCF-x8-CAR" secondAttribute="trailing" constant="8" id="KIq-q1-Wmy"/>
                 <constraint firstItem="4Zo-us-tex" firstAttribute="leading" secondItem="wX3-7p-UCN" secondAttribute="leading" constant="10" id="NU3-bI-YTm"/>
-                <constraint firstItem="yld-Au-NRG" firstAttribute="leading" secondItem="4Zo-us-tex" secondAttribute="trailing" constant="18" id="PYa-aL-cnI"/>
+                <constraint firstItem="yld-Au-NRG" firstAttribute="leading" secondItem="4Zo-us-tex" secondAttribute="trailing" constant="18" id="Qhf-YU-nGk"/>
                 <constraint firstAttribute="trailing" secondItem="nNd-0h-i5Q" secondAttribute="trailing" constant="10" id="dv9-Xf-XfY"/>
+                <constraint firstItem="yld-Au-NRG" firstAttribute="top" secondItem="wX3-7p-UCN" secondAttribute="top" constant="15" id="nEa-Mu-7RM"/>
                 <constraint firstItem="GCF-x8-CAR" firstAttribute="centerY" secondItem="wX3-7p-UCN" secondAttribute="centerY" id="oZ9-fx-Uus"/>
                 <constraint firstAttribute="bottom" secondItem="nNd-0h-i5Q" secondAttribute="bottom" id="wYB-mQ-sPP"/>
+                <constraint firstItem="GCF-x8-CAR" firstAttribute="leading" secondItem="yld-Au-NRG" secondAttribute="trailing" constant="2" id="y5B-zo-04a"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="pna-cJ-x3T"/>
             <size key="customSize" width="366" height="52"/>

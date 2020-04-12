@@ -50,7 +50,7 @@ class TG_Room_Cell: UITableViewCell, FSPagerViewDataSource,FSPagerViewDelegate, 
     func pagerView(_ pagerView: FSPagerView, didSelectItemAt index: Int) {
         pagerView.deselectItem(at: index, animated: true)
         let data = images![index] as! NSDictionary
-        callBack?(data)
+        callBack?(["selection": data, "data": images])
     }
     
     func pagerViewDidScroll(_ pagerView: FSPagerView) {

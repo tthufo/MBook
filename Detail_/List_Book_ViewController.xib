@@ -11,6 +11,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="List_Book_ViewController" customModule="HearThis" customModuleProvider="target">
             <connections>
                 <outlet property="collectionView" destination="ysb-le-BiT" id="aWA-FN-pgH"/>
+                <outlet property="counter" destination="UaE-wm-tiP" id="BA6-T9-ZJX"/>
+                <outlet property="counterHeight" destination="YKH-aC-imr" id="jeH-TA-B8p"/>
                 <outlet property="titleLabel" destination="zBk-MB-z4z" id="szK-o7-L5i"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -56,7 +58,7 @@
                     <viewLayoutGuide key="safeArea" id="aRE-dT-FeD"/>
                 </view>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="ysb-le-BiT">
-                    <rect key="frame" x="10" y="72" width="355" height="585"/>
+                    <rect key="frame" x="10" y="109" width="355" height="548"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="GGg-Vo-GQx">
                         <size key="itemSize" width="50" height="50"/>
@@ -69,14 +71,26 @@
                         <outlet property="delegate" destination="-1" id="hZx-qy-ZWG"/>
                     </connections>
                 </collectionView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UaE-wm-tiP">
+                    <rect key="frame" x="10" y="72" width="355" height="29"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="29" id="YKH-aC-imr"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="ysb-le-BiT" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="GAG-9h-zAP"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="UaE-wm-tiP" secondAttribute="trailing" constant="10" id="6ex-q1-rYy"/>
+                <constraint firstItem="UaE-wm-tiP" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="BaP-FR-0C0"/>
+                <constraint firstItem="UaE-wm-tiP" firstAttribute="top" secondItem="5Mz-Xc-I1R" secondAttribute="bottom" constant="8" id="Ojj-Zm-H1d"/>
+                <constraint firstItem="ysb-le-BiT" firstAttribute="top" secondItem="UaE-wm-tiP" secondAttribute="bottom" constant="8" id="VH3-lC-aBi"/>
                 <constraint firstItem="5Mz-Xc-I1R" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="Ypa-Hk-Os4"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="ysb-le-BiT" secondAttribute="bottom" constant="10" id="cMU-Io-wyb"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ysb-le-BiT" secondAttribute="trailing" constant="10" id="kHI-7d-EL1"/>
-                <constraint firstItem="ysb-le-BiT" firstAttribute="top" secondItem="5Mz-Xc-I1R" secondAttribute="bottom" constant="8" id="nmy-U9-pqi"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="ysb-le-BiT" secondAttribute="bottom" constant="10" id="fH9-sB-2ww"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ysb-le-BiT" secondAttribute="trailing" constant="10" id="fP7-sy-Pqa"/>
+                <constraint firstItem="ysb-le-BiT" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="oqw-ig-SEC"/>
                 <constraint firstItem="5Mz-Xc-I1R" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="sH1-d4-s5Q"/>
                 <constraint firstItem="5Mz-Xc-I1R" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="uL4-S6-6yx"/>
             </constraints>

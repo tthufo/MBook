@@ -101,9 +101,11 @@ extension TG_Intro_ViewController: UITableViewDataSource, UITableViewDelegate {
                 
         let sec = (dataList[section] as! NSMutableDictionary);
                 
+        let subMenu = (sec["sub_category"] as! NSArray).count == 0
+        
         (self.withView(head, tag: 11) as! UILabel).text = sec.getValueFromKey("name")
 
-        (self.withView(head, tag: 12) as! UIButton).isHidden = (sec["sub_category"] as! NSArray).count == 0
+        (self.withView(head, tag: 12) as! UIButton).isHidden = subMenu
         
         (self.withView(head, tag: 12) as! UIButton).action(forTouch: [:]) { (obj) in
             sec["open"] = sec.getValueFromKey("open") == "0" ? "1" : "0"
@@ -123,17 +125,23 @@ extension TG_Intro_ViewController: UITableViewDataSource, UITableViewDelegate {
         
         let id = sec.getValueFromKey("id")
         
-        head.action(forTouch: [:]) { (obj) in
-            if id == "99" {
-                self.center()?.pushViewController(Author_ViewController.init(), animated: true)
+        if subMenu {
+            head.action(forTouch: [:]) { (obj) in
+                if id == "99" {
+                    self.center()?.pushViewController(Author_ViewController.init(), animated: true)
+                }
+                if id == "100" {
+                    let event = Event_ViewController.init()
+                    event.config = ["url": ["CMD_CODE": "getHomeEvent", "position": 0], "title": sec.getValueFromKey("name") as Any]
+                    self.center()?.pushViewController(event, animated: true)
+                }
+                if id == "101" {
+                    let publisher = Publisher_ViewController.init()
+                    publisher.config = ["url": ["CMD_CODE": "getListPublishingHouse"]]
+                    self.center()?.pushViewController(publisher, animated: true)
+                }
+                self.root()?.showCenterPanel(animated: true)
             }
-            if id == "100" {
-                
-            }
-            if id == "101" {
-                
-            }
-            self.root()?.showCenterPanel(animated: true)
         }
         
         return head

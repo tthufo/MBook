@@ -14,6 +14,8 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
     let refreshControl = UIRefreshControl()
     
     var config: NSDictionary!
+    
+    var headerView: UIView!
 
     var pageIndex: Int = 1
      
@@ -60,39 +62,39 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
     }
         
     private func setupParallaxHeader() {
-        let view = Bundle.main.loadNibNamed("Book_Detail_Header", owner: self, options: nil)![IS_IPAD ? 1 : 0] as! UIView
+        headerView = (Bundle.main.loadNibNamed("Book_Detail_Header", owner: self, options: nil)![IS_IPAD ? 1 : 0] as! UIView)
         
-        view.blurView.setup(style: UIBlurEffect.Style.dark, alpha: 1).enable()
+        headerView.blurView.setup(style: UIBlurEffect.Style.dark, alpha: 1).enable()
         
-        let back = self.withView(view, tag: 1) as! UIButton
+        let back = self.withView(headerView, tag: 1) as! UIButton
         
         back.action(forTouch: [:]) { (obj) in
             self.navigationController?.popViewController(animated: true)
         }
         
-        let title = self.withView(view, tag: 2) as! UILabel
+        let title = self.withView(headerView, tag: 2) as! UILabel
 
         title.text = self.config.getValueFromKey("name")
 
-        let avatar = self.withView(view, tag: 3) as! UIImageView
+        let avatar = self.withView(headerView, tag: 3) as! UIImageView
         
         avatar.imageUrl(url: self.config.getValueFromKey("avatar"))
         
-        let name = self.withView(view, tag: 4) as! UILabel
+        let name = self.withView(headerView, tag: 4) as! UILabel
 
         name.text = self.config.getValueFromKey("name")
         
-        let description = self.withView(view, tag: 5) as! UILabel
+        let description = self.withView(headerView, tag: 5) as! UILabel
         
         description.text = (self.config["author"] as! NSArray).count > 1 ? "Nhiều tác giả" : (((self.config["author"] as! NSArray)[0]) as! NSDictionary).getValueFromKey("name")
 
-        let backgroundImage = self.withView(view, tag: 6) as! UIImageView
+        let backgroundImage = self.withView(headerView, tag: 6) as! UIImageView
                
         backgroundImage.blurView.setup(style: UIBlurEffect.Style.dark, alpha: 0.9).enable()
 
         backgroundImage.imageUrl(url: self.config.getValueFromKey("avatar"))
 
-        collectionView.parallaxHeader.view = view
+        collectionView.parallaxHeader.view = headerView
         collectionView.parallaxHeader.height = CGFloat(headerHeight)
         collectionView.parallaxHeader.minimumHeight = 64
         collectionView.parallaxHeader.mode = .centerFill
@@ -109,6 +111,29 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
         self.didRequestDetail()
     }
     
+    func setupInfo() {
+       let title = self.withView(headerView, tag: 2) as! UILabel
+
+       title.text = self.config.getValueFromKey("name")
+
+       let avatar = self.withView(headerView, tag: 3) as! UIImageView
+       
+       avatar.imageUrl(url: self.config.getValueFromKey("avatar"))
+       
+       let name = self.withView(headerView, tag: 4) as! UILabel
+
+       name.text = self.config.getValueFromKey("name")
+       
+       let description = self.withView(headerView, tag: 5) as! UILabel
+       
+       description.text = (self.config["author"] as! NSArray).count > 1 ? "Nhiều tác giả" : (((self.config["author"] as! NSArray)[0]) as! NSDictionary).getValueFromKey("name")
+
+       let backgroundImage = self.withView(headerView, tag: 6) as! UIImageView
+              
+       backgroundImage.blurView.setup(style: UIBlurEffect.Style.dark, alpha: 0.9).enable()
+
+       backgroundImage.imageUrl(url: self.config.getValueFromKey("avatar"))
+   }
     
     @objc func didReload(_ sender: Any) {
         isLoadMore = false
@@ -127,7 +152,7 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
                                                             "host":self])
         
         request.addEntries(from: self.config["url"] as! [AnyHashable : Any])
-        
+                
         print(self.config)
         
         LTRequest.sharedInstance()?.didRequestInfo((request as! [AnyHashable : Any]), withCache: { (cacheString) in
@@ -336,7 +361,24 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-      
+        if indexPath.section == 2 {
+            let tempConfig:NSMutableDictionary = NSMutableDictionary.init(dictionary: (dataList[indexPath.item] as! NSDictionary))
+            tempConfig["url"] = self.config["url"]
+            self.config = tempConfig
+            self.setupInfo()
+            collectionView.setContentOffset(CGPoint.init(x: 0, y: -headerHeight), animated: true)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+                self.didReload(self.refreshControl)
+                self.didRequestChapter()
+                self.didRequestDetail()
+            })
+        }
+        if indexPath.section == 1 {
+            
+        }
+        if indexPath.section == 1 {
+            
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {

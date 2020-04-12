@@ -14,4 +14,6 @@
 
 - (BOOL)isIphoneX;
 
+- (NSAttributedString *)attributeHTML:(NSString*)htmlString;
+
 @end

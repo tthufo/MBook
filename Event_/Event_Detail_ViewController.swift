@@ -8,9 +8,8 @@
 
 import UIKit
 import ParallaxHeader
-import ExpandableLabel
 
-class Author_Detail_ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UIGestureRecognizerDelegate, ExpandableLabelDelegate {
+class Event_Detail_ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UIGestureRecognizerDelegate {
     
     @IBOutlet var collectionView: UICollectionView!
 
@@ -36,7 +35,7 @@ class Author_Detail_ViewController: UIViewController, UICollectionViewDataSource
     
     var bioHeight: CGFloat = 0
     
-    let sectionTitle = ["", "Tác phẩm", "Tác giả khác"]
+    let sectionTitle = ["", "", "Tuyển tập khác"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,6 +49,8 @@ class Author_Detail_ViewController: UIViewController, UICollectionViewDataSource
         collectionView.withCell("TG_Book_Detail_Cell")
 
         collectionView.withCell("TG_Book_Chap_Cell")
+        
+        collectionView.withCell("Event_Cell")
 
         collectionView.refreshControl = refreshControl
         
@@ -63,7 +64,7 @@ class Author_Detail_ViewController: UIViewController, UICollectionViewDataSource
     }
         
     private func setupParallaxHeader() {
-        headerView = (Bundle.main.loadNibNamed("Author_Detail_Header", owner: self, options: nil)![IS_IPAD ? 1 : 0] as! UIView)
+        headerView = (Bundle.main.loadNibNamed("Event_Detail_Header", owner: self, options: nil)![IS_IPAD ? 1 : 0] as! UIView)
                 
         let back = self.withView(headerView, tag: 1) as! UIButton
         
@@ -75,9 +76,6 @@ class Author_Detail_ViewController: UIViewController, UICollectionViewDataSource
 
         title.text = self.config.getValueFromKey("name")
 
-        let avatar = self.withView(headerView, tag: 3) as! UIImageView
-
-        avatar.imageUrl(url: self.config.getValueFromKey("avatar"))
 
         let name = self.withView(headerView, tag: 4) as! UILabel
 
@@ -89,15 +87,20 @@ class Author_Detail_ViewController: UIViewController, UICollectionViewDataSource
         
         let backgroundImage = self.withView(headerView, tag: 6) as! UIImageView
                
+        backgroundImage.imageUrl(url: self.config.getValueFromKey("avatar"))
+        
+        let viewer = self.withView(headerView, tag: 7) as! UILabel
+
+        viewer.text = self.config.getValueFromKey("view_count") + " Lượt xem"
+               
         collectionView.parallaxHeader.view = headerView
         collectionView.parallaxHeader.height = CGFloat(headerHeight)
         collectionView.parallaxHeader.minimumHeight = 64
         collectionView.parallaxHeader.mode = .centerFill
         collectionView.parallaxHeader.parallaxHeaderDidScrollHandler = { parallaxHeader in
-            backgroundImage.alpha = 1 - parallaxHeader.progress
+//            backgroundImage.alpha = 1 - parallaxHeader.progress
             back.alpha = 1 - parallaxHeader.progress
             title.alpha = 1 - parallaxHeader.progress
-            avatar.alpha = parallaxHeader.progress
             name.alpha = parallaxHeader.progress
             description.alpha = parallaxHeader.progress
         }
@@ -109,10 +112,6 @@ class Author_Detail_ViewController: UIViewController, UICollectionViewDataSource
         let title = self.withView(headerView, tag: 2) as! UILabel
 
         title.text = self.config.getValueFromKey("name")
-
-        let avatar = self.withView(headerView, tag: 3) as! UIImageView
-        
-        avatar.imageUrl(url: self.config.getValueFromKey("avatar"))
         
         let name = self.withView(headerView, tag: 4) as! UILabel
 
@@ -121,6 +120,14 @@ class Author_Detail_ViewController: UIViewController, UICollectionViewDataSource
         let description = self.withView(headerView, tag: 5) as! UILabel
         
         description.text = self.config.getValueFromKey("book_count") + " Tác phẩm"
+        
+        let backgroundImage = self.withView(headerView, tag: 6) as! UIImageView
+        
+        backgroundImage.imageUrl(url: self.config.getValueFromKey("avatar"))
+        
+        let viewer = self.withView(headerView, tag: 7) as! UILabel
+
+        viewer.text = self.config.getValueFromKey("view_count") + " Lượt xem"
     }
     
     @objc func didReload(_ sender: Any) {
@@ -131,18 +138,16 @@ class Author_Detail_ViewController: UIViewController, UICollectionViewDataSource
     }
     
     func didRequestData(isShow: Bool) {
-        let request = NSMutableDictionary.init(dictionary: ["CMD_CODE":"getListBook",
+        let request = NSMutableDictionary.init(dictionary: [
                                                             "session":Information.token ?? "",
                                                             "page_index": self.pageIndex,
                                                             "page_size": 10,
-                                                            "book_type": 0,
-                                                            "price":0,
-                                                            "sorting":1,
                                                             "overrideAlert":"1",
                                                             "overrideLoading":isShow ? 1 : 0,
                                                             "host":self])
         
-        request["author_id"] = Int(self.config.getValueFromKey("id"))
+        request["id"] = Int(self.config.getValueFromKey("id"))
+        request["CMD_CODE"] = self.config.getValueFromKey("event_type") == "1" ? "getEventBookDetail" : "getEventAudioOrStoryDetail"
         
         LTRequest.sharedInstance()?.didRequestInfo((request as! [AnyHashable : Any]), withCache: { (cacheString) in
         }, andCompletion: { (response, errorCode, error, isValid, object) in
@@ -179,6 +184,18 @@ class Author_Detail_ViewController: UIViewController, UICollectionViewDataSource
         self.navigationController?.popViewController(animated: true)
     }
     
+    func eventSize() -> CGSize {
+        return CGSize(width: Int((self.screenWidth() / (IS_IPAD ? 3 : 2)) - 15), height: Int(((self.screenWidth() / (IS_IPAD ? 3 : 2)) - 15) * 0.6))
+    }
+    
+    func bookSize() -> CGSize {
+        return CGSize(width: Int((self.screenWidth() / (IS_IPAD ? 5 : 3)) - 15), height: Int(((self.screenWidth() / (IS_IPAD ? 5 : 3)) - 15) * 1.72))
+    }
+    
+    func chapSize() -> CGSize {
+        return CGSize(width: collectionView.frame.width, height: 50)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -188,11 +205,11 @@ class Author_Detail_ViewController: UIViewController, UICollectionViewDataSource
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return section == 1 ? dataList.count : section == 2 ? chapList.count : bioHeight == 0 ? 1 : 1
+        return section == 1 ? dataList.count : section == 2 ? chapList.count : 0//bioHeight == 0 ? 1 : 1
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return indexPath.section != 0 ? CGSize(width: Int((self.screenWidth() / (IS_IPAD ? 5 : 3)) - 15), height: Int(((self.screenWidth() / (IS_IPAD ? 5 : 3)) - 15) * 1.72)) : CGSize(width: collectionView.frame.width, height: bioHeight)
+        return indexPath.section == 2 ? eventSize() : indexPath.section == 1 ? (self.config.getValueFromKey("event_type") == "1" ? bookSize() : chapSize() ) : CGSize(width: collectionView.frame.width, height: 50)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -203,93 +220,67 @@ class Author_Detail_ViewController: UIViewController, UICollectionViewDataSource
         return 10.0
     }
     
-    func willExpandLabel(_ label: ExpandableLabel) {
-    }
-       
-    func didExpandLabel(_ label: ExpandableLabel) {
-           isCollapse = false
-        bioHeight = label.frame.size.width
-        self.collectionView.reloadSections(IndexSet(integer: 0))
-    }
-   
-    func willCollapseLabel(_ label: ExpandableLabel) {
-//       tableView.beginUpdates()
-    }
-   
-    func didCollapseLabel(_ label: ExpandableLabel) {
-          isCollapse = true
-        bioHeight = label.frame.size.width
-        self.collectionView.reloadSections(IndexSet(integer: 0))
-    }
-    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: indexPath.section != 0 ? "TG_Map_Cell" : "Author_Bio_Cell", for: indexPath as IndexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: indexPath.section == 2 ? "Event_Cell" : indexPath.section == 1 ? (self.config.getValueFromKey("event_type") == "1" ? "TG_Map_Cell" : "TG_Book_Chap_Cell") : "Author_Bio_Cell", for: indexPath as IndexPath)
         
         if indexPath.section == 0 {
 
-           let title = self.withView(cell, tag: 1) as! UILabel
-            
-//            title.text = self.config.getValueFromKey("info")
+//           let title = self.withView(cell, tag: 1) as! UILabel
 //
-            let data = self.config.getValueFromKey("info").data(using: String.Encoding.unicode)
-
-            let attributedText = try! NSAttributedString(data: data!, options: [.documentType:NSAttributedString.DocumentType.html], documentAttributes: nil)
+////            title.text = self.config.getValueFromKey("info")
+////
+//            let data = self.config.getValueFromKey("info").data(using: String.Encoding.unicode)
 //
-            title.attributedText = attributedText
-//
-            bioHeight = title.sizeOfMultiLineLabel().height + 80
-//
-            print("--->", bioHeight)
-        
-//            self.collectionView.reloadSections(IndexSet(integer: 0))
-            
-//            title.delegate = self
-
-//            title.setLessLinkWith(lessLink: "Close", attributes: [.foregroundColor:UIColor.red], position: .left)
-
-//            cell.layoutIfNeeded()
-
-//            title.shouldCollapse = true
-//            title.textReplacementType = .word
-//            title.numberOfLines = 3
-//            title.collapsed = isCollapse
-//            title.text = self.config.getValueFromKey("info")
+//            let attributedText = try! NSAttributedString(data: data!, options: [.documentType:NSAttributedString.DocumentType.html], documentAttributes: nil)
+////
 //            title.attributedText = attributedText
-
-        }
-        
-        if indexPath.section == 2 {
-            let data = chapList[indexPath.item] as! NSDictionary
-
-            let title = self.withView(cell, tag: 112) as! UILabel
-
-            title.text = data.getValueFromKey("name")
-
-            let description = self.withView(cell, tag: 13) as! UILabel
-
-            description.text = data.getValueFromKey("book_count") + " Tác phẩm"
-
-            let image = self.withView(cell, tag: 11) as! UIImageView
-
-            image.imageUrl(url: data.getValueFromKey("avatar"))
+////
+//            bioHeight = title.sizeOfMultiLineLabel().height + 80
+////
+//            print("--->", bioHeight)
         }
         
         if indexPath.section == 1 {
             let data = dataList[indexPath.item] as! NSDictionary
-            
-            let title = self.withView(cell, tag: 112) as! UILabel
 
-            title.text = data.getValueFromKey("name")
-            
-            let description = self.withView(cell, tag: 13) as! UILabel
+            if self.config.getValueFromKey("event_type") == "1" {
+                let title = self.withView(cell, tag: 112) as! UILabel
 
-            description.text = (data["author"] as! NSArray).count > 1 ? "Nhiều tác giả" : (((data["author"] as! NSArray)[0]) as! NSDictionary).getValueFromKey("name")
-            
-            let image = self.withView(cell, tag: 11) as! UIImageView
-            
-            image.imageUrl(url: data.getValueFromKey("avatar"))
+                title.text = data.getValueFromKey("name")
+
+                let description = self.withView(cell, tag: 13) as! UILabel
+
+                description.text = (data["author"] as! NSArray).count > 1 ? "Nhiều tác giả" : (((data["author"] as! NSArray)[0]) as! NSDictionary).getValueFromKey("name")
+
+                let image = self.withView(cell, tag: 11) as! UIImageView
+
+                image.imageUrl(url: data.getValueFromKey("avatar"))
+            } else {
+                let chap = dataList[indexPath.item] as! NSDictionary
+                
+                let title = self.withView(cell, tag: 1) as! UILabel
+
+                title.text = chap.getValueFromKey("name")
+                
+                let description = self.withView(cell, tag: 2) as! UILabel
+
+                description.text = chap.getValueFromKey("total_character") + " chữ Cập nhật: " + chap.getValueFromKey("publish_time")
+            }
         }
+        
+        if indexPath.section == 2 {
+           let data = chapList[indexPath.item] as! NSDictionary
+           
+           let book = self.withView(cell, tag: 12) as! UILabel
+
+           book.text = data.getValueFromKey("book_count")
+
+           let image = self.withView(cell, tag: 11) as! UIImageView
+           
+           image.imageUrl(url: data.getValueFromKey("avatar"))
+        }
+                
         return cell
     }
     
