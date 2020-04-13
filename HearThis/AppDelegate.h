@@ -76,5 +76,11 @@
 
 - (NSString*)connectionType;
 
+- (void)addHistory:(NSString*)history;
+
+- (void)removeHistory;
+
+- (NSArray*)getHistory;
+
 @end
 

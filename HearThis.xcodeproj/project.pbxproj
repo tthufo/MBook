@@ -133,6 +133,7 @@
 		FCC965B21DA75C060025971E /* HT_Player_Item.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCC965B11DA75C060025971E /* HT_Player_Item.xib */; };
 		FCD0E59F1DA8F93500DF2ABF /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = FCD0E59E1DA8F93500DF2ABF /* libz.tbd */; };
 		FCD36BFC2437BE2D009BB530 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FCD36BFB2437BE2D009BB530 /* GoogleService-Info.plist */; };
+		FCD381872444D78E004D78C9 /* CustomFlowLayou.m in Sources */ = {isa = PBXBuildFile; fileRef = FCD381862444D78E004D78C9 /* CustomFlowLayou.m */; };
 		FCE38C4A243E4B6C003864BC /* OwnTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE38C49243E4B6C003864BC /* OwnTableView.swift */; };
 		FCFB516C1DD075E200D49FB2 /* Action.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCFB516A1DD075E200D49FB2 /* Action.xib */; };
 		FCFB516D1DD075E200D49FB2 /* actions.plist in Resources */ = {isa = PBXBuildFile; fileRef = FCFB516B1DD075E200D49FB2 /* actions.plist */; };
@@ -306,6 +307,8 @@
 		FCC965B11DA75C060025971E /* HT_Player_Item.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HT_Player_Item.xib; sourceTree = "<group>"; };
 		FCD0E59E1DA8F93500DF2ABF /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		FCD36BFB2437BE2D009BB530 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		FCD381852444D78E004D78C9 /* CustomFlowLayou.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomFlowLayou.h; sourceTree = "<group>"; };
+		FCD381862444D78E004D78C9 /* CustomFlowLayou.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomFlowLayou.m; sourceTree = "<group>"; };
 		FCE38C49243E4B6C003864BC /* OwnTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnTableView.swift; sourceTree = "<group>"; };
 		FCFB516A1DD075E200D49FB2 /* Action.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Action.xib; sourceTree = "<group>"; };
 		FCFB516B1DD075E200D49FB2 /* actions.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = actions.plist; sourceTree = "<group>"; };
@@ -578,6 +581,8 @@
 				FC7A98CE2444AC370038C226 /* TagFlowLayout.swift */,
 				FC7A98D02444AD010038C226 /* Tag_Cell.xib */,
 				FC7A98D22444B0420038C226 /* Tag_Cell.swift */,
+				FCD381852444D78E004D78C9 /* CustomFlowLayou.h */,
+				FCD381862444D78E004D78C9 /* CustomFlowLayou.m */,
 			);
 			path = Search_;
 			sourceTree = "<group>";
@@ -965,6 +970,7 @@
 				FCAD4AAA2434FD1A00387AF6 /* SC_Menu_ViewController.m in Sources */,
 				FC78398E2439C23700470148 /* Third_Tab_ViewController.m in Sources */,
 				FC0A8FB02437770E001A75AF /* PC_Register_ViewController.swift in Sources */,
+				FCD381872444D78E004D78C9 /* CustomFlowLayou.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

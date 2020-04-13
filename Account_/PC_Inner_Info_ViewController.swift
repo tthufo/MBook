@@ -79,7 +79,6 @@ class PC_Inner_Info_ViewController: UIViewController, UITextFieldDelegate {
         phone.addTarget(self, action: #selector(textRePassIsChanging), for: .editingChanged)
         email.addTarget(self, action: #selector(textEmailIsChanging), for: .editingChanged)
         
-        
         let isEmail: Bool = email.text?.count != 0 && (email.text?.isValidEmail())!
         let isMatch: Bool = phone.text?.count != 0 && phone.text?.count == 10
           

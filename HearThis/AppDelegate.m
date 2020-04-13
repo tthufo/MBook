@@ -42,6 +42,11 @@
         [self addValue:@"0" andKey:@"ipod"];
     }
     
+    if(![self getObject:@"historyTag"])
+    {
+        [self addObject:@{@"history": @[]} andKey:@"historyTag"];
+    }
+    
     [[DownloadManager share] loadSort];
     
     
@@ -315,6 +320,22 @@ UIBackgroundTaskIdentifier bgTask;
 //        }
             
     }];
+}
+
+- (void)addHistory:(NSString*)history {
+    NSMutableArray * hisTag = [[NSMutableArray alloc] initWithArray:[self getHistory]];
+    
+    [hisTag addObject:history];
+    
+    [self addObject:@{@"history": hisTag} andKey:@"historyTag"];
+}
+
+- (void)removeHistory {
+    [self addObject:@{@"history": @[]} andKey:@"historyTag"];
+}
+
+- (NSArray*)getHistory {
+    return [self getObject:@"historyTag"][@"history"];
 }
 
 - (BOOL)hasAds
