@@ -125,6 +125,13 @@ class First_Tab_ViewController: UIViewController {
         self.root()?.toggleLeftPanel(nil)
     }
     
+    @IBAction func didPressSearch() {
+        let search = Search_ViewController.init()
+        
+        search.config = [:]
+        self.navigationController?.pushViewController(search, animated: true)
+    }
+    
     func gotoBookDetail(config: NSDictionary) {
         let bookDetail = Book_Detail_ViewController.init()
         

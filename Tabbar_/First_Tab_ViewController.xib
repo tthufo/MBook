@@ -30,7 +30,7 @@
                             </constraints>
                             <state key="normal" image="icon_pass"/>
                             <connections>
-                                <action selector="didPressMenu" destination="-1" eventType="touchUpInside" id="0fx-EV-LXg"/>
+                                <action selector="didPressSearch" destination="-1" eventType="touchUpInside" id="TKR-Dl-1jv"/>
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Kho sách" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vnC-ha-d1k">

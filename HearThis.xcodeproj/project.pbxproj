@@ -82,6 +82,11 @@
 		FC783989243922C100470148 /* PC_Sub_Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC783988243922C100470148 /* PC_Sub_Cell.xib */; };
 		FC78398D2439C23700470148 /* Third_Tab_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC78398A2439C23600470148 /* Third_Tab_ViewController.xib */; };
 		FC78398E2439C23700470148 /* Third_Tab_ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC78398C2439C23700470148 /* Third_Tab_ViewController.m */; };
+		FC7A98CC2444ABC70038C226 /* Search_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7A98CA2444ABC70038C226 /* Search_ViewController.swift */; };
+		FC7A98CD2444ABC70038C226 /* Search_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC7A98CB2444ABC70038C226 /* Search_ViewController.xib */; };
+		FC7A98CF2444AC370038C226 /* TagFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7A98CE2444AC370038C226 /* TagFlowLayout.swift */; };
+		FC7A98D12444AD010038C226 /* Tag_Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC7A98D02444AD010038C226 /* Tag_Cell.xib */; };
+		FC7A98D32444B0420038C226 /* Tag_Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7A98D22444B0420038C226 /* Tag_Cell.swift */; };
 		FC91B731243120F400AA6671 /* GUISlider.m in Sources */ = {isa = PBXBuildFile; fileRef = FC91B72E243120F400AA6671 /* GUISlider.m */; };
 		FC91B732243120F400AA6671 /* GUIPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC91B72F243120F400AA6671 /* GUIPlayerView.m */; };
 		FC91B7352431217F00AA6671 /* XMLReader.m in Sources */ = {isa = PBXBuildFile; fileRef = FC91B7332431217F00AA6671 /* XMLReader.m */; };
@@ -237,6 +242,11 @@
 		FC78398A2439C23600470148 /* Third_Tab_ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Third_Tab_ViewController.xib; sourceTree = "<group>"; };
 		FC78398B2439C23600470148 /* Third_Tab_ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Third_Tab_ViewController.h; sourceTree = "<group>"; };
 		FC78398C2439C23700470148 /* Third_Tab_ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Third_Tab_ViewController.m; sourceTree = "<group>"; };
+		FC7A98CA2444ABC70038C226 /* Search_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Search_ViewController.swift; sourceTree = "<group>"; };
+		FC7A98CB2444ABC70038C226 /* Search_ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Search_ViewController.xib; sourceTree = "<group>"; };
+		FC7A98CE2444AC370038C226 /* TagFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagFlowLayout.swift; sourceTree = "<group>"; };
+		FC7A98D02444AD010038C226 /* Tag_Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Tag_Cell.xib; sourceTree = "<group>"; };
+		FC7A98D22444B0420038C226 /* Tag_Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag_Cell.swift; sourceTree = "<group>"; };
 		FC91B72D243120F400AA6671 /* GUIPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUIPlayerView.h; sourceTree = SOURCE_ROOT; };
 		FC91B72E243120F400AA6671 /* GUISlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GUISlider.m; sourceTree = SOURCE_ROOT; };
 		FC91B72F243120F400AA6671 /* GUIPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GUIPlayerView.m; sourceTree = SOURCE_ROOT; };
@@ -353,6 +363,7 @@
 		FC1AD7C21DA40CA8002BA7EC = {
 			isa = PBXGroup;
 			children = (
+				FC7A98C92444ABB20038C226 /* Search_ */,
 				FCB238D624435BA80034B40B /* Publisher_ */,
 				FCB238CD2443545A0034B40B /* Event_ */,
 				FCB238BE244217C30034B40B /* Author_ */,
@@ -557,6 +568,18 @@
 				FC7839802438F91500470148 /* PC_Info_Cell.xib */,
 			);
 			path = Account_;
+			sourceTree = "<group>";
+		};
+		FC7A98C92444ABB20038C226 /* Search_ */ = {
+			isa = PBXGroup;
+			children = (
+				FC7A98CA2444ABC70038C226 /* Search_ViewController.swift */,
+				FC7A98CB2444ABC70038C226 /* Search_ViewController.xib */,
+				FC7A98CE2444AC370038C226 /* TagFlowLayout.swift */,
+				FC7A98D02444AD010038C226 /* Tag_Cell.xib */,
+				FC7A98D22444B0420038C226 /* Tag_Cell.swift */,
+			);
+			path = Search_;
 			sourceTree = "<group>";
 		};
 		FC91B72C243120E400AA6671 /* MPlayer_ */ = {
@@ -766,6 +789,7 @@
 				FCB238D3244355770034B40B /* Event_Cell.xib in Resources */,
 				FCB782E71DA414D400BDF913 /* Second_Tab_ViewController.xib in Resources */,
 				FC640A921DAAAE2800DAEF55 /* TT_Synced_ViewController.xib in Resources */,
+				FC7A98CD2444ABC70038C226 /* Search_ViewController.xib in Resources */,
 				FC40A101243EFE680096B9DB /* TG_Room_Cell_5.xib in Resources */,
 				FCFB516C1DD075E200D49FB2 /* Action.xib in Resources */,
 				FC7550F91DACDB53007992DF /* EM_Menu.xib in Resources */,
@@ -786,6 +810,7 @@
 				FCB3CD6A1DA4DDE9002FABDD /* HT_Genres_ViewController.xib in Resources */,
 				FC783989243922C100470148 /* PC_Sub_Cell.xib in Resources */,
 				FCB238C2244218DB0034B40B /* Author_ViewController.xib in Resources */,
+				FC7A98D12444AD010038C226 /* Tag_Cell.xib in Resources */,
 				FC7550E41DAC85DE007992DF /* HT_Feed_ViewController.xib in Resources */,
 				FCC965AB1DA5F4200025971E /* HT_Player_ViewController.xib in Resources */,
 				FC78398D2439C23700470148 /* Third_Tab_ViewController.xib in Resources */,
@@ -888,7 +913,9 @@
 				FC0A8FB22437770E001A75AF /* PC_Login_ViewController.swift in Sources */,
 				FC78397F2438F42400470148 /* PC_ChangePass_ViewController.swift in Sources */,
 				FCFB51751DD0EFE300D49FB2 /* M_Detail_ViewController.m in Sources */,
+				FC7A98CC2444ABC70038C226 /* Search_ViewController.swift in Sources */,
 				FC1357DE24377B92001BA5B1 /* Information.swift in Sources */,
+				FC7A98CF2444AC370038C226 /* TagFlowLayout.swift in Sources */,
 				FC7550FA1DACDB53007992DF /* EM_MenuView.m in Sources */,
 				FCAD57F3243DB7E400101A47 /* TG_Room_Cell_N.swift in Sources */,
 				FC7550FB1DACDB53007992DF /* M_Menu.m in Sources */,
@@ -926,6 +953,7 @@
 				FC640A881DAAAD8C00DAEF55 /* Records.m in Sources */,
 				FC7550FF1DACDD78007992DF /* YouTube.m in Sources */,
 				FC91B7352431217F00AA6671 /* XMLReader.m in Sources */,
+				FC7A98D32444B0420038C226 /* Tag_Cell.swift in Sources */,
 				FC91B731243120F400AA6671 /* GUISlider.m in Sources */,
 				FC7550F01DAC959A007992DF /* HT_Detail_ViewController.m in Sources */,
 				FC91B732243120F400AA6671 /* GUIPlayerView.m in Sources */,
