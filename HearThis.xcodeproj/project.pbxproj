@@ -15,6 +15,12 @@
 		FC0A8FB42437770E001A75AF /* PC_Login_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC0A8FAE2437770D001A75AF /* PC_Login_ViewController.xib */; };
 		FC0A8FB52437770E001A75AF /* PC_Forgot_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0A8FAF2437770E001A75AF /* PC_Forgot_ViewController.swift */; };
 		FC0A8FB7243779F0001A75AF /* Marcro.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0A8FB6243779F0001A75AF /* Marcro.swift */; };
+		FC130B8B24461D1A00D64012 /* List_Header_Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC130B8A24461D1A00D64012 /* List_Header_Cell.xib */; };
+		FC130B8E2446236B00D64012 /* Package_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC130B8C2446236B00D64012 /* Package_ViewController.swift */; };
+		FC130B8F2446236B00D64012 /* Package_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC130B8D2446236B00D64012 /* Package_ViewController.xib */; };
+		FC130B912446270600D64012 /* Package_Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC130B902446270600D64012 /* Package_Cell.xib */; };
+		FC130B942446353100D64012 /* Book_Inner_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC130B922446353100D64012 /* Book_Inner_ViewController.swift */; };
+		FC130B952446353100D64012 /* Book_Inner_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC130B932446353100D64012 /* Book_Inner_ViewController.xib */; };
 		FC1357DE24377B92001BA5B1 /* Information.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC1357DD24377B92001BA5B1 /* Information.swift */; };
 		FC1AD7D01DA40CA8002BA7EC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FC1AD7CF1DA40CA8002BA7EC /* main.m */; };
 		FC1AD7D31DA40CA8002BA7EC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FC1AD7D21DA40CA8002BA7EC /* AppDelegate.m */; };
@@ -155,6 +161,12 @@
 		FC0A8FAE2437770D001A75AF /* PC_Login_ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PC_Login_ViewController.xib; sourceTree = "<group>"; };
 		FC0A8FAF2437770E001A75AF /* PC_Forgot_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PC_Forgot_ViewController.swift; sourceTree = "<group>"; };
 		FC0A8FB6243779F0001A75AF /* Marcro.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Marcro.swift; sourceTree = "<group>"; };
+		FC130B8A24461D1A00D64012 /* List_Header_Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = List_Header_Cell.xib; sourceTree = "<group>"; };
+		FC130B8C2446236B00D64012 /* Package_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Package_ViewController.swift; sourceTree = "<group>"; };
+		FC130B8D2446236B00D64012 /* Package_ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Package_ViewController.xib; sourceTree = "<group>"; };
+		FC130B902446270600D64012 /* Package_Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Package_Cell.xib; sourceTree = "<group>"; };
+		FC130B922446353100D64012 /* Book_Inner_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Book_Inner_ViewController.swift; sourceTree = "<group>"; };
+		FC130B932446353100D64012 /* Book_Inner_ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Book_Inner_ViewController.xib; sourceTree = "<group>"; };
 		FC1357DD24377B92001BA5B1 /* Information.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Information.swift; sourceTree = "<group>"; };
 		FC1AD7CB1DA40CA8002BA7EC /* HearThis.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HearThis.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC1AD7CF1DA40CA8002BA7EC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -539,6 +551,8 @@
 				FC78398A2439C23600470148 /* Third_Tab_ViewController.xib */,
 				FC23EB90243A4087003E5E1A /* Book_List_Cell.xib */,
 				FCE38C49243E4B6C003864BC /* OwnTableView.swift */,
+				FC130B922446353100D64012 /* Book_Inner_ViewController.swift */,
+				FC130B932446353100D64012 /* Book_Inner_ViewController.xib */,
 			);
 			path = Tabbar_;
 			sourceTree = "<group>";
@@ -569,6 +583,10 @@
 				FC78397D2438F42400470148 /* PC_ChangePass_ViewController.swift */,
 				FC78397C2438F42300470148 /* PC_ChangePass_ViewController.xib */,
 				FC7839802438F91500470148 /* PC_Info_Cell.xib */,
+				FC130B8A24461D1A00D64012 /* List_Header_Cell.xib */,
+				FC130B8C2446236B00D64012 /* Package_ViewController.swift */,
+				FC130B8D2446236B00D64012 /* Package_ViewController.xib */,
+				FC130B902446270600D64012 /* Package_Cell.xib */,
 			);
 			path = Account_;
 			sourceTree = "<group>";
@@ -796,6 +814,7 @@
 				FC640A921DAAAE2800DAEF55 /* TT_Synced_ViewController.xib in Resources */,
 				FC7A98CD2444ABC70038C226 /* Search_ViewController.xib in Resources */,
 				FC40A101243EFE680096B9DB /* TG_Room_Cell_5.xib in Resources */,
+				FC130B912446270600D64012 /* Package_Cell.xib in Resources */,
 				FCFB516C1DD075E200D49FB2 /* Action.xib in Resources */,
 				FC7550F91DACDB53007992DF /* EM_Menu.xib in Resources */,
 				FC69D4402440D435006D57D9 /* Book_Detail_ViewController.xib in Resources */,
@@ -827,6 +846,7 @@
 				FC7550FC1DACDB53007992DF /* M_Menu.xib in Resources */,
 				FCB3CD721DA4E3FA002FABDD /* ItemCell.xib in Resources */,
 				FCB238DF24435BF60034B40B /* Publisher_ViewController.xib in Resources */,
+				FC130B8F2446236B00D64012 /* Package_ViewController.xib in Resources */,
 				FC7550EA1DAC869B007992DF /* HT_More_ViewController.xib in Resources */,
 				FC78397E2438F42400470148 /* PC_ChangePass_ViewController.xib in Resources */,
 				FC7551051DAE4640007992DF /* Default~iphone.png in Resources */,
@@ -837,6 +857,7 @@
 				FCB238D1244354AB0034B40B /* Event_ViewController.xib in Resources */,
 				FC7550F11DAC959A007992DF /* HT_Detail_ViewController.xib in Resources */,
 				FC7551031DAE4640007992DF /* Default-568h@2x.png in Resources */,
+				FC130B952446353100D64012 /* Book_Inner_ViewController.xib in Resources */,
 				FCC965B21DA75C060025971E /* HT_Player_Item.xib in Resources */,
 				FC78397A2438F37F00470148 /* PC_Info_ViewController.xib in Resources */,
 				FC69D4342440595B006D57D9 /* TG_Room_Cell_Banner_0.xib in Resources */,
@@ -846,6 +867,7 @@
 				FC78396A2438EA6400470148 /* First_Tab_ViewController.xib in Resources */,
 				FCC965B01DA75BF60025971E /* HT_Player_Cell.xib in Resources */,
 				FC69D4422440D500006D57D9 /* Book_Detail_Header.xib in Resources */,
+				FC130B8B24461D1A00D64012 /* List_Header_Cell.xib in Resources */,
 				FC69D43124405879006D57D9 /* TG_Room_Cell_10.xib in Resources */,
 				FC78398424391F6700470148 /* TG_Intro_ViewController.xib in Resources */,
 				FCB238CC244235D70034B40B /* Author_Bio_Cell.xib in Resources */,
@@ -936,6 +958,7 @@
 				FCB238E424437D410034B40B /* Event_Detail_ViewController.swift in Sources */,
 				FCC965AE1DA5FD790025971E /* TT_Panel_ViewController.m in Sources */,
 				FC23EB95243A4C8F003E5E1A /* List_Book_ViewController.swift in Sources */,
+				FC130B942446353100D64012 /* Book_Inner_ViewController.swift in Sources */,
 				FCB3CD691DA4DDE9002FABDD /* HT_Genres_ViewController.m in Sources */,
 				FCB3CD6D1DA4DEC9002FABDD /* UIViewController+Additional.m in Sources */,
 				FC640A911DAAAE2800DAEF55 /* TT_Synced_ViewController.m in Sources */,
@@ -957,6 +980,7 @@
 				FCB238DE24435BF60034B40B /* Publisher_ViewController.m in Sources */,
 				FC640A881DAAAD8C00DAEF55 /* Records.m in Sources */,
 				FC7550FF1DACDD78007992DF /* YouTube.m in Sources */,
+				FC130B8E2446236B00D64012 /* Package_ViewController.swift in Sources */,
 				FC91B7352431217F00AA6671 /* XMLReader.m in Sources */,
 				FC7A98D32444B0420038C226 /* Tag_Cell.swift in Sources */,
 				FC91B731243120F400AA6671 /* GUISlider.m in Sources */,

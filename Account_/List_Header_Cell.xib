@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xae-vS-eu4">
+                    <rect key="frame" x="10" y="11.5" width="0.0" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="kLC-E8-Uzt"/>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" id="rye-jO-lsv"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" alpha="0.0" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7ok-Es-TpX">
+                    <rect key="frame" x="280" y="4.5" width="35" height="35"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="35" id="U7v-oA-LRJ"/>
+                        <constraint firstAttribute="width" constant="35" id="gRq-2i-Msg"/>
+                    </constraints>
+                    <state key="normal" image="delete"/>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Iq0-sL-ocp">
+                    <rect key="frame" x="315" y="11.5" width="0.0" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" id="PTv-pR-ofR"/>
+                        <constraint firstAttribute="height" constant="21" id="Td2-9U-Joi"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="xae-vS-eu4" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="KGF-zW-u95"/>
+                <constraint firstItem="Iq0-sL-ocp" firstAttribute="leading" secondItem="7ok-Es-TpX" secondAttribute="trailing" id="RoB-A7-lL4"/>
+                <constraint firstItem="7ok-Es-TpX" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="VoH-IO-JWp"/>
+                <constraint firstAttribute="trailing" secondItem="Iq0-sL-ocp" secondAttribute="trailing" constant="5" id="csw-3p-kFA"/>
+                <constraint firstItem="xae-vS-eu4" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="gLi-0E-Ils"/>
+                <constraint firstItem="Iq0-sL-ocp" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="s4F-dt-kkK"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="137.68115942028987" y="85.714285714285708"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="delete" width="42.5" height="42.5"/>
+    </resources>
+</document>

@@ -10,6 +10,8 @@
 
 #import "SC_Menu_ViewController.h"
 
+#import "HearThis-Swift.h"
+
 @interface Third_Tab_ViewController ()<ViewPagerDataSource, ViewPagerDelegate>
 {
     IBOutlet NSLayoutConstraint * topBar;
@@ -32,12 +34,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    
-    titleLabel.text = [info responseForKey:@"ten_lo"] ? [NSString stringWithFormat:@"Lô %@", info[@"ten_lo"]] : [info responseForKey:@"text"] ? info[@"text"] : info[@"name_en"];
-    
+        
     UIInterfaceOrientation newOrientation =  [UIApplication sharedApplication].statusBarOrientation;
-
-//        topBar.constant = newOrientation == UIInterfaceOrientationPortrait ? 48 : 44;
         
     self.topHeight = IS_IPAD ? @"84" : [self isIphoneX] ? @"108" : newOrientation == UIInterfaceOrientationPortrait ? @"84" : @"84";
     
@@ -60,7 +58,19 @@
 //        self.arr = arr;
     }
     
-    controllers = [@[[SC_Menu_ViewController new], [SC_Menu_ViewController new], [SC_Menu_ViewController new]] mutableCopy];
+    Book_Inner_ViewController * tab1 = [Book_Inner_ViewController new];
+    
+    tab1.config = @{@"url": @{@"CMD_CODE": @"getListReadOfUser", @"book_type": @(1), @"price": @(0)}};
+    
+    Book_Inner_ViewController * tab2 = [Book_Inner_ViewController new];
+      
+    tab2.config = @{@"url": @{@"CMD_CODE": @"getListReadOfUser", @"book_type": @(2), @"price": @(0)}};
+
+    Book_Inner_ViewController * tab3 = [Book_Inner_ViewController new];
+      
+    tab3.config = @{@"url": @{@"CMD_CODE": @"getListReadOfUser", @"book_type": @(1), @"price": @(0)}};
+
+    controllers = [@[tab1, tab2, tab3] mutableCopy];
     
     [self performSelector:@selector(loadContent) withObject:nil afterDelay:0.0];
 }

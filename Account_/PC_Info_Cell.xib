@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14868" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14824"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -17,7 +17,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fnB-s9-688">
-                        <rect key="frame" x="71" y="9" width="176" height="56.5"/>
+                        <rect key="frame" x="12" y="9" width="235" height="56.5"/>
                         <constraints>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="56.5" id="wpY-Ci-3Nd"/>
                         </constraints>
@@ -33,9 +33,9 @@
                         </constraints>
                     </view>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="11" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vAW-yv-qRZ">
-                        <rect key="frame" x="12" y="15" width="44" height="44"/>
+                        <rect key="frame" x="12" y="15" width="0.0" height="44"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="44" id="XRF-FY-FmP"/>
+                            <constraint firstAttribute="width" id="XRF-FY-FmP"/>
                             <constraint firstAttribute="height" constant="44" id="q61-cR-dat"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
@@ -65,7 +65,7 @@
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="tSQ-LS-yEy" secondAttribute="trailing" constant="16" id="3eX-6z-1xj"/>
                     <constraint firstItem="tSQ-LS-yEy" firstAttribute="top" secondItem="1zM-jD-IRn" secondAttribute="top" constant="26" id="3qu-0m-MuF"/>
-                    <constraint firstItem="fnB-s9-688" firstAttribute="leading" secondItem="vAW-yv-qRZ" secondAttribute="trailing" constant="15" id="9ax-Q5-T2R"/>
+                    <constraint firstItem="fnB-s9-688" firstAttribute="leading" secondItem="vAW-yv-qRZ" secondAttribute="trailing" id="9ax-Q5-T2R"/>
                     <constraint firstAttribute="trailing" secondItem="HS6-9Y-8Do" secondAttribute="trailing" constant="5" id="Ezv-Br-aMi"/>
                     <constraint firstItem="HS6-9Y-8Do" firstAttribute="top" secondItem="fnB-s9-688" secondAttribute="bottom" constant="8" id="GKx-RH-CcD"/>
                     <constraint firstAttribute="bottom" secondItem="HS6-9Y-8Do" secondAttribute="bottom" id="MmL-Ry-JfB"/>

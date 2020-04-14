@@ -67,20 +67,21 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate {
         let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
         
         bottom.text = "MEBOOK © 2020 - Ver %@".format(parameters: appVersion!)
+        
+        getPhoneNumber()
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        let gradientLayer:CAGradientLayer = CAGradientLayer()
-        gradientLayer.frame = submit.bounds
-        gradientLayer.colors =
-            [UIColor.init(red: 0/255, green: 188/255, blue: 62/255, alpha: 1).cgColor , UIColor.yellow.cgColor]
-        gradientLayer.startPoint = CGPoint.zero
-        gradientLayer.endPoint = CGPoint(x: 1.0, y: 1.0)
-        let sublayersCount = submit.layer.sublayers?.count ?? 0
-        submit.layer.insertSublayer(gradientLayer, at: UInt32(sublayersCount))
-
-        submit.layer.layoutSublayers()
+//        let gradientLayer:CAGradientLayer = CAGradientLayer()
+//        gradientLayer.frame = submit.bounds
+//        gradientLayer.colors =
+//            [UIColor.init(red: 0/255, green: 188/255, blue: 62/255, alpha: 1).cgColor , UIColor.yellow.cgColor]
+//        gradientLayer.startPoint = CGPoint.zero
+//        gradientLayer.endPoint = CGPoint(x: 1.0, y: 1.0)
+//        let sublayersCount = submit.layer.sublayers?.count ?? 0
+//        submit.layer.insertSublayer(gradientLayer, at: UInt32(sublayersCount))
+//        submit.layer.layoutSublayers()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -115,6 +116,13 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate {
                 self.logo.frame = frameLogo
             })
         }
+    }
+    
+    func getPhoneNumber() {
+        LTRequest.sharedInstance()?.didRequestInfo(["absoluteLink":"http://mebook.tgphim.vn/header.php/"], withCache: { (cache) in
+        }, andCompletion: { (response, errorCode, error, isValid, object) in
+            print("--->", object);
+        })
     }
     
     func setUp() {

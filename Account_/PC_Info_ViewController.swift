@@ -16,21 +16,17 @@ class PC_Info_ViewController: UIViewController {
     
     var dataList: NSMutableArray!
     
+    var packageList: NSMutableArray!
+    
+    let sections = ["Gói cước", "Thông tin chi tiết"]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
-        dataList = NSMutableArray.init(array: [["title":"Thông tin tài khoản", "image":"user_info"],
-                                               ["title":"Đổi mật khẩu", "image":"change_pass"],
-//                                               ["title":"Đóng góp ý tưởng", "image":"contribution"],
-                                               ["title":"Cho phép nhận thông báo", "image":"notification"],
-                                               ["title":"Đăng xuất", "image":"logout"]
-                                              ])
-    
         dataList = NSMutableArray.init(array: Information.check == "1" ? [
                                                 ["title":"Thông tin tài khoản", "image":"user_info"],
                                                    ["title":"Đổi mật khẩu", "image":"change_pass"],
-                                                   ["title":"Cho phép nhận thông báo", "image":"notification", "content":"sw"],
+//                                                   ["title":"Cho phép nhận thông báo", "image":"notification", "content":"sw"],
                                                    ["title":"Đăng xuất", "image":"logout"]
             ] :
             [
@@ -38,9 +34,13 @@ class PC_Info_ViewController: UIViewController {
             ]
         )
         
+        packageList = NSMutableArray.init(array: [
+           ["title":"Danh sách gói", "image":"notification"],
+        ])
+        
         tableView.withCell("PC_Info_Cell")
         
-        let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
+//        let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
     }
     
     @IBAction func didPressMenu() {
@@ -95,9 +95,9 @@ class PC_Info_ViewController: UIViewController {
                                                    "host":self], withCache: { (cacheString) in
        }, andCompletion: { (response, errorCode, error, isValid, object) in
            let result = response?.dictionize() ?? [:]
-                                
-           if result.getValueFromKey("status") != "OK" {
-               self.showToast(response?.dictionize().getValueFromKey("data") == "" ? "Lỗi xảy ra, mời bạn thử lại" : response?.dictionize().getValueFromKey("data"), andPos: 0)
+           
+           if result.getValueFromKey("error_code") != "0" {
+               self.showToast(response?.dictionize().getValueFromKey("error_msg") == "" ? "Lỗi xảy ra, mời bạn thử lại" : response?.dictionize().getValueFromKey("error_msg"), andPos: 0)
                return
            }
         
@@ -109,18 +109,34 @@ class PC_Info_ViewController: UIViewController {
 extension PC_Info_ViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 74
+        return 60
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataList.count
+        return section == 0 ? packageList.count : dataList.count
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 40
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = Bundle.main.loadNibNamed("List_Header_Cell", owner: self, options: nil)![0] as! UIView
+        
+        (self.withView(view, tag: 1) as! UILabel).text = sections[section]
+        
+        return view
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier:"PC_Info_Cell", for: indexPath)
         
-        let data = dataList![indexPath.row] as! NSDictionary
+        let data = indexPath.section == 0 ? packageList![indexPath.row] as! NSDictionary :  dataList![indexPath.row] as! NSDictionary
 
         
         let image = self.withView(cell, tag: 11) as! UIImageView
@@ -134,22 +150,15 @@ extension PC_Info_ViewController: UITableViewDataSource, UITableViewDelegate {
         
         let sw = self.withView(cell, tag: 3) as! UISwitch
         
-        sw.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
-        
-        sw.isOn = self.getValue("push") == "1" //&& self.checkForNotification()
-        
-//        sw.isEnabled = self.checkForNotification()
-        
-        sw.action(forTouch: [:]) { (obj) in
-//            if self.getValue("push") == "1" {
-////                FirePush.shareInstance()?.didUnregisterNotification()
-//            } else {
-////                FirePush.shareInstance()?.reRegisterNotification()
-//            }
-            self.didRequestNotification()
-            self.addValue(self.getValue("push") == "1" ? "0" : "1", andKey: "push")
-            sw.isOn = self.getValue("push") == "1"
-        }
+//        sw.transform = CGAffineTransform(scaleX: 0.7, y: 0.7)
+//
+//        sw.isOn = self.getValue("push") == "1"
+//
+//        sw.action(forTouch: [:]) { (obj) in
+//            self.didRequestNotification()
+//            self.addValue(self.getValue("push") == "1" ? "0" : "1", andKey: "push")
+//            sw.isOn = self.getValue("push") == "1"
+//        }
         
         sw.alpha = data["content"] as? String == "sw" ? 1 : 0
         
@@ -158,16 +167,9 @@ extension PC_Info_ViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        if indexPath.section == 1 {
             if indexPath.row == 0 {
-                if Information.check == "1" {
-                    self.center()?.pushViewController(PC_Inner_Info_ViewController.init(), animated: true)
-                } else {
-                    self.didRequestNotification()
-                    let cell = tableView.cellForRow(at: indexPath)
-                    self.addValue(self.getValue("push") == "1" ? "0" : "1", andKey: "push")
-                    let sw = self.withView(cell, tag: 3) as! UISwitch
-                    sw.isOn = self.getValue("push") == "1"
-                }
+                self.center()?.pushViewController(PC_Inner_Info_ViewController.init(), animated: true)
             }
         
             if indexPath.row == 1 {
@@ -175,15 +177,10 @@ extension PC_Info_ViewController: UITableViewDataSource, UITableViewDelegate {
             }
             
             if indexPath.row == 2 {
-                self.didRequestNotification()  
-                let cell = tableView.cellForRow(at: indexPath)
-                self.addValue(self.getValue("push") == "1" ? "0" : "1", andKey: "push")
-                let sw = self.withView(cell, tag: 3) as! UISwitch
-                sw.isOn = self.getValue("push") == "1"
-            }
-            
-            if indexPath.row == 3 {
                 self.didPressLogout()
             }
+        } else {
+            self.center()?.pushViewController(Package_ViewController.init(), animated: true)
+        }
     }
 }

@@ -65,6 +65,9 @@ class TG_Intro_ViewController: UIViewController {
 
             for not in noti! {
                 (not as! NSMutableDictionary)["open"] = "0"
+                if ((not as! NSMutableDictionary)["sub_category"] as! NSArray).count != 0 {
+                    ((not as! NSMutableDictionary)["sub_category"] as! NSMutableArray).insert(["name": "Tất cả", "id": (not as! NSMutableDictionary)["id"], "title": (not as! NSMutableDictionary)["name"]], at: 0)
+                }
             }
             
             self.dataList.addObjects(from: noti!)
@@ -129,21 +132,30 @@ extension TG_Intro_ViewController: UITableViewDataSource, UITableViewDelegate {
             head.action(forTouch: [:]) { (obj) in
                 if id == "99" {
                     self.center()?.pushViewController(Author_ViewController.init(), animated: true)
-                }
+                } else
                 if id == "100" {
                     let event = Event_ViewController.init()
                     event.config = ["url": ["CMD_CODE": "getHomeEvent", "position": 0], "title": sec.getValueFromKey("name") as Any]
                     self.center()?.pushViewController(event, animated: true)
-                }
+                } else
                 if id == "101" {
                     let publisher = Publisher_ViewController.init()
                     publisher.config = ["url": ["CMD_CODE": "getListPublishingHouse"]]
                     self.center()?.pushViewController(publisher, animated: true)
+                } else {
+                    let list = List_Book_ViewController.init()
+                    list.config = ["url": ["CMD_CODE":"getListBook",
+                                  "category_id": id,
+                                  "book_type": 0,
+                                  "price": 0,
+                                  "sorting": 1,
+                      ], "title": sec.getValueFromKey("name") as Any]
+                          
+                    self.center()?.pushViewController(list, animated: true)
                 }
                 self.root()?.showCenterPanel(animated: true)
             }
         }
-        
         return head
     }
     
@@ -185,7 +197,7 @@ extension TG_Intro_ViewController: UITableViewDataSource, UITableViewDelegate {
                         "book_type": 0,
                         "price": 0,
                         "sorting": 1,
-            ], "title": data.getValueFromKey("name") as Any]
+            ], "title": data.getValueFromKey(data.getValueFromKey("title") != "" ? "title" : "name") as Any]
                 
         self.center()?.pushViewController(list, animated: true)
         
