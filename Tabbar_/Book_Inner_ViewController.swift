@@ -124,6 +124,10 @@ class Book_Inner_ViewController: UIViewController, UICollectionViewDataSource, U
         
         image.imageUrl(url: data.getValueFromKey("avatar"))
         
+        let player = self.withView(cell, tag: 999) as! UIImageView
+                   
+        player.isHidden = data.getValueFromKey("book_type") != "3"
+        
         return cell
     }
     

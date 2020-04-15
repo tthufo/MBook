@@ -28,29 +28,34 @@ class Reader_ViewController: UIViewController {
         
         titleLabel.text = config.getValueFromKey("name")
         
+        downLoad.transform = downLoad.transform.scaledBy(x: 1.2, y: 1.9)
+        
         if !self.existingFile(fileName: self.config.getValueFromKey("id")) {
             didDownload()
         } else {
-            didDownload()
-
-//            let path = self.pdfFile(fileName: self.config.getValueFromKey("id"))
-//            if let pdfDocument = PDFDocument(url: URL(fileURLWithPath: path)) {
-//                pdfView.displayMode = .singlePageContinuous
-//                pdfView.autoScales = true
-//                pdfView.displayDirection = .horizontal
-//                pdfView.document = pdfDocument
-//            }
+            viewPDF()
+        }
+    }
+    
+    func viewPDF() {
+        let path = self.pdfFile(fileName: self.config.getValueFromKey("id"))
+        pdfView.isHidden = false
+        if let pdfDocument = PDFDocument(url: URL(fileURLWithPath: path)) {
+            pdfView.displayMode = .singlePageContinuous
+            pdfView.autoScales = true
+            pdfView.displayDirection = .horizontal
+            pdfView.document = pdfDocument
         }
     }
     
     func didDownload() {
-        downLoad = DownLoad.shareInstance()
         downLoad.didProgress(["url": self.config.getValueFromKey("file_url") as Any,
                                                "name": self.config.getValueFromKey("id") as Any,
                                                "infor": self.config as Any
             ], andCompletion: { (index, download, object) in
-            print(index)
-            print(object)
+            if index == 0 {
+                self.viewPDF()
+            }
         })
     }
     

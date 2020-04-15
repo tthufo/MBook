@@ -171,6 +171,10 @@ extension First_Tab_ViewController: UITableViewDataSource, UITableViewDelegate {
                 tableView.reloadData()
             }
             (cell as! TG_Room_Cell_N).callBack = { info in
+                if (info as! NSDictionary).getValueFromKey("book_type") == "3" {
+                    self.didRequestUrl(id: (info as! NSDictionary).getValueFromKey("id"))
+                    return
+                }
                 let bookDetail = Book_Detail_ViewController.init()
                 let bookInfo = NSMutableDictionary.init(dictionary: self.removeKey(info: conf))
                 bookInfo.addEntries(from: info as! [AnyHashable : Any])

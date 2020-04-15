@@ -258,6 +258,10 @@ class Event_Detail_ViewController: UIViewController, UICollectionViewDataSource,
                 let image = self.withView(cell, tag: 11) as! UIImageView
 
                 image.imageUrl(url: data.getValueFromKey("avatar"))
+                
+                let player = self.withView(cell, tag: 999) as! UIImageView
+                           
+                player.isHidden = data.getValueFromKey("book_type") != "3"
             } else {
                 let chap = dataList[indexPath.item] as! NSDictionary
                 

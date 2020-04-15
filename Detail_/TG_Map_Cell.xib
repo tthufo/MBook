@@ -17,7 +17,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="160" height="200"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="11" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="YMd-pE-Gfq">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="11" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="book_cover" translatesAutoresizingMaskIntoConstraints="NO" id="YMd-pE-Gfq">
                         <rect key="frame" x="10" y="4" width="140" height="140"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </imageView>
@@ -39,6 +39,10 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" tag="999" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="player" translatesAutoresizingMaskIntoConstraints="NO" id="7sD-4b-Mh2">
+                        <rect key="frame" x="61" y="53" width="38" height="38"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                    </imageView>
                 </subviews>
             </view>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -60,6 +64,7 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="logo" width="174.5" height="61"/>
+        <image name="book_cover" width="270" height="135"/>
+        <image name="player" width="33" height="33"/>
     </resources>
 </document>

@@ -73,7 +73,7 @@ class TG_Room_Cell_N: UITableViewCell, UICollectionViewDelegate, UICollectionVie
            self.collectionView.reloadData()
            
             if self.config.getValueFromKey("direction") == "vertical" {
-                self.returnValue?(self.dataList.count == 0 ? 0 : Float(self.itemHeight * (self.dataList.count % (IS_IPAD ? 5 : 3) == 0 ? self.dataList.count / (IS_IPAD ? 5 : 3) : (self.dataList.count / (IS_IPAD ? 5 : 3)) + 1)) + 110)
+                self.returnValue?(self.dataList.count == 0 ? 0 : Float(self.itemHeight * (self.dataList.count % (IS_IPAD ? 5 : 3) == 0 ? self.dataList.count / (IS_IPAD ? 5 : 3) : (self.dataList.count / (IS_IPAD ? 5 : 3)) + 1)) + 60)
             } else {
                 self.returnValue?(self.dataList.count == 0 ? 0 : Float(self.itemHeight) + 60)
             }
@@ -90,11 +90,11 @@ class TG_Room_Cell_N: UITableViewCell, UICollectionViewDelegate, UICollectionVie
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 10.0
+        return 0.0
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 10.0
+        return 0.0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -115,6 +115,10 @@ class TG_Room_Cell_N: UITableViewCell, UICollectionViewDelegate, UICollectionVie
 
         image.imageUrl(url: data.getValueFromKey("avatar"))
         
+        let player = self.withView(cell, tag: 999) as! UIImageView
+        
+        player.isHidden = data.getValueFromKey("book_type") != "3" ? true : false
+                
         return cell
     }
 

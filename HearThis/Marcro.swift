@@ -499,6 +499,29 @@ extension UIViewController {
         }
         return ""
     }
+    
+    func didRequestUrl(id: String) {
+         let request = NSMutableDictionary.init(dictionary: [
+                                                             "session":Information.token ?? "",
+                                                             "overrideAlert":"1",
+                                                             ])
+            request["id"] = id
+            request["CMD_CODE"] = "getBookContent"
+         LTRequest.sharedInstance()?.didRequestInfo((request as! [AnyHashable : Any]), withCache: { (cacheString) in
+         }, andCompletion: { (response, errorCode, error, isValid, object) in
+             let result = response?.dictionize() ?? [:]
+             
+             if result.getValueFromKey("error_code") != "0" {
+                 self.showToast(response?.dictionize().getValueFromKey("error_msg") == "" ? "Lỗi xảy ra, mời bạn thử lại" : response?.dictionize().getValueFromKey("error_msg"), andPos: 0)
+                 return
+             }
+            
+             
+             self.startPlaying("", andInfo: ["stream_url": (result["result"] as! NSDictionary).getValueFromKey("file_url")])
+             
+         })
+     }
+     
 }
 
 extension UITableView {

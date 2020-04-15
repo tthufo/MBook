@@ -371,7 +371,7 @@ UIBackgroundTaskIdentifier bgTask;
 {
     [[self PLAYER] didStartPlayWith:vID andInfo:info];
     
-//    [[self ROOT] embed];
+    [[self ROOT] embed];
 }
 //
 //- (void)startPlayList:(NSString*)name andVid:(NSString*)vId andInfo:(NSDictionary*)info

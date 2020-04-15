@@ -261,27 +261,27 @@ static DownLoad * instance = nil;
         
         if (![UIApplication sharedApplication].isStatusBarHidden)
         {
-            [CRToastManager dismissAllNotifications:YES];
-            
-            NSDictionary *options = @{
-                                      kCRToastTextKey : [NSString stringWithFormat:@"Completed: %@", dataInfo[@"infor"][@"title"]],
-                                      kCRToastTextAlignmentKey : @(NSTextAlignmentCenter),
-                                      kCRToastBackgroundColorKey : [AVHexColor colorWithHexString:@"#00A3E2"],
-                                      kCRToastAnimationInTypeKey : @(CRToastAnimationTypeGravity),
-                                      kCRToastAnimationOutTypeKey : @(CRToastAnimationTypeGravity),
-                                      kCRToastAnimationInDirectionKey : @(CRToastAnimationDirectionTop),
-                                      kCRToastAnimationOutDirectionKey : @(CRToastAnimationDirectionTop)
-                                      };
-            [CRToastManager showNotificationWithOptions:options
-                                        completionBlock:^{
-                                            
-    //                                        [[APPDELEGATE.window.rootViewController PLAYER] didReloadSyncedData];
-                                            
-                                        }];
+//            [CRToastManager dismissAllNotifications:YES];
+//
+//            NSDictionary *options = @{
+//                                      kCRToastTextKey : [NSString stringWithFormat:@"Completed: %@", dataInfo[@"infor"][@"title"]],
+//                                      kCRToastTextAlignmentKey : @(NSTextAlignmentCenter),
+//                                      kCRToastBackgroundColorKey : [AVHexColor colorWithHexString:@"#00A3E2"],
+//                                      kCRToastAnimationInTypeKey : @(CRToastAnimationTypeGravity),
+//                                      kCRToastAnimationOutTypeKey : @(CRToastAnimationTypeGravity),
+//                                      kCRToastAnimationInDirectionKey : @(CRToastAnimationDirectionTop),
+//                                      kCRToastAnimationOutDirectionKey : @(CRToastAnimationDirectionTop)
+//                                      };
+//            [CRToastManager showNotificationWithOptions:options
+//                                        completionBlock:^{
+//
+//    //                                        [[APPDELEGATE.window.rootViewController PLAYER] didReloadSyncedData];
+//
+//                                        }];
         }
         else
         {
-            [self showToast:[NSString stringWithFormat:@"Completed: %@", dataInfo[@"infor"][@"title"]] andPos:0];
+//            [self showToast:[NSString stringWithFormat:@"Completed: %@", dataInfo[@"infor"][@"title"]] andPos:0];
         }
     }
 }

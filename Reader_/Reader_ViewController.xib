@@ -59,9 +59,16 @@
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8JW-Su-IJf">
                     <rect key="frame" x="0.0" y="108" width="414" height="754"/>
                 </imageView>
-                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progressViewStyle="bar" translatesAutoresizingMaskIntoConstraints="NO" id="BXk-iU-bGX" customClass="DownLoad">
-                    <rect key="frame" x="132" y="447.5" width="150" height="1.5"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <view alpha="0.29999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oQl-Jm-Jd2">
+                    <rect key="frame" x="0.0" y="108" width="414" height="754"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
+                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progressViewStyle="bar" translatesAutoresizingMaskIntoConstraints="NO" id="BXk-iU-bGX" customClass="DownLoad">
+                    <rect key="frame" x="107" y="447.5" width="200" height="2.5"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="200" id="NT9-Fl-C6A"/>
+                        <constraint firstAttribute="height" constant="1.5" id="azk-NU-GUh"/>
+                    </constraints>
                     <color key="progressTintColor" red="0.0" green="0.60784313729999995" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
                     <color key="trackTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </progressView>
@@ -77,12 +84,18 @@
                 <constraint firstItem="1Kd-We-2c1" firstAttribute="top" secondItem="tH1-YX-68o" secondAttribute="bottom" id="8Cd-RI-6eL"/>
                 <constraint firstItem="8JW-Su-IJf" firstAttribute="leading" secondItem="eug-p7-zIe" secondAttribute="leading" id="8KO-32-oU4"/>
                 <constraint firstItem="1Kd-We-2c1" firstAttribute="trailing" secondItem="eug-p7-zIe" secondAttribute="trailing" id="BR1-LG-OKs"/>
+                <constraint firstItem="oQl-Jm-Jd2" firstAttribute="bottom" secondItem="eug-p7-zIe" secondAttribute="bottom" id="Dxa-he-48X"/>
                 <constraint firstItem="tH1-YX-68o" firstAttribute="trailing" secondItem="eug-p7-zIe" secondAttribute="trailing" id="HoS-V6-Hez"/>
+                <constraint firstItem="oQl-Jm-Jd2" firstAttribute="trailing" secondItem="eug-p7-zIe" secondAttribute="trailing" id="Jl0-ON-LfE"/>
+                <constraint firstItem="BXk-iU-bGX" firstAttribute="centerY" secondItem="Xit-aY-mf9" secondAttribute="centerY" id="KjT-dn-krh"/>
                 <constraint firstItem="tH1-YX-68o" firstAttribute="leading" secondItem="eug-p7-zIe" secondAttribute="leading" id="PJl-ip-Glv"/>
                 <constraint firstItem="1Kd-We-2c1" firstAttribute="leading" secondItem="eug-p7-zIe" secondAttribute="leading" id="Yfl-Z0-G6s"/>
                 <constraint firstItem="8JW-Su-IJf" firstAttribute="bottom" secondItem="eug-p7-zIe" secondAttribute="bottom" id="bix-1j-XfK"/>
+                <constraint firstItem="BXk-iU-bGX" firstAttribute="centerX" secondItem="Xit-aY-mf9" secondAttribute="centerX" id="cKD-gW-kkB"/>
                 <constraint firstItem="8JW-Su-IJf" firstAttribute="top" secondItem="tH1-YX-68o" secondAttribute="bottom" id="kmv-l3-8uE"/>
                 <constraint firstItem="tH1-YX-68o" firstAttribute="top" secondItem="eug-p7-zIe" secondAttribute="top" id="meu-za-thE"/>
+                <constraint firstItem="oQl-Jm-Jd2" firstAttribute="leading" secondItem="eug-p7-zIe" secondAttribute="leading" id="vlU-q7-sIh"/>
+                <constraint firstItem="oQl-Jm-Jd2" firstAttribute="top" secondItem="tH1-YX-68o" secondAttribute="bottom" id="yzR-mo-fLh"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="eug-p7-zIe"/>
             <point key="canvasLocation" x="137.68115942028987" y="114.50892857142857"/>
