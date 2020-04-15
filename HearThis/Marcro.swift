@@ -165,7 +165,7 @@ extension UIImageView {
     }
     
     @objc func imageUrl (url: String) {
-        self.sd_setImage(with: NSURL.init(string: (url as NSString).encodeUrl())! as URL, placeholderImage: UIImage.init(named: "ic_avatar")) { (image, error, cacheType, url) in
+        self.sd_setImage(with: NSURL.init(string: (url as NSString).encodeUrl())! as URL, placeholderImage: UIImage.init(named: "book_cover")) { (image, error, cacheType, url) in
             if error != nil {
                 return
             }
@@ -179,8 +179,8 @@ extension UIImageView {
         }
     }
     
-    func imageUrlHolder (url: String) {
-           self.sd_setImage(with: NSURL.init(string: (url as NSString).encodeUrl())! as URL, placeholderImage: UIImage.init(named: "ic_avatar")) { (image, error, cacheType, url) in
+    @objc func imageUrlHolder (url: String, holder: String) {
+           self.sd_setImage(with: NSURL.init(string: (url as NSString).encodeUrl())! as URL, placeholderImage: UIImage.init(named: holder)) { (image, error, cacheType, url) in
                if error != nil {
                    return
                }
@@ -472,6 +472,32 @@ extension UIViewController {
         (info["url"] as! NSMutableDictionary).removeObjects(forKeys: ["page_index", "page_size"])
         
         return info
+    }
+    
+    func existingFile(fileName: String) -> Bool {
+        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
+        let url = NSURL(fileURLWithPath: path)
+        if let pathComponent = url.appendingPathComponent("video/\(fileName)/\(fileName).pdf") {
+            let filePath = pathComponent.path
+            let fileManager = FileManager.default
+            if fileManager.fileExists(atPath: filePath) {
+            return true
+        } else {
+            return false
+        }
+        } else {
+            return false
+        }
+    }
+    
+    func pdfFile(fileName: String) -> String {
+        let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
+        let url = NSURL(fileURLWithPath: path)
+        if let pathComponent = url.appendingPathComponent("video/\(fileName)/\(fileName).pdf") {
+            let filePath = pathComponent.path
+            return filePath
+        }
+        return ""
     }
 }
 

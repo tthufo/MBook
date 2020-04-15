@@ -8,6 +8,8 @@
 
 import UIKit
 
+import MarqueeLabel
+
 class List_Book_ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UIGestureRecognizerDelegate {
     
     let refreshControl = UIRefreshControl()
@@ -22,7 +24,7 @@ class List_Book_ViewController: UIViewController, UICollectionViewDataSource, UI
     
     @IBOutlet var counterHeight: NSLayoutConstraint!
     
-    @IBOutlet var titleLabel: UILabel!
+    @IBOutlet var titleLabel: MarqueeLabel!
 
     @IBOutlet var counter: UILabel!
 
@@ -96,6 +98,12 @@ class List_Book_ViewController: UIViewController, UICollectionViewDataSource, UI
     
     @IBAction func didPressBack() {
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    @IBAction func didPressSearch() {
+        let search = Search_ViewController.init()
+        search.config = [:]
+        self.center()?.pushViewController(search, animated: true)
     }
     
     override func didReceiveMemoryWarning() {

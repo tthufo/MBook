@@ -127,17 +127,8 @@ class First_Tab_ViewController: UIViewController {
     
     @IBAction func didPressSearch() {
         let search = Search_ViewController.init()
-        
         search.config = [:]
-        self.navigationController?.pushViewController(search, animated: true)
-    }
-    
-    func gotoBookDetail(config: NSDictionary) {
-        let bookDetail = Book_Detail_ViewController.init()
-        
-        bookDetail.config = config
-        
-        self.center()?.pushViewController(bookDetail, animated: true)
+        self.center()?.pushViewController(search, animated: true)
     }
 }
 

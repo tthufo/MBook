@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="Reader_ViewController" customModule="HearThis" customModuleProvider="target">
+            <connections>
+                <outlet property="cover" destination="8JW-Su-IJf" id="tLy-Ss-WCF"/>
+                <outlet property="downLoad" destination="BXk-iU-bGX" id="fDj-bo-OJ4"/>
+                <outlet property="pdfView" destination="1Kd-We-2c1" id="Szp-pb-gf2"/>
+                <outlet property="titleLabel" destination="YMH-aa-Yna" id="ddm-eN-Ycl"/>
+                <outlet property="view" destination="Xit-aY-mf9" id="cuU-c5-B1b"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="Xit-aY-mf9">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tH1-YX-68o">
+                    <rect key="frame" x="0.0" y="44" width="414" height="64"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E5Q-k8-K84">
+                            <rect key="frame" x="8" y="10" width="44" height="44"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="44" id="09j-km-4d4"/>
+                                <constraint firstAttribute="height" constant="44" id="Tzn-wc-R2o"/>
+                            </constraints>
+                            <state key="normal" image="icon_back"/>
+                            <connections>
+                                <action selector="didPressBack" destination="-1" eventType="touchUpInside" id="FUB-eJ-IbR"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YMH-aa-Yna">
+                            <rect key="frame" x="60" y="16" width="294" height="33"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="33" id="aq4-G7-qoK"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="0.0" green="0.60784313729999995" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="64" id="CCy-SP-z56"/>
+                        <constraint firstItem="YMH-aa-Yna" firstAttribute="top" secondItem="tH1-YX-68o" secondAttribute="top" constant="16" id="IJS-25-24j"/>
+                        <constraint firstItem="E5Q-k8-K84" firstAttribute="top" secondItem="tH1-YX-68o" secondAttribute="top" constant="10" id="Nu6-3B-pfq"/>
+                        <constraint firstItem="YMH-aa-Yna" firstAttribute="leading" secondItem="E5Q-k8-K84" secondAttribute="trailing" constant="8" id="Y58-it-57X"/>
+                        <constraint firstAttribute="trailing" secondItem="YMH-aa-Yna" secondAttribute="trailing" constant="60" id="dG3-cx-b7d"/>
+                        <constraint firstItem="E5Q-k8-K84" firstAttribute="leading" secondItem="tH1-YX-68o" secondAttribute="leading" constant="8" id="l5L-J3-Cvh"/>
+                    </constraints>
+                </view>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8JW-Su-IJf">
+                    <rect key="frame" x="0.0" y="108" width="414" height="754"/>
+                </imageView>
+                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" progressViewStyle="bar" translatesAutoresizingMaskIntoConstraints="NO" id="BXk-iU-bGX" customClass="DownLoad">
+                    <rect key="frame" x="132" y="447.5" width="150" height="1.5"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="progressTintColor" red="0.0" green="0.60784313729999995" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="trackTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </progressView>
+                <view hidden="YES" clipsSubviews="YES" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="1Kd-We-2c1" customClass="PDFView">
+                    <rect key="frame" x="0.0" y="108" width="414" height="754"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="8JW-Su-IJf" firstAttribute="trailing" secondItem="eug-p7-zIe" secondAttribute="trailing" id="0EJ-ck-YTh"/>
+                <constraint firstItem="1Kd-We-2c1" firstAttribute="bottom" secondItem="eug-p7-zIe" secondAttribute="bottom" id="1nb-Op-T4S"/>
+                <constraint firstItem="1Kd-We-2c1" firstAttribute="top" secondItem="tH1-YX-68o" secondAttribute="bottom" id="8Cd-RI-6eL"/>
+                <constraint firstItem="8JW-Su-IJf" firstAttribute="leading" secondItem="eug-p7-zIe" secondAttribute="leading" id="8KO-32-oU4"/>
+                <constraint firstItem="1Kd-We-2c1" firstAttribute="trailing" secondItem="eug-p7-zIe" secondAttribute="trailing" id="BR1-LG-OKs"/>
+                <constraint firstItem="tH1-YX-68o" firstAttribute="trailing" secondItem="eug-p7-zIe" secondAttribute="trailing" id="HoS-V6-Hez"/>
+                <constraint firstItem="tH1-YX-68o" firstAttribute="leading" secondItem="eug-p7-zIe" secondAttribute="leading" id="PJl-ip-Glv"/>
+                <constraint firstItem="1Kd-We-2c1" firstAttribute="leading" secondItem="eug-p7-zIe" secondAttribute="leading" id="Yfl-Z0-G6s"/>
+                <constraint firstItem="8JW-Su-IJf" firstAttribute="bottom" secondItem="eug-p7-zIe" secondAttribute="bottom" id="bix-1j-XfK"/>
+                <constraint firstItem="8JW-Su-IJf" firstAttribute="top" secondItem="tH1-YX-68o" secondAttribute="bottom" id="kmv-l3-8uE"/>
+                <constraint firstItem="tH1-YX-68o" firstAttribute="top" secondItem="eug-p7-zIe" secondAttribute="top" id="meu-za-thE"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="eug-p7-zIe"/>
+            <point key="canvasLocation" x="137.68115942028987" y="114.50892857142857"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="icon_back" width="33" height="33"/>
+    </resources>
+</document>

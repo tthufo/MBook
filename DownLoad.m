@@ -45,7 +45,7 @@ static DownLoad * instance = nil;
 {
     operationBreaked = YES;
 
-    [Records addValue:[self downloadData] andvId:[dataInfo[@"infor"] getValueFromKey:@"id"] andKey:dataInfo[@"name"]];
+//    [Records addValue:[self downloadData] andvId:[dataInfo[@"infor"] getValueFromKey:@"id"] andKey:dataInfo[@"name"]];
 }
 
 - (void)forceContinue
@@ -128,9 +128,9 @@ static DownLoad * instance = nil;
     
     [requestConnection start];
     
-    [Records addValue:[self downloadData] andvId:[dataInfo[@"infor"] getValueFromKey:@"id"] andKey:dataInfo[@"name"]];
+//    [Records addValue:[self downloadData] andvId:[dataInfo[@"infor"] getValueFromKey:@"id"] andKey:dataInfo[@"name"]];
     
-    [[NSFileManager defaultManager] createFileAtPath:[NSString stringWithFormat:@"%@.mp3", [self filePath]] contents:nil attributes:nil];
+    [[NSFileManager defaultManager] createFileAtPath:[NSString stringWithFormat:@"%@.pdf", [self filePath]] contents:nil attributes:nil];
     
     return self;
 }
@@ -142,7 +142,7 @@ static DownLoad * instance = nil;
 
 - (void)writing:(NSData*)data
 {
-    NSFileHandle *hFile = [NSFileHandle fileHandleForWritingAtPath:[NSString stringWithFormat:@"%@.mp3", [self filePath]]];
+    NSFileHandle *hFile = [NSFileHandle fileHandleForWritingAtPath:[NSString stringWithFormat:@"%@.pdf", [self filePath]]];
     
     @try
     {
@@ -152,7 +152,7 @@ static DownLoad * instance = nil;
     }
     @catch (NSException * e)
     {
-        NSLog(@"exception when writing to file %@", [NSString stringWithFormat:@"%@.mp3", [self filePath]]);
+        NSLog(@"exception when writing to file %@", [NSString stringWithFormat:@"%@.pdf", [self filePath]]);
     }
     
     [hFile closeFile];
@@ -236,7 +236,7 @@ static DownLoad * instance = nil;
 {
     if((int)ceil(self.percentComplete) != 100)
     {
-        [[NSFileManager defaultManager] removeItemAtPath:[NSString stringWithFormat:@"%@.mp3", [self filePath]] error:NULL];
+        [[NSFileManager defaultManager] removeItemAtPath:[NSString stringWithFormat:@"%@.pdf", [self filePath]] error:NULL];
         
         self.completion(0, self, @{@"reload":@(1)});
     }
@@ -250,7 +250,7 @@ static DownLoad * instance = nil;
         
         dispatch_async(dispatch_get_global_queue( DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^(void)
        {
-           [Records addValue:[self downloadData] andvId:[dataInfo[@"infor"] getValueFromKey:@"id"] andKey:dataInfo[@"name"]];
+//           [Records addValue:[self downloadData] andvId:[dataInfo[@"infor"] getValueFromKey:@"id"] andKey:dataInfo[@"name"]];
            
            dispatch_async(dispatch_get_main_queue(), ^(void)
           {
@@ -326,61 +326,61 @@ static DownLoad * instance = nil;
     }
 
     
-    NSString *imagePath = [NSString stringWithFormat:@"%@.png", [self filePath]];
+//    NSString *imagePath = [NSString stringWithFormat:@"%@.png", [self filePath]];
+//
+//    AVAsset *asset = [[AVURLAsset alloc] initWithURL:[NSURL fileURLWithPath:[NSString stringWithFormat:@"%@.mp3", [self filePath]]] options:nil];
+//
+//    AVAssetImageGenerator *imageGenerator = [[AVAssetImageGenerator alloc] initWithAsset:asset];
+//
+//    Float64 durationSeconds = CMTimeGetSeconds(asset.duration);
+//
+//    CMTime midpoint = CMTimeMakeWithSeconds(durationSeconds / 2.0, 600);
+//
+//    CMTime actualTime;
+//
+//    CGImageRef preImage = [imageGenerator copyCGImageAtTime:midpoint actualTime:&actualTime error:NULL];
+//
+//    if (preImage != NULL)
+//    {
+//        CGRect rect =  CGRectMake(0.0, 0.0,[dataInfo responseForKey:@"cover"] ? ((UIImage*)dataInfo[@"cover"]).size.width : CGImageGetWidth(preImage) * 0.5, [dataInfo responseForKey:@"cover"] ? ((UIImage*)dataInfo[@"cover"]).size.height : CGImageGetHeight(preImage) * 0.5);
+//
+//        UIImage *image = [dataInfo responseForKey:@"cover"] ? dataInfo[@"cover"] : [UIImage imageWithCGImage:preImage];
+//
+//        UIGraphicsBeginImageContext(rect.size);
+//
+//        [image drawInRect:rect];
+//
+//        NSData *data = UIImagePNGRepresentation(UIGraphicsGetImageFromCurrentImageContext());
+//
+//        [fileManager createFileAtPath:imagePath contents:data attributes:nil];
+//
+//        UIGraphicsEndImageContext();
+//    }
+//    else
+//    {
+//        if(dataInfo[@"cover"])
+//        {
+//            CGRect rect =  CGRectMake(0.0, 0.0,((UIImage*)dataInfo[@"cover"]).size.width ,((UIImage*)dataInfo[@"cover"]).size.height);
+//
+//            UIImage *image = dataInfo[@"cover"];
+//
+//            UIGraphicsBeginImageContext(rect.size);
+//
+//            [image drawInRect:rect];
+//
+//            NSData *data = UIImagePNGRepresentation(UIGraphicsGetImageFromCurrentImageContext());
+//
+//            [fileManager createFileAtPath:imagePath contents:data attributes:nil];
+//
+//            UIGraphicsEndImageContext();
+//        }
+//    }
     
-    AVAsset *asset = [[AVURLAsset alloc] initWithURL:[NSURL fileURLWithPath:[NSString stringWithFormat:@"%@.mp3", [self filePath]]] options:nil];
+//    NSLog(@"%@",imagePath);
     
-    AVAssetImageGenerator *imageGenerator = [[AVAssetImageGenerator alloc] initWithAsset:asset];
+    NSLog(@"--->%@",[self filePath]);
     
-    Float64 durationSeconds = CMTimeGetSeconds(asset.duration);
-    
-    CMTime midpoint = CMTimeMakeWithSeconds(durationSeconds / 2.0, 600);
-    
-    CMTime actualTime;
-    
-    CGImageRef preImage = [imageGenerator copyCGImageAtTime:midpoint actualTime:&actualTime error:NULL];
-    
-    if (preImage != NULL)
-    {
-        CGRect rect =  CGRectMake(0.0, 0.0,[dataInfo responseForKey:@"cover"] ? ((UIImage*)dataInfo[@"cover"]).size.width : CGImageGetWidth(preImage) * 0.5, [dataInfo responseForKey:@"cover"] ? ((UIImage*)dataInfo[@"cover"]).size.height : CGImageGetHeight(preImage) * 0.5);
-        
-        UIImage *image = [dataInfo responseForKey:@"cover"] ? dataInfo[@"cover"] : [UIImage imageWithCGImage:preImage];
-        
-        UIGraphicsBeginImageContext(rect.size);
-        
-        [image drawInRect:rect];
-        
-        NSData *data = UIImagePNGRepresentation(UIGraphicsGetImageFromCurrentImageContext());
-        
-        [fileManager createFileAtPath:imagePath contents:data attributes:nil];
-        
-        UIGraphicsEndImageContext();
-    }
-    else
-    {
-        if(dataInfo[@"cover"])
-        {
-            CGRect rect =  CGRectMake(0.0, 0.0,((UIImage*)dataInfo[@"cover"]).size.width ,((UIImage*)dataInfo[@"cover"]).size.height);
-            
-            UIImage *image = dataInfo[@"cover"];
-            
-            UIGraphicsBeginImageContext(rect.size);
-            
-            [image drawInRect:rect];
-            
-            NSData *data = UIImagePNGRepresentation(UIGraphicsGetImageFromCurrentImageContext());
-            
-            [fileManager createFileAtPath:imagePath contents:data attributes:nil];
-            
-            UIGraphicsEndImageContext();
-        }
-    }
-    
-    NSLog(@"%@",imagePath);
-    
-//    NSLog(@"%@",@"-----save");
-    
-    CGImageRelease(preImage);
+//    CGImageRelease(preImage);
 }
 
 + (DownLoad*)shareInstance

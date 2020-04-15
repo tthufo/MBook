@@ -140,6 +140,8 @@
 		FCD0E59F1DA8F93500DF2ABF /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = FCD0E59E1DA8F93500DF2ABF /* libz.tbd */; };
 		FCD36BFC2437BE2D009BB530 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FCD36BFB2437BE2D009BB530 /* GoogleService-Info.plist */; };
 		FCD381872444D78E004D78C9 /* CustomFlowLayou.m in Sources */ = {isa = PBXBuildFile; fileRef = FCD381862444D78E004D78C9 /* CustomFlowLayou.m */; };
+		FCD979892447693D00970A4E /* Reader_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD979872447693D00970A4E /* Reader_ViewController.swift */; };
+		FCD9798A2447693D00970A4E /* Reader_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCD979882447693D00970A4E /* Reader_ViewController.xib */; };
 		FCE38C4A243E4B6C003864BC /* OwnTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE38C49243E4B6C003864BC /* OwnTableView.swift */; };
 		FCFB516C1DD075E200D49FB2 /* Action.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCFB516A1DD075E200D49FB2 /* Action.xib */; };
 		FCFB516D1DD075E200D49FB2 /* actions.plist in Resources */ = {isa = PBXBuildFile; fileRef = FCFB516B1DD075E200D49FB2 /* actions.plist */; };
@@ -321,6 +323,8 @@
 		FCD36BFB2437BE2D009BB530 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FCD381852444D78E004D78C9 /* CustomFlowLayou.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomFlowLayou.h; sourceTree = "<group>"; };
 		FCD381862444D78E004D78C9 /* CustomFlowLayou.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomFlowLayou.m; sourceTree = "<group>"; };
+		FCD979872447693D00970A4E /* Reader_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reader_ViewController.swift; sourceTree = "<group>"; };
+		FCD979882447693D00970A4E /* Reader_ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Reader_ViewController.xib; sourceTree = "<group>"; };
 		FCE38C49243E4B6C003864BC /* OwnTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnTableView.swift; sourceTree = "<group>"; };
 		FCFB516A1DD075E200D49FB2 /* Action.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Action.xib; sourceTree = "<group>"; };
 		FCFB516B1DD075E200D49FB2 /* actions.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = actions.plist; sourceTree = "<group>"; };
@@ -378,6 +382,7 @@
 		FC1AD7C21DA40CA8002BA7EC = {
 			isa = PBXGroup;
 			children = (
+				FCD979862447692400970A4E /* Reader_ */,
 				FC7A98C92444ABB20038C226 /* Search_ */,
 				FCB238D624435BA80034B40B /* Publisher_ */,
 				FCB238CD2443545A0034B40B /* Event_ */,
@@ -737,6 +742,15 @@
 			name = Player_;
 			sourceTree = "<group>";
 		};
+		FCD979862447692400970A4E /* Reader_ */ = {
+			isa = PBXGroup;
+			children = (
+				FCD979872447693D00970A4E /* Reader_ViewController.swift */,
+				FCD979882447693D00970A4E /* Reader_ViewController.xib */,
+			);
+			path = Reader_;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -847,6 +861,7 @@
 				FCB3CD721DA4E3FA002FABDD /* ItemCell.xib in Resources */,
 				FCB238DF24435BF60034B40B /* Publisher_ViewController.xib in Resources */,
 				FC130B8F2446236B00D64012 /* Package_ViewController.xib in Resources */,
+				FCD9798A2447693D00970A4E /* Reader_ViewController.xib in Resources */,
 				FC7550EA1DAC869B007992DF /* HT_More_ViewController.xib in Resources */,
 				FC78397E2438F42400470148 /* PC_ChangePass_ViewController.xib in Resources */,
 				FC7551051DAE4640007992DF /* Default~iphone.png in Resources */,
@@ -955,6 +970,7 @@
 				FCE38C4A243E4B6C003864BC /* OwnTableView.swift in Sources */,
 				FC640A861DAAAD8C00DAEF55 /* List.m in Sources */,
 				FCC965AA1DA5F4200025971E /* HT_Player_ViewController.m in Sources */,
+				FCD979892447693D00970A4E /* Reader_ViewController.swift in Sources */,
 				FCB238E424437D410034B40B /* Event_Detail_ViewController.swift in Sources */,
 				FCC965AE1DA5FD790025971E /* TT_Panel_ViewController.m in Sources */,
 				FC23EB95243A4C8F003E5E1A /* List_Book_ViewController.swift in Sources */,
@@ -1128,7 +1144,7 @@
 				);
 				GCC_PREFIX_HEADER = HearThis/PrefixHeader.pch;
 				INFOPLIST_FILE = HearThis/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.innovatube.shoubotenken;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1157,7 +1173,7 @@
 				);
 				GCC_PREFIX_HEADER = HearThis/PrefixHeader.pch;
 				INFOPLIST_FILE = HearThis/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.innovatube.shoubotenken;
 				PRODUCT_NAME = "$(TARGET_NAME)";

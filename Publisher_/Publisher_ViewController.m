@@ -138,7 +138,7 @@
     
     NSDictionary * list = dataList[indexPath.row];
     
-    [(UIImageView*)[self withView:cell tag:1] imageUrlWithUrl: [list getValueFromKey:@"avatar"]];
+    [(UIImageView*)[self withView:cell tag:1] imageUrlHolderWithUrl:[list getValueFromKey:@"avatar"] holder:@"bg_publisher_default_img"];
     
     [(UILabel*)[self withView:cell tag:2] setText: [list getValueFromKey:@"name"]];
 

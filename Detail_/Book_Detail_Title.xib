@@ -40,7 +40,7 @@
                         <constraint firstAttribute="height" constant="35" id="k2P-q5-j2v"/>
                         <constraint firstAttribute="width" constant="35" id="oEy-xV-Yjn"/>
                     </constraints>
-                    <state key="normal" image="delete"/>
+                    <state key="normal" image="ic_delete_all"/>
                 </button>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -57,6 +57,6 @@
         </collectionReusableView>
     </objects>
     <resources>
-        <image name="delete" width="42.5" height="42.5"/>
+        <image name="ic_delete_all" width="50.5" height="50.5"/>
     </resources>
 </document>

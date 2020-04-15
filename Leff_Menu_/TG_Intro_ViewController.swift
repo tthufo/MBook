@@ -14,6 +14,12 @@ class TG_Intro_ViewController: UIViewController {
             
     @IBOutlet var tableView: UITableView!
         
+    @IBOutlet var userName: UILabel!
+
+    @IBOutlet var phoneNo: UILabel!
+
+    @IBOutlet var avatar: UIImageView!
+
     @IBOutlet var widthConstant: NSLayoutConstraint!
 
     var dataList: NSMutableArray!
@@ -42,6 +48,14 @@ class TG_Intro_ViewController: UIViewController {
         tableView.withHeaderOrFooter("PC_Header_Tab")
         
         didRequestNotification()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+                
+        userName.text = Information.userInfo?.getValueFromKey("name") == "" ? "bcd" : Information.userInfo?.getValueFromKey("name")
+        
+        phoneNo.text = " " + (Information.userInfo?.getValueFromKey("phone"))! + " "
     }
     
     @objc func didRequestNotification() {
@@ -95,7 +109,7 @@ class TG_Intro_ViewController: UIViewController {
 extension TG_Intro_ViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 50
+        return 40
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -160,7 +174,9 @@ extension TG_Intro_ViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
+        let section = (dataList[indexPath.section] as! NSDictionary);
+
+        return section.getValueFromKey("open") == "0" ? 0 : UITableView.automaticDimension
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {

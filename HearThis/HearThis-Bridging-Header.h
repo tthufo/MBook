@@ -21,6 +21,8 @@
 
 #import "EM_MenuView.h"
 
+#import "DownLoad.h"
+
 #import "Publisher_ViewController.h"
 
 

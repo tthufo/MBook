@@ -60,10 +60,17 @@ class Author_Detail_ViewController: UIViewController, UICollectionViewDataSource
         didRequestData(isShow: true)
     
         setupParallaxHeader()
+        
+        let height = self.collectionView.contentSize.height
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
+           let collectionViewInsets: UIEdgeInsets  = UIEdgeInsets(top: CGFloat(self.headerHeight), left: 0.0, bottom: height < CGFloat(self.screenHeight()) ? CGFloat(self.headerHeight) : 0, right: 0.0)
+           self.collectionView.contentInset = collectionViewInsets
+        })
     }
         
     private func setupParallaxHeader() {
-        headerView = (Bundle.main.loadNibNamed("Author_Detail_Header", owner: self, options: nil)![IS_IPAD ? 1 : 0] as! UIView)
+        headerView = (Bundle.main.loadNibNamed("Author_Detail_Header", owner: self, options: nil)![IS_IPAD ? 0 : 1] as! UIView)
                 
         let back = self.withView(headerView, tag: 1) as! UIButton
         
@@ -167,6 +174,8 @@ class Author_Detail_ViewController: UIViewController, UICollectionViewDataSource
             self.dataList.addObjects(from: data.withMutable())
             
             self.collectionView.reloadSections(IndexSet(integer: 1))
+
+            self.collectionView.reloadData()
 
             let height = self.collectionView.contentSize.height
             

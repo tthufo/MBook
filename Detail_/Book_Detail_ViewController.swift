@@ -72,6 +72,12 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
             self.navigationController?.popViewController(animated: true)
         }
         
+        let read = self.withView(headerView, tag: 33) as! UIButton
+        
+        read.action(forTouch: [:]) { (obj) in
+            self.didRequestUrl()
+        }
+        
         let title = self.withView(headerView, tag: 2) as! UILabel
 
         title.text = self.config.getValueFromKey("name")
@@ -103,6 +109,7 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
             title.alpha = 1 - parallaxHeader.progress
             avatar.alpha = parallaxHeader.progress
             name.alpha = parallaxHeader.progress
+            read.alpha = parallaxHeader.progress
             description.alpha = parallaxHeader.progress
         }
         
@@ -152,9 +159,7 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
                                                             "host":self])
         
         request.addEntries(from: self.config["url"] as! [AnyHashable : Any])
-                
-        print(self.config)
-        
+                        
         LTRequest.sharedInstance()?.didRequestInfo((request as! [AnyHashable : Any]), withCache: { (cacheString) in
         }, andCompletion: { (response, errorCode, error, isValid, object) in
             self.refreshControl.endRefreshing()
@@ -191,8 +196,8 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
                                                              "session":Information.token ?? "",
                                                              "overrideAlert":"1",
                                                              ])
-        request.addEntries(from: self.config["url"] as! [AnyHashable : Any])
-        request["id"] = self.config.getValueFromKey("id")
+            request.addEntries(from: self.config["url"] as! [AnyHashable : Any])
+            request["id"] = self.config.getValueFromKey("id")
         request["CMD_CODE"] = "getListChapOfStory"
          LTRequest.sharedInstance()?.didRequestInfo((request as! [AnyHashable : Any]), withCache: { (cacheString) in
          }, andCompletion: { (response, errorCode, error, isValid, object) in
@@ -224,8 +229,8 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
                                                             "session":Information.token ?? "",
                                                             "overrideAlert":"1",
                                                             ])
-       request["id"] = self.config.getValueFromKey("id")
-       request["CMD_CODE"] = "getBookDetail"
+           request["id"] = self.config.getValueFromKey("id")
+           request["CMD_CODE"] = "getBookDetail"
         LTRequest.sharedInstance()?.didRequestInfo((request as! [AnyHashable : Any]), withCache: { (cacheString) in
         }, andCompletion: { (response, errorCode, error, isValid, object) in
             self.refreshControl.endRefreshing()
@@ -238,10 +243,42 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
             
             self.detailList.removeAllObjects()
             
-
             self.detailList.addObjects(from: self.filter(info: result["result"] as! NSDictionary) as! [Any])
 
             self.collectionView.reloadSections(IndexSet(integer: 0))
+            
+            let height = self.collectionView.contentSize.height
+            
+            let collectionViewInsets: UIEdgeInsets  = UIEdgeInsets(top: CGFloat(self.headerHeight), left: 0.0, bottom: height < CGFloat(self.screenHeight()) ? CGFloat(self.headerHeight) : 0, right: 0.0)
+            self.collectionView.contentInset = collectionViewInsets
+        })
+    }
+    
+    func didRequestUrl() {
+        let request = NSMutableDictionary.init(dictionary: [
+                                                            "session":Information.token ?? "",
+                                                            "overrideAlert":"1",
+                                                            ])
+           request["id"] = self.config.getValueFromKey("id")
+           request["CMD_CODE"] = "getBookContent"
+        LTRequest.sharedInstance()?.didRequestInfo((request as! [AnyHashable : Any]), withCache: { (cacheString) in
+        }, andCompletion: { (response, errorCode, error, isValid, object) in
+            let result = response?.dictionize() ?? [:]
+            
+            if result.getValueFromKey("error_code") != "0" {
+                self.showToast(response?.dictionize().getValueFromKey("error_msg") == "" ? "Lỗi xảy ra, mời bạn thử lại" : response?.dictionize().getValueFromKey("error_msg"), andPos: 0)
+                return
+            }
+            
+            let reader = Reader_ViewController.init()
+            
+            let bookInfo = NSMutableDictionary.init(dictionary: self.config)
+            
+            bookInfo["file_url"] = (result["result"] as! NSDictionary).getValueFromKey("file_url")
+            
+            reader.config = bookInfo
+            
+            self.navigationController?.pushViewController(reader, animated: true)
             
             let height = self.collectionView.contentSize.height
             
@@ -264,22 +301,58 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
                 let dict = NSMutableDictionary()
                 if (info[keying] as? NSArray) != nil {
                     if keying == "author" {
-                        dict["value"] = (info[keying] as! NSArray).count != 0 ? (info[keying] as! NSArray).count > 1 ? (((info[keying] as! NSArray).firstObject) as! NSDictionary)["name"] : "Nhiều tác giả" : ""
+                        dict["name"] = (info[keying] as! NSArray).count != 0 ? (info[keying] as! NSArray).count == 1 ? (((info[keying] as! NSArray).firstObject) as! NSDictionary)["name"] : "Nhiều tác giả" : ""
                     } else {
-                        dict["value"] = (info[keying] as! NSArray).count != 0 ? (((info[keying] as! NSArray).firstObject) as! NSDictionary)["name"] : ""
+                        dict["name"] = (info[keying] as! NSArray).count != 0 ? (((info[keying] as! NSArray).firstObject) as! NSDictionary)["name"] : ""
                     }
                 } else {
-                    dict["value"] = info.getValueFromKey(keying)
+                    dict["name"] = info.getValueFromKey(keying)
                 }
+                dict["key"] = keying
+                dict["config"] = info[keying]
                 dict["title"] = (key as NSDictionary)["title"] as! String
                 dict["arrow"] = (key as NSDictionary).getValueFromKey("arrow") == "" ? "0" : "1"
-                if dict.getValueFromKey("value") != "" {
+                if dict.getValueFromKey("name") != "" {
                     tempArray.add(dict)
                 }
             }
         }
         
         return tempArray
+    }
+    
+    func didGoToType(object: NSDictionary) {
+        let type = object.getValueFromKey("key")
+        let config = (object["config"] as! NSArray).firstObject as! NSDictionary
+        if type == "category" {
+            let list = List_Book_ViewController.init()
+            list.config = ["url": ["CMD_CODE":"getListBook",
+                          "category_id": config.getValueFromKey("id") as Any,
+                          "book_type": 0,
+                          "price": 0,
+                          "sorting": 1,
+              ], "title": object.getValueFromKey("name") as Any]
+            self.navigationController!.pushViewController(list, animated: true)
+        }
+        if type == "author" {
+            let authorDetail = Author_Detail_ViewController.init()
+            authorDetail.chapList = []
+            authorDetail.config = config
+            self.navigationController?.pushViewController(authorDetail, animated: true)
+        }
+        if type == "publisher" {
+            let list = List_Book_ViewController.init()
+            list.config = ["url": ["CMD_CODE":"getListBook",
+                          "publishing_house_id": config.getValueFromKey("id") as Any,
+                          "book_type": 0,
+                          "price": 0,
+                          "sorting": 1,
+              ], "title": object.getValueFromKey("name") as Any]
+            self.navigationController!.pushViewController(list, animated: true)
+        }
+        if type == "events" {
+            
+        }
     }
     
     @IBAction func didPressBack() {
@@ -323,7 +396,7 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
 
            let description = self.withView(cell, tag: 2) as! UILabel
 
-           description.text = detail.getValueFromKey("value")
+           description.text = detail.getValueFromKey("name")
             
            let arrow = self.withView(cell, tag: 3) as! UIImageView
             
@@ -373,11 +446,13 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
                 self.didRequestDetail()
             })
         }
-        if indexPath.section == 1 {
+        if indexPath.section == 1 { //chapter
             
         }
-        if indexPath.section == 1 {
-            
+        if indexPath.section == 0 { //detail
+            print(detailList[indexPath.item])
+            let data = detailList[indexPath.item] as! NSDictionary
+            self.didGoToType(object: data)
         }
     }
     

@@ -45,7 +45,7 @@
                                 <constraint firstAttribute="height" constant="44" id="0VF-AX-Fhu"/>
                                 <constraint firstAttribute="width" constant="44" id="MZH-DM-p9z"/>
                             </constraints>
-                            <state key="normal" image="addon"/>
+                            <state key="normal" image="ic_menu"/>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                     <integer key="value" value="8"/>
@@ -67,18 +67,42 @@
                                 <constraint firstAttribute="width" constant="220" id="b9H-nY-dFl"/>
                                 <constraint firstAttribute="height" constant="21" id="eTJ-gO-IKw"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cob-he-1oy">
+                            <rect key="frame" x="268" y="10" width="44" height="44"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="6FU-Bf-ZT5"/>
+                                <constraint firstAttribute="width" constant="44" id="iRG-3A-28s"/>
+                            </constraints>
+                            <state key="normal" image="ic_search"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                    <integer key="value" value="8"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                    <integer key="value" value="0"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="color" keyPath="layer.borrderUIColor">
+                                    <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                            <connections>
+                                <action selector="didPressSearch:" destination="-1" eventType="touchUpInside" id="qJN-zu-SC0"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" red="0.0" green="0.60784313729999995" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstItem="uuo-e1-Ocn" firstAttribute="centerX" secondItem="26d-QX-CoH" secondAttribute="centerX" id="E5y-qt-QOz"/>
                         <constraint firstAttribute="height" constant="64" id="IqF-1P-2D3"/>
                         <constraint firstItem="9Tv-eH-ghu" firstAttribute="top" secondItem="gCf-Ly-5Gv" secondAttribute="top" constant="10" id="WDq-iQ-n9F"/>
+                        <constraint firstItem="Cob-he-1oy" firstAttribute="top" secondItem="gCf-Ly-5Gv" secondAttribute="top" constant="10" id="gNv-VG-gH0"/>
                         <constraint firstItem="uuo-e1-Ocn" firstAttribute="top" secondItem="gCf-Ly-5Gv" secondAttribute="top" constant="22" id="j1a-bc-1HA"/>
                         <constraint firstItem="9Tv-eH-ghu" firstAttribute="leading" secondItem="gCf-Ly-5Gv" secondAttribute="leading" constant="8" id="pPm-Fv-UKa"/>
+                        <constraint firstItem="gCf-Ly-5Gv" firstAttribute="trailing" secondItem="Cob-he-1oy" secondAttribute="trailing" constant="8" id="pV8-DV-OFA"/>
                     </constraints>
                     <viewLayoutGuide key="safeArea" id="gCf-Ly-5Gv"/>
                 </view>
@@ -117,7 +141,8 @@
         </view>
     </objects>
     <resources>
-        <image name="addon" width="29" height="29"/>
+        <image name="ic_menu" width="33" height="33"/>
+        <image name="ic_search" width="50.5" height="50.5"/>
         <image name="left" width="84.5" height="95.5"/>
         <image name="right" width="84.5" height="95.5"/>
     </resources>

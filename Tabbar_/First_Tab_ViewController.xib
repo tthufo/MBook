@@ -28,32 +28,45 @@
                                 <constraint firstAttribute="width" constant="44" id="0vD-Sf-eCY"/>
                                 <constraint firstAttribute="height" constant="44" id="64F-1h-mZE"/>
                             </constraints>
-                            <state key="normal" image="icon_pass"/>
+                            <state key="normal" image="ic_menu"/>
                             <connections>
-                                <action selector="didPressSearch" destination="-1" eventType="touchUpInside" id="TKR-Dl-1jv"/>
+                                <action selector="didPressMenu" destination="-1" eventType="touchUpInside" id="uo7-gF-TlA"/>
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Kho sách" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vnC-ha-d1k">
-                            <rect key="frame" x="120.5" y="22" width="79" height="21"/>
+                            <rect key="frame" x="119.5" y="22" width="81" height="21"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="21" id="QBa-Yl-o8k"/>
                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="42" id="RLp-dd-WVt"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iSg-GY-BhK">
+                            <rect key="frame" x="268" y="10" width="44" height="44"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="44" id="Axh-6q-ZVa"/>
+                                <constraint firstAttribute="height" constant="44" id="uxI-kW-ltn"/>
+                            </constraints>
+                            <state key="normal" image="ic_search"/>
+                            <connections>
+                                <action selector="didPressSearch" destination="-1" eventType="touchUpInside" id="hGo-Se-wMz"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" red="0.0" green="0.60784313729999995" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
+                        <constraint firstAttribute="trailing" secondItem="iSg-GY-BhK" secondAttribute="trailing" constant="8" id="RHl-gX-nP8"/>
                         <constraint firstItem="vnC-ha-d1k" firstAttribute="top" secondItem="kFS-mh-T3b" secondAttribute="top" constant="22" id="W1L-qF-McP"/>
                         <constraint firstItem="vnC-ha-d1k" firstAttribute="centerX" secondItem="kFS-mh-T3b" secondAttribute="centerX" id="aTd-8u-ug3"/>
                         <constraint firstItem="aDz-qA-ppq" firstAttribute="top" secondItem="kFS-mh-T3b" secondAttribute="top" constant="10" id="dfq-p0-Kv4"/>
                         <constraint firstItem="aDz-qA-ppq" firstAttribute="leading" secondItem="kFS-mh-T3b" secondAttribute="leading" constant="8" id="t5a-cU-d6A"/>
+                        <constraint firstItem="iSg-GY-BhK" firstAttribute="top" secondItem="kFS-mh-T3b" secondAttribute="top" constant="10" id="zOg-km-hqf"/>
                         <constraint firstAttribute="height" constant="64" id="zwV-wz-li3"/>
                     </constraints>
                 </view>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="JxR-HW-6v5" customClass="OwnTableView" customModule="HearThis" customModuleProvider="target">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="JxR-HW-6v5" customClass="OwnTableView" customModule="HearThis" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                     <connections>
@@ -77,6 +90,7 @@
         </view>
     </objects>
     <resources>
-        <image name="icon_pass" width="13" height="13"/>
+        <image name="ic_menu" width="33" height="33"/>
+        <image name="ic_search" width="50.5" height="50.5"/>
     </resources>
 </document>

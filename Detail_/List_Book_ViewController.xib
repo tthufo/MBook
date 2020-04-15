@@ -36,24 +36,37 @@
                                 <action selector="didPressBack" destination="-1" eventType="touchUpInside" id="zgo-VJ-nkI"/>
                             </connections>
                         </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zBk-MB-z4z">
-                            <rect key="frame" x="166.5" y="22" width="42" height="21"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zBk-MB-z4z" customClass="MarqueeLabel" customModule="MarqueeLabel">
+                            <rect key="frame" x="60" y="17" width="255" height="31"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="21" id="r1I-tw-bwG"/>
-                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="42" id="t8V-ow-coG"/>
+                                <constraint firstAttribute="height" constant="31" id="vPI-XX-vur"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oUp-fl-eBe">
+                            <rect key="frame" x="320" y="7" width="51" height="51"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="KB8-Iu-b46"/>
+                                <constraint firstAttribute="width" constant="44" id="zD7-9i-lth"/>
+                            </constraints>
+                            <state key="normal" image="ic_search"/>
+                            <connections>
+                                <action selector="didPressSearch" destination="-1" eventType="touchUpInside" id="nTT-Cy-hjv"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" red="0.0" green="0.60784313729999995" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
+                        <constraint firstItem="zBk-MB-z4z" firstAttribute="leading" secondItem="2Vo-MR-vDZ" secondAttribute="trailing" constant="8" id="3xQ-33-MgL"/>
                         <constraint firstItem="2Vo-MR-vDZ" firstAttribute="leading" secondItem="aRE-dT-FeD" secondAttribute="leading" constant="8" id="57S-Ea-FsH"/>
-                        <constraint firstItem="zBk-MB-z4z" firstAttribute="top" secondItem="aRE-dT-FeD" secondAttribute="top" constant="22" id="VNg-qn-dnT"/>
+                        <constraint firstItem="zBk-MB-z4z" firstAttribute="top" secondItem="aRE-dT-FeD" secondAttribute="top" constant="17" id="I6Z-5h-Gip"/>
                         <constraint firstItem="2Vo-MR-vDZ" firstAttribute="top" secondItem="aRE-dT-FeD" secondAttribute="top" constant="10" id="cZj-bs-aLN"/>
-                        <constraint firstItem="zBk-MB-z4z" firstAttribute="centerX" secondItem="5Mz-Xc-I1R" secondAttribute="centerX" id="nRz-3r-eVY"/>
+                        <constraint firstItem="oUp-fl-eBe" firstAttribute="top" secondItem="aRE-dT-FeD" secondAttribute="top" constant="10" id="edx-Cw-Tv1"/>
+                        <constraint firstItem="aRE-dT-FeD" firstAttribute="trailing" secondItem="oUp-fl-eBe" secondAttribute="trailing" constant="8" id="fOV-Ac-GkO"/>
                         <constraint firstAttribute="height" constant="64" id="qk3-Kx-hYm"/>
+                        <constraint firstItem="aRE-dT-FeD" firstAttribute="trailing" secondItem="zBk-MB-z4z" secondAttribute="trailing" constant="60" id="swV-Ib-aqw"/>
                     </constraints>
                     <viewLayoutGuide key="safeArea" id="aRE-dT-FeD"/>
                 </view>
@@ -99,6 +112,7 @@
         </view>
     </objects>
     <resources>
+        <image name="ic_search" width="50.5" height="50.5"/>
         <image name="icon_back" width="33" height="33"/>
     </resources>
 </document>

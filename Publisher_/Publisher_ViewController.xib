@@ -34,13 +34,12 @@
                                 <action selector="didPressBack:" destination="-1" eventType="touchUpInside" id="6i2-Wz-W2R"/>
                             </connections>
                         </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sVo-DK-x6V">
-                            <rect key="frame" x="186" y="22" width="42" height="21"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nhà xuất bản" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sVo-DK-x6V">
+                            <rect key="frame" x="60" y="16" width="294" height="33"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="21" id="4KO-7e-lf2"/>
-                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="42" id="gi6-gT-OxT"/>
+                                <constraint firstAttribute="height" constant="33" id="Mil-zD-mZo"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
@@ -49,9 +48,10 @@
                     <constraints>
                         <constraint firstItem="Dhp-BX-hGz" firstAttribute="top" secondItem="n60-7A-NpQ" secondAttribute="top" constant="10" id="0sW-Qo-ydD"/>
                         <constraint firstItem="Dhp-BX-hGz" firstAttribute="leading" secondItem="n60-7A-NpQ" secondAttribute="leading" constant="8" id="5Eq-zb-YuA"/>
-                        <constraint firstItem="sVo-DK-x6V" firstAttribute="centerX" secondItem="n60-7A-NpQ" secondAttribute="centerX" id="ACY-Uz-qFc"/>
                         <constraint firstAttribute="height" constant="64" id="BXc-OE-saF"/>
-                        <constraint firstItem="sVo-DK-x6V" firstAttribute="top" secondItem="n60-7A-NpQ" secondAttribute="top" constant="22" id="fXx-ck-pcn"/>
+                        <constraint firstItem="sVo-DK-x6V" firstAttribute="top" secondItem="n60-7A-NpQ" secondAttribute="top" constant="16" id="JaZ-hi-4fa"/>
+                        <constraint firstAttribute="trailing" secondItem="sVo-DK-x6V" secondAttribute="trailing" constant="60" id="QMm-wA-K8w"/>
+                        <constraint firstItem="sVo-DK-x6V" firstAttribute="leading" secondItem="Dhp-BX-hGz" secondAttribute="trailing" constant="8" id="XYN-s3-rqC"/>
                     </constraints>
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2uV-zL-MGT">
@@ -74,7 +74,7 @@
                 <constraint firstItem="2uV-zL-MGT" firstAttribute="trailing" secondItem="zVo-Oo-yM8" secondAttribute="trailing" id="jAF-Zd-7Fe"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="zVo-Oo-yM8"/>
-            <point key="canvasLocation" x="138.75" y="115.14084507042254"/>
+            <point key="canvasLocation" x="137.68115942028987" y="114.50892857142857"/>
         </view>
     </objects>
     <resources>

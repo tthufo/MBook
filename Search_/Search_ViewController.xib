@@ -45,7 +45,7 @@
                             </constraints>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                    <integer key="value" value="23"/>
+                                    <real key="value" value="20.5"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                         </view>
@@ -55,7 +55,7 @@
                                 <constraint firstAttribute="height" constant="44" id="DGt-Mq-jfk"/>
                                 <constraint firstAttribute="width" constant="44" id="hGV-t2-0aI"/>
                             </constraints>
-                            <state key="normal" image="xmark"/>
+                            <state key="normal" image="icon_close"/>
                             <connections>
                                 <action selector="didPressClose" destination="-1" eventType="touchUpInside" id="JBs-j9-V7i"/>
                             </connections>
@@ -137,6 +137,6 @@
     </objects>
     <resources>
         <image name="icon_back" width="33" height="33"/>
-        <image name="xmark" width="170.5" height="170.5"/>
+        <image name="icon_close" width="33" height="33"/>
     </resources>
 </document>

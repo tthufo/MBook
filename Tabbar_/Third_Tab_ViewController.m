@@ -95,6 +95,10 @@
     [[self ROOT] toggleLeftPanel:sender];
 }
 
+- (IBAction)didPressSearch:(id)sender {
+    [self.navigationController pushViewController:[Search_ViewController new] animated:YES];
+}
+
 #pragma mark - Setters
 - (void)setNumberOfTabs:(NSUInteger)numberOfTabs
 {

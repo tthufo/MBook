@@ -40,7 +40,7 @@
                                 <constraint firstAttribute="height" constant="21" id="EJH-nI-UMh"/>
                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="42" id="PAP-2f-ybQ"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>

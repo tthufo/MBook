@@ -64,7 +64,7 @@ class Event_Detail_ViewController: UIViewController, UICollectionViewDataSource,
     }
         
     private func setupParallaxHeader() {
-        headerView = (Bundle.main.loadNibNamed("Event_Detail_Header", owner: self, options: nil)![IS_IPAD ? 1 : 0] as! UIView)
+        headerView = (Bundle.main.loadNibNamed("Event_Detail_Header", owner: self, options: nil)![IS_IPAD ? 0 : 1] as! UIView)
                 
         let back = self.withView(headerView, tag: 1) as! UIButton
         

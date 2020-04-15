@@ -27,7 +27,7 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" tag="3" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="drop_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="GCF-x8-CAR">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" tag="3" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_right" translatesAutoresizingMaskIntoConstraints="NO" id="GCF-x8-CAR">
                         <rect key="frame" x="278" y="8" width="34" height="34"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="34" id="WLC-Ro-hD4"/>
@@ -69,6 +69,6 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="drop_arrow" width="33" height="33"/>
+        <image name="ic_right" width="33" height="33"/>
     </resources>
 </document>

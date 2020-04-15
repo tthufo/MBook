@@ -109,6 +109,14 @@
     return info;
 }
 
+- (IBAction)didPressMenu:(id)sender {
+    [[self ROOT] toggleLeftPanel:sender];
+}
+
+- (IBAction)didPressSearch:(id)sender {
+    [self.navigationController pushViewController:[Search_ViewController new] animated:YES];
+}
+
 #pragma TableView
 
 - (NSInteger)tableView:(UITableView *)_tableView numberOfRowsInSection:(NSInteger)section

@@ -23,12 +23,12 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tài khoản" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xQ2-Xi-yiW">
-                            <rect key="frame" x="147" y="22" width="81.5" height="21"/>
+                            <rect key="frame" x="146" y="22" width="83.5" height="21"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="21" id="ckD-Ty-MHK"/>
                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="79" id="gUM-Td-PsG"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
@@ -38,18 +38,28 @@
                                 <constraint firstAttribute="height" constant="44" id="hJI-Vk-8dR"/>
                                 <constraint firstAttribute="width" constant="44" id="jx5-e0-0ah"/>
                             </constraints>
-                            <state key="normal" image="addon"/>
+                            <state key="normal" image="ic_menu"/>
                             <connections>
                                 <action selector="didPressMenu" destination="-1" eventType="touchUpInside" id="sGf-ix-Z5y"/>
                             </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uTm-F0-lQ2">
+                            <rect key="frame" x="323" y="10" width="44" height="44"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="i7f-Yb-GGW"/>
+                                <constraint firstAttribute="width" constant="44" id="ymL-Ye-I6j"/>
+                            </constraints>
+                            <state key="normal" image="ic_search"/>
                         </button>
                     </subviews>
                     <color key="backgroundColor" red="0.0" green="0.60784313729999995" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstItem="TjU-wa-C0Q" firstAttribute="leading" secondItem="N8a-hm-drJ" secondAttribute="leading" constant="8" id="Enw-Xv-mbj"/>
                         <constraint firstItem="xQ2-Xi-yiW" firstAttribute="centerX" secondItem="eXU-8s-cfN" secondAttribute="centerX" id="GhJ-1P-e0m"/>
+                        <constraint firstItem="N8a-hm-drJ" firstAttribute="trailing" secondItem="uTm-F0-lQ2" secondAttribute="trailing" constant="8" id="HJC-hP-4dG"/>
                         <constraint firstItem="TjU-wa-C0Q" firstAttribute="top" secondItem="N8a-hm-drJ" secondAttribute="top" constant="10" id="UfY-du-Qq4"/>
                         <constraint firstAttribute="height" constant="64" id="V7r-fP-8CA"/>
+                        <constraint firstItem="uTm-F0-lQ2" firstAttribute="top" secondItem="N8a-hm-drJ" secondAttribute="top" constant="10" id="b2O-6C-ZGu"/>
                         <constraint firstItem="xQ2-Xi-yiW" firstAttribute="top" secondItem="N8a-hm-drJ" secondAttribute="top" constant="22" id="bKt-iJ-VhZ"/>
                     </constraints>
                     <viewLayoutGuide key="safeArea" id="N8a-hm-drJ"/>
@@ -78,6 +88,7 @@
         </view>
     </objects>
     <resources>
-        <image name="addon" width="29" height="29"/>
+        <image name="ic_menu" width="33" height="33"/>
+        <image name="ic_search" width="50.5" height="50.5"/>
     </resources>
 </document>

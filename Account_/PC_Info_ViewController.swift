@@ -47,6 +47,12 @@ class PC_Info_ViewController: UIViewController {
         self.root()?.toggleLeftPanel(nil)
     }
     
+    @IBAction func didPressSearch() {
+        let search = Search_ViewController.init()
+        search.config = [:]
+        self.center()?.pushViewController(search, animated: true)
+    }
+    
     func didPressLogout() {
 //        LTRequest.sharedInstance()?.didRequestInfo(["CMD_CODE":"logout",
 //                                                    "user_id":Information.userInfo?.getValueFromKey("user_id") ?? "",
