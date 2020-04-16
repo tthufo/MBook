@@ -49,6 +49,8 @@
 
 - (void)didEmbed;
 
+- (void)didUnEmbed;
+
 - (void)goUp;
 
 - (void)goDown;
@@ -57,6 +59,8 @@
 - (HT_Root_ViewController*)TABBAR;
 
 - (UINavigationController*)CENTER;
+
+- (UIViewController*)TOPVIEWCONTROLER;
 
 - (BOOL)hasAds;
 

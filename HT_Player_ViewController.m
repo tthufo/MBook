@@ -17,8 +17,12 @@
 //    IBOutlet MarqueeLabel * titleSong;
     
     IBOutlet UILabel * titleSong;
+        
+    IBOutlet UICollectionView * collectionView;
+
+    IBOutlet UIView * controlView;
     
-    IBOutlet UITableView * tableView;
+    IBOutlet NSLayoutConstraint * topHeight;
     
     IBOutlet UIButton * play;
     
@@ -39,7 +43,7 @@
 
 @implementation HT_Player_ViewController
 
-@synthesize playerView, playState, topView, uID, adsView;
+@synthesize playerView, playState, topView, uID;
 
 - (void)viewDidLoad
 {
@@ -48,12 +52,6 @@
     dataList = [NSMutableArray new];
     
     setupData = [@{} mutableCopy];
-    
-    [tableView registerNib:[UINib nibWithNibName:@"HT_Player_Cell" bundle:nil] forCellReuseIdentifier:@"playerCell"];
-    
-    [tableView registerNib:[UINib nibWithNibName:@"HT_Player_Item" bundle:nil] forCellReuseIdentifier:@"playerItem"];
-    
-    [tableView reloadData];
     
     if(![self getObject:@"settingOpt"])
     {
@@ -67,6 +65,15 @@
 //    [self previousPlay];
     
     ((UIImageView*)[self playerInfo][@"img"]).hidden = YES;
+    
+    [self didSetUpCollectionView];
+}
+
+- (void)didSetUpCollectionView {
+    [collectionView withCell:@"TG_Map_Cell"];
+    [collectionView withCell:@"TG_Book_Chap_Cell"];
+    [collectionView withHeaderOrFooter:@"Book_Detail_Title" andKind: UICollectionElementKindSectionHeader];
+
 }
 
 - (void)playingState
@@ -165,141 +172,9 @@
     uID = isIpod ? dict[@"assetUrl"] : [dict getValueFromKey:@"id"];
     
 //    [dataList addObjectsFromArray:[self getValue:@"leftOverList"]];
-//
-//    [tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
 }
 
 #pragma mark TableView
-
-- (NSIndexPath *)tableView:(UITableView *)tableView targetIndexPathForMoveFromRowAtIndexPath:(NSIndexPath *)sourceIndexPath toProposedIndexPath:(NSIndexPath *)proposedDestinationIndexPath
-{
-    if( sourceIndexPath.section != proposedDestinationIndexPath.section )
-    {
-        return sourceIndexPath;
-    }
-    else
-    {
-        return proposedDestinationIndexPath;
-    }
-}
-
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return indexPath.section == 1 ? YES : NO;
-}
-
--(BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return indexPath.section == 1 ? YES : NO;
-}
-
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath
-{
-    NSString *stringToMove = dataList[sourceIndexPath.row];
-    
-    [dataList removeObjectAtIndex:sourceIndexPath.row];
-    
-    [dataList insertObject:stringToMove atIndex:destinationIndexPath.row];
-    
-//    [System addValue:dataList andKey:@"leftOverList"];
-}
-
-- (void)tableView:(UITableView *)_tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete)
-    {
-        [dataList removeObjectAtIndex:indexPath.row];
-        
-        [_tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-    }
-    
-//    [System addValue:dataList andKey:@"leftOverList"];
-}
-
-
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
-    return -1;
-}
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return 2;
-}
-
-- (NSInteger)tableView:(UITableView *)_tableView numberOfRowsInSection:(NSInteger)section
-{
-    return section == 0 ? 1 : dataList.count;
-}
-
-- (CGFloat)tableView:(UITableView *)_tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return indexPath.section == 0 ? 480 : 50;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)_tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    UITableViewCell * cell = [_tableView dequeueReusableCellWithIdentifier:indexPath.section == 0 ? @"playerCell" : @"playerItem" forIndexPath:indexPath];
-
-    if(indexPath.section == 0)
-    {
-        
-    }
-    else
-    {
-        id list = dataList[indexPath.row];
-        
-        BOOL isIpod = [list responseForKey:@"ipod"];
-        
-        if(isIpod)
-        {
-            ((UIImageView*)[self withView:cell tag:11]).image = [UIImage imageNamed:@"ipod"];
-        }
-        else
-        {
-            [((UIImageView*)[self withView:cell tag:11]) sd_setImageWithURL:[NSURL URLWithString: list[@"artwork_url"]] placeholderImage:kAvatar completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
-                if (error) return;
-                if (image && cacheType == SDImageCacheTypeNone)
-                {
-                    [UIView transitionWithView:(UIImageView*)[self playerInfo][@"img"]
-                                      duration:0.5
-                                       options:UIViewAnimationOptionTransitionCrossDissolve
-                                    animations:^{
-                                        [(UIImageView*)[self playerInfo][@"img"] setImage:image];
-                                    } completion:NULL];
-                }
-            }];
-        }
-        
-        ((UILabel*)[self withView:cell tag:12]).text = list[@"title"];
-        
-        ((UIImageView*)[self withView:cell tag:9869]).hidden = ![isIpod ? list[@"assetUrl"] : [list getValueFromKey:@"id"] isEqualToString:uID];
-        
-        ((HT_Player_Item*)cell).isActive = ([isIpod ? list[@"assetUrl"] : [list getValueFromKey:@"id"] isEqualToString:uID] && ![self.playerView isPlaying]);
-        
-        [((HT_Player_Item*)cell) reActive];
-    }
-    
-    return cell;
-}
-
-- (void)tableView:(UITableView *)_tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    [_tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-    if(tableView.isEditing || indexPath.section == 0)
-    {
-        return;
-    }
-    
-    id list = dataList[indexPath.row];
-    
-    BOOL isIpod = [list responseForKey:@"ipod"];
-    
-    [self resortDownload:list andIndex:indexPath.row];
-    
-    [self didStartPlayWith:isIpod ? list[@"assetUrl"] : [list getValueFromKey:@"id"] andInfo:dataList[indexPath.row]];
-}
 
 - (void)updateAll:(NSString*)playList
 {
@@ -311,8 +186,6 @@
         
         [dataList addObject:dict];
     }
-    
-    [tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
 }
 
 - (void)updateList:(id)item
@@ -364,8 +237,6 @@
     }
     
     [dataList insertObject:item atIndex:0];
-
-    [tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
     
 //    [System addValue:dataList andKey:@"leftOverList"];
 //
@@ -394,8 +265,6 @@
             dict[@"name"] = [NSKeyedUnarchiver unarchiveObjectWithData:r.data][@"name"];
             
             [dataList replaceObjectAtIndex:index withObject:dict];
-            
-            [tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
         }
     }
 }
@@ -419,12 +288,11 @@
     
     playingData[@"cover"] = setupData[@"img"];
     
-
-    titleSong.text = info[@"title"];
+    NSLog(@"%@", info);
+    
+    titleSong.text = info[@"name"];
     
     ((UILabel*)[self playerInfo][@"title"]).text = info[@"title"];
-    
-    
     
     [((UIButton*)[self playerInfo][@"play"]) addTarget:self action:@selector(didPressPause:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -441,22 +309,22 @@
 //    [((UIButton*)[self playerInfo][@"sync"]) addTarget:self action:@selector(didPressSync:) forControlEvents:UIControlEventTouchUpInside];
     
 
-    [((UIButton*)[self playerInfo][@"volume"]) addTarget:self action:@selector(didPressVolume:) forControlEvents:UIControlEventTouchUpInside];
-
-    [((UIButton*)[self playerInfo][@"random"]) addTarget:self action:@selector(didPressRandom:) forControlEvents:UIControlEventTouchUpInside];
-
-    [((UIButton*)[self playerInfo][@"repeat"]) addTarget:self action:@selector(didPressRepeat:) forControlEvents:UIControlEventTouchUpInside];
-
-    [((UIButton*)[self playerInfo][@"edit"]) addTarget:self action:@selector(didPressEdit:) forControlEvents:UIControlEventTouchUpInside];
-    
+//    [((UIButton*)[self playerInfo][@"volume"]) addTarget:self action:@selector(didPressVolume:) forControlEvents:UIControlEventTouchUpInside];
+//
+//    [((UIButton*)[self playerInfo][@"random"]) addTarget:self action:@selector(didPressRandom:) forControlEvents:UIControlEventTouchUpInside];
+//
+//    [((UIButton*)[self playerInfo][@"repeat"]) addTarget:self action:@selector(didPressRepeat:) forControlEvents:UIControlEventTouchUpInside];
+//
+//    [((UIButton*)[self playerInfo][@"edit"]) addTarget:self action:@selector(didPressEdit:) forControlEvents:UIControlEventTouchUpInside];
+//
 
     [((UIView*)[self playerInfo][@"view"]) withBorder:@{@"Bcorner":@(2)}];
     
     ((UIView*)[self playerInfo][@"view"]).alpha = 0.89;
     
-    [((UIButton*)[self playerInfo][@"share"]) addTarget:self action:@selector(didPressClock:) forControlEvents:UIControlEventTouchUpInside];
-
-    
+//    [((UIButton*)[self playerInfo][@"share"]) addTarget:self action:@selector(didPressClock:) forControlEvents:UIControlEventTouchUpInside];
+//
+//
     
     
     BOOL isIpod = [info responseForKey:@"ipod"];
@@ -468,7 +336,7 @@
     [self didPlayingWithUrl: isIpod ? [NSURL URLWithString:url] : isDownload ? [NSURL fileURLWithPath:url] : [NSURL URLWithString:url]];
     
 
-    ((UIButton*)[self playerInfo][@"sync"]).enabled = !isIpod && !isDownload;
+//    ((UIButton*)[self playerInfo][@"sync"]).enabled = !isIpod && !isDownload;
     
     if(isIpod)
     {
@@ -478,7 +346,7 @@
     }
     else
     {
-        [(UIImageView*)[self playerInfo][@"img"] sd_setImageWithURL:[NSURL URLWithString: info[@"artwork_url"]] placeholderImage:kAvatar completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        [(UIImageView*)[self playerInfo][@"img"] sd_setImageWithURL:[NSURL URLWithString: info[@"avatar"]] placeholderImage:kAvatar completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             if (error) return;
             if (image && cacheType == SDImageCacheTypeNone)
             {
@@ -494,18 +362,17 @@
     
     if(info[@"img"])
     {
-        [self showInforPlayer:@{@"img":info[@"img"], @"song":info[@"title"] ? info[@"title"] : @"Unknown"}];
+        [self showInforPlayer:@{@"img":info[@"img"], @"song": info[@"name"] ? info[@"name"] : @"Unknown"}];
         
         avatar.image = info[@"img"];
-
     }
     else
     {
-        [avatar sd_setImageWithURL:[NSURL URLWithString:[info getValueFromKey:@"artwork_url"]] placeholderImage:kAvatar completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        [avatar sd_setImageWithURL:[NSURL URLWithString:[info getValueFromKey:@"avatar"]] placeholderImage:kAvatar completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             
             setupData[@"img"] = image ? image : kAvatar;
             
-            [self showInforPlayer:@{@"img":image ?  image : kAvatar, @"song":info[@"title"] ? info[@"title"] : @"Unknown"}];
+            [self showInforPlayer:@{@"img": image ?  image : kAvatar, @"song":info[@"name"] ? info[@"name"] : @"Unknown"}];
         }];
     }
 }
@@ -514,17 +381,17 @@
 {
     NSMutableDictionary * dict = [@{} mutableCopy];
     
-    UITableViewCell * cell = [tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]];
+    UIView * cell = controlView;
     
-    NSArray * array = @[@"img",@"slider",@"currentTime",@"remainTime",@"title",@"back",@"play",@"next",@"off",@"loading",@"sync",@"volume",@"share",@"random",@"repeat",@"line",@"view",@"list",@"edit",@"time"];
+    NSArray * array = @[@"img", @"cover",@"slider",@"currentTime",@"remainTime",@"title",@"back",@"play",@"next",@"off",@"loading",@"sync",@"volume",@"share",@"random",@"repeat",@"line",@"view",@"list",@"edit",@"time"];
     
-    for(UIView * v in cell.contentView.subviews)
+    for(UIView * v in cell.subviews)
     {
-        dict[array[[cell.contentView.subviews indexOfObject:v]]] = v;
+        dict[array[[cell.subviews indexOfObject:v]]] = v;
     }
         
     [((UIImageView*)dict[@"img"]) withBorder:@{@"Bcorner":@(6)}];
-    
+        
     return dict;
 }
 
@@ -591,8 +458,6 @@
     play.enabled = NO;
     
     ((UIButton*)[self playerInfo][@"play"]).enabled = NO;
-    
-    [tableView reloadData];
 }
 
 - (void)fadeVolume
@@ -698,9 +563,9 @@
 
 - (void)didPressEdit:(UIButton*)sender
 {
-    tableView.editing = tableView.isEditing ? NO : YES;
+//    tableView.editing = tableView.isEditing ? NO : YES;
     
-    [sender setTitle:tableView.isEditing ? @"Done" : @"Edit" forState:UIControlStateNormal];
+//    [sender setTitle:tableView.isEditing ? @"Done" : @"Edit" forState:UIControlStateNormal];
 }
 
 - (void)didPressSync:(UIButton*)sender
@@ -1113,13 +978,12 @@
     
     [(UIButton*)[self playerInfo][@"play"] setImage:[UIImage imageNamed:isPlaying ? @"pause_D" : @"play_D"] forState:UIControlStateNormal];
     
-    [UIView animateWithDuration:0.3 animations:^{
-        
-        ((UIImageView*)[self playerInfo][@"img"]).transform = CGAffineTransformScale(CGAffineTransformIdentity, isPlaying ? 1 : 0.9,isPlaying ? 1 : 0.9);
-        
-    }];
-    
-    [tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
+//    [UIView animateWithDuration:0.3 animations:^{
+//        
+//        ((UIImageView*)[self playerInfo][@"img"]).transform = CGAffineTransformScale(CGAffineTransformIdentity, isPlaying ? 1 : 0.9,isPlaying ? 1 : 0.9);
+//        
+//    }];
+//    
 }
 
 - (void)showInforPlayer:(NSDictionary*)dict
@@ -1187,6 +1051,13 @@
 - (IBAction)didPressDown
 {
     [self goDown];
+}
+
+- (IBAction)didPressDismiss
+{
+    [self.playerView stop];
+    
+    [[self ROOT] unEmbed];
 }
 
 - (void)didReceiveMemoryWarning

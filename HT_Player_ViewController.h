@@ -24,7 +24,7 @@ typedef enum __playerState
 
 @property(nonatomic, retain) GUIPlayerView * playerView;
 
-@property(nonatomic, retain) IBOutlet UIView * topView, *adsView;
+@property(nonatomic, retain) IBOutlet UIView * topView;
 
 @property(nonatomic) PlayingState playState;
 

@@ -23,7 +23,7 @@
     
     [self addChildViewController:player];
     
-    player.view.frame = CGRectMake(0, screenHeight1 - 0 , screenWidth1, 57);
+    player.view.frame = CGRectMake(0, screenHeight1 - 0 , screenWidth1, 65);
 
     [self.view addSubview:player.view];
 

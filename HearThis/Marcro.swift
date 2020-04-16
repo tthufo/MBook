@@ -500,12 +500,12 @@ extension UIViewController {
         return ""
     }
     
-    func didRequestUrl(id: String) {
+    func didRequestUrl(info: NSDictionary) {
          let request = NSMutableDictionary.init(dictionary: [
                                                              "session":Information.token ?? "",
                                                              "overrideAlert":"1",
                                                              ])
-            request["id"] = id
+            request["id"] = info.getValueFromKey("id")
             request["CMD_CODE"] = "getBookContent"
          LTRequest.sharedInstance()?.didRequestInfo((request as! [AnyHashable : Any]), withCache: { (cacheString) in
          }, andCompletion: { (response, errorCode, error, isValid, object) in
@@ -516,8 +516,11 @@ extension UIViewController {
                  return
              }
             
+            let information = NSMutableDictionary.init(dictionary: info)
+            
+            information["stream_url"] = (result["result"] as! NSDictionary).getValueFromKey("file_url")
              
-             self.startPlaying("", andInfo: ["stream_url": (result["result"] as! NSDictionary).getValueFromKey("file_url")])
+            self.startPlaying("", andInfo: (information as! [AnyHashable : Any]))
              
          })
      }

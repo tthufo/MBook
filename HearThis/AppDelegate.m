@@ -221,6 +221,12 @@ UIBackgroundTaskIdentifier bgTask;
     return (UINavigationController*)[self ROOT].centerPanel;
 }
 
+- (UIViewController*)TOPVIEWCONTROLER
+{
+    return [((UINavigationController*)[self ROOT].centerPanel).viewControllers lastObject];
+}
+
+
 - (UIViewController*)LAST
 {
     return [((UINavigationController*)[self TABBAR].selectedViewController).viewControllers lastObject];
@@ -263,15 +269,48 @@ UIBackgroundTaskIdentifier bgTask;
     }
 }
 
+- (void)didUnEmbed
+{
+    if (![self isEmbed]) {
+        return;
+    }
+    int embed = 0;// [[self getValue:@"embed"] intValue];
+
+    for(UIView * v in [self LAST].view.subviews)
+    {
+        if([v isKindOfClass:[UITableView class]])
+        {
+            ((UITableView*)v).contentInset = UIEdgeInsetsMake(0, 0, ([self isEmbed] ? 107 : [self hasAds] ? 52 : v.tag == 8989 ? 54 : 54) + embed, 0);
+        }
+            
+        if([v isKindOfClass:[UICollectionView class]])
+        {
+            ((UICollectionView*)v).contentInset = UIEdgeInsetsMake(0, 0, ([self isEmbed] ? 107 : [self hasAds] ? 52 : 54) + embed, 0);
+        }
+        
+            if([v isKindOfClass:[UIButton class]] && v.tag == 99881)
+            {
+                
+                [UIView animateWithDuration:0.3 animations:^{
+                    
+                    v.frame = CGRectMake(0, screenHeight1 - 175 - embed, 50, 50);
+                    
+                }];
+                
+                break;
+            }
+    }
+}
+
 - (void)goUp
 {
     [UIView animateWithDuration:0.4 delay:0 usingSpringWithDamping:0.8 initialSpringVelocity:0 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
                 
         CGRect rect = [[self CENTER].view.subviews lastObject].frame;
         
-        rect.origin.y = 25;
+        rect.origin.y = 0;//25;
         
-        rect.size.height = screenHeight1 - 15;
+        rect.size.height = screenHeight1 - 0;//15;
         
         [self PLAYER].view.backgroundColor = [UIColor whiteColor];
 
@@ -291,14 +330,14 @@ UIBackgroundTaskIdentifier bgTask;
 - (void)goDown
 {
     int embed = [[self getValue:@"embed"] intValue];
-        
+            
     [UIView animateWithDuration:0.4 delay:0 usingSpringWithDamping:0.8 initialSpringVelocity:0 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
                 
         CGRect rect = [[self CENTER].view.subviews lastObject].frame;
 
-        rect.origin.y = screenHeight1 - 107 - ([self isIphoneX] ? 35 : 0) - embed;
+        rect.origin.y = screenHeight1 - ([[self TOPVIEWCONTROLER] isKindOfClass:[UITabBarController class]] ? 115 : 65) - ([self isIphoneX] ? 35 : 0) - embed;
 
-        rect.size.height = 57;
+        rect.size.height = 65;
         
         [self PLAYER].view.backgroundColor = [UIColor clearColor];
 
@@ -371,7 +410,7 @@ UIBackgroundTaskIdentifier bgTask;
 {
     [[self PLAYER] didStartPlayWith:vID andInfo:info];
     
-    [[self ROOT] embed];
+    [[self ROOT] goUp];
 }
 //
 //- (void)startPlayList:(NSString*)name andVid:(NSString*)vId andInfo:(NSDictionary*)info

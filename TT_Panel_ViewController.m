@@ -52,8 +52,8 @@
     [UIView animateWithDuration:0.5 delay:0 usingSpringWithDamping:0.7 initialSpringVelocity:0 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
         
         CGRect rect = [self PLAYER].view.frame;
-
-        rect.origin.y = screenHeight1 - 107 - ([self isIphoneX] ? 35 : 0) - embed;
+        
+        rect.origin.y = screenHeight1 - ([[self TOPVIEWCONTROLER] isKindOfClass:[UITabBarController class]] ? 115 : 65) - ([self isIphoneX] ? 35 : 0) - embed - 1;
         
         [self PLAYER].view.frame = rect;
         
@@ -64,19 +64,40 @@
     }];
 }
 
-//
+- (void)unEmbed
+{
+    [self PLAYER].topView.alpha = 1;
+        
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
+    
+    [UIView animateWithDuration:0.5 delay:0 usingSpringWithDamping:0.7 initialSpringVelocity:0 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+        
+        CGRect rect = [self PLAYER].view.frame;
+
+        rect.origin.y = screenHeight1;
+        
+        [self PLAYER].view.frame = rect;
+        
+    } completion:^(BOOL finished) {
+        
+        [self didUnEmbed];
+        
+    }];
+}
+
+
 //- (void)hide
 //{
 //    [UIView animateWithDuration:0.5 delay:0 usingSpringWithDamping:0.7 initialSpringVelocity:0 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
-//        
+//
 //        CGRect rect = [self.centerPanel.view.subviews lastObject].frame;
-//        
+//
 //        rect.origin.y = screenHeight1;
-//        
-//        [self.centerPanel.view.subviews lastObject].frame= rect;
-//        
+//
+//        [self.centerPanel.view.subviews lastObject].frame = rect;
+//
 //    } completion:^(BOOL finished) {
-//        
+//
 //    }];
 //}
 

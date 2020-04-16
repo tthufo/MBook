@@ -16,6 +16,8 @@
 
 - (void)embed;
 
+- (void)unEmbed;
+
 @end
 
 @interface JASidePanelController (extend)
