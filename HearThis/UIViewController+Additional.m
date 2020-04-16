@@ -23,6 +23,11 @@
           [self didSuperEmbed];
 
           [self didEmbed];
+          
+//          if([self isFobidden])
+//          {
+//              [self didSubEmbed];
+//          }
       }
 
       [self didEmbed:self];

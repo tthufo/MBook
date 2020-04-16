@@ -48,6 +48,8 @@
 
 - (void)didSuperEmbed;
 
+- (void)didSubEmbed;
+
 - (void)embed;
 
 - (void)didEmbed;

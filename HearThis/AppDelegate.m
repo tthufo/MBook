@@ -422,6 +422,29 @@ UIBackgroundTaskIdentifier bgTask;
     }];
 }
 
+- (void)didSubEmbed
+{
+    BOOL isMotion = [[self TOPVIEWCONTROLER] isKindOfClass:[Reader_ViewController class]];
+    
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
+    
+    [UIView animateWithDuration:0.3 animations:^{
+        
+        CGRect rect = [self PLAYER].view.frame;
+        
+        rect.origin.y = screenHeight1 - h - (isMotion ? 83 : 0);
+        
+        rect.size.height = h;
+        
+        [self PLAYER].view.frame = rect;
+        
+        [[self PLAYER].view withBorder:@{@"Bcorner":@(0)}];
+        
+    } completion:^(BOOL finished) {
+        
+    }];
+}
+
 - (void)unEmbed
 {
     [self PLAYER].topView.alpha = 1;
@@ -586,7 +609,7 @@ UIBackgroundTaskIdentifier bgTask;
 
 - (BOOL)isFobidden
 {
-    return [self isKindOfClass:[PC_Login_ViewController class]] || [self isKindOfClass:[PC_Forgot_ViewController class]] || [self isKindOfClass:[PC_Register_ViewController class]];
+    return [self isKindOfClass:[Reader_ViewController class]];
 }
 
 //- (void)startPlayingIpod:(NSURL*)url andInfo:(NSDictionary*)info
