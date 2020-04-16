@@ -18,9 +18,9 @@
 
 #import "HearThis-Swift.h"
 
+#define h 65
+
 @interface AppDelegate ()
-{
-}
 
 @end
 
@@ -109,7 +109,7 @@
 
 - (UINavigationController *)authenticationViewController {
         
-    Navigation_ViewController * nav = [[Navigation_ViewController alloc] initWithRootViewController: [PC_Login_ViewController new]];
+    UINavigationController * nav = [[UINavigationController alloc] initWithRootViewController: [PC_Login_ViewController new]];
     
     nav.navigationBarHidden = YES;
     
@@ -239,34 +239,221 @@ UIBackgroundTaskIdentifier bgTask;
     return controller;
 }
 
+- (void)didSuperEmbed
+{
+    BOOL isMotion = [[self TOPVIEWCONTROLER] isKindOfClass:[UITabBarController class]];
+    
+    int loca = 0;
+    
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
+    
+    [UIView animateWithDuration:0.3 animations:^{
+    
+        CGRect rect = [self PLAYER].view.frame;
+        
+        rect.origin.y = screenHeight1 - h - (isMotion ? 50 : 0 + loca);
+        
+        rect.size.height = h;
+
+        [self PLAYER].view.frame = rect;
+        
+        [[self PLAYER].view withBorder:@{@"Bcorner":@(0)}];
+        
+    } completion:^(BOOL finished) {
+        
+    }];
+}
+
+- (void)didEmbed:(UIViewController*)controller
+{
+    int embed = [[self getValue:@"embed"] intValue];
+    
+    for(UIView * v in controller.view.subviews)
+    {
+        if([v isKindOfClass:[UITableView class]])
+        {
+            ((UITableView*)v).contentInset = UIEdgeInsetsMake(0, 0, ([self isEmbed] ? h : 0) + embed, 0);
+        }
+        
+        if([v isKindOfClass:[UICollectionView class]])
+        {
+            ((UICollectionView*)v).contentInset = UIEdgeInsetsMake(0, 0, ([self isEmbed] ? h : 0) + embed, 0);
+        }
+        
+        if([v isKindOfClass:[UIView class]])
+        {
+            for(UIView * innerView in v.subviews)
+            {
+                if([innerView isKindOfClass:[UITableView class]])
+                {
+                    ((UITableView*)innerView).contentInset = UIEdgeInsetsMake(0, 0, ([self isEmbed] ? h : 0) + embed, 0);
+                }
+                
+                if([innerView isKindOfClass:[UICollectionView class]])
+                {
+                    ((UICollectionView*)innerView).contentInset = UIEdgeInsetsMake(0, 0, ([self isEmbed] ? h : 0) + embed, 0);
+                }
+                
+                if([innerView isKindOfClass:[UITextView class]])
+                {
+                    ((UITextView*)innerView).contentInset = UIEdgeInsetsMake(0, 0, ([self isEmbed] ? h - 15 : 0) + embed, 0);
+                }
+                
+                if([innerView isKindOfClass:[UIView class]])
+                {
+                    for(UIView * childInner in v.subviews)
+                    {
+                        if([childInner isKindOfClass:[UITableView class]])
+                        {
+                            ((UITableView*)childInner).contentInset = UIEdgeInsetsMake(0, 0, ([self isEmbed] ? h : 0) + embed, 0);
+                        }
+                        
+                        if([childInner isKindOfClass:[UICollectionView class]])
+                        {
+                            ((UICollectionView*)childInner).contentInset = UIEdgeInsetsMake(0, 0, ([self isEmbed] ? h : 0) + embed, 0);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
 - (void)didEmbed
 {
     int embed = [[self getValue:@"embed"] intValue];
-
+    
     for(UIView * v in [self LAST].view.subviews)
     {
         if([v isKindOfClass:[UITableView class]])
         {
-            ((UITableView*)v).contentInset = UIEdgeInsetsMake(0, 0, ([self isEmbed] ? 107 : [self hasAds] ? 52 : v.tag == 8989 ? 54 : 54) + embed, 0);
-        }
-            
-        if([v isKindOfClass:[UICollectionView class]])
-        {
-            ((UICollectionView*)v).contentInset = UIEdgeInsetsMake(0, 0, ([self isEmbed] ? 107 : [self hasAds] ? 52 : 54) + embed, 0);
+            ((UITableView*)v).contentInset = UIEdgeInsetsMake(0, 0, ([self isEmbed] ? h : 0) + embed, 0);
         }
         
-            if([v isKindOfClass:[UIButton class]] && v.tag == 99881)
+        if([v isKindOfClass:[UICollectionView class]])
+        {
+            ((UICollectionView*)v).contentInset = UIEdgeInsetsMake(0, 0, ([self isEmbed] ? h : 0) + embed, 0);
+        }
+        
+        if([v isKindOfClass:[UIView class]])
+        {
+            for(UIView * innerView in v.subviews)
             {
+                if([innerView isKindOfClass:[UITableView class]])
+                {
+                    ((UITableView*)innerView).contentInset = UIEdgeInsetsMake(0, 0, ([self isEmbed] ? h : 0) + embed, 0);
+                }
                 
-                [UIView animateWithDuration:0.3 animations:^{
-                    
-                    v.frame = CGRectMake(0, screenHeight1 - 175 - embed, 50, 50);
-                    
-                }];
+                if([innerView isKindOfClass:[UICollectionView class]])
+                {
+                    ((UICollectionView*)innerView).contentInset = UIEdgeInsetsMake(0, 0, ([self isEmbed] ? h : 0) + embed, 0);
+                }
                 
-                break;
+                if([innerView isKindOfClass:[UIView class]])
+                {
+                    for(UIView * childInner in v.subviews)
+                    {
+                        if([childInner isKindOfClass:[UITableView class]])
+                        {
+                            ((UITableView*)childInner).contentInset = UIEdgeInsetsMake(0, 0, ([self isEmbed] ? h : 0) + embed, 0);
+                        }
+                        
+                        if([childInner isKindOfClass:[UICollectionView class]])
+                        {
+                            ((UICollectionView*)childInner).contentInset = UIEdgeInsetsMake(0, 0, ([self isEmbed] ? h : 0) + embed, 0);
+                        }
+                    }
+                }
             }
+        }
     }
+}
+
+//- (void)didEmbed
+//{
+//    int embed = [[self getValue:@"embed"] intValue];
+//
+//    for(UIView * v in [self LAST].view.subviews)
+//    {
+//        if([v isKindOfClass:[UITableView class]])
+//        {
+//            ((UITableView*)v).contentInset = UIEdgeInsetsMake(0, 0, ([self isEmbed] ? 107 : [self hasAds] ? 52 : v.tag == 8989 ? 54 : 54) + embed, 0);
+//        }
+//
+//        if([v isKindOfClass:[UICollectionView class]])
+//        {
+//            ((UICollectionView*)v).contentInset = UIEdgeInsetsMake(0, 0, ([self isEmbed] ? 107 : [self hasAds] ? 52 : 54) + embed, 0);
+//        }
+//
+//            if([v isKindOfClass:[UIButton class]] && v.tag == 99881)
+//            {
+//
+//                [UIView animateWithDuration:0.3 animations:^{
+//
+//                    v.frame = CGRectMake(0, screenHeight1 - 175 - embed, 50, 50);
+//
+//                }];
+//
+//                break;
+//            }
+//    }
+//}
+
+- (void)embed
+{
+    [self PLAYER].topView.alpha = 1;
+    
+    int embed = [[self getValue:@"embed"] intValue];
+    
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
+    
+    [UIView animateWithDuration:0.5 delay:0 usingSpringWithDamping:0.7 initialSpringVelocity:0 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+        
+        CGRect rect = [self PLAYER].view.frame;
+        
+        rect.origin.y = screenHeight1 - ([[self TOPVIEWCONTROLER] isKindOfClass:[UITabBarController class]] ? 115 : 65) - ([self isIphoneX] ? 35 : 0) - embed - 1;
+        
+        [self PLAYER].view.frame = rect;
+        
+    } completion:^(BOOL finished) {
+        
+        [self didEmbed];
+        
+    }];
+}
+
+- (void)unEmbed
+{
+    [self PLAYER].topView.alpha = 1;
+    
+    int embed = [[self getValue:@"embed"] intValue];
+    
+    if([self activeState])
+    {
+        [[self PLAYER].playerView stop];
+        
+        [[self PLAYER].playerView clean];
+        
+        [self PLAYER].playerView = nil;
+    }
+    
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
+    
+    [UIView animateWithDuration:0.5 delay:0 usingSpringWithDamping:0.7 initialSpringVelocity:0 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+        
+        CGRect rect = [self PLAYER].view.frame;
+        
+        rect.origin.y = screenHeight1 - embed;
+        
+        [self PLAYER].view.frame = rect;
+        
+        [[self PLAYER].view withBorder:@{@"Bcorner":@(0)}];
+        
+    } completion:^(BOOL finished) {
+        
+        [self didEmbed];
+        
+    }];
 }
 
 - (void)didUnEmbed
@@ -306,7 +493,7 @@ UIBackgroundTaskIdentifier bgTask;
 {
     [UIView animateWithDuration:0.4 delay:0 usingSpringWithDamping:0.8 initialSpringVelocity:0 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
                 
-        CGRect rect = [[self CENTER].view.subviews lastObject].frame;
+        CGRect rect = [self PLAYER].view.frame;
         
         rect.origin.y = 0;//25;
         
@@ -333,7 +520,7 @@ UIBackgroundTaskIdentifier bgTask;
             
     [UIView animateWithDuration:0.4 delay:0 usingSpringWithDamping:0.8 initialSpringVelocity:0 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
                 
-        CGRect rect = [[self CENTER].view.subviews lastObject].frame;
+        CGRect rect = [self PLAYER].view.frame;
 
         rect.origin.y = screenHeight1 - ([[self TOPVIEWCONTROLER] isKindOfClass:[UITabBarController class]] ? 115 : 65) - ([self isIphoneX] ? 35 : 0) - embed;
 
@@ -382,6 +569,11 @@ UIBackgroundTaskIdentifier bgTask;
     return ![[[self CENTER].view.subviews lastObject] isKindOfClass:[UITabBar class]];
 }
 
+- (BOOL)isFullEmbed
+{
+    return [self PLAYER].view.frame.origin.y == 0;
+}
+
 - (BOOL)isEmbed
 {
     return [self PLAYER].view.frame.origin.y < screenHeight1;
@@ -390,6 +582,11 @@ UIBackgroundTaskIdentifier bgTask;
 - (BOOL)activeState
 {
     return [[self PLAYER].playerView isPlaying];
+}
+
+- (BOOL)isFobidden
+{
+    return [self isKindOfClass:[PC_Login_ViewController class]] || [self isKindOfClass:[PC_Forgot_ViewController class]] || [self isKindOfClass:[PC_Register_ViewController class]];
 }
 
 //- (void)startPlayingIpod:(NSURL*)url andInfo:(NSDictionary*)info
@@ -406,12 +603,14 @@ UIBackgroundTaskIdentifier bgTask;
 //    [[self ROOT] embed];
 //}
 //
+
 - (void)startPlaying:(NSString*)vID andInfo:(NSDictionary*)info
 {
     [[self PLAYER] didStartPlayWith:vID andInfo:info];
     
     [[self ROOT] goUp];
 }
+
 //
 //- (void)startPlayList:(NSString*)name andVid:(NSString*)vId andInfo:(NSDictionary*)info
 //{

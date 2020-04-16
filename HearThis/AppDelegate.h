@@ -46,14 +46,21 @@
 
 - (HT_Player_ViewController*)PLAYER;
 
+- (void)didSuperEmbed;
+
+- (void)embed;
 
 - (void)didEmbed;
+
+- (void)didEmbed:(UIViewController*)controller;
 
 - (void)didUnEmbed;
 
 - (void)goUp;
 
 - (void)goDown;
+
+- (void)unEmbed;
 
 
 - (HT_Root_ViewController*)TABBAR;
@@ -66,7 +73,11 @@
 
 - (BOOL)isEmbed;
 
+- (BOOL)isFullEmbed;
+
 - (BOOL)activeState;
+
+- (BOOL)isFobidden;
 
 //- (void)startPlayingIpod:(NSURL*)url andInfo:(NSDictionary*)info;
 //

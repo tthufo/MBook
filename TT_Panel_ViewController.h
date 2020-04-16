@@ -10,13 +10,13 @@
 
 @interface TT_Panel_ViewController : JASidePanelController
 
-- (void)show;
-
-- (void)hide;
-
-- (void)embed;
-
-- (void)unEmbed;
+//- (void)show;
+//
+//- (void)hide;
+//
+//- (void)embed;
+//
+//- (void)unEmbed;
 
 @end
 

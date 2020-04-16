@@ -12,6 +12,22 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    if ([[self WINDOW].rootViewController isKindOfClass:[TT_Panel_ViewController class]]) {
+      if([self isFullEmbed])
+      {
+          return;
+      }
+
+      if([self isEmbed])
+      {
+          [self didSuperEmbed];
+
+          [self didEmbed];
+      }
+
+      [self didEmbed:self];
+    }
+    
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     
     [self.navigationController.navigationBar setTitleTextAttributes:

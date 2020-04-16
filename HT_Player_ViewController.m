@@ -12,6 +12,8 @@
 
 #import "HT_Player_Item.h"
 
+#import "HearThis-Swift.h"
+
 @interface HT_Player_ViewController ()<GUIPlayerViewDelegate>
 {
 //    IBOutlet MarqueeLabel * titleSong;
@@ -26,7 +28,7 @@
     
     IBOutlet UIButton * play;
     
-    NSMutableArray * dataList;
+    NSMutableArray * dataList, * chapList;
     
     NSMutableDictionary * playingData, * setupData;
     
@@ -34,9 +36,17 @@
     
     BOOL isResume, isSound;
     
+    NSDictionary * config;
+    
     NSString * localUrl, * playListName;
     
     IBOutlet GUISlider * slider;
+    
+    int pageIndex;
+    
+    int totalPage;
+    
+    BOOL isLoadMore;
 }
 
 @end
@@ -51,6 +61,8 @@
     
     dataList = [NSMutableArray new];
     
+    chapList = [NSMutableArray new];
+
     setupData = [@{} mutableCopy];
     
     if(![self getObject:@"settingOpt"])
@@ -73,7 +85,6 @@
     [collectionView withCell:@"TG_Map_Cell"];
     [collectionView withCell:@"TG_Book_Chap_Cell"];
     [collectionView withHeaderOrFooter:@"Book_Detail_Title" andKind: UICollectionElementKindSectionHeader];
-
 }
 
 - (void)playingState
@@ -117,7 +128,6 @@
     }
     
     isResume = YES;
-    
     
     NSMutableDictionary * dict = [[NSMutableDictionary alloc] initWithDictionary:[self getObject:@"leftOver"]];
     
@@ -275,12 +285,13 @@
 
 - (void)didStartPlayWith:(NSString*)vID andInfo:(NSDictionary*)info
 {
+    config = info;
+    
     uID = vID;
     
     localUrl = @"";
     
     playListName = @"";
-    
     
     [setupData removeAllObjects];
     
@@ -325,7 +336,6 @@
 //    [((UIButton*)[self playerInfo][@"share"]) addTarget:self action:@selector(didPressClock:) forControlEvents:UIControlEventTouchUpInside];
 //
 //
-    
     
     BOOL isIpod = [info responseForKey:@"ipod"];
     
@@ -375,6 +385,14 @@
             [self showInforPlayer:@{@"img": image ?  image : kAvatar, @"song":info[@"name"] ? info[@"name"] : @"Unknown"}];
         }];
     }
+    
+    pageIndex = 1;
+    
+    totalPage = 1;
+    
+    [self didRequestData];
+     
+    [self didRequestChapter];
 }
 
 - (NSDictionary*)playerInfo
@@ -721,10 +739,10 @@
         nextIndexing = 0;
     }
     
-    if([self.playerView.options[@"shuffle"] isEqualToString:@"1"])
-    {
-        nextIndexing = RAND_FROM_TO(0, dataList.count -1);
-    }
+//    if([self.playerView.options[@"shuffle"] isEqualToString:@"1"])
+//    {
+//        nextIndexing = RAND_FROM_TO(0, dataList.count -1);
+//    }
     
     switch (playState)
     {
@@ -876,21 +894,21 @@
     
     BOOL isIpod = [setupData responseForKey:@"ipod"];
     
-    if([playingData[@"repeat"] isEqualToString:@"0"])
-    {
-        [self initAvatar:[setupData getValueFromKey:@"artwork_url"]];
-        
-        ((GUISlider*)[self playerInfo][@"slider"]).value = 0;
-    }
-
-    if([playingData[@"repeat"] isEqualToString:@"1"])
-    {
-        NSMutableDictionary * dict = [[NSMutableDictionary alloc] initWithDictionary:setupData];
-        
-        [self didStartPlayWith:isIpod ? dict[@"assetUrl"] : [dict getValueFromKey:@"id"] andInfo:dict];
-        
-        [self initAvatar:[dict getValueFromKey:@"artwork_url"]];
-    }
+//    if([playingData[@"repeat"] isEqualToString:@"0"])
+//    {
+//        [self initAvatar:[setupData getValueFromKey:@"artwork_url"]];
+//
+//        ((GUISlider*)[self playerInfo][@"slider"]).value = 0;
+//    }
+//
+//    if([playingData[@"repeat"] isEqualToString:@"1"])
+//    {
+//        NSMutableDictionary * dict = [[NSMutableDictionary alloc] initWithDictionary:setupData];
+//
+//        [self didStartPlayWith:isIpod ? dict[@"assetUrl"] : [dict getValueFromKey:@"id"] andInfo:dict];
+//
+//        [self initAvatar:[dict getValueFromKey:@"artwork_url"]];
+//    }
     
     if([playingData[@"repeat"] isEqualToString:@"2"])
     {
@@ -903,61 +921,61 @@
         
         int nextIndexing = 0;
         
-        if([self.playerView.options[@"shuffle"] isEqualToString:@"0"])
-        {
-            BOOL found = NO;
-            
-            switch (playState)
-            {
-                case Search:
-                {
-                    for(NSDictionary* dict in dataList)
-                    {
-                        if([dict responseForKey:@"ipod"])
-                        {
-                            if([[dict getValueFromKey:@"assetUrl"] isEqualToString:uID])
-                            {
-                                found = YES;
-                                
-                                nextIndexing = [dataList indexOfObject:dict] + 1;
-                                
-                                break;
-                            }
-                        }
-                        else
-                        {
-                            if([[dict getValueFromKey:@"id"] isEqualToString:uID])
-                            {
-                                found = YES;
-                                
-                                nextIndexing = [dataList indexOfObject:dict] + 1;
-                                
-                                break;
-                            }
-                        }
-                    }
-                }
-                    break;
-                default:
-                    break;
-            }
-            
-            if(found)
-            {
-                if(nextIndexing >= dataList.count)
-                {
-                    nextIndexing = 0;
-                }
-            }
-            else
-            {
-                nextIndexing = 0;
-            }
-        }
-        else
-        {
-            nextIndexing = RAND_FROM_TO(0, dataList.count -1);
-        }
+//        if([self.playerView.options[@"shuffle"] isEqualToString:@"0"])
+//        {
+//            BOOL found = NO;
+//
+//            switch (playState)
+//            {
+//                case Search:
+//                {
+//                    for(NSDictionary* dict in dataList)
+//                    {
+//                        if([dict responseForKey:@"ipod"])
+//                        {
+//                            if([[dict getValueFromKey:@"assetUrl"] isEqualToString:uID])
+//                            {
+//                                found = YES;
+//
+//                                nextIndexing = [dataList indexOfObject:dict] + 1;
+//
+//                                break;
+//                            }
+//                        }
+//                        else
+//                        {
+//                            if([[dict getValueFromKey:@"id"] isEqualToString:uID])
+//                            {
+//                                found = YES;
+//
+//                                nextIndexing = [dataList indexOfObject:dict] + 1;
+//
+//                                break;
+//                            }
+//                        }
+//                    }
+//                }
+//                    break;
+//                default:
+//                    break;
+//            }
+//
+//            if(found)
+//            {
+//                if(nextIndexing >= dataList.count)
+//                {
+//                    nextIndexing = 0;
+//                }
+//            }
+//            else
+//            {
+//                nextIndexing = 0;
+//            }
+//        }
+//        else
+//        {
+//            nextIndexing = RAND_FROM_TO(0, dataList.count -1);
+//        }
         
         switch (playState)
         {
@@ -1057,7 +1075,207 @@
 {
     [self.playerView stop];
     
-    [[self ROOT] unEmbed];
+    [self unEmbed];
+}
+
+- (void)didRequestData {
+    NSMutableDictionary * request = [[NSMutableDictionary alloc] initWithDictionary:@{@"session": Information.token,
+                                                                                      @"page_index": @(pageIndex),
+                                                                                      @"page_size": @(10),
+                                                                                      @"book_type": @(0),
+                                                                                      @"price": @(0), @"sorting": @(1),
+                                                                                      @"overrideLoading": @"1",
+                                                                                      @"overrideAlert": @"1",
+                                                                                      @"host": self,
+    }];
+    request[@"CMD_CODE"] = @"getListBook";
+    [[LTRequest sharedInstance] didRequestInfo:request withCache:^(NSString *cacheString) {
+        
+    } andCompletion:^(NSString *responseString, NSString *errorCode, NSError *error, BOOL isValidated, NSDictionary *header) {
+        NSDictionary * dict = [responseString objectFromJSONString];
+    
+        if ([[dict getValueFromKey:@"error_code"] isEqualToString:@"0"]) {
+            NSDictionary * dict = [responseString objectFromJSONString][@"result"];
+            totalPage = [dict[@"total_page"] intValue] ;
+            if (!isLoadMore) {
+                [dataList removeAllObjects];
+            }
+            
+            [dataList addObjectsFromArray:dict[@"data"]];
+            
+            [collectionView reloadData];
+        } else {
+            [self showToast:[[dict getValueFromKey:@"error_msg"] isEqualToString:@""] ? @"Lỗi xảy ra, mời bạn thử lại" : [dict getValueFromKey:@"error_msg"] andPos:0];
+        }
+    }];
+}
+
+- (void)didRequestChapter {
+    NSMutableDictionary * request = [[NSMutableDictionary alloc] initWithDictionary:@{@"session": Information.token,
+                                                                                      @"book_type": @(0),
+                                                                                      @"price": @(0), @"sorting": @(1),
+                                                                                      @"overrideAlert": @"1",
+    }];
+    
+    request[@"id"] = config[@"id"];
+    request[@"CMD_CODE"] = @"getListChapOfStory";
+
+    [[LTRequest sharedInstance] didRequestInfo:request withCache:^(NSString *cacheString) {
+        
+    } andCompletion:^(NSString *responseString, NSString *errorCode, NSError *error, BOOL isValidated, NSDictionary *header) {
+        NSDictionary * dict = [responseString objectFromJSONString];
+
+        if ([[dict getValueFromKey:@"error_code"] isEqualToString:@"0"]) {
+            NSArray * dict = [responseString objectFromJSONString][@"result"];
+            
+            [chapList removeAllObjects];
+            
+            [chapList addObjectsFromArray: dict];
+            
+            [collectionView reloadData];
+        } else {
+            [self showToast:[[dict getValueFromKey:@"error_msg"] isEqualToString:@""] ? @"Lỗi xảy ra, mời bạn thử lại" : [dict getValueFromKey:@"error_msg"] andPos:0];
+        }
+    }];
+}
+
+- (void)didRequestContent {
+    NSMutableDictionary * request = [[NSMutableDictionary alloc] initWithDictionary:@{@"session": Information.token,
+                                                                                      @"overrideAlert": @"1",
+    }];
+    
+    request[@"id"] = config[@"id"];
+    request[@"CMD_CODE"] = @"getBookContent";
+
+    [[LTRequest sharedInstance] didRequestInfo:request withCache:^(NSString *cacheString) {
+        
+    } andCompletion:^(NSString *responseString, NSString *errorCode, NSError *error, BOOL isValidated, NSDictionary *header) {
+        NSDictionary * dict = [responseString objectFromJSONString];
+
+        if ([[dict getValueFromKey:@"error_code"] isEqualToString:@"0"]) {
+            NSDictionary * dict = [responseString objectFromJSONString][@"result"];
+
+            NSMutableDictionary * information = [[NSMutableDictionary alloc] initWithDictionary:config];
+            
+            information[@"stream_url"] = [dict getValueFromKey:@"file_url"];
+
+            [self didStartPlayWith:@"" andInfo:information];
+            
+        } else {
+            [self showToast:[[dict getValueFromKey:@"error_msg"] isEqualToString:@""] ? @"Lỗi xảy ra, mời bạn thử lại" : [dict getValueFromKey:@"error_msg"] andPos:0];
+        }
+    }];
+}
+
+#pragma Collection
+
+
+- (NSInteger)collectionView:(UICollectionView *)view numberOfItemsInSection:(NSInteger)section
+{
+    return section == 1 ? dataList.count : chapList.count;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    UICollectionViewCell *cell = [cv dequeueReusableCellWithReuseIdentifier:indexPath.section == 0 ? @"TG_Book_Chap_Cell" : @"TG_Map_Cell" forIndexPath:indexPath];
+    
+    if (indexPath.section == 0) {
+        NSDictionary * chap = chapList[indexPath.item];
+        
+        ((UILabel*)[self withView:cell tag:1]).text = [chap getValueFromKey:@"name"];
+        
+        ((UILabel*)[self withView:cell tag:2]).text = [NSString stringWithFormat:@"%@ chữ Cập nhật %@", [chap getValueFromKey:@"total_character"], [chap getValueFromKey:@"publish_time"]];
+    }
+    
+    if (indexPath.section == 1) {
+        NSDictionary * book = dataList[indexPath.item];
+        
+        ((UILabel*)[self withView:cell tag:112]).text = [book getValueFromKey:@"name"];
+        
+        ((UILabel*)[self withView:cell tag:13]).text = ((NSArray*)book[@"author"]).count > 1 ? @"Nhiều tác giả" : book[@"author"][0][@"name"];
+        
+        [((UIImageView*)[self withView:cell tag:11]) imageUrlWithUrl:[book getValueFromKey:@"avatar"]];
+        
+        ((UIImageView*)[self withView:cell tag:999]).hidden = ![[book getValueFromKey:@"book_type"] isEqualToString:@"3"];
+    }
+    
+    return cell;
+}
+
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+    return 2;
+}
+
+- (CGSize)collectionView:(UICollectionView *)_collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    return indexPath.section == 1 ? CGSizeMake((screenWidth1 / (IS_IPAD ? 5 : 3)) - 15, ((screenWidth1 / (IS_IPAD ? 5 : 3)) - 15) * 1.72) : CGSizeMake(_collectionView.frame.size.width, 50);
+}
+
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
+{
+    return UIEdgeInsetsMake(4, 4, 4, 4);
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
+{
+    return 0.0;
+}
+
+- (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumInteritemSpacingForSectionAtIndex:(NSInteger)section
+{
+    return 10.0;
+}
+
+- (void)collectionView:(UICollectionView *)_collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 0) {
+        NSDictionary * chap = chapList[indexPath.item];
+        config = chap;
+        [self didRequestContent];
+    }
+    
+    if (indexPath.section == 1) {
+        NSDictionary * book = dataList[indexPath.item];
+        if ([[book getValueFromKey:@"book_type"] isEqualToString:@"3"]) {
+            config = book;
+            [self didRequestContent];
+        } else {
+            [self goDown];
+            Book_Detail_ViewController * detail = [Book_Detail_ViewController new];
+            NSMutableDictionary * information = [[NSMutableDictionary alloc] initWithDictionary:book];
+            information[@"url"] = @{@"CMD_CODE": @"getListBook", @"book_type": @(0), @"price": @(0), @"sorting": @(1)};
+            detail.config = information;
+            [[self CENTER] pushViewController:detail animated:YES];
+        }
+    }
+}
+
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
+    UIView * view = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"Book_Detail_Title" forIndexPath:indexPath];
+    
+    ((UILabel*)[self withView:view tag:1]).text = indexPath.section == 0 ? @"Danh sách chương" : @"Có thể bạn thích";
+    
+    return view;
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
+    return CGSizeMake(collectionView.frame.size.width, 44);
+}
+
+
+- (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.section == 2) {
+        if (pageIndex == 1) {
+            return;
+        }
+        
+        if (indexPath.item == dataList.count - 1) {
+            if(pageIndex <= totalPage) {
+                isLoadMore = YES;
+                [self didRequestData];
+            }
+        }
+    }
 }
 
 - (void)didReceiveMemoryWarning

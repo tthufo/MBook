@@ -198,7 +198,7 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
                                                              ])
             request.addEntries(from: self.config["url"] as! [AnyHashable : Any])
             request["id"] = self.config.getValueFromKey("id")
-        request["CMD_CODE"] = "getListChapOfStory"
+            request["CMD_CODE"] = "getListChapOfStory"
          LTRequest.sharedInstance()?.didRequestInfo((request as! [AnyHashable : Any]), withCache: { (cacheString) in
          }, andCompletion: { (response, errorCode, error, isValid, object) in
              self.refreshControl.endRefreshing()
@@ -477,7 +477,7 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
               return
             }
           
-            if indexPath.row == dataList.count - 1 {
+            if indexPath.item == dataList.count - 1 {
               if self.pageIndex <= self.totalPage {
                   self.isLoadMore = true
                   self.didRequestData(isShow: false)
