@@ -60,7 +60,7 @@
     
     [refreshControl addTarget:self action:@selector(didReloadData) forControlEvents:UIControlEventValueChanged];
     
-    titleLabel.text = [config getValueFromKey:@"title"];
+//    titleLabel.text = [config getValueFromKey:@"title"];
     
     [self didRequestData:YES];
 }

@@ -28,7 +28,7 @@
                                 <constraint firstAttribute="height" constant="21" id="L85-qq-qNP"/>
                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="79" id="cTv-9P-rzp"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>

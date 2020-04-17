@@ -22,15 +22,21 @@
       {
           [self didSuperEmbed];
 
-          [self didEmbed];
+          if([self isParallax])
+          {
+              [self didEmbed];
+          }
           
-          if([self isFobidden])
+          if([self isReader])
           {
               [self didSubEmbed];
           }
       }
 
-      [self didEmbed:self];
+      if([self isParallax])
+      {
+        [self didEmbed:self];
+      }
     }
     
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];

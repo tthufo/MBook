@@ -611,9 +611,16 @@ UIBackgroundTaskIdentifier bgTask;
     return [[self PLAYER].playerView isPlaying];
 }
 
-- (BOOL)isFobidden
+- (BOOL)isReader
 {
     return [self isKindOfClass:[Reader_ViewController class]];
+}
+
+- (BOOL)isParallax
+{
+    return ![self isKindOfClass:[Book_Detail_ViewController class]]
+    && ![self isKindOfClass:[Author_Detail_ViewController class]]
+    && ![self isKindOfClass:[Event_Detail_ViewController class]];
 }
 
 //- (void)startPlayingIpod:(NSURL*)url andInfo:(NSDictionary*)info

@@ -254,62 +254,6 @@ extension UIImage {
     }
 }
 
-//extension UIView {
-//    func topRadius() {
-//        if #available(iOS 11.0, *){
-//            self.clipsToBounds = false
-//            self.layer.cornerRadius = 8
-//            self.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner]
-//        }else{
-//            let rectShape = CAShapeLayer()
-//            rectShape.bounds = self.frame
-//            rectShape.position = self.center
-//            rectShape.path = UIBezierPath(roundedRect: self.bounds, byRoundingCorners: [.topLeft , .topRight], cornerRadii: CGSize(width: 8, height: 8)).cgPath
-//            self.layer.mask = rectShape
-//        }
-//    }
-//
-//    func image() -> UIImage {
-//        UIGraphicsBeginImageContextWithOptions(bounds.size, isOpaque, 0)
-//        guard let context = UIGraphicsGetCurrentContext() else {
-//            return UIImage()
-//        }
-//        layer.render(in: context)
-//        let image = UIGraphicsGetImageFromCurrentImageContext()
-//        UIGraphicsEndImageContext()
-//        return image!
-//    }
-//
-//    var parentViewController: UIViewController? {
-//        var parentResponder: UIResponder? = self
-//        while parentResponder != nil {
-//            parentResponder = parentResponder!.next
-//            if let viewController = parentResponder as? UIViewController {
-//                return viewController
-//            }
-//        }
-//        return nil
-//    }
-//
-//    var heightConstaint: NSLayoutConstraint? {
-//        get {
-//            return constraints.first(where: {
-//                $0.firstAttribute == .height && $0.relation == .equal
-//            })
-//        }
-//        set { setNeedsLayout() }
-//    }
-//
-//    var widthConstaint: NSLayoutConstraint? {
-//        get {
-//            return constraints.first(where: {
-//                $0.firstAttribute == .width && $0.relation == .equal
-//            })
-//        }
-//        set { setNeedsLayout() }
-//    }
-//}
-
 extension UITapGestureRecognizer {
     
     func didTapAttributedTextInLabel(label: UILabel, inRange targetRange: NSRange) -> Bool {
@@ -500,7 +444,7 @@ extension UIViewController {
         return ""
     }
     
-    func didRequestUrl(info: NSDictionary) {
+    func didRequestMP3Link(info: NSDictionary) {
          let request = NSMutableDictionary.init(dictionary: [
                                                              "session":Information.token ?? "",
                                                              "overrideAlert":"1",
@@ -521,10 +465,43 @@ extension UIViewController {
             information["stream_url"] = (result["result"] as! NSDictionary).getValueFromKey("file_url")
              
             self.startPlaying("", andInfo: (information as! [AnyHashable : Any]))
-             
          })
      }
-     
+    
+//    func yourFunctionName(isBook: Bool, finished: (Bool) -> ()) {
+    func didRequestUrl(info: NSDictionary) {
+        let request = NSMutableDictionary.init(dictionary: [
+                                                            "session":Information.token ?? "",
+                                                            "overrideAlert":"1",
+                                                            ])
+        request["CMD_CODE"] = "getPackageInfo"
+        LTRequest.sharedInstance()?.didRequestInfo((request as! [AnyHashable : Any]), withCache: { (cacheString) in
+        }, andCompletion: { (response, errorCode, error, isValid, object) in
+            let result = response?.dictionize() ?? [:]
+            
+            if result.getValueFromKey("error_code") != "0" || result["result"] is NSNull {
+                self.showToast(response?.dictionize().getValueFromKey("error_msg") == "" ? "Lỗi xảy ra, mời bạn thử lại" : response?.dictionize().getValueFromKey("error_msg"), andPos: 0)
+                return
+            }
+            if !self.checkRegister(package: response?.dictionize()["result"] as! NSArray, type: "AUDIOBOOK") {
+                self.center()?.pushViewController(Package_ViewController.init(), animated: true)
+            } else {
+                self.didRequestMP3Link(info: info)
+            }
+        })
+    }
+    
+    func checkRegister(package: NSArray, type: String) -> Bool {
+        var isReg = false
+        for dict in package {
+            if (dict as! NSDictionary).getValueFromKey("status") == "1"
+                && (dict as! NSDictionary).getValueFromKey("package_code") == type {
+                isReg = true
+                break
+            }
+        }
+        return isReg
+    }
 }
 
 extension UITableView {

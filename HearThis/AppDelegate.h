@@ -79,7 +79,9 @@
 
 - (BOOL)activeState;
 
-- (BOOL)isFobidden;
+- (BOOL)isReader;
+
+- (BOOL)isParallax;
 
 //- (void)startPlayingIpod:(NSURL*)url andInfo:(NSDictionary*)info;
 //

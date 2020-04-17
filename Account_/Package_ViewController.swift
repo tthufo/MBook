@@ -10,7 +10,10 @@ import UIKit
 
 import MarqueeLabel
 
-class Package_ViewController: UIViewController {
+import MessageUI
+
+
+class Package_ViewController: UIViewController, MFMessageComposeViewControllerDelegate {
                 
     let refreshControl = UIRefreshControl()
 
@@ -85,21 +88,35 @@ extension Package_ViewController: UITableViewDataSource, UITableViewDelegate {
         
         let background = self.withView(cell, tag: 2) as! UIImageView
         
-//        background.image = UIImage.init(named: "trans")
-        
-//        title.text = data["info"] as? String
-        
-        title.text = "%@ %@".format(parameters: ((data["name"] as? String)!), ((data["price"] as? String)!))
-        
-        title.font = UIFont.boldSystemFont(ofSize: 15)
-        
-        title.textColor = UIColor.white
+        if data.getValueFromKey("status") == "1" {
+            background.image = UIImage.init(named: "trans")
+            
+            title.text = data["info"] as? String
+        } else {
+            title.text = "%@ %@".format(parameters: ((data["name"] as? String)!), ((data["price"] as? String)!))
+                   
+            title.font = UIFont.boldSystemFont(ofSize: 15)
+           
+            title.textColor = UIColor.white
+        }
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
+        let data = dataList![indexPath.row] as! NSDictionary
+        print(data)
+        if (MFMessageComposeViewController.canSendText()) {
+            let controller = MFMessageComposeViewController()
+            controller.body = data.getValueFromKey("reg_keyword")
+            controller.recipients = [data.getValueFromKey("reg_shortcode")]
+            controller.messageComposeDelegate = self
+            self.present(controller, animated: true, completion: nil)
+        }
+    }
+    
+    func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
+        self.dismiss(animated: true, completion: nil)
     }
 }

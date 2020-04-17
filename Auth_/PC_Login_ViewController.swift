@@ -8,9 +8,10 @@
 
 import UIKit
 import MarqueeLabel
+import MessageUI
 
-class PC_Login_ViewController: UIViewController, UITextFieldDelegate {
- 
+class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageComposeViewControllerDelegate {
+  
     @IBOutlet var logo: UIImageView!
     
     @IBOutlet var bg: UIImageView!
@@ -52,7 +53,7 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate {
 
         isCheck = false
         
-        self.setUp()
+//        self.setUp()
         
         self.view.action(forTouch: [:]) { (obj) in
             self.view.endEditing(true)
@@ -69,19 +70,6 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate {
         bottom.text = "MEBOOK © 2020 - Ver %@".format(parameters: appVersion!)
         
         getPhoneNumber()
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-//        let gradientLayer:CAGradientLayer = CAGradientLayer()
-//        gradientLayer.frame = submit.bounds
-//        gradientLayer.colors =
-//            [UIColor.init(red: 0/255, green: 188/255, blue: 62/255, alpha: 1).cgColor , UIColor.yellow.cgColor]
-//        gradientLayer.startPoint = CGPoint.zero
-//        gradientLayer.endPoint = CGPoint(x: 1.0, y: 1.0)
-//        let sublayersCount = submit.layer.sublayers?.count ?? 0
-//        submit.layer.insertSublayer(gradientLayer, at: UInt32(sublayersCount))
-//        submit.layer.layoutSublayers()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -121,11 +109,24 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate {
     func getPhoneNumber() {
         LTRequest.sharedInstance()?.didRequestInfo(["absoluteLink":"http://mebook.tgphim.vn/header.php/", "overrideError":"1"], withCache: { (cache) in
         }, andCompletion: { (response, errorCode, error, isValid, object) in
-            print("--->", object);
+            
+            let hpple = TFHpple.init(htmlData: response!.data(using: .utf8))
+            
+            let element = hpple?.search(withXPathQuery: "//i[@class='desktop']")
+            
+            if let content = element![0] as? TFHppleElement {
+                let phoneNumber = content.content.replacingOccurrences(of: "Xin chào: ", with: "")
+                
+                if Int(phoneNumber) == nil {
+                    self.setUp(phoneNumber: "")
+                } else {
+                    self.setUp(phoneNumber: phoneNumber)
+                }
+            }
         })
     }
     
-    func setUp() {
+    func setUp(phoneNumber: Any) {
         let logged = Information.token != nil && Information.token != ""
                 
         let bbgg = Information.bbgg != nil && Information.bbgg != ""
@@ -178,8 +179,8 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate {
                                     self.submit.isEnabled = self.uName.text?.count != 0 && self.pass.text?.count != 0
                                     self.submit.alpha = self.uName.text?.count != 0 && self.pass.text?.count != 0 ? 1 : 0.5
                                     self.sumitText.alpha = self.uName.text?.count != 0 && self.pass.text?.count != 0 ? 1 : 0.5
-                                    self.didPressSubmit()
                                 }
+                                self.didPressSubmit(phoneNumber: phoneNumber as! String)
                                 self.setUpLogin()
                             }
                             return
@@ -204,7 +205,6 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate {
 
                         Information.saveToken()
                         
-                            
                             Information.check = (dict! as NSDictionary).getValueFromKey("show") == "0" ? "0" : "1"
 
                             if Information.check == "1" {
@@ -214,12 +214,6 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate {
                             self.logo.alpha = 1
                             
                             print(Information.check)
-                        
-//                            if Information.userInfo?.getValueFromKey("count_province") == "1" {
-//                                self.navigationController?.pushViewController(PC_Station_ViewController.init(), animated: false)
-//                            } else {
-//                                self.navigationController?.pushViewController(PC_Map_ViewController.init(), animated: false)
-//                            }
                         } else {
                         
                         Information.check = (dict! as NSDictionary).getValueFromKey("show") == "0" ? "0" : "1"
@@ -245,8 +239,8 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate {
                                     self.submit.isEnabled = self.uName.text?.count != 0 && self.pass.text?.count != 0
                                     self.submit.alpha = self.uName.text?.count != 0 && self.pass.text?.count != 0 ? 1 : 0.5
                                     self.sumitText.alpha = self.uName.text?.count != 0 && self.pass.text?.count != 0 ? 1 : 0.5
-                                    self.didPressSubmit()
                                 }
+                                self.didPressSubmit(phoneNumber: phoneNumber as! String)
                                 self.setUpLogin()
                             }
                         }
@@ -293,18 +287,35 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func didPressRegister() {
         self.view.endEditing(true)
-        let forgot = PC_Forgot_ViewController.init();
-        forgot.typing = "register"
-        self.navigationController?.pushViewController(forgot, animated: true)
+        if (MFMessageComposeViewController.canSendText()) {
+            let controller = MFMessageComposeViewController()
+            controller.body = "EB"
+            controller.recipients = ["1352"]
+            controller.messageComposeDelegate = self
+            self.present(controller, animated: true, completion: nil)
+        }
+        
+//        let forgot = PC_Forgot_ViewController.init();
+//        forgot.typing = "register"
+//        self.navigationController?.pushViewController(forgot, animated: true)
     }
     
-    @IBAction func didPressSubmit() {
+    @IBAction func didPressSubmit(phoneNumber: Any) {
         self.view.endEditing(true)
-        
+        var is3G = false
+        if phoneNumber is UIButton {
+            is3G = false
+        } else if phoneNumber is String {
+            if (phoneNumber as! String) == "" {
+                is3G = false
+            } else {
+                is3G = true
+            }
+        }
         LTRequest.sharedInstance()?.didRequestInfo(["CMD_CODE":"login",
                                                     "username":(uName.text!) as Any,
-                                                    "password":pass.text as Any,
-                                                    "login_type": self.connectionType() as Any,
+                                                    "password": is3G ? "" : pass.text as Any,
+                                                    "login_type": is3G ? "3G" : "WIFI", // self.connectionType() as Any,
                                                     "push_token": FirePush.shareInstance()?.deviceToken() ?? "",
                                                     "platform":"IOS",
                                                     "overrideAlert":"1",
@@ -331,8 +342,43 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate {
 
             Information.saveToken()
             
-            (UIApplication.shared.delegate as! AppDelegate).changeRoot(false)
+//            self.didRequestPackage()   CHECK PACKAGE
+            
+            (UIApplication.shared.delegate as! AppDelegate).changeRoot(false) //CHECK PACKAGE
         })
+    }
+    
+    func didRequestPackage() {
+        LTRequest.sharedInstance()?.didRequestInfo(["CMD_CODE":"getPackageInfo",
+                                                    "session":Information.token ?? "",
+                                                    "overrideAlert":"1",
+                                                    "overrideLoading":"1",
+                                                    "host":self], withCache: { (cacheString) in
+       }, andCompletion: { (response, errorCode, error, isValid, object) in
+            let result = response?.dictionize() ?? [:]
+                                           
+            if result.getValueFromKey("error_code") != "0" || result["result"] is NSNull {
+               self.showToast(response?.dictionize().getValueFromKey("error_msg") == "" ? "Lỗi xảy ra, mời bạn thử lại" : response?.dictionize().getValueFromKey("error_msg"), andPos: 0)
+               return
+            }
+        
+            if !self.checkRegister(package: response?.dictionize()["result"] as! NSArray) {
+                self.showToast("Xin chào " + self.uName.text! + ", Quý khách chưa đăng ký dịch vụ hãy bấm \"Đăng ký\" để sử dụng dịch vụ", andPos: 0)
+            } else {
+                (UIApplication.shared.delegate as! AppDelegate).changeRoot(false)
+            }
+       })
+    }
+    
+    func checkRegister(package: NSArray) -> Bool {
+        var isReg = false
+        for dict in package {
+            if (dict as! NSDictionary).getValueFromKey("status") == "1" {
+                isReg = true
+                break
+            }
+        }
+        return isReg
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -348,5 +394,9 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate {
     @objc func textIsChanging(_ textField:UITextField) {
         submit.isEnabled = uName.text?.count != 0 && pass.text?.count != 0
         submit.alpha = uName.text?.count != 0 && pass.text?.count != 0 ? 1 : 0.5
+    }
+    
+    func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
+        self.dismiss(animated: true, completion: nil)
     }
 }

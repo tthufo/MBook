@@ -93,6 +93,10 @@
 		FC7A98CF2444AC370038C226 /* TagFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7A98CE2444AC370038C226 /* TagFlowLayout.swift */; };
 		FC7A98D12444AD010038C226 /* Tag_Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC7A98D02444AD010038C226 /* Tag_Cell.xib */; };
 		FC7A98D32444B0420038C226 /* Tag_Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7A98D22444B0420038C226 /* Tag_Cell.swift */; };
+		FC7F32B4244A0731007429F7 /* TFHpple.m in Sources */ = {isa = PBXBuildFile; fileRef = FC7F32AF244A0730007429F7 /* TFHpple.m */; };
+		FC7F32B5244A0731007429F7 /* XPathQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = FC7F32B0244A0730007429F7 /* XPathQuery.m */; };
+		FC7F32B6244A0731007429F7 /* TFHppleElement.m in Sources */ = {isa = PBXBuildFile; fileRef = FC7F32B3244A0731007429F7 /* TFHppleElement.m */; };
+		FC7F32BA244A095E007429F7 /* libxml2.2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = FC7F32B9244A095E007429F7 /* libxml2.2.tbd */; };
 		FC91B731243120F400AA6671 /* GUISlider.m in Sources */ = {isa = PBXBuildFile; fileRef = FC91B72E243120F400AA6671 /* GUISlider.m */; };
 		FC91B732243120F400AA6671 /* GUIPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC91B72F243120F400AA6671 /* GUIPlayerView.m */; };
 		FC91B7352431217F00AA6671 /* XMLReader.m in Sources */ = {isa = PBXBuildFile; fileRef = FC91B7332431217F00AA6671 /* XMLReader.m */; };
@@ -262,6 +266,14 @@
 		FC7A98CE2444AC370038C226 /* TagFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagFlowLayout.swift; sourceTree = "<group>"; };
 		FC7A98D02444AD010038C226 /* Tag_Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Tag_Cell.xib; sourceTree = "<group>"; };
 		FC7A98D22444B0420038C226 /* Tag_Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag_Cell.swift; sourceTree = "<group>"; };
+		FC7F32AE244A0730007429F7 /* TFHppleElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFHppleElement.h; sourceTree = "<group>"; };
+		FC7F32AF244A0730007429F7 /* TFHpple.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFHpple.m; sourceTree = "<group>"; };
+		FC7F32B0244A0730007429F7 /* XPathQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XPathQuery.m; sourceTree = "<group>"; };
+		FC7F32B1244A0731007429F7 /* TFHpple.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFHpple.h; sourceTree = "<group>"; };
+		FC7F32B2244A0731007429F7 /* XPathQuery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XPathQuery.h; sourceTree = "<group>"; };
+		FC7F32B3244A0731007429F7 /* TFHppleElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFHppleElement.m; sourceTree = "<group>"; };
+		FC7F32B7244A093B007429F7 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
+		FC7F32B9244A095E007429F7 /* libxml2.2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.2.tbd; path = usr/lib/libxml2.2.tbd; sourceTree = SDKROOT; };
 		FC91B72D243120F400AA6671 /* GUIPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUIPlayerView.h; sourceTree = SOURCE_ROOT; };
 		FC91B72E243120F400AA6671 /* GUISlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GUISlider.m; sourceTree = SOURCE_ROOT; };
 		FC91B72F243120F400AA6671 /* GUIPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GUIPlayerView.m; sourceTree = SOURCE_ROOT; };
@@ -340,6 +352,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC7F32BA244A095E007429F7 /* libxml2.2.tbd in Frameworks */,
 				FCD0E59F1DA8F93500DF2ABF /* libz.tbd in Frameworks */,
 				1C4D84C1CEDC423884030E84 /* libPods-HearThis.a in Frameworks */,
 			);
@@ -351,6 +364,8 @@
 		3CCC56E878539E5641BBEC2F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FC7F32B9244A095E007429F7 /* libxml2.2.tbd */,
+				FC7F32B7244A093B007429F7 /* libxml2.tbd */,
 				FCD0E59E1DA8F93500DF2ABF /* libz.tbd */,
 				0EB075356C7261DC57790B0A /* libPods-HearThis.a */,
 			);
@@ -382,6 +397,7 @@
 		FC1AD7C21DA40CA8002BA7EC = {
 			isa = PBXGroup;
 			children = (
+				FC7F32AD244A0724007429F7 /* Parser_ */,
 				FCD979862447692400970A4E /* Reader_ */,
 				FC7A98C92444ABB20038C226 /* Search_ */,
 				FCB238D624435BA80034B40B /* Publisher_ */,
@@ -608,6 +624,19 @@
 				FCD381862444D78E004D78C9 /* CustomFlowLayou.m */,
 			);
 			path = Search_;
+			sourceTree = "<group>";
+		};
+		FC7F32AD244A0724007429F7 /* Parser_ */ = {
+			isa = PBXGroup;
+			children = (
+				FC7F32B1244A0731007429F7 /* TFHpple.h */,
+				FC7F32AF244A0730007429F7 /* TFHpple.m */,
+				FC7F32AE244A0730007429F7 /* TFHppleElement.h */,
+				FC7F32B3244A0731007429F7 /* TFHppleElement.m */,
+				FC7F32B2244A0731007429F7 /* XPathQuery.h */,
+				FC7F32B0244A0730007429F7 /* XPathQuery.m */,
+			);
+			path = Parser_;
 			sourceTree = "<group>";
 		};
 		FC91B72C243120E400AA6671 /* MPlayer_ */ = {
@@ -966,6 +995,7 @@
 				FC640A851DAAAD8C00DAEF55 /* Item.m in Sources */,
 				FC0A8FB7243779F0001A75AF /* Marcro.swift in Sources */,
 				FCAD57F0243DB7E400101A47 /* TG_Room_Cell.swift in Sources */,
+				FC7F32B6244A0731007429F7 /* TFHppleElement.m in Sources */,
 				FC7550E31DAC85DE007992DF /* HT_Feed_ViewController.m in Sources */,
 				FCE38C4A243E4B6C003864BC /* OwnTableView.swift in Sources */,
 				FC640A861DAAAD8C00DAEF55 /* List.m in Sources */,
@@ -975,6 +1005,8 @@
 				FCC965AE1DA5FD790025971E /* TT_Panel_ViewController.m in Sources */,
 				FC23EB95243A4C8F003E5E1A /* List_Book_ViewController.swift in Sources */,
 				FC130B942446353100D64012 /* Book_Inner_ViewController.swift in Sources */,
+				FC7F32B5244A0731007429F7 /* XPathQuery.m in Sources */,
+				FC7F32B4244A0731007429F7 /* TFHpple.m in Sources */,
 				FCB3CD691DA4DDE9002FABDD /* HT_Genres_ViewController.m in Sources */,
 				FCB3CD6D1DA4DEC9002FABDD /* UIViewController+Additional.m in Sources */,
 				FC640A911DAAAE2800DAEF55 /* TT_Synced_ViewController.m in Sources */,
@@ -1143,6 +1175,45 @@
 					"$(PROJECT_DIR)",
 				);
 				GCC_PREFIX_HEADER = HearThis/PrefixHeader.pch;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/AFNetworking\"",
+					"\"${PODS_ROOT}/Headers/Public/AVHexColor\"",
+					"\"${PODS_ROOT}/Headers/Public/AllPod\"",
+					"\"${PODS_ROOT}/Headers/Public/CRToast\"",
+					"\"${PODS_ROOT}/Headers/Public/FSPagerView\"",
+					"\"${PODS_ROOT}/Headers/Public/FireBasePod\"",
+					"\"${PODS_ROOT}/Headers/Public/Firebase\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseAnalyticsInterop\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseCore\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseCoreDiagnostics\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseCoreDiagnosticsInterop\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseInstallations\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseInstanceID\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseMessaging\"",
+					"\"${PODS_ROOT}/Headers/Public/GoogleDataTransport\"",
+					"\"${PODS_ROOT}/Headers/Public/GoogleDataTransportCCTSupport\"",
+					"\"${PODS_ROOT}/Headers/Public/GoogleUtilities\"",
+					"\"${PODS_ROOT}/Headers/Public/IAPHelper\"",
+					"\"${PODS_ROOT}/Headers/Public/JASidePanels\"",
+					"\"${PODS_ROOT}/Headers/Public/JSONKit-NoWarning\"",
+					"\"${PODS_ROOT}/Headers/Public/MBCircularProgressBar\"",
+					"\"${PODS_ROOT}/Headers/Public/MYNStickyFlowLayout\"",
+					"\"${PODS_ROOT}/Headers/Public/NSDate+TimeAgo\"",
+					"\"${PODS_ROOT}/Headers/Public/PromisesObjC\"",
+					"\"${PODS_ROOT}/Headers/Public/Protobuf\"",
+					"\"${PODS_ROOT}/Headers/Public/Reachability\"",
+					"\"${PODS_ROOT}/Headers/Public/SDWebImage\"",
+					"\"${PODS_ROOT}/Headers/Public/SVProgressHUD\"",
+					"\"${PODS_ROOT}/Headers/Public/Toast\"",
+					"\"${PODS_ROOT}/Headers/Public/XCDYouTubeKit\"",
+					"\"${PODS_ROOT}/Headers/Public/nanopb\"",
+					"$(inherited)",
+					"${PODS_ROOT}/Firebase/CoreOnly/Sources",
+					"\"${PODS_TARGET_SRCROOT}/Sources/FBLPromises/include\"",
+					"$(SDKROOT)/usr/include/libxml2",
+				);
 				INFOPLIST_FILE = HearThis/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1175,6 +1246,42 @@
 				INFOPLIST_FILE = HearThis/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/AFNetworking\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/AVHexColor\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/AllPod\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/CRToast\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/ExpandableLabel\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FSPagerView\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FireBasePod\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseCore\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseCoreDiagnostics\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseInstallations\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseInstanceID\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseMessaging\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/GoogleDataTransport\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/GoogleDataTransportCCTSupport\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/GoogleUtilities\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/IAPHelper\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/JASidePanels\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/JSONKit-NoWarning\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MBCircularProgressBar\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MYNStickyFlowLayout\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MarqueeLabel\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/NSDate+TimeAgo\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/ParallaxHeader\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/PromisesObjC\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Protobuf\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Reachability\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/ReachabilitySwift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SDWebImage\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SVProgressHUD\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Toast\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/XCDYouTubeKit\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/nanopb\"",
+					"$(SDKROOT)/usr/include/libxml2",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.innovatube.shoubotenken;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "d4f4ddc3-6615-47d3-9900-2f2822cb0a06";
