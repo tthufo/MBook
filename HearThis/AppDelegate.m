@@ -524,7 +524,7 @@ UIBackgroundTaskIdentifier bgTask;
         
         rect.origin.y = IS_IPAD ? 0 : [self isIphoneX] ? 40 : 0;
         
-        rect.size.height = screenHeight1 - ( IS_IPAD ? 0 : [self isIphoneX] ? 40 : 0);
+        rect.size.height = screenHeight1 - (IS_IPAD ? 0 : [self isIphoneX] ? 40 : 0);
         
         [self PLAYER].view.backgroundColor = [UIColor whiteColor];
 
@@ -642,6 +642,10 @@ UIBackgroundTaskIdentifier bgTask;
 {
     [[self PLAYER] didStartPlayWith:vID andInfo:info];
     
+    
+    if ([self isFullEmbed]) {
+        return;
+    }
     [[self ROOT] goUp];
 }
 

@@ -468,7 +468,7 @@ extension UIViewController {
          })
      }
     
-    func didRequestUrl(info: NSDictionary) {
+    @objc func didRequestUrl(info: NSDictionary) {
         let request = NSMutableDictionary.init(dictionary: [
                                                             "session":Information.token ?? "",
                                                             "overrideAlert":"1",
@@ -483,6 +483,9 @@ extension UIViewController {
                 return
             }
             if !self.checkRegister(package: response?.dictionize()["result"] as! NSArray, type: "AUDIOBOOK") {
+                if self.isFullEmbed() {
+                    self.goDown()
+                }
                 self.center()?.pushViewController(Package_ViewController.init(), animated: true)
             } else {
                 self.didRequestMP3Link(info: info)
@@ -491,7 +494,7 @@ extension UIViewController {
     }
     
     func checkRegister(package: NSArray, type: String) -> Bool {
-        var isReg = true //// dev test package
+        var isReg = true //// dev test package chane to false
         for dict in package {
             if (dict as! NSDictionary).getValueFromKey("status") == "1"
                 && (dict as! NSDictionary).getValueFromKey("package_code") == type {
@@ -587,7 +590,7 @@ extension UIView {
         return nil
     }
     
-    var heightConstaint: NSLayoutConstraint? {
+   @objc var heightConstaint: NSLayoutConstraint? {
         get {
             return constraints.first(where: {
                 $0.firstAttribute == .height && $0.relation == .equal
@@ -596,7 +599,7 @@ extension UIView {
         set { setNeedsLayout() }
     }
     
-    var widthConstaint: NSLayoutConstraint? {
+   @objc var widthConstaint: NSLayoutConstraint? {
         get {
             return constraints.first(where: {
                 $0.firstAttribute == .width && $0.relation == .equal

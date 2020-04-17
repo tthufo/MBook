@@ -22,9 +22,9 @@
         
     IBOutlet UICollectionView * collectionView;
 
-    IBOutlet UIView * controlView;
+    IBOutlet UIView * controlView, * controlViewIpad;
     
-    IBOutlet NSLayoutConstraint * topHeight;
+    IBOutlet NSLayoutConstraint * topHeight, * topHeightIpad;
     
     IBOutlet UIButton * play;
     
@@ -67,6 +67,8 @@
     
     topHeight.constant = screenWidth1 * 9 / 16;
     
+    topHeightIpad.constant = screenWidth1 * 9 / 16;
+
     if(![self getObject:@"settingOpt"])
     {
         [self addObject:@{@"repeat":@"2", @"shuffle":@"0"} andKey:@"settingOpt"];
@@ -287,9 +289,11 @@
 
 - (void)didStartPlayWith:(NSString*)vID andInfo:(NSDictionary*)info
 {
+//    topHeight.constant = screenWidth1 * 9 / 16;
+
     config = info;
     
-    uID = vID;
+    uID = [info getValueFromKey:@"id"];
     
     localUrl = @"";
     
@@ -302,10 +306,10 @@
     playingData[@"cover"] = setupData[@"img"];
     
     NSLog(@"%@", info);
-    
+        
     titleSong.text = info[@"name"];
     
-    ((UILabel*)[self playerInfo][@"title"]).text = info[@"title"];
+    ((UILabel*)[self playerInfo][@"title"]).text = info[@"name"];
     
     [((UIButton*)[self playerInfo][@"play"]) addTarget:self action:@selector(didPressPause:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -331,9 +335,9 @@
 //    [((UIButton*)[self playerInfo][@"edit"]) addTarget:self action:@selector(didPressEdit:) forControlEvents:UIControlEventTouchUpInside];
 //
 
-    [((UIView*)[self playerInfo][@"view"]) withBorder:@{@"Bcorner":@(2)}];
+    [((UIView*)[self playerInfo][@"view"]) withBorder:@{@"Bcorner":@(0)}];
     
-    ((UIView*)[self playerInfo][@"view"]).alpha = 0.89;
+    ((UIView*)[self playerInfo][@"view"]).alpha = 1;
     
 //    [((UIButton*)[self playerInfo][@"share"]) addTarget:self action:@selector(didPressClock:) forControlEvents:UIControlEventTouchUpInside];
 //
@@ -401,7 +405,11 @@
 {
     NSMutableDictionary * dict = [@{} mutableCopy];
     
-    UIView * cell = controlView;
+    controlView.alpha = !IS_IPAD;
+    
+    controlViewIpad.alpha = IS_IPAD;
+
+    UIView * cell = IS_IPAD ? controlViewIpad : controlView;
     
     NSArray * array = @[@"img", @"cover",@"slider",@"currentTime",@"remainTime",@"title",@"back",@"play",@"next",@"off",@"loading",@"sync",@"volume",@"share",@"random",@"repeat",@"line",@"view",@"list",@"edit",@"time"];
     
@@ -669,7 +677,7 @@
 
 - (void)didPlayNextOrPre:(BOOL)isNext
 {
-    if(dataList.count == 0)
+    if(chapList.count == 0)
     {
         [self showToast:@"Music list is empty, please try other song" andPos:0];
         
@@ -680,46 +688,46 @@
     
     BOOL found = NO;
     
-    switch (playState)
+//    switch (playState)
     {
-        case Search:
+//        case Search:
         {
-            for(NSDictionary* dict in dataList)
+            for(NSDictionary* dict in chapList)
             {
-                if([dict responseForKey:@"ipod"])
-                {
-                    if([[dict getValueFromKey:@"assetUrl"] isEqualToString:uID])
-                    {
-                        found = YES;
-                        
-                        nextIndexing = [dataList indexOfObject:dict] + (isNext ? 1 : -1);
-                        
-                        break;
-                    }
-                }
-                else
+//                if([dict responseForKey:@"ipod"])
+//                {
+//                    if([[dict getValueFromKey:@"assetUrl"] isEqualToString:uID])
+//                    {
+//                        found = YES;
+//
+//                        nextIndexing = [dataList indexOfObject:dict] + (isNext ? 1 : -1);
+//
+//                        break;
+//                    }
+//                }
+//                else
                 {
                     if([[dict getValueFromKey:@"id"] isEqualToString:uID])
                     {
                         found = YES;
                         
-                        nextIndexing = [dataList indexOfObject:dict] + (isNext ? 1 : -1);
+                        nextIndexing = [chapList indexOfObject:dict] + (isNext ? 1 : -1);
                         
                         break;
                     }
                 }
             }
         }
-            break;
-        default:
-            break;
+//            break;
+//        default:
+//            break;
     }
     
     if(found)
     {
         if(isNext)
         {
-            if(nextIndexing >= dataList.count)
+            if(nextIndexing >= chapList.count)
             {
                 nextIndexing = 0;
             }
@@ -728,7 +736,7 @@
         {
             if(nextIndexing < 0)
             {
-                nextIndexing = dataList.count - 1;
+                nextIndexing = chapList.count - 1;
             }
             else
             {
@@ -741,20 +749,22 @@
         nextIndexing = 0;
     }
     
+    [self didRequestUrlWithInfo:chapList[nextIndexing]];
+    
 //    if([self.playerView.options[@"shuffle"] isEqualToString:@"1"])
 //    {
 //        nextIndexing = RAND_FROM_TO(0, dataList.count -1);
 //    }
     
-    switch (playState)
+//    switch (playState)
     {
-        case Search:
+//        case Search:
         {
-            [self didStartPlayWith:[(NSDictionary*)dataList[nextIndexing] getValueFromKey: [(NSDictionary*)dataList[nextIndexing] responseForKey:@"ipod"] ? @"assetUrl" : @"id"] andInfo:(NSDictionary*)dataList[nextIndexing]];
+//            [self didStartPlayWith:[(NSDictionary*)dataList[nextIndexing] getValueFromKey: [(NSDictionary*)dataList[nextIndexing] responseForKey:@"ipod"] ? @"assetUrl" : @"id"] andInfo:(NSDictionary*)dataList[nextIndexing]];
         }
-            break;
-        default:
-            break;
+//            break;
+//        default:
+//            break;
     }
 }
 
@@ -893,6 +903,10 @@
 - (void)playerDidEndPlaying
 {
     [self playingState:NO];
+    
+    [self playNext];
+    
+    return;
     
     BOOL isIpod = [setupData responseForKey:@"ipod"];
     
