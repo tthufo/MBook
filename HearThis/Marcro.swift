@@ -468,7 +468,6 @@ extension UIViewController {
          })
      }
     
-//    func yourFunctionName(isBook: Bool, finished: (Bool) -> ()) {
     func didRequestUrl(info: NSDictionary) {
         let request = NSMutableDictionary.init(dictionary: [
                                                             "session":Information.token ?? "",
@@ -492,7 +491,7 @@ extension UIViewController {
     }
     
     func checkRegister(package: NSArray, type: String) -> Bool {
-        var isReg = false
+        var isReg = true //// dev test package
         for dict in package {
             if (dict as! NSDictionary).getValueFromKey("status") == "1"
                 && (dict as! NSDictionary).getValueFromKey("package_code") == type {

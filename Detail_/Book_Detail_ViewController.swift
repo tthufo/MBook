@@ -75,7 +75,7 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
         let read = self.withView(headerView, tag: 33) as! UIButton
         
         read.action(forTouch: [:]) { (obj) in
-            self.didRequestUrl()
+            self.didRequestPackage(book: self.config)
         }
         
         let title = self.withView(headerView, tag: 2) as! UILabel
@@ -254,12 +254,12 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
         })
     }
     
-    func didRequestUrl() {
+    func didRequestUrlBook(book: NSDictionary) {
         let request = NSMutableDictionary.init(dictionary: [
                                                             "session":Information.token ?? "",
                                                             "overrideAlert":"1",
                                                             ])
-           request["id"] = self.config.getValueFromKey("id")
+           request["id"] = book.getValueFromKey("id")
            request["CMD_CODE"] = "getBookContent"
         LTRequest.sharedInstance()?.didRequestInfo((request as! [AnyHashable : Any]), withCache: { (cacheString) in
         }, andCompletion: { (response, errorCode, error, isValid, object) in
@@ -272,7 +272,7 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
             
             let reader = Reader_ViewController.init()
             
-            let bookInfo = NSMutableDictionary.init(dictionary: self.config)
+            let bookInfo = NSMutableDictionary.init(dictionary: book)
             
             bookInfo["file_url"] = (result["result"] as! NSDictionary).getValueFromKey("file_url")
             
@@ -286,6 +286,28 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
             self.collectionView.contentInset = collectionViewInsets
         })
     }
+    
+    func didRequestPackage(book: NSDictionary) {
+           let request = NSMutableDictionary.init(dictionary: [
+                                                               "session":Information.token ?? "",
+                                                               "overrideAlert":"1",
+                                                               ])
+           request["CMD_CODE"] = "getPackageInfo"
+           LTRequest.sharedInstance()?.didRequestInfo((request as! [AnyHashable : Any]), withCache: { (cacheString) in
+           }, andCompletion: { (response, errorCode, error, isValid, object) in
+               let result = response?.dictionize() ?? [:]
+               
+               if result.getValueFromKey("error_code") != "0" || result["result"] is NSNull {
+                   self.showToast(response?.dictionize().getValueFromKey("error_msg") == "" ? "Lỗi xảy ra, mời bạn thử lại" : response?.dictionize().getValueFromKey("error_msg"), andPos: 0)
+                   return
+               }
+               if !self.checkRegister(package: response?.dictionize()["result"] as! NSArray, type: "EBOOK") {
+                   self.center()?.pushViewController(Package_ViewController.init(), animated: true)
+               } else {
+                   self.didRequestUrlBook(book: book)
+               }
+           })
+       }
     
     func filter(info: NSDictionary) -> NSArray {
         let keys = [["key": "category", "title": "Thể loại"],
@@ -455,7 +477,8 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
             })
         }
         if indexPath.section == 1 { //chapter
-            
+            let chap = chapList[indexPath.item] as! NSDictionary
+            self.didRequestPackage(book: chap)
         }
         if indexPath.section == 0 { //detail
             print(detailList[indexPath.item])
