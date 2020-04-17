@@ -68,7 +68,7 @@ class TG_Intro_ViewController: UIViewController {
                                                          
             self.refreshControl.endRefreshing()
                         
-            if (error != nil) || result.getValueFromKey("error_code") != "0" {
+            if (error != nil) || result.getValueFromKey("error_code") != "0" || result["result"] is NSNull {
                 self.showToast(response?.dictionize().getValueFromKey("error_msg") == "" ? "Lỗi xảy ra, mời bạn thử lại" : response?.dictionize().getValueFromKey("error_msg"), andPos: 0)
                 return
             }

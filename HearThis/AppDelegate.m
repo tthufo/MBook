@@ -242,16 +242,16 @@ UIBackgroundTaskIdentifier bgTask;
 - (void)didSuperEmbed
 {
     BOOL isMotion = [[self TOPVIEWCONTROLER] isKindOfClass:[UITabBarController class]];
-    
-    int loca = 0;
+        
+    int embed = [[self getValue:@"embed"] intValue];
     
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationFade];
     
     [UIView animateWithDuration:0.3 animations:^{
     
         CGRect rect = [self PLAYER].view.frame;
-        
-        rect.origin.y = screenHeight1 - h - (isMotion ? 50 : 0 + loca);
+                
+        rect.origin.y = screenHeight1 - (isMotion ? 115 : 65) - ( IS_IPAD ? 1 : [self isIphoneX] ? 35 : 0) - embed;
         
         rect.size.height = h;
 
@@ -432,7 +432,7 @@ UIBackgroundTaskIdentifier bgTask;
         
         CGRect rect = [self PLAYER].view.frame;
         
-        rect.origin.y = screenHeight1 - h - (isMotion ? 83 : 0);
+        rect.origin.y = screenHeight1; //- h - (isMotion ? 0 : 0);
         
         rect.size.height = h;
         
@@ -442,6 +442,8 @@ UIBackgroundTaskIdentifier bgTask;
         
     } completion:^(BOOL finished) {
         
+        [[self PLAYER].playerView pause];
+        [self PLAYER].playState = Pause;
     }];
 }
 
@@ -475,6 +477,8 @@ UIBackgroundTaskIdentifier bgTask;
     } completion:^(BOOL finished) {
         
         [self didEmbed];
+        
+        [self PLAYER].playState = Normal;
         
     }];
 }
@@ -518,15 +522,15 @@ UIBackgroundTaskIdentifier bgTask;
                 
         CGRect rect = [self PLAYER].view.frame;
         
-        rect.origin.y = 0;//25;
+        rect.origin.y = IS_IPAD ? 0 : [self isIphoneX] ? 40 : 0;
         
-        rect.size.height = screenHeight1 - 0;//15;
+        rect.size.height = screenHeight1 - ( IS_IPAD ? 0 : [self isIphoneX] ? 40 : 0);
         
         [self PLAYER].view.backgroundColor = [UIColor whiteColor];
 
         [self PLAYER].view.frame = rect;
 
-        [[self PLAYER].view withBorder:@{@"Bcorner":@(6)}];
+        [[self PLAYER].view withBorder:@{@"Bcorner":@(0)}];
         
         [self PLAYER].topView.alpha = 0;
         
@@ -545,7 +549,7 @@ UIBackgroundTaskIdentifier bgTask;
                 
         CGRect rect = [self PLAYER].view.frame;
 
-        rect.origin.y = screenHeight1 - ([[self TOPVIEWCONTROLER] isKindOfClass:[UITabBarController class]] ? 115 : 65) - ([self isIphoneX] ? 35 : 0) - embed;
+        rect.origin.y = screenHeight1 - ([[self TOPVIEWCONTROLER] isKindOfClass:[UITabBarController class]] ? 115 : 65) - ( IS_IPAD ? 1 : [self isIphoneX] ? 35 : 0) - embed;
 
         rect.size.height = 65;
         
@@ -553,7 +557,7 @@ UIBackgroundTaskIdentifier bgTask;
 
         [self PLAYER].view.frame = rect;
         
-        [[self PLAYER].view withBorder:@{@"Bcorner":@(3)}];
+        [[self PLAYER].view withBorder:@{@"Bcorner":@(0)}];
         
         [self PLAYER].topView.alpha = 1;
         

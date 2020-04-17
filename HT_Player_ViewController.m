@@ -65,6 +65,8 @@
 
     setupData = [@{} mutableCopy];
     
+    topHeight.constant = screenWidth1 * 9 / 16;
+    
     if(![self getObject:@"settingOpt"])
     {
         [self addObject:@{@"repeat":@"2", @"shuffle":@"0"} andKey:@"settingOpt"];
@@ -1094,7 +1096,7 @@
     } andCompletion:^(NSString *responseString, NSString *errorCode, NSError *error, BOOL isValidated, NSDictionary *header) {
         NSDictionary * dict = [responseString objectFromJSONString];
     
-        if ([[dict getValueFromKey:@"error_code"] isEqualToString:@"0"]) {
+        if ([[dict getValueFromKey:@"error_code"] isEqualToString:@"0"] || dict[@"result"] == [NSNull null] ) {
             NSDictionary * dict = [responseString objectFromJSONString][@"result"];
             totalPage = [dict[@"total_page"] intValue] ;
             if (!isLoadMore) {
@@ -1125,7 +1127,7 @@
     } andCompletion:^(NSString *responseString, NSString *errorCode, NSError *error, BOOL isValidated, NSDictionary *header) {
         NSDictionary * dict = [responseString objectFromJSONString];
 
-        if ([[dict getValueFromKey:@"error_code"] isEqualToString:@"0"]) {
+        if ([[dict getValueFromKey:@"error_code"] isEqualToString:@"0"] || dict[@"result"] == [NSNull null]) {
             NSArray * dict = [responseString objectFromJSONString][@"result"];
             
             [chapList removeAllObjects];
@@ -1152,7 +1154,7 @@
     } andCompletion:^(NSString *responseString, NSString *errorCode, NSError *error, BOOL isValidated, NSDictionary *header) {
         NSDictionary * dict = [responseString objectFromJSONString];
 
-        if ([[dict getValueFromKey:@"error_code"] isEqualToString:@"0"]) {
+        if ([[dict getValueFromKey:@"error_code"] isEqualToString:@"0"] || dict[@"result"] == [NSNull null]) {
             NSDictionary * dict = [responseString objectFromJSONString][@"result"];
 
             NSMutableDictionary * information = [[NSMutableDictionary alloc] initWithDictionary:config];

@@ -141,7 +141,7 @@ class Search_ViewController: UIViewController, UICollectionViewDataSource, UICol
            self.refreshControl.endRefreshing()
            let result = response?.dictionize() ?? [:]
            
-           if result.getValueFromKey("error_code") != "0" {
+           if result.getValueFromKey("error_code") != "0" || result["result"] is NSNull {
                self.showToast(response?.dictionize().getValueFromKey("error_msg") == "" ? "Lỗi xảy ra, mời bạn thử lại" : response?.dictionize().getValueFromKey("error_msg"), andPos: 0)
                return
            }
@@ -173,7 +173,7 @@ class Search_ViewController: UIViewController, UICollectionViewDataSource, UICol
             self.refreshControl.endRefreshing()
             let result = response?.dictionize() ?? [:]
             
-            if result.getValueFromKey("error_code") != "0" {
+            if result.getValueFromKey("error_code") != "0" || result["result"] is NSNull {
                 self.showToast(response?.dictionize().getValueFromKey("error_msg") == "" ? "Lỗi xảy ra, mời bạn thử lại" : response?.dictionize().getValueFromKey("error_msg"), andPos: 0)
                 return
             }
@@ -281,8 +281,12 @@ class Search_ViewController: UIViewController, UICollectionViewDataSource, UICol
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView != self.collectionView {
-            let bookDetail = Book_Detail_ViewController.init()
             let data = bookList[indexPath.item] as! NSDictionary
+            if data.getValueFromKey("book_type") == "3" {
+                self.didRequestUrl(info: (data ))
+                return
+            }
+            let bookDetail = Book_Detail_ViewController.init()
             let bookInfo = NSMutableDictionary.init(dictionary: ["url": ["CMD_CODE":"getListBook", "book_type": 0, "price": 0, "sorting": 1]])
              bookInfo.addEntries(from: data as! [AnyHashable : Any])
              bookDetail.config = bookInfo

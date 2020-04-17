@@ -73,7 +73,7 @@ class List_Book_ViewController: UIViewController, UICollectionViewDataSource, UI
             self.refreshControl.endRefreshing()
             let result = response?.dictionize() ?? [:]
             
-            if result.getValueFromKey("error_code") != "0" {
+            if result.getValueFromKey("error_code") != "0" || result["result"] is NSNull {
                 self.showToast(response?.dictionize().getValueFromKey("error_msg") == "" ? "Lỗi xảy ra, mời bạn thử lại" : response?.dictionize().getValueFromKey("error_msg"), andPos: 0)
                 return
             }
@@ -152,9 +152,14 @@ class List_Book_ViewController: UIViewController, UICollectionViewDataSource, UI
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+         let data =  dataList[indexPath.item] as! NSDictionary
+         let bookInfo = NSMutableDictionary.init(dictionary: data)
+         bookInfo["url"] = ["CMD_CODE":"getListBook"]
+         if data.getValueFromKey("book_type") == "3" {
+            self.didRequestUrl(info: bookInfo)
+            return
+         }
          let bookDetail = Book_Detail_ViewController.init()
-         let bookInfo = NSMutableDictionary.init(dictionary: ["url": ["CMD_CODE":"getListBook"]])
-         bookInfo.addEntries(from: dataList[indexPath.item] as! [AnyHashable : Any])
          bookDetail.config = bookInfo
          self.navigationController?.pushViewController(bookDetail, animated: true)
     }

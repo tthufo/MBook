@@ -119,7 +119,7 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate {
     }
     
     func getPhoneNumber() {
-        LTRequest.sharedInstance()?.didRequestInfo(["absoluteLink":"http://mebook.tgphim.vn/header.php/"], withCache: { (cache) in
+        LTRequest.sharedInstance()?.didRequestInfo(["absoluteLink":"http://mebook.tgphim.vn/header.php/", "overrideError":"1"], withCache: { (cache) in
         }, andCompletion: { (response, errorCode, error, isValid, object) in
             print("--->", object);
         })
@@ -302,8 +302,8 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate {
         self.view.endEditing(true)
         
         LTRequest.sharedInstance()?.didRequestInfo(["CMD_CODE":"login",
-                                                    "username":uName.text as Any,
-                                                    "password":("84" + pass.text!) as Any,
+                                                    "username":(uName.text!) as Any,
+                                                    "password":pass.text as Any,
                                                     "login_type": self.connectionType() as Any,
                                                     "push_token": FirePush.shareInstance()?.deviceToken() ?? "",
                                                     "platform":"IOS",
@@ -313,8 +313,8 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate {
                                                     "host":self], withCache: { (cacheString) in
         }, andCompletion: { (response, errorCode, error, isValid, object) in
             let result = response?.dictionize() ?? [:]
-                                                
-            if result.getValueFromKey("error_code") != "0" {
+                                        
+            if result.getValueFromKey("error_code") != "0" || result["result"] is NSNull {
                 self.showToast(response?.dictionize().getValueFromKey("error_msg") == "" ? "Lỗi xảy ra, mời bạn thử lại" : response?.dictionize().getValueFromKey("error_msg"), andPos: 0)
                 return
             }

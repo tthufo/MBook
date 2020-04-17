@@ -165,7 +165,7 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
             self.refreshControl.endRefreshing()
             let result = response?.dictionize() ?? [:]
             
-            if result.getValueFromKey("error_code") != "0" {
+            if result.getValueFromKey("error_code") != "0" || result["result"] is NSNull {
                 self.showToast(response?.dictionize().getValueFromKey("error_msg") == "" ? "Lỗi xảy ra, mời bạn thử lại" : response?.dictionize().getValueFromKey("error_msg"), andPos: 0)
                 return
             }
@@ -204,7 +204,7 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
              self.refreshControl.endRefreshing()
              let result = response?.dictionize() ?? [:]
              
-             if result.getValueFromKey("error_code") != "0" {
+             if result.getValueFromKey("error_code") != "0" || result["result"] is NSNull {
                  self.showToast(response?.dictionize().getValueFromKey("error_msg") == "" ? "Lỗi xảy ra, mời bạn thử lại" : response?.dictionize().getValueFromKey("error_msg"), andPos: 0)
                  return
              }
@@ -236,7 +236,7 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
             self.refreshControl.endRefreshing()
             let result = response?.dictionize() ?? [:]
             
-            if result.getValueFromKey("error_code") != "0" {
+            if result.getValueFromKey("error_code") != "0" || result["result"] is NSNull {
                 self.showToast(response?.dictionize().getValueFromKey("error_msg") == "" ? "Lỗi xảy ra, mời bạn thử lại" : response?.dictionize().getValueFromKey("error_msg"), andPos: 0)
                 return
             }
@@ -265,7 +265,7 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
         }, andCompletion: { (response, errorCode, error, isValid, object) in
             let result = response?.dictionize() ?? [:]
             
-            if result.getValueFromKey("error_code") != "0" {
+            if result.getValueFromKey("error_code") != "0" || result["result"] is NSNull {
                 self.showToast(response?.dictionize().getValueFromKey("error_msg") == "" ? "Lỗi xảy ra, mời bạn thử lại" : response?.dictionize().getValueFromKey("error_msg"), andPos: 0)
                 return
             }
@@ -439,9 +439,13 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.section == 2 {
-            let tempConfig:NSMutableDictionary = NSMutableDictionary.init(dictionary: (dataList[indexPath.item] as! NSDictionary))
-            tempConfig["url"] = self.config["url"]
-            self.config = tempConfig
+            let bookInfo:NSMutableDictionary = NSMutableDictionary.init(dictionary: (dataList[indexPath.item] as! NSDictionary))
+            bookInfo["url"] = self.config["url"]
+            if bookInfo.getValueFromKey("book_type") == "3" {
+               self.didRequestUrl(info: bookInfo)
+               return
+            }
+            self.config = bookInfo
             self.setupInfo()
             collectionView.setContentOffset(CGPoint.init(x: 0, y: -headerHeight), animated: true)
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {

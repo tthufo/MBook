@@ -17,7 +17,8 @@ typedef enum __playerState
     Local,
     Recent,
     Search,
-    Ipod
+    Ipod,
+    Pause,
 }PlayingState;
 
 @interface HT_Player_ViewController : UIViewController

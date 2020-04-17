@@ -24,10 +24,10 @@
 
           [self didEmbed];
           
-//          if([self isFobidden])
-//          {
-//              [self didSubEmbed];
-//          }
+          if([self isFobidden])
+          {
+              [self didSubEmbed];
+          }
       }
 
       [self didEmbed:self];

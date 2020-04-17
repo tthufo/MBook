@@ -61,5 +61,8 @@ class Reader_ViewController: UIViewController {
     
     @IBAction func didPressBack() {
            self.navigationController?.popViewController(animated: true)
+            if self.player()?.playState == Pause {
+              self.embed()
+           }
        }
 }
