@@ -61,12 +61,12 @@ class Author_Detail_ViewController: UIViewController, UICollectionViewDataSource
     
         setupParallaxHeader()
         
-        let height = self.collectionView.contentSize.height
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
-           let collectionViewInsets: UIEdgeInsets  = UIEdgeInsets(top: CGFloat(self.headerHeight), left: 0.0, bottom: height < CGFloat(self.screenHeight()) ? CGFloat(self.headerHeight) : 0, right: 0.0)
-           self.collectionView.contentInset = collectionViewInsets
-        })
+//        let height = self.collectionView.contentSize.height
+//
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
+//           let collectionViewInsets: UIEdgeInsets  = UIEdgeInsets(top: CGFloat(self.headerHeight), left: 0.0, bottom: height < CGFloat(self.screenHeight()) ? CGFloat(self.headerHeight) : 0, right: 0.0)
+//           self.collectionView.contentInset = collectionViewInsets
+//        })
     }
         
     private func setupParallaxHeader() {
@@ -179,8 +179,9 @@ class Author_Detail_ViewController: UIViewController, UICollectionViewDataSource
 
             let height = self.collectionView.contentSize.height
             
-            let collectionViewInsets: UIEdgeInsets  = UIEdgeInsets(top: CGFloat(self.headerHeight), left: 0.0, bottom: height < CGFloat(self.screenHeight()) ? CGFloat(self.headerHeight) : 0, right: 0.0)
-            self.collectionView.contentInset = collectionViewInsets
+            print(height, self.screenHeight())
+//            let collectionViewInsets: UIEdgeInsets  = UIEdgeInsets(top: CGFloat(self.headerHeight), left: 0.0, bottom: height < CGFloat(self.screenHeight()) ? CGFloat(self.headerHeight) : 0, right: 0.0)
+//            self.collectionView.contentInset = collectionViewInsets
         })
     }
     
@@ -201,7 +202,7 @@ class Author_Detail_ViewController: UIViewController, UICollectionViewDataSource
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return indexPath.section != 0 ? CGSize(width: Int((self.screenWidth() / (IS_IPAD ? 5 : 3)) - 15), height: Int(((self.screenWidth() / (IS_IPAD ? 5 : 3)) - 15) * 1.72)) : CGSize(width: collectionView.frame.width, height: bioHeight)
+        return indexPath.section != 0 ? CGSize(width: Int((self.screenWidth() / (IS_IPAD ? 5 : 3)) - 15), height: Int(((self.screenWidth() / (IS_IPAD ? 5 : 3)) - 15) * 1.72)) : CGSize(width: collectionView.frame.width, height: self.returnSize(self.config.getValueFromKey("info")))
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -241,15 +242,19 @@ class Author_Detail_ViewController: UIViewController, UICollectionViewDataSource
             
 //            title.text = self.config.getValueFromKey("info")
 //
-            let data = self.config.getValueFromKey("info").data(using: String.Encoding.unicode)
+            let modifiedFont = String(format:"<span style=\"font-family: '-apple-system', 'HelveticaNeue'; font-size:16 \">%@</span>", self.config.getValueFromKey("info"))
+
+            let data = modifiedFont.data(using: String.Encoding.unicode)
+            
+            print(self.config.getValueFromKey("info"))
 
             let attributedText = try! NSAttributedString(data: data!, options: [.documentType:NSAttributedString.DocumentType.html], documentAttributes: nil)
-//
+
             title.attributedText = attributedText
 //
-            bioHeight = title.sizeOfMultiLineLabel().height + 80
+//            bioHeight = title.sizeOfMultiLineLabel().height + 80
 //
-            print("--->", bioHeight)
+//            print("--->", bioHeight)
         
 //            self.collectionView.reloadSections(IndexSet(integer: 0))
             

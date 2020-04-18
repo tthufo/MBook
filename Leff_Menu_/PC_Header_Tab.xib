@@ -35,12 +35,23 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P5v-RX-bDJ">
+                    <rect key="frame" x="8" y="49.5" width="312" height="0.5"/>
+                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="0.5" id="hEM-o0-gTX"/>
+                    </constraints>
+                </view>
             </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="cxI-d5-sLp" secondAttribute="trailing" constant="10" id="11v-Ka-i0L"/>
                 <constraint firstItem="cxI-d5-sLp" firstAttribute="centerY" secondItem="WLg-az-iL0" secondAttribute="centerY" id="5yG-Pn-d9D"/>
+                <constraint firstItem="P5v-RX-bDJ" firstAttribute="bottom" secondItem="nNQ-qI-h1w" secondAttribute="bottom" id="Kqa-7h-BAd"/>
+                <constraint firstItem="P5v-RX-bDJ" firstAttribute="leading" secondItem="nNQ-qI-h1w" secondAttribute="leading" constant="8" id="So5-PP-Qa6"/>
                 <constraint firstItem="cxI-d5-sLp" firstAttribute="leading" secondItem="tNX-tE-2BY" secondAttribute="trailing" id="Twr-IP-kkA"/>
                 <constraint firstItem="ZxX-rS-1Uu" firstAttribute="leading" secondItem="WLg-az-iL0" secondAttribute="leading" constant="8" id="UrW-ZI-XGg"/>
+                <constraint firstItem="P5v-RX-bDJ" firstAttribute="trailing" secondItem="nNQ-qI-h1w" secondAttribute="trailing" id="Wfl-d9-kNW"/>
                 <constraint firstItem="ZxX-rS-1Uu" firstAttribute="centerY" secondItem="WLg-az-iL0" secondAttribute="centerY" id="dUd-Mp-1iQ"/>
                 <constraint firstItem="tNX-tE-2BY" firstAttribute="top" secondItem="WLg-az-iL0" secondAttribute="top" id="j42-da-Fom"/>
                 <constraint firstItem="tNX-tE-2BY" firstAttribute="leading" secondItem="ZxX-rS-1Uu" secondAttribute="trailing" id="mTd-Wg-9q5"/>

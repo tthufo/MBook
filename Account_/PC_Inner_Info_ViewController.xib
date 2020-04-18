@@ -13,6 +13,7 @@
                 <outlet property="address" destination="yN0-dX-j1n" id="CL7-bb-tid"/>
                 <outlet property="avatar" destination="iQu-4F-Xfj" id="2xG-BV-sSV"/>
                 <outlet property="birthday" destination="lJm-hc-A7o" id="Yom-Nm-QEb"/>
+                <outlet property="bottomHeight" destination="7Se-4b-fvF" id="DvE-8H-7dA"/>
                 <outlet property="cell" destination="juF-JV-LDy" id="WNf-M0-1kz"/>
                 <outlet property="email" destination="YTW-6s-GJa" id="PSh-fG-cSL"/>
                 <outlet property="emailBG" destination="Spe-MK-1vy" id="U3b-3K-C9g"/>

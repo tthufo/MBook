@@ -17,6 +17,10 @@
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="6" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ou6-mg-uyH">
                     <rect key="frame" x="0.0" y="0.0" width="448" height="306"/>
                 </imageView>
+                <view alpha="0.29999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ni2-Gl-pe1">
+                    <rect key="frame" x="0.0" y="0.0" width="448" height="306"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
                 <button opaque="NO" alpha="0.0" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FIb-ST-OUM">
                     <rect key="frame" x="8" y="136.5" width="33" height="33"/>
                     <constraints>
@@ -69,9 +73,12 @@
             <constraints>
                 <constraint firstItem="zZA-Hb-m5H" firstAttribute="leading" secondItem="EPP-VA-1IV" secondAttribute="leading" constant="8" id="1hM-VC-3Bw"/>
                 <constraint firstItem="qUM-Rg-ohd" firstAttribute="leading" secondItem="MKc-CM-pAW" secondAttribute="leading" constant="8" id="2TP-1c-bSP"/>
+                <constraint firstItem="Ni2-Gl-pe1" firstAttribute="leading" secondItem="EPP-VA-1IV" secondAttribute="leading" id="6eD-xQ-Nbz"/>
                 <constraint firstItem="ou6-mg-uyH" firstAttribute="leading" secondItem="EPP-VA-1IV" secondAttribute="leading" id="7dB-h5-hFI"/>
                 <constraint firstItem="EPP-VA-1IV" firstAttribute="trailing" secondItem="8nP-0A-IsZ" secondAttribute="trailing" constant="12" id="7m2-lQ-2jk"/>
                 <constraint firstAttribute="bottom" secondItem="qUM-Rg-ohd" secondAttribute="bottom" constant="3" id="Fgx-iX-nTZ"/>
+                <constraint firstItem="Ni2-Gl-pe1" firstAttribute="top" secondItem="MKc-CM-pAW" secondAttribute="top" id="JDp-UH-H9C"/>
+                <constraint firstItem="Ni2-Gl-pe1" firstAttribute="trailing" secondItem="EPP-VA-1IV" secondAttribute="trailing" id="Ono-8n-aNY"/>
                 <constraint firstItem="FIb-ST-OUM" firstAttribute="centerY" secondItem="MKc-CM-pAW" secondAttribute="centerY" id="TJ0-yL-8s6"/>
                 <constraint firstItem="8nP-0A-IsZ" firstAttribute="centerY" secondItem="MKc-CM-pAW" secondAttribute="centerY" id="Urr-zk-EVN"/>
                 <constraint firstItem="qUM-Rg-ohd" firstAttribute="top" secondItem="zZA-Hb-m5H" secondAttribute="bottom" constant="1" id="Xyv-fL-k9i"/>
@@ -81,6 +88,7 @@
                 <constraint firstItem="FIb-ST-OUM" firstAttribute="leading" secondItem="EPP-VA-1IV" secondAttribute="leading" constant="8" id="kF3-eN-nAf"/>
                 <constraint firstItem="ou6-mg-uyH" firstAttribute="trailing" secondItem="EPP-VA-1IV" secondAttribute="trailing" id="ln3-5p-dZ2"/>
                 <constraint firstAttribute="bottom" secondItem="KTq-BA-e4p" secondAttribute="bottom" constant="3" id="qgX-EV-tbF"/>
+                <constraint firstAttribute="bottom" secondItem="Ni2-Gl-pe1" secondAttribute="bottom" id="t1L-2L-s84"/>
                 <constraint firstItem="ou6-mg-uyH" firstAttribute="top" secondItem="MKc-CM-pAW" secondAttribute="top" id="v6u-cn-2aI"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -94,6 +102,10 @@
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="6" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="u5v-uc-1NN">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="171"/>
                 </imageView>
+                <view alpha="0.29999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8dq-fa-adr">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="171"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
                 <button opaque="NO" alpha="0.0" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vQ2-px-bXc">
                     <rect key="frame" x="8" y="69" width="33" height="33"/>
                     <constraints>
@@ -155,10 +167,14 @@
                 <constraint firstItem="r5q-B0-0lT" firstAttribute="leading" secondItem="hRq-x5-B8e" secondAttribute="leading" constant="8" id="Mh3-vL-3dJ"/>
                 <constraint firstItem="r5q-B0-0lT" firstAttribute="top" secondItem="EMp-IW-WH0" secondAttribute="bottom" constant="1" id="PAR-XO-Lo8"/>
                 <constraint firstItem="u5v-uc-1NN" firstAttribute="leading" secondItem="hRq-x5-B8e" secondAttribute="leading" id="QMy-Lj-FWT"/>
+                <constraint firstItem="8dq-fa-adr" firstAttribute="trailing" secondItem="hRq-x5-B8e" secondAttribute="trailing" id="WHG-WI-onv"/>
                 <constraint firstItem="u5v-uc-1NN" firstAttribute="trailing" secondItem="hRq-x5-B8e" secondAttribute="trailing" id="bvo-KO-Fcy"/>
                 <constraint firstItem="fug-nB-2Pb" firstAttribute="leading" secondItem="vQ2-px-bXc" secondAttribute="trailing" constant="6" id="f8Q-Wd-Ygd"/>
                 <constraint firstItem="hRq-x5-B8e" firstAttribute="trailing" secondItem="fug-nB-2Pb" secondAttribute="trailing" constant="12" id="fai-V3-Lwc"/>
+                <constraint firstItem="8dq-fa-adr" firstAttribute="bottom" secondItem="hRq-x5-B8e" secondAttribute="bottom" id="ftQ-vv-SOP"/>
                 <constraint firstItem="u5v-uc-1NN" firstAttribute="bottom" secondItem="hRq-x5-B8e" secondAttribute="bottom" id="gh7-Tl-HP9"/>
+                <constraint firstItem="8dq-fa-adr" firstAttribute="leading" secondItem="hRq-x5-B8e" secondAttribute="leading" id="hSr-yt-2bc"/>
+                <constraint firstItem="8dq-fa-adr" firstAttribute="top" secondItem="feB-4V-Q7P" secondAttribute="top" id="r5f-L7-M45"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="hRq-x5-B8e"/>

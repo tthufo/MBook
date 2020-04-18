@@ -38,13 +38,23 @@
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KkK-Gb-G9x">
+                        <rect key="frame" x="16" y="40.5" width="304" height="0.5"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="0.5" id="Q7k-Jf-vc5"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstItem="vqm-x9-KBT" firstAttribute="top" secondItem="XZa-WF-aAd" secondAttribute="top" constant="10" id="2vA-oP-e82"/>
                     <constraint firstAttribute="bottom" secondItem="vqm-x9-KBT" secondAttribute="bottom" constant="10" id="8tc-RG-rLa"/>
+                    <constraint firstAttribute="bottom" secondItem="KkK-Gb-G9x" secondAttribute="bottom" id="OFl-11-qSc"/>
                     <constraint firstItem="vqm-x9-KBT" firstAttribute="leading" secondItem="QBp-x5-pLS" secondAttribute="trailing" constant="8" id="Py4-eg-H4R"/>
                     <constraint firstItem="QBp-x5-pLS" firstAttribute="centerY" secondItem="XZa-WF-aAd" secondAttribute="centerY" id="Q4m-6I-qFQ"/>
+                    <constraint firstAttribute="trailing" secondItem="KkK-Gb-G9x" secondAttribute="trailing" id="RGl-Mt-tKQ"/>
                     <constraint firstAttribute="trailing" secondItem="vqm-x9-KBT" secondAttribute="trailing" constant="16" id="oyE-9S-wA3"/>
+                    <constraint firstItem="KkK-Gb-G9x" firstAttribute="leading" secondItem="XZa-WF-aAd" secondAttribute="leading" constant="16" id="scX-6m-sip"/>
                     <constraint firstItem="QBp-x5-pLS" firstAttribute="leading" secondItem="XZa-WF-aAd" secondAttribute="leading" constant="35" id="y1c-Zc-9FN"/>
                 </constraints>
             </tableViewCellContentView>

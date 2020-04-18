@@ -35,6 +35,8 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
     @IBOutlet var sumitText: UILabel!
     
     @IBOutlet var bottom: MarqueeLabel!
+    
+    @objc var logOut: String!
 
     var loginCover: UIView!
     
@@ -180,7 +182,9 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
                                     self.submit.alpha = self.uName.text?.count != 0 && self.pass.text?.count != 0 ? 1 : 0.5
                                     self.sumitText.alpha = self.uName.text?.count != 0 && self.pass.text?.count != 0 ? 1 : 0.5
                                 }
-                                self.didPressSubmit(phoneNumber: phoneNumber as! String)
+                                if self.logOut == "logIn" {
+                                    self.didPressSubmit(phoneNumber: phoneNumber as! String)
+                                }
                                 self.setUpLogin()
                             }
                             return
@@ -240,7 +244,9 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
                                     self.submit.alpha = self.uName.text?.count != 0 && self.pass.text?.count != 0 ? 1 : 0.5
                                     self.sumitText.alpha = self.uName.text?.count != 0 && self.pass.text?.count != 0 ? 1 : 0.5
                                 }
-                                self.didPressSubmit(phoneNumber: phoneNumber as! String)
+                                if self.logOut == "logIn" {
+                                    self.didPressSubmit(phoneNumber: phoneNumber as! String)
+                                }
                                 self.setUpLogin()
                             }
                         }
@@ -303,25 +309,50 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
     @IBAction func didPressSubmit(phoneNumber: Any) {
         self.view.endEditing(true)
         var is3G = false
-        if phoneNumber is UIButton {
-            is3G = false
-        } else if phoneNumber is String {
+        if phoneNumber is String {
             if (phoneNumber as! String) == "" {
                 is3G = false
             } else {
                 is3G = true
             }
         }
-        LTRequest.sharedInstance()?.didRequestInfo(["CMD_CODE":"login",
-                                                    "username":(uName.text!) as Any,
-                                                    "password": is3G ? "" : pass.text as Any,
-                                                    "login_type": is3G ? "3G" : "WIFI", // self.connectionType() as Any,
-                                                    "push_token": FirePush.shareInstance()?.deviceToken() ?? "",
-                                                    "platform":"IOS",
-                                                    "overrideAlert":"1",
-                                                    "overrideLoading":"1",
-                                                    "postFix":"login",
-                                                    "host":self], withCache: { (cacheString) in
+                        
+        let logged = Information.token != nil && Information.token != ""
+        
+        if is3G {
+            requestLogin(request: ["username":(uName.text!) as Any,
+//                                   "password":"",
+//                                   "password":pass.text as Any,
+                                   "login_type":"3G"])
+            print("3G")
+        } else {
+            if logged {
+                requestLogin(request: ["username":(uName.text!) as Any,
+                                       "password":pass.text as Any,
+                                       "login_type":"WIFI"])
+                print("LOGIN")
+            }
+            print("NORMAL")
+        }
+        
+        if phoneNumber is UIButton {
+            requestLogin(request: ["username":(uName.text!) as Any,
+                                    "password":pass.text as Any,
+                                    "login_type":"WIFI"])
+            print("BUTTON")
+        }
+    }
+    
+    func requestLogin(request: NSDictionary) {
+        let requesting = NSMutableDictionary.init(dictionary: ["CMD_CODE":"login",
+                                                                "push_token": FirePush.shareInstance()?.deviceToken() ?? "",
+                                                                "platform":"IOS",
+                                                                "overrideAlert":"1",
+                                                                "overrideLoading":"1",
+                                                                "postFix":"login",
+                                                                "host":self])
+        requesting.addEntries(from: request as! [AnyHashable : Any])
+        LTRequest.sharedInstance()?.didRequestInfo(requesting as? [AnyHashable : Any], withCache: { (cacheString) in
         }, andCompletion: { (response, errorCode, error, isValid, object) in
             let result = response?.dictionize() ?? [:]
                                         

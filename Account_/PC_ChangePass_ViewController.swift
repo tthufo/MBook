@@ -44,6 +44,8 @@ class PC_ChangePass_ViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet var reNewPassErr: UILabel!
     
+    @IBOutlet var bottomHeight: NSLayoutConstraint!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -72,6 +74,9 @@ class PC_ChangePass_ViewController: UIViewController, UITextFieldDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+        if self.isEmbed() {
+           bottomHeight.constant = 100
+        }
         kb.keyboard { (height, isOn) in
             self.tableView.contentInset = UIEdgeInsets(top: 64, left: 0, bottom: isOn ? (height - 100) : 0, right: 0)
         }

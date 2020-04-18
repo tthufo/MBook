@@ -10,6 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PC_ChangePass_ViewController" customModule="HearThis" customModuleProvider="target">
             <connections>
+                <outlet property="bottomHeight" destination="Gns-fo-be8" id="UVy-hb-PF6"/>
                 <outlet property="cell1" destination="C9P-IU-l8d" id="pet-F2-zHt"/>
                 <outlet property="cell2" destination="jEv-qe-6ZY" id="PqO-4U-lho"/>
                 <outlet property="cell3" destination="EZg-eY-sOX" id="DGa-vV-VD6"/>

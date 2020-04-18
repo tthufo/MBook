@@ -66,9 +66,35 @@ class PC_Info_ViewController: UIViewController {
 //                return
 //            }
 //
-            Information.removeInfo()
+//        [[DropAlert shareInstance] alertWithInfor:@{@"cancel":@"Cancel",@"buttons":@[@"Restore", @"Purchase"],@"title":@"Remove Ads",@"message":@"Do you want to restore or purchase Remove Ads ?"} andCompletion:^(int indexButton, id object) {
+//            switch (indexButton)
+//            {
+//                case 0:
+//                {
+//                    [self restoreProduct];
+//                }
+//                    break;
+//                case 1:
+//                {
+//                    [self buyProduct];
+//                }
+//                    break;
+//                default:
+//                    break;
+//            }
+//        }];
         
-        (UIApplication.shared.delegate as! AppDelegate).changeRoot(true)
+        DropAlert.shareInstance()?.alert(withInfor: ["cancel":"Thoát", "buttons":["Đăng xuất"], "title":"Thông báo", "message": "Bạn có muốn đăng xuất khỏi tài khoản ?"], andCompletion: { (index, objc) in
+            if index == 0 {
+                if self.isEmbed() {
+                    self.unEmbed()
+                }
+                Information.removeInfo()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+                    (UIApplication.shared.delegate as! AppDelegate).changeRoot(true)
+                })
+            }
+        })
 //        })
     }
     

@@ -175,8 +175,12 @@ class Event_Detail_ViewController: UIViewController, UICollectionViewDataSource,
 
             let height = self.collectionView.contentSize.height
             
-            let collectionViewInsets: UIEdgeInsets  = UIEdgeInsets(top: CGFloat(self.headerHeight), left: 0.0, bottom: height < CGFloat(self.screenHeight()) ? CGFloat(self.headerHeight) : 0, right: 0.0)
+            let collectionViewInsets: UIEdgeInsets  = UIEdgeInsets(top: CGFloat(self.headerHeight), left: 0.0, bottom: height < CGFloat(self.screenHeight()) ? CGFloat(self.headerHeight + 64) : 0, right: 0.0)
             self.collectionView.contentInset = collectionViewInsets
+                        
+            UIView.animate(withDuration: 0.3) {
+                self.collectionView.alpha = 1
+            }
         })
     }
     
@@ -209,7 +213,7 @@ class Event_Detail_ViewController: UIViewController, UICollectionViewDataSource,
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return indexPath.section == 2 ? eventSize() : indexPath.section == 1 ? (self.config.getValueFromKey("event_type") == "1" ? bookSize() : chapSize() ) : CGSize(width: collectionView.frame.width, height: 50)
+        return indexPath.section == 2 ? eventSize() : indexPath.section == 1 ? (self.config.getValueFromKey("event_type") == "1" ? bookSize() : chapSize() ) : CGSize(width: collectionView.frame.width, height: self.returnSize(self.config.getValueFromKey("description")))
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -229,18 +233,6 @@ class Event_Detail_ViewController: UIViewController, UICollectionViewDataSource,
            let title = self.withView(cell, tag: 1) as! UILabel
 
             title.text = self.config.getValueFromKey("description")
-            
-            print(self.config)
-
-//            let data = self.config.getValueFromKey("info").data(using: String.Encoding.unicode)
-//
-//            let attributedText = try! NSAttributedString(data: data!, options: [.documentType:NSAttributedString.DocumentType.html], documentAttributes: nil)
-////
-//            title.attributedText = attributedText
-////
-            bioHeight = title.sizeOfMultiLineLabel().height + 0
-////
-//            print("--->", bioHeight)
         }
         
         if indexPath.section == 1 {

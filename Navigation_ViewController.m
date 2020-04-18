@@ -10,7 +10,7 @@
 
 #import "HT_Player_ViewController.h"
 
-@interface Navigation_ViewController ()
+@interface Navigation_ViewController ()<UIGestureRecognizerDelegate>
 
 @end
 
@@ -29,7 +29,15 @@
 
     [player didMoveToParentViewController:self];
     
-//    NSLog(@"%@", self.viewControllers);
+    self.interactivePopGestureRecognizer.delegate = self;
+}
+
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
+    if ([[self.viewControllers lastObject] isKindOfClass:[HT_Root_ViewController class]] || [self isFullEmbed]) {
+        [[self ROOT] toggleLeftPanel:nil];
+        return NO;
+    }
+    return YES;
 }
 
 @end

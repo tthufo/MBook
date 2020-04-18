@@ -74,7 +74,7 @@
                                 <constraint firstAttribute="height" constant="150" id="y4e-4E-cPX"/>
                             </constraints>
                         </view>
-                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="BdG-F7-GTQ">
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="BdG-F7-GTQ">
                             <rect key="frame" x="0.0" y="150" width="320" height="418"/>
                             <connections>
                                 <outlet property="dataSource" destination="-1" id="fDZ-8S-IHT"/>

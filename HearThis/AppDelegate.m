@@ -83,7 +83,7 @@
     
 
     
-    self.window.rootViewController = [self authenticationViewController];
+    self.window.rootViewController = [self authenticationViewController: @"logIn"];
     
     [self.window makeKeyAndVisible];
     
@@ -107,9 +107,12 @@
     return panel;
 }
 
-- (UINavigationController *)authenticationViewController {
-        
-    UINavigationController * nav = [[UINavigationController alloc] initWithRootViewController: [PC_Login_ViewController new]];
+- (UINavigationController *)authenticationViewController:(NSString* )logOut {
+    PC_Login_ViewController * login = [PC_Login_ViewController new];
+    
+    login.logOut = logOut;
+    
+    UINavigationController * nav = [[UINavigationController alloc] initWithRootViewController: login];
     
     nav.navigationBarHidden = YES;
     
@@ -120,7 +123,7 @@
     if (!logOut) {
         [[self window] setRootViewController:[self rootViewController]];
     } else {
-        [[self window] setRootViewController:[self authenticationViewController]];
+        [[self window] setRootViewController:[self authenticationViewController: @"logOut"]];
     }
 }
 
@@ -573,6 +576,12 @@ UIBackgroundTaskIdentifier bgTask;
 //        }
             
     }];
+}
+
+- (CGFloat)returnSize:(NSString*)des  {
+    NSAttributedString* labelString = [[NSAttributedString alloc] initWithString:des attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:16.0]}];
+           CGRect cellRect = [labelString boundingRectWithSize:CGSizeMake(screenWidth1, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin context:nil];
+    return cellRect.size.height;
 }
 
 - (void)addHistory:(NSString*)history {

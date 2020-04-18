@@ -44,6 +44,8 @@ class PC_Inner_Info_ViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet var submit: UIButton!
 
+    @IBOutlet var bottomHeight: NSLayoutConstraint!
+    
     var sex: String!
     
     var kb: KeyBoard!
@@ -111,6 +113,9 @@ class PC_Inner_Info_ViewController: UIViewController, UITextFieldDelegate {
     override func viewWillAppear(_ animated: Bool) {
        super.viewWillAppear(animated)
        
+        if self.isEmbed() {
+            bottomHeight.constant = 80
+        }
        kb.keyboard { (height, isOn) in
            self.tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: isOn ? (height - 100) : 0, right: 0)
        }

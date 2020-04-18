@@ -64,7 +64,6 @@
 
 - (void)unEmbed;
 
-
 - (HT_Root_ViewController*)TABBAR;
 
 - (UINavigationController*)CENTER;
@@ -82,6 +81,8 @@
 - (BOOL)isReader;
 
 - (BOOL)isParallax;
+
+- (CGFloat)returnSize:(NSString*)des;
 
 //- (void)startPlayingIpod:(NSURL*)url andInfo:(NSDictionary*)info;
 //
