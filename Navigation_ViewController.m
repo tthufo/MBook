@@ -33,8 +33,10 @@
 }
 
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer {
-    if ([[self.viewControllers lastObject] isKindOfClass:[HT_Root_ViewController class]] || [self isFullEmbed]) {
-        [[self ROOT] toggleLeftPanel:nil];
+    if ([[self.viewControllers lastObject] isKindOfClass:[HT_Root_ViewController class]]) {
+        if (![self isFullEmbed]) {
+            [[self ROOT] toggleLeftPanel:nil];
+        }
         return NO;
     }
     return YES;

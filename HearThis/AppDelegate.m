@@ -444,7 +444,6 @@ UIBackgroundTaskIdentifier bgTask;
         [[self PLAYER].view withBorder:@{@"Bcorner":@(0)}];
         
     } completion:^(BOOL finished) {
-        
         [[self PLAYER].playerView pause];
         [self PLAYER].playState = Pause;
     }];
@@ -479,8 +478,12 @@ UIBackgroundTaskIdentifier bgTask;
         
     } completion:^(BOOL finished) {
         
-        [self didEmbed];
-        
+        if([self isParallax]) {
+            [self didEmbed];
+            
+            [self didEmbed:[self TOPVIEWCONTROLER]];
+        }
+
         [self PLAYER].playState = Normal;
         
     }];
@@ -541,6 +544,10 @@ UIBackgroundTaskIdentifier bgTask;
         
     } completion:^(BOOL finished) {
         
+        if([self isParallax]) {
+            [self didEmbed];
+            [self didEmbed:[self TOPVIEWCONTROLER]];
+        }
     }];
 }
 
@@ -578,9 +585,17 @@ UIBackgroundTaskIdentifier bgTask;
     }];
 }
 
+- (CGFloat)returnSizing:(NSAttributedString*)labelString  {
+//    NSAttributedString* labelString = [[NSAttributedString alloc] initWithString:des attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:16.0]}];
+           CGRect cellRect = [labelString boundingRectWithSize:CGSizeMake(screenWidth1 - 20, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin context:nil];
+    return cellRect.size.height;
+}
+
+
 - (CGFloat)returnSize:(NSString*)des  {
     NSAttributedString* labelString = [[NSAttributedString alloc] initWithString:des attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:16.0]}];
-           CGRect cellRect = [labelString boundingRectWithSize:CGSizeMake(screenWidth1, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin context:nil];
+           CGRect cellRect = [labelString boundingRectWithSize:CGSizeMake(screenWidth1 - 20, MAXFLOAT) options:NSStringDrawingUsesLineFragmentOrigin context:nil];
+    
     return cellRect.size.height;
 }
 
@@ -651,8 +666,7 @@ UIBackgroundTaskIdentifier bgTask;
 {
     [[self PLAYER] didStartPlayWith:vID andInfo:info];
     
-    
-    if ([self isFullEmbed]) {
+    if ([self isFullEmbed] || [info responseForKey:@"byPass"]) {
         return;
     }
     [[self ROOT] goUp];

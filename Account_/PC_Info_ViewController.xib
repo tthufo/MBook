@@ -50,6 +50,9 @@
                                 <constraint firstAttribute="width" constant="44" id="ymL-Ye-I6j"/>
                             </constraints>
                             <state key="normal" image="ic_search"/>
+                            <connections>
+                                <action selector="didPressSearch" destination="-1" eventType="touchUpInside" id="5ib-9k-ojp"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" red="0.0" green="0.60784313729999995" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>

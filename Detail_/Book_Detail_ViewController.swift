@@ -184,9 +184,12 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
             
             self.collectionView.reloadSections(IndexSet(integer: 2))
             
-            let height = self.collectionView.contentSize.height
+            let contentSizeHeight = self.collectionView.collectionViewLayout.collectionViewContentSize.height
             
-            let collectionViewInsets: UIEdgeInsets  = UIEdgeInsets(top: CGFloat(self.headerHeight), left: 0.0, bottom: height < CGFloat(self.screenHeight()) ? CGFloat(self.headerHeight) : 0, right: 0.0)
+            let collectionViewHeight = self.collectionView.frame.size.height
+            
+            let collectionViewInsets: UIEdgeInsets = UIEdgeInsets(top: CGFloat(self.headerHeight), left: 0.0, bottom: contentSizeHeight < CGFloat(collectionViewHeight - 64) ? CGFloat(collectionViewHeight - contentSizeHeight - 64) : 0, right: 0.0)
+            
             self.collectionView.contentInset = collectionViewInsets
         })
     }
@@ -217,9 +220,12 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
              
              self.collectionView.reloadSections(IndexSet(integer: 1))
             
-             let height = self.collectionView.contentSize.height
-            
-            let collectionViewInsets: UIEdgeInsets  = UIEdgeInsets(top: CGFloat(self.headerHeight), left: 0.0, bottom: height < CGFloat(self.screenHeight()) ? CGFloat(self.headerHeight) : 0, right: 0.0)
+             let contentSizeHeight = self.collectionView.collectionViewLayout.collectionViewContentSize.height
+             
+             let collectionViewHeight = self.collectionView.frame.size.height
+             
+             let collectionViewInsets: UIEdgeInsets = UIEdgeInsets(top: CGFloat(self.headerHeight), left: 0.0, bottom: contentSizeHeight < CGFloat(collectionViewHeight - 64) ? CGFloat(collectionViewHeight - contentSizeHeight - 64) : 0, right: 0.0)
+             
              self.collectionView.contentInset = collectionViewInsets
          })
     }
@@ -247,9 +253,12 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
 
             self.collectionView.reloadSections(IndexSet(integer: 0))
             
-            let height = self.collectionView.contentSize.height
+            let contentSizeHeight = self.collectionView.collectionViewLayout.collectionViewContentSize.height
             
-            let collectionViewInsets: UIEdgeInsets  = UIEdgeInsets(top: CGFloat(self.headerHeight), left: 0.0, bottom: height < CGFloat(self.screenHeight()) ? CGFloat(self.headerHeight) : 0, right: 0.0)
+            let collectionViewHeight = self.collectionView.frame.size.height
+            
+            let collectionViewInsets: UIEdgeInsets = UIEdgeInsets(top: CGFloat(self.headerHeight), left: 0.0, bottom: contentSizeHeight < CGFloat(collectionViewHeight - 64) ? CGFloat(collectionViewHeight - contentSizeHeight - 64) : 0, right: 0.0)
+            
             self.collectionView.contentInset = collectionViewInsets
         })
     }
@@ -280,9 +289,12 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
             
             self.navigationController?.pushViewController(reader, animated: true)
             
-            let height = self.collectionView.contentSize.height
+           let contentSizeHeight = self.collectionView.collectionViewLayout.collectionViewContentSize.height
             
-            let collectionViewInsets: UIEdgeInsets  = UIEdgeInsets(top: CGFloat(self.headerHeight), left: 0.0, bottom: height < CGFloat(self.screenHeight()) ? CGFloat(self.headerHeight) : 0, right: 0.0)
+            let collectionViewHeight = self.collectionView.frame.size.height
+            
+            let collectionViewInsets: UIEdgeInsets = UIEdgeInsets(top: CGFloat(self.headerHeight), left: 0.0, bottom: contentSizeHeight < CGFloat(collectionViewHeight - 64) ? CGFloat(collectionViewHeight - contentSizeHeight - 64) : 0, right: 0.0)
+            
             self.collectionView.contentInset = collectionViewInsets
         })
     }

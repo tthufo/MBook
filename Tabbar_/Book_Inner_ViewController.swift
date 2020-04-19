@@ -78,6 +78,14 @@ class Book_Inner_ViewController: UIViewController, UICollectionViewDataSource, U
             
             self.dataList.addObjects(from: data.withMutable())
                         
+            self.dataList.addObjects(from: data.withMutable())
+
+            self.dataList.addObjects(from: data.withMutable())
+
+            self.dataList.addObjects(from: data.withMutable())
+
+            self.dataList.addObjects(from: data.withMutable())
+
             self.collectionView.reloadData()
         })
     }

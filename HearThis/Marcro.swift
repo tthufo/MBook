@@ -526,6 +526,23 @@ extension UIImage {
     }
 }
 
+extension UILabel {
+
+    func sizeForString(string: NSString, constrainedToWidth width: Double) -> CGSize {
+
+        return string.boundingRect(
+            with: CGSize(
+                width: width,
+                height: DBL_MAX
+            ),
+            options: .usesLineFragmentOrigin,
+            attributes: [
+                NSAttributedString.Key.font : self.font as Any
+            ],
+            context: nil).size
+    }
+}
+
 extension PHAsset {
 
     func getURL(completionHandler : @escaping ((_ responseURL : URL?) -> Void)){
@@ -549,6 +566,20 @@ extension PHAsset {
                 }
             })
         }
+    }
+}
+
+extension String {
+    func htmlAttributedString(fontSize: CGFloat = 17.0) -> NSAttributedString? {
+        let fontName = UIFont.systemFont(ofSize: fontSize).fontName
+        let string = self.appending(String(format: "<style>body{font-family: '%@'; font-size:%fpx;}</style>", fontName, fontSize))
+        guard let data = string.data(using: String.Encoding.utf16, allowLossyConversion: false) else { return nil }
+
+        guard let html = try? NSMutableAttributedString (
+             data: data,
+             options: [NSAttributedString.DocumentReadingOptionKey.documentType: NSAttributedString.DocumentType.html],
+             documentAttributes: nil) else { return nil }
+        return html
     }
 }
 

@@ -38,6 +38,8 @@ class Author_Detail_ViewController: UIViewController, UICollectionViewDataSource
     
     let sectionTitle = ["", "Tác phẩm", "Tác giả khác"]
     
+    var bioString: String!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
                         
@@ -58,15 +60,10 @@ class Author_Detail_ViewController: UIViewController, UICollectionViewDataSource
         collectionView.withHeaderOrFooter("Book_Detail_Title", andKind: UICollectionView.elementKindSectionHeader)
 
         didRequestData(isShow: true)
+        
+        bioString = self.config.getValueFromKey("info")// "1liner nwer"
     
         setupParallaxHeader()
-        
-//        let height = self.collectionView.contentSize.height
-//
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
-//           let collectionViewInsets: UIEdgeInsets  = UIEdgeInsets(top: CGFloat(self.headerHeight), left: 0.0, bottom: height < CGFloat(self.screenHeight()) ? CGFloat(self.headerHeight) : 0, right: 0.0)
-//           self.collectionView.contentInset = collectionViewInsets
-//        })
     }
         
     private func setupParallaxHeader() {
@@ -177,11 +174,13 @@ class Author_Detail_ViewController: UIViewController, UICollectionViewDataSource
 
             self.collectionView.reloadData()
 
-            let height = self.collectionView.contentSize.height
+            let contentSizeHeight = self.collectionView.collectionViewLayout.collectionViewContentSize.height
             
-            print(height, self.screenHeight())
-//            let collectionViewInsets: UIEdgeInsets  = UIEdgeInsets(top: CGFloat(self.headerHeight), left: 0.0, bottom: height < CGFloat(self.screenHeight()) ? CGFloat(self.headerHeight) : 0, right: 0.0)
-//            self.collectionView.contentInset = collectionViewInsets
+            let collectionViewHeight = self.collectionView.frame.size.height
+            
+            let collectionViewInsets: UIEdgeInsets = UIEdgeInsets(top: CGFloat(self.headerHeight), left: 0.0, bottom: contentSizeHeight < CGFloat(collectionViewHeight - 64) ? CGFloat(collectionViewHeight - contentSizeHeight - 64) : 0, right: 0.0)
+            
+            self.collectionView.contentInset = collectionViewInsets
         })
     }
     
@@ -202,7 +201,20 @@ class Author_Detail_ViewController: UIViewController, UICollectionViewDataSource
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return indexPath.section != 0 ? CGSize(width: Int((self.screenWidth() / (IS_IPAD ? 5 : 3)) - 15), height: Int(((self.screenWidth() / (IS_IPAD ? 5 : 3)) - 15) * 1.72)) : CGSize(width: collectionView.frame.width, height: self.returnSize(self.config.getValueFromKey("info")))
+        let modifiedFont = String(format:"<span style=\"font-family: '-apple-system', 'HelveticaNeue'; font-size:16 \">%@</span>", bioString)
+        let cell = collectionView.cellForItem(at: indexPath)
+        if cell != nil {
+//            let title = self.withView(cell, tag: 1) as! UILabel
+//            let modifiedFont = String(format:"<span style=\"font-family: '-apple-system', 'HelveticaNeue'; font-size:16 \">%@</span>", bioString)
+//
+//            let data = modifiedFont.data(using: String.Encoding.unicode)
+//
+//            let attributedText = try! NSAttributedString(data: data!, options: [.documentType:NSAttributedString.DocumentType.html], documentAttributes: nil)
+//            title.attributedText = attributedText
+//            bioHeight = title.sizeForString(string: modifiedFont as NSString, constrainedToWidth: Double(self.screenWidth() - 20)).height
+        }
+        print("--->", cell)
+        return indexPath.section != 0 ? CGSize(width: Int((self.screenWidth() / (IS_IPAD ? 5 : 3)) - 15), height: Int(((self.screenWidth() / (IS_IPAD ? 5 : 3)) - 15) * 1.72)) : CGSize(width: collectionView.frame.width, height: bioHeight)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -218,8 +230,8 @@ class Author_Detail_ViewController: UIViewController, UICollectionViewDataSource
        
     func didExpandLabel(_ label: ExpandableLabel) {
            isCollapse = false
-        bioHeight = label.frame.size.width
-        self.collectionView.reloadSections(IndexSet(integer: 0))
+//        bioHeight = label.frame.size.width
+//        self.collectionView.reloadSections(IndexSet(integer: 0))
     }
    
     func willCollapseLabel(_ label: ExpandableLabel) {
@@ -228,8 +240,8 @@ class Author_Detail_ViewController: UIViewController, UICollectionViewDataSource
    
     func didCollapseLabel(_ label: ExpandableLabel) {
           isCollapse = true
-        bioHeight = label.frame.size.width
-        self.collectionView.reloadSections(IndexSet(integer: 0))
+//        bioHeight = label.frame.size.width
+//        self.collectionView.reloadSections(IndexSet(integer: 0))
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -242,14 +254,14 @@ class Author_Detail_ViewController: UIViewController, UICollectionViewDataSource
             
 //            title.text = self.config.getValueFromKey("info")
 //
-            let modifiedFont = String(format:"<span style=\"font-family: '-apple-system', 'HelveticaNeue'; font-size:16 \">%@</span>", self.config.getValueFromKey("info"))
+            let modifiedFont = String(format:"<span style=\"font-family: '-apple-system', 'HelveticaNeue'; font-size:16 \">%@</span>", bioString)
 
             let data = modifiedFont.data(using: String.Encoding.unicode)
             
-            print(self.config.getValueFromKey("info"))
-
             let attributedText = try! NSAttributedString(data: data!, options: [.documentType:NSAttributedString.DocumentType.html], documentAttributes: nil)
 
+            bioHeight = title.sizeForString(string: modifiedFont as NSString, constrainedToWidth: Double(self.screenWidth() - 20)).height
+            
             title.attributedText = attributedText
 //
 //            bioHeight = title.sizeOfMultiLineLabel().height + 80
@@ -259,16 +271,16 @@ class Author_Detail_ViewController: UIViewController, UICollectionViewDataSource
 //            self.collectionView.reloadSections(IndexSet(integer: 0))
             
 //            title.delegate = self
-
+//
 //            title.setLessLinkWith(lessLink: "Close", attributes: [.foregroundColor:UIColor.red], position: .left)
-
+//
 //            cell.layoutIfNeeded()
-
+//
 //            title.shouldCollapse = true
 //            title.textReplacementType = .word
 //            title.numberOfLines = 3
 //            title.collapsed = isCollapse
-//            title.text = self.config.getValueFromKey("info")
+//            title.text = modifiedFont//self.config.getValueFromKey("info")
 //            title.attributedText = attributedText
 
         }
@@ -287,6 +299,10 @@ class Author_Detail_ViewController: UIViewController, UICollectionViewDataSource
             let image = self.withView(cell, tag: 11) as! UIImageView
 
             image.imageUrl(url: data.getValueFromKey("avatar"))
+            
+            let player = self.withView(cell, tag: 999) as! UIImageView
+                                
+            player.isHidden = true
         }
         
         if indexPath.section == 1 {
@@ -312,6 +328,10 @@ class Author_Detail_ViewController: UIViewController, UICollectionViewDataSource
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.section == 0 {
+            bioString = self.config.getValueFromKey("info")
+            self.collectionView.reloadSections(IndexSet(integer: 0))
+        }
         if indexPath.section == 1 {
             let data = dataList[indexPath.item] as! NSDictionary
             let bookInfo = NSMutableDictionary.init(dictionary: data)
@@ -327,6 +347,8 @@ class Author_Detail_ViewController: UIViewController, UICollectionViewDataSource
         
         if indexPath.section == 2 {
             self.config = (chapList[indexPath.item] as! NSDictionary)
+            bioString = self.config.getValueFromKey("info")
+            self.collectionView.reloadSections(IndexSet(integer: 0))
             self.setupInfo()
             collectionView.setContentOffset(CGPoint.init(x: 0, y: -headerHeight), animated: true)
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {

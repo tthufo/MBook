@@ -677,13 +677,13 @@
 
 - (void)didPlayNextOrPre:(BOOL)isNext
 {
-    if(chapList.count == 0)
-    {
-        [self showToast:@"Music list is empty, please try other song" andPos:0];
-        
-        return;
-    }
-    
+//    if(chapList.count == 0)
+//    {
+//        [self showToast:@"Music list is empty, please try other song" andPos:0];
+//
+//        return;
+//    }
+//
     int nextIndexing = 0;
     
     BOOL found = NO;
@@ -749,7 +749,11 @@
         nextIndexing = 0;
     }
     
-    [self didRequestUrlWithInfo:chapList[nextIndexing]];
+    NSMutableDictionary * playingInfo = [[NSMutableDictionary alloc] initWithDictionary:chapList[nextIndexing]];
+    
+    playingInfo[@"byPass"] = @"1";
+    
+    [self didRequestUrlWithInfo:playingInfo];
     
 //    if([self.playerView.options[@"shuffle"] isEqualToString:@"1"])
 //    {
@@ -870,7 +874,7 @@
 
 - (void)playerReadyToPlay
 {
-    [self showInforPlayer:@{@"img":[setupData responseForKey:@"img"] ? setupData[@"img"] : kAvatar,@"song":[setupData responseForKey:@"title"] ? setupData[@"title"] : @"No Title"}];
+    [self showInforPlayer:@{@"img":[setupData responseForKey:@"img"] ? setupData[@"img"] : kAvatar,@"song":[setupData responseForKey:@"name"] ? setupData[@"name"] : @"No Title"}];
     
     [self playingState:YES];
     

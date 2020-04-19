@@ -82,6 +82,8 @@
 
 - (BOOL)isParallax;
 
+- (CGFloat)returnSizing:(NSAttributedString*)labelString;
+
 - (CGFloat)returnSize:(NSString*)des;
 
 //- (void)startPlayingIpod:(NSURL*)url andInfo:(NSDictionary*)info;

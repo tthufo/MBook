@@ -104,7 +104,7 @@ class Event_Detail_ViewController: UIViewController, UICollectionViewDataSource,
             name.alpha = parallaxHeader.progress
             description.alpha = parallaxHeader.progress
         }
-                          
+
         self.collectionView.reloadSections(IndexSet(integer: 0))
     }
     
@@ -172,10 +172,13 @@ class Event_Detail_ViewController: UIViewController, UICollectionViewDataSource,
             self.dataList.addObjects(from: data.withMutable())
             
             self.collectionView.reloadSections(IndexSet(integer: 1))
-
-            let height = self.collectionView.contentSize.height
             
-            let collectionViewInsets: UIEdgeInsets  = UIEdgeInsets(top: CGFloat(self.headerHeight), left: 0.0, bottom: height < CGFloat(self.screenHeight()) ? CGFloat(self.headerHeight + 64) : 0, right: 0.0)
+            let contentSizeHeight = self.collectionView.collectionViewLayout.collectionViewContentSize.height
+            
+            let collectionViewHeight = self.collectionView.frame.size.height
+            
+            let collectionViewInsets: UIEdgeInsets = UIEdgeInsets(top: CGFloat(self.headerHeight), left: 0.0, bottom: contentSizeHeight < CGFloat(collectionViewHeight - 64) ? CGFloat(collectionViewHeight - contentSizeHeight - 64) : 0, right: 0.0)
+            
             self.collectionView.contentInset = collectionViewInsets
                         
             UIView.animate(withDuration: 0.3) {

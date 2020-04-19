@@ -31,11 +31,7 @@ class TG_Intro_ViewController: UIViewController {
           
         widthConstant.constant = CGFloat(self.screenWidth() * (IS_IPAD ? 0.4 : 0.8));
         
-        if #available(iOS 10.0, *) {
-           tableView.refreshControl = refreshControl
-        } else {
-           tableView.addSubview(refreshControl)
-        }
+        tableView.refreshControl = refreshControl
            
         refreshControl.tintColor = UIColor.black
         
