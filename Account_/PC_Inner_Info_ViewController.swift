@@ -50,9 +50,18 @@ class PC_Inner_Info_ViewController: UIViewController, UITextFieldDelegate {
     
     var kb: KeyBoard!
     
+    @IBOutlet var sideGapLeft: NSLayoutConstraint!
+    
+    @IBOutlet var sideGapRight: NSLayoutConstraint!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        if IS_IPAD {
+           sideGapLeft.constant = 100
+           sideGapRight.constant = -100
+        }
+        
         kb = KeyBoard.shareInstance()
         
         self.view.action(forTouch: [:]) { (obj) in

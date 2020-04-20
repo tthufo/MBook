@@ -54,7 +54,9 @@ class First_Tab_ViewController: UIViewController {
         refreshControl.addTarget(self, action: #selector(didReload), for: .valueChanged)
         
         config = NSArray.init(array: [["url": ["CMD_CODE":"getHomeEvent",
-                                          "position": 1,
+                                               "page_index": 1,
+                                               "page_size": 24,
+                                               "position": 1,
                                         ], "height": 0, "loaded": false, "ident": "TG_Room_Cell_Banner_0"],
                                       ["title":"Mới nhất",
                                        "url": ["CMD_CODE":"getListBook",
@@ -97,7 +99,9 @@ class First_Tab_ViewController: UIViewController {
                                           "sorting": 3,
                                       ], "height": 0, "direction": "vertical", "loaded": false],
                                       ["url": ["CMD_CODE":"getHomeEvent",
-                                        "position": 2,
+                                               "page_index": 1,
+                                               "page_size": 24,
+                                               "position": 2,
                                       ], "height": 0, "loaded": false, "ident": "TG_Room_Cell_Banner_1"],
                                       ["title":"Promotion",
                                         "url": ["CMD_CODE":"getListPromotionBook",

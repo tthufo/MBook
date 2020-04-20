@@ -45,9 +45,18 @@ class PC_ChangePass_ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var reNewPassErr: UILabel!
     
     @IBOutlet var bottomHeight: NSLayoutConstraint!
-
+    
+    @IBOutlet var sideGapLeft: NSLayoutConstraint!
+      
+    @IBOutlet var sideGapRight: NSLayoutConstraint!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if IS_IPAD {
+          sideGapLeft.constant = 100
+          sideGapRight.constant = -100
+        }
         
         kb = KeyBoard.shareInstance()
         

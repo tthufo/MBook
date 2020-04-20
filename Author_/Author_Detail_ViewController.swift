@@ -8,10 +8,8 @@
 
 import UIKit
 import ParallaxHeader
-import ExpandableLabel
-import WebKit
 
-class Author_Detail_ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UIGestureRecognizerDelegate, ExpandableLabelDelegate {
+class Author_Detail_ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UIGestureRecognizerDelegate {
     
     @IBOutlet var collectionView: UICollectionView!
 
@@ -26,9 +24,7 @@ class Author_Detail_ViewController: UIViewController, UICollectionViewDataSource
     var totalPage: Int = 1
      
     var isLoadMore: Bool = false
-    
-    var isCollapse: Bool = true
-            
+                
     var dataList: NSMutableArray!
     
     var chapList = NSMutableArray()
@@ -235,25 +231,6 @@ class Author_Detail_ViewController: UIViewController, UICollectionViewDataSource
         return 10.0
     }
     
-    func willExpandLabel(_ label: ExpandableLabel) {
-    }
-       
-    func didExpandLabel(_ label: ExpandableLabel) {
-           isCollapse = false
-//        bioHeight = label.frame.size.width
-//        self.collectionView.reloadSections(IndexSet(integer: 0))
-    }
-   
-    func willCollapseLabel(_ label: ExpandableLabel) {
-//       tableView.beginUpdates()
-    }
-   
-    func didCollapseLabel(_ label: ExpandableLabel) {
-          isCollapse = true
-//        bioHeight = label.frame.size.width
-//        self.collectionView.reloadSections(IndexSet(integer: 0))
-    }
-    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: indexPath.section != 0 ? "TG_Map_Cell" : "Author_Bio_Cell", for: indexPath as IndexPath)
@@ -370,7 +347,6 @@ class Author_Detail_ViewController: UIViewController, UICollectionViewDataSource
 //        }
     }
 }
-
 
 extension Data {
     var html2AttributedString: NSAttributedString? {

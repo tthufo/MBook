@@ -77,14 +77,6 @@ class Book_Inner_ViewController: UIViewController, UICollectionViewDataSource, U
             let data = ((result["result"] as! NSDictionary)["data"] as! NSArray)
             
             self.dataList.addObjects(from: data.withMutable())
-                        
-            self.dataList.addObjects(from: data.withMutable())
-
-            self.dataList.addObjects(from: data.withMutable())
-
-            self.dataList.addObjects(from: data.withMutable())
-
-            self.dataList.addObjects(from: data.withMutable())
 
             self.collectionView.reloadData()
         })

@@ -10,6 +10,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="Package_ViewController" customModule="HearThis" customModuleProvider="target">
             <connections>
+                <outlet property="sideGapLeft" destination="Z1P-2A-q8e" id="zM0-44-1aj"/>
+                <outlet property="sideGapRight" destination="pyV-En-SXQ" id="Rbh-4j-yjH"/>
                 <outlet property="tableView" destination="OSU-bk-GSc" id="luV-AH-J9i"/>
                 <outlet property="view" destination="KnP-qG-tfs" id="caS-Eh-QkY"/>
             </connections>
@@ -56,6 +58,9 @@
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="OSU-bk-GSc">
                     <rect key="frame" x="0.0" y="238" width="375" height="429"/>
+                    <constraints>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="320" id="5pE-kh-zfe"/>
+                    </constraints>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="Dfb-af-PTT"/>
                         <outlet property="delegate" destination="-1" id="35y-Ss-00H"/>

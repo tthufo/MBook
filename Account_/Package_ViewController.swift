@@ -19,10 +19,19 @@ class Package_ViewController: UIViewController, MFMessageComposeViewControllerDe
 
     @IBOutlet var tableView: UITableView!
     
+    @IBOutlet var sideGapLeft: NSLayoutConstraint!
+    
+    @IBOutlet var sideGapRight: NSLayoutConstraint!
+
     var dataList: NSMutableArray!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if IS_IPAD {
+            sideGapLeft.constant = -100
+            sideGapRight.constant = 100
+        }
         
         tableView.withCell("Package_Cell")
         

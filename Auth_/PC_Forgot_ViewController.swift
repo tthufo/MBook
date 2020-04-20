@@ -140,9 +140,9 @@ class PC_Forgot_ViewController: UIViewController , UITextFieldDelegate {
         
         frame.origin.y = CGFloat(self.screenHeight() - 280) / 2 + CGFloat(self.topGap)
         
-        frame.size.width = CGFloat(self.screenWidth() - 40)
-        
-        frame.origin.x = 20
+        frame.size.width = CGFloat(self.screenWidth() - (IS_IPAD ? 200 : 40))
+               
+        frame.origin.x = IS_IPAD ? 100 : 20
         
         login.frame = frame
         

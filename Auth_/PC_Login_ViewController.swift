@@ -261,9 +261,9 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
         
         frame.origin.y = CGFloat(self.screenHeight() - 363) / 2 + CGFloat(self.topGap)
         
-        frame.size.width = CGFloat(self.screenWidth() - 40)
+        frame.size.width = CGFloat(self.screenWidth() - (IS_IPAD ? 200 : 40))
         
-        frame.origin.x = 20
+        frame.origin.x = IS_IPAD ? 100 : 20
 
         login.frame = frame
         
