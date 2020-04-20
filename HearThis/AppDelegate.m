@@ -280,7 +280,7 @@ UIBackgroundTaskIdentifier bgTask;
         
         if([v isKindOfClass:[UICollectionView class]])
         {
-            ((UICollectionView*)v).contentInset = UIEdgeInsetsMake(0, 0, ([self isEmbed] ? h : 0) + embed, 0);
+            ((UICollectionView*)v).contentInset = UIEdgeInsetsMake(((UICollectionView*)v).contentInset.top, 0, ([self isEmbed] ? (((UICollectionView*)v).contentInset.bottom == 0 ? h : ((UICollectionView*)v).contentInset.bottom) : ((UICollectionView*)v).contentInset.bottom == h ? 0 : ((UICollectionView*)v).contentInset.bottom) + (((UICollectionView*)v).contentInset.bottom == 0 ? embed : 0), 0);
         }
         
         if([v isKindOfClass:[UIView class]])
@@ -335,7 +335,7 @@ UIBackgroundTaskIdentifier bgTask;
         
         if([v isKindOfClass:[UICollectionView class]])
         {
-            ((UICollectionView*)v).contentInset = UIEdgeInsetsMake(0, 0, ([self isEmbed] ? h : 0) + embed, 0);
+            ((UICollectionView*)v).contentInset = UIEdgeInsetsMake(((UICollectionView*)v).contentInset.top, 0, ([self isEmbed] ? (((UICollectionView*)v).contentInset.bottom == 0 ? h : ((UICollectionView*)v).contentInset.bottom) : ((UICollectionView*)v).contentInset.bottom == h ? 0 : ((UICollectionView*)v).contentInset.bottom) + (((UICollectionView*)v).contentInset.bottom == 0 ? embed : 0), 0);
         }
         
         if([v isKindOfClass:[UIView class]])
@@ -371,36 +371,6 @@ UIBackgroundTaskIdentifier bgTask;
         }
     }
 }
-
-//- (void)didEmbed
-//{
-//    int embed = [[self getValue:@"embed"] intValue];
-//
-//    for(UIView * v in [self LAST].view.subviews)
-//    {
-//        if([v isKindOfClass:[UITableView class]])
-//        {
-//            ((UITableView*)v).contentInset = UIEdgeInsetsMake(0, 0, ([self isEmbed] ? 107 : [self hasAds] ? 52 : v.tag == 8989 ? 54 : 54) + embed, 0);
-//        }
-//
-//        if([v isKindOfClass:[UICollectionView class]])
-//        {
-//            ((UICollectionView*)v).contentInset = UIEdgeInsetsMake(0, 0, ([self isEmbed] ? 107 : [self hasAds] ? 52 : 54) + embed, 0);
-//        }
-//
-//            if([v isKindOfClass:[UIButton class]] && v.tag == 99881)
-//            {
-//
-//                [UIView animateWithDuration:0.3 animations:^{
-//
-//                    v.frame = CGRectMake(0, screenHeight1 - 175 - embed, 50, 50);
-//
-//                }];
-//
-//                break;
-//            }
-//    }
-//}
 
 - (void)embed
 {
@@ -489,7 +459,7 @@ UIBackgroundTaskIdentifier bgTask;
     }];
 }
 
-- (void)didUnEmbed
+- (void)didUnEmbed //no use
 {
     if (![self isEmbed]) {
         return;
@@ -510,7 +480,7 @@ UIBackgroundTaskIdentifier bgTask;
         
             if([v isKindOfClass:[UIButton class]] && v.tag == 99881)
             {
-                
+
                 [UIView animateWithDuration:0.3 animations:^{
                     
                     v.frame = CGRectMake(0, screenHeight1 - 175 - embed, 50, 50);
@@ -642,9 +612,11 @@ UIBackgroundTaskIdentifier bgTask;
 
 - (BOOL)isParallax
 {
-    return ![self isKindOfClass:[Book_Detail_ViewController class]]
-    && ![self isKindOfClass:[Author_Detail_ViewController class]]
-    && ![self isKindOfClass:[Event_Detail_ViewController class]];
+    return YES;
+//    ![self isKindOfClass:[Book_Detail_ViewController class]]
+//    &&
+//    ![self isKindOfClass:[Author_Detail_ViewController class]];
+//    && ![self isKindOfClass:[Event_Detail_ViewController class]];
 }
 
 //- (void)startPlayingIpod:(NSURL*)url andInfo:(NSDictionary*)info

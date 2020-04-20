@@ -40,11 +40,23 @@ class Reader_ViewController: UIViewController {
     func viewPDF() {
         let path = self.pdfFile(fileName: self.config.getValueFromKey("id"))
         pdfView.isHidden = false
+//        pdfView.frame = CGRect.init(x: 0, y: 0, width: CGFloat(screenWidth()), height: CGFloat(screenHeight()))
         if let pdfDocument = PDFDocument(url: URL(fileURLWithPath: path)) {
-            pdfView.displayMode = .singlePageContinuous
-            pdfView.autoScales = true
+//            pdfView.displayMode = .singlePageContinuous
+//            pdfView.autoScales = true
+            pdfView.autoresizesSubviews = true
+                      pdfView.autoresizingMask = [.flexibleWidth, .flexibleHeight, .flexibleTopMargin, .flexibleLeftMargin]
             pdfView.displayDirection = .horizontal
+//            pdfView.document = pdfDocument
+//
+            pdfView.autoScales = true
+            pdfView.displayMode = .twoUpContinuous
+            pdfView.displaysPageBreaks = true
+
+            pdfView.maxScaleFactor = 4.0
+            pdfView.minScaleFactor = pdfView.scaleFactorForSizeToFit
             pdfView.document = pdfDocument
+
         }
     }
     
