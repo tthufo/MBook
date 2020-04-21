@@ -21,7 +21,7 @@
                         <constraints>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="56.5" id="wpY-Ci-3Nd"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -54,23 +54,23 @@
                         <color key="thumbTintColor" red="0.0" green="0.59999999999999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </switch>
                     <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" tag="15" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_right" translatesAutoresizingMaskIntoConstraints="NO" id="0bt-QE-79P">
-                        <rect key="frame" x="279" y="24" width="25" height="25"/>
+                        <rect key="frame" x="279" y="24.5" width="25" height="25"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="25" id="0ou-uq-R4O"/>
-                            <constraint firstAttribute="width" constant="25" id="Ltj-of-Ycy"/>
+                            <constraint firstAttribute="height" constant="25" id="YXz-JB-E7g"/>
+                            <constraint firstAttribute="width" constant="25" id="rWZ-7Y-a2M"/>
                         </constraints>
                     </imageView>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
+                    <constraint firstAttribute="trailing" secondItem="0bt-QE-79P" secondAttribute="trailing" constant="16" id="1zo-PU-2gk"/>
                     <constraint firstAttribute="trailing" secondItem="tSQ-LS-yEy" secondAttribute="trailing" constant="16" id="3eX-6z-1xj"/>
                     <constraint firstItem="tSQ-LS-yEy" firstAttribute="top" secondItem="1zM-jD-IRn" secondAttribute="top" constant="26" id="3qu-0m-MuF"/>
                     <constraint firstItem="fnB-s9-688" firstAttribute="leading" secondItem="vAW-yv-qRZ" secondAttribute="trailing" id="9ax-Q5-T2R"/>
                     <constraint firstAttribute="trailing" secondItem="HS6-9Y-8Do" secondAttribute="trailing" constant="5" id="Ezv-Br-aMi"/>
                     <constraint firstItem="HS6-9Y-8Do" firstAttribute="top" secondItem="fnB-s9-688" secondAttribute="bottom" constant="8" id="GKx-RH-CcD"/>
                     <constraint firstAttribute="bottom" secondItem="HS6-9Y-8Do" secondAttribute="bottom" id="MmL-Ry-JfB"/>
-                    <constraint firstItem="0bt-QE-79P" firstAttribute="top" secondItem="1zM-jD-IRn" secondAttribute="top" constant="24" id="Ur4-Yd-zkx"/>
-                    <constraint firstAttribute="trailing" secondItem="0bt-QE-79P" secondAttribute="trailing" constant="16" id="bpV-Rv-8dg"/>
+                    <constraint firstItem="0bt-QE-79P" firstAttribute="centerY" secondItem="1zM-jD-IRn" secondAttribute="centerY" id="Yzz-ug-7gg"/>
                     <constraint firstItem="fnB-s9-688" firstAttribute="top" secondItem="1zM-jD-IRn" secondAttribute="top" constant="9" id="i9o-m2-MR5"/>
                     <constraint firstItem="vAW-yv-qRZ" firstAttribute="top" secondItem="1zM-jD-IRn" secondAttribute="top" constant="15" id="ijZ-NR-flA"/>
                     <constraint firstItem="HS6-9Y-8Do" firstAttribute="leading" secondItem="1zM-jD-IRn" secondAttribute="leading" constant="5" id="qRQ-Rr-64I"/>

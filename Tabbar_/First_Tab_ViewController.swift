@@ -65,7 +65,7 @@ class First_Tab_ViewController: UIViewController {
                                           "book_type": 2,
                                           "price": 0,
                                           "sorting": 1,
-                                        ], "height": 0, "direction": "vertical", "loaded": false],
+                                        ], "height": 0, "direction": "horizontal", "loaded": false],
                                       ["title":"Miễn phí HOT",
                                        "url": ["CMD_CODE":"getListBook",
                                            "page_index": 1,

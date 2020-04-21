@@ -7,7 +7,7 @@
 //
 
 import UIKit
-//import PDFKit
+import PDFKit
 
 class Reader_ViewController: UIViewController {
 
@@ -17,7 +17,11 @@ class Reader_ViewController: UIViewController {
     
     @IBOutlet var cover: UIImageView!
     
-//    @IBOutlet var pdfView: PDFView!
+    @IBOutlet var failLabel: UILabel!
+    
+    @IBOutlet var restart: UIButton!
+    
+    @IBOutlet var pdfView: PDFView!
     
     @IBOutlet var downLoad: DownLoad!
 
@@ -32,28 +36,33 @@ class Reader_ViewController: UIViewController {
         
         if !self.existingFile(fileName: self.config.getValueFromKey("id")) {
             didDownload()
+            showHide(show: true)
         } else {
             viewPDF()
         }
     }
     
     func viewPDF() {
+        showHide(show: false)
         let path = self.pdfFile(fileName: self.config.getValueFromKey("id"))
-//        pdfView.isHidden = false
-////        pdfView.frame = CGRect.init(x: 0, y: 0, width: CGFloat(screenWidth()), height: CGFloat(screenHeight()))
-//        if let pdfDocument = PDFDocument(url: URL(fileURLWithPath: path)) {
+        if let pdfDocument = PDFDocument(url: URL(fileURLWithPath: path)) {
 //            pdfView.autoresizesSubviews = true
-//                      pdfView.autoresizingMask = [.flexibleWidth, .flexibleHeight, .flexibleTopMargin, .flexibleLeftMargin]
-//            pdfView.displayDirection = .horizontal
-//            pdfView.autoScales = true
-//            pdfView.displayMode = IS_IPAD ? .twoUpContinuous : .singlePageContinuous
-//            pdfView.displaysPageBreaks = true
-//
-//            pdfView.maxScaleFactor = 4.0
-//            pdfView.minScaleFactor = pdfView.scaleFactorForSizeToFit
-//            pdfView.document = pdfDocument
-//
-//        }
+            pdfView.autoresizingMask = [.flexibleWidth, .flexibleHeight, .flexibleTopMargin, .flexibleLeftMargin]
+            pdfView.displayDirection = .horizontal
+            pdfView.autoScales = true
+            pdfView.displayMode = IS_IPAD ? .twoUpContinuous : .singlePageContinuous
+            pdfView.displaysPageBreaks = true
+
+            pdfView.maxScaleFactor = 1.0
+            pdfView.minScaleFactor = pdfView.scaleFactorForSizeToFit
+            pdfView.document = pdfDocument
+        } else {
+            if !self.existingFile(fileName: self.config.getValueFromKey("id")) {
+                self.deleteFile(fileName: self.pdfFile(fileName: self.config.getValueFromKey("id")))
+            }
+            showHide(show: true)
+            didDownload()
+        }
     }
     
     func didDownload() {
@@ -61,16 +70,41 @@ class Reader_ViewController: UIViewController {
                                                "name": self.config.getValueFromKey("id") as Any,
                                                "infor": self.config as Any
             ], andCompletion: { (index, download, object) in
+            if index == -1 {
+                self.failLabel.alpha = 1
+                self.restart.alpha = 1
+                self.downLoad.alpha = 0
+            }
+                
             if index == 0 {
                 self.viewPDF()
             }
         })
     }
     
+    func showHide(show: Bool) {
+        cover.alpha = show ? 1 : 0
+        downLoad.alpha = show ? 1 : 0
+        pdfView.isHidden = show
+    }
+    
+    @IBAction func didPressRestart() {
+        self.restart.alpha = 0
+        self.failLabel.alpha = 0
+        self.downLoad.alpha = 1
+        self.didDownload()
+    }
+    
     @IBAction func didPressBack() {
-           self.navigationController?.popViewController(animated: true)
-            if self.player()?.playState == Pause {
-              self.embed()
-           }
+       self.navigationController?.popViewController(animated: true)
+        if self.player()?.playState == Pause {
+          self.embed()
        }
+        if downLoad.percentComplete > 0 && downLoad.percentComplete < 100 {
+            downLoad.forceStop()
+            if !self.existingFile(fileName: self.config.getValueFromKey("id")) {
+                self.deleteFile(fileName: self.pdfFile(fileName: self.config.getValueFromKey("id")))
+            }
+        }
+    }
 }

@@ -82,21 +82,26 @@
         [refreshControl endRefreshing];
         
         [tableView performSelector:@selector(footerEndRefreshing) withObject:nil afterDelay:0.5];
-                
+                        
         if(isValidated)
         {
             NSDictionary * dict = [responseString objectFromJSONString];
             
-            totalPage = [dict[@"result"][@"total_page"] intValue];
-              
-            pageIndex += 1;
-              
-            if(!isLoadMore)
-            {
-                [dataList removeAllObjects];
-            }
+            if (![dict[@"result"] isEqual:[NSNull null]]) {
             
-            [dataList addObjectsFromArray:dict[@"result"][@"data"]];
+                totalPage = [dict[@"result"][@"total_page"] intValue];
+                  
+                pageIndex += 1;
+                  
+                if(!isLoadMore)
+                {
+                    [dataList removeAllObjects];
+                }
+                
+                [dataList addObjectsFromArray:dict[@"result"][@"data"]];
+            } else {
+                [self showToast:[[dict getValueFromKey:@"error_msg"] isEqualToString:@""] ? @"Lỗi xảy ra, mời bạn thử lại" : [dict getValueFromKey:@"error_msg"] andPos:0];
+            }
         }
         
         [tableView reloadData];

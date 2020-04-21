@@ -147,6 +147,7 @@
 		FCD979892447693D00970A4E /* Reader_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD979872447693D00970A4E /* Reader_ViewController.swift */; };
 		FCD9798A2447693D00970A4E /* Reader_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCD979882447693D00970A4E /* Reader_ViewController.xib */; };
 		FCE38C4A243E4B6C003864BC /* OwnTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE38C49243E4B6C003864BC /* OwnTableView.swift */; };
+		FCF8A5B6244F54AD00E815E8 /* Package_Reg_Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCF8A5B5244F54AD00E815E8 /* Package_Reg_Cell.xib */; };
 		FCFB516C1DD075E200D49FB2 /* Action.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCFB516A1DD075E200D49FB2 /* Action.xib */; };
 		FCFB516D1DD075E200D49FB2 /* actions.plist in Resources */ = {isa = PBXBuildFile; fileRef = FCFB516B1DD075E200D49FB2 /* actions.plist */; };
 		FCFB516F1DD086C500D49FB2 /* TT_List_Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCFB516E1DD086C500D49FB2 /* TT_List_Cell.xib */; };
@@ -338,6 +339,7 @@
 		FCD979872447693D00970A4E /* Reader_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reader_ViewController.swift; sourceTree = "<group>"; };
 		FCD979882447693D00970A4E /* Reader_ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Reader_ViewController.xib; sourceTree = "<group>"; };
 		FCE38C49243E4B6C003864BC /* OwnTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnTableView.swift; sourceTree = "<group>"; };
+		FCF8A5B5244F54AD00E815E8 /* Package_Reg_Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Package_Reg_Cell.xib; sourceTree = "<group>"; };
 		FCFB516A1DD075E200D49FB2 /* Action.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Action.xib; sourceTree = "<group>"; };
 		FCFB516B1DD075E200D49FB2 /* actions.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = actions.plist; sourceTree = "<group>"; };
 		FCFB516E1DD086C500D49FB2 /* TT_List_Cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TT_List_Cell.xib; sourceTree = "<group>"; };
@@ -608,6 +610,7 @@
 				FC130B8C2446236B00D64012 /* Package_ViewController.swift */,
 				FC130B8D2446236B00D64012 /* Package_ViewController.xib */,
 				FC130B902446270600D64012 /* Package_Cell.xib */,
+				FCF8A5B5244F54AD00E815E8 /* Package_Reg_Cell.xib */,
 			);
 			path = Account_;
 			sourceTree = "<group>";
@@ -878,6 +881,7 @@
 				FC783989243922C100470148 /* PC_Sub_Cell.xib in Resources */,
 				FCB238C2244218DB0034B40B /* Author_ViewController.xib in Resources */,
 				FC7A98D12444AD010038C226 /* Tag_Cell.xib in Resources */,
+				FCF8A5B6244F54AD00E815E8 /* Package_Reg_Cell.xib in Resources */,
 				FC7550E41DAC85DE007992DF /* HT_Feed_ViewController.xib in Resources */,
 				FCC965AB1DA5F4200025971E /* HT_Player_ViewController.xib in Resources */,
 				FC78398D2439C23700470148 /* Third_Tab_ViewController.xib in Resources */,
@@ -1215,7 +1219,7 @@
 					"$(SDKROOT)/usr/include/libxml2",
 				);
 				INFOPLIST_FILE = HearThis/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.innovatube.shoubotenken;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1244,7 +1248,7 @@
 				);
 				GCC_PREFIX_HEADER = HearThis/PrefixHeader.pch;
 				INFOPLIST_FILE = HearThis/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

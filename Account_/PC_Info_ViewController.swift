@@ -113,7 +113,7 @@ class PC_Info_ViewController: UIViewController {
                                       return
                                   }
                                                                   
-                                self.showToast("Cập nhật thông báo thành công", andPos: 0)
+                                  self.showToast("Cập nhật thông báo thành công", andPos: 0)
                                               
                               })
     }

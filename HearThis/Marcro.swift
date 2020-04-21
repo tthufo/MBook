@@ -452,6 +452,18 @@ extension UIViewController {
         return ""
     }
     
+    func deleteFile(fileName: String) {
+        guard let fileUrl = URL(string: "\(fileName)") else { return }
+
+        do {
+            try FileManager.default.removeItem(at: fileUrl)
+            print("Remove successfully")
+        }
+        catch let error as NSError {
+            print("An error took place: \(error)")
+        }
+    }
+    
     func didRequestMP3Link(info: NSDictionary) {
          let request = NSMutableDictionary.init(dictionary: [
                                                              "session":Information.token ?? "",
@@ -484,13 +496,13 @@ extension UIViewController {
         request["CMD_CODE"] = "getPackageInfo"
         LTRequest.sharedInstance()?.didRequestInfo((request as! [AnyHashable : Any]), withCache: { (cacheString) in
         }, andCompletion: { (response, errorCode, error, isValid, object) in
+            print("===========", response)
             let result = response?.dictionize() ?? [:]
             
             if result.getValueFromKey("error_code") != "0" || result["result"] is NSNull {
                 self.showToast(response?.dictionize().getValueFromKey("error_msg") == "" ? "Lỗi xảy ra, mời bạn thử lại" : response?.dictionize().getValueFromKey("error_msg"), andPos: 0)
                 return
             }
-            print("===Pack", result)
             if !self.checkRegister(package: response?.dictionize()["result"] as! NSArray, type: "AUDIOBOOK") {
                 if self.isFullEmbed() {
                     self.goDown()
@@ -506,7 +518,7 @@ extension UIViewController {
         var isReg = false //// dev test package chane to FALSE
         for dict in package {
             let expDate = ((dict as! NSDictionary).getValueFromKey("expireTime")! as NSString).date(withFormat: "dd-MM-yyyy")
-            print(expDate! > Date())
+            print("ALLOWING", expDate! > Date())
             if (dict as! NSDictionary).getValueFromKey("status") == "1" && expDate! > Date()
                 && (dict as! NSDictionary).getValueFromKey("package_code") == type {
                 isReg = true
@@ -789,4 +801,28 @@ extension UIView {
             )
         )
     }
+}
+
+import UIKit
+
+class PaddingLabel: UILabel {
+
+   @IBInspectable var topInset: CGFloat = 7.0
+   @IBInspectable var bottomInset: CGFloat = 7.0
+   @IBInspectable var leftInset: CGFloat = 7.0
+   @IBInspectable var rightInset: CGFloat = 7.0
+
+   override func drawText(in rect: CGRect) {
+      let insets = UIEdgeInsets(top: topInset, left: leftInset, bottom: bottomInset, right: rightInset)
+      super.drawText(in: rect.inset(by: insets))
+   }
+
+   override var intrinsicContentSize: CGSize {
+      get {
+         var contentSize = super.intrinsicContentSize
+         contentSize.height += topInset + bottomInset
+         contentSize.width += leftInset + rightInset
+         return contentSize
+      }
+   }
 }

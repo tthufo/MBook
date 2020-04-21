@@ -35,6 +35,8 @@ class Package_ViewController: UIViewController, MFMessageComposeViewControllerDe
         
         tableView.withCell("Package_Cell")
         
+        tableView.withCell("Package_Reg_Cell")
+
         dataList = NSMutableArray.init()
         
         tableView.refreshControl = refreshControl
@@ -92,23 +94,29 @@ extension Package_ViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier:"Package_Cell", for: indexPath)
-        
         let data = dataList![indexPath.row] as! NSDictionary
+        
+        let expDate = (data.getValueFromKey("expireTime")! as NSString).date(withFormat: "dd-MM-yyyy")
 
-        let title = self.withView(cell, tag: 1) as! UILabel
+        let isRegistered = data.getValueFromKey("status") == "1" && expDate! > Date()
         
-        let background = self.withView(cell, tag: 2) as! UIImageView
-        
-        if data.getValueFromKey("status") == "1" {
-            background.image = UIImage.init(named: "trans")
+        let cell = tableView.dequeueReusableCell(withIdentifier:isRegistered ? "Package_Reg_Cell" : "Package_Cell", for: indexPath)
+                
+        if isRegistered {
+            let title = self.withView(cell, tag: 1) as! UILabel
+                        
+            let button = self.withView(cell, tag: 2) as! UIButton
             
-            title.text = data["info"] as? String
+            button.setTitle("Đang sử dụng Gói " + data.getValueFromKey("package_code"), for: .normal)
+
+            title.text = (data["info"] as? String)! + ". Hết hạn sử dụng ngày " + data.getValueFromKey("expireTime")
         } else {
+            let title = self.withView(cell, tag: 1) as! UILabel
+
             title.text = "%@ %@".format(parameters: ((data["name"] as? String)!), ((data["price"] as? String)!))
-                   
+
             title.font = UIFont.boldSystemFont(ofSize: 15)
-           
+
             title.textColor = UIColor.white
         }
         
@@ -118,13 +126,17 @@ extension Package_ViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let data = dataList![indexPath.row] as! NSDictionary
-        print(data)
-        if (MFMessageComposeViewController.canSendText()) {
-            let controller = MFMessageComposeViewController()
-            controller.body = data.getValueFromKey("reg_keyword")
-            controller.recipients = [data.getValueFromKey("reg_shortcode")]
-            controller.messageComposeDelegate = self
-            self.present(controller, animated: true, completion: nil)
+        let expDate = (data.getValueFromKey("expireTime")! as NSString).date(withFormat: "dd-MM-yyyy")
+        let isRegistered = data.getValueFromKey("status") == "1" && expDate! > Date()
+        if !isRegistered {
+            print(data)
+            if (MFMessageComposeViewController.canSendText()) {
+                let controller = MFMessageComposeViewController()
+                controller.body = data.getValueFromKey("reg_keyword")
+                controller.recipients = [data.getValueFromKey("reg_shortcode")]
+                controller.messageComposeDelegate = self
+                self.present(controller, animated: true, completion: nil)
+            }
         }
     }
     

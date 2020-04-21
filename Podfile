@@ -3,7 +3,7 @@
 
 target 'HearThis' do
 pod 'XCDYouTubeKit', '~> 2.3.3'
-pod 'AllPod', '~> 0.1.9'
+pod 'AllPod', '~> 0.2.1'
 pod 'MarqueeLabel'
 pod 'JASidePanels', '~> 1.3'
 pod 'MYNStickyFlowLayout'

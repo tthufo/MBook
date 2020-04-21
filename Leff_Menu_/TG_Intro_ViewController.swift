@@ -49,9 +49,9 @@ class TG_Intro_ViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
                 
-        userName.text = Information.userInfo?.getValueFromKey("name") == "" ? "bcd" : Information.userInfo?.getValueFromKey("name")
+        userName.text = Information.userInfo?.getValueFromKey("name") == "" ? "Vô danh" : Information.userInfo?.getValueFromKey("name")
         
-        phoneNo.text = " " + (Information.userInfo?.getValueFromKey("phone"))! + " "
+        phoneNo.text = " " + (Information.userInfo?.getValueFromKey("phone"))! + "  "
     }
     
     @objc func didRequestNotification() {

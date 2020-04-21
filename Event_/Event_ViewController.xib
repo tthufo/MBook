@@ -44,14 +44,27 @@
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8i0-TN-8Ei">
+                            <rect key="frame" x="323" y="10" width="44" height="44"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="44" id="5lV-XZ-uiM"/>
+                                <constraint firstAttribute="height" constant="44" id="MJ8-34-DpA"/>
+                            </constraints>
+                            <state key="normal" image="ic_search"/>
+                            <connections>
+                                <action selector="didPressSearch" destination="-1" eventType="touchUpInside" id="8cH-2V-icc"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" red="0.0" green="0.60784313729999995" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstItem="0n4-Eg-Rac" firstAttribute="top" secondItem="BGV-lD-IHW" secondAttribute="top" constant="10" id="QNF-0T-wbD"/>
                         <constraint firstItem="0n4-Eg-Rac" firstAttribute="leading" secondItem="BGV-lD-IHW" secondAttribute="leading" constant="8" id="TyO-2q-fl4"/>
+                        <constraint firstItem="8i0-TN-8Ei" firstAttribute="top" secondItem="BGV-lD-IHW" secondAttribute="top" constant="10" id="ZC3-Bi-Wca"/>
                         <constraint firstItem="etz-qV-5td" firstAttribute="top" secondItem="BGV-lD-IHW" secondAttribute="top" constant="22" id="ZPY-Xh-QEZ"/>
                         <constraint firstItem="etz-qV-5td" firstAttribute="centerX" secondItem="p28-1X-exE" secondAttribute="centerX" id="cQs-rT-y7b"/>
                         <constraint firstAttribute="height" constant="64" id="tSu-if-W6N"/>
+                        <constraint firstItem="BGV-lD-IHW" firstAttribute="trailing" secondItem="8i0-TN-8Ei" secondAttribute="trailing" constant="8" id="wxV-eV-JIN"/>
                     </constraints>
                     <viewLayoutGuide key="safeArea" id="BGV-lD-IHW"/>
                 </view>
@@ -85,6 +98,7 @@
         </view>
     </objects>
     <resources>
+        <image name="ic_search" width="50.5" height="50.5"/>
         <image name="icon_back" width="33" height="33"/>
     </resources>
 </document>

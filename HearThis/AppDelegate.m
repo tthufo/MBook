@@ -29,7 +29,20 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    [[LTRequest sharedInstance] initRequest];
+//    [[LTRequest sharedInstance] initRequest];
+    
+    [[LTRequest sharedInstance] initRequestWithWatch:^(NSDictionary *response) {
+        if ([response responseForKey:@"error_code"] && [[response getValueFromKey:@"error_code"] isEqualToString:@"-1"]) {
+            if ([self.window.rootViewController isEmbed]) {
+                [self.window.rootViewController unEmbed];
+            }
+//            [Information removeInfo];
+            dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC);
+            dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                [self changeRoot:YES];
+            });
+        }
+    }];
     
     [[FirePush shareInstance] didRegister];
     
@@ -47,16 +60,16 @@
         [self addObject:@{@"history": @[]} andKey:@"historyTag"];
     }
     
-    [[DownloadManager share] loadSort];
+//    [[DownloadManager share] loadSort];
     
-    if([[self getValue:@"ipod"] boolValue])
-    {
-        [[DownloadManager share] mergeIpod];
-    }
-    else
-    {
-        [[DownloadManager share] unmergeIpod];
-    }
+//    if([[self getValue:@"ipod"] boolValue])
+//    {
+//        [[DownloadManager share] mergeIpod];
+//    }
+//    else
+//    {
+//        [[DownloadManager share] unmergeIpod];
+//    }
     
     
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleDarkContent];

@@ -114,7 +114,7 @@ class Information: NSObject {
         return offLine!
     }
     
-    static func removeInfo() {
+    @objc static func removeInfo() {
         
         self.removeValue("token")
 

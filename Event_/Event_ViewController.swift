@@ -87,6 +87,12 @@ class Event_ViewController: UIViewController, UICollectionViewDataSource, UIColl
         self.navigationController?.popViewController(animated: true)
     }
     
+    @IBAction func didPressSearch() {
+        let search = Search_ViewController.init()
+        search.config = [:]
+        self.center()?.pushViewController(search, animated: true)
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }

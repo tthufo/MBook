@@ -362,7 +362,7 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
                          
         let logged = Information.log != nil ? Information.log?.getValueFromKey("name") != "" && Information.log?.getValueFromKey("pass") != "" ? true : false : false
         
-        print(Information.log)
+        print("---++++>", Information.log)
         
         if is3G {
             self.uName.text = (phoneNumber as! String)
@@ -417,11 +417,11 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
 
             Information.saveInfo()
 
-            print(Information.userInfo)
-
             self.addValue((response?.dictionize()["result"] as! NSDictionary).getValueFromKey("session"), andKey: "token")
 
             Information.saveToken()
+            
+            print(Information.log as Any)
             
             self.didRequestPackage()   //CHECK PACKAGE
             

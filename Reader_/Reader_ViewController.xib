@@ -12,6 +12,9 @@
             <connections>
                 <outlet property="cover" destination="8JW-Su-IJf" id="tLy-Ss-WCF"/>
                 <outlet property="downLoad" destination="BXk-iU-bGX" id="fDj-bo-OJ4"/>
+                <outlet property="failLabel" destination="5Ao-PB-nqt" id="TIc-Jg-vdt"/>
+                <outlet property="pdfView" destination="1Kd-We-2c1" id="foz-n6-PAf"/>
+                <outlet property="restart" destination="I6S-Zs-M4F" id="Xw6-UP-G8G"/>
                 <outlet property="titleLabel" destination="YMH-aa-Yna" id="ddm-eN-Ycl"/>
                 <outlet property="view" destination="Xit-aY-mf9" id="cuU-c5-B1b"/>
             </connections>
@@ -75,19 +78,44 @@
                     <rect key="frame" x="0.0" y="108" width="414" height="754"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                 </view>
+                <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I6S-Zs-M4F">
+                    <rect key="frame" x="182" y="423" width="50" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="dBz-Cj-Czh"/>
+                        <constraint firstAttribute="width" constant="50" id="o6g-n8-z0Z"/>
+                    </constraints>
+                    <state key="normal" image="reload"/>
+                    <connections>
+                        <action selector="didPressRestart" destination="-1" eventType="touchUpInside" id="X5L-b8-NHV"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lỗi xảy ra, mời bạn tải lại." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Ao-PB-nqt">
+                    <rect key="frame" x="92.5" y="482" width="229" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="229" id="UXE-3o-T6X"/>
+                        <constraint firstAttribute="height" constant="21" id="iFC-Vc-Rk9"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="8JW-Su-IJf" firstAttribute="trailing" secondItem="eug-p7-zIe" secondAttribute="trailing" id="0EJ-ck-YTh"/>
                 <constraint firstItem="1Kd-We-2c1" firstAttribute="bottom" secondItem="eug-p7-zIe" secondAttribute="bottom" id="1nb-Op-T4S"/>
+                <constraint firstItem="5Ao-PB-nqt" firstAttribute="centerX" secondItem="Xit-aY-mf9" secondAttribute="centerX" id="4sk-DC-cwU"/>
                 <constraint firstItem="1Kd-We-2c1" firstAttribute="top" secondItem="tH1-YX-68o" secondAttribute="bottom" id="8Cd-RI-6eL"/>
                 <constraint firstItem="8JW-Su-IJf" firstAttribute="leading" secondItem="eug-p7-zIe" secondAttribute="leading" id="8KO-32-oU4"/>
                 <constraint firstItem="1Kd-We-2c1" firstAttribute="trailing" secondItem="eug-p7-zIe" secondAttribute="trailing" id="BR1-LG-OKs"/>
                 <constraint firstItem="oQl-Jm-Jd2" firstAttribute="bottom" secondItem="eug-p7-zIe" secondAttribute="bottom" id="Dxa-he-48X"/>
+                <constraint firstItem="I6S-Zs-M4F" firstAttribute="centerY" secondItem="Xit-aY-mf9" secondAttribute="centerY" id="ERQ-J3-5ol"/>
+                <constraint firstItem="I6S-Zs-M4F" firstAttribute="centerX" secondItem="Xit-aY-mf9" secondAttribute="centerX" id="EtP-gb-fU9"/>
                 <constraint firstItem="tH1-YX-68o" firstAttribute="trailing" secondItem="eug-p7-zIe" secondAttribute="trailing" id="HoS-V6-Hez"/>
                 <constraint firstItem="oQl-Jm-Jd2" firstAttribute="trailing" secondItem="eug-p7-zIe" secondAttribute="trailing" id="Jl0-ON-LfE"/>
                 <constraint firstItem="BXk-iU-bGX" firstAttribute="centerY" secondItem="Xit-aY-mf9" secondAttribute="centerY" id="KjT-dn-krh"/>
                 <constraint firstItem="tH1-YX-68o" firstAttribute="leading" secondItem="eug-p7-zIe" secondAttribute="leading" id="PJl-ip-Glv"/>
+                <constraint firstItem="5Ao-PB-nqt" firstAttribute="top" secondItem="I6S-Zs-M4F" secondAttribute="bottom" constant="9" id="VSc-2P-UZp"/>
                 <constraint firstItem="1Kd-We-2c1" firstAttribute="leading" secondItem="eug-p7-zIe" secondAttribute="leading" id="Yfl-Z0-G6s"/>
                 <constraint firstItem="8JW-Su-IJf" firstAttribute="bottom" secondItem="eug-p7-zIe" secondAttribute="bottom" id="bix-1j-XfK"/>
                 <constraint firstItem="BXk-iU-bGX" firstAttribute="centerX" secondItem="Xit-aY-mf9" secondAttribute="centerX" id="cKD-gW-kkB"/>
@@ -102,5 +130,6 @@
     </objects>
     <resources>
         <image name="icon_back" width="33" height="33"/>
+        <image name="reload" width="42.5" height="42.5"/>
     </resources>
 </document>
