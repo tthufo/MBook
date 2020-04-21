@@ -478,17 +478,17 @@ UIBackgroundTaskIdentifier bgTask;
             ((UICollectionView*)v).contentInset = UIEdgeInsetsMake(0, 0, ([self isEmbed] ? 107 : [self hasAds] ? 52 : 54) + embed, 0);
         }
         
-            if([v isKindOfClass:[UIButton class]] && v.tag == 99881)
-            {
+        if([v isKindOfClass:[UIButton class]] && v.tag == 99881)
+        {
 
-                [UIView animateWithDuration:0.3 animations:^{
-                    
-                    v.frame = CGRectMake(0, screenHeight1 - 175 - embed, 50, 50);
-                    
-                }];
+            [UIView animateWithDuration:0.3 animations:^{
                 
-                break;
-            }
+                v.frame = CGRectMake(0, screenHeight1 - 175 - embed, 50, 50);
+                
+            }];
+            
+            break;
+        }
     }
 }
 
@@ -514,6 +514,14 @@ UIBackgroundTaskIdentifier bgTask;
         
         [self PLAYER].topView.alpha = 0;
         
+        [self PLAYER].controlView.alpha = 1;
+             
+        [self PLAYER].controlViewIpad.alpha = 1;
+        
+        for (UIView * v in  [self PLAYER].controlViewIpad.subviews) {
+            v.alpha = v.tag == 1010101 ? 0.6 : 1;
+        }
+        
         ((UIImageView*)[[self PLAYER] playerInfo][@"img"]).hidden = NO;
         
     } completion:^(BOOL finished) {
@@ -535,9 +543,9 @@ UIBackgroundTaskIdentifier bgTask;
 
         rect.origin.y = screenHeight1 - ([[self TOPVIEWCONTROLER] isKindOfClass:[UITabBarController class]] ? 115 : 65) - ( IS_IPAD ? 1 : [self isIphoneX] ? 35 : 0) - embed;
 
-        rect.origin.x = IS_IPAD ? 100 : 0;
+        rect.origin.x = IS_IPAD ? 150 : 0;
              
-        rect.size.width = screenWidth1 - (IS_IPAD ? 200 : 0);
+        rect.size.width = screenWidth1 - (IS_IPAD ? 300 : 0);
         
         rect.size.height = screenHeight1 - (IS_IPAD ? 0 : [self isIphoneX] ? 40 : 0);
 
@@ -550,6 +558,14 @@ UIBackgroundTaskIdentifier bgTask;
         [[self PLAYER].view withBorder:@{@"Bcorner":@(0)}];
         
         [self PLAYER].topView.alpha = 1;
+        
+        [self PLAYER].controlView.alpha = 0;
+        
+        [self PLAYER].controlViewIpad.alpha = 0;
+        
+        for (UIView * v in  [self PLAYER].controlViewIpad.subviews) {
+            v.alpha = 0;
+        }
         
         ((UIImageView*)[[self PLAYER] playerInfo][@"img"]).hidden = NO;
         

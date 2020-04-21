@@ -38,7 +38,7 @@
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Kh6-aq-UdX">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="197"/>
                         </imageView>
-                        <view alpha="0.60000002384185791" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xce-mP-OLK">
+                        <view alpha="0.60000002384185791" tag="1010101" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xce-mP-OLK">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="197"/>
                             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
@@ -160,7 +160,7 @@
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8aS-JL-qOE">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="197"/>
                         </imageView>
-                        <view alpha="0.59999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h7V-TM-wUm">
+                        <view alpha="0.59999999999999998" tag="1010101" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h7V-TM-wUm">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="197"/>
                             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>

@@ -496,7 +496,9 @@ extension UIViewController {
     func checkRegister(package: NSArray, type: String) -> Bool {
         var isReg = true //// dev test package chane to false
         for dict in package {
-            if (dict as! NSDictionary).getValueFromKey("status") == "1"
+            let expDate = ((dict as! NSDictionary).getValueFromKey("expireTime")! as NSString).date(withFormat: "dd-MM-yyyy")
+            print(expDate! > Date())
+            if (dict as! NSDictionary).getValueFromKey("status") == "1" && expDate! > Date()
                 && (dict as! NSDictionary).getValueFromKey("package_code") == type {
                 isReg = true
                 break

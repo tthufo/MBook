@@ -53,7 +53,7 @@
 
 @implementation HT_Player_ViewController
 
-@synthesize playerView, playState, topView, uID;
+@synthesize playerView, playState, topView, uID, controlView, controlViewIpad;
 
 - (void)viewDidLoad
 {
