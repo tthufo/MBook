@@ -92,6 +92,7 @@ class PC_ChangePass_ViewController: UIViewController, UITextFieldDelegate {
         if self.isEmbed() {
            bottomHeight.constant = 100
         }
+        
         kb.keyboard { (height, isOn) in
             self.tableView.contentInset = UIEdgeInsets(top: 64, left: 0, bottom: isOn ? (height - 100) : 0, right: 0)
         }

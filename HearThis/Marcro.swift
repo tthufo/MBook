@@ -503,7 +503,7 @@ extension UIViewController {
     }
     
     func checkRegister(package: NSArray, type: String) -> Bool {
-        var isReg = true //// dev test package chane to false
+        var isReg = false //// dev test package chane to FALSE
         for dict in package {
             let expDate = ((dict as! NSDictionary).getValueFromKey("expireTime")! as NSString).date(withFormat: "dd-MM-yyyy")
             print(expDate! > Date())

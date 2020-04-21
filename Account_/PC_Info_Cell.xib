@@ -53,7 +53,7 @@
                         <color key="onTintColor" red="0.13725490200000001" green="0.33333333329999998" blue="0.87058823529999996" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="thumbTintColor" red="0.0" green="0.59999999999999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </switch>
-                    <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" tag="15" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="drop_arrow" translatesAutoresizingMaskIntoConstraints="NO" id="0bt-QE-79P">
+                    <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" tag="15" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_right" translatesAutoresizingMaskIntoConstraints="NO" id="0bt-QE-79P">
                         <rect key="frame" x="279" y="24" width="25" height="25"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="25" id="0ou-uq-R4O"/>
@@ -83,6 +83,6 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="drop_arrow" width="33" height="33"/>
+        <image name="ic_right" width="33" height="33"/>
     </resources>
 </document>

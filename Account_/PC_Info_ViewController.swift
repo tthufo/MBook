@@ -194,6 +194,10 @@ extension PC_Info_ViewController: UITableViewDataSource, UITableViewDelegate {
         
         sw.alpha = data["content"] as? String == "sw" ? 1 : 0
         
+        let arrow = self.withView(cell, tag: 15) as! UIImageView
+
+        arrow.isHidden = false
+        
         return cell
     }
     
