@@ -63,6 +63,8 @@ class Package_ViewController: UIViewController, MFMessageComposeViewControllerDe
                return
            }
         
+        print(result)
+        
            self.dataList.removeAllObjects()
 
            let data = (result["result"] as! NSArray)

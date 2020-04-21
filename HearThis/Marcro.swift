@@ -288,6 +288,14 @@ extension UITapGestureRecognizer {
 }
 
 extension String {
+    var isInt: Bool {
+        return Int(self) != nil
+    }
+    
+    var isNumber: Bool {
+           return !isEmpty && rangeOfCharacter(from: CharacterSet.decimalDigits.inverted) == nil
+       }
+    
     func contains(find: String) -> Bool{
         return self.range(of: find) != nil
     }
@@ -482,6 +490,7 @@ extension UIViewController {
                 self.showToast(response?.dictionize().getValueFromKey("error_msg") == "" ? "Lỗi xảy ra, mời bạn thử lại" : response?.dictionize().getValueFromKey("error_msg"), andPos: 0)
                 return
             }
+            print("===Pack", result)
             if !self.checkRegister(package: response?.dictionize()["result"] as! NSArray, type: "AUDIOBOOK") {
                 if self.isFullEmbed() {
                     self.goDown()

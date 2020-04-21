@@ -12,7 +12,6 @@
             <connections>
                 <outlet property="cover" destination="8JW-Su-IJf" id="tLy-Ss-WCF"/>
                 <outlet property="downLoad" destination="BXk-iU-bGX" id="fDj-bo-OJ4"/>
-                <outlet property="pdfView" destination="1Kd-We-2c1" id="Szp-pb-gf2"/>
                 <outlet property="titleLabel" destination="YMH-aa-Yna" id="ddm-eN-Ycl"/>
                 <outlet property="view" destination="Xit-aY-mf9" id="cuU-c5-B1b"/>
             </connections>

@@ -40,6 +40,8 @@ class PC_Forgot_ViewController: UIViewController , UITextFieldDelegate {
     
     let topGap = IS_IPHONE_5 ? 80 : 120
     
+    var isValid: Bool = true
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -176,29 +178,75 @@ class PC_Forgot_ViewController: UIViewController , UITextFieldDelegate {
         self.navigationController?.popViewController(animated: true)
     }
     
+    func convertPhone() -> String {
+       let phone = uName.text
+       if phone?.substring(to: 2) == "84" {
+           return phone!
+       } else if phone?.substring(to: 1) == "0"  {
+           return "84" + (phone?.dropFirst())!
+       }
+       return phone!
+    }
+    
     @IBAction func didPressSubmit() {
         self.view.endEditing(true)
-        LTRequest.sharedInstance()?.didRequestInfo(["CMD_CODE":"reset",
-                                                    "phone":uName.text as Any,
+        isValid = self.checkPhone()
+        if !isValid {
+            validPhone()
+            return
+        }
+        LTRequest.sharedInstance()?.didRequestInfo(["CMD_CODE":"forgetPassword",
+                                                    "username":convertPhone(),
                                                     "overrideAlert":"1",
                                                     "overrideLoading":"1",
-                                                    "postFix":"auth/password/reset",
                                                     "host":self], withCache: { (cacheString) in
         }, andCompletion: { (response, errorCode, error, isValid, object) in
             let result = response?.dictionize() ?? [:]
                                     
-            if result.getValueFromKey("status") != "OK" {
-                self.showToast(response?.dictionize().getValueFromKey("data") == "" ? "Lỗi xảy ra, mời bạn thử lại" : response?.dictionize().getValueFromKey("data"), andPos: 0)
+            if result.getValueFromKey("error_code") != "0" || result["result"] is NSNull {
+               self.showToast(response?.dictionize().getValueFromKey("error_msg") == "" ? "Lỗi xảy ra, mời bạn thử lại" : response?.dictionize().getValueFromKey("error_msg"), andPos: 0)
                 return
             }
             
-            self.showToast("Lấy lại mật khẩu thành công".format(parameters: self.uName.text!), andPos: 0)
+            self.showToast("Lấy lại mật khẩu thành công. Mật khẩu mới sẽ đưởi gửi về số điện thoại %@".format(parameters: self.uName.text!), andPos: 0)
 
             self.didPressBack()
         })
     }
     
+    func checkPhone() -> Bool {
+        let phone = uName.text
+        if phone!.count > 10 {
+            if phone?.substring(to: 2) == "84" {
+                if phone?.count == 11 {
+                    return true
+                } else {
+                    return false
+                }
+            } else {
+                return false
+            }
+        } else {
+            if phone!.count == 10 {
+                if phone?.substring(to: 1) != "0" {
+                    return false
+                } else {
+                    return true
+                }
+            } else {
+                return false
+            }
+        }
+    }
+    
+    func validPhone() {
+          uNameErr.alpha = isValid ? 0 : 1
+          uNameBg.backgroundColor = isValid ? UIColor.black : UIColor.red
+      }
+    
     @objc func textIsChanging(_ textField:UITextField) {
+        isValid = true
+        validPhone()
 //        let isEmail: Bool = uName.text?.count != 0 && (uName.text?.isValidEmail())!
 //
 //        uNameBg.backgroundColor = isEmail ? AVHexColor.color(withHexString: "#F2F2F2") : .red

@@ -160,8 +160,8 @@
                         <outlet property="delegate" destination="-1" id="Mcg-x8-Hlu"/>
                     </connections>
                 </textField>
-                <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email chưa đúng định dạng" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pg9-pn-h9I">
-                    <rect key="frame" x="20" y="113" width="305" height="21"/>
+                <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Số điện thoại không chính xác" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pg9-pn-h9I">
+                    <rect key="frame" x="20" y="113" width="366" height="21"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="YRr-K8-Z3P"/>
                     </constraints>
@@ -180,9 +180,9 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0/10" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yIL-Jc-qct">
-                    <rect key="frame" x="333" y="113" width="61" height="21"/>
+                    <rect key="frame" x="394" y="113" width="0.0" height="21"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="61" id="IkW-WU-evz"/>
+                        <constraint firstAttribute="width" id="IkW-WU-evz"/>
                         <constraint firstAttribute="height" constant="21" id="U7o-g7-dhO"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>

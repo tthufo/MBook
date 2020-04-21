@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import PDFKit
+//import PDFKit
 
 class Reader_ViewController: UIViewController {
 
@@ -17,7 +17,7 @@ class Reader_ViewController: UIViewController {
     
     @IBOutlet var cover: UIImageView!
     
-    @IBOutlet var pdfView: PDFView!
+//    @IBOutlet var pdfView: PDFView!
     
     @IBOutlet var downLoad: DownLoad!
 
@@ -39,21 +39,21 @@ class Reader_ViewController: UIViewController {
     
     func viewPDF() {
         let path = self.pdfFile(fileName: self.config.getValueFromKey("id"))
-        pdfView.isHidden = false
-//        pdfView.frame = CGRect.init(x: 0, y: 0, width: CGFloat(screenWidth()), height: CGFloat(screenHeight()))
-        if let pdfDocument = PDFDocument(url: URL(fileURLWithPath: path)) {
-            pdfView.autoresizesSubviews = true
-                      pdfView.autoresizingMask = [.flexibleWidth, .flexibleHeight, .flexibleTopMargin, .flexibleLeftMargin]
-            pdfView.displayDirection = .horizontal
-            pdfView.autoScales = true
-            pdfView.displayMode = IS_IPAD ? .twoUpContinuous : .singlePageContinuous
-            pdfView.displaysPageBreaks = true
-
-            pdfView.maxScaleFactor = 4.0
-            pdfView.minScaleFactor = pdfView.scaleFactorForSizeToFit
-            pdfView.document = pdfDocument
-
-        }
+//        pdfView.isHidden = false
+////        pdfView.frame = CGRect.init(x: 0, y: 0, width: CGFloat(screenWidth()), height: CGFloat(screenHeight()))
+//        if let pdfDocument = PDFDocument(url: URL(fileURLWithPath: path)) {
+//            pdfView.autoresizesSubviews = true
+//                      pdfView.autoresizingMask = [.flexibleWidth, .flexibleHeight, .flexibleTopMargin, .flexibleLeftMargin]
+//            pdfView.displayDirection = .horizontal
+//            pdfView.autoScales = true
+//            pdfView.displayMode = IS_IPAD ? .twoUpContinuous : .singlePageContinuous
+//            pdfView.displaysPageBreaks = true
+//
+//            pdfView.maxScaleFactor = 4.0
+//            pdfView.minScaleFactor = pdfView.scaleFactorForSizeToFit
+//            pdfView.document = pdfDocument
+//
+//        }
     }
     
     func didDownload() {

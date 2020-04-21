@@ -48,8 +48,6 @@ class Author_Detail_ViewController: UIViewController, UICollectionViewDataSource
                         
         collectionView.withCell("Author_Bio_Cell")
         
-        collectionView.withCell("Author_Web_Cell")
-
 
         collectionView.withCell("TG_Book_Detail_Cell")
 

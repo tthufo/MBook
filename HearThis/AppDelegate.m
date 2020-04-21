@@ -49,7 +49,6 @@
     
     [[DownloadManager share] loadSort];
     
-    
     if([[self getValue:@"ipod"] boolValue])
     {
         [[DownloadManager share] mergeIpod];
@@ -522,6 +521,10 @@ UIBackgroundTaskIdentifier bgTask;
             v.alpha = v.tag == 1010101 ? 0.6 : 1;
         }
         
+        for (UIView * v in  [self PLAYER].controlView.subviews) {
+            v.alpha = v.tag == 1010101 ? 0.6 : 1;
+        }
+        
         ((UIImageView*)[[self PLAYER] playerInfo][@"img"]).hidden = NO;
         
     } completion:^(BOOL finished) {
@@ -564,6 +567,10 @@ UIBackgroundTaskIdentifier bgTask;
         [self PLAYER].controlViewIpad.alpha = 0;
         
         for (UIView * v in  [self PLAYER].controlViewIpad.subviews) {
+            v.alpha = 0;
+        }
+        
+        for (UIView * v in  [self PLAYER].controlView.subviews) {
             v.alpha = 0;
         }
         

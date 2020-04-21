@@ -29,6 +29,8 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
     @IBOutlet var submit: UIButton!
     
     @IBOutlet var uNameErr: UILabel!
+    
+    @IBOutlet var uNameView: UIView!
 
     @IBOutlet var passErr: UILabel!
     
@@ -41,6 +43,8 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
     var loginCover: UIView!
     
     var isCheck: Bool!
+    
+    var isValid: Bool = true
     
     var kb: KeyBoard!
     
@@ -60,6 +64,7 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
         self.view.action(forTouch: [:]) { (obj) in
             self.view.endEditing(true)
         }
+        
         uName.addTarget(self, action: #selector(textIsChanging), for: .editingChanged)
         pass.addTarget(self, action: #selector(textIsChanging), for: .editingChanged)
         
@@ -76,15 +81,11 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
         uName.text = ""
-        
         pass.text = ""
-        
         self.submit.isEnabled = self.uName.text?.count != 0 && self.pass.text?.count != 0
         self.submit.alpha = self.uName.text?.count != 0 && self.pass.text?.count != 0 ? 1 : 0.5
         self.sumitText.alpha = self.uName.text?.count != 0 && self.pass.text?.count != 0 ? 1 : 0.5
-
         kb.keyboardOff()
     }
     
@@ -119,7 +120,9 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
             if let content = element![0] as? TFHppleElement {
                 let phoneNumber = content.content.replacingOccurrences(of: "Xin chào: ", with: "")
                 
-                if Int(phoneNumber) == nil {
+                print("-->", phoneNumber)
+                
+                if !phoneNumber.isNumber {
                     self.setUp(phoneNumber: "")
                 } else {
                     self.setUp(phoneNumber: phoneNumber)
@@ -129,6 +132,7 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
     }
     
     func setUp(phoneNumber: Any) {
+                
         let logged = Information.token != nil && Information.token != ""
                 
         let bbgg = Information.bbgg != nil && Information.bbgg != ""
@@ -182,9 +186,11 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
                                     self.submit.alpha = self.uName.text?.count != 0 && self.pass.text?.count != 0 ? 1 : 0.5
                                     self.sumitText.alpha = self.uName.text?.count != 0 && self.pass.text?.count != 0 ? 1 : 0.5
                                 }
-                                if self.logOut == "logIn" {
-                                    self.didPressSubmit(phoneNumber: phoneNumber as! String)
-                                }
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.6, execute: {
+                                   if self.logOut == "logIn" {
+                                       self.didPressSubmit(phoneNumber: phoneNumber as! String)
+                                   }
+                                })
                                 self.setUpLogin()
                             }
                             return
@@ -244,9 +250,11 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
                                     self.submit.alpha = self.uName.text?.count != 0 && self.pass.text?.count != 0 ? 1 : 0.5
                                     self.sumitText.alpha = self.uName.text?.count != 0 && self.pass.text?.count != 0 ? 1 : 0.5
                                 }
-                                if self.logOut == "logIn" {
-                                    self.didPressSubmit(phoneNumber: phoneNumber as! String)
-                                }
+                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.6, execute: {
+                                       if self.logOut == "logIn" {
+                                       self.didPressSubmit(phoneNumber: phoneNumber as! String)
+                                   }
+                                })
                                 self.setUpLogin()
                             }
                         }
@@ -306,6 +314,41 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
 //        self.navigationController?.pushViewController(forgot, animated: true)
     }
     
+    func checkPhone() -> Bool {
+        let phone = uName.text
+        if phone!.count > 10 {
+            if phone?.substring(to: 2) == "84" {
+                if phone?.count == 11 {
+                    return true
+                } else {
+                    return false
+                }
+            } else {
+                return false
+            }
+        } else {
+            if phone!.count == 10 {
+                if phone?.substring(to: 1) != "0" {
+                    return false
+                } else {
+                    return true
+                }
+            } else {
+                return false
+            }
+        }
+    }
+    
+    func convertPhone() -> String {
+        let phone = uName.text
+        if phone?.substring(to: 2) == "84" {
+            return phone!
+        } else if phone?.substring(to: 1) == "0"  {
+            return "84" + (phone?.dropFirst())!
+        }
+        return phone!
+    }
+    
     @IBAction func didPressSubmit(phoneNumber: Any) {
         self.view.endEditing(true)
         var is3G = false
@@ -316,30 +359,37 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
                 is3G = true
             }
         }
-                        
-        let logged = Information.token != nil && Information.token != ""
+                         
+        let logged = Information.log != nil ? Information.log?.getValueFromKey("name") != "" && Information.log?.getValueFromKey("pass") != "" ? true : false : false
+        
+        print(Information.log)
         
         if is3G {
-            requestLogin(request: ["username":(uName.text!) as Any,
-//                                   "password":"",
+            self.uName.text = (phoneNumber as! String)
+            requestLogin(request: ["username":phoneNumber,
 //                                   "password":pass.text as Any,
                                    "login_type":"3G"])
             print("3G")
         } else {
             if logged {
-                requestLogin(request: ["username":(uName.text!) as Any,
+                requestLogin(request: ["username":convertPhone(),
                                        "password":pass.text as Any,
                                        "login_type":"WIFI"])
                 print("LOGIN")
+            } else {
+                print("BUTTON")
+                if phoneNumber is UIButton {
+                    isValid = self.checkPhone()
+                    if !isValid {
+                        validPhone()
+                        return
+                    }
+                    print(convertPhone())
+                    requestLogin(request: ["username":convertPhone(),
+                                            "password":pass.text as Any,
+                                            "login_type":"WIFI"])
+                }
             }
-            print("NORMAL")
-        }
-        
-        if phoneNumber is UIButton {
-            requestLogin(request: ["username":(uName.text!) as Any,
-                                    "password":pass.text as Any,
-                                    "login_type":"WIFI"])
-            print("BUTTON")
         }
     }
     
@@ -357,7 +407,7 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
             let result = response?.dictionize() ?? [:]
                                         
             if result.getValueFromKey("error_code") != "0" || result["result"] is NSNull {
-                self.showToast(response?.dictionize().getValueFromKey("error_msg") == "" ? "Lỗi xảy ra, mời bạn thử lại" : response?.dictionize().getValueFromKey("error_msg"), andPos: 0)
+                self.showToast("Không có thông tin tài khoản. Liên hệ quản trị viên để được tài trợ.", andPos: 0)
                 return
             }
                                     
@@ -373,9 +423,9 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
 
             Information.saveToken()
             
-//            self.didRequestPackage()   CHECK PACKAGE
+            self.didRequestPackage()   //CHECK PACKAGE
             
-            (UIApplication.shared.delegate as! AppDelegate).changeRoot(false) //CHECK PACKAGE
+//            (UIApplication.shared.delegate as! AppDelegate).changeRoot(false) //CHECK PACKAGE
         })
     }
     
@@ -404,7 +454,8 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
     func checkRegister(package: NSArray) -> Bool {
         var isReg = false
         for dict in package {
-            if (dict as! NSDictionary).getValueFromKey("status") == "1" {
+            let expDate = ((dict as! NSDictionary).getValueFromKey("expireTime")! as NSString).date(withFormat: "dd-MM-yyyy")
+            if (dict as! NSDictionary).getValueFromKey("status") == "1" && expDate! > Date() {
                 isReg = true
                 break
             }
@@ -422,7 +473,14 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
         return true
     }
     
+    func validPhone() {
+        uNameErr.alpha = isValid ? 0 : 1
+        uNameView.backgroundColor = isValid ? UIColor.black : UIColor.red
+    }
+    
     @objc func textIsChanging(_ textField:UITextField) {
+        isValid = true
+        validPhone()
         submit.isEnabled = uName.text?.count != 0 && pass.text?.count != 0
         submit.alpha = uName.text?.count != 0 && pass.text?.count != 0 ? 1 : 0.5
     }
