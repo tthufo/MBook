@@ -24,6 +24,8 @@
                 <outlet property="phone" destination="4TG-yY-Ruw" id="IPg-QJ-EjM"/>
                 <outlet property="rePassBG" destination="rS3-U7-S5i" id="4Lq-PM-G3Q"/>
                 <outlet property="rePassError" destination="KOL-GT-sok" id="SSo-b4-UsZ"/>
+                <outlet property="sideGapBottomLeft" destination="H5S-jZ-oC4" id="XWL-La-QXR"/>
+                <outlet property="sideGapBottomRight" destination="Tht-93-2Tt" id="S8Z-kd-Jgi"/>
                 <outlet property="sideGapLeft" destination="GNA-k7-JRf" id="xaz-8B-sW1"/>
                 <outlet property="sideGapRight" destination="6oF-5R-zLh" id="xTM-Fp-TPs"/>
                 <outlet property="submit" destination="ZBX-Aa-Lpo" id="qdd-sw-9cd"/>

@@ -500,6 +500,10 @@ UIBackgroundTaskIdentifier bgTask;
         
         rect.origin.y = IS_IPAD ? 0 : [self isIphoneX] ? 40 : 0;
         
+        rect.origin.x = IS_IPAD ? 0 : 0;
+        
+        rect.size.width = screenWidth1 - (IS_IPAD ? 0 : 0);
+        
         rect.size.height = screenHeight1 - (IS_IPAD ? 0 : [self isIphoneX] ? 40 : 0);
         
         [self PLAYER].view.backgroundColor = [UIColor whiteColor];
@@ -530,6 +534,12 @@ UIBackgroundTaskIdentifier bgTask;
         CGRect rect = [self PLAYER].view.frame;
 
         rect.origin.y = screenHeight1 - ([[self TOPVIEWCONTROLER] isKindOfClass:[UITabBarController class]] ? 115 : 65) - ( IS_IPAD ? 1 : [self isIphoneX] ? 35 : 0) - embed;
+
+        rect.origin.x = IS_IPAD ? 100 : 0;
+             
+        rect.size.width = screenWidth1 - (IS_IPAD ? 200 : 0);
+        
+        rect.size.height = screenHeight1 - (IS_IPAD ? 0 : [self isIphoneX] ? 40 : 0);
 
         rect.size.height = 65;
         

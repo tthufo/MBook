@@ -109,7 +109,7 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
             title.alpha = 1 - parallaxHeader.progress
             avatar.alpha = parallaxHeader.progress
             name.alpha = parallaxHeader.progress
-            read.alpha = parallaxHeader.progress
+//            read.alpha = parallaxHeader.progress
             description.alpha = parallaxHeader.progress
         }
         

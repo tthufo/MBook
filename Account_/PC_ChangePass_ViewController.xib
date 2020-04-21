@@ -21,6 +21,8 @@
                 <outlet property="reNewBg" destination="D6l-IG-goW" id="hRK-k7-hby"/>
                 <outlet property="reNewPass" destination="j2F-L0-Ayu" id="yZy-af-4Uk"/>
                 <outlet property="reNewPassErr" destination="W0R-Ve-mLp" id="RE1-21-R2X"/>
+                <outlet property="sideGapBottomLeft" destination="PjN-YN-sEi" id="4yf-Be-bRT"/>
+                <outlet property="sideGapBottomRight" destination="d3C-V7-bPH" id="fJj-C0-bam"/>
                 <outlet property="sideGapLeft" destination="jzl-jn-yb5" id="cfb-2R-WhN"/>
                 <outlet property="sideGapRight" destination="3DX-3S-2Bm" id="sbl-OV-mIW"/>
                 <outlet property="submit" destination="tYc-ER-5me" id="xGr-Fr-w1i"/>
