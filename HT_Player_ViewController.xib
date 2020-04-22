@@ -301,7 +301,7 @@
                                 <outletCollection property="gestureRecognizers" destination="Nlj-9U-b5p" appends="YES" id="0Cm-G1-xCm"/>
                             </connections>
                         </imageView>
-                        <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8uT-eY-7rd">
+                        <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8uT-eY-7rd" customClass="MarqueeLabel" customModule="MarqueeLabel">
                             <rect key="frame" x="66" y="7" width="123.5" height="51"/>
                             <gestureRecognizers/>
                             <constraints>

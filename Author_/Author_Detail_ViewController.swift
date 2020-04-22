@@ -198,6 +198,10 @@ class Author_Detail_ViewController: UIViewController, UICollectionViewDataSource
             self.collectionView.reloadSections(IndexSet(integer: 2))
 
             self.adjustInset()
+            
+            UIView.animate(withDuration: 0.3) {
+                self.collectionView.alpha = 1
+            }
         })
     }
     

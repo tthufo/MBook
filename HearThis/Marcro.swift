@@ -496,7 +496,6 @@ extension UIViewController {
         request["CMD_CODE"] = "getPackageInfo"
         LTRequest.sharedInstance()?.didRequestInfo((request as! [AnyHashable : Any]), withCache: { (cacheString) in
         }, andCompletion: { (response, errorCode, error, isValid, object) in
-            print("===========", response)
             let result = response?.dictionize() ?? [:]
             
             if result.getValueFromKey("error_code") != "0" || result["result"] is NSNull {
@@ -515,7 +514,7 @@ extension UIViewController {
     }
     
     func checkRegister(package: NSArray, type: String) -> Bool {
-        var isReg = false //// dev test package change to true
+        var isReg = Information.check == "1" ? false : true //// dev test package change to true
         for dict in package {
             let expDate = ((dict as! NSDictionary).getValueFromKey("expireTime")! as NSString).date(withFormat: "dd-MM-yyyy")
             print("ALLOWING", expDate! > Date())

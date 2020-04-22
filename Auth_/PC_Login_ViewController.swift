@@ -112,21 +112,25 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
     }
     
     func getPhoneNumber() {
-        LTRequest.sharedInstance()?.didRequestInfo(["absoluteLink":"http://mebook.tgphim.vn/header.php/", "overrideError":"1"], withCache: { (cache) in
+        LTRequest.sharedInstance()?.didRequestInfo(["absoluteLink":"http://mebook.tgphim.vn/header.php/", "overrideAlert":"1", "overrideError":"1"], withCache: { (cache) in
         }, andCompletion: { (response, errorCode, error, isValid, object) in
-            
-            let hpple = TFHpple.init(htmlData: response!.data(using: .utf8))
-            
-            let element = hpple?.search(withXPathQuery: "//i[@class='desktop']")
-            
-            if let content = element![0] as? TFHppleElement {
-                let phoneNumber = content.content.replacingOccurrences(of: "Xin chào: ", with: "")
-                                
-                if !phoneNumber.isNumber {
-                    self.setUp(phoneNumber: "")
-                } else {
-                    self.setUp(phoneNumber: phoneNumber)
+                        
+            if errorCode == "200" {
+                let hpple = TFHpple.init(htmlData: response!.data(using: .utf8))
+    
+                let element = hpple?.search(withXPathQuery: "//i[@class='desktop']")
+    
+                if let content = element![0] as? TFHppleElement {
+                    let phoneNumber = content.content.replacingOccurrences(of: "Xin chào: ", with: "")
+    
+                    if !phoneNumber.isNumber {
+                        self.setUp(phoneNumber: "")
+                    } else {
+                        self.setUp(phoneNumber: phoneNumber)
+                    }
                 }
+            } else {
+                self.setUp(phoneNumber: "")
             }
         })
     }
@@ -433,6 +437,7 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
                                            
             if result.getValueFromKey("error_code") != "0" || result["result"] is NSNull {
                self.showToast(response?.dictionize().getValueFromKey("error_msg") == "" ? "Lỗi xảy ra, mời bạn thử lại" : response?.dictionize().getValueFromKey("error_msg"), andPos: 0)
+                (UIApplication.shared.delegate as! AppDelegate).changeRoot(false) //////////////////////////////////////// CHECK THÍ SHIT
                return
             }
         

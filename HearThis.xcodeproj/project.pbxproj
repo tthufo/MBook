@@ -386,10 +386,10 @@
 		FC0A8FA8243776D7001A75AF /* Auth_ */ = {
 			isa = PBXGroup;
 			children = (
-				FC0A8FAF2437770E001A75AF /* PC_Forgot_ViewController.swift */,
-				FC0A8FAB2437770D001A75AF /* PC_Forgot_ViewController.xib */,
 				FC0A8FAC2437770D001A75AF /* PC_Login_ViewController.swift */,
 				FC0A8FAE2437770D001A75AF /* PC_Login_ViewController.xib */,
+				FC0A8FAF2437770E001A75AF /* PC_Forgot_ViewController.swift */,
+				FC0A8FAB2437770D001A75AF /* PC_Forgot_ViewController.xib */,
 				FC0A8FAA2437770C001A75AF /* PC_Register_ViewController.swift */,
 				FC0A8FAD2437770D001A75AF /* PC_Register_ViewController.xib */,
 			);
@@ -409,7 +409,7 @@
 				FC78396D2438F16500470148 /* Detail_ */,
 				FC7839652438EA3400470148 /* Tabbar_ */,
 				FC0A8FA8243776D7001A75AF /* Auth_ */,
-				FCAD4AA22434FCFA00387AF6 /* Leff_Menu_ */,
+				FCAD4AA22434FCFA00387AF6 /* Left_Menu_ */,
 				FC91B72C243120E400AA6671 /* MPlayer_ */,
 				FC7550F21DACDB48007992DF /* Menu_ */,
 				FC7550E51DAC8684007992DF /* More_ */,
@@ -655,7 +655,7 @@
 			path = MPlayer_;
 			sourceTree = "<group>";
 		};
-		FCAD4AA22434FCFA00387AF6 /* Leff_Menu_ */ = {
+		FCAD4AA22434FCFA00387AF6 /* Left_Menu_ */ = {
 			isa = PBXGroup;
 			children = (
 				FC78398324391F6700470148 /* TG_Intro_ViewController.swift */,
@@ -668,7 +668,7 @@
 				FCAD4AA42434FD1A00387AF6 /* SC_Menu.xib */,
 				FCAD4AA32434FD1A00387AF6 /* MenuList.plist */,
 			);
-			path = Leff_Menu_;
+			path = Left_Menu_;
 			sourceTree = "<group>";
 		};
 		FCB238BE244217C30034B40B /* Author_ */ = {
@@ -1173,7 +1173,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development: Nguyen Ngoc Quang (589UWV5PGW)";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = 7546H2CFFT;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1278,7 +1278,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Distribution: AGRIMEDIA WEATHER AND AGRICULTURE SOLUTION JOINT STOCK COMPANY (7546H2CFFT)";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 10;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (

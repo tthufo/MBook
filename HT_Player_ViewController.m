@@ -14,11 +14,13 @@
 
 #import "HearThis-Swift.h"
 
+@import MarqueeLabel;
+
 @interface HT_Player_ViewController ()<GUIPlayerViewDelegate>
 {
-//    IBOutlet MarqueeLabel * titleSong;
+    IBOutlet MarqueeLabel * titleSong;
     
-    IBOutlet UILabel * titleSong;
+//    IBOutlet UILabel * titleSong;
         
     IBOutlet UICollectionView * collectionView;
 
@@ -1172,7 +1174,7 @@
     } andCompletion:^(NSString *responseString, NSString *errorCode, NSError *error, BOOL isValidated, NSDictionary *header) {
         NSDictionary * dict = [responseString objectFromJSONString];
 
-        if ([[dict getValueFromKey:@"error_code"] isEqualToString:@"0"] || dict[@"result"] == [NSNull null]) {
+        if ([[dict getValueFromKey:@"error_code"] isEqualToString:@"0"] && dict[@"result"] != [NSNull null]) {
             NSDictionary * dict = [responseString objectFromJSONString][@"result"];
 
             NSMutableDictionary * information = [[NSMutableDictionary alloc] initWithDictionary:config];

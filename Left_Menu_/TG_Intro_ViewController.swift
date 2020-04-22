@@ -44,11 +44,18 @@ class TG_Intro_ViewController: UIViewController {
         tableView.withHeaderOrFooter("PC_Header_Tab")
         
         didRequestNotification()
-        
-        avatar.action(forTouch: [:]) { (objc) in
-            self.center()?.pushViewController(PC_Inner_Info_ViewController.init(), animated: true)
-            self.root()?.showCenterPanel(animated: true)
+        if Information.check == "1" {
+            avatar.action(forTouch: [:]) { (objc) in
+                    self.center()?.pushViewController(PC_Inner_Info_ViewController.init(), animated: true)
+                    self.root()?.showCenterPanel(animated: true)
+            }
+        } else {
+            avatar.image = UIImage.init(named: "logos-1")
         }
+        
+        userName.alpha = Information.check == "1" ? 1 : 0
+        
+        phoneNo.alpha = Information.check == "1" ? 1 : 0
     }
     
     override func viewWillAppear(_ animated: Bool) {

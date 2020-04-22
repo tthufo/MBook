@@ -68,7 +68,7 @@
 
     Book_Inner_ViewController * tab3 = [Book_Inner_ViewController new];
       
-    tab3.config = @{@"url": @{@"CMD_CODE": @"getListReadOfUser", @"book_type": @(1), @"price": @(0)}};
+    tab3.config = @{@"url": @{@"CMD_CODE": @"getListReadOfUser", @"book_type": @(3), @"price": @(0)}};
 
     controllers = [@[tab1, tab2, tab3] mutableCopy];
     
