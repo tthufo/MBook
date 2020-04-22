@@ -70,7 +70,7 @@ class PC_ChangePass_ViewController: UIViewController, UITextFieldDelegate {
             self.view.endEditing(true)
         }
         
-        self.tableView.contentInset = UIEdgeInsets(top: 64, left: 0, bottom: 0, right: 0)
+//        self.tableView.contentInset = UIEdgeInsets(top: 64, left: 0, bottom: 0, right: 0)
         
         if Information.bg != nil && Information.bg != "" {
             bg.imageUrlNoCache(url: Information.bg ?? "")
@@ -92,6 +92,8 @@ class PC_ChangePass_ViewController: UIViewController, UITextFieldDelegate {
         if self.isEmbed() {
            bottomHeight.constant = 100
         }
+        
+        self.tableView.contentInset = UIEdgeInsets(top: 64, left: 0, bottom: 0, right: 0)
         
         kb.keyboard { (height, isOn) in
             self.tableView.contentInset = UIEdgeInsets(top: 64, left: 0, bottom: isOn ? (height - 100) : 0, right: 0)

@@ -191,16 +191,18 @@ class Author_Detail_ViewController: UIViewController, UICollectionViewDataSource
 
             self.dataList.addObjects(from: data.withMutable())
             
-            self.collectionView.reloadSections(IndexSet(integer: 0))
+//            self.collectionView.reloadSections(IndexSet(integer: 0))
+//
+//            self.collectionView.reloadSections(IndexSet(integer: 1))
 
-            self.collectionView.reloadSections(IndexSet(integer: 1))
-
-            self.collectionView.reloadSections(IndexSet(integer: 2))
-
-            self.adjustInset()
+//            self.collectionView.reloadSections(IndexSet(integer: 2))
             
-            UIView.animate(withDuration: 0.3) {
+            self.collectionView.reloadData()
+
+            UIView.animate(withDuration: 0.5, animations: {
                 self.collectionView.alpha = 1
+            }) { (done) in
+                self.adjustInset()
             }
         })
     }
