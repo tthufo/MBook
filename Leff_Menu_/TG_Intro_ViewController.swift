@@ -44,6 +44,11 @@ class TG_Intro_ViewController: UIViewController {
         tableView.withHeaderOrFooter("PC_Header_Tab")
         
         didRequestNotification()
+        
+        avatar.action(forTouch: [:]) { (objc) in
+            self.center()?.pushViewController(PC_Inner_Info_ViewController.init(), animated: true)
+            self.root()?.showCenterPanel(animated: true)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

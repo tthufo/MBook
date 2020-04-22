@@ -65,6 +65,8 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
             self.view.endEditing(true)
         }
         
+        self.logo.alpha = 0
+
         uName.addTarget(self, action: #selector(textIsChanging), for: .editingChanged)
         pass.addTarget(self, action: #selector(textIsChanging), for: .editingChanged)
         
@@ -119,9 +121,7 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
             
             if let content = element![0] as? TFHppleElement {
                 let phoneNumber = content.content.replacingOccurrences(of: "Xin chào: ", with: "")
-                
-                print("-->", phoneNumber)
-                
+                                
                 if !phoneNumber.isNumber {
                     self.setUp(phoneNumber: "")
                 } else {
@@ -198,32 +198,31 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
                         
                         let data = response?.data(using: .utf8)
                         let dict = XMLReader.return(XMLReader.dictionary(forXMLData: data, options: 0))
-                        
-//                        self.loginCover.alpha = (dict! as NSDictionary).getValueFromKey("show") == "1" ? 1 : 0
-                        
-                        let information = [ "token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6InR0aGh1dWZmIiwibmJmIjoxNTgzMjI3ODc3LCJleHAiOjE1ODM4MzI2NzcsImlhdCI6MTU4MzIyNzg3N30.qeCVZsvL2Uikzf6KO1wbpmcfFIBwewqeSolg_Gex3-o"] as [String : Any]
+                                                
+                        let information = [ "token":"C1D32CC976AD994C0AEC1CF0A74B092D"] as [String : Any]
                         
                     if (dict! as NSDictionary).getValueFromKey("show") == "0" {
                             
-                        self.add(["name":"tthhuuff" as Any, "pass":"123456" as Any], andKey: "log")
+                        self.add(["name":"0913552640" as Any, "pass":"123456" as Any], andKey: "log")
 
-                        self.add((information as! NSDictionary).reFormat() as? [AnyHashable : Any], andKey: "info")
+                        self.add((information as NSDictionary).reFormat() as? [AnyHashable : Any], andKey: "info")
 
                         Information.saveInfo()
 
-                        self.addValue((information as! NSDictionary).getValueFromKey("token"), andKey: "token")
+                        self.addValue((information as NSDictionary).getValueFromKey("token"), andKey: "token")
 
                         Information.saveToken()
                         
-                            Information.check = (dict! as NSDictionary).getValueFromKey("show") == "0" ? "0" : "1"
+                        Information.check = (dict! as NSDictionary).getValueFromKey("show") == "0" ? "0" : "1"
 
-                            if Information.check == "1" {
-                                self.logo.image = UIImage(named: "logo")
-                            }
+                        if Information.check == "1" {
+                            self.logo.image = UIImage(named: "logo")
+                        }
+                                         
+                        self.uName.text = Information.log!["name"] as? String
+                        self.pass.text = Information.log!["pass"] as? String
                         
-                            self.logo.alpha = 1
-                            
-                            print(Information.check)
+                        self.didPressSubmit(phoneNumber: "" as Any)
                         } else {
                         
                         Information.check = (dict! as NSDictionary).getValueFromKey("show") == "0" ? "0" : "1"
@@ -251,7 +250,7 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
                                     self.sumitText.alpha = self.uName.text?.count != 0 && self.pass.text?.count != 0 ? 1 : 0.5
                                 }
                                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.6, execute: {
-                                       if self.logOut == "logIn" {
+                                    if self.logOut == "logIn" {
                                        self.didPressSubmit(phoneNumber: phoneNumber as! String)
                                    }
                                 })
@@ -308,10 +307,6 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
             controller.messageComposeDelegate = self
             self.present(controller, animated: true, completion: nil)
         }
-        
-//        let forgot = PC_Forgot_ViewController.init();
-//        forgot.typing = "register"
-//        self.navigationController?.pushViewController(forgot, animated: true)
     }
     
     func checkPhone() -> Bool {
@@ -361,9 +356,7 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
         }
                          
         let logged = Information.log != nil ? Information.log?.getValueFromKey("name") != "" && Information.log?.getValueFromKey("pass") != "" ? true : false : false
-        
-        print("---++++>", Information.log)
-        
+                
         if is3G {
             self.uName.text = (phoneNumber as! String)
             requestLogin(request: ["username":phoneNumber,
@@ -421,7 +414,7 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
 
             Information.saveToken()
             
-            print(Information.log as Any)
+            print(Information.userInfo as Any)
             
             self.didRequestPackage()   //CHECK PACKAGE
             

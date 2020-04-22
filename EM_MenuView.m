@@ -121,7 +121,7 @@
     
     contentView.frame = CGRectMake(0, 0, commentView.frame.size.width, commentView.frame.size.height);
  
-    [((UIWebView*)[self withView:contentView tag:11]) loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:dict[@"url"]]]];
+//    [((UIWebView*)[self withView:contentView tag:11]) loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:dict[@"url"]]]];
     
     [commentView addSubview:contentView];
     

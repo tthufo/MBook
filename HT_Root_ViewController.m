@@ -222,7 +222,7 @@
                 {
                     [self addValue:dict[@"directKey"] andKey:dict[@"directKey"]];
                     
-                    [[[EM_MenuView alloc] initWithWebView:@{@"url":dict[@"direct"]}] show];
+//                    [[[EM_MenuView alloc] initWithWebView:@{@"url":dict[@"direct"]}] show];
                 }
             }
         }

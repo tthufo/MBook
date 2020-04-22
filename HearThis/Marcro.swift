@@ -293,8 +293,8 @@ extension String {
     }
     
     var isNumber: Bool {
-           return !isEmpty && rangeOfCharacter(from: CharacterSet.decimalDigits.inverted) == nil
-       }
+       return !isEmpty && rangeOfCharacter(from: CharacterSet.decimalDigits.inverted) == nil
+    }
     
     func contains(find: String) -> Bool{
         return self.range(of: find) != nil
@@ -515,7 +515,7 @@ extension UIViewController {
     }
     
     func checkRegister(package: NSArray, type: String) -> Bool {
-        var isReg = false //// dev test package chane to FALSE
+        var isReg = false //// dev test package change to true
         for dict in package {
             let expDate = ((dict as! NSDictionary).getValueFromKey("expireTime")! as NSString).date(withFormat: "dd-MM-yyyy")
             print("ALLOWING", expDate! > Date())

@@ -816,6 +816,7 @@
 				TargetAttributes = {
 					FC1AD7CA1DA40CA8002BA7EC = {
 						CreatedOnToolsVersion = 8.0;
+						DevelopmentTeam = 7546H2CFFT;
 						LastSwiftMigration = 1130;
 						ProvisioningStyle = Manual;
 						SystemCapabilities = {
@@ -1170,8 +1171,114 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "Apple Development: Developer Nexus (97K77L65W7)";
+				CODE_SIGN_IDENTITY = "Apple Development: Nguyen Ngoc Quang (589UWV5PGW)";
 				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 8;
+				DEVELOPMENT_TEAM = 7546H2CFFT;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				GCC_PREFIX_HEADER = HearThis/PrefixHeader.pch;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/AFNetworking\"",
+					"\"${PODS_ROOT}/Headers/Public/AVHexColor\"",
+					"\"${PODS_ROOT}/Headers/Public/AllPod\"",
+					"\"${PODS_ROOT}/Headers/Public/CRToast\"",
+					"\"${PODS_ROOT}/Headers/Public/FSPagerView\"",
+					"\"${PODS_ROOT}/Headers/Public/FireBasePod\"",
+					"\"${PODS_ROOT}/Headers/Public/Firebase\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseAnalyticsInterop\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseCore\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseCoreDiagnostics\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseCoreDiagnosticsInterop\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseInstallations\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseInstanceID\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseMessaging\"",
+					"\"${PODS_ROOT}/Headers/Public/GoogleDataTransport\"",
+					"\"${PODS_ROOT}/Headers/Public/GoogleDataTransportCCTSupport\"",
+					"\"${PODS_ROOT}/Headers/Public/GoogleUtilities\"",
+					"\"${PODS_ROOT}/Headers/Public/IAPHelper\"",
+					"\"${PODS_ROOT}/Headers/Public/JASidePanels\"",
+					"\"${PODS_ROOT}/Headers/Public/JSONKit-NoWarning\"",
+					"\"${PODS_ROOT}/Headers/Public/MBCircularProgressBar\"",
+					"\"${PODS_ROOT}/Headers/Public/MYNStickyFlowLayout\"",
+					"\"${PODS_ROOT}/Headers/Public/NSDate+TimeAgo\"",
+					"\"${PODS_ROOT}/Headers/Public/PromisesObjC\"",
+					"\"${PODS_ROOT}/Headers/Public/Protobuf\"",
+					"\"${PODS_ROOT}/Headers/Public/Reachability\"",
+					"\"${PODS_ROOT}/Headers/Public/SDWebImage\"",
+					"\"${PODS_ROOT}/Headers/Public/SVProgressHUD\"",
+					"\"${PODS_ROOT}/Headers/Public/Toast\"",
+					"\"${PODS_ROOT}/Headers/Public/XCDYouTubeKit\"",
+					"\"${PODS_ROOT}/Headers/Public/nanopb\"",
+					"$(inherited)",
+					"${PODS_ROOT}/Firebase/CoreOnly/Sources",
+					"\"${PODS_TARGET_SRCROOT}/Sources/FBLPromises/include\"",
+					"$(SDKROOT)/usr/include/libxml2",
+				);
+				INFOPLIST_FILE = HearThis/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/AFNetworking\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/AVHexColor\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/AllPod\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/CRToast\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/ExpandableLabel\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FSPagerView\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FireBasePod\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseCore\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseCoreDiagnostics\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseInstallations\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseInstanceID\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseMessaging\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/GoogleDataTransport\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/GoogleDataTransportCCTSupport\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/GoogleUtilities\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/IAPHelper\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/JASidePanels\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/JSONKit-NoWarning\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MBCircularProgressBar\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MYNStickyFlowLayout\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MarqueeLabel\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/NSDate+TimeAgo\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/ParallaxHeader\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/PromisesObjC\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Protobuf\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Reachability\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/ReachabilitySwift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SDWebImage\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SVProgressHUD\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Toast\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/XCDYouTubeKit\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/nanopb\"",
+					"$(SDKROOT)/usr/include/libxml2",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.agri.ebook;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "d4f4ddc3-6615-47d3-9900-2f2822cb0a06";
+				PROVISIONING_PROFILE_SPECIFIER = Ebook_Dev;
+				SWIFT_OBJC_BRIDGING_HEADER = "HearThis/HearThis-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		FC1AD7E41DA40CA8002BA7EC /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 57B771C8FC9DB06500C15CB5 /* Pods-HearThis.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "Apple Distribution: AGRIMEDIA WEATHER AND AGRICULTURE SOLUTION JOINT STOCK COMPANY (7546H2CFFT)";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1221,35 +1328,6 @@
 				INFOPLIST_FILE = HearThis/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.innovatube.shoubotenken;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "d4f4ddc3-6615-47d3-9900-2f2822cb0a06";
-				PROVISIONING_PROFILE_SPECIFIER = Shobo_dev;
-				SWIFT_OBJC_BRIDGING_HEADER = "HearThis/HearThis-Bridging-Header.h";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		FC1AD7E41DA40CA8002BA7EC /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 57B771C8FC9DB06500C15CB5 /* Pods-HearThis.release.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "Apple Development: Developer Nexus (97K77L65W7)";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
-				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)",
-				);
-				GCC_PREFIX_HEADER = HearThis/PrefixHeader.pch;
-				INFOPLIST_FILE = HearThis/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/AFNetworking\"",
@@ -1286,10 +1364,10 @@
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/nanopb\"",
 					"$(SDKROOT)/usr/include/libxml2",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.innovatube.shoubotenken;
+				PRODUCT_BUNDLE_IDENTIFIER = com.agri.ebook;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "d4f4ddc3-6615-47d3-9900-2f2822cb0a06";
-				PROVISIONING_PROFILE_SPECIFIER = Shobo_dev;
+				PROVISIONING_PROFILE_SPECIFIER = Ebook_Dis;
 				SWIFT_OBJC_BRIDGING_HEADER = "HearThis/HearThis-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
