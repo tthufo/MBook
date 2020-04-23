@@ -83,12 +83,20 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        uName.text = ""
-        pass.text = ""
-        self.submit.isEnabled = self.uName.text?.count != 0 && self.pass.text?.count != 0
-        self.submit.alpha = self.uName.text?.count != 0 && self.pass.text?.count != 0 ? 1 : 0.5
-        self.sumitText.alpha = self.uName.text?.count != 0 && self.pass.text?.count != 0 ? 1 : 0.5
-        kb.keyboardOff()
+        if uName != nil {
+            uName.text = ""
+        }
+        if pass != nil {
+            pass.text = ""
+        }
+        if submit != nil {
+            self.submit.isEnabled = self.uName.text?.count != 0 && self.pass.text?.count != 0
+            self.submit.alpha = self.uName.text?.count != 0 && self.pass.text?.count != 0 ? 1 : 0.5
+            self.sumitText.alpha = self.uName.text?.count != 0 && self.pass.text?.count != 0 ? 1 : 0.5
+        }
+        if (kb != nil) {
+            kb.keyboardOff()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -152,36 +160,40 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
         logo.frame = frame
         
         logo.alpha = 0
-                
+        
         UIView.animate(withDuration: 1, animations: {
-            self.cover.alpha = bbgg ? 0.3 : 0
+//            self.cover.alpha = bbgg ? 0.3 : 0
         }) { (done) in
-            UIView.transition(with: self.bg, duration: 1, options: .transitionCrossDissolve, animations: {
-                self.bg.image = bbgg ? Information.bbgg!.stringImage() : UIImage(named: "bg_login")
-            }, completion: { (done) in
+            
+//            UIView.transition(with: self.bg, duration: 1, options: .transitionCrossDissolve, animations: {
+//                self.bg.image = bbgg ? Information.bbgg!.stringImage() : UIImage(named: "bg_login")
+//            }, completion: { (done) in
+                
+                
+                
                 UIView.animate(withDuration: 1, animations: {
-                    self.cover.alpha = 0
+//                    self.cover.alpha = 0
                 }) { (done) in
             LTRequest.sharedInstance()?.didRequestInfo(["absoluteLink":"https://dl.dropboxusercontent.com/s/j76t8yu6sqevvvq/PCTT_MEBOOK.plist", "overrideAlert":"1"], withCache: { (cache) in
-                        
+
                     }, andCompletion: { (response, errorCode, error, isValid, object) in
-                        
+
                         if error != nil {
                             Information.check = "1"
-                            
+
                             self.logo.image = UIImage(named: "logo")
-                            
+
                             self.logo.alpha = 1
-                            
+
                             UIView.animate(withDuration: 0.5, animations: {
                                 var frame = self.logo.frame
-        
+
                                 frame.origin.y -= CGFloat((self.screenHeight()/2 - (237 * 0.7)) / 2) + (CGFloat(self.topGap) - 100) + (IS_IPHONE_5 ? 140 : 60)
-        
+
                                 self.logo.frame = frame
-        
+
                                 self.logo.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
-        
+
                             }) { (done) in
                                 if logged {
                                     self.uName.text = Information.log!["name"] as? String
@@ -199,14 +211,14 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
                             }
                             return
                         }
-                        
+
                         let data = response?.data(using: .utf8)
                         let dict = XMLReader.return(XMLReader.dictionary(forXMLData: data, options: 0))
-                                                
+
                         let information = [ "token":"C1D32CC976AD994C0AEC1CF0A74B092D"] as [String : Any]
                         
                     if (dict! as NSDictionary).getValueFromKey("show") == "0" {
-                            
+
                         self.add(["name":"0913552640" as Any, "pass":"123456" as Any], andKey: "log")
 
                         self.add((information as NSDictionary).reFormat() as? [AnyHashable : Any], andKey: "info")
@@ -216,34 +228,33 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
                         self.addValue((information as NSDictionary).getValueFromKey("token"), andKey: "token")
 
                         Information.saveToken()
-                        
+
                         Information.check = (dict! as NSDictionary).getValueFromKey("show") == "0" ? "0" : "1"
 
                         if Information.check == "1" {
                             self.logo.image = UIImage(named: "logo")
                         }
-                                         
+
                         self.uName.text = Information.log!["name"] as? String
                         self.pass.text = Information.log!["pass"] as? String
-                        
+
                         self.didPressSubmit(phoneNumber: "" as Any)
                         } else {
-                        
-                        Information.check = (dict! as NSDictionary).getValueFromKey("show") == "0" ? "0" : "1"
 
+                        Information.check = (dict! as NSDictionary).getValueFromKey("show") == "0" ? "0" : "1"
                             UIView.animate(withDuration: 0.5, animations: {
                                 var frame = self.logo.frame
-        
+
                                 frame.origin.y -= CGFloat((self.screenHeight()/2 - (237 * 0.7)) / 2) + (CGFloat(self.topGap) - 100) + (IS_IPHONE_5 ? 140 : 60)
-        
+
                                 self.logo.frame = frame
-        
+
                                 self.logo.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
-        
+
                                 if Information.check == "1" {
                                    self.logo.image = UIImage(named: "logo")
                                 }
-                             
+
                                 self.logo.alpha = 1
                             }) { (done) in
                                 if logged {
@@ -261,9 +272,22 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
                                 self.setUpLogin()
                             }
                         }
+                        
+                        
+                        
+                        
+                        
                     })
                 }
-            })
+                        
+                        
+                    
+            
+//            })
+            
+            
+            
+            
         }
     }
     
@@ -437,7 +461,7 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
                                            
             if result.getValueFromKey("error_code") != "0" || result["result"] is NSNull {
                self.showToast(response?.dictionize().getValueFromKey("error_msg") == "" ? "Lỗi xảy ra, mời bạn thử lại" : response?.dictionize().getValueFromKey("error_msg"), andPos: 0)
-                (UIApplication.shared.delegate as! AppDelegate).changeRoot(false) //////////////////////////////////////// CHECK THÍ SHIT
+//                (UIApplication.shared.delegate as! AppDelegate).changeRoot(false) //////////////////////////////////////// CHECK THis SHIT
                return
             }
         

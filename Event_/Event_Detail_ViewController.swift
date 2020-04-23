@@ -31,6 +31,8 @@ class Event_Detail_ViewController: UIViewController, UICollectionViewDataSource,
     
     var chapList = NSMutableArray()
         
+    var tempList: NSMutableArray!
+    
     let headerHeight = IS_IPAD ? 306 : 171
     
     var bioHeight: CGFloat = 0
@@ -41,6 +43,8 @@ class Event_Detail_ViewController: UIViewController, UICollectionViewDataSource,
         super.viewDidLoad()
                         
         dataList = NSMutableArray.init()
+        
+        tempList = NSMutableArray.init(array: chapList)
                 
         collectionView.withCell("TG_Map_Cell")
                         
@@ -61,7 +65,25 @@ class Event_Detail_ViewController: UIViewController, UICollectionViewDataSource,
         didRequestData(isShow: true)
     
         setupParallaxHeader()
+        
+        filterAuthor()
+        
+        collectionView.reloadData()
     }
+    
+    func filterAuthor() {
+           tempList.removeAllObjects()
+           
+           tempList.addObjects(from: chapList as! [Any])
+                   
+           if tempList.count != 0 {
+               for dict in tempList {
+                   if (dict as! NSDictionary).getValueFromKey("id") == self.config.getValueFromKey("id") {
+                       tempList.remove(dict)
+                   }
+               }
+           }
+       }
         
     private func setupParallaxHeader() {
         headerView = (Bundle.main.loadNibNamed("Event_Detail_Header", owner: self, options: nil)![IS_IPAD ? 0 : 1] as! UIView)
@@ -218,7 +240,7 @@ class Event_Detail_ViewController: UIViewController, UICollectionViewDataSource,
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return section == 1 ? dataList.count : section == 2 ? chapList.count : bioHeight == 0 ? 1 : 1
+        return section == 1 ? dataList.count : section == 2 ? tempList.count : bioHeight == 0 ? 1 : 1
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -277,7 +299,7 @@ class Event_Detail_ViewController: UIViewController, UICollectionViewDataSource,
         }
         
         if indexPath.section == 2 {
-           let data = chapList[indexPath.item] as! NSDictionary
+           let data = tempList[indexPath.item] as! NSDictionary
            
            let book = self.withView(cell, tag: 12) as! UILabel
 
@@ -306,7 +328,8 @@ class Event_Detail_ViewController: UIViewController, UICollectionViewDataSource,
         }
         
         if indexPath.section == 2 {
-            self.config = (chapList[indexPath.item] as! NSDictionary)
+            self.config = (tempList[indexPath.item] as! NSDictionary)
+            self.filterAuthor()
             self.setupInfo()
             collectionView.setContentOffset(CGPoint.init(x: 0, y: -headerHeight), animated: true)
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {

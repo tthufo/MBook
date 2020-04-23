@@ -99,8 +99,8 @@ class PC_Inner_Info_ViewController: UIViewController, UITextFieldDelegate {
         let isEmail: Bool = email.text?.count != 0 && (email.text?.isValidEmail())!
         let isMatch: Bool = phone.text?.count != 0 && phone.text?.count == 10
           
-        submit.isEnabled = phone.text?.count != 0 && email.text?.count != 0 && isEmail && isMatch
-        submit.alpha = phone.text?.count != 0 && email.text?.count != 0 && isEmail && isMatch ? 1 : 0.5
+//        submit.isEnabled = phone.text?.count != 0 && email.text?.count != 0 && isEmail && isMatch
+//        submit.alpha = phone.text?.count != 0 && email.text?.count != 0 && isEmail && isMatch ? 1 : 0.5
         
         avatar.action(forTouch: [:]) { (objc) in
             self.didPressPreview(image: self.avatarTemp != nil ? self.avatarTemp as Any: Information.userInfo?.getValueFromKey("Avatar") as Any)
@@ -285,8 +285,8 @@ class PC_Inner_Info_ViewController: UIViewController, UITextFieldDelegate {
         emailBG.backgroundColor = isEmail ? AVHexColor.color(withHexString: "#F2F2F2") : .red
         emailError.alpha = isEmail ? 0 : 1
         
-        submit.isEnabled = phone.text?.count != 0 && email.text?.count != 0 && isEmail && isMatch
-        submit.alpha = phone.text?.count != 0 && email.text?.count != 0 && isEmail && isMatch ? 1 : 0.5
+//        submit.isEnabled = phone.text?.count != 0 && email.text?.count != 0 && isEmail && isMatch
+//        submit.alpha = phone.text?.count != 0 && email.text?.count != 0 && isEmail && isMatch ? 1 : 0.5
     }
     
     @objc func textRePassIsChanging(_ textField:UITextField) {
@@ -295,8 +295,8 @@ class PC_Inner_Info_ViewController: UIViewController, UITextFieldDelegate {
         rePassBG.backgroundColor = isMatch ? AVHexColor.color(withHexString: "#F2F2F2") : .red
         rePassError.alpha = isMatch ? 0 : 1
         
-        submit.isEnabled = phone.text?.count != 0 && email.text?.count != 0 && isEmail && isMatch
-        submit.alpha = phone.text?.count != 0 && email.text?.count != 0 && isEmail && isMatch ? 1 : 0.5
+//        submit.isEnabled = phone.text?.count != 0 && email.text?.count != 0 && isEmail && isMatch
+//        submit.alpha = phone.text?.count != 0 && email.text?.count != 0 && isEmail && isMatch ? 1 : 0.5
     }
 }
 

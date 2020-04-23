@@ -27,6 +27,8 @@ class Author_Detail_ViewController: UIViewController, UICollectionViewDataSource
                 
     var dataList: NSMutableArray!
     
+    var tempList: NSMutableArray!
+    
     var chapList = NSMutableArray()
         
     let headerHeight = IS_IPAD ? 306 : 171
@@ -43,6 +45,8 @@ class Author_Detail_ViewController: UIViewController, UICollectionViewDataSource
         super.viewDidLoad()
                         
         dataList = NSMutableArray.init()
+        
+        tempList = NSMutableArray.init(array: chapList)
                 
         collectionView.withCell("TG_Map_Cell")
                         
@@ -61,10 +65,27 @@ class Author_Detail_ViewController: UIViewController, UICollectionViewDataSource
 
         didRequestData(isShow: true)
         
-//        initBio(show: showMore)
         bioString = initBio(show: showMore)
         
         setupParallaxHeader()
+        
+        filterAuthor()
+        
+        collectionView.reloadData()
+    }
+    
+    func filterAuthor() {
+        tempList.removeAllObjects()
+        
+        tempList.addObjects(from: chapList as! [Any])
+                
+        if tempList.count != 0 {
+            for dict in tempList {
+                if (dict as! NSDictionary).getValueFromKey("id") == self.config.getValueFromKey("id") {
+                    tempList.remove(dict)
+                }
+            }
+        }
     }
     
     func initBio(show: Bool) -> String {
@@ -220,7 +241,7 @@ class Author_Detail_ViewController: UIViewController, UICollectionViewDataSource
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return section == 1 ? dataList.count : section == 2 ? chapList.count : bioHeight == 0 ? 1 : 1
+        return section == 1 ? dataList.count : section == 2 ? tempList.count : bioHeight == 0 ? 1 : 1
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -249,7 +270,7 @@ class Author_Detail_ViewController: UIViewController, UICollectionViewDataSource
         }
         
         if indexPath.section == 2 {
-            let data = chapList[indexPath.item] as! NSDictionary
+            let data = tempList[indexPath.item] as! NSDictionary
 
             let title = self.withView(cell, tag: 112) as! UILabel
 
@@ -313,7 +334,8 @@ class Author_Detail_ViewController: UIViewController, UICollectionViewDataSource
             self.center()?.pushViewController(bookDetail, animated: true)
         }
         if indexPath.section == 2 {
-            self.config = (chapList[indexPath.item] as! NSDictionary)
+            self.config = (tempList[indexPath.item] as! NSDictionary)
+            self.filterAuthor()
             showMore = false
             bioString = initBio(show: showMore)
             self.collectionView.reloadSections(IndexSet(integer: 0))

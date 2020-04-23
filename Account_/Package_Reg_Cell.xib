@@ -17,7 +17,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dny-lX-5BN" customClass="PaddingLabel" customModule="HearThis" customModuleProvider="target">
-                        <rect key="frame" x="20" y="11" width="280" height="15"/>
+                        <rect key="frame" x="20" y="11" width="280" height="19"/>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -28,14 +28,13 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </label>
-                    <button opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eSn-Qn-uYe">
-                        <rect key="frame" x="20" y="38" width="280" height="35"/>
-                        <color key="backgroundColor" red="0.0" green="0.60784313729999995" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <button opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eSn-Qn-uYe">
+                        <rect key="frame" x="20" y="38" width="280" height="44"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="35" id="5Kl-eX-f3P"/>
+                            <constraint firstAttribute="height" constant="44" id="Sll-3c-Yn1"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                        <state key="normal">
+                        <state key="normal" backgroundImage="gradient">
                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </state>
                         <userDefinedRuntimeAttributes>
@@ -46,16 +45,19 @@
                     </button>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailing" secondItem="Dny-lX-5BN" secondAttribute="trailing" constant="20" id="1PQ-Wj-yFP"/>
-                    <constraint firstItem="Dny-lX-5BN" firstAttribute="top" secondItem="gzU-pf-PiS" secondAttribute="top" constant="11" id="Pop-l9-ZJE"/>
-                    <constraint firstItem="Dny-lX-5BN" firstAttribute="leading" secondItem="gzU-pf-PiS" secondAttribute="leading" constant="20" id="QRo-bu-bEP"/>
-                    <constraint firstItem="eSn-Qn-uYe" firstAttribute="leading" secondItem="gzU-pf-PiS" secondAttribute="leading" constant="20" id="bcB-go-p3R"/>
-                    <constraint firstItem="eSn-Qn-uYe" firstAttribute="top" secondItem="Dny-lX-5BN" secondAttribute="bottom" constant="12" id="ngE-We-xXp"/>
-                    <constraint firstAttribute="bottom" secondItem="eSn-Qn-uYe" secondAttribute="bottom" constant="16" id="qgj-Zk-UUX"/>
-                    <constraint firstAttribute="trailing" secondItem="eSn-Qn-uYe" secondAttribute="trailing" constant="20" id="v8S-PP-QrA"/>
+                    <constraint firstAttribute="bottom" secondItem="eSn-Qn-uYe" secondAttribute="bottom" constant="7" id="CEs-IF-9ag"/>
+                    <constraint firstAttribute="trailing" secondItem="Dny-lX-5BN" secondAttribute="trailing" constant="20" id="Fz4-hl-aS4"/>
+                    <constraint firstAttribute="trailing" secondItem="eSn-Qn-uYe" secondAttribute="trailing" constant="20" id="b88-9w-Gby"/>
+                    <constraint firstItem="eSn-Qn-uYe" firstAttribute="top" secondItem="Dny-lX-5BN" secondAttribute="bottom" constant="8" id="im1-cZ-5LA"/>
+                    <constraint firstItem="Dny-lX-5BN" firstAttribute="top" secondItem="gzU-pf-PiS" secondAttribute="top" constant="11" id="nBt-7l-9gV"/>
+                    <constraint firstItem="eSn-Qn-uYe" firstAttribute="leading" secondItem="gzU-pf-PiS" secondAttribute="leading" constant="20" id="nms-cx-1dq"/>
+                    <constraint firstItem="Dny-lX-5BN" firstAttribute="leading" secondItem="gzU-pf-PiS" secondAttribute="leading" constant="20" id="odn-Dg-7Uz"/>
                 </constraints>
             </tableViewCellContentView>
             <point key="canvasLocation" x="-1.4492753623188408" y="-55.245535714285715"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <image name="gradient" width="79.5" height="10.5"/>
+    </resources>
 </document>

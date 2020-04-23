@@ -29,7 +29,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_login" translatesAutoresizingMaskIntoConstraints="NO" id="rNh-x1-sW9">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                    <rect key="frame" x="0.0" y="20" width="414" height="716"/>
                 </imageView>
                 <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="70K-zN-u0s">
                     <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
@@ -80,22 +80,18 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="70K-zN-u0s" firstAttribute="leading" secondItem="XVt-kr-Wtk" secondAttribute="leading" id="2nR-TM-Aqt"/>
-                <constraint firstItem="rNh-x1-sW9" firstAttribute="trailing" secondItem="XVt-kr-Wtk" secondAttribute="trailing" id="2ph-ss-5da"/>
                 <constraint firstItem="70K-zN-u0s" firstAttribute="top" secondItem="kcN-gd-h0s" secondAttribute="top" id="AJC-r3-khg"/>
                 <constraint firstItem="XVt-kr-Wtk" firstAttribute="bottom" secondItem="0V9-x0-1ig" secondAttribute="bottom" constant="10" id="EEa-av-QFQ"/>
                 <constraint firstItem="70K-zN-u0s" firstAttribute="bottom" secondItem="XVt-kr-Wtk" secondAttribute="bottom" id="KhC-wP-BTS"/>
-                <constraint firstItem="rNh-x1-sW9" firstAttribute="bottom" secondItem="XVt-kr-Wtk" secondAttribute="bottom" id="M2i-5s-cAA"/>
                 <constraint firstItem="lhp-0V-46r" firstAttribute="leading" secondItem="XVt-kr-Wtk" secondAttribute="leading" constant="8" id="PuY-tz-XFy"/>
-                <constraint firstItem="rNh-x1-sW9" firstAttribute="top" secondItem="kcN-gd-h0s" secondAttribute="top" id="YSM-ws-i6g"/>
                 <constraint firstItem="70K-zN-u0s" firstAttribute="trailing" secondItem="XVt-kr-Wtk" secondAttribute="trailing" id="fB1-X1-6CK"/>
-                <constraint firstItem="rNh-x1-sW9" firstAttribute="bottom" secondItem="XVt-kr-Wtk" secondAttribute="bottom" id="lHQ-Cr-C1w"/>
+                <constraint firstItem="rNh-x1-sW9" firstAttribute="top" secondItem="XVt-kr-Wtk" secondAttribute="top" id="fQV-Cf-jsQ"/>
                 <constraint firstItem="0V9-x0-1ig" firstAttribute="leading" secondItem="XVt-kr-Wtk" secondAttribute="leading" constant="10" id="m8e-fk-gQX"/>
                 <constraint firstItem="XVt-kr-Wtk" firstAttribute="trailing" secondItem="0V9-x0-1ig" secondAttribute="trailing" constant="10" id="njY-hg-3ja"/>
                 <constraint firstItem="lhp-0V-46r" firstAttribute="top" secondItem="XVt-kr-Wtk" secondAttribute="top" constant="8" id="pD8-z4-pZd"/>
-                <constraint firstItem="rNh-x1-sW9" firstAttribute="leading" secondItem="XVt-kr-Wtk" secondAttribute="leading" id="rcc-LT-5l1"/>
-                <constraint firstItem="rNh-x1-sW9" firstAttribute="leading" secondItem="XVt-kr-Wtk" secondAttribute="leading" id="rf8-4Y-AR2"/>
-                <constraint firstItem="rNh-x1-sW9" firstAttribute="trailing" secondItem="XVt-kr-Wtk" secondAttribute="trailing" id="xZJ-4G-A3a"/>
-                <constraint firstItem="rNh-x1-sW9" firstAttribute="top" secondItem="kcN-gd-h0s" secondAttribute="top" id="yvG-2g-gBC"/>
+                <constraint firstItem="rNh-x1-sW9" firstAttribute="bottom" secondItem="XVt-kr-Wtk" secondAttribute="bottom" id="sva-KJ-bSr"/>
+                <constraint firstItem="rNh-x1-sW9" firstAttribute="trailing" secondItem="XVt-kr-Wtk" secondAttribute="trailing" id="umf-tz-CSU"/>
+                <constraint firstItem="rNh-x1-sW9" firstAttribute="leading" secondItem="XVt-kr-Wtk" secondAttribute="leading" id="wTz-jX-lvi"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="XVt-kr-Wtk"/>
             <point key="canvasLocation" x="63.768115942028992" y="67.663043478260875"/>

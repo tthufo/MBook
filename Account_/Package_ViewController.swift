@@ -100,24 +100,25 @@ extension Package_ViewController: UITableViewDataSource, UITableViewDelegate {
 
         let isRegistered = data.getValueFromKey("status") == "1" && expDate! > Date()
         
-        let cell = tableView.dequeueReusableCell(withIdentifier:isRegistered ? "Package_Reg_Cell" : "Package_Cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier:"Package_Reg_Cell", for: indexPath)
                 
+        let title = self.withView(cell, tag: 1) as! UILabel
+                    
+        let button = self.withView(cell, tag: 2) as! UIButton
+        
         if isRegistered {
-            let title = self.withView(cell, tag: 1) as! UILabel
-                        
-            let button = self.withView(cell, tag: 2) as! UIButton
-            
             button.setTitle("Đang sử dụng Gói " + data.getValueFromKey("package_code"), for: .normal)
 
+            button.setBackgroundImage(UIImage.init(named: "trans"), for: .normal)
+            
+            button.backgroundColor = AVHexColor.color(withHexString: "#009BB4")
+            
             title.text = (data["info"] as? String)! + ". Hết hạn sử dụng ngày " + data.getValueFromKey("expireTime")
+            
         } else {
-            let title = self.withView(cell, tag: 1) as! UILabel
+            button.setTitle("%@ %@".format(parameters: ((data["name"] as? String)!), ((data["price"] as? String)!)), for: .normal)
 
-            title.text = "%@ %@".format(parameters: ((data["name"] as? String)!), ((data["price"] as? String)!))
-
-            title.font = UIFont.boldSystemFont(ofSize: 15)
-
-            title.textColor = UIColor.white
+            title.text = (data["info"] as? String)!
         }
         
         return cell
@@ -128,8 +129,8 @@ extension Package_ViewController: UITableViewDataSource, UITableViewDelegate {
         let data = dataList![indexPath.row] as! NSDictionary
         let expDate = (data.getValueFromKey("expireTime")! as NSString).date(withFormat: "dd-MM-yyyy")
         let isRegistered = data.getValueFromKey("status") == "1" && expDate! > Date()
+        print(data)
         if !isRegistered {
-            print(data)
             if (MFMessageComposeViewController.canSendText()) {
                 let controller = MFMessageComposeViewController()
                 controller.body = data.getValueFromKey("reg_keyword")
