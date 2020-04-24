@@ -50,14 +50,24 @@
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     </textView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Rq-eT-4Kz">
+                        <rect key="frame" x="8" y="138.5" width="312" height="0.5"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="0.5" id="kLy-l7-bII"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstItem="hd1-Rf-Sar" firstAttribute="top" secondItem="xek-8x-Akz" secondAttribute="top" constant="7" id="3KI-h2-lDf"/>
                     <constraint firstItem="fl2-lE-8Zb" firstAttribute="leading" secondItem="hd1-Rf-Sar" secondAttribute="trailing" constant="8" id="4IL-ps-aSy"/>
                     <constraint firstItem="NeL-Mf-EN5" firstAttribute="leading" secondItem="hd1-Rf-Sar" secondAttribute="trailing" constant="8" id="BwW-kd-RnG"/>
                     <constraint firstItem="Jhb-9n-BGZ" firstAttribute="top" secondItem="NeL-Mf-EN5" secondAttribute="bottom" id="Ipt-OD-gU5"/>
+                    <constraint firstItem="2Rq-eT-4Kz" firstAttribute="leading" secondItem="xek-8x-Akz" secondAttribute="leading" constant="8" id="LSZ-Y6-pi2"/>
                     <constraint firstAttribute="trailing" secondItem="NeL-Mf-EN5" secondAttribute="trailing" constant="11" id="MBG-Ar-UHL"/>
+                    <constraint firstAttribute="bottom" secondItem="2Rq-eT-4Kz" secondAttribute="bottom" id="Tgn-NL-7Mb"/>
                     <constraint firstItem="fl2-lE-8Zb" firstAttribute="top" secondItem="xek-8x-Akz" secondAttribute="top" constant="7" id="Ued-Mn-SC8"/>
+                    <constraint firstAttribute="trailing" secondItem="2Rq-eT-4Kz" secondAttribute="trailing" id="gF2-Ua-fVX"/>
                     <constraint firstItem="NeL-Mf-EN5" firstAttribute="top" secondItem="fl2-lE-8Zb" secondAttribute="bottom" constant="4" id="i21-tb-kpE"/>
                     <constraint firstAttribute="trailing" secondItem="Jhb-9n-BGZ" secondAttribute="trailing" constant="11" id="jZR-P2-KoJ"/>
                     <constraint firstAttribute="trailing" secondItem="fl2-lE-8Zb" secondAttribute="trailing" constant="11" id="nBE-1t-VMX"/>

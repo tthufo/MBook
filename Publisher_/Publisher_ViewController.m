@@ -52,17 +52,26 @@
     
     [tableView withCell: @"Publisher_Cell"];
     
-    tableView.estimatedRowHeight = 150;
+    [tableView withCell: @"Publisher_Cell_Large"];
+    
+    tableView.rowHeight = UITableViewAutomaticDimension;
+
+    tableView.estimatedRowHeight = IS_IPAD ? 245 : 150;
     
     refreshControl = [UIRefreshControl new];
     
     tableView.refreshControl = refreshControl;
     
     [refreshControl addTarget:self action:@selector(didReloadData) forControlEvents:UIControlEventValueChanged];
-    
-//    titleLabel.text = [config getValueFromKey:@"title"];
-    
+        
     [self didRequestData:YES];
+}
+
+- (NSString *)inform:(NSString *)content {
+
+    NSString * tempString = [NSString stringWithFormat:@"<span style=\"font-family: '-apple-system', 'HelveticaNeue'; font-size:17 \">%@</span>", content];
+    
+    return tempString;
 }
 
 - (void)didReloadData
@@ -135,11 +144,13 @@
 - (CGFloat)tableView:(UITableView *)_tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return UITableViewAutomaticDimension;
+
+//    return UITableViewAutomaticDimension;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)_tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell * cell = [_tableView dequeueReusableCellWithIdentifier:@"Publisher_Cell" forIndexPath:indexPath];
+    UITableViewCell * cell = [_tableView dequeueReusableCellWithIdentifier: IS_IPAD ? @"Publisher_Cell_Large" : @"Publisher_Cell" forIndexPath:indexPath];
     
     NSDictionary * list = dataList[indexPath.row];
     
@@ -149,7 +160,7 @@
 
     [(UILabel*)[self withView:cell tag:3] setText: [NSString stringWithFormat:@"%@ tác phẩm", [list getValueFromKey:@"book_count"]]];
 
-    ((UITextView*)[self withView:cell tag:22]).attributedText = [self attributeHTML:[list getValueFromKey:@"info"]];
+    ((UITextView*)[self withView:cell tag:22]).text = [self attributeHTMLRaw:[list getValueFromKey:@"info"]];
 
     return cell;
 }

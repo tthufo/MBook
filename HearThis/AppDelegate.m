@@ -618,7 +618,9 @@ UIBackgroundTaskIdentifier bgTask;
 - (void)addHistory:(NSString*)history {
     NSMutableArray * hisTag = [[NSMutableArray alloc] initWithArray:[self getHistory]];
     
-    [hisTag addObject:history];
+    if (![hisTag containsObject: history] ) {
+        [hisTag addObject:history];
+    }
     
     [self addObject:@{@"history": hisTag} andKey:@"historyTag"];
 }

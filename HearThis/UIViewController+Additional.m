@@ -93,9 +93,16 @@
 
 - (NSAttributedString *)attributeHTML:(NSString*)htmlString {
     NSString * string = [NSString stringWithFormat:@"<span style=\"font-size: 14;\">%@</span>", htmlString];
-    NSAttributedString * attrStr = [[NSAttributedString alloc] initWithData:[string dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
+    NSAttributedString * attrStr = [[NSAttributedString alloc] initWithData:[string dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType, NSCharacterEncodingDocumentAttribute: NSCharacterEncodingDocumentOption } documentAttributes:nil error:nil];
 
     return attrStr;
+}
+
+- (NSString *)attributeHTMLRaw:(NSString*)htmlString {
+    NSString * string = [NSString stringWithFormat:@"<span style=\"font-family: '-apple-system', 'HelveticaNeue'; font-size:17 \">%@</span>", htmlString];
+    NSAttributedString * attrStr = [[NSAttributedString alloc] initWithData:[string dataUsingEncoding:NSUnicodeStringEncoding] options:@{ NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType } documentAttributes:nil error:nil];
+
+    return [attrStr string];
 }
 
 @end

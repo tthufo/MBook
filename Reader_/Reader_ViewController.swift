@@ -49,19 +49,18 @@ class Reader_ViewController: UIViewController {
 //            pdfView.autoresizesSubviews = true
             pdfView.autoresizingMask = [.flexibleWidth, .flexibleHeight, .flexibleTopMargin, .flexibleLeftMargin]
             pdfView.displayDirection = .horizontal
-            pdfView.autoScales = true
             pdfView.displayMode = IS_IPAD ? .twoUpContinuous : .singlePageContinuous
             pdfView.displaysPageBreaks = true
-
-            pdfView.maxScaleFactor = 1.0
-            pdfView.minScaleFactor = pdfView.scaleFactorForSizeToFit
+            pdfView.minScaleFactor = 1.0
+//            pdfView.scaleFactor = 1.0
+            pdfView.maxScaleFactor = 4.0
+            pdfView.autoScales = true
             pdfView.document = pdfDocument
         } else {
-            if !self.existingFile(fileName: self.config.getValueFromKey("id")) {
-                self.deleteFile(fileName: self.pdfFile(fileName: self.config.getValueFromKey("id")))
-            }
-            showHide(show: true)
-            didDownload()
+            self.failLabel.alpha = 1
+            self.failLabel.text = "Không mở được file PDF, mời bạn tải lại."
+            self.restart.alpha = 1
+            self.cover.alpha = 1
         }
     }
     
@@ -72,6 +71,7 @@ class Reader_ViewController: UIViewController {
             ], andCompletion: { (index, download, object) in
             if index == -1 {
                 self.failLabel.alpha = 1
+                self.failLabel.text = "Lỗi xảy ra, mời bạn tải lại."
                 self.restart.alpha = 1
                 self.downLoad.alpha = 0
             }
@@ -92,6 +92,10 @@ class Reader_ViewController: UIViewController {
         self.restart.alpha = 0
         self.failLabel.alpha = 0
         self.downLoad.alpha = 1
+        if !self.existingFile(fileName: self.config.getValueFromKey("id")) {
+           self.deleteFile(fileName: self.pdfFile(fileName: self.config.getValueFromKey("id")))
+        }
+        showHide(show: true)
         self.didDownload()
     }
     

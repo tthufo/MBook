@@ -91,7 +91,7 @@ class Author_Detail_ViewController: UIViewController, UICollectionViewDataSource
     func initBio(show: Bool) -> String {
          let modifiedFont = String(format:"<span style=\"font-family: '-apple-system', 'HelveticaNeue'; font-size:17 \">%@</span>", self.config.getValueFromKey("info"))
         
-         let tempString = modifiedFont.html2String.count > 120 ? modifiedFont.html2String.substring(to: 120) + "..." : modifiedFont.html2String
+        let tempString = modifiedFont.html2String.count > (IS_IPAD ? 1000 : 120) ? modifiedFont.html2String.substring(to: 120) + "..." : modifiedFont.html2String
         
         return !show ? tempString : modifiedFont.html2String
     }
@@ -212,12 +212,6 @@ class Author_Detail_ViewController: UIViewController, UICollectionViewDataSource
 
             self.dataList.addObjects(from: data.withMutable())
             
-//            self.collectionView.reloadSections(IndexSet(integer: 0))
-//
-//            self.collectionView.reloadSections(IndexSet(integer: 1))
-
-//            self.collectionView.reloadSections(IndexSet(integer: 2))
-            
             self.collectionView.reloadData()
 
             UIView.animate(withDuration: 0.5, animations: {
@@ -320,6 +314,7 @@ class Author_Detail_ViewController: UIViewController, UICollectionViewDataSource
             title.text = bioString
             bioHeight = title.sizeOfMultiLineLabel().height
             self.collectionView.reloadSections(IndexSet(integer: 0))
+            self.adjustInset()
         }
         if indexPath.section == 1 {
             let data = dataList[indexPath.item] as! NSDictionary
@@ -354,11 +349,10 @@ class Author_Detail_ViewController: UIViewController, UICollectionViewDataSource
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: collectionView.frame.width, height: section == 0 ? 0 : 44)
+        return CGSize(width: collectionView.frame.width, height: section == 0 ? 0 : section == 2 ? chapList.count == 0 ? 0 : 44 : 44)
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        
 //        if indexPath.section == 2 {
 //            if self.pageIndex == 1 {
 //              return
@@ -371,28 +365,5 @@ class Author_Detail_ViewController: UIViewController, UICollectionViewDataSource
 //              }
 //           }
 //        }
-    }
-}
-
-extension Data {
-    var html2AttributedString: NSAttributedString? {
-        do {
-            return try NSAttributedString(data: self, options: [.documentType: NSAttributedString.DocumentType.html, .characterEncoding: String.Encoding.utf8.rawValue], documentAttributes: nil)
-        } catch {
-            print("error:", error)
-            return  nil
-        }
-    }
-    var html2String: String {
-        return html2AttributedString?.string ?? ""
-    }
-}
-
-extension String {
-    var html2AttributedString: NSAttributedString? {
-        return Data(utf8).html2AttributedString
-    }
-    var html2String: String {
-        return html2AttributedString?.string ?? ""
     }
 }

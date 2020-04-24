@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1C4D84C1CEDC423884030E84 /* libPods-HearThis.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EB075356C7261DC57790B0A /* libPods-HearThis.a */; };
+		FC01776D24529BA80097957C /* Publisher_Cell_Large.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC01776C24529BA80097957C /* Publisher_Cell_Large.xib */; };
 		FC0A8FB02437770E001A75AF /* PC_Register_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0A8FAA2437770C001A75AF /* PC_Register_ViewController.swift */; };
 		FC0A8FB12437770E001A75AF /* PC_Forgot_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC0A8FAB2437770D001A75AF /* PC_Forgot_ViewController.xib */; };
 		FC0A8FB22437770E001A75AF /* PC_Login_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0A8FAC2437770D001A75AF /* PC_Login_ViewController.swift */; };
@@ -160,6 +161,7 @@
 		0EB075356C7261DC57790B0A /* libPods-HearThis.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-HearThis.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		57B771C8FC9DB06500C15CB5 /* Pods-HearThis.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HearThis.release.xcconfig"; path = "Pods/Target Support Files/Pods-HearThis/Pods-HearThis.release.xcconfig"; sourceTree = "<group>"; };
 		A9269A55EA96317478696AD0 /* Pods-HearThis.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HearThis.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HearThis/Pods-HearThis.debug.xcconfig"; sourceTree = "<group>"; };
+		FC01776C24529BA80097957C /* Publisher_Cell_Large.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Publisher_Cell_Large.xib; sourceTree = "<group>"; };
 		FC0A8FA92437770A001A75AF /* HearThis-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HearThis-Bridging-Header.h"; sourceTree = "<group>"; };
 		FC0A8FAA2437770C001A75AF /* PC_Register_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PC_Register_ViewController.swift; sourceTree = "<group>"; };
 		FC0A8FAB2437770D001A75AF /* PC_Forgot_ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PC_Forgot_ViewController.xib; sourceTree = "<group>"; };
@@ -705,6 +707,7 @@
 				FCB238DC24435BF60034B40B /* Publisher_ViewController.m */,
 				FCB238DD24435BF60034B40B /* Publisher_ViewController.xib */,
 				FCB238E024435C410034B40B /* Publisher_Cell.xib */,
+				FC01776C24529BA80097957C /* Publisher_Cell_Large.xib */,
 			);
 			path = Publisher_;
 			sourceTree = "<group>";
@@ -893,6 +896,7 @@
 				FCB238E124435C410034B40B /* Publisher_Cell.xib in Resources */,
 				FC7550FC1DACDB53007992DF /* M_Menu.xib in Resources */,
 				FCB3CD721DA4E3FA002FABDD /* ItemCell.xib in Resources */,
+				FC01776D24529BA80097957C /* Publisher_Cell_Large.xib in Resources */,
 				FCB238DF24435BF60034B40B /* Publisher_ViewController.xib in Resources */,
 				FC130B8F2446236B00D64012 /* Package_ViewController.xib in Resources */,
 				FCD9798A2447693D00970A4E /* Reader_ViewController.xib in Resources */,
@@ -1173,7 +1177,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Development: Nguyen Ngoc Quang (589UWV5PGW)";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 18;
 				DEVELOPMENT_TEAM = 7546H2CFFT;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1278,7 +1282,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "Apple Distribution: AGRIMEDIA WEATHER AND AGRICULTURE SOLUTION JOINT STOCK COMPANY (7546H2CFFT)";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 18;
 				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (

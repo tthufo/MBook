@@ -656,6 +656,8 @@
         [self.playerView play];
         
         [self fadeVolume];
+        
+        [titleSong resumeAnimations];
     }
     else
     {
@@ -832,6 +834,8 @@
 - (void)playerDidPause
 {
     [self playingState:NO];
+    
+    [titleSong pauseAnimations];
 
     [self didSaveProgress];
 }

@@ -89,16 +89,23 @@
                         <action selector="didPressRestart" destination="-1" eventType="touchUpInside" id="X5L-b8-NHV"/>
                     </connections>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lỗi xảy ra, mời bạn tải lại." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Ao-PB-nqt">
-                    <rect key="frame" x="92.5" y="482" width="229" height="21"/>
+                <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lỗi xảy ra, mời bạn tải lại." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Ao-PB-nqt">
+                    <rect key="frame" x="92.5" y="482" width="229" height="23"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="229" id="UXE-3o-T6X"/>
-                        <constraint firstAttribute="height" constant="21" id="iFC-Vc-Rk9"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="iFC-Vc-Rk9"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="19"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hyh-zg-4NE">
+                    <rect key="frame" x="0.0" y="108" width="20" height="754"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="20" id="1Os-Yp-TEY"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
@@ -109,6 +116,7 @@
                 <constraint firstItem="8JW-Su-IJf" firstAttribute="leading" secondItem="eug-p7-zIe" secondAttribute="leading" id="8KO-32-oU4"/>
                 <constraint firstItem="1Kd-We-2c1" firstAttribute="trailing" secondItem="eug-p7-zIe" secondAttribute="trailing" id="BR1-LG-OKs"/>
                 <constraint firstItem="oQl-Jm-Jd2" firstAttribute="bottom" secondItem="eug-p7-zIe" secondAttribute="bottom" id="Dxa-he-48X"/>
+                <constraint firstItem="Hyh-zg-4NE" firstAttribute="top" secondItem="tH1-YX-68o" secondAttribute="bottom" id="E9Y-9L-QAr"/>
                 <constraint firstItem="I6S-Zs-M4F" firstAttribute="centerY" secondItem="Xit-aY-mf9" secondAttribute="centerY" id="ERQ-J3-5ol"/>
                 <constraint firstItem="I6S-Zs-M4F" firstAttribute="centerX" secondItem="Xit-aY-mf9" secondAttribute="centerX" id="EtP-gb-fU9"/>
                 <constraint firstItem="tH1-YX-68o" firstAttribute="trailing" secondItem="eug-p7-zIe" secondAttribute="trailing" id="HoS-V6-Hez"/>
@@ -119,6 +127,8 @@
                 <constraint firstItem="1Kd-We-2c1" firstAttribute="leading" secondItem="eug-p7-zIe" secondAttribute="leading" id="Yfl-Z0-G6s"/>
                 <constraint firstItem="8JW-Su-IJf" firstAttribute="bottom" secondItem="eug-p7-zIe" secondAttribute="bottom" id="bix-1j-XfK"/>
                 <constraint firstItem="BXk-iU-bGX" firstAttribute="centerX" secondItem="Xit-aY-mf9" secondAttribute="centerX" id="cKD-gW-kkB"/>
+                <constraint firstItem="Hyh-zg-4NE" firstAttribute="bottom" secondItem="eug-p7-zIe" secondAttribute="bottom" id="fOm-n6-sUK"/>
+                <constraint firstItem="Hyh-zg-4NE" firstAttribute="leading" secondItem="eug-p7-zIe" secondAttribute="leading" id="gpJ-ut-NTn"/>
                 <constraint firstItem="8JW-Su-IJf" firstAttribute="top" secondItem="tH1-YX-68o" secondAttribute="bottom" id="kmv-l3-8uE"/>
                 <constraint firstItem="tH1-YX-68o" firstAttribute="top" secondItem="eug-p7-zIe" secondAttribute="top" id="meu-za-thE"/>
                 <constraint firstItem="oQl-Jm-Jd2" firstAttribute="leading" secondItem="eug-p7-zIe" secondAttribute="leading" id="vlU-q7-sIh"/>

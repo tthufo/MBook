@@ -16,4 +16,6 @@
 
 - (NSAttributedString *)attributeHTML:(NSString*)htmlString;
 
+- (NSString *)attributeHTMLRaw:(NSString*)htmlString;
+
 @end

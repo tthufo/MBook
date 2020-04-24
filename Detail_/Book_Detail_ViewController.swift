@@ -159,6 +159,10 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
         let collectionViewInsets: UIEdgeInsets = UIEdgeInsets(top: CGFloat(self.headerHeight), left: 0.0, bottom: contentSizeHeight < CGFloat(collectionViewHeight - 64) ? CGFloat(collectionViewHeight - contentSizeHeight - 64) + CGFloat(embeded) : CGFloat(0 + embeded), right: 0.0)
          
         self.collectionView.contentInset = collectionViewInsets
+        
+        let read = self.withView(headerView, tag: 33) as! UIButton
+
+        read.isHidden = chapList.count > 1
     }
     
     func didRequestData(isShow: Bool) {
@@ -390,7 +394,7 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return section == 2 ? dataList.count : section == 1 ? chapList.count : detailList.count
+        return section == 2 ? dataList.count : section == 1 ? chapList.count > 1 ? chapList.count : 0 : detailList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -494,7 +498,7 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: collectionView.frame.width, height: 44)
+        return CGSize(width: collectionView.frame.width, height: section == 1 ? chapList.count <= 1 ? 0 : 44 : 44)
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {

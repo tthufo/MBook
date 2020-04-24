@@ -282,6 +282,8 @@ class Search_ViewController: UIViewController, UICollectionViewDataSource, UICol
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView != self.collectionView {
             let data = bookList[indexPath.item] as! NSDictionary
+            self.addHistory(data.getValueFromKey("name"))
+            self.reloadHistory()
             if data.getValueFromKey("book_type") == "3" {
                 self.didRequestUrl(info: (data ))
                 return
@@ -291,8 +293,6 @@ class Search_ViewController: UIViewController, UICollectionViewDataSource, UICol
              bookInfo.addEntries(from: data as! [AnyHashable : Any])
              bookDetail.config = bookInfo
              self.navigationController?.pushViewController(bookDetail, animated: true)
-            self.addHistory(data.getValueFromKey("name"))
-            self.reloadHistory()
         } else {
             if indexPath.section == 0 {
                 let data = dataList[indexPath.item] as! NSDictionary
