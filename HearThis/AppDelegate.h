@@ -14,6 +14,8 @@
 
 #import "TT_Panel_ViewController.h"
 
+#import "ViewPagerController.h"
+
 #import "TT_Synced_ViewController.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
@@ -33,6 +35,12 @@
 @interface NSObject (ext)
 
 - (NSDictionary*)ipodItem:(MPMediaItem*)item;
+
+@end
+
+@interface ViewPagerController (external)
+
+- (UIViewController *)viewControllerAtIndex:(NSUInteger)index;
 
 @end
 

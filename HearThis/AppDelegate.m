@@ -349,6 +349,8 @@ UIBackgroundTaskIdentifier bgTask;
             ((UICollectionView*)v).contentInset = UIEdgeInsetsMake(((UICollectionView*)v).contentInset.top, 0, ([self isEmbed] ? (((UICollectionView*)v).contentInset.bottom == 0 ? h : ((UICollectionView*)v).contentInset.bottom) : ((UICollectionView*)v).contentInset.bottom == h ? 0 : ((UICollectionView*)v).contentInset.bottom) + (((UICollectionView*)v).contentInset.bottom == 0 ? embed : 0), 0);
         }
         
+        NSLog(@"%@", v);
+        
         if([v isKindOfClass:[UIView class]])
         {
             for(UIView * innerView in v.subviews)
@@ -463,6 +465,11 @@ UIBackgroundTaskIdentifier bgTask;
             [self didEmbed];
             
             [self didEmbed:[self TOPVIEWCONTROLER]];
+            
+            if([[[self LAST] classForCoder] isSubclassOfClass:[ViewPagerController class]])
+            {
+                [self didEmbed:[((ViewPagerController*)[self LAST]) viewControllerAtIndex:[((ViewPagerController*)[self LAST]).indexSelected intValue]]];
+            }
         }
 
         [self PLAYER].playState = Normal;
@@ -505,18 +512,19 @@ UIBackgroundTaskIdentifier bgTask;
 
 - (void)goUp
 {
-    
     [UIView animateWithDuration:0.4 delay:0 usingSpringWithDamping:0.8 initialSpringVelocity:0 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
                 
+        int topPoint = IS_IPAD ? 24 : [self isIphoneX] ? 40 : 20;
+        
         CGRect rect = [self PLAYER].view.frame;
         
-        rect.origin.y = IS_IPAD ? 24 : [self isIphoneX] ? 40 : 20;
+        rect.origin.y = topPoint;
         
         rect.origin.x = IS_IPAD ? 0 : 0;
         
         rect.size.width = screenWidth1 - (IS_IPAD ? 0 : 0);
         
-        rect.size.height = screenHeight1 - (IS_IPAD ? 0 : [self isIphoneX] ? 40 : 0);
+        rect.size.height = screenHeight1 - topPoint;
         
         [self PLAYER].view.backgroundColor = [UIColor whiteColor];
 
@@ -557,6 +565,11 @@ UIBackgroundTaskIdentifier bgTask;
         if([self isParallax]) {
             [self didEmbed];
             [self didEmbed:[self TOPVIEWCONTROLER]];
+            
+            if([[[self LAST] classForCoder] isSubclassOfClass:[ViewPagerController class]])
+            {
+                [self didEmbed:[((ViewPagerController*)[self LAST]) viewControllerAtIndex:[((ViewPagerController*)[self LAST]).indexSelected intValue]]];
+            }
         }
     }];
 }
@@ -567,6 +580,8 @@ UIBackgroundTaskIdentifier bgTask;
             
     [UIView animateWithDuration:0.4 delay:0 usingSpringWithDamping:0.8 initialSpringVelocity:0 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
                 
+        int topPoint = IS_IPAD ? 24 : [self isIphoneX] ? 40 : 20;
+
         CGRect rect = [self PLAYER].view.frame;
 
         rect.origin.y = screenHeight1 - ([[self TOPVIEWCONTROLER] isKindOfClass:[UITabBarController class]] ? 115 : 65) - ( IS_IPAD ? 1 : [self isIphoneX] ? 35 : 0) - embed;
@@ -575,7 +590,7 @@ UIBackgroundTaskIdentifier bgTask;
              
         rect.size.width = screenWidth1 - (IS_IPAD ? 300 : 0);
         
-        rect.size.height = screenHeight1 - (IS_IPAD ? 0 : [self isIphoneX] ? 40 : 0);
+        rect.size.height = screenHeight1 - topPoint;
 
         rect.size.height = 65;
         
@@ -621,7 +636,10 @@ UIBackgroundTaskIdentifier bgTask;
 //        {
 //            [(TT_Synced_ViewController*)controller didReloadData];
 //        }
-            
+        if([[[self LAST] classForCoder] isSubclassOfClass:[ViewPagerController class]])
+        {
+            [self didEmbed:[((ViewPagerController*)[self LAST]) viewControllerAtIndex:[((ViewPagerController*)[self LAST]).indexSelected intValue]]];
+        }
     }];
 }
 
@@ -664,7 +682,8 @@ UIBackgroundTaskIdentifier bgTask;
 
 - (BOOL)isFullEmbed
 {
-    return [self PLAYER].view.frame.origin.y == 0;
+    int point = IS_IPAD ? 24 : [self isIphoneX] ? 40 : 20;
+    return [self PLAYER].view.frame.origin.y == point;
 }
 
 - (BOOL)isEmbed
@@ -759,6 +778,10 @@ UIBackgroundTaskIdentifier bgTask;
 
 @end
 
+@implementation ViewPagerController (external)
+
+
+@end
 
 @implementation UIImageView (shadow)
 

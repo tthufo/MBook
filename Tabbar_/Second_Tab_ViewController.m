@@ -119,7 +119,7 @@
 }
 
 - (IBAction)didPressSearch:(id)sender {
-    [self.navigationController pushViewController:[Search_ViewController new] animated:YES];
+    [[self CENTER] pushViewController:[Search_ViewController new] animated:YES];
 }
 
 #pragma TableView

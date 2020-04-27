@@ -103,7 +103,7 @@
     collectionView.parallaxHeader.height = screenWidth1 * 9 / 16;
     collectionView.parallaxHeader.minimumHeight = [self isIphoneX] ? 64 : 64;
     [collectionView.parallaxHeader setParallaxHeaderDidScrollHandler:^(ParallaxHeader * header) {
-        NSLog(@"%f", header.progress);
+//        NSLog(@"%f", header.progress);
         for (UIView * v in controller.subviews) {
             if (v.tag != 1000 && v.tag != 1010101) {
                 if (v.tag == 9988 || v.tag == 9989 || v.tag == 9990) {
@@ -341,7 +341,7 @@
     
     playingData[@"cover"] = setupData[@"img"];
     
-    NSLog(@"%@", info);
+//    NSLog(@"%@", info);
         
     titleSong.text = info[@"name"];
     
@@ -463,7 +463,7 @@
         dict[array[[cell.subviews indexOfObject:v]]] = v;
     }
 
-    NSLog(@"%@", dict);
+//    NSLog(@"%@", dict);
     
     [((UIImageView*)dict[@"img"]) withBorder:@{@"Bcorner":@(6)}];
         
