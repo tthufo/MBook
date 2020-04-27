@@ -445,7 +445,8 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
             print(Information.userInfo as Any)
             
             if Information.check == "1" {
-                self.didRequestPackage()   //CHECK PACKAGE
+//                self.didRequestPackage()   //CHECK PACKAGE
+                (UIApplication.shared.delegate as! AppDelegate).changeRoot(false) //CHECK PACKAGE
             } else {
                 (UIApplication.shared.delegate as! AppDelegate).changeRoot(false) //CHECK PACKAGE
             }

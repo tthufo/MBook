@@ -90,7 +90,7 @@ class PC_Inner_Info_ViewController: UIViewController, UITextFieldDelegate {
             avatarTemp = Information.avatar
             avatar.image = avatarTemp
         } else {
-            avatar.imageUrlHolder(url: (Information.userInfo?.getValueFromKey("Avatar"))!, holder: "ic_avatar")
+            avatar.imageUrlHolder(url: (Information.userInfo?.getValueFromKey("avatar"))!, holder: "ic_avatar")
         }
                 
         phone.addTarget(self, action: #selector(textRePassIsChanging), for: .editingChanged)

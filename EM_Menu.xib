@@ -306,7 +306,7 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="jV6-4n-DEs">
-                    <rect key="frame" x="0.0" y="0.0" width="310" height="171"/>
+                    <rect key="frame" x="0.0" y="0.0" width="310" height="135"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <subviews>
                         <view tag="222" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ion-4k-2d3">
@@ -375,12 +375,12 @@
             </subviews>
             <color key="backgroundColor" red="0.86666666670000003" green="0.86666666670000003" blue="0.86666666670000003" alpha="1" colorSpace="calibratedRGB"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="-654.375" y="1225.625"/>
+            <point key="canvasLocation" x="-654.375" y="1224.823943661972"/>
         </view>
     </objects>
     <resources>
         <image name="ic_avatar" width="116.5" height="116.5"/>
-        <image name="ic_camera" width="16" height="16"/>
+        <image name="ic_camera" width="49.5" height="32"/>
         <image name="ic_gallery" width="49.5" height="32"/>
         <image name="ic_view" width="16" height="16"/>
         <image name="xxxx" width="33" height="33"/>
