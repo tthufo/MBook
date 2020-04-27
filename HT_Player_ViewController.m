@@ -14,16 +14,14 @@
 
 #import "HearThis-Swift.h"
 
+@import ParallaxHeader;
+
 @import MarqueeLabel;
 
 @interface HT_Player_ViewController ()<GUIPlayerViewDelegate>
 {
     IBOutlet MarqueeLabel * titleSong;
-    
-//    IBOutlet UILabel * titleSong;
-        
-    IBOutlet UICollectionView * collectionView;
-
+            
     IBOutlet UIView * controlView, * controlViewIpad;
     
     IBOutlet NSLayoutConstraint * topHeight, * topHeightIpad;
@@ -55,7 +53,7 @@
 
 @implementation HT_Player_ViewController
 
-@synthesize playerView, playState, topView, uID, controlView, controlViewIpad;
+@synthesize playerView, playState, topView, uID, controlView, controlViewIpad, collectionView;
 
 - (void)viewDidLoad
 {
@@ -85,12 +83,50 @@
     ((UIImageView*)[self playerInfo][@"img"]).hidden = YES;
     
     [self didSetUpCollectionView];
+    
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, 1 * NSEC_PER_SEC);
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+       [self parallaxHeader];
+    });
 }
 
 - (void)didSetUpCollectionView {
     [collectionView withCell:@"TG_Map_Cell"];
     [collectionView withCell:@"TG_Book_Chap_Cell"];
     [collectionView withHeaderOrFooter:@"Book_Detail_Title" andKind: UICollectionElementKindSectionHeader];
+}
+
+- (void)parallaxHeader {
+    UIView * controller = IS_IPAD ? controlViewIpad : controlView;
+    UIView * bg = [self withView:controller tag:1000];
+    collectionView.parallaxHeader.view = IS_IPAD ? controlViewIpad : controlView;
+    collectionView.parallaxHeader.height = screenWidth1 * 9 / 16;
+    collectionView.parallaxHeader.minimumHeight = [self isIphoneX] ? 64 : 64;
+    [collectionView.parallaxHeader setParallaxHeaderDidScrollHandler:^(ParallaxHeader * header) {
+        NSLog(@"%f", header.progress);
+        for (UIView * v in controller.subviews) {
+            if (v.tag != 1000 && v.tag != 1010101) {
+                if (v.tag == 9988 || v.tag == 9989 || v.tag == 9990) {
+                    v.alpha = 1 - header.progress;
+                } else {
+                    v.alpha = header.progress;
+                }
+            }
+        }
+        bg.alpha = 1 - header.progress;
+    }];
+}
+
+- (void)adjustInset {
+    float headerHeight = screenWidth1 * 9 / 16;
+    float embeded = [self isEmbed] ? 0 : 0;
+    float contentSizeHeight = collectionView.collectionViewLayout.collectionViewContentSize.height;
+    float collectionViewHeight = collectionView.frame.size.height;
+    collectionView.contentInset = UIEdgeInsetsMake(headerHeight, 0, contentSizeHeight < (collectionViewHeight - 64) ? (collectionViewHeight - contentSizeHeight - 64 + embeded) : (0 + embeded), 0);
+}
+
+- (void)backToTop {
+    [collectionView setContentOffset:CGPointMake(0, - screenWidth1 * 9 / 16) animated:YES];
 }
 
 - (void)playingState
@@ -111,14 +147,14 @@
     
     [self addObject:dict andKey:@"settingOpt"];
     
-    [(UIButton*)[self playerInfo][@"random"] setImage:![playingData[@"shuffle"] boolValue] ? [UIImage imageNamed:@"shuffle"] : [[UIImage imageNamed:@"shuffle"] tintedImage: kColor] forState:UIControlStateNormal];
+//    [(UIButton*)[self playerInfo][@"random"] setImage:![playingData[@"shuffle"] boolValue] ? [UIImage imageNamed:@"shuffle"] : [[UIImage imageNamed:@"shuffle"] tintedImage: kColor] forState:UIControlStateNormal];
     
     [((UIButton*)[self playerInfo][@"repeat"]) setImage:[UIImage imageNamed:[playingData[@"repeat"] isEqualToString:@"2"] ? @"infinity" : [playingData[@"repeat"] isEqualToString:@"1"] ? @"repeat" : @"once"] forState:UIControlStateNormal];
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView
 {
-    if(scrollView.contentOffset.y < -35)
+    if(scrollView.contentOffset.y < (-65 - (screenWidth1 * 9 / 16)))
     {
         [self didPressDown];
     }
@@ -291,8 +327,6 @@
 
 - (void)didStartPlayWith:(NSString*)vID andInfo:(NSDictionary*)info
 {
-//    topHeight.constant = screenWidth1 * 9 / 16;
-
     config = info;
     
     uID = [info getValueFromKey:@"id"];
@@ -313,7 +347,11 @@
     
     ((UILabel*)[self playerInfo][@"title"]).text = info[@"name"];
     
+    ((UILabel*)[self playerInfo][@"titleTop"]).text = info[@"name"];
+    
     [((UIButton*)[self playerInfo][@"play"]) addTarget:self action:@selector(didPressPause:) forControlEvents:UIControlEventTouchUpInside];
+    
+     [((UIButton*)[self playerInfo][@"playTop"]) addTarget:self action:@selector(didPressPause:) forControlEvents:UIControlEventTouchUpInside];
     
     [((UIButton*)[self playerInfo][@"back"]) addTarget:self action:@selector(playPrevious) forControlEvents:UIControlEventTouchUpInside];
 
@@ -324,6 +362,8 @@
     [((GUISlider*)[self playerInfo][@"slider"]) setThumbImage:[UIImage imageNamed:@"trans"] forState:UIControlStateHighlighted];
     
     [((UIButton*)[self playerInfo][@"off"]) addTarget:self action:@selector(didPressDown) forControlEvents:UIControlEventTouchUpInside];
+    
+    [((UIButton*)[self playerInfo][@"downTop"]) addTarget:self action:@selector(didPressDown) forControlEvents:UIControlEventTouchUpInside];
     
 //    [((UIButton*)[self playerInfo][@"sync"]) addTarget:self action:@selector(didPressSync:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -342,7 +382,6 @@
     ((UIView*)[self playerInfo][@"view"]).alpha = 1;
     
 //    [((UIButton*)[self playerInfo][@"share"]) addTarget:self action:@selector(didPressClock:) forControlEvents:UIControlEventTouchUpInside];
-//
 //
     
     BOOL isIpod = [info responseForKey:@"ipod"];
@@ -401,6 +440,10 @@
     [self didRequestData];
      
     [self didRequestChapter];
+    
+    if ([info responseForKey:@"back_to_top"]) {
+        [self backToTop];
+    }
 }
 
 - (NSDictionary*)playerInfo
@@ -413,13 +456,15 @@
 
     UIView * cell = IS_IPAD ? controlViewIpad : controlView;
     
-    NSArray * array = @[@"img", @"cover",@"slider",@"currentTime",@"remainTime",@"title",@"back",@"play",@"next",@"off",@"loading",@"sync",@"volume",@"share",@"random",@"repeat",@"line",@"view",@"list",@"edit",@"time"];
+    NSArray * array = @[@"img", @"cover",@"slider",@"currentTime",@"remainTime",@"title",@"back",@"play",@"next",@"off",@"loading",@"sync",@"playTop",@"titleTop",@"downTop",@"repeat",@"line",@"view",@"list",@"edit",@"time"];
     
     for(UIView * v in cell.subviews)
     {
         dict[array[[cell.subviews indexOfObject:v]]] = v;
     }
-        
+
+    NSLog(@"%@", dict);
+    
     [((UIImageView*)dict[@"img"]) withBorder:@{@"Bcorner":@(6)}];
         
     return dict;
@@ -710,16 +755,16 @@
 //                    }
 //                }
 //                else
-                {
+//                {
                     if([[dict getValueFromKey:@"id"] isEqualToString:uID])
                     {
                         found = YES;
                         
-                        nextIndexing = [chapList indexOfObject:dict] + (isNext ? 1 : -1);
+                        nextIndexing = [chapList indexOfObject:dict] + (isNext ? -1 : 1);
                         
                         break;
                     }
-                }
+//                }
             }
         }
 //            break;
@@ -727,9 +772,11 @@
 //            break;
     }
     
+//    NSLog(@"%i", nextIndexing);
+    
     if(found)
     {
-        if(isNext)
+        if(!isNext)
         {
             if(nextIndexing >= chapList.count)
             {
@@ -738,21 +785,21 @@
         }
         else
         {
-            if(nextIndexing < 0)
+            if(nextIndexing <= 0)
             {
                 nextIndexing = chapList.count - 1;
             }
-            else
-            {
-                nextIndexing = 0;
-            }
+//            else
+//            {
+//                nextIndexing = 0;
+//            }
         }
     }
     else
     {
         nextIndexing = 0;
     }
-    
+        
     NSMutableDictionary * playingInfo = [[NSMutableDictionary alloc] initWithDictionary:chapList[nextIndexing]];
     
     playingInfo[@"byPass"] = @"1";
@@ -1022,6 +1069,8 @@
     
     [(UIButton*)[self playerInfo][@"play"] setImage:[UIImage imageNamed:isPlaying ? @"pause_D" : @"play_D"] forState:UIControlStateNormal];
     
+    [(UIButton*)[self playerInfo][@"playTop"] setImage:[UIImage imageNamed:isPlaying ? @"pause_D" : @"play_D"] forState:UIControlStateNormal];
+    
 //    [UIView animateWithDuration:0.3 animations:^{
 //        
 //        ((UIImageView*)[self playerInfo][@"img"]).transform = CGAffineTransformScale(CGAffineTransformIdentity, isPlaying ? 1 : 0.9,isPlaying ? 1 : 0.9);
@@ -1074,22 +1123,22 @@
 {
     [self goUp];
     
-    if(![[self getObject:@"adsInfo"][@"itune"] boolValue])
-    {
-        [((UIButton*)[self playerInfo][@"sync"]) setImage:[UIImage imageNamed:@"shareI"] forState:UIControlStateNormal];
-        
-        [((UIButton*)[self playerInfo][@"sync"]) removeTarget:NULL action:nil forControlEvents:UIControlEventAllTouchEvents];
-        
-        [((UIButton*)[self playerInfo][@"sync"]) addTarget:self action:@selector(didPressShare:) forControlEvents:UIControlEventTouchUpInside];
-    }
-    else
-    {
-        [((UIButton*)[self playerInfo][@"sync"]) setImage:[UIImage imageNamed:@"reload"] forState:UIControlStateNormal];
-        
-        [((UIButton*)[self playerInfo][@"sync"]) removeTarget:NULL action:nil forControlEvents:UIControlEventAllTouchEvents];
-        
-        [((UIButton*)[self playerInfo][@"sync"]) addTarget:self action:@selector(didPressSync:) forControlEvents:UIControlEventTouchUpInside];
-    }
+//    if(![[self getObject:@"adsInfo"][@"itune"] boolValue])
+//    {
+//        [((UIButton*)[self playerInfo][@"sync"]) setImage:[UIImage imageNamed:@"shareI"] forState:UIControlStateNormal];
+//
+//        [((UIButton*)[self playerInfo][@"sync"]) removeTarget:NULL action:nil forControlEvents:UIControlEventAllTouchEvents];
+//
+//        [((UIButton*)[self playerInfo][@"sync"]) addTarget:self action:@selector(didPressShare:) forControlEvents:UIControlEventTouchUpInside];
+//    }
+//    else
+//    {
+//        [((UIButton*)[self playerInfo][@"sync"]) setImage:[UIImage imageNamed:@"reload"] forState:UIControlStateNormal];
+//
+//        [((UIButton*)[self playerInfo][@"sync"]) removeTarget:NULL action:nil forControlEvents:UIControlEventAllTouchEvents];
+//
+//        [((UIButton*)[self playerInfo][@"sync"]) addTarget:self action:@selector(didPressSync:) forControlEvents:UIControlEventTouchUpInside];
+//    }
 }
 
 - (IBAction)didPressDown
@@ -1133,6 +1182,8 @@
         } else {
             [self showToast:[[dict getValueFromKey:@"error_msg"] isEqualToString:@""] ? @"Lỗi xảy ra, mời bạn thử lại" : [dict getValueFromKey:@"error_msg"] andPos:0];
         }
+        
+        [self adjustInset];
     }];
 }
 
@@ -1162,6 +1213,7 @@
         } else {
             [self showToast:[[dict getValueFromKey:@"error_msg"] isEqualToString:@""] ? @"Lỗi xảy ra, mời bạn thử lại" : [dict getValueFromKey:@"error_msg"] andPos:0];
         }
+        [self adjustInset];
     }];
 }
 
@@ -1190,6 +1242,7 @@
         } else {
             [self showToast:[[dict getValueFromKey:@"error_msg"] isEqualToString:@""] ? @"Lỗi xảy ra, mời bạn thử lại" : [dict getValueFromKey:@"error_msg"] andPos:0];
         }
+        [self adjustInset];
     }];
 }
 
@@ -1198,7 +1251,7 @@
 
 - (NSInteger)collectionView:(UICollectionView *)view numberOfItemsInSection:(NSInteger)section
 {
-    return section == 1 ? dataList.count : chapList.count;
+    return section == 1 ? dataList.count : chapList.count == 1 ? 0 : chapList.count;
 }
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -1259,12 +1312,12 @@
         config = chap;
         [self didRequestContent];
     }
-    
     if (indexPath.section == 1) {
         NSDictionary * book = dataList[indexPath.item];
         if ([[book getValueFromKey:@"book_type"] isEqualToString:@"3"]) {
             config = book;
             [self didRequestContent];
+            [self backToTop];
         } else {
             [self goDown];
             Book_Detail_ViewController * detail = [Book_Detail_ViewController new];
@@ -1285,7 +1338,7 @@
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
-    return CGSizeMake(collectionView.frame.size.width, 44);
+    return CGSizeMake(collectionView.frame.size.width, chapList.count == 1 ? 0 : 44);
 }
 
 

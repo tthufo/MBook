@@ -26,7 +26,6 @@
 
 @implementation AppDelegate
 
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
 //    [[LTRequest sharedInstance] initRequest];
@@ -506,11 +505,12 @@ UIBackgroundTaskIdentifier bgTask;
 
 - (void)goUp
 {
+    
     [UIView animateWithDuration:0.4 delay:0 usingSpringWithDamping:0.8 initialSpringVelocity:0 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
                 
         CGRect rect = [self PLAYER].view.frame;
         
-        rect.origin.y = IS_IPAD ? 0 : [self isIphoneX] ? 40 : 0;
+        rect.origin.y = IS_IPAD ? 24 : [self isIphoneX] ? 40 : 20;
         
         rect.origin.x = IS_IPAD ? 0 : 0;
         
@@ -531,14 +531,26 @@ UIBackgroundTaskIdentifier bgTask;
         [self PLAYER].controlViewIpad.alpha = 1;
         
         for (UIView * v in  [self PLAYER].controlViewIpad.subviews) {
-            v.alpha = v.tag == 1010101 ? 0.6 : 1;
+//            v.alpha = v.tag == 1010101 ? 0.6 : 1;
+            if (v.tag == 10001) {
+                v.hidden = YES;
+            }
+            v.hidden = NO;
         }
         
         for (UIView * v in  [self PLAYER].controlView.subviews) {
-            v.alpha = v.tag == 1010101 ? 0.6 : 1;
+//            if (v.tag != 9988 || v.tag != 9989) {
+//                v.alpha = v.tag == 1010101 ? 0.6 : 1;
+            if (v.tag == 10001) {
+                v.hidden = YES;
+            }
+            v.hidden = NO;
+//            }
         }
         
         ((UIImageView*)[[self PLAYER] playerInfo][@"img"]).hidden = NO;
+        
+        ((UICollectionView*)[self PLAYER].collectionView).hidden = NO;
         
     } completion:^(BOOL finished) {
         
@@ -580,15 +592,27 @@ UIBackgroundTaskIdentifier bgTask;
         [self PLAYER].controlViewIpad.alpha = 0;
         
         for (UIView * v in  [self PLAYER].controlViewIpad.subviews) {
-            v.alpha = 0;
+//            v.alpha = 0;
+            if (v.tag == 10001) {
+                v.hidden = YES;
+            }
+            v.hidden = YES;
         }
         
         for (UIView * v in  [self PLAYER].controlView.subviews) {
-            v.alpha = 0;
+//            if (v.tag != 9988 || v.tag != 9989) {
+//                v.alpha = 0;
+            if (v.tag == 10001) {
+                v.hidden = YES;
+            }
+            v.hidden = YES;
+//            }
         }
         
-        ((UIImageView*)[[self PLAYER] playerInfo][@"img"]).hidden = NO;
+        ((UIImageView*)[[self PLAYER] playerInfo][@"img"]).hidden = YES;
         
+        ((UICollectionView*)[self PLAYER].collectionView).hidden = YES;
+
     } completion:^(BOOL finished) {
         
 //        id controller = [((UINavigationController*)[self TABBAR].selectedViewController).viewControllers lastObject];
@@ -661,7 +685,7 @@ UIBackgroundTaskIdentifier bgTask;
 - (BOOL)isParallax
 {
     return YES;
-//    ![self isKindOfClass:[Book_Detail_ViewController class]]
+//    ![self isKindOfClass:[HT_Player_ViewController class]];
 //    &&
 //    ![self isKindOfClass:[Author_Detail_ViewController class]];
 //    && ![self isKindOfClass:[Event_Detail_ViewController class]];

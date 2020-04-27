@@ -20,6 +20,10 @@ class Search_ViewController: UIViewController, UICollectionViewDataSource, UICol
      
     var isLoadMore: Bool = false
         
+    @IBOutlet var topView: UIView!
+    
+    @IBOutlet var deleteWidth: NSLayoutConstraint!
+
     @IBOutlet var deleteButton: UIButton!
     
     @IBOutlet var searchField: UITextField!
@@ -84,6 +88,10 @@ class Search_ViewController: UIViewController, UICollectionViewDataSource, UICol
     
     @objc func searchTextChange(_ textField:UITextField) {
         let hasText = textField.text?.replacingOccurrences(of: " ", with: "") == ""
+        UIView.animate(withDuration: 0.3) {
+            self.deleteWidth.constant = hasText ? 0 : 44
+            self.topView.layoutIfNeeded()
+        }
         deleteButton.alpha = hasText ? 0 : 1
         collectionBook.alpha = hasText ? 0 : 1
         if !hasText {
@@ -102,6 +110,10 @@ class Search_ViewController: UIViewController, UICollectionViewDataSource, UICol
     }
 
     @IBAction func didPressClose() {
+        UIView.animate(withDuration: 0.3) {
+            self.deleteWidth.constant = 0
+            self.topView.layoutIfNeeded()
+        }
         deleteButton.alpha = 0
         collectionBook.alpha = 0
         searchField.text = ""
@@ -305,6 +317,10 @@ class Search_ViewController: UIViewController, UICollectionViewDataSource, UICol
                 didReload(refreshControl)
                 collectionBook.alpha = 1
                 deleteButton.alpha = 1
+                UIView.animate(withDuration: 0.3) {
+                    self.deleteWidth.constant = 44
+                    self.topView.layoutIfNeeded()
+                }
             }
         }
     }

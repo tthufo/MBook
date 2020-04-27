@@ -23,6 +23,8 @@ typedef enum __playerState
 
 @interface HT_Player_ViewController : UIViewController
 
+@property(nonatomic, retain) IBOutlet UICollectionView * collectionView;
+
 @property(nonatomic, retain) GUIPlayerView * playerView;
 
 @property(nonatomic, retain) IBOutlet UIView * topView, * controlView, * controlViewIpad;
@@ -44,5 +46,7 @@ typedef enum __playerState
 - (IBAction)playNext;
 
 - (IBAction)playPrevious;
+
+- (void)backToTop;
 
 @end

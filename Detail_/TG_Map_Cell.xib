@@ -17,6 +17,18 @@
                 <rect key="frame" x="0.0" y="0.0" width="160" height="200"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uXI-g6-buO">
+                        <rect key="frame" x="10" y="4" width="140" height="140"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="point" keyPath="shadowOffset">
+                                <point key="value" x="0.5" y="0.0"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                <real key="value" value="0.59999999999999998"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="11" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="book_cover" translatesAutoresizingMaskIntoConstraints="NO" id="YMd-pE-Gfq">
                         <rect key="frame" x="10" y="4" width="140" height="140"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -51,9 +63,13 @@
                 <constraint firstItem="onA-w3-bM5" firstAttribute="leading" secondItem="wX3-7p-UCN" secondAttribute="leading" constant="5" id="96P-VT-zZ0"/>
                 <constraint firstItem="YMd-pE-Gfq" firstAttribute="top" secondItem="wX3-7p-UCN" secondAttribute="top" constant="4" id="CCg-OI-sBv"/>
                 <constraint firstAttribute="bottom" secondItem="4z1-A9-f4q" secondAttribute="bottom" constant="28" id="CeH-lj-oxV"/>
+                <constraint firstItem="uXI-g6-buO" firstAttribute="leading" secondItem="wX3-7p-UCN" secondAttribute="leading" constant="10" id="JIs-h8-nYu"/>
                 <constraint firstAttribute="bottom" secondItem="onA-w3-bM5" secondAttribute="bottom" constant="5" id="JNC-b0-S5m"/>
+                <constraint firstItem="uXI-g6-buO" firstAttribute="top" secondItem="wX3-7p-UCN" secondAttribute="top" constant="4" id="K9p-yC-Dl8"/>
+                <constraint firstAttribute="trailing" secondItem="uXI-g6-buO" secondAttribute="trailing" constant="10" id="Zba-V2-qvY"/>
                 <constraint firstAttribute="trailing" secondItem="onA-w3-bM5" secondAttribute="trailing" constant="5" id="eMo-95-1iR"/>
                 <constraint firstAttribute="trailing" secondItem="YMd-pE-Gfq" secondAttribute="trailing" constant="10" id="hHD-v5-hFP"/>
+                <constraint firstItem="4z1-A9-f4q" firstAttribute="top" secondItem="uXI-g6-buO" secondAttribute="bottom" constant="3" id="ij0-EP-pSK"/>
                 <constraint firstItem="4z1-A9-f4q" firstAttribute="leading" secondItem="wX3-7p-UCN" secondAttribute="leading" constant="5" id="nRf-Bo-0Ie"/>
                 <constraint firstAttribute="trailing" secondItem="4z1-A9-f4q" secondAttribute="trailing" constant="5" id="uWY-QL-hV1"/>
                 <constraint firstItem="4z1-A9-f4q" firstAttribute="top" secondItem="YMd-pE-Gfq" secondAttribute="bottom" constant="3" id="zbt-Rh-foA"/>

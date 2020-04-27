@@ -13,8 +13,10 @@
                 <outlet property="collectionBook" destination="HO7-Kn-qFu" id="Qvk-dr-xLN"/>
                 <outlet property="collectionView" destination="b8W-PC-frw" id="7VR-Zu-uAQ"/>
                 <outlet property="deleteButton" destination="HMM-gb-sZC" id="25V-px-Uus"/>
+                <outlet property="deleteWidth" destination="hGV-t2-0aI" id="nxN-cD-rxd"/>
                 <outlet property="flowLayout" destination="xpY-uN-5yM" id="MRH-PB-3px"/>
                 <outlet property="searchField" destination="633-Vu-amd" id="eiG-6K-Yhq"/>
+                <outlet property="topView" destination="2hx-Zc-Jz2" id="rIE-ly-TGK"/>
                 <outlet property="view" destination="Vnx-LC-jBw" id="CYz-2i-WML"/>
             </connections>
         </placeholder>
@@ -38,7 +40,7 @@
                             </connections>
                         </button>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B82-XP-zj2">
-                            <rect key="frame" x="60" y="14" width="294" height="38"/>
+                            <rect key="frame" x="60" y="14" width="338" height="38"/>
                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="38" id="6fo-xn-04C"/>
@@ -50,10 +52,10 @@
                             </userDefinedRuntimeAttributes>
                         </view>
                         <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HMM-gb-sZC">
-                            <rect key="frame" x="362" y="10" width="44" height="44"/>
+                            <rect key="frame" x="406" y="10" width="0.0" height="44"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="44" id="DGt-Mq-jfk"/>
-                                <constraint firstAttribute="width" constant="44" id="hGV-t2-0aI"/>
+                                <constraint firstAttribute="width" id="hGV-t2-0aI"/>
                             </constraints>
                             <state key="normal" image="icon_close"/>
                             <connections>
@@ -61,7 +63,7 @@
                             </connections>
                         </button>
                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Từ khóa tìm kiếm" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="633-Vu-amd">
-                            <rect key="frame" x="70" y="16" width="274" height="34"/>
+                            <rect key="frame" x="70" y="16" width="318" height="34"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="34" id="JCZ-eU-D1y"/>
                             </constraints>

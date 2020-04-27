@@ -66,24 +66,24 @@ class Event_Detail_ViewController: UIViewController, UICollectionViewDataSource,
     
         setupParallaxHeader()
         
-        filterAuthor()
+        filterEvent()
         
         collectionView.reloadData()
     }
     
-    func filterAuthor() {
-           tempList.removeAllObjects()
-           
-           tempList.addObjects(from: chapList as! [Any])
-                   
-           if tempList.count != 0 {
-               for dict in tempList {
-                   if (dict as! NSDictionary).getValueFromKey("id") == self.config.getValueFromKey("id") {
-                       tempList.remove(dict)
-                   }
+    func filterEvent() {
+       tempList.removeAllObjects()
+       
+       tempList.addObjects(from: chapList as! [Any])
+               
+       if tempList.count != 0 {
+           for dict in tempList {
+               if (dict as! NSDictionary).getValueFromKey("id") == self.config.getValueFromKey("id") {
+                   tempList.remove(dict)
                }
            }
        }
+    }
         
     private func setupParallaxHeader() {
         headerView = (Bundle.main.loadNibNamed("Event_Detail_Header", owner: self, options: nil)![IS_IPAD ? 0 : 1] as! UIView)
@@ -205,6 +205,8 @@ class Event_Detail_ViewController: UIViewController, UICollectionViewDataSource,
 
             self.dataList.addObjects(from: data.withMutable())
             
+            self.collectionView.reloadData()
+            
             self.collectionView.reloadSections(IndexSet(integer: 1))
             
             self.adjustInset()
@@ -244,7 +246,7 @@ class Event_Detail_ViewController: UIViewController, UICollectionViewDataSource,
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return indexPath.section == 2 ? eventSize() : indexPath.section == 1 ? (self.config.getValueFromKey("event_type") == "1" ? bookSize() : chapSize() ) : CGSize(width: collectionView.frame.width, height: self.returnSize(self.config.getValueFromKey("description")))
+        return indexPath.section == 2 ? eventSize() : indexPath.section == 1 ? (self.config.getValueFromKey("event_type") == "1" ? bookSize() : chapSize() ) : CGSize(width: collectionView.frame.width, height: self.returnSize(self.config.getValueFromKey("description")) + 10)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -329,7 +331,8 @@ class Event_Detail_ViewController: UIViewController, UICollectionViewDataSource,
         
         if indexPath.section == 2 {
             self.config = (tempList[indexPath.item] as! NSDictionary)
-            self.filterAuthor()
+            self.filterEvent()
+            self.collectionView.reloadSections(IndexSet(integer: 0))
             self.setupInfo()
             collectionView.setContentOffset(CGPoint.init(x: 0, y: -headerHeight), animated: true)
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
@@ -345,7 +348,7 @@ class Event_Detail_ViewController: UIViewController, UICollectionViewDataSource,
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: collectionView.frame.width, height: section != 2 ? 0 : 44)
+        return CGSize(width: collectionView.frame.width, height: section != 2 ? 0 : section == 2 ? tempList.count == 0 ? 0 : 44 : 44)
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
