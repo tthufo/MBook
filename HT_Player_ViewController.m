@@ -12,7 +12,7 @@
 
 #import "HT_Player_Item.h"
 
-#import "HearThis-Swift.h"
+#import "MeBook-Swift.h"
 
 @import ParallaxHeader;
 

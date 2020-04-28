@@ -197,7 +197,7 @@ class Author_ViewController: UIViewController, UICollectionViewDataSource, UICol
                return
             }
            
-            if indexPath.row == dataList.count - 1 {
+            if indexPath.item == dataList.count - 1 {
                if self.pageIndex <= self.totalPage {
                    self.isLoadMore = true
                    self.didRequestData(isShow: false)

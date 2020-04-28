@@ -8,22 +8,31 @@
 
 import UIKit
 import PDFKit
+import MarqueeLabel
 
 class Reader_ViewController: UIViewController {
 
     var config: NSDictionary!
     
-    @IBOutlet var titleLabel: UILabel!
+    @IBOutlet var titleLabel: MarqueeLabel!
     
+    @IBOutlet var topView: UIView!
+
     @IBOutlet var cover: UIImageView!
     
     @IBOutlet var failLabel: UILabel!
     
     @IBOutlet var restart: UIButton!
     
+    @IBOutlet var showFull: UIButton!
+
     @IBOutlet var pdfView: PDFView!
     
     @IBOutlet var downLoad: DownLoad!
+    
+    @IBOutlet var topHeight: NSLayoutConstraint!
+    
+    var show: Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -110,5 +119,18 @@ class Reader_ViewController: UIViewController {
                 self.deleteFile(fileName: self.pdfFile(fileName: self.config.getValueFromKey("id")))
             }
         }
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+    }
+    
+    @IBAction func didPressFull() {
+        UIView.animate(withDuration: 0.3) {
+            self.topHeight.constant = !self.show ? 0 : 64
+            self.showFull.alpha = !self.show ? 1 : 0
+            self.topView.layoutIfNeeded()
+        }
+        show = !show
     }
 }

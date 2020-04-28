@@ -8,7 +8,7 @@
 
 #import "Publisher_ViewController.h"
 
-#import "HearThis-Swift.h"
+#import "MeBook-Swift.h"
 
 @interface Publisher_ViewController ()
 {

@@ -8,14 +8,17 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="Reader_ViewController" customModule="HearThis" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="Reader_ViewController" customModule="MeBook" customModuleProvider="target">
             <connections>
                 <outlet property="cover" destination="8JW-Su-IJf" id="tLy-Ss-WCF"/>
                 <outlet property="downLoad" destination="BXk-iU-bGX" id="fDj-bo-OJ4"/>
                 <outlet property="failLabel" destination="5Ao-PB-nqt" id="TIc-Jg-vdt"/>
                 <outlet property="pdfView" destination="1Kd-We-2c1" id="foz-n6-PAf"/>
                 <outlet property="restart" destination="I6S-Zs-M4F" id="Xw6-UP-G8G"/>
+                <outlet property="showFull" destination="LpR-aG-b8R" id="Jhr-IS-PhC"/>
                 <outlet property="titleLabel" destination="YMH-aa-Yna" id="ddm-eN-Ycl"/>
+                <outlet property="topHeight" destination="CCy-SP-z56" id="FWl-FR-nDJ"/>
+                <outlet property="topView" destination="tH1-YX-68o" id="iX1-wM-pMW"/>
                 <outlet property="view" destination="Xit-aY-mf9" id="cuU-c5-B1b"/>
             </connections>
         </placeholder>
@@ -39,7 +42,7 @@
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YMH-aa-Yna">
-                            <rect key="frame" x="60" y="16" width="294" height="33"/>
+                            <rect key="frame" x="60" y="16" width="289" height="33"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="33" id="aq4-G7-qoK"/>
                             </constraints>
@@ -47,15 +50,28 @@
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="41J-L5-vvB">
+                            <rect key="frame" x="371" y="14.5" width="35" height="35"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="35" id="dfR-62-H41"/>
+                                <constraint firstAttribute="height" constant="35" id="gqV-9x-V96"/>
+                            </constraints>
+                            <state key="normal" image="full-screen-light"/>
+                            <connections>
+                                <action selector="didPressFull" destination="-1" eventType="touchUpInside" id="0qz-Pi-2Yy"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" red="0.0" green="0.60784313729999995" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="64" id="CCy-SP-z56"/>
                         <constraint firstItem="YMH-aa-Yna" firstAttribute="top" secondItem="tH1-YX-68o" secondAttribute="top" constant="16" id="IJS-25-24j"/>
+                        <constraint firstItem="41J-L5-vvB" firstAttribute="centerY" secondItem="tH1-YX-68o" secondAttribute="centerY" id="JMa-Md-GbT"/>
                         <constraint firstItem="E5Q-k8-K84" firstAttribute="top" secondItem="tH1-YX-68o" secondAttribute="top" constant="10" id="Nu6-3B-pfq"/>
                         <constraint firstItem="YMH-aa-Yna" firstAttribute="leading" secondItem="E5Q-k8-K84" secondAttribute="trailing" constant="8" id="Y58-it-57X"/>
-                        <constraint firstAttribute="trailing" secondItem="YMH-aa-Yna" secondAttribute="trailing" constant="60" id="dG3-cx-b7d"/>
+                        <constraint firstAttribute="trailing" secondItem="YMH-aa-Yna" secondAttribute="trailing" constant="65" id="dG3-cx-b7d"/>
                         <constraint firstItem="E5Q-k8-K84" firstAttribute="leading" secondItem="tH1-YX-68o" secondAttribute="leading" constant="8" id="l5L-J3-Cvh"/>
+                        <constraint firstAttribute="trailing" secondItem="41J-L5-vvB" secondAttribute="trailing" constant="8" id="xvd-Ni-FWm"/>
                     </constraints>
                 </view>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8JW-Su-IJf">
@@ -78,6 +94,17 @@
                     <rect key="frame" x="0.0" y="108" width="414" height="754"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                 </view>
+                <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LpR-aG-b8R">
+                    <rect key="frame" x="371" y="60" width="35" height="35"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="35" id="PXg-70-xox"/>
+                        <constraint firstAttribute="height" constant="35" id="qa3-0i-xjh"/>
+                    </constraints>
+                    <state key="normal" image="full-screen-dark"/>
+                    <connections>
+                        <action selector="didPressFull" destination="-1" eventType="touchUpInside" id="KIq-g4-JFn"/>
+                    </connections>
+                </button>
                 <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I6S-Zs-M4F">
                     <rect key="frame" x="182" y="423" width="50" height="50"/>
                     <constraints>
@@ -132,13 +159,17 @@
                 <constraint firstItem="8JW-Su-IJf" firstAttribute="top" secondItem="tH1-YX-68o" secondAttribute="bottom" id="kmv-l3-8uE"/>
                 <constraint firstItem="tH1-YX-68o" firstAttribute="top" secondItem="eug-p7-zIe" secondAttribute="top" id="meu-za-thE"/>
                 <constraint firstItem="oQl-Jm-Jd2" firstAttribute="leading" secondItem="eug-p7-zIe" secondAttribute="leading" id="vlU-q7-sIh"/>
+                <constraint firstItem="eug-p7-zIe" firstAttribute="trailing" secondItem="LpR-aG-b8R" secondAttribute="trailing" constant="8" id="wUl-Q2-ldl"/>
                 <constraint firstItem="oQl-Jm-Jd2" firstAttribute="top" secondItem="tH1-YX-68o" secondAttribute="bottom" id="yzR-mo-fLh"/>
+                <constraint firstItem="LpR-aG-b8R" firstAttribute="top" secondItem="eug-p7-zIe" secondAttribute="top" constant="16" id="zBK-JK-tdS"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="eug-p7-zIe"/>
             <point key="canvasLocation" x="137.68115942028987" y="114.50892857142857"/>
         </view>
     </objects>
     <resources>
+        <image name="full-screen-dark" width="50.5" height="50.5"/>
+        <image name="full-screen-light" width="50.5" height="50.5"/>
         <image name="icon_back" width="33" height="33"/>
         <image name="reload" width="42.5" height="42.5"/>
     </resources>

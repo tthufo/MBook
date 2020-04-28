@@ -16,7 +16,7 @@
 
 #import "Reachability.h"
 
-#import "HearThis-Swift.h"
+#import "MeBook-Swift.h"
 
 #define h 65
 
@@ -348,9 +348,7 @@ UIBackgroundTaskIdentifier bgTask;
         {
             ((UICollectionView*)v).contentInset = UIEdgeInsetsMake(((UICollectionView*)v).contentInset.top, 0, ([self isEmbed] ? (((UICollectionView*)v).contentInset.bottom == 0 ? h : ((UICollectionView*)v).contentInset.bottom) : ((UICollectionView*)v).contentInset.bottom == h ? 0 : ((UICollectionView*)v).contentInset.bottom) + (((UICollectionView*)v).contentInset.bottom == 0 ? embed : 0), 0);
         }
-        
-        NSLog(@"%@", v);
-        
+                
         if([v isKindOfClass:[UIView class]])
         {
             for(UIView * innerView in v.subviews)
