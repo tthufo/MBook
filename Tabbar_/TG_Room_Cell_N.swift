@@ -66,9 +66,11 @@ class TG_Room_Cell_N: UITableViewCell, UICollectionViewDelegate, UICollectionVie
         
            let data = ((result["result"] as! NSDictionary)["data"] as! NSArray)
         
+           let filter = self.parentViewController()?.filterArray(data: data)
+        
            self.dataList.removeAllObjects()
         
-           self.dataList.addObjects(from: data.withMutable())
+           self.dataList.addObjects(from: Information.check == "0" ? filter!.withMutable() : data.withMutable())
 
            self.collectionView.reloadData()
            

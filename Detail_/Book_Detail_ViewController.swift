@@ -196,7 +196,9 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
 
             let data = ((result["result"] as! NSDictionary)["data"] as! NSArray)
 
-            self.dataList.addObjects(from: data.withMutable())
+            let filter = self.filterArray(data: data)
+
+            self.dataList.addObjects(from: Information.check == "0" ? filter.withMutable() : data.withMutable())
             
             self.collectionView.reloadSections(IndexSet(integer: 2))
             

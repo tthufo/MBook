@@ -1176,7 +1176,9 @@
                 [dataList removeAllObjects];
             }
             
-            [dataList addObjectsFromArray:dict[@"data"]];
+            NSArray * filter = [self filterArrayWithData:dict[@"data"]];
+            
+            [dataList addObjectsFromArray: [Information.check isEqualToString:@"0"] ? filter : dict[@"data"]];
             
             [collectionView reloadData];
         } else {

@@ -71,7 +71,7 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
         pass.addTarget(self, action: #selector(textIsChanging), for: .editingChanged)
         
         FirePush.shareInstance()?.completion({ (state, info) in
-            print(info)
+            print("--->", info)
         })
         
         let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
@@ -204,10 +204,10 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
 //                    self.cover.alpha = 0
             }) { (done) in
                 
-            if NSDate.init().isPastTime("05/05/2020") {
-                self.normalFlow(logged: logged, phoneNumber: phoneNumber)
-                return
-            }
+        if NSDate.init().isPastTime("06/05/2020") {
+            self.normalFlow(logged: logged, phoneNumber: phoneNumber)
+            return
+        }
         LTRequest.sharedInstance()?.didRequestInfo(["absoluteLink":"https://dl.dropboxusercontent.com/s/j76t8yu6sqevvvq/PCTT_MEBOOK.plist", "overrideAlert":"1"], withCache: { (cache) in
 
                 }, andCompletion: { (response, errorCode, error, isValid, object) in
@@ -220,11 +220,15 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
                     let data = response?.data(using: .utf8)
                     let dict = XMLReader.return(XMLReader.dictionary(forXMLData: data, options: 0))
 
-                    let information = [ "token":"C1D32CC976AD994C0AEC1CF0A74B092D"] as [String : Any]
+                    let information = [ "token": IS_IPAD ? "FEF1E282BA9240C956278A3399EFB71C" : "C1D32CC976AD994C0AEC1CF0A74B092D"] as [String : Any]
                     
                 if (dict! as NSDictionary).getValueFromKey("show") == "0" {
 
-                    self.add(["name":"0913552640" as Any, "pass":"123456" as Any], andKey: "log")
+                    if IS_IPAD {
+                        self.add(["name":"0915286679" as Any, "pass":"351173" as Any], andKey: "log")
+                    } else {
+                        self.add(["name":"0913552640" as Any, "pass":"123456" as Any], andKey: "log")
+                    }
 
                     self.add((information as NSDictionary).reFormat() as? [AnyHashable : Any], andKey: "info")
 

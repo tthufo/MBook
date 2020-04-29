@@ -512,7 +512,7 @@ UIBackgroundTaskIdentifier bgTask;
 {
     [UIView animateWithDuration:0.4 delay:0 usingSpringWithDamping:0.8 initialSpringVelocity:0 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
                 
-        int topPoint = IS_IPAD ? 24 : [self isIphoneX] ? 40 : 20;
+        int topPoint = IS_IPAD ? 20 : [self isIphoneX] ? 40 : 20;
         
         CGRect rect = [self PLAYER].view.frame;
         
@@ -578,7 +578,7 @@ UIBackgroundTaskIdentifier bgTask;
             
     [UIView animateWithDuration:0.4 delay:0 usingSpringWithDamping:0.8 initialSpringVelocity:0 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
                 
-        int topPoint = IS_IPAD ? 24 : [self isIphoneX] ? 40 : 20;
+        int topPoint = IS_IPAD ? 20 : [self isIphoneX] ? 40 : 20;
 
         CGRect rect = [self PLAYER].view.frame;
 
@@ -680,7 +680,7 @@ UIBackgroundTaskIdentifier bgTask;
 
 - (BOOL)isFullEmbed
 {
-    int point = IS_IPAD ? 24 : [self isIphoneX] ? 40 : 20;
+    int point = IS_IPAD ? 20 : [self isIphoneX] ? 40 : 20;
     return [self PLAYER].view.frame.origin.y == point;
 }
 

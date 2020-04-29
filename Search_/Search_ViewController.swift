@@ -200,7 +200,9 @@ class Search_ViewController: UIViewController, UICollectionViewDataSource, UICol
 
             let data = ((result["result"] as! NSDictionary)["data"] as! NSArray)
 
-            self.bookList.addObjects(from: data.withMutable())
+            let filter = self.filterArray(data: data)
+
+            self.bookList.addObjects(from: Information.check == "0" ? filter.withMutable() : data.withMutable())
             
             self.collectionBook.reloadData()
         })

@@ -88,7 +88,9 @@ class List_Book_ViewController: UIViewController, UICollectionViewDataSource, UI
 
             let data = ((result["result"] as! NSDictionary)["data"] as! NSArray)
 
-            self.dataList.addObjects(from: data.withMutable())
+            let filter = self.filterArray(data: data)
+
+            self.dataList.addObjects(from: Information.check == "0" ? filter.withMutable() : data.withMutable())
             
             self.counter.text = self.dataList.count == 0 ? "" : (String(self.dataList.count) + " TÁC PHẨM")
             

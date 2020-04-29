@@ -494,12 +494,14 @@ extension UIViewController {
         let request = NSMutableDictionary.init(dictionary: [
                                                             "session":Information.token ?? "",
                                                             "overrideAlert":"1",
+                                                            "overrideLoading":"1",
+                                                            "host": self.topviewcontroler(),
                                                             ])
         request["CMD_CODE"] = "getPackageInfo"
         LTRequest.sharedInstance()?.didRequestInfo((request as! [AnyHashable : Any]), withCache: { (cacheString) in
         }, andCompletion: { (response, errorCode, error, isValid, object) in
             let result = response?.dictionize() ?? [:]
-            
+            self.hideSVHUD()
             if result.getValueFromKey("error_code") != "0" || result["result"] is NSNull {
                 self.showToast(response?.dictionize().getValueFromKey("error_msg") == "" ? "Lỗi xảy ra, mời bạn thử lại" : response?.dictionize().getValueFromKey("error_msg"), andPos: 0)
                 return
@@ -527,6 +529,17 @@ extension UIViewController {
             }
         }
         return isReg
+    }
+    
+    @objc func filterArray(data: NSArray) -> NSArray {
+        let ids = ["244", "242", "240", "225", "183", "189"]
+        let tempArray = NSMutableArray.init()
+        for dict in data {
+            if !ids.contains((dict as! NSDictionary).getValueFromKey("id")) {
+                tempArray.add(dict)
+            }
+        }
+        return tempArray
     }
 }
 

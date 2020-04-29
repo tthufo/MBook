@@ -94,11 +94,11 @@ class TG_Intro_ViewController: UIViewController {
             
             self.dataList.addObjects(from: noti!)
             
-            self.dataList.add(NSMutableDictionary.init(dictionary:["avatar": "id", "name": "Tác giả", "sub_category": [], "open": "0", "id": "99"]))
+            self.dataList.add(NSMutableDictionary.init(dictionary:["avatar": "id", "name": "Tác giả", "sub_category": [], "open": "0", "id": "9999"]))
 
-            self.dataList.add(NSMutableDictionary.init(dictionary:["avatar": "id", "name": "Tuyển tập chọn lọc", "sub_category": [], "open": "0", "id": "100"]))
+            self.dataList.add(NSMutableDictionary.init(dictionary:["avatar": "id", "name": "Tuyển tập chọn lọc", "sub_category": [], "open": "0", "id": "99100"]))
 
-            self.dataList.add(NSMutableDictionary.init(dictionary:["avatar": "id", "name": "Nhà xuất bản", "sub_category": [], "open": "0", "id": "101"]))
+            self.dataList.add(NSMutableDictionary.init(dictionary:["avatar": "id", "name": "Nhà xuất bản", "sub_category": [], "open": "0", "id": "99101"]))
 
             self.tableView.reloadData()
         })
@@ -152,15 +152,15 @@ extension TG_Intro_ViewController: UITableViewDataSource, UITableViewDelegate {
         
         if subMenu {
             head.action(forTouch: [:]) { (obj) in
-                if id == "99" {
+                if id == "9999" {
                     self.center()?.pushViewController(Author_ViewController.init(), animated: true)
                 } else
-                if id == "100" {
+                if id == "99100" {
                     let event = Event_ViewController.init()
                     event.config = ["url": ["CMD_CODE": "getHomeEvent", "position": 0], "title": sec.getValueFromKey("name") as Any]
                     self.center()?.pushViewController(event, animated: true)
                 } else
-                if id == "101" {
+                if id == "99101" {
                     let publisher = Publisher_ViewController.init()
                     publisher.config = ["url": ["CMD_CODE": "getListPublishingHouse"]]
                     self.center()?.pushViewController(publisher, animated: true)
