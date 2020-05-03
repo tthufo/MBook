@@ -112,12 +112,16 @@ class PC_Inner_Info_ViewController: UIViewController, UITextFieldDelegate {
         male.action(forTouch: [:]) { (objc) in
             self.female.image = UIImage.init(named: "radio_in")
             self.male.image = UIImage.init(named: "radio_ac")
+            self.sex = "1"
         }
         
         female.action(forTouch: [:]) { (objc) in
             self.female.image = UIImage.init(named: "radio_ac")
             self.male.image = UIImage.init(named: "radio_in")
+            self.sex = "0"
         }
+        
+        didGetInfo()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -232,11 +236,29 @@ class PC_Inner_Info_ViewController: UIViewController, UITextFieldDelegate {
         })
     }
     
+    func didGetInfo() {
+        LTRequest.sharedInstance()?.didRequestInfo(["CMD_CODE":"getUserInfo",
+                                                     "session": Information.token ?? "",
+                                                    "overrideAlert":"1",
+                                                    "overrideLoading":"1",
+                                                    "host":self], withCache: { (cacheString) in
+        }, andCompletion: { (response, errorCode, error, isValid, object) in
+            let result = response?.dictionize() ?? [:]
+                                                
+            if result.getValueFromKey("error_code") != "0" || result["result"] is NSNull {
+                self.showToast(response?.dictionize().getValueFromKey("error_msg") == "" ? "Lỗi xảy ra, mời bạn thử lại" : response?.dictionize().getValueFromKey("error_msg"), andPos: 0)
+                return
+            }
+                   
+            self.add((response?.dictionize()["result"] as! NSDictionary).reFormat() as? [AnyHashable : Any], andKey: "info")
+
+            Information.saveInfo()
+        })
+    }
+    
     @IBAction func didPressSubmit() {
        self.view.endEditing(true)
-       LTRequest.sharedInstance()?.didRequestMultiPart(["CMD_CODE":"updateUserInfo",
-//                                                   "header":["Authorization":Information.token == nil ? "" : Information.token!],
-//                                                   "data":[
+       LTRequest.sharedInstance()?.didRequestInfo(["CMD_CODE":"updateUserInfo",
                                                     "session": Information.token ?? "",
                                                     "avatar": self.avatarTemp != nil ? self.avatarTemp.imageString() : "",
                                                     "sex": sex ?? "",
@@ -245,11 +267,9 @@ class PC_Inner_Info_ViewController: UIViewController, UITextFieldDelegate {
                                                     "phone":phone.text as Any,
                                                     "birthday": birthday.text as Any,
                                                     "address":address.text as Any,
-//        ],
-//                                                   "field": avatarTemp != nil ? [["file": avatarTemp.imageString(), "fileName":"avatar.png", "key":"FileAvatar"]] : [],
                                                    "overrideAlert":"1",
                                                    "overrideLoading":"1",
-//                                                   "postFix":"auth/profile",
+//                                                   "postFix":"updateUserInfo",
                                                    "host":self], withCache: { (cacheString) in
        }, andCompletion: { (response, errorCode, error, isValid, object) in
            let result = response?.dictionize() ?? [:]
@@ -261,6 +281,7 @@ class PC_Inner_Info_ViewController: UIViewController, UITextFieldDelegate {
         
            self.showToast("Cập nhật thông tin thành công", andPos: 0)
            
+           self.didGetInfo()
        })
    }
     

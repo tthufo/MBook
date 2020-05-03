@@ -165,7 +165,7 @@ extension First_Tab_ViewController: UITableViewDataSource, UITableViewDelegate {
                 let eventDetail = Event_Detail_ViewController.init()
                 eventDetail.config = ((info as! NSDictionary)["selection"] as! NSDictionary)
                 eventDetail.chapList = (info as! NSDictionary)["data"] as! NSMutableArray
-                self.navigationController?.pushViewController(eventDetail, animated: true)
+                self.center()?.pushViewController(eventDetail, animated: true)
             }
         } else {
             (cell as! TG_Room_Cell_N).config = (config[indexPath.row] as! NSDictionary)

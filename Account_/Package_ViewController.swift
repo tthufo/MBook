@@ -33,7 +33,7 @@ class Package_ViewController: UIViewController, MFMessageComposeViewControllerDe
             sideGapRight.constant = 100
         }
         
-        tableView.estimatedRowHeight = 100
+        tableView.estimatedRowHeight = 130
         
         tableView.rowHeight = UITableView.automaticDimension
         
@@ -89,7 +89,7 @@ class Package_ViewController: UIViewController, MFMessageComposeViewControllerDe
 extension Package_ViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 130//UITableView.automaticDimension
+        return UITableView.automaticDimension
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

@@ -71,7 +71,7 @@
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 	<key>host</key>
-	<string>http://mebook.weatherplus.vn:8004/processrequest/</string>
+	<string>http://api-mebook.tgphim.vn/processrequest/</string>
 	<key>lang</key>
 	<false/>
 	<key>showAds</key>

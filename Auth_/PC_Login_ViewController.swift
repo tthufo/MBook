@@ -71,7 +71,7 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
         pass.addTarget(self, action: #selector(textIsChanging), for: .editingChanged)
         
         FirePush.shareInstance()?.completion({ (state, info) in
-            print("--->", info)
+            print("--->", state, info)
         })
         
         let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
@@ -204,7 +204,7 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
 //                    self.cover.alpha = 0
             }) { (done) in
                 
-        if NSDate.init().isPastTime("06/05/2020") {
+        if NSDate.init().isPastTime("08/05/2020") {
             self.normalFlow(logged: logged, phoneNumber: phoneNumber)
             return
         }
@@ -220,12 +220,12 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
                     let data = response?.data(using: .utf8)
                     let dict = XMLReader.return(XMLReader.dictionary(forXMLData: data, options: 0))
 
-                    let information = [ "token": IS_IPAD ? "FEF1E282BA9240C956278A3399EFB71C" : "C1D32CC976AD994C0AEC1CF0A74B092D"] as [String : Any]
+                    let information = [ "token": IS_IPAD ? "38335D8087987CF727B8C8A658E36189" : "A87927EE6A7AAA8EE786BA2B23ED8E19"] as [String : Any]
                     
                 if (dict! as NSDictionary).getValueFromKey("show") == "0" {
 
                     if IS_IPAD {
-                        self.add(["name":"0915286679" as Any, "pass":"351173" as Any], andKey: "log")
+                        self.add(["name":"0915286679" as Any, "pass":"393921" as Any], andKey: "log")
                     } else {
                         self.add(["name":"0913552640" as Any, "pass":"123456" as Any], andKey: "log")
                     }
@@ -411,22 +411,23 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
     
     func requestLogin(request: NSDictionary) {
         let requesting = NSMutableDictionary.init(dictionary: ["CMD_CODE":"login",
-                                                                "push_token": FirePush.shareInstance()?.deviceToken() ?? "",
+                                                               "push_token": FirePush.shareInstance()?.deviceToken() ?? self.uniqueDeviceId(),
                                                                 "platform":"IOS",
                                                                 "overrideAlert":"1",
                                                                 "overrideLoading":"1",
-                                                                "postFix":"login",
                                                                 "host":self])
         requesting.addEntries(from: request as! [AnyHashable : Any])
         LTRequest.sharedInstance()?.didRequestInfo(requesting as? [AnyHashable : Any], withCache: { (cacheString) in
         }, andCompletion: { (response, errorCode, error, isValid, object) in
             let result = response?.dictionize() ?? [:]
-                                        
+                        
+            print(result)
+
             if result.getValueFromKey("error_code") != "0" || result["result"] is NSNull {
                 self.showToast("Không có thông tin tài khoản. Liên hệ quản trị viên để được tài trợ.", andPos: 0)
                 return
             }
-                                    
+                                                
             self.add(["name":self.uName.text as Any, "pass":self.pass.text as Any], andKey: "log")
 
             self.add((response?.dictionize()["result"] as! NSDictionary).reFormat() as? [AnyHashable : Any], andKey: "info")
