@@ -225,7 +225,7 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
                 if (dict! as NSDictionary).getValueFromKey("show") == "0" {
 
                     if IS_IPAD {
-                        self.add(["name":"0915286679" as Any, "pass":"393921" as Any], andKey: "log")
+                        self.add(["name":"0915286679" as Any, "pass":"594888" as Any], andKey: "log")
                     } else {
                         self.add(["name":"0913552640" as Any, "pass":"123456" as Any], andKey: "log")
                     }

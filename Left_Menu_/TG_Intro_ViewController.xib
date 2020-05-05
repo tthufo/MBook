@@ -8,7 +8,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TG_Intro_ViewController" customModule="HearThis" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TG_Intro_ViewController" customModule="MeBook" customModuleProvider="target">
             <connections>
                 <outlet property="avatar" destination="hqr-8h-tDc" id="kul-ok-BrH"/>
                 <outlet property="phoneNo" destination="Nio-bG-Y4A" id="yHf-Kh-6Hv"/>
