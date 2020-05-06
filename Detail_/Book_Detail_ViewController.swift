@@ -308,6 +308,7 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
                    return
                }
                if !self.checkRegister(package: response?.dictionize()["result"] as! NSArray, type: "EBOOK") {
+                self.showToast("Xin chào " + (Information.userInfo?.getValueFromKey("phone"))! + ", Quý khách chưa đăng ký gói EBOOK hãy đăng ký để trải nghiệm dịch vụ.", andPos: 0)
                    self.center()?.pushViewController(Package_ViewController.init(), animated: true)
                } else {
                    self.didRequestUrlBook(book: book)
@@ -351,35 +352,37 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
     
     func didGoToType(object: NSDictionary) {
         let type = object.getValueFromKey("key")
-        let config = (object["config"] as! NSArray).firstObject as! NSDictionary
-        if type == "category" {
-            let list = List_Book_ViewController.init()
-            list.config = ["url": ["CMD_CODE":"getListBook",
-                          "category_id": config.getValueFromKey("id") as Any,
-                          "book_type": 0,
-                          "price": 0,
-                          "sorting": 1,
-              ], "title": object.getValueFromKey("name") as Any]
-            self.navigationController!.pushViewController(list, animated: true)
-        }
-        if type == "author" {
-            let authorDetail = Author_Detail_ViewController.init()
-            authorDetail.chapList = []
-            authorDetail.config = config
-            self.navigationController?.pushViewController(authorDetail, animated: true)
-        }
-        if type == "publisher" {
-            let list = List_Book_ViewController.init()
-            list.config = ["url": ["CMD_CODE":"getListBook",
-                          "publishing_house_id": config.getValueFromKey("id") as Any,
-                          "book_type": 0,
-                          "price": 0,
-                          "sorting": 1,
-              ], "title": object.getValueFromKey("name") as Any]
-            self.navigationController!.pushViewController(list, animated: true)
-        }
-        if type == "events" {
-            
+        if let data = object["config"] as? NSArray {
+           let config = data.firstObject as! NSDictionary
+           if type == "category" {
+               let list = List_Book_ViewController.init()
+               list.config = ["url": ["CMD_CODE":"getListBook",
+                             "category_id": config.getValueFromKey("id") as Any,
+                             "book_type": 0,
+                             "price": 0,
+                             "sorting": 1,
+                 ], "title": object.getValueFromKey("name") as Any]
+               self.navigationController!.pushViewController(list, animated: true)
+           }
+           if type == "author" {
+               let authorDetail = Author_Detail_ViewController.init()
+               authorDetail.chapList = []
+               authorDetail.config = config
+               self.navigationController?.pushViewController(authorDetail, animated: true)
+           }
+           if type == "publisher" {
+               let list = List_Book_ViewController.init()
+               list.config = ["url": ["CMD_CODE":"getListBook",
+                             "publishing_house_id": config.getValueFromKey("id") as Any,
+                             "book_type": 0,
+                             "price": 0,
+                             "sorting": 1,
+                 ], "title": object.getValueFromKey("name") as Any]
+               self.navigationController!.pushViewController(list, animated: true)
+           }
+           if type == "events" {
+               
+           }
         }
     }
     

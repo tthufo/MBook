@@ -510,6 +510,7 @@ extension UIViewController {
                 if self.isFullEmbed() {
                     self.goDown()
                 }
+                self.showToast("Xin chào " + (Information.userInfo?.getValueFromKey("phone"))! + ", Quý khách chưa đăng ký gói AUDIO hãy đăng ký để trải nghiệm dịch vụ.", andPos: 0)
                 self.center()?.pushViewController(Package_ViewController.init(), animated: true)
             } else {
                 self.didRequestMP3Link(info: info)
