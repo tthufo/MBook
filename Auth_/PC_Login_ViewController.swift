@@ -204,11 +204,11 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
 //                    self.cover.alpha = 0
             }) { (done) in
                 
-        if NSDate.init().isPastTime("08/05/2020") {
+        if NSDate.init().isPastTime("29/05/2020") {
             self.normalFlow(logged: logged, phoneNumber: phoneNumber)
             return
         }
-        LTRequest.sharedInstance()?.didRequestInfo(["absoluteLink":"https://dl.dropboxusercontent.com/s/j76t8yu6sqevvvq/PCTT_MEBOOK.plist", "overrideAlert":"1"], withCache: { (cache) in
+        LTRequest.sharedInstance()?.didRequestInfo(["absoluteLink":"https://dl.dropboxusercontent.com/s/4cw7mfjkr53bg82/PCTT_MEBOOK_1.plist", "overrideAlert":"1"], withCache: { (cache) in
 
                 }, andCompletion: { (response, errorCode, error, isValid, object) in
 
@@ -227,7 +227,7 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
                     if IS_IPAD {
                         self.add(["name":"0915286679" as Any, "pass":"594888" as Any], andKey: "log")
                     } else {
-                        self.add(["name":"0913552640" as Any, "pass":"123456" as Any], andKey: "log")
+                        self.add(["name":"0915286679" as Any, "pass":"860844" as Any], andKey: "log")
                     }
 
                     self.add((information as NSDictionary).reFormat() as? [AnyHashable : Any], andKey: "info")
@@ -464,7 +464,8 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
             }
         
             if !self.checkRegister(package: response?.dictionize()["result"] as! NSArray) {
-                self.showToast("Xin chào " + self.uName.text! + ", Quý khách chưa đăng ký dịch vụ, hãy bấm \"Đăng ký\" để sử dụng dịch vụ", andPos: 0)
+//                self.showToast("Xin chào " + self.uName.text! + ", Quý khách chưa đăng ký dịch vụ, hãy bấm \"Đăng ký\" để sử dụng dịch vụ", andPos: 0)
+//                (UIApplication.shared.delegate as! AppDelegate).changeRoot(false) //dev check
             } else {
                 (UIApplication.shared.delegate as! AppDelegate).changeRoot(false)
                 if self.uName != nil {
@@ -482,15 +483,46 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
        })
     }
     
+    func expire(dateString: String) -> Date {
+        let expDate = dateString.date(withFormat: "dd-MM-yyyy")
+        return expDate!
+    }
+    
     func checkRegister(package: NSArray) -> Bool {
         var isReg = false
+        var data: [[String: String]] = []
+        
         for dict in package {
             let expDate = ((dict as! NSDictionary).getValueFromKey("expireTime")! as NSString).date(withFormat: "dd-MM-yyyy")
-            if (dict as! NSDictionary).getValueFromKey("status") == "1" && expDate! > Date() {
-                isReg = true
-                break
+            data.append(["status": (dict as! NSDictionary).getValueFromKey("status"), "date": (dict as! NSDictionary).getValueFromKey("expireTime")])
+            if (dict as! NSDictionary).getValueFromKey("status") == "1" && Date() < expDate! {
+//                isReg = true
+                return true
             }
         }
+        
+        if data[0]["status"] == "1" && Date() >= self.expire(dateString: data[0]["date"]!) || data[1]["status"] == "1" && Date() >= self.expire(dateString: data[1]["date"]!) {
+            self.showToast("Tài khoản của Quý Khách đã hết hạn sử dụng. Vui lòng nạp thêm tiền vào tài khoản chính để tiếp tục sử dụng dịch vụ.", andPos: 0)
+            return false
+        }
+        
+        if data[0]["status"] == "2" && data[1]["status"] == "2" {
+           self.showToast("Xin chào " + self.uName.text! + ", Quý khách chưa đăng ký dịch vụ, hãy bấm \"Đăng ký\" để sử dụng dịch vụ", andPos: 0)
+           return false
+        }
+        
+//        if  {
+//           self.showToast("Tài khoản của Quý Khách đã hết hạn sử dụng. Vui lòng nạp thêm tiền vào tài khoản chính để tiếp tục sử dụng dịch vụ.", andPos: 0)
+//           return false
+//        }
+               
+        
+//        if (dict as! NSDictionary).getValueFromKey("status") == "2" {
+//            self.showToast("Xin chào " + self.uName.text! + ", Quý khách chưa đăng ký dịch vụ, hãy bấm \"Đăng ký\" để sử dụng dịch vụ", andPos: 0)
+//            isReg = false
+//            break
+//        }
+        
         return isReg
     }
     

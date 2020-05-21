@@ -162,7 +162,7 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
         
         let read = self.withView(headerView, tag: 33) as! UIButton
 
-        read.isHidden = chapList.count > 1
+//        read.isHidden = chapList.count > 1
     }
     
     func didRequestData(isShow: Bool) {
@@ -308,7 +308,7 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
                    return
                }
                if !self.checkRegister(package: response?.dictionize()["result"] as! NSArray, type: "EBOOK") {
-                self.showToast("Xin chào " + (Information.userInfo?.getValueFromKey("phone"))! + ", Quý khách chưa đăng ký gói EBOOK hãy đăng ký để trải nghiệm dịch vụ.", andPos: 0)
+//                self.showToast("Xin chào " + (Information.userInfo?.getValueFromKey("phone"))! + ", Quý khách chưa đăng ký gói EBOOK hãy đăng ký để trải nghiệm dịch vụ.", andPos: 0)
                    self.center()?.pushViewController(Package_ViewController.init(), animated: true)
                } else {
                    self.didRequestUrlBook(book: book)
@@ -444,6 +444,10 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
             let description = self.withView(cell, tag: 2) as! UILabel
 
             description.text = chap.getValueFromKey("total_character") + " chữ Cập nhật: " + chap.getValueFromKey("publish_time")
+            
+            let arrow = self.withView(cell, tag: 5) as! UILabel
+            
+            arrow.text = "Đọc >"
         }
         
         if indexPath.section == 2 {

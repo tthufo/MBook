@@ -495,7 +495,7 @@ extension UIViewController {
                                                             "session":Information.token ?? "",
                                                             "overrideAlert":"1",
                                                             "overrideLoading":"1",
-                                                            "host": self.topviewcontroler(),
+                                                            "host": self.topviewcontroler() as Any,
                                                             ])
         request["CMD_CODE"] = "getPackageInfo"
         LTRequest.sharedInstance()?.didRequestInfo((request as! [AnyHashable : Any]), withCache: { (cacheString) in
@@ -510,7 +510,7 @@ extension UIViewController {
                 if self.isFullEmbed() {
                     self.goDown()
                 }
-                self.showToast("Xin chào " + (Information.userInfo?.getValueFromKey("phone"))! + ", Quý khách chưa đăng ký gói AUDIO hãy đăng ký để trải nghiệm dịch vụ.", andPos: 0)
+//                self.showToast("Xin chào " + (Information.userInfo?.getValueFromKey("phone"))! + ", Quý khách chưa đăng ký gói AUDIO hãy đăng ký để trải nghiệm dịch vụ.", andPos: 0)
                 self.center()?.pushViewController(Package_ViewController.init(), animated: true)
             } else {
                 self.didRequestMP3Link(info: info)
@@ -520,10 +520,24 @@ extension UIViewController {
     
     func checkRegister(package: NSArray, type: String) -> Bool {
         var isReg = Information.check == "1" ? false : true //// dev test package change to true
+        if Information.check == "0" {
+            return isReg
+        }
         for dict in package {
             let expDate = ((dict as! NSDictionary).getValueFromKey("expireTime")! as NSString).date(withFormat: "dd-MM-yyyy")
             print("ALLOWING", expDate! > Date())
-            if (dict as! NSDictionary).getValueFromKey("status") == "1" && expDate! > Date()
+            if (dict as! NSDictionary).getValueFromKey("status") == "2" {
+                self.showToast("Xin chào " + (Information.userInfo?.getValueFromKey("phone"))! + ", Quý khách chưa đăng ký gói " + (type == "AUDIOBOOK" ? "AUDIO" : "EBOOK") + " hãy đăng ký để trải nghiệm dịch vụ.", andPos: 0)
+                isReg = false
+                break
+            }
+            if (dict as! NSDictionary).getValueFromKey("status") == "1" && Date() >= expDate!
+                && (dict as! NSDictionary).getValueFromKey("package_code") == type {
+                self.showToast("Tài khoản của Quý Khách đã hết hạn sử dụng. Vui lòng nạp thêm tiền vào tài khoản chính để tiếp tục sử dụng dịch vụ.", andPos: 0)
+                isReg = false
+                break
+            }
+            if (dict as! NSDictionary).getValueFromKey("status") == "1" && Date() < expDate!
                 && (dict as! NSDictionary).getValueFromKey("package_code") == type {
                 isReg = true
                 break

@@ -33,7 +33,7 @@ class Package_ViewController: UIViewController, MFMessageComposeViewControllerDe
             sideGapRight.constant = 100
         }
         
-        tableView.estimatedRowHeight = 130
+        tableView.estimatedRowHeight = 150
         
         tableView.rowHeight = UITableView.automaticDimension
         
@@ -102,7 +102,7 @@ extension Package_ViewController: UITableViewDataSource, UITableViewDelegate {
         
         let expDate = (data.getValueFromKey("expireTime")! as NSString).date(withFormat: "dd-MM-yyyy")
 
-        let isRegistered = data.getValueFromKey("status") == "1" && expDate! > Date()
+        let isRegistered = data.getValueFromKey("status") == "1" && Date() < expDate!
         
         let cell = tableView.dequeueReusableCell(withIdentifier:"Package_Reg_Cell", for: indexPath)
                 
