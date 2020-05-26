@@ -20,6 +20,64 @@
 
 @synthesize menuCompletion;
 
+- (id)initWithDate:(NSDictionary*)info
+{
+    self = [self init];
+    
+    [self setContainerView:[self didCreateDateView:info]];
+    
+    [self setUseMotionEffects:true];
+    
+    return self;
+}
+
+- (NSDate *)getDateFromDateString:(NSString *)dateString
+{
+    NSDateFormatter * dateFormatter = [[NSDateFormatter alloc]init];
+    [dateFormatter setDateFormat:@"dd/MM/yyyy"];
+    NSDate *date = [dateFormatter dateFromString:dateString];
+    return date;
+}
+
+- (UIView*)didCreateDateView:(NSDictionary*)dict
+{
+    UIView *commentView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 300, 247)];
+    
+    [commentView withBorder:@{@"Bcolor":[UIColor whiteColor],@"Bcorner":@(5),@"Bwidth":@(0)}];
+    
+    UIView* contentView = [[NSBundle mainBundle] loadNibNamed:@"EM_Menu" owner:self options:nil][9];
+    
+    contentView.frame = CGRectMake(0, 0, commentView.frame.size.width, commentView.frame.size.height);
+    
+    UIDatePicker * datePicker = ((UIDatePicker*)[self withView:contentView tag:11]);
+
+    if([dict responseForKey:@"date"])
+    {
+        [datePicker setDate:[self getDateFromDateString:dict[@"date"]] animated:YES];
+    }
+    
+    [(UIButton*)[self withView:contentView tag:14] actionForTouch:@{} and:^(NSDictionary *touchInfo) {
+        
+        [self close];
+        
+    }];
+    
+    [(UIButton*)[self withView:contentView tag:15] actionForTouch:@{} and:^(NSDictionary *touchInfo) {
+        
+        if(self.menuCompletion)
+        {
+            self.menuCompletion(0, @{@"date":[datePicker.date stringWithFormat:@"dd/MM/yyyy"]}, self);
+        }
+        
+        [self close];
+    }];
+    
+    [commentView addSubview:contentView];
+    
+    return commentView;
+}
+
+
 - (id)initWithPreviewMenu:(NSDictionary*)info
 {
     self = [self init];

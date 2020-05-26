@@ -70,7 +70,7 @@
     
     Second_Tab_ViewController * second = [Second_Tab_ViewController new];
     
-    second.title = @"Hiệu sách";
+    second.title = @"Truyện";
     
     UINavigationController *nav2 = [[UINavigationController alloc]
                                     initWithRootViewController:second];

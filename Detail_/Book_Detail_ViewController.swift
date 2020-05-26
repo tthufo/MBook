@@ -443,7 +443,9 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
             
             let description = self.withView(cell, tag: 2) as! UILabel
 
-            description.text = chap.getValueFromKey("total_character") + " chữ Cập nhật: " + chap.getValueFromKey("publish_time")
+//            description.text = chap.getValueFromKey("total_character") + " chữ Cập nhật: " + chap.getValueFromKey("publish_time")
+            
+            description.text = "Cập nhật: " + chap.getValueFromKey("publish_time")
             
             let arrow = self.withView(cell, tag: 5) as! UILabel
             

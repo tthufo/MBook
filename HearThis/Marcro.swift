@@ -137,7 +137,7 @@ extension String {
 
 extension UIImage {
     func imageString() -> String {
-        return (self.jpegData(compressionQuality: 0.5)?.base64EncodedString(options: .endLineWithLineFeed))!
+        return (self.jpegData(compressionQuality: 0.2)?.base64EncodedString(options: .endLineWithLineFeed))!
     }
 
     func fullImageString() -> String {
@@ -519,35 +519,41 @@ extension UIViewController {
     }
     
     func checkRegister(package: NSArray, type: String) -> Bool {
-        var isReg = Information.check == "1" ? false : true //// dev test package change to true
+        var isReg = false//Information.check == "1" ? false : true //// dev test package change to true
         if Information.check == "0" {
-            return isReg
+            return true
         }
         for dict in package {
-            let expDate = ((dict as! NSDictionary).getValueFromKey("expireTime")! as NSString).date(withFormat: "dd-MM-yyyy")
-            print("ALLOWING", expDate! > Date())
-            if (dict as! NSDictionary).getValueFromKey("status") == "2" {
-                self.showToast("Xin chào " + (Information.userInfo?.getValueFromKey("phone"))! + ", Quý khách chưa đăng ký gói " + (type == "AUDIOBOOK" ? "AUDIO" : "EBOOK") + " hãy đăng ký để trải nghiệm dịch vụ.", andPos: 0)
-                isReg = false
-                break
-            }
-            if (dict as! NSDictionary).getValueFromKey("status") == "1" && Date() >= expDate!
-                && (dict as! NSDictionary).getValueFromKey("package_code") == type {
-                self.showToast("Tài khoản của Quý Khách đã hết hạn sử dụng. Vui lòng nạp thêm tiền vào tài khoản chính để tiếp tục sử dụng dịch vụ.", andPos: 0)
-                isReg = false
-                break
-            }
-            if (dict as! NSDictionary).getValueFromKey("status") == "1" && Date() < expDate!
-                && (dict as! NSDictionary).getValueFromKey("package_code") == type {
-                isReg = true
-                break
+            if (dict as! NSDictionary).getValueFromKey("package_code") == type {
+                let expDate = ((dict as! NSDictionary).getValueFromKey("expireTime")! as NSString).date(withFormat: "dd/MM/yyyy")
+                
+                print("ALLOWING", expDate! > Date())
+                
+                if (dict as! NSDictionary).getValueFromKey("status") == "2" {
+                    self.showToast("Xin chào " + (Information.userInfo?.getValueFromKey("phone"))! + ", Quý khách chưa đăng ký gói " + (type == "AUDIOBOOK" ? "AUDIO" : "EBOOK") + " hãy đăng ký để trải nghiệm dịch vụ.", andPos: 0)
+                    isReg = false
+                    break
+                }
+                
+                if (dict as! NSDictionary).getValueFromKey("status") == "1" && Date() >= expDate!
+                    && (dict as! NSDictionary).getValueFromKey("package_code") == type {
+                    self.showToast("Tài khoản của Quý Khách đã hết hạn sử dụng. Vui lòng nạp thêm tiền vào tài khoản chính để tiếp tục sử dụng dịch vụ.", andPos: 0)
+                    isReg = false
+                    break
+                }
+                
+                if (dict as! NSDictionary).getValueFromKey("status") == "1" && Date() < expDate!
+                    && (dict as! NSDictionary).getValueFromKey("package_code") == type {
+                    isReg = true
+                    break
+                }
             }
         }
         return isReg
     }
     
     @objc func filterArray(data: NSArray) -> NSArray {
-        let ids = ["244", "242", "240", "225", "183", "189"]
+        let ids = ["244", "242", "240", "225", "183", "189", "288", "290", "287", "289", "239"]
         let tempArray = NSMutableArray.init()
         for dict in data {
             if !ids.contains((dict as! NSDictionary).getValueFromKey("id")) {

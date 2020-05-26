@@ -10,6 +10,8 @@
 
 #import "HT_Player_ViewController.h"
 
+#import "MeBook-Swift.h"
+
 @interface TT_Panel_ViewController ()
 {
     
@@ -155,7 +157,7 @@
 //    
 //    NSString * titleText = ((M_First_ViewController*)[((UINavigationController*)[[self ROOT].childViewControllers firstObject]).viewControllers lastObject]).title;
 //    
-//    [[self LEFT] reloadData];
+    [(TG_Intro_ViewController*)[self LEFT] reloadData];
     
     return [super _adjustCenterFrame];
 }

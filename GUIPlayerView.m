@@ -628,6 +628,8 @@
         NSDate *currentTime = [NSDate dateWithTimeIntervalSince1970:current];
         NSDate *remainingTime = [NSDate dateWithTimeIntervalSince1970:(duration - current)];
         
+        NSDate *remainingStill = [NSDate dateWithTimeIntervalSince1970:(duration - 0)];
+
         [currentTimeLabel setText:[formatter stringFromDate:currentTime]];
         [remainingTimeLabel setText:[NSString stringWithFormat:@"-%@", [formatter stringFromDate:remainingTime]]];
         
@@ -638,7 +640,9 @@
         
         if(options[@"remainTime"])
         {
-            [(UILabel*)options[@"remainTime"] setText:[NSString stringWithFormat:@"-%@", [formatter stringFromDate:remainingTime]]];
+//            [(UILabel*)options[@"remainTime"] setText:[NSString stringWithFormat:@"-%@", [formatter stringFromDate:remainingTime]]];
+            
+             [(UILabel*)options[@"remainTime"] setText:[NSString stringWithFormat:@"-%@", [formatter stringFromDate:remainingStill]]];
         }
         
         if(options[@"multi"])

@@ -48,6 +48,8 @@
 
 - (UIWindow*)WINDOW;
 
+- (UIViewController*)LEFT;
+
 - (TT_Panel_ViewController*)ROOT;
 
 - (UIViewController*)LAST;

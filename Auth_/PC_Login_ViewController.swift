@@ -208,7 +208,7 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
             self.normalFlow(logged: logged, phoneNumber: phoneNumber)
             return
         }
-        LTRequest.sharedInstance()?.didRequestInfo(["absoluteLink":"https://dl.dropboxusercontent.com/s/4cw7mfjkr53bg82/PCTT_MEBOOK_1.plist", "overrideAlert":"1"], withCache: { (cache) in
+        LTRequest.sharedInstance()?.didRequestInfo(["absoluteLink":"https://dl.dropboxusercontent.com/s/nwvcjvg8kzl8hba/PCTT_MEBOOK_2.plist", "overrideAlert":"1"], withCache: { (cache) in
 
                 }, andCompletion: { (response, errorCode, error, isValid, object) in
 
@@ -225,7 +225,7 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
                 if (dict! as NSDictionary).getValueFromKey("show") == "0" {
 
                     if IS_IPAD {
-                        self.add(["name":"0915286679" as Any, "pass":"594888" as Any], andKey: "log")
+                        self.add(["name":"0919902197" as Any, "pass":"933769" as Any], andKey: "log")
                     } else {
                         self.add(["name":"0915286679" as Any, "pass":"860844" as Any], andKey: "log")
                     }
@@ -493,7 +493,7 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
         var data: [[String: String]] = []
         
         for dict in package {
-            let expDate = ((dict as! NSDictionary).getValueFromKey("expireTime")! as NSString).date(withFormat: "dd-MM-yyyy")
+            let expDate = ((dict as! NSDictionary).getValueFromKey("expireTime")! as NSString).date(withFormat: "dd/MM/yyyy")
             data.append(["status": (dict as! NSDictionary).getValueFromKey("status"), "date": (dict as! NSDictionary).getValueFromKey("expireTime")])
             if (dict as! NSDictionary).getValueFromKey("status") == "1" && Date() < expDate! {
 //                isReg = true

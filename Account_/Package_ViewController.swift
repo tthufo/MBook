@@ -100,7 +100,7 @@ extension Package_ViewController: UITableViewDataSource, UITableViewDelegate {
         
         let data = dataList![indexPath.row] as! NSDictionary
         
-        let expDate = (data.getValueFromKey("expireTime")! as NSString).date(withFormat: "dd-MM-yyyy")
+        let expDate = (data.getValueFromKey("expireTime")! as NSString).date(withFormat: "dd/MM/yyyy")
 
         let isRegistered = data.getValueFromKey("status") == "1" && Date() < expDate!
         
@@ -131,7 +131,7 @@ extension Package_ViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let data = dataList![indexPath.row] as! NSDictionary
-        let expDate = (data.getValueFromKey("expireTime")! as NSString).date(withFormat: "dd-MM-yyyy")
+        let expDate = (data.getValueFromKey("expireTime")! as NSString).date(withFormat: "dd/MM/yyyy")
         let isRegistered = data.getValueFromKey("status") == "1" && expDate! > Date()
         print(data)
         if !isRegistered {

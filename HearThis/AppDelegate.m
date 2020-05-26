@@ -220,6 +220,11 @@ UIBackgroundTaskIdentifier bgTask;
     return APPDELEGATE.window;
 }
 
+- (UIViewController*)LEFT
+{
+    return (UIViewController*)[self ROOT].leftPanel;
+}
+
 - (TT_Panel_ViewController*)ROOT
 {
     return ((TT_Panel_ViewController*)[self WINDOW].rootViewController);

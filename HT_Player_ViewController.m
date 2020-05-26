@@ -1265,8 +1265,10 @@
         
         ((UILabel*)[self withView:cell tag:1]).text = [chap getValueFromKey:@"name"];
         
-        ((UILabel*)[self withView:cell tag:2]).text = [NSString stringWithFormat:@"%@ chữ Cập nhật %@", [chap getValueFromKey:@"total_character"], [chap getValueFromKey:@"publish_time"]];
-                
+//        ((UILabel*)[self withView:cell tag:2]).text = [NSString stringWithFormat:@"%@ chữ Cập nhật %@", [chap getValueFromKey:@"total_character"], [chap getValueFromKey:@"publish_time"]];
+        
+        ((UILabel*)[self withView:cell tag:2]).text = [NSString stringWithFormat:@"Cập nhật %@", [chap getValueFromKey:@"publish_time"]];
+
         ((UILabel*)[self withView:cell tag:5]).text = @"Nghe >";
     }
     

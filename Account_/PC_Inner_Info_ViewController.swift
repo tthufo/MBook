@@ -31,6 +31,8 @@ class PC_Inner_Info_ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var male: UIImageView!
 
     @IBOutlet var female: UIImageView!
+    
+    @IBOutlet var dateTime: UIView!
 
     var avatarTemp: UIImage!
     
@@ -79,31 +81,34 @@ class PC_Inner_Info_ViewController: UIViewController, UITextFieldDelegate {
         name.text = Information.userInfo?.getValueFromKey("name")
         
         email.text = Information.userInfo?.getValueFromKey("email")
-                
-        birthday.text = Information.userInfo?.getValueFromKey("birthday")
+        
+        let birtText = Information.userInfo?.getValueFromKey("birthday")?.components(separatedBy: " ").first
+        
+        birthday.text = birtText
 
         address.text = Information.userInfo?.getValueFromKey("address")
         
         sex = Information.userInfo?.getValueFromKey("sex")
         
-        if Information.avatar != nil {
-            avatarTemp = Information.avatar
-            avatar.image = avatarTemp
-        } else {
-            avatar.imageUrlHolder(url: (Information.userInfo?.getValueFromKey("avatar"))!, holder: "ic_avatar")
-        }
+//        if Information.avatar != nil {
+//            avatarTemp = Information.avatar
+//            avatar.image = avatarTemp
+//        } else {
+        avatar.imageUrlHolder(url: (Information.userInfo?.getValueFromKey("avatar"))!, holder: "ic_avatar")
+                
+//        }
                 
         phone.addTarget(self, action: #selector(textRePassIsChanging), for: .editingChanged)
         email.addTarget(self, action: #selector(textEmailIsChanging), for: .editingChanged)
         
-        let isEmail: Bool = email.text?.count != 0 && (email.text?.isValidEmail())!
-        let isMatch: Bool = phone.text?.count != 0 && phone.text?.count == 10
+//        let isEmail: Bool = email.text?.count != 0 && (email.text?.isValidEmail())!
+//        let isMatch: Bool = phone.text?.count != 0 && phone.text?.count == 10
           
 //        submit.isEnabled = phone.text?.count != 0 && email.text?.count != 0 && isEmail && isMatch
 //        submit.alpha = phone.text?.count != 0 && email.text?.count != 0 && isEmail && isMatch ? 1 : 0.5
         
         avatar.action(forTouch: [:]) { (objc) in
-            self.didPressPreview(image: self.avatarTemp != nil ? self.avatarTemp as Any: Information.userInfo?.getValueFromKey("Avatar") as Any)
+            self.didPressPreview(image: self.avatarTemp != nil ? self.avatarTemp as Any: Information.userInfo?.getValueFromKey("avatar") as Any)
         }
         
         self.male.image = UIImage.init(named: sex == "1" ? "radio_ac" : "radio_in")
@@ -121,7 +126,22 @@ class PC_Inner_Info_ViewController: UIViewController, UITextFieldDelegate {
             self.sex = "0"
         }
         
+        dateTime.action(forTouch: [:]) { (objc) in
+            EM_MenuView.init(date: ["date": self.birthday.text as Any]).show { (index, obj, menu) in
+                self.birthday.text = (obj as! NSDictionary).getValueFromKey("date")
+            }
+        }
+
         didGetInfo()
+    }
+    
+    func convertDate(date: String) -> String {
+                
+        let date: NSString = date.components(separatedBy: " ").first! as NSString
+        
+        let dateString = date.date(withFormat: "MM/dd/yyyy")
+                
+        return (dateString! as NSDate).string(withFormat: "dd/MM/yyyy")
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -150,7 +170,7 @@ class PC_Inner_Info_ViewController: UIViewController, UITextFieldDelegate {
         EM_MenuView.init(settingMenu: [:]).show(completion: { (indexing, obj, menu) in
             switch indexing {
             case 1:
-                self.didPressPreview(image: self.avatarTemp != nil ? self.avatarTemp as Any: Information.userInfo?.getValueFromKey("Avatar") as Any)
+                self.didPressPreview(image: self.avatarTemp != nil ? self.avatarTemp as Any: Information.userInfo?.getValueFromKey("avatar") as Any)
                 break
             case 2:
                 Permission.shareInstance()?.askCamera { (camType) in
@@ -250,7 +270,11 @@ class PC_Inner_Info_ViewController: UIViewController, UITextFieldDelegate {
                 return
             }
                    
-            self.add((response?.dictionize()["result"] as! NSDictionary).reFormat() as? [AnyHashable : Any], andKey: "info")
+            let preInfo: NSMutableDictionary = (response?.dictionize()["result"] as! NSDictionary).reFormat()
+            
+            preInfo["birthday"] = self.convertDate(date: preInfo.getValueFromKey("birthday"))
+            
+            self.add(preInfo as? [AnyHashable : Any], andKey: "info")
 
             Information.saveInfo()
         })
@@ -258,19 +282,32 @@ class PC_Inner_Info_ViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func didPressSubmit() {
        self.view.endEditing(true)
-       LTRequest.sharedInstance()?.didRequestInfo(["CMD_CODE":"updateUserInfo",
-                                                    "session": Information.token ?? "",
-                                                    "avatar": self.avatarTemp != nil ? self.avatarTemp.imageString() : "",
-                                                    "sex": sex ?? "",
-                                                    "email":email.text as Any,
-                                                    "name":name.text as Any,
-                                                    "phone":phone.text as Any,
-                                                    "birthday": birthday.text as Any,
-                                                    "address":address.text as Any,
-                                                   "overrideAlert":"1",
-                                                   "overrideLoading":"1",
-//                                                   "postFix":"updateUserInfo",
-                                                   "host":self], withCache: { (cacheString) in
+        let data: NSMutableDictionary = self.avatarTemp != nil ? ["CMD_CODE":"updateUserInfo",
+                                         "session": Information.token ?? "",
+                                         "avatar": self.avatarTemp != nil ? self.avatarTemp.imageString() : "",
+                                         "sex": sex ?? "",
+                                         "email":email.text as Any,
+                                         "name":name.text as Any,
+                                         "phone":phone.text as Any,
+                                         "birthday": birthday.text as Any,
+                                         "address":address.text as Any,
+                                        "overrideAlert":"1",
+                                        "overrideLoading":"1",
+                                        "host":self]
+                                        :
+                                        ["CMD_CODE":"updateUserInfo",
+                                         "session": Information.token ?? "",
+                                         "sex": sex ?? "",
+                                         "email":email.text as Any,
+                                         "name":name.text as Any,
+                                         "phone":phone.text as Any,
+                                         "birthday": birthday.text as Any,
+                                         "address":address.text as Any,
+                                        "overrideAlert":"1",
+                                        "overrideLoading":"1",
+                                        "host":self]
+        
+        LTRequest.sharedInstance()?.didRequestInfo((data as! [AnyHashable : Any]), withCache: { (cacheString) in
        }, andCompletion: { (response, errorCode, error, isValid, object) in
            let result = response?.dictionize() ?? [:]
                                                

@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PC_Inner_Info_ViewController" customModule="HearThis" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PC_Inner_Info_ViewController" customModule="MeBook" customModuleProvider="target">
             <connections>
                 <outlet property="address" destination="yN0-dX-j1n" id="CL7-bb-tid"/>
                 <outlet property="avatar" destination="iQu-4F-Xfj" id="2xG-BV-sSV"/>
                 <outlet property="birthday" destination="lJm-hc-A7o" id="Yom-Nm-QEb"/>
                 <outlet property="bottomHeight" destination="7Se-4b-fvF" id="DvE-8H-7dA"/>
                 <outlet property="cell" destination="juF-JV-LDy" id="WNf-M0-1kz"/>
+                <outlet property="dateTime" destination="2AB-Vb-03B" id="qWC-Zu-och"/>
                 <outlet property="email" destination="YTW-6s-GJa" id="PSh-fG-cSL"/>
                 <outlet property="emailBG" destination="Spe-MK-1vy" id="U3b-3K-C9g"/>
                 <outlet property="emailError" destination="Dyx-4b-tEG" id="b6h-lX-eni"/>
@@ -393,7 +394,7 @@
                                     <constraint firstAttribute="height" constant="30" id="q63-f2-hFA"/>
                                 </constraints>
                             </imageView>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Ngày tháng năm sinh" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lJm-hc-A7o">
+                            <textField opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Ngày tháng năm sinh" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lJm-hc-A7o">
                                 <rect key="frame" x="68" y="451" width="251" height="31"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
@@ -457,12 +458,20 @@
                                 <color key="textColor" red="0.89411764709999997" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2AB-Vb-03B">
+                                <rect key="frame" x="21" y="440" width="352" height="52"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="52" id="uSw-dc-8ZX"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="iNZ-IT-CfO" firstAttribute="leading" secondItem="27Q-FC-J6h" secondAttribute="leading" constant="20" id="1Ff-5D-orE"/>
                             <constraint firstItem="69T-9d-MOI" firstAttribute="top" secondItem="27Q-FC-J6h" secondAttribute="top" constant="61" id="2ap-mC-gnW"/>
                             <constraint firstItem="4TG-yY-Ruw" firstAttribute="leading" secondItem="05Y-uq-C4e" secondAttribute="trailing" constant="7" id="2d0-5X-nMg"/>
+                            <constraint firstItem="2AB-Vb-03B" firstAttribute="leading" secondItem="27Q-FC-J6h" secondAttribute="leading" constant="21" id="2eE-yK-Ojs"/>
                             <constraint firstItem="aoq-Vs-yAu" firstAttribute="top" secondItem="27Q-FC-J6h" secondAttribute="top" constant="66" id="5Zf-oZ-yjl"/>
                             <constraint firstItem="27Q-FC-J6h" firstAttribute="trailing" secondItem="yN0-dX-j1n" secondAttribute="trailing" constant="75" id="86T-Ww-LdI"/>
                             <constraint firstItem="iNZ-IT-CfO" firstAttribute="top" secondItem="1Ya-WH-hkI" secondAttribute="bottom" constant="48" id="8KD-xZ-gDa"/>
@@ -479,8 +488,10 @@
                             <constraint firstItem="SAp-lN-ePr" firstAttribute="top" secondItem="KOL-GT-sok" secondAttribute="bottom" constant="27" id="Hjg-ql-2o6"/>
                             <constraint firstItem="YTW-6s-GJa" firstAttribute="leading" secondItem="Zx8-p4-ifE" secondAttribute="trailing" constant="7" id="ISu-DS-rhP"/>
                             <constraint firstItem="yB7-07-Qzp" firstAttribute="leading" secondItem="27Q-FC-J6h" secondAttribute="leading" constant="20" id="KXg-3u-MD2"/>
+                            <constraint firstItem="27Q-FC-J6h" firstAttribute="trailing" secondItem="2AB-Vb-03B" secondAttribute="trailing" constant="21" id="Kmd-Dv-dHT"/>
                             <constraint firstItem="Pag-dz-0mq" firstAttribute="top" secondItem="1Ya-WH-hkI" secondAttribute="bottom" constant="59" id="L5J-JI-xnf"/>
                             <constraint firstItem="27Q-FC-J6h" firstAttribute="trailing" secondItem="YTW-6s-GJa" secondAttribute="trailing" constant="75" id="M23-sM-yIg"/>
+                            <constraint firstItem="2AB-Vb-03B" firstAttribute="top" secondItem="Dyx-4b-tEG" secondAttribute="bottom" constant="21" id="N09-wW-Fae"/>
                             <constraint firstItem="27Q-FC-J6h" firstAttribute="trailing" secondItem="lJm-hc-A7o" secondAttribute="trailing" constant="75" id="NSb-Fw-yiw"/>
                             <constraint firstItem="27Q-FC-J6h" firstAttribute="trailing" secondItem="Dyx-4b-tEG" secondAttribute="trailing" constant="20" id="Nyj-ly-XGI"/>
                             <constraint firstItem="Dow-Jl-5yH" firstAttribute="top" secondItem="KOL-GT-sok" secondAttribute="bottom" constant="16" id="Q0G-u1-Urj"/>
@@ -540,7 +551,7 @@
                     <constraint firstItem="UPg-Pg-xAu" firstAttribute="top" secondItem="p2C-25-7DF" secondAttribute="bottom" id="tSR-j7-9q5"/>
                 </constraints>
             </tableViewCellContentView>
-            <point key="canvasLocation" x="-904.34782608695662" y="4.3526785714285712"/>
+            <point key="canvasLocation" x="-905.60000000000002" y="4.0479760119940034"/>
         </tableViewCell>
     </objects>
     <resources>
