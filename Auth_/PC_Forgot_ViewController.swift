@@ -30,6 +30,8 @@ class PC_Forgot_ViewController: UIViewController , UITextFieldDelegate {
     
     @IBOutlet var count: UILabel!
     
+    @IBOutlet var reminder: UILabel!
+    
     @IBOutlet var bottom: MarqueeLabel!
     
     var typing: NSString!
@@ -67,6 +69,9 @@ class PC_Forgot_ViewController: UIViewController , UITextFieldDelegate {
         }
         
         submit.setTitle(typing == "register" ? "Đăng ký" : "Lấy mật khẩu", for: .normal)
+        
+        reminder.boldSubstring("Meebook")
+        reminder.colorSubstring("Meebook", color: AVHexColor.color(withHexString: "#1e928c"))
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -79,17 +84,17 @@ class PC_Forgot_ViewController: UIViewController , UITextFieldDelegate {
         
         kb.keyboard { (height, isOn) in
             UIView.animate(withDuration: 1, animations: {
-                var frame = self.login.frame
-                
-                frame.origin.y -= isOn ? (height - CGFloat(self.bottomGap)) : (-height + CGFloat(self.bottomGap))
-                
-                self.login.frame = frame
-                
-                var frameLogo  = self.logo.frame
-                
-                frameLogo.origin.y -= isOn ? (height - CGFloat(self.bottomGap)) : (-height + CGFloat(self.bottomGap))
-                
-                self.logo.frame = frameLogo
+//                var frame = self.login.frame
+//                
+//                frame.origin.y -= isOn ? (height - CGFloat(self.bottomGap)) : (-height + CGFloat(self.bottomGap))
+//                
+//                self.login.frame = frame
+//                
+//                var frameLogo  = self.logo.frame
+//                
+//                frameLogo.origin.y -= isOn ? (height - CGFloat(self.bottomGap)) : (-height + CGFloat(self.bottomGap))
+//                
+//                self.logo.frame = frameLogo
             })
         }
     }
@@ -109,19 +114,19 @@ class PC_Forgot_ViewController: UIViewController , UITextFieldDelegate {
         
         logo.alpha = 1
         
-        UIView.animate(withDuration: 1.5, animations: {
-            self.cover.alpha = bbgg ? 0.3 : 0
-        }) { (done) in
-            UIView.transition(with: self.bg, duration: 1.5, options: .transitionCrossDissolve, animations: {
-                self.bg.image = bbgg ? Information.bbgg!.stringImage() : UIImage(named: "bg_login")
-            }, completion: { (done) in
-                UIView.animate(withDuration: 1.5, animations: {
-                    self.cover.alpha = 0
-                }) { (done) in
-                   
-                }
-            })
-        }
+//        UIView.animate(withDuration: 1.5, animations: {
+////            self.cover.alpha = bbgg ? 0.3 : 0
+//        }) { (done) in
+//            UIView.transition(with: self.bg, duration: 1.5, options: .transitionCrossDissolve, animations: {
+////                self.bg.image = bbgg ? Information.bbgg!.stringImage() : UIImage(named: "bg_login")
+//            }, completion: { (done) in
+//                UIView.animate(withDuration: 1.5, animations: {
+////                    self.cover.alpha = 0
+//                }) { (done) in
+//
+//                }
+//            })
+//        }
         
         UIView.animate(withDuration: 0, animations: {
             var frame = self.logo.frame
@@ -133,7 +138,7 @@ class PC_Forgot_ViewController: UIViewController , UITextFieldDelegate {
             self.logo.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
             
         }) { (done) in
-            self.setUpLogin()
+//            self.setUpLogin()
         }
     }
     

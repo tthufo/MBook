@@ -28,6 +28,8 @@ class PC_Register_ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var nameCell: UITableViewCell!
 
     @IBOutlet var emailCell: UITableViewCell!
+    
+    @IBOutlet var phoneCell: UITableViewCell!
 
     @IBOutlet var passCell: UITableViewCell!
 
@@ -39,6 +41,8 @@ class PC_Register_ViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet var email: UITextField!
     
+    @IBOutlet var phone: UITextField!
+
     @IBOutlet var pass: UITextField!
     
     @IBOutlet var rePass: UITextField!
@@ -48,9 +52,13 @@ class PC_Register_ViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet var emailBG: UIView!
 
+    @IBOutlet var phoneBG: UIView!
+
     @IBOutlet var rePassBG: UIView!
 
     @IBOutlet var emailError: UILabel!
+
+    @IBOutlet var phoneError: UILabel!
 
     @IBOutlet var rePassError: UILabel!
 
@@ -60,12 +68,14 @@ class PC_Register_ViewController: UIViewController, UITextFieldDelegate {
     
     var kb: KeyBoard!
 
+    var isValid: Bool = true
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         kb = KeyBoard.shareInstance()
 
-        dataList = NSMutableArray.init(array: [logoCell, nameCell, emailCell, passCell, rePassCell, submitCell])
+        dataList = NSMutableArray.init(array: [logoCell, nameCell, emailCell, phoneCell, submitCell])
         
         self.tableView.contentInset = UIEdgeInsets(top: 64, left: 0, bottom: 0, right: 0)
         
@@ -82,9 +92,10 @@ class PC_Register_ViewController: UIViewController, UITextFieldDelegate {
         
         rePass.addTarget(self, action: #selector(textRePassIsChanging), for: .editingChanged)
         email.addTarget(self, action: #selector(textEmailIsChanging), for: .editingChanged)
-        
+        phone.addTarget(self, action: #selector(textPhoneIsChanging), for: .editingChanged)
+
         if Information.check == "1" {
-            self.logo.image = UIImage(named: "logo")
+//            self.logo.image = UIImage(named: "logo")
         }
     }
     
@@ -117,6 +128,11 @@ class PC_Register_ViewController: UIViewController, UITextFieldDelegate {
     
         @IBAction func didPressSubmit() {
             self.view.endEditing(true)
+            isValid = self.checkPhone()
+            if !isValid {
+                validPhone()
+                return
+            }
             LTRequest.sharedInstance()?.didRequestInfo(["CMD_CODE":"auth",
                                                         "Department":"",
                                                         "Email":email.text as Any,
@@ -148,13 +164,10 @@ class PC_Register_ViewController: UIViewController, UITextFieldDelegate {
            if textField == uName {
                email.becomeFirstResponder()
            } else if textField == email {
-               pass.becomeFirstResponder()
-           } else if textField == pass {
-               rePass.becomeFirstResponder()
-           } else {
+               phone.becomeFirstResponder()
+           } else if textField == phone {
                self.view.endEditing(true)
            }
-           
            return true
        }
        
@@ -181,21 +194,66 @@ class PC_Register_ViewController: UIViewController, UITextFieldDelegate {
    @objc func textIsChanging(_ textField:UITextField) {
     let isEmail: Bool = email.text?.count != 0 && (email.text?.isValidEmail())!
        
-    let isMatch: Bool = pass.text?.count != 0 && rePass.text?.count != 0 && pass.text == rePass.text
+    let isMatch: Bool = true// pass.text?.count != 0 && rePass.text?.count != 0 && pass.text == rePass.text
     
     submit.isEnabled = uName.text?.count != 0 && pass.text?.count != 0 && email.text?.count != 0 && rePass.text?.count != 0 && isEmail && isMatch
        submit.alpha = uName.text?.count != 0 && pass.text?.count != 0 && email.text?.count != 0 && rePass.text?.count != 0 && isEmail && isMatch ? 1 : 0.5
    }
+    
+    func convertPhone() -> String {
+       let phone = uName.text
+       if phone?.substring(to: 2) == "84" {
+           return phone!
+       } else if phone?.substring(to: 1) == "0"  {
+           return "84" + (phone?.dropFirst())!
+       }
+       return phone!
+    }
+    
+    func checkPhone() -> Bool {
+        let phone = uName.text
+        if phone!.count > 10 {
+            if phone?.substring(to: 2) == "84" {
+                if phone?.count == 11 {
+                    return true
+                } else {
+                    return false
+                }
+            } else {
+                return false
+            }
+        } else {
+            if phone!.count == 10 {
+                if phone?.substring(to: 1) != "0" {
+                    return false
+                } else {
+                    return true
+                }
+            } else {
+                return false
+            }
+        }
+    }
+    
+    func validPhone() {
+          phoneError.alpha = isValid ? 0 : 1
+          phoneBG.backgroundColor = isValid ? UIColor.white : UIColor.red
+      }
+    
+    @objc func textPhoneIsChanging(_ textField:UITextField) {
+        isValid = true
+        validPhone()
+    }
 }
 
 extension PC_Register_ViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return indexPath.row == 0 ? 175 : indexPath.row == 5 ? 100 : 93
+        return indexPath.row == 0 ? 158 : indexPath.row == 5 ? 100 : 93
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 6
+        return dataList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

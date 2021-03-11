@@ -830,6 +830,10 @@
     return player.volume;
 }
 
+- (void)clearSession {
+    [[AVAudioSession sharedInstance] setActive:NO withOptions:AVAudioSessionSetActiveOptionNotifyOthersOnDeactivation error:nil];
+}
+
 #pragma mark - AV Player Notifications and Observers
 
 - (void)playerDidFinishPlaying:(NSNotification *)notification {

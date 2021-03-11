@@ -1150,6 +1150,10 @@
 {
     [self.playerView stop];
     
+    [self.playerView clearSession];
+    
+    [[MPNowPlayingInfoCenter defaultCenter] setNowPlayingInfo:@{}];
+    
     [self unEmbed];
 }
 

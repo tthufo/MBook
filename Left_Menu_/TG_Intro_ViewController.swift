@@ -68,10 +68,12 @@ class TG_Intro_ViewController: UIViewController {
         }
         
         if Information.check == "1" {
-            avatar.imageUrlHolder(url: (Information.userInfo?.getValueFromKey("avatar"))!, holder: "ic_avatar")
-            avatar.action(forTouch: [:]) { (objc) in
-                    self.center()?.pushViewController(PC_Inner_Info_ViewController.init(), animated: true)
-                    self.root()?.showCenterPanel(animated: true)
+            if Information.userInfo != nil {
+                avatar.imageUrlHolder(url: (Information.userInfo?.getValueFromKey("avatar"))!, holder: "ic_avatar")
+                avatar.action(forTouch: [:]) { (objc) in
+                        self.center()?.pushViewController(PC_Inner_Info_ViewController.init(), animated: true)
+                        self.root()?.showCenterPanel(animated: true)
+                }
             }
         } else {
             avatar.image = UIImage.init(named: "logos-1")

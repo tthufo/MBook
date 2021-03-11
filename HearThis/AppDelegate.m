@@ -18,6 +18,8 @@
 
 #import "MeBook-Swift.h"
 
+#import "UIViewController+Additional.h"
+
 #define h 65
 
 @interface AppDelegate ()
@@ -812,6 +814,40 @@ UIBackgroundTaskIdentifier bgTask;
     [shadowView addSubview:self];
     [superView addSubview:shadowView];
     
+}
+
+@end
+
+@implementation UILabel(boldBody)
+
+- (void) boldRange: (NSRange) range {
+    if (![self respondsToSelector:@selector(setAttributedText:)]) {
+        return;
+    }
+    NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithAttributedString:self.attributedText];
+    [attributedText setAttributes:@{NSFontAttributeName:[UIFont boldSystemFontOfSize:self.font.pointSize]} range:range];
+
+    self.attributedText = attributedText;
+}
+
+- (void) colorRange: (NSRange) range color:(UIColor*)coloring {
+    if (![self respondsToSelector:@selector(setAttributedText:)]) {
+        return;
+    }
+    NSMutableAttributedString *attributedText = [[NSMutableAttributedString alloc] initWithAttributedString:self.attributedText];
+    [attributedText setAttributes:@{NSForegroundColorAttributeName: coloring} range:range];
+
+    self.attributedText = attributedText;
+}
+
+- (void) boldSubstring: (NSString*) substring {
+    NSRange range = [self.text rangeOfString:substring];
+    [self boldRange:range];
+}
+
+- (void) colorSubstring: (NSString*) substring color:(UIColor*)color {
+    NSRange range = [self.text rangeOfString:substring];
+    [self colorRange:range color:color];
 }
 
 @end

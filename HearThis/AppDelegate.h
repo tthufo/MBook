@@ -116,3 +116,10 @@
 
 @end
 
+@interface UILabel(boldBody)
+
+- (void) boldSubstring: (NSString*) substring;
+- (void) boldRange: (NSRange) range;
+- (void) colorSubstring: (NSString*) substring color:(UIColor*)color;
+
+@end

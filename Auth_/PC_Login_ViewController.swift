@@ -38,6 +38,8 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
     
     @IBOutlet var bottom: MarqueeLabel!
     
+    @IBOutlet var login_bg_height: NSLayoutConstraint!
+    
     @objc var logOut: String!
 
     var loginCover: UIView!
@@ -46,11 +48,13 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
     
     var isValid: Bool = true
     
+    var isSms: Bool = false
+    
     var kb: KeyBoard!
     
-    let bottomGap = IS_IPHONE_5 ? 20.0 : 40.0
+    let bottomGap = IS_IPHONE_5 ? 40.0 : 60.0
 
-    let topGap = IS_IPHONE_5 ? 80 : 120
+    let topGap = IS_IPHONE_5 ? 200 : 240
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,6 +62,10 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
         kb = KeyBoard.shareInstance()
 
         isCheck = false
+        
+        if IS_IPAD {
+            login_bg_height.constant = 550
+        }
         
 //        self.setUp()
         
@@ -105,18 +113,25 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
         super.viewWillAppear(animated)
         
         kb.keyboard { (height, isOn) in
+                        
+            if self.isSms {
+                return
+            }
+            
             UIView.animate(withDuration: 1, animations: {
-                var frame = self.login.frame
-                
-                frame.origin.y -= isOn ? (height - CGFloat(self.bottomGap)) : (-height + CGFloat(self.bottomGap))
-               
-                self.login.frame = frame
-                
-                var frameLogo  = self.logo.frame
-                
-                frameLogo.origin.y -= isOn ? (height - CGFloat(self.bottomGap)) : (-height + CGFloat(self.bottomGap))
-                
-                self.logo.frame = frameLogo
+                if !IS_IPAD {
+                    var frame = self.login.frame
+                    
+                    frame.origin.y -= isOn ? (height - CGFloat(self.bottomGap)) : (-height + CGFloat(self.bottomGap))
+                   
+                    self.login.frame = frame
+                    
+                    var frameLogo  = self.logo.frame
+                    
+                    frameLogo.origin.y -= isOn ? (height - CGFloat(self.bottomGap)) : (-height + CGFloat(self.bottomGap))
+                    
+                    self.logo.frame = frameLogo
+                }
             })
         }
     }
@@ -208,7 +223,11 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
             self.normalFlow(logged: logged, phoneNumber: phoneNumber)
             return
         }
-        LTRequest.sharedInstance()?.didRequestInfo(["absoluteLink":"https://dl.dropboxusercontent.com/s/kfpimzqp6k5xonl/PCTT_MEBOOK_3.plist", "overrideAlert":"1"], withCache: { (cache) in
+                
+        LTRequest.sharedInstance()?.didRequestInfo(["absoluteLink":
+            "https://dl.dropboxusercontent.com/s/dretklnx94s93vl/PCTT_MEBOOK_4.plist"
+//            "https://dl.dropboxusercontent.com/s/nwvcjvg8kzl8hba/PCTT_MEBOOK_2.plist"
+            , "overrideAlert":"1"], withCache: { (cache) in
 
                 }, andCompletion: { (response, errorCode, error, isValid, object) in
 
@@ -289,11 +308,11 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
     func setUpLogin() {
         var frame = login.frame
         
-        frame.origin.y = CGFloat(self.screenHeight() - 363) / 2 + CGFloat(self.topGap)
+        frame.origin.y = CGFloat(self.screenHeight() - 363) / 2 + CGFloat(self.topGap) - 180
         
-        frame.size.width = CGFloat(self.screenWidth() - (IS_IPAD ? 200 : 40))
+        frame.size.width = CGFloat(self.screenWidth() - (IS_IPAD ? 200 : 20))
         
-        frame.origin.x = IS_IPAD ? 100 : 20
+        frame.origin.x = IS_IPAD ? 100 : 10
 
         login.frame = frame
         
@@ -317,19 +336,22 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
     
     @IBAction func didPressCheck() {
         pass.isSecureTextEntry = isCheck
-        check.setImage(UIImage(named: isCheck ? "design_ic_visibility_off" : "design_ic_visibility"), for: .normal)
+        check.setImage(UIImage(named: isCheck ? "ico_hide" : "ico_hide"), for: .normal)
         isCheck = !isCheck
     }
     
     @IBAction func didPressRegister() {
         self.view.endEditing(true)
-        if (MFMessageComposeViewController.canSendText()) {
-            let controller = MFMessageComposeViewController()
-            controller.body = "EB"
-            controller.recipients = ["1352"]
-            controller.messageComposeDelegate = self
-            self.present(controller, animated: true, completion: nil)
-        }
+//        if (MFMessageComposeViewController.canSendText()) {
+//            let controller = MFMessageComposeViewController()
+//            controller.body = "EB"
+//            controller.recipients = ["1352"]
+//            controller.messageComposeDelegate = self
+//            self.present(controller, animated: true) {
+//                self.isSms = true
+//            }
+//        }
+        self.navigationController?.pushViewController(PC_Register_ViewController.init(), animated: true)
     }
     
     func checkPhone() -> Bool {
@@ -538,7 +560,7 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
     
     func validPhone() {
         uNameErr.alpha = isValid ? 0 : 1
-        uNameView.backgroundColor = isValid ? UIColor.black : UIColor.red
+        uNameView.backgroundColor = isValid ? UIColor.white : UIColor.systemRed
     }
     
     @objc func textIsChanging(_ textField:UITextField) {
@@ -549,6 +571,8 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
     }
     
     func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
-        self.dismiss(animated: true, completion: nil)
+        self.dismiss(animated: true, completion: {
+            self.isSms = false
+        })
     }
 }

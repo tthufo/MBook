@@ -530,7 +530,7 @@ extension UIViewController {
                 print("ALLOWING", expDate! > Date())
                 
                 if (dict as! NSDictionary).getValueFromKey("status") == "2" {
-                    self.showToast("Xin chào " + (Information.userInfo?.getValueFromKey("phone"))! + ", Quý khách chưa đăng ký gói " + (type == "AUDIOBOOK" ? "AUDIO" : "EBOOK") + " hãy đăng ký để trải nghiệm dịch vụ.", andPos: 0)
+                    self.showToast("Xin chào " + (Information.userInfo?.getValueFromKey("phone"))! + ", Quý khách chưa đăng ký gói " + (type == "AUDIOBOOK" ? "AUDIOBOOK" : "EBOOK") + " hãy đăng ký để trải nghiệm dịch vụ.", andPos: 0)
                     isReg = false
                     break
                 }

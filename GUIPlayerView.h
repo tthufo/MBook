@@ -28,7 +28,6 @@
 - (void)playerStalled;
 - (void)playerError;
 - (void)playerRetry;
-
 @end
 
 @interface GUIPlayerView : UIView
@@ -50,6 +49,7 @@
 - (void)play;
 - (void)pause;
 - (void)stop;
+- (void)clearSession;
 
 - (NSTimeInterval)availableDuration;
 
