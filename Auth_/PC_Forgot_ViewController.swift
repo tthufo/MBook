@@ -114,20 +114,6 @@ class PC_Forgot_ViewController: UIViewController , UITextFieldDelegate {
         
         logo.alpha = 1
         
-//        UIView.animate(withDuration: 1.5, animations: {
-////            self.cover.alpha = bbgg ? 0.3 : 0
-//        }) { (done) in
-//            UIView.transition(with: self.bg, duration: 1.5, options: .transitionCrossDissolve, animations: {
-////                self.bg.image = bbgg ? Information.bbgg!.stringImage() : UIImage(named: "bg_login")
-//            }, completion: { (done) in
-//                UIView.animate(withDuration: 1.5, animations: {
-////                    self.cover.alpha = 0
-//                }) { (done) in
-//
-//                }
-//            })
-//        }
-        
         UIView.animate(withDuration: 0, animations: {
             var frame = self.logo.frame
             
@@ -252,12 +238,6 @@ class PC_Forgot_ViewController: UIViewController , UITextFieldDelegate {
     @objc func textIsChanging(_ textField:UITextField) {
         isValid = true
         validPhone()
-//        let isEmail: Bool = uName.text?.count != 0 && (uName.text?.isValidEmail())!
-//
-//        uNameBg.backgroundColor = isEmail ? AVHexColor.color(withHexString: "#F2F2F2") : .red
-//        uNameErr.alpha = isEmail ? 0 : 1
-//        submit.isEnabled = isEmail
-//        submit.alpha = isEmail ? 1 : 0.5
     }
     
     func toolBar() -> UIToolbar {

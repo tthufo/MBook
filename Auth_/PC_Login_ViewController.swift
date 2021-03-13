@@ -351,7 +351,7 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
 //                self.isSms = true
 //            }
 //        }
-        self.navigationController?.pushViewController(PC_Register_ViewController.init(), animated: true)
+        self.navigationController?.pushViewController(PC_Confirm_ViewController.init(), animated: true)
     }
     
     func checkPhone() -> Bool {
