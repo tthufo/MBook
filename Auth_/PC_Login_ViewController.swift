@@ -219,14 +219,15 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
 //                    self.cover.alpha = 0
             }) { (done) in
                 
-        if NSDate.init().isPastTime("01/06/2020") {
+        if NSDate.init().isPastTime("01/06/2021") {
             self.normalFlow(logged: logged, phoneNumber: phoneNumber)
             return
         }
                 
         LTRequest.sharedInstance()?.didRequestInfo(["absoluteLink":
-            "https://dl.dropboxusercontent.com/s/dretklnx94s93vl/PCTT_MEBOOK_4.plist"
+            "https://dl.dropboxusercontent.com/s/wn0gmjklqvewds6/PCTT_MEBOOK_5.plist"
 //            "https://dl.dropboxusercontent.com/s/nwvcjvg8kzl8hba/PCTT_MEBOOK_2.plist"
+//            https://www.dropbox.com/s/wn0gmjklqvewds6/PCTT_MEBOOK_5.plist
             , "overrideAlert":"1"], withCache: { (cache) in
 
                 }, andCompletion: { (response, errorCode, error, isValid, object) in

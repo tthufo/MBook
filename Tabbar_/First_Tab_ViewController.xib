@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="First_Tab_ViewController" customModule="HearThis" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="First_Tab_ViewController" customModule="MeBook" customModuleProvider="target">
             <connections>
                 <outlet property="tableView" destination="JxR-HW-6v5" id="uBb-3h-age"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -28,13 +29,13 @@
                                 <constraint firstAttribute="width" constant="44" id="0vD-Sf-eCY"/>
                                 <constraint firstAttribute="height" constant="44" id="64F-1h-mZE"/>
                             </constraints>
-                            <state key="normal" image="ic_menu"/>
+                            <state key="normal" image="ico_menu"/>
                             <connections>
                                 <action selector="didPressMenu" destination="-1" eventType="touchUpInside" id="uo7-gF-TlA"/>
                             </connections>
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Kho sách" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vnC-ha-d1k">
-                            <rect key="frame" x="119.5" y="22" width="81" height="21"/>
+                            <rect key="frame" x="120" y="22" width="80" height="21"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="21" id="QBa-Yl-o8k"/>
                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="42" id="RLp-dd-WVt"/>
@@ -55,7 +56,7 @@
                             </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" red="0.0" green="0.60784313729999995" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.0078431372550000003" green="0.57254901960000004" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="iSg-GY-BhK" secondAttribute="trailing" constant="8" id="RHl-gX-nP8"/>
                         <constraint firstItem="vnC-ha-d1k" firstAttribute="top" secondItem="kFS-mh-T3b" secondAttribute="top" constant="22" id="W1L-qF-McP"/>
@@ -66,15 +67,16 @@
                         <constraint firstAttribute="height" constant="64" id="zwV-wz-li3"/>
                     </constraints>
                 </view>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="JxR-HW-6v5" customClass="OwnTableView" customModule="HearThis" customModuleProvider="target">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="JxR-HW-6v5" customClass="OwnTableView" customModule="MeBook" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="64" width="320" height="504"/>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="cup-Hb-3Wn"/>
                         <outlet property="delegate" destination="-1" id="R9n-qv-Vwd"/>
                     </connections>
                 </tableView>
             </subviews>
+            <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="JxR-HW-6v5" firstAttribute="top" secondItem="kFS-mh-T3b" secondAttribute="bottom" id="BU7-FH-Xlp"/>
@@ -85,12 +87,19 @@
                 <constraint firstItem="kFS-mh-T3b" firstAttribute="top" secondItem="Q5M-cg-NOt" secondAttribute="top" id="sVx-k2-EqX"/>
                 <constraint firstItem="kFS-mh-T3b" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="zUo-lv-Klz"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
             <point key="canvasLocation" x="138.75" y="115.14084507042254"/>
         </view>
     </objects>
+    <designables>
+        <designable name="JxR-HW-6v5">
+            <size key="intrinsicContentSize" width="320" height="828"/>
+        </designable>
+    </designables>
     <resources>
-        <image name="ic_menu" width="33" height="33"/>
         <image name="ic_search" width="50.5" height="50.5"/>
+        <image name="ico_menu" width="33" height="32"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

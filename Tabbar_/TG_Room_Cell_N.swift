@@ -33,12 +33,12 @@ class TG_Room_Cell_N: UITableViewCell, UICollectionViewDelegate, UICollectionVie
             collectionView.isScrollEnabled = config.getValueFromKey("direction") != "vertical"
          }
         
-        titleLabel.font = UIFont.systemFont(ofSize: 17)
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 15)
                 
         if !(self.config["loaded"] as! Bool) {
             didRequestInfo()
         } else {
-            titleLabel.text = config.getValueFromKey("title") != "" ? config.getValueFromKey("title") : ""
+            titleLabel.text = config.getValueFromKey("title") != "" ? config.getValueFromKey("title").uppercased() : ""
             extraButton.alpha = 1
         }
     }

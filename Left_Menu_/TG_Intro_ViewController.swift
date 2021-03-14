@@ -143,7 +143,7 @@ class TG_Intro_ViewController: UIViewController {
 extension TG_Intro_ViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 40
+        return 50
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -167,6 +167,8 @@ extension TG_Intro_ViewController: UITableViewDataSource, UITableViewDelegate {
             sec["open"] = sec.getValueFromKey("open") == "0" ? "1" : "0"
             tableView.reloadSections(NSIndexSet(index: section) as IndexSet, with: .automatic)
         }
+        
+        head.backgroundColor = sec.getValueFromKey("open") != "0" ? AVHexColor.color(withHexString: "#DEEBEA") : .clear
         
         let angle = sec.getValueFromKey("open") == "0" ? 0 : CGFloat.pi
         
