@@ -18,9 +18,15 @@ class First_Tab_ViewController: UIViewController {
     
     let refreshControl = UIRefreshControl()
 
+    @IBOutlet var login_bg_height: NSLayoutConstraint!
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        if IS_IPAD {
+            login_bg_height.constant = 550
+        }
+        
         tableView.withCell("TG_Room_Cell_Banner_0")
 
         tableView.withCell("TG_Room_Cell_Banner_1")

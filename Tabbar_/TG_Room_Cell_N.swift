@@ -24,7 +24,7 @@ class TG_Room_Cell_N: UITableViewCell, UICollectionViewDelegate, UICollectionVie
     
     var callBack: ((_ info: Any)->())?
 
-    let itemHeight = Int(((screenWidth() / (IS_IPAD ? 5 : 3)) - 15) * 1.72)
+    let itemHeight = Int(((screenWidth() / (IS_IPAD ? 5 : 3)) - 15) * 1.80)
         
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -47,6 +47,10 @@ class TG_Room_Cell_N: UITableViewCell, UICollectionViewDelegate, UICollectionVie
         super.awakeFromNib()
         
         collectionView.withCell("TG_Map_Cell")
+        
+        self.backgroundColor = .clear
+        
+        self.contentView.backgroundColor = .clear
                 
         dataList = NSMutableArray.init()
     }
