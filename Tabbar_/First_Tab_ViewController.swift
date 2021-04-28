@@ -20,12 +20,25 @@ class First_Tab_ViewController: UIViewController {
 
     @IBOutlet var login_bg_height: NSLayoutConstraint!
 
+    @IBOutlet var banner_bg_height: NSLayoutConstraint!
+    
+    @IBOutlet var bg_banner: UIImageView!
+    
+    @IBOutlet var bg_top: UIImageView!
+
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         if IS_IPAD {
             login_bg_height.constant = 550
         }
+        
+        bg_banner.imageColor(color: AVHexColor.color(withHexString: "#1E928C"))
+        
+        bg_top.imageColor(color: AVHexColor.color(withHexString: "#1E928C"))
+
+        banner_bg_height.constant = CGFloat(screenWidth() * 9 / 16) - 70
         
         tableView.withCell("TG_Room_Cell_Banner_0")
 
@@ -57,9 +70,11 @@ class First_Tab_ViewController: UIViewController {
         
         tableView.refreshControl = refreshControl
         
+        refreshControl.tintColor = .white
+        
         refreshControl.addTarget(self, action: #selector(didReload), for: .valueChanged)
         
-        config = NSArray.init(array: [["url": ["CMD_CODE":"getListBook", //getHomeEvent
+        config = NSArray.init(array: [["url": ["CMD_CODE":"getHomeEvent", //getHomeEvent
                                                "page_index": 1,
                                                "page_size": 24,
                                                "position": 1,
@@ -125,9 +140,9 @@ class First_Tab_ViewController: UIViewController {
         for dict in self.config {
             (dict as! NSMutableDictionary)["loaded"] = false
         }
-        tableView.reloadData()
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: {
             self.refreshControl.endRefreshing()
+            self.tableView.reloadData()
         })
     }
     
@@ -136,9 +151,9 @@ class First_Tab_ViewController: UIViewController {
     }
     
     @IBAction func didPressSearch() {
-        let search = Search_ViewController.init()
-        search.config = [:]
-        self.center()?.pushViewController(search, animated: true)
+//        let search = Search_ViewController.init()
+//        search.config = [:]
+        self.center()?.pushViewController(VIP_ViewController.init(), animated: true)
     }
 }
 

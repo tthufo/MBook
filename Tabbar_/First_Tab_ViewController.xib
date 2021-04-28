@@ -10,6 +10,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="First_Tab_ViewController" customModule="MeBook" customModuleProvider="target">
             <connections>
+                <outlet property="banner_bg_height" destination="nhL-dL-67P" id="cds-Bb-499"/>
+                <outlet property="bg_banner" destination="HtY-hz-uT7" id="Rav-7f-udE"/>
+                <outlet property="bg_top" destination="g5P-W0-jZw" id="AgT-nY-SR8"/>
                 <outlet property="login_bg_height" destination="TdY-Ze-5ia" id="P9h-th-2B0"/>
                 <outlet property="tableView" destination="JxR-HW-6v5" id="uBb-3h-age"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -29,6 +32,9 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kFS-mh-T3b">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
                     <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg" translatesAutoresizingMaskIntoConstraints="NO" id="g5P-W0-jZw">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
+                        </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aDz-qA-ppq">
                             <rect key="frame" x="8" y="10" width="44" height="44"/>
                             <constraints>
@@ -62,17 +68,28 @@
                             </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" red="0.0078431372550000003" green="0.57254901960000004" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.11764705882352941" green="0.5725490196078431" blue="0.5490196078431373" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
+                        <constraint firstItem="g5P-W0-jZw" firstAttribute="top" secondItem="kFS-mh-T3b" secondAttribute="top" id="8YJ-vw-rad"/>
+                        <constraint firstAttribute="bottom" secondItem="g5P-W0-jZw" secondAttribute="bottom" id="8et-fo-gm7"/>
+                        <constraint firstAttribute="trailing" secondItem="g5P-W0-jZw" secondAttribute="trailing" id="EVk-Ri-XAk"/>
                         <constraint firstAttribute="trailing" secondItem="iSg-GY-BhK" secondAttribute="trailing" constant="8" id="RHl-gX-nP8"/>
                         <constraint firstItem="vnC-ha-d1k" firstAttribute="top" secondItem="kFS-mh-T3b" secondAttribute="top" constant="22" id="W1L-qF-McP"/>
                         <constraint firstItem="vnC-ha-d1k" firstAttribute="centerX" secondItem="kFS-mh-T3b" secondAttribute="centerX" id="aTd-8u-ug3"/>
                         <constraint firstItem="aDz-qA-ppq" firstAttribute="top" secondItem="kFS-mh-T3b" secondAttribute="top" constant="10" id="dfq-p0-Kv4"/>
+                        <constraint firstItem="g5P-W0-jZw" firstAttribute="leading" secondItem="kFS-mh-T3b" secondAttribute="leading" id="jOR-nh-ivg"/>
                         <constraint firstItem="aDz-qA-ppq" firstAttribute="leading" secondItem="kFS-mh-T3b" secondAttribute="leading" constant="8" id="t5a-cU-d6A"/>
                         <constraint firstItem="iSg-GY-BhK" firstAttribute="top" secondItem="kFS-mh-T3b" secondAttribute="top" constant="10" id="zOg-km-hqf"/>
                         <constraint firstAttribute="height" constant="64" id="zwV-wz-li3"/>
                     </constraints>
                 </view>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bg_banner" translatesAutoresizingMaskIntoConstraints="NO" id="HtY-hz-uT7">
+                    <rect key="frame" x="0.0" y="64" width="320" height="120"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="120" id="nhL-dL-67P"/>
+                    </constraints>
+                </imageView>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="JxR-HW-6v5" customClass="OwnTableView" customModule="MeBook" customModuleProvider="target">
                     <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -85,8 +102,11 @@
             <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
             <color key="backgroundColor" red="0.85490196080000003" green="0.89411764709999997" blue="0.89411764709999997" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
+                <constraint firstItem="HtY-hz-uT7" firstAttribute="trailing" secondItem="Q5M-cg-NOt" secondAttribute="trailing" id="2vo-Ya-RaL"/>
+                <constraint firstItem="HtY-hz-uT7" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="6Jf-La-ms3"/>
                 <constraint firstItem="JxR-HW-6v5" firstAttribute="top" secondItem="kFS-mh-T3b" secondAttribute="bottom" id="BU7-FH-Xlp"/>
                 <constraint firstItem="88W-zO-w4d" firstAttribute="trailing" secondItem="Q5M-cg-NOt" secondAttribute="trailing" id="BlW-r7-SuF"/>
+                <constraint firstItem="HtY-hz-uT7" firstAttribute="top" secondItem="kFS-mh-T3b" secondAttribute="bottom" id="CWU-wr-pn0"/>
                 <constraint firstItem="kFS-mh-T3b" firstAttribute="trailing" secondItem="Q5M-cg-NOt" secondAttribute="trailing" id="Lgt-1G-HUW"/>
                 <constraint firstItem="JxR-HW-6v5" firstAttribute="trailing" secondItem="Q5M-cg-NOt" secondAttribute="trailing" id="N4j-QO-zTn"/>
                 <constraint firstItem="JxR-HW-6v5" firstAttribute="leading" secondItem="Q5M-cg-NOt" secondAttribute="leading" id="OcB-Of-qjC"/>
@@ -100,6 +120,8 @@
         </view>
     </objects>
     <resources>
+        <image name="bg" width="208.5" height="114"/>
+        <image name="bg_banner" width="373" height="115.5"/>
         <image name="bg_login-1" width="266.5" height="136.5"/>
         <image name="ic_search" width="50.5" height="50.5"/>
         <image name="ico_menu" width="33" height="32"/>

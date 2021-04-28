@@ -86,9 +86,9 @@ class TG_Room_Cell: UITableViewCell, FSPagerViewDataSource,FSPagerViewDelegate, 
                   return
               }
                                                           
-//              let data = (result["result"] as! NSArray)
+              let data = (result["result"] as! NSArray)
             
-              let data = ((result["result"] as! NSDictionary)["data"] as! NSArray)
+//              let data = ((result["result"] as! NSDictionary)["data"] as! NSArray)
 
               self.images?.removeAllObjects()
 

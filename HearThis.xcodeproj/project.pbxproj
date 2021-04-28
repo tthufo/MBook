@@ -103,6 +103,9 @@
 		FC91B7352431217F00AA6671 /* XMLReader.m in Sources */ = {isa = PBXBuildFile; fileRef = FC91B7332431217F00AA6671 /* XMLReader.m */; };
 		FC9467D325FD4BD800175288 /* PC_Confirm_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9467D125FD4BD800175288 /* PC_Confirm_ViewController.swift */; };
 		FC9467D425FD4BD800175288 /* PC_Confirm_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC9467D225FD4BD800175288 /* PC_Confirm_ViewController.xib */; };
+		FCAB62C62639675300E26484 /* VIP_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAB62C42639675300E26484 /* VIP_ViewController.swift */; };
+		FCAB62C72639675300E26484 /* VIP_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCAB62C52639675300E26484 /* VIP_ViewController.xib */; };
+		FCAB62CA2639731400E26484 /* Vip_Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCAB62C92639731400E26484 /* Vip_Cell.xib */; };
 		FCAD4AA82434FD1A00387AF6 /* MenuList.plist in Resources */ = {isa = PBXBuildFile; fileRef = FCAD4AA32434FD1A00387AF6 /* MenuList.plist */; };
 		FCAD4AA92434FD1A00387AF6 /* SC_Menu.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCAD4AA42434FD1A00387AF6 /* SC_Menu.xib */; };
 		FCAD4AAA2434FD1A00387AF6 /* SC_Menu_ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCAD4AA52434FD1A00387AF6 /* SC_Menu_ViewController.m */; };
@@ -288,6 +291,9 @@
 		FC91B7342431217F00AA6671 /* XMLReader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XMLReader.h; sourceTree = "<group>"; };
 		FC9467D125FD4BD800175288 /* PC_Confirm_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PC_Confirm_ViewController.swift; sourceTree = "<group>"; };
 		FC9467D225FD4BD800175288 /* PC_Confirm_ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PC_Confirm_ViewController.xib; sourceTree = "<group>"; };
+		FCAB62C42639675300E26484 /* VIP_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VIP_ViewController.swift; sourceTree = "<group>"; };
+		FCAB62C52639675300E26484 /* VIP_ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VIP_ViewController.xib; sourceTree = "<group>"; };
+		FCAB62C92639731400E26484 /* Vip_Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Vip_Cell.xib; sourceTree = "<group>"; };
 		FCAD4AA32434FD1A00387AF6 /* MenuList.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = MenuList.plist; sourceTree = "<group>"; };
 		FCAD4AA42434FD1A00387AF6 /* SC_Menu.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SC_Menu.xib; sourceTree = "<group>"; };
 		FCAD4AA52434FD1A00387AF6 /* SC_Menu_ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SC_Menu_ViewController.m; sourceTree = "<group>"; };
@@ -621,6 +627,9 @@
 				FC130B8D2446236B00D64012 /* Package_ViewController.xib */,
 				FC130B902446270600D64012 /* Package_Cell.xib */,
 				FCF8A5B5244F54AD00E815E8 /* Package_Reg_Cell.xib */,
+				FCAB62C42639675300E26484 /* VIP_ViewController.swift */,
+				FCAB62C52639675300E26484 /* VIP_ViewController.xib */,
+				FCAB62C92639731400E26484 /* Vip_Cell.xib */,
 			);
 			path = Account_;
 			sourceTree = "<group>";
@@ -866,6 +875,7 @@
 				FCB238BB244186E10034B40B /* Book_Detail_Title.xib in Resources */,
 				FCB238E524437D410034B40B /* Event_Detail_ViewController.xib in Resources */,
 				FCFB516D1DD075E200D49FB2 /* actions.plist in Resources */,
+				FCAB62C72639675300E26484 /* VIP_ViewController.xib in Resources */,
 				FC0A8FB42437770E001A75AF /* PC_Login_ViewController.xib in Resources */,
 				FCB238D3244355770034B40B /* Event_Cell.xib in Resources */,
 				FCB782E71DA414D400BDF913 /* Second_Tab_ViewController.xib in Resources */,
@@ -903,6 +913,7 @@
 				FCB238C824422DFB0034B40B /* Author_Detail_ViewController.xib in Resources */,
 				FCB238E124435C410034B40B /* Publisher_Cell.xib in Resources */,
 				FC7550FC1DACDB53007992DF /* M_Menu.xib in Resources */,
+				FCAB62CA2639731400E26484 /* Vip_Cell.xib in Resources */,
 				FCB3CD721DA4E3FA002FABDD /* ItemCell.xib in Resources */,
 				FC01776D24529BA80097957C /* Publisher_Cell_Large.xib in Resources */,
 				FCB238DF24435BF60034B40B /* Publisher_ViewController.xib in Resources */,
@@ -1036,6 +1047,7 @@
 				FC640A831DAAAD8C00DAEF55 /* DownloadManager.m in Sources */,
 				FC640A841DAAAD8C00DAEF55 /* History.m in Sources */,
 				FCB238C724422DFB0034B40B /* Author_Detail_ViewController.swift in Sources */,
+				FCAB62C62639675300E26484 /* VIP_ViewController.swift in Sources */,
 				FC7550E91DAC869B007992DF /* HT_More_ViewController.m in Sources */,
 				FC0A8FB52437770E001A75AF /* PC_Forgot_ViewController.swift in Sources */,
 				FC640A811DAAAD8B00DAEF55 /* CoreModel.xcdatamodel in Sources */,
