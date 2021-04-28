@@ -63,17 +63,17 @@
                     </constraints>
                 </imageView>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="* Miễn phí giao dịch trên các kênh thanh toán" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GoS-qN-RI7">
-                    <rect key="frame" x="16" y="621" width="343" height="21"/>
+                    <rect key="frame" x="36.5" y="621" width="302.5" height="21"/>
                     <constraints>
                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="42" id="eed-AH-n73"/>
                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="jVU-2j-1Iz"/>
                     </constraints>
-                    <fontDescription key="fontDescription" name="HelveticaNeue-Italic" family="Helvetica Neue" pointSize="17"/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue-Italic" family="Helvetica Neue" pointSize="15"/>
                     <color key="textColor" red="0.0" green="0.58431372550000005" blue="0.5568627451" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6P9-hL-c0B">
-                    <rect key="frame" x="0.0" y="208" width="375" height="405"/>
+                    <rect key="frame" x="0.0" y="124" width="375" height="489"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="Fjo-B5-oQh"/>
@@ -90,7 +90,7 @@
                 <constraint firstItem="gii-nJ-gXF" firstAttribute="leading" secondItem="r0D-X2-Vtr" secondAttribute="leading" id="B6K-Lb-Gqp"/>
                 <constraint firstItem="iu2-ni-heW" firstAttribute="top" secondItem="r0D-X2-Vtr" secondAttribute="top" id="F8B-py-OKk"/>
                 <constraint firstItem="gii-nJ-gXF" firstAttribute="trailing" secondItem="r0D-X2-Vtr" secondAttribute="trailing" id="Fmq-fo-eT8"/>
-                <constraint firstItem="6P9-hL-c0B" firstAttribute="top" secondItem="gIC-Fe-9zC" secondAttribute="bottom" constant="144" id="Hvy-Rh-Kdo"/>
+                <constraint firstItem="6P9-hL-c0B" firstAttribute="top" secondItem="gIC-Fe-9zC" secondAttribute="bottom" constant="60" id="Hvy-Rh-Kdo"/>
                 <constraint firstItem="pgN-Xj-m7A" firstAttribute="top" secondItem="r0D-X2-Vtr" secondAttribute="top" constant="30" id="LJs-yt-pAh"/>
                 <constraint firstItem="r0D-X2-Vtr" firstAttribute="bottom" secondItem="GoS-qN-RI7" secondAttribute="bottom" constant="25" id="QDj-5c-wBb"/>
                 <constraint firstItem="9aA-0D-gEK" firstAttribute="trailing" secondItem="r0D-X2-Vtr" secondAttribute="trailing" id="UA3-8G-eHU"/>

@@ -33,6 +33,8 @@ class VIP_ViewController: UIViewController {
 //            sideGapLeft.constant = -100
 //            sideGapRight.constant = 100
         }
+        
+        tableView.contentInset = UIEdgeInsets(top: 1000, left: 0, bottom: 0, right: 0)
 
         tableView.estimatedRowHeight = 150
         
@@ -40,7 +42,7 @@ class VIP_ViewController: UIViewController {
         
         tableView.withCell("Vip_Cell")
         
-        dataList = ["", "", "", ""]
+        dataList = [["price": "365.000 đ", "vip": "VIP12", "des": "Đọc trọn bộ kho sách VIP 365 ngày *"], ["price": "90.000 đ", "vip": "VIP3", "des": "Đọc trọn bộ kho sách VIP 90 ngày *"], ["price": "30.000 đ", "vip": "VIP1", "des": "Đọc trọn bộ kho sách VIP 30 ngày *"], ["price": "3.000 đ", "vip": "VIPD", "des": "Đọc trọn bộ kho sách VIP 1 ngày *"]]
         
 //        dataList = NSMutableArray.init()
 
@@ -99,7 +101,7 @@ extension VIP_ViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-//        let data = dataList![indexPath.row] as! NSDictionary
+        let data = dataList![indexPath.row] as! NSDictionary
 //
 //        let expDate = (data.getValueFromKey("expireTime")! as NSString).date(withFormat: "dd/MM/yyyy")
 //
@@ -107,10 +109,18 @@ extension VIP_ViewController: UITableViewDataSource, UITableViewDelegate {
         
         let cell = tableView.dequeueReusableCell(withIdentifier:"Vip_Cell", for: indexPath)
                 
-        let title = self.withView(cell, tag: 1) as! UILabel
+        let vip = self.withView(cell, tag: 1) as! UILabel
                     
-        let button = self.withView(cell, tag: 2) as! UIButton
+        vip.text = data.getValueFromKey("vip")
         
+        let price = self.withView(cell, tag: 2) as! UILabel
+        
+        price.text = data.getValueFromKey("price")
+
+        let des = self.withView(cell, tag: 3) as! UILabel
+
+        des.text = data.getValueFromKey("des")
+
 //        if isRegistered {
 //            button.setTitle("Đang sử dụng Gói " + data.getValueFromKey("package_code"), for: .normal)
 //
