@@ -43,7 +43,7 @@
                                     </userDefinedRuntimeAttributes>
                                 </imageView>
                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nio-bG-Y4A">
-                                    <rect key="frame" x="106" y="83" width="150" height="21"/>
+                                    <rect key="frame" x="106" y="83" width="145" height="21"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="21" id="EIq-12-Rn7"/>
@@ -58,7 +58,7 @@
                                     </userDefinedRuntimeAttributes>
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4xK-pA-qhv">
-                                    <rect key="frame" x="264" y="31" width="56" height="88"/>
+                                    <rect key="frame" x="259" y="31" width="56" height="88"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="56" id="9nh-FB-1Rp"/>
                                         <constraint firstAttribute="height" constant="88" id="lHA-zG-riQ"/>
@@ -66,7 +66,7 @@
                                     <state key="normal" backgroundImage="btn_upgrade"/>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e5B-Ou-Lo5">
-                                    <rect key="frame" x="106" y="38" width="150" height="37"/>
+                                    <rect key="frame" x="106" y="38" width="145" height="37"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="37" id="Nl7-ZO-D9c"/>
                                     </constraints>
@@ -85,7 +85,7 @@
                                 <constraint firstItem="hqr-8h-tDc" firstAttribute="top" secondItem="6Nu-LM-5aW" secondAttribute="top" constant="31" id="V0a-cm-MA0"/>
                                 <constraint firstItem="4xK-pA-qhv" firstAttribute="leading" secondItem="e5B-Ou-Lo5" secondAttribute="trailing" constant="8" symbolic="YES" id="bVd-3m-Jzb"/>
                                 <constraint firstItem="4xK-pA-qhv" firstAttribute="top" secondItem="6Nu-LM-5aW" secondAttribute="top" constant="31" id="ePG-jZ-58A"/>
-                                <constraint firstAttribute="trailing" secondItem="4xK-pA-qhv" secondAttribute="trailing" id="hf7-VO-cgN"/>
+                                <constraint firstAttribute="trailing" secondItem="4xK-pA-qhv" secondAttribute="trailing" constant="5" id="hf7-VO-cgN"/>
                                 <constraint firstItem="hqr-8h-tDc" firstAttribute="leading" secondItem="6Nu-LM-5aW" secondAttribute="leading" constant="10" id="iDE-S3-wMU"/>
                                 <constraint firstAttribute="height" constant="150" id="y4e-4E-cPX"/>
                             </constraints>

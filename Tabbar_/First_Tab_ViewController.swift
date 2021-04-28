@@ -59,7 +59,7 @@ class First_Tab_ViewController: UIViewController {
         
         refreshControl.addTarget(self, action: #selector(didReload), for: .valueChanged)
         
-        config = NSArray.init(array: [["url": ["CMD_CODE":"getHomeEvent",
+        config = NSArray.init(array: [["url": ["CMD_CODE":"getListBook", //getHomeEvent
                                                "page_index": 1,
                                                "page_size": 24,
                                                "position": 1,

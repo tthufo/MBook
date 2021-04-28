@@ -22,7 +22,7 @@ class TG_Room_Cell: UITableViewCell, FSPagerViewDataSource,FSPagerViewDelegate, 
        
     var callBack: ((_ info: Any)->())?
 
-    let itemHeight = Int(screenWidth() * 9 / 16)
+    let itemHeight = Int(screenWidth() * 9 / 16) + 10
     
     @IBOutlet weak var pagerView: FSPagerView! {
         didSet {
@@ -86,7 +86,9 @@ class TG_Room_Cell: UITableViewCell, FSPagerViewDataSource,FSPagerViewDelegate, 
                   return
               }
                                                           
-              let data = (result["result"] as! NSArray)
+//              let data = (result["result"] as! NSArray)
+            
+              let data = ((result["result"] as! NSDictionary)["data"] as! NSArray)
 
               self.images?.removeAllObjects()
 
