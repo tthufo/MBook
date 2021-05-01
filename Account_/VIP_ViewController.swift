@@ -21,6 +21,8 @@ class VIP_ViewController: UIViewController {
     
     @IBOutlet var sideGapRight: NSLayoutConstraint!
 
+    @IBOutlet var sideGapTop: NSLayoutConstraint!
+
     var dataList: NSMutableArray!
     
     override func viewDidLoad() {
@@ -30,11 +32,13 @@ class VIP_ViewController: UIViewController {
             login_bg_height.constant = 550
             top_bg_height.constant = 550
             
-//            sideGapLeft.constant = -100
-//            sideGapRight.constant = 100
+            sideGapLeft.constant = 100
+            sideGapRight.constant = 100
+            
+            sideGapTop.constant = 250
+        } else {
+            sideGapTop.constant = 150
         }
-        
-        tableView.contentInset = UIEdgeInsets(top: 1000, left: 0, bottom: 0, right: 0)
 
         tableView.estimatedRowHeight = 150
         
@@ -43,14 +47,6 @@ class VIP_ViewController: UIViewController {
         tableView.withCell("Vip_Cell")
         
         dataList = [["price": "365.000 đ", "vip": "VIP12", "des": "Đọc trọn bộ kho sách VIP 365 ngày *"], ["price": "90.000 đ", "vip": "VIP3", "des": "Đọc trọn bộ kho sách VIP 90 ngày *"], ["price": "30.000 đ", "vip": "VIP1", "des": "Đọc trọn bộ kho sách VIP 30 ngày *"], ["price": "3.000 đ", "vip": "VIPD", "des": "Đọc trọn bộ kho sách VIP 1 ngày *"]]
-        
-//        dataList = NSMutableArray.init()
-
-//        tableView.refreshControl = refreshControl
-//
-//        refreshControl.addTarget(self, action: #selector(didReload(_:)), for: .valueChanged)
-//
-//        didReload(refreshControl)
     }
     
     @objc func didReload(_ sender: Any) {
@@ -102,11 +98,7 @@ extension VIP_ViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let data = dataList![indexPath.row] as! NSDictionary
-//
-//        let expDate = (data.getValueFromKey("expireTime")! as NSString).date(withFormat: "dd/MM/yyyy")
-//
-//        let isRegistered = data.getValueFromKey("status") == "1" && Date() < expDate!
-        
+
         let cell = tableView.dequeueReusableCell(withIdentifier:"Vip_Cell", for: indexPath)
                 
         let vip = self.withView(cell, tag: 1) as! UILabel
@@ -145,6 +137,11 @@ extension VIP_ViewController: UITableViewDataSource, UITableViewDelegate {
 //        let expDate = (data.getValueFromKey("expireTime")! as NSString).date(withFormat: "dd/MM/yyyy")
 //        let isRegistered = data.getValueFromKey("status") == "1" && expDate! > Date()
 
+        let checkOut = Check_Out_ViewController.init()
+        
+        checkOut.isPackage = indexPath.row == 0
+        
+        self.navigationController?.pushViewController(checkOut, animated: true)
     }
 
 }

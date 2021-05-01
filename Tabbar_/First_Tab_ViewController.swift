@@ -151,9 +151,28 @@ class First_Tab_ViewController: UIViewController {
     }
     
     @IBAction func didPressSearch() {
+        
 //        let search = Search_ViewController.init()
 //        search.config = [:]
-        self.center()?.pushViewController(VIP_ViewController.init(), animated: true)
+//        self.center()?.pushViewController(VIP_ViewController.init(), animated: true)
+        
+//        EM_MenuView.init(confirm: ["image": "success", "line1": "Cập nhật không thành công", "line2": "Xin lỗi quý khách vì sự cố này \nVui lòng thử lại sau", "line3": "Về trang cá nhân"]).show { (index, obj, menu) in
+//            if index == 4 {
+//
+//            } else {
+//
+//            }
+//        }
+        
+//        EM_MenuView.init(cancel: ["line1": "Quý khách muốn huỷ thay đổi ?"]).show { (index, obj, menu) in
+//            if index == 2 {
+//
+//            } else {
+//
+//            }
+//        }
+        
+        self.center()?.pushViewController(Transaction_ViewController.init(), animated: true)
     }
 }
 

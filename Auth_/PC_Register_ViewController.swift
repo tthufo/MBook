@@ -105,10 +105,6 @@ class PC_Register_ViewController: UIViewController, UITextFieldDelegate {
         let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
         
         bottom.text = "MEBOOK © 2020 - Ver %@".format(parameters: appVersion!)
-
-        self.view.action(forTouch: [:]) { (objc) in
-            self.view.endEditing(true)
-        }
         
         uName.addTarget(self, action: #selector(textIsChanging), for: .editingChanged)
         pass.addTarget(self, action: #selector(textIsChanging), for: .editingChanged)

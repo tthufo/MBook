@@ -20,6 +20,131 @@
 
 @synthesize menuCompletion;
 
+- (id)initWithCancel:(NSDictionary*)info
+{
+    self = [self init];
+    
+    [self setContainerView:[self didCreateCancelView:info]];
+    
+    [self setUseMotionEffects:true];
+    
+    return self;
+}
+
+- (UIView*)didCreateCancelView:(NSDictionary*)dict
+{
+    UIView *commentView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.screenWidth, self.screenHeight - 0)];
+    
+    [commentView setBackgroundColor:[UIColor clearColor]];
+    
+    UIView *contentView = [[NSBundle mainBundle] loadNibNamed:@"EM_Menu" owner:self options:nil][11];
+    
+    contentView.frame = CGRectMake(0, 0, commentView.frame.size.width, commentView.frame.size.height);
+    
+    UILabel * line1 = ((UILabel*)[self withView:contentView tag: 1]);
+    
+    line1.text = dict[@"line1"];
+        
+    
+    UIButton * action = ((UIButton*)[self withView:contentView tag: 2]);
+        
+    [action actionForTouch:@{} and:^(NSDictionary *touchInfo) {
+        
+        if(self.menuCompletion)
+        {
+            self.menuCompletion(2, @{}, self);
+        }
+        
+        [self close];
+    }];
+    
+    
+    UIButton * cancel = ((UIButton*)[self withView:contentView tag: 3]);
+        
+    [cancel actionForTouch:@{} and:^(NSDictionary *touchInfo) {
+        
+        if(self.menuCompletion)
+        {
+            self.menuCompletion(3, @{}, self);
+        }
+        
+        [self close];
+    }];
+    
+    [commentView addSubview:contentView];
+    
+    return commentView;
+}
+
+- (id)initWithConfirm:(NSDictionary*)info
+{
+    self = [self init];
+    
+    [self setContainerView:[self didCreateConfirmView:info]];
+    
+    [self setUseMotionEffects:true];
+    
+    return self;
+}
+
+- (UIView*)didCreateConfirmView:(NSDictionary*)dict
+{
+    UIView *commentView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.screenWidth, self.screenHeight - 0)];
+    
+    [commentView setBackgroundColor:[UIColor clearColor]];
+    
+    UIView *contentView = [[NSBundle mainBundle] loadNibNamed:@"EM_Menu" owner:self options:nil][10];
+    
+    contentView.frame = CGRectMake(0, 0, commentView.frame.size.width, commentView.frame.size.height);
+    
+    ((UIImageView*)[self withView:contentView tag: 1]).image = [UIImage imageNamed: [NSString stringWithFormat:@"ico_%@", dict[@"image"]]];
+
+    
+    UILabel * line1 = ((UILabel*)[self withView:contentView tag: 2]);
+    
+    line1.text = dict[@"line1"];
+    
+    if (![[dict getValueFromKey:@"image"] isEqualToString:@"success"]) {
+        [line1 setTextColor:[UIColor systemRedColor]];
+    }
+    
+    ((UILabel*)[self withView:contentView tag: 3]).text = dict[@"line2"];
+    
+    
+    UIButton * action = ((UIButton*)[self withView:contentView tag: 4]);
+    
+    [action setTitle: dict[@"line3"] forState:UIControlStateNormal];
+    
+    [action actionForTouch:@{} and:^(NSDictionary *touchInfo) {
+        
+        if(self.menuCompletion)
+        {
+            self.menuCompletion(4, @{}, self);
+        }
+        
+        [self close];
+    }];
+    
+    
+    UIButton * cancel = ((UIButton*)[self withView:contentView tag: 5]);
+    
+    cancel.hidden = ![dict responseForKey:@"isCancel"];
+    
+    [cancel actionForTouch:@{} and:^(NSDictionary *touchInfo) {
+        
+        if(self.menuCompletion)
+        {
+            self.menuCompletion(5, @{}, self);
+        }
+        
+        [self close];
+    }];
+    
+    [commentView addSubview:contentView];
+    
+    return commentView;
+}
+
 - (id)initWithDate:(NSDictionary*)info
 {
     self = [self init];

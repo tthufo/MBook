@@ -34,6 +34,10 @@ typedef void (^MenuCompletion)(int index, id object, EM_MenuView * menu);
 
 - (id)initWithPreviewMenu:(NSDictionary*)info;
 
+- (id)initWithConfirm:(NSDictionary*)info;
+
+- (id)initWithCancel:(NSDictionary*)info;
+
 - (EM_MenuView*)showWithCompletion:(MenuCompletion)_completion;
 
 @property(nonatomic,copy) MenuCompletion menuCompletion;

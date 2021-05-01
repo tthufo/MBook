@@ -74,6 +74,10 @@
 		FC7551031DAE4640007992DF /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC7551001DAE4640007992DF /* Default-568h@2x.png */; };
 		FC7551041DAE4640007992DF /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = FC7551011DAE4640007992DF /* Default.png */; };
 		FC7551051DAE4640007992DF /* Default~iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = FC7551021DAE4640007992DF /* Default~iphone.png */; };
+		FC771C49263B1FB2005851FA /* Check_Out_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC771C47263B1FB2005851FA /* Check_Out_ViewController.swift */; };
+		FC771C4A263B1FB2005851FA /* Check_Out_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC771C48263B1FB2005851FA /* Check_Out_ViewController.xib */; };
+		FC771C4D263B3FB2005851FA /* Check_Out_Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC771C4C263B3FB1005851FA /* Check_Out_Cell.xib */; };
+		FC771C51263BFBAA005851FA /* Check_Out_Book_Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC771C50263BFBAA005851FA /* Check_Out_Book_Cell.xib */; };
 		FC78396A2438EA6400470148 /* First_Tab_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC7839682438EA6400470148 /* First_Tab_ViewController.xib */; };
 		FC78396C2438EC9400470148 /* SC_Menu_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC78396B2438EC9400470148 /* SC_Menu_ViewController.xib */; };
 		FC7839782438F37F00470148 /* PC_Info_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7839742438F37E00470148 /* PC_Info_ViewController.swift */; };
@@ -141,6 +145,12 @@
 		FCB782E01DA413E000BDF913 /* HT_Root_ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCB782DF1DA413E000BDF913 /* HT_Root_ViewController.m */; };
 		FCB782E61DA414D400BDF913 /* Second_Tab_ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCB782E41DA414D400BDF913 /* Second_Tab_ViewController.m */; };
 		FCB782E71DA414D400BDF913 /* Second_Tab_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCB782E51DA414D400BDF913 /* Second_Tab_ViewController.xib */; };
+		FCBC3471263D986D00AC9621 /* Feed_Back_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBC346F263D986D00AC9621 /* Feed_Back_ViewController.swift */; };
+		FCBC3472263D986D00AC9621 /* Feed_Back_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCBC3470263D986D00AC9621 /* Feed_Back_ViewController.xib */; };
+		FCBC3476263DC73400AC9621 /* Transaction_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBC3474263DC73400AC9621 /* Transaction_ViewController.swift */; };
+		FCBC3477263DC73400AC9621 /* Transaction_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCBC3475263DC73400AC9621 /* Transaction_ViewController.xib */; };
+		FCBC347A263DC80F00AC9621 /* Transaction_Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCBC3479263DC80F00AC9621 /* Transaction_Cell.xib */; };
+		FCBC347D263DCD9600AC9621 /* Transaction_Fail.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCBC347C263DCD9600AC9621 /* Transaction_Fail.xib */; };
 		FCC7EFB51DB9348A0080A08A /* HT_Player_Item.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC7EFB41DB9348A0080A08A /* HT_Player_Item.m */; };
 		FCC965AA1DA5F4200025971E /* HT_Player_ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC965A81DA5F4200025971E /* HT_Player_ViewController.m */; };
 		FCC965AB1DA5F4200025971E /* HT_Player_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCC965A91DA5F4200025971E /* HT_Player_ViewController.xib */; };
@@ -253,6 +263,10 @@
 		FC7551001DAE4640007992DF /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		FC7551011DAE4640007992DF /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		FC7551021DAE4640007992DF /* Default~iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default~iphone.png"; sourceTree = "<group>"; };
+		FC771C47263B1FB2005851FA /* Check_Out_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Check_Out_ViewController.swift; sourceTree = "<group>"; };
+		FC771C48263B1FB2005851FA /* Check_Out_ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Check_Out_ViewController.xib; sourceTree = "<group>"; };
+		FC771C4C263B3FB1005851FA /* Check_Out_Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Check_Out_Cell.xib; sourceTree = "<group>"; };
+		FC771C50263BFBAA005851FA /* Check_Out_Book_Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Check_Out_Book_Cell.xib; sourceTree = "<group>"; };
 		FC77314E24572918006ABF3E /* MeBook.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MeBook.entitlements; sourceTree = "<group>"; };
 		FC7839682438EA6400470148 /* First_Tab_ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = First_Tab_ViewController.xib; sourceTree = "<group>"; };
 		FC78396B2438EC9400470148 /* SC_Menu_ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SC_Menu_ViewController.xib; sourceTree = "<group>"; };
@@ -336,6 +350,12 @@
 		FCB782E31DA414D400BDF913 /* Second_Tab_ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Second_Tab_ViewController.h; sourceTree = "<group>"; };
 		FCB782E41DA414D400BDF913 /* Second_Tab_ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Second_Tab_ViewController.m; sourceTree = "<group>"; };
 		FCB782E51DA414D400BDF913 /* Second_Tab_ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Second_Tab_ViewController.xib; sourceTree = "<group>"; };
+		FCBC346F263D986D00AC9621 /* Feed_Back_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feed_Back_ViewController.swift; sourceTree = "<group>"; };
+		FCBC3470263D986D00AC9621 /* Feed_Back_ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Feed_Back_ViewController.xib; sourceTree = "<group>"; };
+		FCBC3474263DC73400AC9621 /* Transaction_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction_ViewController.swift; sourceTree = "<group>"; };
+		FCBC3475263DC73400AC9621 /* Transaction_ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Transaction_ViewController.xib; sourceTree = "<group>"; };
+		FCBC3479263DC80F00AC9621 /* Transaction_Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Transaction_Cell.xib; sourceTree = "<group>"; };
+		FCBC347C263DCD9600AC9621 /* Transaction_Fail.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Transaction_Fail.xib; sourceTree = "<group>"; };
 		FCC7EFB31DB9348A0080A08A /* HT_Player_Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HT_Player_Item.h; sourceTree = "<group>"; };
 		FCC7EFB41DB9348A0080A08A /* HT_Player_Item.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HT_Player_Item.m; sourceTree = "<group>"; };
 		FCC965A71DA5F4200025971E /* HT_Player_ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HT_Player_ViewController.h; sourceTree = "<group>"; };
@@ -630,6 +650,16 @@
 				FCAB62C42639675300E26484 /* VIP_ViewController.swift */,
 				FCAB62C52639675300E26484 /* VIP_ViewController.xib */,
 				FCAB62C92639731400E26484 /* Vip_Cell.xib */,
+				FC771C47263B1FB2005851FA /* Check_Out_ViewController.swift */,
+				FC771C48263B1FB2005851FA /* Check_Out_ViewController.xib */,
+				FC771C4C263B3FB1005851FA /* Check_Out_Cell.xib */,
+				FC771C50263BFBAA005851FA /* Check_Out_Book_Cell.xib */,
+				FCBC346F263D986D00AC9621 /* Feed_Back_ViewController.swift */,
+				FCBC3470263D986D00AC9621 /* Feed_Back_ViewController.xib */,
+				FCBC3474263DC73400AC9621 /* Transaction_ViewController.swift */,
+				FCBC3475263DC73400AC9621 /* Transaction_ViewController.xib */,
+				FCBC3479263DC80F00AC9621 /* Transaction_Cell.xib */,
+				FCBC347C263DCD9600AC9621 /* Transaction_Fail.xib */,
 			);
 			path = Account_;
 			sourceTree = "<group>";
@@ -873,6 +903,7 @@
 			files = (
 				FCFB51761DD0EFE300D49FB2 /* M_Detail_ViewController.xib in Resources */,
 				FCB238BB244186E10034B40B /* Book_Detail_Title.xib in Resources */,
+				FC771C4A263B1FB2005851FA /* Check_Out_ViewController.xib in Resources */,
 				FCB238E524437D410034B40B /* Event_Detail_ViewController.xib in Resources */,
 				FCFB516D1DD075E200D49FB2 /* actions.plist in Resources */,
 				FCAB62C72639675300E26484 /* VIP_ViewController.xib in Resources */,
@@ -899,6 +930,7 @@
 				FCB238B92441858D0034B40B /* TG_Book_Detail_Cell.xib in Resources */,
 				FC640A901DAAAE2800DAEF55 /* TT_Sync_Header.xib in Resources */,
 				FC7839872439204C00470148 /* PC_Header_Tab.xib in Resources */,
+				FCBC3477263DC73400AC9621 /* Transaction_ViewController.xib in Resources */,
 				FCB3CD6A1DA4DDE9002FABDD /* HT_Genres_ViewController.xib in Resources */,
 				FC783989243922C100470148 /* PC_Sub_Cell.xib in Resources */,
 				FCB238C2244218DB0034B40B /* Author_ViewController.xib in Resources */,
@@ -907,7 +939,9 @@
 				FC7550E41DAC85DE007992DF /* HT_Feed_ViewController.xib in Resources */,
 				FCC965AB1DA5F4200025971E /* HT_Player_ViewController.xib in Resources */,
 				FC78398D2439C23700470148 /* Third_Tab_ViewController.xib in Resources */,
+				FCBC347D263DCD9600AC9621 /* Transaction_Fail.xib in Resources */,
 				FC7839812438F91600470148 /* PC_Info_Cell.xib in Resources */,
+				FC771C51263BFBAA005851FA /* Check_Out_Book_Cell.xib in Resources */,
 				FCAD57F1243DB7E400101A47 /* TG_Room_Cell_0.xib in Resources */,
 				FCB238C424421BC20034B40B /* Author_Filter_Cell.xib in Resources */,
 				FCB238C824422DFB0034B40B /* Author_Detail_ViewController.xib in Resources */,
@@ -922,8 +956,10 @@
 				FC7550EA1DAC869B007992DF /* HT_More_ViewController.xib in Resources */,
 				FC78397E2438F42400470148 /* PC_ChangePass_ViewController.xib in Resources */,
 				FC7551051DAE4640007992DF /* Default~iphone.png in Resources */,
+				FCBC347A263DC80F00AC9621 /* Transaction_Cell.xib in Resources */,
 				FC23EB94243A4C8F003E5E1A /* List_Book_ViewController.xib in Resources */,
 				FC69D43024405879006D57D9 /* TG_Room_Cell_9.xib in Resources */,
+				FCBC3472263D986D00AC9621 /* Feed_Back_ViewController.xib in Resources */,
 				FC23EB97243A4CB9003E5E1A /* TG_Map_Cell.xib in Resources */,
 				FCB238BD2441B6960034B40B /* TG_Book_Chap_Cell.xib in Resources */,
 				FCB238D1244354AB0034B40B /* Event_ViewController.xib in Resources */,
@@ -933,6 +969,7 @@
 				FCC965B21DA75C060025971E /* HT_Player_Item.xib in Resources */,
 				FC78397A2438F37F00470148 /* PC_Info_ViewController.xib in Resources */,
 				FC69D4342440595B006D57D9 /* TG_Room_Cell_Banner_0.xib in Resources */,
+				FC771C4D263B3FB2005851FA /* Check_Out_Cell.xib in Resources */,
 				FCB238CA2442329C0034B40B /* Author_Detail_Header.xib in Resources */,
 				FC40A0FF243EFE5C0096B9DB /* TG_Room_Cell_2.xib in Resources */,
 				FCAD4AA82434FD1A00387AF6 /* MenuList.plist in Resources */,
@@ -1010,6 +1047,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FC640A871DAAAD8C00DAEF55 /* M_Core.m in Sources */,
+				FCBC3471263D986D00AC9621 /* Feed_Back_ViewController.swift in Sources */,
 				FC0A8FB22437770E001A75AF /* PC_Login_ViewController.swift in Sources */,
 				FC78397F2438F42400470148 /* PC_ChangePass_ViewController.swift in Sources */,
 				FCFB51751DD0EFE300D49FB2 /* M_Detail_ViewController.m in Sources */,
@@ -1023,6 +1061,7 @@
 				FC43399C2436493A00CFD50E /* Navigation_ViewController.m in Sources */,
 				FC640A851DAAAD8C00DAEF55 /* Item.m in Sources */,
 				FC0A8FB7243779F0001A75AF /* Marcro.swift in Sources */,
+				FC771C49263B1FB2005851FA /* Check_Out_ViewController.swift in Sources */,
 				FCAD57F0243DB7E400101A47 /* TG_Room_Cell.swift in Sources */,
 				FC7F32B6244A0731007429F7 /* TFHppleElement.m in Sources */,
 				FC7550E31DAC85DE007992DF /* HT_Feed_ViewController.m in Sources */,
@@ -1073,6 +1112,7 @@
 				FCAD4AAA2434FD1A00387AF6 /* SC_Menu_ViewController.m in Sources */,
 				FC78398E2439C23700470148 /* Third_Tab_ViewController.m in Sources */,
 				FC0A8FB02437770E001A75AF /* PC_Register_ViewController.swift in Sources */,
+				FCBC3476263DC73400AC9621 /* Transaction_ViewController.swift in Sources */,
 				FCD381872444D78E004D78C9 /* CustomFlowLayou.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

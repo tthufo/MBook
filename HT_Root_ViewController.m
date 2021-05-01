@@ -118,7 +118,7 @@
 //
 //    nav5.tabBarItem.image = [UIImage imageNamed:@"extras"];
     
-    self.viewControllers = [Information.check isEqualToString:@"1"] ? @[nav1, nav2, nav3, nav4] : @[nav1, nav2, nav3];
+    self.viewControllers = [Information.check isEqualToString:@"0"] ? @[nav1, nav2, nav3, nav4] : @[nav1, nav2, nav3];
     
 //    self.tabBarItem.imageInsets = UIEdgeInsetsMake(16, 0, 0, 0);
 //    self.title = nil;

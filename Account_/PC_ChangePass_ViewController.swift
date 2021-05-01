@@ -30,6 +30,8 @@ class PC_ChangePass_ViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet var cell3: UITableViewCell!
     
+    @IBOutlet var cell4: UITableViewCell!
+
     @IBOutlet var oldPass: UITextField!
     
     @IBOutlet var newPass: UITextField!
@@ -60,8 +62,8 @@ class PC_ChangePass_ViewController: UIViewController, UITextFieldDelegate {
         if IS_IPAD {
           sideGapLeft.constant = 100
           sideGapRight.constant = -100
-          sideGapBottomLeft.constant = 100
-          sideGapBottomRight.constant = 100
+//          sideGapBottomLeft.constant = 100
+//          sideGapBottomRight.constant = 100
         }
         
         kb = KeyBoard.shareInstance()
@@ -103,6 +105,15 @@ class PC_ChangePass_ViewController: UIViewController, UITextFieldDelegate {
     @IBAction func didPressBack() {
         self.view.endEditing(true)
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    @IBAction func didPressCancel() {
+        self.view.endEditing(true)
+        EM_MenuView.init(cancel: ["line1": "Quý khách muốn huỷ thay đổi ?"]).show { (index, obj, menu) in
+            if index == 3 {
+                self.navigationController?.popViewController(animated: true)
+            }
+        }
     }
     
     @IBAction func didPressCheck(sender: UIButton) {
@@ -164,7 +175,7 @@ class PC_ChangePass_ViewController: UIViewController, UITextFieldDelegate {
     
     @objc func textIsChanging(_ textField:UITextField) {
         let isMatch: Bool = newPass.text?.count != 0 && reNewPass.text?.count != 0 && newPass.text == reNewPass.text
-        reNewBg.backgroundColor = isMatch ? AVHexColor.color(withHexString: "#F2F2F2") : .red
+        reNewBg.backgroundColor = isMatch ? AVHexColor.color(withHexString: "#FFFFFF") : .red
         reNewPassErr.alpha = isMatch ? 0 : 1
         
         submit.isEnabled = oldPass.text?.count != 0 && newPass.text?.count != 0 && reNewPass.text?.count != 0 && newPass.text == reNewPass.text
@@ -175,16 +186,16 @@ class PC_ChangePass_ViewController: UIViewController, UITextFieldDelegate {
 extension PC_ChangePass_ViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return indexPath.row == 2 ? 191 : 94
+        return indexPath.row == 3 ? 155 : 94
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return 4
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        return indexPath.row == 0 ? cell1 : indexPath.row == 1 ? cell2 : cell3
+        return indexPath.row == 0 ? cell1 : indexPath.row == 1 ? cell2 : indexPath.row == 2 ? cell3 : cell4
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

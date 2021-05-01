@@ -23,7 +23,7 @@ class PC_Info_ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        dataList = NSMutableArray.init(array: Information.check == "1" ? [
+        dataList = NSMutableArray.init(array: Information.check == "0" ? [
                                                 ["title":"Thông tin tài khoản", "image":"user_info"],
                                                    ["title":"Đổi mật khẩu", "image":"change_pass"],
 //                                                   ["title":"Cho phép nhận thông báo", "image":"notification", "content":"sw"],

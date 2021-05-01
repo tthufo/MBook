@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="Transaction_ViewController" customModule="MeBook" customModuleProvider="target">
+            <connections>
+                <outlet property="sideGapLeft" destination="i71-Ym-YpI" id="yo4-y5-ir8"/>
+                <outlet property="sideGapRight" destination="Ehr-DN-m8D" id="p3L-rN-WX8"/>
+                <outlet property="tableView" destination="qfj-1i-wDp" id="Vqh-dR-gqw"/>
+                <outlet property="view" destination="pGH-Ja-Pat" id="0fQ-18-blr"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="pGH-Ja-Pat">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2LD-zb-0xl">
+                    <rect key="frame" x="0.0" y="44" width="414" height="64"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="v6b-pF-6eK">
+                            <rect key="frame" x="8" y="10" width="44" height="44"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="uYi-ty-GpG"/>
+                                <constraint firstAttribute="width" constant="44" id="xbr-bV-kSO"/>
+                            </constraints>
+                            <state key="normal" image="ico_arrow_l_white"/>
+                            <connections>
+                                <action selector="didPressBack" destination="-1" eventType="touchUpInside" id="uoR-cC-X7m"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lịch sử giao dịch" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ojp-So-u1J">
+                            <rect key="frame" x="134.5" y="22" width="145" height="21"/>
+                            <constraints>
+                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="42" id="V4q-oi-onM"/>
+                                <constraint firstAttribute="height" constant="21" id="bwq-Yp-Hmj"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fw0-jl-3SV">
+                            <rect key="frame" x="362" y="10" width="44" height="44"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="evl-O7-Lnb"/>
+                                <constraint firstAttribute="width" constant="44" id="hTK-YQ-Rgh"/>
+                            </constraints>
+                            <state key="normal" image="ic_search"/>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" red="0.1176470588" green="0.57254901960000004" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstItem="v6b-pF-6eK" firstAttribute="top" secondItem="2LD-zb-0xl" secondAttribute="top" constant="10" id="Kkr-Wu-xlq"/>
+                        <constraint firstAttribute="trailing" secondItem="fw0-jl-3SV" secondAttribute="trailing" constant="8" id="Sbq-gk-fDZ"/>
+                        <constraint firstItem="ojp-So-u1J" firstAttribute="centerX" secondItem="2LD-zb-0xl" secondAttribute="centerX" id="ZsL-Bt-Bfl"/>
+                        <constraint firstItem="ojp-So-u1J" firstAttribute="top" secondItem="2LD-zb-0xl" secondAttribute="top" constant="22" id="jX6-u2-G40"/>
+                        <constraint firstAttribute="height" constant="64" id="nNN-DK-SPc"/>
+                        <constraint firstItem="fw0-jl-3SV" firstAttribute="top" secondItem="2LD-zb-0xl" secondAttribute="top" constant="10" id="qZv-yk-AUA"/>
+                        <constraint firstItem="v6b-pF-6eK" firstAttribute="leading" secondItem="2LD-zb-0xl" secondAttribute="leading" constant="8" id="tFw-tg-a4x"/>
+                    </constraints>
+                </view>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qfj-1i-wDp">
+                    <rect key="frame" x="0.0" y="108" width="414" height="754"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="iyx-oC-DKg"/>
+                        <outlet property="delegate" destination="-1" id="Zf2-E9-7f0"/>
+                    </connections>
+                </tableView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="Ytc-7Y-c7t"/>
+            <color key="backgroundColor" red="0.8980392157" green="0.8980392157" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="2LD-zb-0xl" firstAttribute="top" secondItem="Ytc-7Y-c7t" secondAttribute="top" id="2lw-fc-vZ8"/>
+                <constraint firstItem="qfj-1i-wDp" firstAttribute="bottom" secondItem="Ytc-7Y-c7t" secondAttribute="bottom" id="31r-RG-sSF"/>
+                <constraint firstItem="qfj-1i-wDp" firstAttribute="trailing" secondItem="Ytc-7Y-c7t" secondAttribute="trailing" id="Ehr-DN-m8D"/>
+                <constraint firstItem="2LD-zb-0xl" firstAttribute="trailing" secondItem="Ytc-7Y-c7t" secondAttribute="trailing" id="Kzl-Ju-ga0"/>
+                <constraint firstItem="2LD-zb-0xl" firstAttribute="leading" secondItem="Ytc-7Y-c7t" secondAttribute="leading" id="fxf-hH-IKU"/>
+                <constraint firstItem="qfj-1i-wDp" firstAttribute="leading" secondItem="Ytc-7Y-c7t" secondAttribute="leading" id="i71-Ym-YpI"/>
+                <constraint firstItem="qfj-1i-wDp" firstAttribute="top" secondItem="2LD-zb-0xl" secondAttribute="bottom" id="sHW-eA-ppQ"/>
+            </constraints>
+            <point key="canvasLocation" x="138.75" y="115.14084507042254"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="ic_search" width="50.5" height="50.5"/>
+        <image name="ico_arrow_l_white" width="33" height="33"/>
+    </resources>
+</document>

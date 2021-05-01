@@ -74,9 +74,18 @@
                                     <color key="textColor" red="0.11764705882352941" green="0.5725490196078431" blue="0.5490196078431373" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TM9-dK-nIh">
+                                    <rect key="frame" x="0.0" y="149.5" width="320" height="0.5"/>
+                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="0.5" id="mbz-JY-Lmw"/>
+                                    </constraints>
+                                </view>
                             </subviews>
                             <color key="backgroundColor" red="0.92549019610000005" green="0.92941176469999998" blue="0.90588235289999997" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
+                                <constraint firstItem="TM9-dK-nIh" firstAttribute="leading" secondItem="6Nu-LM-5aW" secondAttribute="leading" id="7ug-Za-4fS"/>
+                                <constraint firstAttribute="bottom" secondItem="TM9-dK-nIh" secondAttribute="bottom" id="9AR-9s-kWR"/>
                                 <constraint firstItem="e5B-Ou-Lo5" firstAttribute="top" secondItem="6Nu-LM-5aW" secondAttribute="top" constant="38" id="BWx-IO-M6j"/>
                                 <constraint firstItem="4xK-pA-qhv" firstAttribute="leading" secondItem="Nio-bG-Y4A" secondAttribute="trailing" constant="8" symbolic="YES" id="Er4-rj-yvJ"/>
                                 <constraint firstItem="Nio-bG-Y4A" firstAttribute="leading" secondItem="hqr-8h-tDc" secondAttribute="trailing" constant="8" symbolic="YES" id="Kk7-97-qJF"/>
@@ -85,6 +94,7 @@
                                 <constraint firstItem="hqr-8h-tDc" firstAttribute="top" secondItem="6Nu-LM-5aW" secondAttribute="top" constant="31" id="V0a-cm-MA0"/>
                                 <constraint firstItem="4xK-pA-qhv" firstAttribute="leading" secondItem="e5B-Ou-Lo5" secondAttribute="trailing" constant="8" symbolic="YES" id="bVd-3m-Jzb"/>
                                 <constraint firstItem="4xK-pA-qhv" firstAttribute="top" secondItem="6Nu-LM-5aW" secondAttribute="top" constant="31" id="ePG-jZ-58A"/>
+                                <constraint firstAttribute="trailing" secondItem="TM9-dK-nIh" secondAttribute="trailing" id="gDj-YG-4Rm"/>
                                 <constraint firstAttribute="trailing" secondItem="4xK-pA-qhv" secondAttribute="trailing" constant="5" id="hf7-VO-cgN"/>
                                 <constraint firstItem="hqr-8h-tDc" firstAttribute="leading" secondItem="6Nu-LM-5aW" secondAttribute="leading" constant="10" id="iDE-S3-wMU"/>
                                 <constraint firstAttribute="height" constant="150" id="y4e-4E-cPX"/>
