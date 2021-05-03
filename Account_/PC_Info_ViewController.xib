@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PC_Info_ViewController" customModule="HearThis" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PC_Info_ViewController" customModule="MeBook" customModuleProvider="target">
             <connections>
                 <outlet property="tableView" destination="NBy-aq-cqm" id="QM9-Ky-Haq"/>
                 <outlet property="view" destination="wvr-aG-TEd" id="Mp9-Q2-Oe5"/>
@@ -23,7 +24,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tài khoản" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xQ2-Xi-yiW">
-                            <rect key="frame" x="146" y="22" width="83.5" height="21"/>
+                            <rect key="frame" x="146" y="22" width="83" height="21"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="21" id="ckD-Ty-MHK"/>
                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="79" id="gUM-Td-PsG"/>
@@ -55,7 +56,8 @@
                             </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" red="0.0" green="0.60784313729999995" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <viewLayoutGuide key="safeArea" id="N8a-hm-drJ"/>
+                    <color key="backgroundColor" red="0.1176470588" green="0.57254901960000004" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstItem="TjU-wa-C0Q" firstAttribute="leading" secondItem="N8a-hm-drJ" secondAttribute="leading" constant="8" id="Enw-Xv-mbj"/>
                         <constraint firstItem="xQ2-Xi-yiW" firstAttribute="centerX" secondItem="eXU-8s-cfN" secondAttribute="centerX" id="GhJ-1P-e0m"/>
@@ -65,17 +67,17 @@
                         <constraint firstItem="uTm-F0-lQ2" firstAttribute="top" secondItem="N8a-hm-drJ" secondAttribute="top" constant="10" id="b2O-6C-ZGu"/>
                         <constraint firstItem="xQ2-Xi-yiW" firstAttribute="top" secondItem="N8a-hm-drJ" secondAttribute="top" constant="22" id="bKt-iJ-VhZ"/>
                     </constraints>
-                    <viewLayoutGuide key="safeArea" id="N8a-hm-drJ"/>
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="NBy-aq-cqm">
                     <rect key="frame" x="0.0" y="64" width="375" height="603"/>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="lxE-Pp-Rc2"/>
                         <outlet property="delegate" destination="-1" id="Hm6-3l-KG7"/>
                     </connections>
                 </tableView>
             </subviews>
+            <viewLayoutGuide key="safeArea" id="4Qa-f3-Qou"/>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="eXU-8s-cfN" firstAttribute="trailing" secondItem="4Qa-f3-Qou" secondAttribute="trailing" id="Cu8-LU-qwz"/>
@@ -86,12 +88,14 @@
                 <constraint firstItem="NBy-aq-cqm" firstAttribute="bottom" secondItem="4Qa-f3-Qou" secondAttribute="bottom" id="tz2-Ap-iPu"/>
                 <constraint firstItem="eXU-8s-cfN" firstAttribute="top" secondItem="4Qa-f3-Qou" secondAttribute="top" id="xI4-V5-7lz"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="4Qa-f3-Qou"/>
             <point key="canvasLocation" x="61.600000000000001" y="66.11694152923539"/>
         </view>
     </objects>
     <resources>
         <image name="ic_menu" width="33" height="33"/>
         <image name="ic_search" width="50.5" height="50.5"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

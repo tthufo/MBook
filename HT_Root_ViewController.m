@@ -61,53 +61,53 @@
     
     nav1.navigationBarHidden = YES;
     
-    first.title = @"Kho sách";
+//    first.title = @"Kho sách";
     
-    nav1.tabBarItem.image = [UIImage imageNamed:@"ic_home_normal"];
+    nav1.tabBarItem.image = [UIImage imageNamed:@"home_default"];
     
-    nav1.tabBarItem.selectedImage = [UIImage imageNamed:@"ic_home_active"];
+    nav1.tabBarItem.selectedImage = [UIImage imageNamed:@"home_active"];
 
     
     Second_Tab_ViewController * second = [Second_Tab_ViewController new];
     
-    second.title = @"Truyện";
+//    second.title = @"Truyện";
     
     UINavigationController *nav2 = [[UINavigationController alloc]
                                     initWithRootViewController:second];
     
     nav2.navigationBarHidden = YES;
 
-    nav2.tabBarItem.image = [UIImage imageNamed:@"ic_hieusach_normal"];
+    nav2.tabBarItem.image = [UIImage imageNamed:@"shop_default"];
     
-    nav2.tabBarItem.selectedImage = [UIImage imageNamed:@"ic_hieusach_active"];
+    nav2.tabBarItem.selectedImage = [UIImage imageNamed:@"shop_active"];
 
 
     Third_Tab_ViewController * third = [Third_Tab_ViewController new];
     
-    third.title = @"Tủ sách";
+//    third.title = @"Tủ sách";
     
     UINavigationController *nav3 = [[UINavigationController alloc]
                                     initWithRootViewController:third];
     
     nav3.navigationBarHidden = YES;
 
-    nav3.tabBarItem.image = [UIImage imageNamed:@"ic_tusach_normal"];
+    nav3.tabBarItem.image = [UIImage imageNamed:@"book_default"];
     
-    nav3.tabBarItem.selectedImage = [UIImage imageNamed:@"ic_tusach_active"];
+    nav3.tabBarItem.selectedImage = [UIImage imageNamed:@"book_active"];
 
 
     PC_Info_ViewController * fourth = [PC_Info_ViewController new];
     
-    fourth.title = @"Tài khoản";
+//    fourth.title = @"Tài khoản";
     
     UINavigationController *nav4 = [[UINavigationController alloc]
                                     initWithRootViewController:fourth];
     
     nav4.navigationBarHidden = YES;
 
-    nav4.tabBarItem.image = [UIImage imageNamed:@"ic_account_normal"];
+    nav4.tabBarItem.image = [UIImage imageNamed:@"user_default"];
     
-    nav4.tabBarItem.selectedImage = [UIImage imageNamed:@"ic_account_active"];
+    nav4.tabBarItem.selectedImage = [UIImage imageNamed:@"user_active"];
 
 //    HT_More_ViewController * fifth = [HT_More_ViewController new];
 //
@@ -123,10 +123,10 @@
 //    self.tabBarItem.imageInsets = UIEdgeInsetsMake(16, 0, 0, 0);
 //    self.title = nil;
 
-//    [self.viewControllers enumerateObjectsUsingBlock:^(UIViewController *vc, NSUInteger idx, BOOL *stop) {
-//           vc.tabBarItem.title = nil;
-//           vc.tabBarItem.imageInsets = UIEdgeInsetsMake(10, 0, 0, 0);
-//       }];
+    [self.viewControllers enumerateObjectsUsingBlock:^(UIViewController *vc, NSUInteger idx, BOOL *stop) {
+           vc.tabBarItem.title = nil;
+           vc.tabBarItem.imageInsets = UIEdgeInsetsMake(0, 0, -9, 0);
+       }];
 //
 //
 //    for(UITabBarItem * button in self.tabBar.items)

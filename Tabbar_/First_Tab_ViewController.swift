@@ -172,7 +172,9 @@ class First_Tab_ViewController: UIViewController {
 //            }
 //        }
         
-        self.center()?.pushViewController(Transaction_ViewController.init(), animated: true)
+//        self.center()?.pushViewController(Transaction_ViewController.init(), animated: true)
+        
+        self.center()?.pushViewController(User_Infor_ViewController.init(), animated: true)
     }
 }
 

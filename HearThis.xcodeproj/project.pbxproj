@@ -151,6 +151,8 @@
 		FCBC3477263DC73400AC9621 /* Transaction_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCBC3475263DC73400AC9621 /* Transaction_ViewController.xib */; };
 		FCBC347A263DC80F00AC9621 /* Transaction_Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCBC3479263DC80F00AC9621 /* Transaction_Cell.xib */; };
 		FCBC347D263DCD9600AC9621 /* Transaction_Fail.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCBC347C263DCD9600AC9621 /* Transaction_Fail.xib */; };
+		FCBC3481263FFB2600AC9621 /* User_Infor_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBC347F263FFB2600AC9621 /* User_Infor_ViewController.swift */; };
+		FCBC3482263FFB2600AC9621 /* User_Infor_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCBC3480263FFB2600AC9621 /* User_Infor_ViewController.xib */; };
 		FCC7EFB51DB9348A0080A08A /* HT_Player_Item.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC7EFB41DB9348A0080A08A /* HT_Player_Item.m */; };
 		FCC965AA1DA5F4200025971E /* HT_Player_ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC965A81DA5F4200025971E /* HT_Player_ViewController.m */; };
 		FCC965AB1DA5F4200025971E /* HT_Player_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCC965A91DA5F4200025971E /* HT_Player_ViewController.xib */; };
@@ -356,6 +358,8 @@
 		FCBC3475263DC73400AC9621 /* Transaction_ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Transaction_ViewController.xib; sourceTree = "<group>"; };
 		FCBC3479263DC80F00AC9621 /* Transaction_Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Transaction_Cell.xib; sourceTree = "<group>"; };
 		FCBC347C263DCD9600AC9621 /* Transaction_Fail.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Transaction_Fail.xib; sourceTree = "<group>"; };
+		FCBC347F263FFB2600AC9621 /* User_Infor_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User_Infor_ViewController.swift; sourceTree = "<group>"; };
+		FCBC3480263FFB2600AC9621 /* User_Infor_ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = User_Infor_ViewController.xib; sourceTree = "<group>"; };
 		FCC7EFB31DB9348A0080A08A /* HT_Player_Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HT_Player_Item.h; sourceTree = "<group>"; };
 		FCC7EFB41DB9348A0080A08A /* HT_Player_Item.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HT_Player_Item.m; sourceTree = "<group>"; };
 		FCC965A71DA5F4200025971E /* HT_Player_ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HT_Player_ViewController.h; sourceTree = "<group>"; };
@@ -660,6 +664,8 @@
 				FCBC3475263DC73400AC9621 /* Transaction_ViewController.xib */,
 				FCBC3479263DC80F00AC9621 /* Transaction_Cell.xib */,
 				FCBC347C263DCD9600AC9621 /* Transaction_Fail.xib */,
+				FCBC347F263FFB2600AC9621 /* User_Infor_ViewController.swift */,
+				FCBC3480263FFB2600AC9621 /* User_Infor_ViewController.xib */,
 			);
 			path = Account_;
 			sourceTree = "<group>";
@@ -961,6 +967,7 @@
 				FC69D43024405879006D57D9 /* TG_Room_Cell_9.xib in Resources */,
 				FCBC3472263D986D00AC9621 /* Feed_Back_ViewController.xib in Resources */,
 				FC23EB97243A4CB9003E5E1A /* TG_Map_Cell.xib in Resources */,
+				FCBC3482263FFB2600AC9621 /* User_Infor_ViewController.xib in Resources */,
 				FCB238BD2441B6960034B40B /* TG_Book_Chap_Cell.xib in Resources */,
 				FCB238D1244354AB0034B40B /* Event_ViewController.xib in Resources */,
 				FC7550F11DAC959A007992DF /* HT_Detail_ViewController.xib in Resources */,
@@ -1089,6 +1096,7 @@
 				FCAB62C62639675300E26484 /* VIP_ViewController.swift in Sources */,
 				FC7550E91DAC869B007992DF /* HT_More_ViewController.m in Sources */,
 				FC0A8FB52437770E001A75AF /* PC_Forgot_ViewController.swift in Sources */,
+				FCBC3481263FFB2600AC9621 /* User_Infor_ViewController.swift in Sources */,
 				FC640A811DAAAD8B00DAEF55 /* CoreModel.xcdatamodel in Sources */,
 				FC78398524391F6700470148 /* TG_Intro_ViewController.swift in Sources */,
 				FCB3CD711DA4E3FA002FABDD /* ItemCell.m in Sources */,

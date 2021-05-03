@@ -22,19 +22,19 @@ class PC_Inner_Info_ViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet var email: UITextField!
 
-    @IBOutlet var birthday: UITextField!
+//    @IBOutlet var birthday: UITextField!
     
-    @IBOutlet var address: UITextField!
-
-    @IBOutlet var avatar: UIImageView!
+//    @IBOutlet var address: UITextField!
+//
+//    @IBOutlet var avatar: UIImageView!
+//
+//    @IBOutlet var male: UIImageView!
+//
+//    @IBOutlet var female: UIImageView!
     
-    @IBOutlet var male: UIImageView!
+//    @IBOutlet var dateTime: UIView!
 
-    @IBOutlet var female: UIImageView!
-    
-    @IBOutlet var dateTime: UIView!
-
-    var avatarTemp: UIImage!
+//    var avatarTemp: UIImage!
     
     @IBOutlet var emailBG: UIView!
 
@@ -46,9 +46,9 @@ class PC_Inner_Info_ViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet var submit: UIButton!
 
-    @IBOutlet var bottomHeight: NSLayoutConstraint!
+//    @IBOutlet var bottomHeight: NSLayoutConstraint!
     
-    var sex: String!
+//    var sex: String!
     
     var kb: KeyBoard!
     
@@ -56,9 +56,9 @@ class PC_Inner_Info_ViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet var sideGapRight: NSLayoutConstraint!
     
-    @IBOutlet var sideGapBottomLeft: NSLayoutConstraint!
-    
-    @IBOutlet var sideGapBottomRight: NSLayoutConstraint!
+//    @IBOutlet var sideGapBottomLeft: NSLayoutConstraint!
+//
+//    @IBOutlet var sideGapBottomRight: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,8 +66,8 @@ class PC_Inner_Info_ViewController: UIViewController, UITextFieldDelegate {
         if IS_IPAD {
            sideGapLeft.constant = 100
            sideGapRight.constant = -100
-           sideGapBottomLeft.constant = 100
-           sideGapBottomRight.constant = 100
+//           sideGapBottomLeft.constant = 100
+//           sideGapBottomRight.constant = 100
         }
         
         kb = KeyBoard.shareInstance()
@@ -82,19 +82,19 @@ class PC_Inner_Info_ViewController: UIViewController, UITextFieldDelegate {
         
         email.text = Information.userInfo?.getValueFromKey("email")
         
-        let birtText = Information.userInfo?.getValueFromKey("birthday")?.components(separatedBy: " ").first
-        
-        birthday.text = birtText
+//        let birtText = Information.userInfo?.getValueFromKey("birthday")?.components(separatedBy: " ").first
+//
+//        birthday.text = birtText
 
-        address.text = Information.userInfo?.getValueFromKey("address")
+//        address.text = Information.userInfo?.getValueFromKey("address")
         
-        sex = Information.userInfo?.getValueFromKey("sex")
+//        sex = Information.userInfo?.getValueFromKey("sex")
         
 //        if Information.avatar != nil {
 //            avatarTemp = Information.avatar
 //            avatar.image = avatarTemp
 //        } else {
-        avatar.imageUrlHolder(url: (Information.userInfo?.getValueFromKey("avatar"))!, holder: "ic_avatar")
+//        avatar.imageUrlHolder(url: (Information.userInfo?.getValueFromKey("avatar"))!, holder: "ic_avatar")
                 
 //        }
                 
@@ -107,30 +107,30 @@ class PC_Inner_Info_ViewController: UIViewController, UITextFieldDelegate {
 //        submit.isEnabled = phone.text?.count != 0 && email.text?.count != 0 && isEmail && isMatch
 //        submit.alpha = phone.text?.count != 0 && email.text?.count != 0 && isEmail && isMatch ? 1 : 0.5
         
-        avatar.action(forTouch: [:]) { (objc) in
-            self.didPressPreview(image: self.avatarTemp != nil ? self.avatarTemp as Any: Information.userInfo?.getValueFromKey("avatar") as Any)
-        }
+//        avatar.action(forTouch: [:]) { (objc) in
+//            self.didPressPreview(image: self.avatarTemp != nil ? self.avatarTemp as Any: Information.userInfo?.getValueFromKey("avatar") as Any)
+//        }
         
-        self.male.image = UIImage.init(named: sex == "1" ? "radio_ac" : "radio_in")
-        self.female.image = UIImage.init(named: sex == "1" ? "radio_in" : "radio_ac")
+//        self.male.image = UIImage.init(named: sex == "1" ? "radio_ac" : "radio_in")
+//        self.female.image = UIImage.init(named: sex == "1" ? "radio_in" : "radio_ac")
+//
+//        male.action(forTouch: [:]) { (objc) in
+//            self.female.image = UIImage.init(named: "radio_in")
+//            self.male.image = UIImage.init(named: "radio_ac")
+//            self.sex = "1"
+//        }
+//
+//        female.action(forTouch: [:]) { (objc) in
+//            self.female.image = UIImage.init(named: "radio_ac")
+//            self.male.image = UIImage.init(named: "radio_in")
+//            self.sex = "0"
+//        }
         
-        male.action(forTouch: [:]) { (objc) in
-            self.female.image = UIImage.init(named: "radio_in")
-            self.male.image = UIImage.init(named: "radio_ac")
-            self.sex = "1"
-        }
-        
-        female.action(forTouch: [:]) { (objc) in
-            self.female.image = UIImage.init(named: "radio_ac")
-            self.male.image = UIImage.init(named: "radio_in")
-            self.sex = "0"
-        }
-        
-        dateTime.action(forTouch: [:]) { (objc) in
-            EM_MenuView.init(date: ["date": self.birthday.text as Any]).show { (index, obj, menu) in
-                self.birthday.text = (obj as! NSDictionary).getValueFromKey("date")
-            }
-        }
+//        dateTime.action(forTouch: [:]) { (objc) in
+//            EM_MenuView.init(date: ["date": self.birthday.text as Any]).show { (index, obj, menu) in
+//                self.birthday.text = (obj as! NSDictionary).getValueFromKey("date")
+//            }
+//        }
 
         didGetInfo()
     }
@@ -153,7 +153,7 @@ class PC_Inner_Info_ViewController: UIViewController, UITextFieldDelegate {
        super.viewWillAppear(animated)
        
         if self.isEmbed() {
-            bottomHeight.constant = 80
+//            bottomHeight.constant = 80
         }
        kb.keyboard { (height, isOn) in
            self.tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: isOn ? (height - 100) : 0, right: 0)
@@ -170,7 +170,7 @@ class PC_Inner_Info_ViewController: UIViewController, UITextFieldDelegate {
         EM_MenuView.init(settingMenu: [:]).show(completion: { (indexing, obj, menu) in
             switch indexing {
             case 1:
-                self.didPressPreview(image: self.avatarTemp != nil ? self.avatarTemp as Any: Information.userInfo?.getValueFromKey("avatar") as Any)
+//                self.didPressPreview(image: self.avatarTemp != nil ? self.avatarTemp as Any: Information.userInfo?.getValueFromKey("avatar") as Any)
                 break
             case 2:
                 Permission.shareInstance()?.askCamera { (camType) in
@@ -179,8 +179,8 @@ class PC_Inner_Info_ViewController: UIViewController, UITextFieldDelegate {
                         DispatchQueue.main.async(execute: {
                             Media.shareInstance().startPickImage(withOption: true, andBase: nil, andRoot: self, andCompletion: { (image) in
                                 if image != nil {
-                                    self.avatarTemp = (image as! UIImage)
-                                    self.avatar.image = (image as! UIImage)
+//                                    self.avatarTemp = (image as! UIImage)
+//                                    self.avatar.image = (image as! UIImage)
                                     Information.avatar = (image as! UIImage)
                                 }
                             })
@@ -196,8 +196,8 @@ class PC_Inner_Info_ViewController: UIViewController, UITextFieldDelegate {
                         DispatchQueue.main.async(execute: {
                             Media.shareInstance().startPickImage(withOption: true, andBase: nil, andRoot: self, andCompletion: { (image) in
                                 if image != nil {
-                                    self.avatarTemp = (image as! UIImage)
-                                    self.avatar.image = (image as! UIImage)
+//                                    self.avatarTemp = (image as! UIImage)
+//                                    self.avatar.image = (image as! UIImage)
                                     Information.avatar = (image as! UIImage)
                                 }
                             })
@@ -218,8 +218,8 @@ class PC_Inner_Info_ViewController: UIViewController, UITextFieldDelegate {
                         DispatchQueue.main.async(execute: {
                            Media.shareInstance().startPickImage(withOption: false, andBase: nil, andRoot: self, andCompletion: { (image) in
                                if image != nil {
-                                self.avatarTemp = (image as! UIImage)
-                                self.avatar.image = (image as! UIImage)
+//                                self.avatarTemp = (image as! UIImage)
+//                                self.avatar.image = (image as! UIImage)
                                 Information.avatar = (image as! UIImage)
                                }
                            })
@@ -235,8 +235,8 @@ class PC_Inner_Info_ViewController: UIViewController, UITextFieldDelegate {
                         DispatchQueue.main.async(execute: {
                            Media.shareInstance().startPickImage(withOption: false, andBase: nil, andRoot: self, andCompletion: { (image) in
                                if image != nil {
-                                self.avatarTemp = (image as! UIImage)
-                                self.avatar.image = (image as! UIImage)
+//                                self.avatarTemp = (image as! UIImage)
+//                                self.avatar.image = (image as! UIImage)
                                 Information.avatar = (image as! UIImage)
                                }
                            })
@@ -282,27 +282,28 @@ class PC_Inner_Info_ViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func didPressSubmit() {
        self.view.endEditing(true)
-        let data: NSMutableDictionary = self.avatarTemp != nil ? ["CMD_CODE":"updateUserInfo",
-                                         "session": Information.token ?? "",
-                                         "avatar": self.avatarTemp != nil ? self.avatarTemp.imageString() : "",
-                                         "sex": sex ?? "",
-                                         "email":email.text as Any,
-                                         "name":name.text as Any,
-                                         "phone":phone.text as Any,
-                                         "birthday": birthday.text as Any,
-                                         "address":address.text as Any,
-                                        "overrideAlert":"1",
-                                        "overrideLoading":"1",
-                                        "host":self]
-                                        :
+        let data: NSMutableDictionary =
+//            self.avatarTemp != nil ? ["CMD_CODE":"updateUserInfo",
+//                                         "session": Information.token ?? "",
+//                                         "avatar": self.avatarTemp != nil ? self.avatarTemp.imageString() : "",
+//                                         "sex": sex ?? "",
+//                                         "email":email.text as Any,
+//                                         "name":name.text as Any,
+//                                         "phone":phone.text as Any,
+//                                         "birthday": birthday.text as Any,
+//                                         "address":address.text as Any,
+//                                        "overrideAlert":"1",
+//                                        "overrideLoading":"1",
+//                                        "host":self]
+//                                        :
                                         ["CMD_CODE":"updateUserInfo",
                                          "session": Information.token ?? "",
-                                         "sex": sex ?? "",
+//                                         "sex": sex ?? "",
                                          "email":email.text as Any,
                                          "name":name.text as Any,
                                          "phone":phone.text as Any,
-                                         "birthday": birthday.text as Any,
-                                         "address":address.text as Any,
+//                                         "birthday": birthday.text as Any,
+//                                         "address":address.text as Any,
                                         "overrideAlert":"1",
                                         "overrideLoading":"1",
                                         "host":self]
@@ -327,6 +328,14 @@ class PC_Inner_Info_ViewController: UIViewController, UITextFieldDelegate {
         self.navigationController?.popViewController(animated: true)
     }
     
+    @IBAction func didPressCancel() {
+        EM_MenuView.init(cancel: ["line1": "Quý khách muốn huỷ thay đổi ?"]).show { (index, obj, menu) in
+            if index == 3 {
+                self.navigationController?.popViewController(animated: true)
+            }
+        }
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
 //       if textField == phone {
 //           email.becomeFirstResponder()
@@ -340,7 +349,7 @@ class PC_Inner_Info_ViewController: UIViewController, UITextFieldDelegate {
     @objc func textEmailIsChanging(_ textField:UITextField) {
         let isEmail: Bool = email.text?.count != 0 && (email.text?.isValidEmail())!
         let isMatch: Bool = phone.text?.count != 0 && phone.text?.count == 10
-        emailBG.backgroundColor = isEmail ? AVHexColor.color(withHexString: "#F2F2F2") : .red
+        emailBG.backgroundColor = isEmail ? AVHexColor.color(withHexString: "#FFFFFF") : .red
         emailError.alpha = isEmail ? 0 : 1
         
 //        submit.isEnabled = phone.text?.count != 0 && email.text?.count != 0 && isEmail && isMatch
@@ -350,7 +359,7 @@ class PC_Inner_Info_ViewController: UIViewController, UITextFieldDelegate {
     @objc func textRePassIsChanging(_ textField:UITextField) {
         let isEmail: Bool = email.text?.count != 0 && (email.text?.isValidEmail())!
         let isMatch: Bool = phone.text?.count != 0 && phone.text?.count == 10
-        rePassBG.backgroundColor = isMatch ? AVHexColor.color(withHexString: "#F2F2F2") : .red
+        rePassBG.backgroundColor = isMatch ? AVHexColor.color(withHexString: "#FFFFFF") : .red
         rePassError.alpha = isMatch ? 0 : 1
         
 //        submit.isEnabled = phone.text?.count != 0 && email.text?.count != 0 && isEmail && isMatch
@@ -361,7 +370,7 @@ class PC_Inner_Info_ViewController: UIViewController, UITextFieldDelegate {
 extension PC_Inner_Info_ViewController: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 839
+        return 490
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
