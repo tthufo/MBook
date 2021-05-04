@@ -163,7 +163,7 @@
                         <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="myg-1P-nsh">
+                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="myg-1P-nsh">
                         <rect key="frame" x="122" y="528.5" width="170" height="52"/>
                         <color key="backgroundColor" red="0.1176470588" green="0.57254901960000004" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
@@ -181,7 +181,7 @@
                         </userDefinedRuntimeAttributes>
                     </button>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ico_vip" translatesAutoresizingMaskIntoConstraints="NO" id="u8X-gW-R9p">
-                        <rect key="frame" x="252" y="523.5" width="61" height="61"/>
+                        <rect key="frame" x="247" y="523.5" width="61" height="61"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="61" id="40l-j0-1be"/>
                             <constraint firstAttribute="width" constant="61" id="fPK-vB-4O8"/>
@@ -203,7 +203,7 @@
                     <constraint firstItem="71Z-kv-xhp" firstAttribute="leading" secondItem="nSr-x5-a3x" secondAttribute="trailing" constant="2" id="9nr-GN-iZQ"/>
                     <constraint firstItem="nSr-x5-a3x" firstAttribute="centerX" secondItem="RXY-tc-VD8" secondAttribute="centerX" id="Cde-L6-OdB"/>
                     <constraint firstAttribute="trailing" secondItem="oQu-ie-Ps0" secondAttribute="trailing" id="EC7-zQ-K4r"/>
-                    <constraint firstItem="u8X-gW-R9p" firstAttribute="leading" secondItem="nSr-x5-a3x" secondAttribute="trailing" constant="40" id="Gtk-a3-XzC"/>
+                    <constraint firstItem="u8X-gW-R9p" firstAttribute="leading" secondItem="nSr-x5-a3x" secondAttribute="trailing" constant="35" id="Gtk-a3-XzC"/>
                     <constraint firstAttribute="trailing" secondItem="p3l-TG-EzS" secondAttribute="trailing" id="HvK-nT-NqG"/>
                     <constraint firstItem="RRh-DB-gGU" firstAttribute="leading" secondItem="RXY-tc-VD8" secondAttribute="leading" id="IGF-3o-vBB"/>
                     <constraint firstAttribute="trailing" secondItem="Rqs-V2-2fq" secondAttribute="trailing" constant="18" id="JBE-nJ-5DO"/>

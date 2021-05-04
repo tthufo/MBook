@@ -164,6 +164,14 @@ class First_Tab_ViewController: UIViewController {
 //            }
 //        }
         
+//        EM_MenuView.init(confirm: ["image": "error", "line2": "Trang hiện đang gặp sự cố! \nXin quý khách vui lòng quay lại sau", "line3": "Về trang trước"]).show { (index, obj, menu) in
+//            if index == 4 {
+//
+//            } else {
+//
+//            }
+//        }
+        
 //        EM_MenuView.init(cancel: ["line1": "Quý khách muốn huỷ thay đổi ?"]).show { (index, obj, menu) in
 //            if index == 2 {
 //
@@ -172,9 +180,15 @@ class First_Tab_ViewController: UIViewController {
 //            }
 //        }
         
+        EM_MenuView.init(restrict: ["line3": "MUA GÓI"]).show { (index, obj, menu) in
+            if index == 4 {
+
+            }
+        }
+        
 //        self.center()?.pushViewController(Transaction_ViewController.init(), animated: true)
         
-        self.center()?.pushViewController(User_Infor_ViewController.init(), animated: true)
+//        self.center()?.pushViewController(User_Infor_ViewController.init(), animated: true)
     }
 }
 

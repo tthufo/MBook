@@ -20,6 +20,46 @@
 
 @synthesize menuCompletion;
 
+- (id)initWithRestrict:(NSDictionary*)info
+{
+    self = [self init];
+    
+    [self setContainerView:[self didCreateRestrictView:info]];
+    
+    [self setUseMotionEffects:true];
+    
+    return self;
+}
+
+- (UIView*)didCreateRestrictView:(NSDictionary*)dict
+{
+    UIView *commentView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.screenWidth, self.screenHeight - 0)];
+    
+    [commentView setBackgroundColor:[UIColor clearColor]];
+    
+    UIView *contentView = [[NSBundle mainBundle] loadNibNamed:@"EM_Menu" owner:self options:nil][12];
+    
+    contentView.frame = CGRectMake(0, 0, commentView.frame.size.width, commentView.frame.size.height);
+    
+    UIButton * action = ((UIButton*)[self withView:contentView tag: 4]);
+    
+    [action setTitle: dict[@"line3"] forState:UIControlStateNormal];
+    
+    [action actionForTouch:@{} and:^(NSDictionary *touchInfo) {
+        
+        if(self.menuCompletion)
+        {
+            self.menuCompletion(4, @{}, self);
+        }
+        
+        [self close];
+    }];
+    
+    [commentView addSubview:contentView];
+    
+    return commentView;
+}
+
 - (id)initWithCancel:(NSDictionary*)info
 {
     self = [self init];
