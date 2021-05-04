@@ -41,7 +41,7 @@ class Author_ViewController: UIViewController, UICollectionViewDataSource, UICol
                         
         dataList = NSMutableArray.init()
         
-        collectionView.withCell("TG_Map_Cell")
+        collectionView.withCell("Author_Cell")
         
         collectionFilter.withCell("Author_Filter_Cell")
                 
@@ -128,7 +128,7 @@ class Author_ViewController: UIViewController, UICollectionViewDataSource, UICol
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return collectionView == self.collectionView ? CGSize(width: Int((self.screenWidth() / (IS_IPAD ? 5 : 3)) - 15), height: Int(((self.screenWidth() / (IS_IPAD ? 5 : 3)) - 15) * 1.72)) : CGSize(width: Int((self.screenWidth() / (IS_IPAD ? 6 : 4)) - 15), height: Int(((self.screenWidth() / (IS_IPAD ? 6 : 4)) - 15) * 0.6))
+        return collectionView == self.collectionView ? CGSize(width: Int((self.screenWidth() / (IS_IPAD ? 5 : 3)) - 15), height: Int(((self.screenWidth() / (IS_IPAD ? 5 : 3)) - 15) * 1.5)) : CGSize(width: Int((self.screenWidth() / (IS_IPAD ? 6 : 4)) - 15), height: Int(((self.screenWidth() / (IS_IPAD ? 6 : 4)) - 15) * 0.6))
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -141,7 +141,7 @@ class Author_ViewController: UIViewController, UICollectionViewDataSource, UICol
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: collectionView == self.collectionView ? "TG_Map_Cell" : "Author_Filter_Cell", for: indexPath as IndexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: collectionView == self.collectionView ? "Author_Cell" : "Author_Filter_Cell", for: indexPath as IndexPath)
         
         if collectionView == self.collectionView {
             let data = dataList[indexPath.item] as! NSDictionary
@@ -152,15 +152,15 @@ class Author_ViewController: UIViewController, UICollectionViewDataSource, UICol
             
             let description = self.withView(cell, tag: 13) as! UILabel
 
-            description.text = data.getValueFromKey("book_count") + " Tác phẩm"
+            description.text = data.getValueFromKey("book_count")
             
             let image = self.withView(cell, tag: 11) as! UIImageView
             
             image.imageUrl(url: data.getValueFromKey("avatar"))
             
-            let player = self.withView(cell, tag: 999) as! UIImageView
-                       
-            player.isHidden = data.getValueFromKey("book_type") != "3"
+//            let player = self.withView(cell, tag: 999) as! UIImageView
+//                       
+//            player.isHidden = data.getValueFromKey("book_type") != "3"
         } else {
             let title = self.withView(cell, tag: 1) as! UILabel
             

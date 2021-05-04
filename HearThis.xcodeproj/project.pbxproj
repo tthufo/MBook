@@ -153,6 +153,11 @@
 		FCBC347D263DCD9600AC9621 /* Transaction_Fail.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCBC347C263DCD9600AC9621 /* Transaction_Fail.xib */; };
 		FCBC3481263FFB2600AC9621 /* User_Infor_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBC347F263FFB2600AC9621 /* User_Infor_ViewController.swift */; };
 		FCBC3482263FFB2600AC9621 /* User_Infor_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCBC3480263FFB2600AC9621 /* User_Infor_ViewController.xib */; };
+		FCBC34852640668900AC9621 /* Author_Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCBC34842640668900AC9621 /* Author_Cell.xib */; };
+		FCBC34882640777B00AC9621 /* Tag_View.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCBC34872640777B00AC9621 /* Tag_View.swift */; };
+		FCBC348B2640797F00AC9621 /* Tag_View.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCBC348A2640797F00AC9621 /* Tag_View.xib */; };
+		FCBC348E26407A0900AC9621 /* Tag.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCBC348D26407A0900AC9621 /* Tag.xib */; };
+		FCBC349126410EEE00AC9621 /* Tag_Button.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCBC349026410EEE00AC9621 /* Tag_Button.xib */; };
 		FCC7EFB51DB9348A0080A08A /* HT_Player_Item.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC7EFB41DB9348A0080A08A /* HT_Player_Item.m */; };
 		FCC965AA1DA5F4200025971E /* HT_Player_ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC965A81DA5F4200025971E /* HT_Player_ViewController.m */; };
 		FCC965AB1DA5F4200025971E /* HT_Player_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCC965A91DA5F4200025971E /* HT_Player_ViewController.xib */; };
@@ -360,6 +365,11 @@
 		FCBC347C263DCD9600AC9621 /* Transaction_Fail.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Transaction_Fail.xib; sourceTree = "<group>"; };
 		FCBC347F263FFB2600AC9621 /* User_Infor_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User_Infor_ViewController.swift; sourceTree = "<group>"; };
 		FCBC3480263FFB2600AC9621 /* User_Infor_ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = User_Infor_ViewController.xib; sourceTree = "<group>"; };
+		FCBC34842640668900AC9621 /* Author_Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Author_Cell.xib; sourceTree = "<group>"; };
+		FCBC34872640777B00AC9621 /* Tag_View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag_View.swift; sourceTree = "<group>"; };
+		FCBC348A2640797F00AC9621 /* Tag_View.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Tag_View.xib; sourceTree = "<group>"; };
+		FCBC348D26407A0900AC9621 /* Tag.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Tag.xib; sourceTree = "<group>"; };
+		FCBC349026410EEE00AC9621 /* Tag_Button.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Tag_Button.xib; sourceTree = "<group>"; };
 		FCC7EFB31DB9348A0080A08A /* HT_Player_Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HT_Player_Item.h; sourceTree = "<group>"; };
 		FCC7EFB41DB9348A0080A08A /* HT_Player_Item.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HT_Player_Item.m; sourceTree = "<group>"; };
 		FCC965A71DA5F4200025971E /* HT_Player_ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HT_Player_ViewController.h; sourceTree = "<group>"; };
@@ -582,6 +592,10 @@
 				FC7550FE1DACDD78007992DF /* YouTube.m */,
 				FCFB516A1DD075E200D49FB2 /* Action.xib */,
 				FCFB516B1DD075E200D49FB2 /* actions.plist */,
+				FCBC34872640777B00AC9621 /* Tag_View.swift */,
+				FCBC348A2640797F00AC9621 /* Tag_View.xib */,
+				FCBC348D26407A0900AC9621 /* Tag.xib */,
+				FCBC349026410EEE00AC9621 /* Tag_Button.xib */,
 			);
 			name = Menu_;
 			sourceTree = "<group>";
@@ -736,6 +750,7 @@
 				FCB238C624422DFB0034B40B /* Author_Detail_ViewController.xib */,
 				FCB238CB244235D70034B40B /* Author_Bio_Cell.xib */,
 				FCB238C92442329C0034B40B /* Author_Detail_Header.xib */,
+				FCBC34842640668900AC9621 /* Author_Cell.xib */,
 			);
 			path = Author_;
 			sourceTree = "<group>";
@@ -987,14 +1002,18 @@
 				FC130B8B24461D1A00D64012 /* List_Header_Cell.xib in Resources */,
 				FC69D43124405879006D57D9 /* TG_Room_Cell_10.xib in Resources */,
 				FC78398424391F6700470148 /* TG_Intro_ViewController.xib in Resources */,
+				FCBC34852640668900AC9621 /* Author_Cell.xib in Resources */,
 				FCB238CC244235D70034B40B /* Author_Bio_Cell.xib in Resources */,
 				FC1AD7DE1DA40CA8002BA7EC /* LaunchScreen.storyboard in Resources */,
 				FCD36BFC2437BE2D009BB530 /* GoogleService-Info.plist in Resources */,
+				FCBC348E26407A0900AC9621 /* Tag.xib in Resources */,
 				FCAD57F2243DB7E400101A47 /* TG_Room_Cell_Banner_1.xib in Resources */,
+				FCBC348B2640797F00AC9621 /* Tag_View.xib in Resources */,
 				FC69D42E24405879006D57D9 /* TG_Room_Cell_7.xib in Resources */,
 				FCFB516F1DD086C500D49FB2 /* TT_List_Cell.xib in Resources */,
 				FCFB51711DD0E72700D49FB2 /* CellView.xib in Resources */,
 				FC78396C2438EC9400470148 /* SC_Menu_ViewController.xib in Resources */,
+				FCBC349126410EEE00AC9621 /* Tag_Button.xib in Resources */,
 				FC1AD7DB1DA40CA8002BA7EC /* Assets.xcassets in Resources */,
 				FC78397B2438F37F00470148 /* PC_Inner_Info_ViewController.xib in Resources */,
 				FC7550EC1DAC8E95007992DF /* HT_Genres_Cell.xib in Resources */,
@@ -1090,6 +1109,7 @@
 				FCB782E61DA414D400BDF913 /* Second_Tab_ViewController.m in Sources */,
 				FC7839782438F37F00470148 /* PC_Info_ViewController.swift in Sources */,
 				FCB782E01DA413E000BDF913 /* HT_Root_ViewController.m in Sources */,
+				FCBC34882640777B00AC9621 /* Tag_View.swift in Sources */,
 				FC640A831DAAAD8C00DAEF55 /* DownloadManager.m in Sources */,
 				FC640A841DAAAD8C00DAEF55 /* History.m in Sources */,
 				FCB238C724422DFB0034B40B /* Author_Detail_ViewController.swift in Sources */,

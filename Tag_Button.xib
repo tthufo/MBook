@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Tag_Button" id="RjO-Oa-OMK">
+            <rect key="frame" x="0.0" y="0.0" width="113" height="34"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="lM6-ve-Mvc">
+                <rect key="frame" x="0.0" y="0.0" width="113" height="34"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UHz-nz-Bev">
+                        <rect key="frame" x="0.0" y="0.0" width="113" height="34"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" tag="9" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Mua VIP" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ofw-bT-A1n">
+                                <rect key="frame" x="36" y="0.0" width="77" height="34"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" red="0.1176470588" green="0.57254901960000004" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ico_crown" translatesAutoresizingMaskIntoConstraints="NO" id="nQd-NC-kbm">
+                                <rect key="frame" x="5" y="3" width="30" height="28"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="DPr-6x-BeB"/>
+                                    <constraint firstAttribute="width" constant="30" id="Q0Z-Te-5LW"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="ofw-bT-A1n" secondAttribute="bottom" id="8RV-CL-InG"/>
+                            <constraint firstItem="ofw-bT-A1n" firstAttribute="leading" secondItem="nQd-NC-kbm" secondAttribute="trailing" constant="1" id="HPk-ZS-Wxx"/>
+                            <constraint firstItem="nQd-NC-kbm" firstAttribute="centerY" secondItem="UHz-nz-Bev" secondAttribute="centerY" id="WG8-4Y-54N"/>
+                            <constraint firstItem="nQd-NC-kbm" firstAttribute="leading" secondItem="UHz-nz-Bev" secondAttribute="leading" constant="5" id="eta-r7-q1I"/>
+                            <constraint firstItem="ofw-bT-A1n" firstAttribute="top" secondItem="UHz-nz-Bev" secondAttribute="top" id="qIv-kl-OPA"/>
+                            <constraint firstAttribute="trailing" secondItem="ofw-bT-A1n" secondAttribute="trailing" id="vy9-db-qHD"/>
+                        </constraints>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <integer key="value" value="16"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                <integer key="value" value="1"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="color" keyPath="layer.borderUIColor">
+                                <color key="value" red="0.1176470588" green="0.57254901960000004" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstItem="UHz-nz-Bev" firstAttribute="leading" secondItem="lM6-ve-Mvc" secondAttribute="leading" id="UW8-16-QEY"/>
+                    <constraint firstAttribute="trailing" secondItem="UHz-nz-Bev" secondAttribute="trailing" id="acR-Vg-1lo"/>
+                    <constraint firstItem="UHz-nz-Bev" firstAttribute="top" secondItem="lM6-ve-Mvc" secondAttribute="top" id="xNn-st-TC7"/>
+                    <constraint firstAttribute="bottom" secondItem="UHz-nz-Bev" secondAttribute="bottom" id="xZQ-bf-WTL"/>
+                </constraints>
+            </collectionViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <size key="customSize" width="113" height="34"/>
+            <point key="canvasLocation" x="38.405797101449281" y="23.4375"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="ico_crown" width="29.5" height="29.5"/>
+    </resources>
+</document>
