@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Tag_View: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+@objc class Tag_View: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     @IBOutlet var collectionView: UICollectionView!
 
@@ -16,7 +16,7 @@ class Tag_View: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UI
 
     var dataList: Array<[String: Any]> = [["title": "Tất cả", "check": "1"], ["title": "Văn Học", "check": "0"], ["title": "Xã Hội", "check": "0"], ["title": "Kiến thức phổ thông", "check": "0"]]
     
-    var callBack: ((_ info: Any)->())?
+    @objc var callBack: ((_ info: Any)->())?
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -44,7 +44,7 @@ class Tag_View: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UI
             label.sizeToFit()
             return CGSize(width: label.frame.width + 20, height: self.bounds.size.height)
         }
-        return CGSize(width: 110, height: self.bounds.size.height)
+        return CGSize(width: 105, height: self.bounds.size.height)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -91,9 +91,11 @@ class Tag_View: UIView, UICollectionViewDelegate, UICollectionViewDataSource, UI
             
             dataList[indexPath.item - 1]["check"] = "1"
                     
-            collectionView.reloadData()
-        }
+            callBack?(dataList[indexPath.item - 1])
 
-//        callBack?(data)
+            collectionView.reloadData()
+        } else {
+            callBack?(["data": "Mua VIP"])
+        }
     }
 }

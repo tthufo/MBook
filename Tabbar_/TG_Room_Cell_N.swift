@@ -18,11 +18,11 @@ class TG_Room_Cell_N: UITableViewCell, UICollectionViewDelegate, UICollectionVie
 
     var dataList: NSMutableArray!
     
-    var config: NSDictionary!
+    @objc var config: NSDictionary!
         
-    var returnValue: ((_ value: Float)->())?
+    @objc var returnValue: ((_ value: Float)->())?
     
-    var callBack: ((_ info: Any)->())?
+    @objc var callBack: ((_ info: Any)->())?
 
     let itemHeight = Int(((screenWidth() / (IS_IPAD ? 5 : 3)) - 15) * 1.80)
         

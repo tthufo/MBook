@@ -16,13 +16,17 @@
     
     IBOutlet UIRefreshControl * refreshControl;
     
+    IBOutlet Tag_View * tagView;
+    
     NSMutableArray * dataList;
+    
+    NSMutableDictionary * config;
         
     int pageIndex;
     
     int totalPage;
     
-    BOOL isLoadMore;
+    BOOL isLoadMore, isHot;
 }
 
 @end
@@ -44,10 +48,14 @@
     
     totalPage = 1;
     
+    isHot = YES;
+    
     dataList = [NSMutableArray new];
     
     [tableView withCell: @"Book_List_Cell"];
     
+    [tableView withCell: @"TG_Room_Cell_0"];
+
     refreshControl = [UIRefreshControl new];
     
     tableView.refreshControl = refreshControl;
@@ -55,6 +63,23 @@
     [refreshControl addTarget:self action:@selector(didReloadData) forControlEvents:UIControlEventValueChanged];
     
     [self didRequestData:YES];
+    
+    tagView.callBack = ^(NSDictionary *infor) {
+        NSLog(@"%@", infor);
+    };
+    
+    config = [@{
+        @"title": @"EBOOK Mới Nhất", @"url": [@{
+                @"CMD_CODE" : @"getListBook",
+                @"page_index": @1,
+                @"page_size": @24,
+                @"book_type": @0,
+                @"price": @0,
+                @"sorting": @1 } mutableCopy],
+        @"height": @0,
+        @"directon": @"horizontal",
+        @"loaded": @NO
+    } mutableCopy];
 }
 
 - (void)didReloadData
@@ -124,34 +149,117 @@
 
 #pragma TableView
 
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 2;
+}
+
+- (CGFloat)tableView:(UITableView *)_tableView heightForHeaderInSection:(NSInteger)section
+{
+    return section == 0 ? 1 : 40;
+}
+
+- (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView * header = [[NSBundle mainBundle] loadNibNamed:@"Book_List_Header" owner:self options:nil][0];
+    
+    UIButton * hot = (UIButton*)[self withView:header tag:1];
+    
+    UIButton * top = (UIButton*)[self withView:header tag:2];
+
+    [hot setTitleColor:[AVHexColor colorWithHexString: isHot ? @"#1E928C" : @"#FFFFFF"] forState:UIControlStateNormal];
+    [hot setBackgroundImage:[UIImage imageNamed: isHot ? @"ico_tab_white" : @"ico_tab_teal"] forState:UIControlStateNormal];
+    
+    [top setTitleColor:[AVHexColor colorWithHexString: isHot ? @"#FFFFFF" : @"1E928C"] forState:UIControlStateNormal];
+    [top setBackgroundImage:[UIImage imageNamed: isHot ? @"ico_tab_teal" : @"ico_tab_white"] forState:UIControlStateNormal];
+    
+    [top actionForTouch:@{} and:^(NSDictionary *touchInfo) {
+        isHot = NO;
+        [tableView reloadData];
+    }];
+    
+    [hot actionForTouch:@{} and:^(NSDictionary *touchInfo) {
+        isHot = YES;
+        [tableView reloadData];
+    }];
+        
+    return section == 0 ? nil : header;
+}
+
+- (CGFloat)tableView:(UITableView *)_tableView heightForFooterInSection:(NSInteger)section
+{
+    return 1;
+}
+
+- (CGFloat)tableView:(UITableView *)_tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return UITableViewAutomaticDimension;
+}
+
 - (NSInteger)tableView:(UITableView *)_tableView numberOfRowsInSection:(NSInteger)section
 {
-    return dataList.count;
+    return section == 0 ? 1 : dataList.count;
 }
 
 - (CGFloat)tableView:(UITableView *)_tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 165;
+    return indexPath.section == 0 ? [config[@"height"] floatValue] : 155;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)_tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell * cell = [_tableView dequeueReusableCellWithIdentifier:@"Book_List_Cell" forIndexPath:indexPath];
+    UITableViewCell * cell = [_tableView dequeueReusableCellWithIdentifier: indexPath.section == 0 ? @"TG_Room_Cell_0" : @"Book_List_Cell" forIndexPath:indexPath];
     
-    NSDictionary * list = dataList[indexPath.row];
-    
-    [(UIImageView*)[self withView:cell tag:1] imageUrlWithUrl: [list getValueFromKey:@"avatar"]];
-    
-    [(UILabel*)[self withView:cell tag:2] setText: [list getValueFromKey:@"name"]];
+    if (indexPath.section == 1) {
+        
+        cell.contentView.backgroundColor = [AVHexColor colorWithHexString:@"#ECEDE7"];
+        
+        NSDictionary * list = dataList[indexPath.row];
+        
+        [(UIImageView*)[self withView:cell tag:1] imageUrlWithUrl: [list getValueFromKey:@"avatar"]];
+        
+        [(UILabel*)[self withView:cell tag:2] setText: [list getValueFromKey:@"name"]];
 
-    [(UILabel*)[self withView:cell tag:3] setText: ((NSArray*)list[@"author"]).count > 1 ? @"Nhiều tác giả" : list[@"author"][0][@"name"]];
+        [(UILabel*)[self withView:cell tag:3] setText: ((NSArray*)list[@"author"]).count > 1 ? @"Nhiều tác giả" : list[@"author"][0][@"name"]];
 
-    [(UILabel*)[self withView:cell tag:4] setText: ((NSArray*)list[@"category"]).count > 1 ? @"Đang cập nhật" : list[@"category"][0][@"name"]];
+        [(UILabel*)[self withView:cell tag:4] setText: ((NSArray*)list[@"category"]).count > 1 ? @"Đang cập nhật" : list[@"category"][0][@"name"]];
 
-    [(UILabel*)[self withView:cell tag:5] setText: [NSString stringWithFormat:@"%@ chương", [list getValueFromKey:@"total_chapter"]]];
+        [(UILabel*)[self withView:cell tag:5] setText: [NSString stringWithFormat:@"%@ chương", [list getValueFromKey:@"total_chapter"]]];
 
-    [(UILabel*)[self withView:cell tag:6] setText: [list[@"newest_chapter"] isEqual:[NSNull null]] ? @"Đang cập nhật" : list[@"newest_chapter"][@"name"]];
+//        [(UILabel*)[self withView:cell tag:6] setText: [list[@"newest_chapter"] isEqual:[NSNull null]] ? @"Đang cập nhật" : list[@"newest_chapter"][@"name"]];
+        
+        [(UILabel*)[self withView:cell tag:11] setText: [NSString stringWithFormat:@"%i", indexPath.row + 1]];
 
+    } else {
+        ((TG_Room_Cell_N *)cell).config = self->config;
+        ((TG_Room_Cell_N *)cell).returnValue = ^(float value) {
+            self->config[@"height"] = [NSString stringWithFormat:@"%f", value];
+            self->config[@"loaded"] = @YES;
+            [tableView reloadData];
+        };
+        ((TG_Room_Cell_N *)cell).callBack = ^(id infor) {
+            if ([[(NSDictionary*)infor getValueFromKey:@"book_type"] isEqualToString:@"3"]) {
+                [self didRequestUrlWithInfo:(NSDictionary*)infor];
+                return;
+            }
+            
+            Book_Detail_ViewController * bookDetail = [Book_Detail_ViewController new];
+            NSMutableDictionary * bookInfo = [[NSMutableDictionary alloc] initWithDictionary:[self removeKey:self->config]];
+            [bookInfo addEntriesFromDictionary:(NSDictionary*)infor];
+            bookDetail.config = bookInfo;
+            [self.navigationController pushViewController:bookDetail animated:YES];
+        };
+
+        UIButton * more = (UIButton*)[self withView:cell tag:12];
+        
+        [more actionForTouch:@{} and:^(NSDictionary *touchInfo) {
+            List_Book_ViewController * list = [List_Book_ViewController new];
+            list.config = [self removeKey:self->config];
+            [self.navigationController pushViewController:list animated:YES];
+        }];
+
+    }
+ 
     return cell;
 }
 

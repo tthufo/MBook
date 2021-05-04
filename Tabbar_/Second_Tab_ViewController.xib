@@ -5,13 +5,13 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="Second_Tab_ViewController">
             <connections>
                 <outlet property="tableView" destination="Qza-1l-HTV" id="g3G-5y-vCB"/>
+                <outlet property="tagView" destination="UWH-fe-PkK" id="ErU-E0-ITN"/>
                 <outlet property="view" destination="3kU-PG-sYP" id="hKh-BZ-4Pr"/>
             </connections>
         </placeholder>
@@ -67,10 +67,9 @@
                         <constraint firstItem="JX1-Fa-cbG" firstAttribute="top" secondItem="Gur-fu-bRv" secondAttribute="top" constant="10" id="xbB-d8-Dgj"/>
                     </constraints>
                 </view>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Qza-1l-HTV">
-                    <rect key="frame" x="0.0" y="131" width="320" height="437"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="Qza-1l-HTV">
+                    <rect key="frame" x="0.0" y="114" width="320" height="454"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="xYj-Yf-5FQ"/>
                         <outlet property="delegate" destination="-1" id="WFg-Nv-avS"/>
@@ -85,14 +84,18 @@
                 </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="W3e-U0-vWI"/>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="W3e-U0-vWI" firstAttribute="trailing" secondItem="UWH-fe-PkK" secondAttribute="trailing" constant="10" id="DNp-yx-xOg"/>
+                <constraint firstItem="Qza-1l-HTV" firstAttribute="leading" secondItem="W3e-U0-vWI" secondAttribute="leading" id="TTn-yk-AYm"/>
                 <constraint firstItem="Gur-fu-bRv" firstAttribute="leading" secondItem="W3e-U0-vWI" secondAttribute="leading" id="Vdj-Sa-GXr"/>
+                <constraint firstItem="Qza-1l-HTV" firstAttribute="top" secondItem="UWH-fe-PkK" secondAttribute="bottom" constant="8" symbolic="YES" id="Xt4-wc-62x"/>
                 <constraint firstItem="UWH-fe-PkK" firstAttribute="top" secondItem="Gur-fu-bRv" secondAttribute="bottom" constant="10" id="ado-46-eQx"/>
                 <constraint firstItem="UWH-fe-PkK" firstAttribute="leading" secondItem="W3e-U0-vWI" secondAttribute="leading" constant="10" id="ecw-38-UVJ"/>
                 <constraint firstItem="Gur-fu-bRv" firstAttribute="top" secondItem="W3e-U0-vWI" secondAttribute="top" id="pVm-27-p04"/>
+                <constraint firstItem="Qza-1l-HTV" firstAttribute="trailing" secondItem="W3e-U0-vWI" secondAttribute="trailing" id="tTy-wb-s32"/>
                 <constraint firstItem="Gur-fu-bRv" firstAttribute="trailing" secondItem="W3e-U0-vWI" secondAttribute="trailing" id="uMJ-cw-gcO"/>
+                <constraint firstItem="Qza-1l-HTV" firstAttribute="bottom" secondItem="W3e-U0-vWI" secondAttribute="bottom" id="ye9-YB-8Kf"/>
             </constraints>
             <point key="canvasLocation" x="138.75" y="115.14084507042254"/>
         </view>
@@ -100,8 +103,5 @@
     <resources>
         <image name="ic_menu" width="33" height="33"/>
         <image name="ic_search" width="50.5" height="50.5"/>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
     </resources>
 </document>
