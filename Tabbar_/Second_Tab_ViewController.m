@@ -228,7 +228,20 @@
 
 //        [(UILabel*)[self withView:cell tag:6] setText: [list[@"newest_chapter"] isEqual:[NSNull null]] ? @"Đang cập nhật" : list[@"newest_chapter"][@"name"]];
         
-        [(UILabel*)[self withView:cell tag:11] setText: [NSString stringWithFormat:@"%i", indexPath.row + 1]];
+        [(UILabel*)[self withView:cell tag:11] setText: [NSString stringWithFormat:@"%li", indexPath.row + 1]];
+        
+        Progress * progress = ((Progress*)[self withView:cell tag:12]);
+        
+        progress.percentage.text = indexPath.row % 2 == 0 ? @"16 %" : @"30 %";
+        
+        CGRect rect = progress.outer.frame;
+        
+        CGRect rectIn = progress.inner.frame;
+
+        rectIn.size.width = rect.size.width * (indexPath.row % 2 == 0 ? 16 : 30) / 100;
+        
+        progress.inner.frame = rectIn;
+        
 
     } else {
         ((TG_Room_Cell_N *)cell).config = self->config;

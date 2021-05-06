@@ -159,6 +159,8 @@
 		FCBC348E26407A0900AC9621 /* Tag.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCBC348D26407A0900AC9621 /* Tag.xib */; };
 		FCBC349126410EEE00AC9621 /* Tag_Button.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCBC349026410EEE00AC9621 /* Tag_Button.xib */; };
 		FCBC3495264153B800AC9621 /* Book_List_Header.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCBC3494264153B700AC9621 /* Book_List_Header.xib */; };
+		FCC024D22642BDBF00588AC5 /* Progress.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC024D12642BDBF00588AC5 /* Progress.swift */; };
+		FCC024D52642BDE100588AC5 /* Progress.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCC024D42642BDE100588AC5 /* Progress.xib */; };
 		FCC7EFB51DB9348A0080A08A /* HT_Player_Item.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC7EFB41DB9348A0080A08A /* HT_Player_Item.m */; };
 		FCC965AA1DA5F4200025971E /* HT_Player_ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC965A81DA5F4200025971E /* HT_Player_ViewController.m */; };
 		FCC965AB1DA5F4200025971E /* HT_Player_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCC965A91DA5F4200025971E /* HT_Player_ViewController.xib */; };
@@ -372,6 +374,8 @@
 		FCBC348D26407A0900AC9621 /* Tag.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Tag.xib; sourceTree = "<group>"; };
 		FCBC349026410EEE00AC9621 /* Tag_Button.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Tag_Button.xib; sourceTree = "<group>"; };
 		FCBC3494264153B700AC9621 /* Book_List_Header.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Book_List_Header.xib; sourceTree = "<group>"; };
+		FCC024D12642BDBF00588AC5 /* Progress.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Progress.swift; sourceTree = "<group>"; };
+		FCC024D42642BDE100588AC5 /* Progress.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Progress.xib; sourceTree = "<group>"; };
 		FCC7EFB31DB9348A0080A08A /* HT_Player_Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HT_Player_Item.h; sourceTree = "<group>"; };
 		FCC7EFB41DB9348A0080A08A /* HT_Player_Item.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HT_Player_Item.m; sourceTree = "<group>"; };
 		FCC965A71DA5F4200025971E /* HT_Player_ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HT_Player_ViewController.h; sourceTree = "<group>"; };
@@ -596,8 +600,10 @@
 				FCFB516B1DD075E200D49FB2 /* actions.plist */,
 				FCBC34872640777B00AC9621 /* Tag_View.swift */,
 				FCBC348A2640797F00AC9621 /* Tag_View.xib */,
-				FCBC348D26407A0900AC9621 /* Tag.xib */,
 				FCBC349026410EEE00AC9621 /* Tag_Button.xib */,
+				FCBC348D26407A0900AC9621 /* Tag.xib */,
+				FCC024D12642BDBF00588AC5 /* Progress.swift */,
+				FCC024D42642BDE100588AC5 /* Progress.xib */,
 			);
 			name = Menu_;
 			sourceTree = "<group>";
@@ -1018,6 +1024,7 @@
 				FCFB51711DD0E72700D49FB2 /* CellView.xib in Resources */,
 				FC78396C2438EC9400470148 /* SC_Menu_ViewController.xib in Resources */,
 				FCBC349126410EEE00AC9621 /* Tag_Button.xib in Resources */,
+				FCC024D52642BDE100588AC5 /* Progress.xib in Resources */,
 				FC1AD7DB1DA40CA8002BA7EC /* Assets.xcassets in Resources */,
 				FC78397B2438F37F00470148 /* PC_Inner_Info_ViewController.xib in Resources */,
 				FC7550EC1DAC8E95007992DF /* HT_Genres_Cell.xib in Resources */,
@@ -1113,6 +1120,7 @@
 				FCB782E61DA414D400BDF913 /* Second_Tab_ViewController.m in Sources */,
 				FC7839782438F37F00470148 /* PC_Info_ViewController.swift in Sources */,
 				FCB782E01DA413E000BDF913 /* HT_Root_ViewController.m in Sources */,
+				FCC024D22642BDBF00588AC5 /* Progress.swift in Sources */,
 				FCBC34882640777B00AC9621 /* Tag_View.swift in Sources */,
 				FC640A831DAAAD8C00DAEF55 /* DownloadManager.m in Sources */,
 				FC640A841DAAAD8C00DAEF55 /* History.m in Sources */,

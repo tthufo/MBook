@@ -101,10 +101,19 @@
                         <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view tag="12" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rsU-C0-1kF" customClass="Progress" customModule="MeBook" customModuleProvider="target">
+                        <rect key="frame" x="122" y="111" width="160" height="10"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="10" id="sg3-Bz-4WA"/>
+                            <constraint firstAttribute="width" constant="160" id="wBY-bu-gC3"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstItem="s7P-cd-GVj" firstAttribute="leading" secondItem="eKm-44-0I4" secondAttribute="leading" constant="20" id="7G6-ww-ghv"/>
                     <constraint firstItem="fdH-1U-Xij" firstAttribute="top" secondItem="eKm-44-0I4" secondAttribute="top" constant="7" id="8c3-dw-4su"/>
+                    <constraint firstItem="rsU-C0-1kF" firstAttribute="top" secondItem="Tjq-ps-R5d" secondAttribute="bottom" constant="8" symbolic="YES" id="BeH-En-Z4X"/>
                     <constraint firstItem="K0W-HG-Mtd" firstAttribute="leading" secondItem="WAf-UP-r62" secondAttribute="trailing" constant="12" id="CUO-X3-bko"/>
                     <constraint firstItem="Tjq-ps-R5d" firstAttribute="leading" secondItem="WAf-UP-r62" secondAttribute="trailing" constant="12" id="KpV-aC-nqt"/>
                     <constraint firstItem="Pbg-mN-naX" firstAttribute="top" secondItem="K0W-HG-Mtd" secondAttribute="bottom" constant="4" id="OBo-Lv-H3D"/>
@@ -113,6 +122,7 @@
                     <constraint firstItem="WAf-UP-r62" firstAttribute="leading" secondItem="eKm-44-0I4" secondAttribute="leading" constant="20" id="bPV-mJ-iEE"/>
                     <constraint firstAttribute="trailing" secondItem="Tjq-ps-R5d" secondAttribute="trailing" constant="11" id="c2l-oH-78k"/>
                     <constraint firstAttribute="trailing" secondItem="K0W-HG-Mtd" secondAttribute="trailing" constant="11" id="ccm-ar-3XD"/>
+                    <constraint firstItem="rsU-C0-1kF" firstAttribute="leading" secondItem="W3e-Rb-1Cr" secondAttribute="trailing" constant="12" id="dtq-Dz-ekk"/>
                     <constraint firstItem="T8C-V1-SZZ" firstAttribute="leading" secondItem="eKm-44-0I4" secondAttribute="leading" constant="20" id="j5u-Ss-0IJ"/>
                     <constraint firstItem="s7P-cd-GVj" firstAttribute="top" secondItem="eKm-44-0I4" secondAttribute="top" constant="7" id="jgQ-S8-ifM"/>
                     <constraint firstItem="Pbg-mN-naX" firstAttribute="leading" secondItem="WAf-UP-r62" secondAttribute="trailing" constant="12" id="k6D-TT-qfP"/>
