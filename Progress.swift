@@ -17,11 +17,7 @@ class Progress: UIView {
     @IBOutlet var inner: UIView!
 
     @IBOutlet var outer: UIView!
-    
-    @objc var percent: String = "0"
-
-//    @objc var callBack: ((_ info: Any)->())?
-    
+        
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setUp()
@@ -37,7 +33,5 @@ class Progress: UIView {
         self.addSubview(contentView)
         contentView.frame = self.bounds
         contentView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
-        print(percent)
-        percentage.text = "%@%@".format(parameters: percent, "%")
     }
 }

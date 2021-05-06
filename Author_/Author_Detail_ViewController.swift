@@ -52,7 +52,6 @@ class Author_Detail_ViewController: UIViewController, UICollectionViewDataSource
                         
         collectionView.withCell("Author_Bio_Cell")
         
-
         collectionView.withCell("TG_Book_Detail_Cell")
 
         collectionView.withCell("TG_Book_Chap_Cell")
@@ -261,7 +260,7 @@ class Author_Detail_ViewController: UIViewController, UICollectionViewDataSource
             let title = self.withView(cell, tag: 1) as! UILabel
 
             title.text = bioString
-
+            
             bioHeight = title.sizeOfMultiLineLabel().height
         }
         

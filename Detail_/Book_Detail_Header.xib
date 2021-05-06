@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -59,7 +60,7 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" clipsSubviews="YES" tag="33" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OU4-Pg-SJK">
+                <button opaque="NO" clipsSubviews="YES" tag="33" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OU4-Pg-SJK">
                     <rect key="frame" x="244" y="92.5" width="60" height="35"/>
                     <color key="backgroundColor" red="0.0" green="0.60784313729999995" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
@@ -77,7 +78,8 @@
                     </userDefinedRuntimeAttributes>
                 </button>
             </subviews>
-            <color key="backgroundColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <viewLayoutGuide key="safeArea" id="ZtM-7w-pO6"/>
+            <color key="backgroundColor" systemColor="linkColor"/>
             <constraints>
                 <constraint firstItem="CTW-p0-eqB" firstAttribute="centerY" secondItem="uqS-UH-Icy" secondAttribute="centerY" id="7p9-jI-UYP"/>
                 <constraint firstItem="7yi-sg-LM1" firstAttribute="leading" secondItem="ZtM-7w-pO6" secondAttribute="leading" id="BiO-o5-irL"/>
@@ -100,7 +102,6 @@
                 <constraint firstItem="Wiy-EE-Rty" firstAttribute="leading" secondItem="LG0-Jy-G7K" secondAttribute="trailing" constant="8" id="xv0-Af-Jji"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <viewLayoutGuide key="safeArea" id="ZtM-7w-pO6"/>
             <point key="canvasLocation" x="-304" y="-577"/>
         </view>
         <view contentMode="scaleToFill" id="dbe-7j-3Tw">
@@ -152,7 +153,7 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" clipsSubviews="YES" tag="33" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jlw-r0-VoM">
+                <button opaque="NO" clipsSubviews="YES" tag="33" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jlw-r0-VoM">
                     <rect key="frame" x="358" y="150" width="70" height="40"/>
                     <color key="backgroundColor" red="0.0" green="0.60784313729999995" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
@@ -170,7 +171,8 @@
                     </userDefinedRuntimeAttributes>
                 </button>
             </subviews>
-            <color key="backgroundColor" systemColor="linkColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <viewLayoutGuide key="safeArea" id="8Ng-T4-wdK"/>
+            <color key="backgroundColor" systemColor="linkColor"/>
             <constraints>
                 <constraint firstItem="3RU-iS-5ZR" firstAttribute="leading" secondItem="8Ng-T4-wdK" secondAttribute="leading" constant="8" id="47c-Dj-8bo"/>
                 <constraint firstItem="8Ng-T4-wdK" firstAttribute="trailing" secondItem="jlw-r0-VoM" secondAttribute="trailing" constant="20" id="8ma-GS-rim"/>
@@ -193,12 +195,14 @@
                 <constraint firstItem="8Ng-T4-wdK" firstAttribute="trailing" secondItem="fcH-yZ-98X" secondAttribute="trailing" constant="16" id="rmW-Xr-3GH"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <viewLayoutGuide key="safeArea" id="8Ng-T4-wdK"/>
             <point key="canvasLocation" x="-840.57971014492762" y="-474.10714285714283"/>
         </view>
     </objects>
     <resources>
         <image name="bg_login" width="239.5" height="426.5"/>
         <image name="icon_back" width="33" height="33"/>
+        <systemColor name="linkColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
     </resources>
 </document>
