@@ -103,6 +103,9 @@
 		FC7F32B6244A0731007429F7 /* TFHppleElement.m in Sources */ = {isa = PBXBuildFile; fileRef = FC7F32B3244A0731007429F7 /* TFHppleElement.m */; };
 		FC7F32BA244A095E007429F7 /* libxml2.2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = FC7F32B9244A095E007429F7 /* libxml2.2.tbd */; };
 		FC908BA02644786000176E13 /* Book_Detail_Infor.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC908B9F2644786000176E13 /* Book_Detail_Infor.xib */; };
+		FC908BA32645243A00176E13 /* Book_Detail_Option_Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC908BA22645243900176E13 /* Book_Detail_Option_Cell.xib */; };
+		FC908BA62645C67600176E13 /* Book_Detail_Chap_Header.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC908BA52645C67500176E13 /* Book_Detail_Chap_Header.xib */; };
+		FC908BA92645CF3B00176E13 /* CosmosDistrib.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC908BA82645CF3A00176E13 /* CosmosDistrib.swift */; };
 		FC91B731243120F400AA6671 /* GUISlider.m in Sources */ = {isa = PBXBuildFile; fileRef = FC91B72E243120F400AA6671 /* GUISlider.m */; };
 		FC91B732243120F400AA6671 /* GUIPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC91B72F243120F400AA6671 /* GUIPlayerView.m */; };
 		FC91B7352431217F00AA6671 /* XMLReader.m in Sources */ = {isa = PBXBuildFile; fileRef = FC91B7332431217F00AA6671 /* XMLReader.m */; };
@@ -309,6 +312,9 @@
 		FC7F32B7244A093B007429F7 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
 		FC7F32B9244A095E007429F7 /* libxml2.2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.2.tbd; path = usr/lib/libxml2.2.tbd; sourceTree = SDKROOT; };
 		FC908B9F2644786000176E13 /* Book_Detail_Infor.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Book_Detail_Infor.xib; sourceTree = "<group>"; };
+		FC908BA22645243900176E13 /* Book_Detail_Option_Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Book_Detail_Option_Cell.xib; sourceTree = "<group>"; };
+		FC908BA52645C67500176E13 /* Book_Detail_Chap_Header.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Book_Detail_Chap_Header.xib; sourceTree = "<group>"; };
+		FC908BA82645CF3A00176E13 /* CosmosDistrib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CosmosDistrib.swift; sourceTree = "<group>"; };
 		FC91B72D243120F400AA6671 /* GUIPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUIPlayerView.h; sourceTree = SOURCE_ROOT; };
 		FC91B72E243120F400AA6671 /* GUISlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GUISlider.m; sourceTree = SOURCE_ROOT; };
 		FC91B72F243120F400AA6671 /* GUIPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GUIPlayerView.m; sourceTree = SOURCE_ROOT; };
@@ -657,7 +663,10 @@
 				FCB238BC2441B6960034B40B /* TG_Book_Chap_Cell.xib */,
 				FC69D4412440D500006D57D9 /* Book_Detail_Header.xib */,
 				FCB238BA244186E10034B40B /* Book_Detail_Title.xib */,
+				FC908BA52645C67500176E13 /* Book_Detail_Chap_Header.xib */,
 				FC908B9F2644786000176E13 /* Book_Detail_Infor.xib */,
+				FC908BA22645243900176E13 /* Book_Detail_Option_Cell.xib */,
+				FC908BA82645CF3A00176E13 /* CosmosDistrib.swift */,
 			);
 			path = Detail_;
 			sourceTree = "<group>";
@@ -950,6 +959,7 @@
 				FCFB516C1DD075E200D49FB2 /* Action.xib in Resources */,
 				FC7550F91DACDB53007992DF /* EM_Menu.xib in Resources */,
 				FC69D4402440D435006D57D9 /* Book_Detail_ViewController.xib in Resources */,
+				FC908BA32645243A00176E13 /* Book_Detail_Option_Cell.xib in Resources */,
 				FC0A8FB32437770E001A75AF /* PC_Register_ViewController.xib in Resources */,
 				FCB238E724437DB80034B40B /* Event_Detail_Header.xib in Resources */,
 				FC0A8FB12437770E001A75AF /* PC_Forgot_ViewController.xib in Resources */,
@@ -993,6 +1003,7 @@
 				FC7551051DAE4640007992DF /* Default~iphone.png in Resources */,
 				FCBC347A263DC80F00AC9621 /* Transaction_Cell.xib in Resources */,
 				FC23EB94243A4C8F003E5E1A /* List_Book_ViewController.xib in Resources */,
+				FC908BA62645C67600176E13 /* Book_Detail_Chap_Header.xib in Resources */,
 				FC69D43024405879006D57D9 /* TG_Room_Cell_9.xib in Resources */,
 				FCBC3472263D986D00AC9621 /* Feed_Back_ViewController.xib in Resources */,
 				FC23EB97243A4CB9003E5E1A /* TG_Map_Cell.xib in Resources */,
@@ -1146,6 +1157,7 @@
 				FC91B7352431217F00AA6671 /* XMLReader.m in Sources */,
 				FC7A98D32444B0420038C226 /* Tag_Cell.swift in Sources */,
 				FC91B731243120F400AA6671 /* GUISlider.m in Sources */,
+				FC908BA92645CF3B00176E13 /* CosmosDistrib.swift in Sources */,
 				FC7550F01DAC959A007992DF /* HT_Detail_ViewController.m in Sources */,
 				FC91B732243120F400AA6671 /* GUIPlayerView.m in Sources */,
 				FC1AD7D31DA40CA8002BA7EC /* AppDelegate.m in Sources */,

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Book_Detail_Option_Cell" id="JdI-nA-CK6">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="4Na-T0-kFz">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hqd-Vx-jHm">
+                        <rect key="frame" x="10" y="16" width="61" height="18"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="18" id="LLc-yH-sBK"/>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="61" id="P6y-6b-FeH"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <color key="textColor" red="0.1137254902" green="0.32156862749999998" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <integer key="value" value="8"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </label>
+                    <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n2W-Md-J2u">
+                        <rect key="frame" x="343" y="16" width="61" height="18"/>
+                        <constraints>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="61" id="eu6-fp-RJM"/>
+                            <constraint firstAttribute="height" constant="18" id="ufA-8O-8ws"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <color key="textColor" red="0.1176470588" green="0.57254901960000004" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <integer key="value" value="8"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </label>
+                    <button hidden="YES" opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qo4-HU-hrN">
+                        <rect key="frame" x="10" y="15.5" width="99.5" height="19"/>
+                        <constraints>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="85.5" id="5sD-AE-yfh"/>
+                            <constraint firstAttribute="height" constant="19" id="icD-vi-I8Y"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <state key="normal" title="Đọc Ebook" image="ico_watch">
+                            <color key="titleColor" red="0.1176470588" green="0.57254901960000004" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
+                        </state>
+                    </button>
+                    <button hidden="YES" opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zm6-7I-Phy">
+                        <rect key="frame" x="309.5" y="15.5" width="94.5" height="19.5"/>
+                        <constraints>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="82" id="Mi0-QI-UtX"/>
+                            <constraint firstAttribute="height" constant="19.5" id="oua-tb-Xuu"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <state key="normal" title=" Mua ngay" image="ico_buy">
+                            <color key="titleColor" red="0.1176470588" green="0.57254901960000004" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
+                        </state>
+                    </button>
+                    <label hidden="YES" opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="THÔNG TIN CHI TIẾT" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1cq-RL-Ymg">
+                        <rect key="frame" x="10" y="16" width="157" height="18"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="18" id="2Hz-Kz-aYR"/>
+                            <constraint firstAttribute="width" constant="157" id="hUO-9E-AA4"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <color key="textColor" red="0.1137254902" green="0.32156862749999998" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <integer key="value" value="8"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </label>
+                    <button hidden="YES" opaque="NO" clipsSubviews="YES" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4n6-1z-9gG">
+                        <rect key="frame" x="19" y="-1" width="376" height="52"/>
+                        <color key="backgroundColor" red="0.1137254902" green="0.32156862749999998" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="52" id="VD8-f2-HTj"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="21"/>
+                        <state key="normal" title="Đọc ngay">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </state>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <integer key="value" value="26"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="Zm6-7I-Phy" secondAttribute="trailing" constant="10" id="9pa-ZQ-JNC"/>
+                    <constraint firstItem="qo4-HU-hrN" firstAttribute="leading" secondItem="4Na-T0-kFz" secondAttribute="leading" constant="10" id="Cft-y6-qbo"/>
+                    <constraint firstItem="qo4-HU-hrN" firstAttribute="centerY" secondItem="4Na-T0-kFz" secondAttribute="centerY" id="EyP-uo-loV"/>
+                    <constraint firstItem="hqd-Vx-jHm" firstAttribute="leading" secondItem="4Na-T0-kFz" secondAttribute="leading" constant="10" id="FAu-t6-Flr"/>
+                    <constraint firstItem="1cq-RL-Ymg" firstAttribute="leading" secondItem="4Na-T0-kFz" secondAttribute="leading" constant="10" id="PPM-Vs-aMY"/>
+                    <constraint firstItem="n2W-Md-J2u" firstAttribute="centerY" secondItem="4Na-T0-kFz" secondAttribute="centerY" id="ZAh-jy-a5H"/>
+                    <constraint firstItem="4n6-1z-9gG" firstAttribute="centerY" secondItem="4Na-T0-kFz" secondAttribute="centerY" id="aLo-9x-U6a"/>
+                    <constraint firstItem="4n6-1z-9gG" firstAttribute="centerX" secondItem="4Na-T0-kFz" secondAttribute="centerX" id="eI9-R5-9aL"/>
+                    <constraint firstItem="Zm6-7I-Phy" firstAttribute="centerY" secondItem="4Na-T0-kFz" secondAttribute="centerY" id="iEE-UK-EWc"/>
+                    <constraint firstItem="4n6-1z-9gG" firstAttribute="leading" secondItem="4Na-T0-kFz" secondAttribute="leading" constant="19" id="o6R-sU-XO6"/>
+                    <constraint firstItem="hqd-Vx-jHm" firstAttribute="centerY" secondItem="4Na-T0-kFz" secondAttribute="centerY" id="pkm-7d-spl"/>
+                    <constraint firstAttribute="trailing" secondItem="n2W-Md-J2u" secondAttribute="trailing" constant="10" id="ruW-jl-rsP"/>
+                    <constraint firstItem="1cq-RL-Ymg" firstAttribute="centerY" secondItem="4Na-T0-kFz" secondAttribute="centerY" id="t0f-n4-EIW"/>
+                    <constraint firstAttribute="trailing" secondItem="4n6-1z-9gG" secondAttribute="trailing" constant="19" id="udS-EV-dzQ"/>
+                </constraints>
+            </collectionViewCellContentView>
+            <size key="customSize" width="414" height="56"/>
+            <point key="canvasLocation" x="100.00000000000001" y="77.678571428571431"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="ico_buy" width="19.5" height="19.5"/>
+        <image name="ico_watch" width="19.5" height="19.5"/>
+    </resources>
+</document>

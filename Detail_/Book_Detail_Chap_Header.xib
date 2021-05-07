@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="Book_Detail_Chap_Header" id="9iv-sM-74h">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="40"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J6R-eF-g1E">
+                    <rect key="frame" x="10" y="9.5" width="0.0" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" id="KOV-TJ-rgc"/>
+                        <constraint firstAttribute="height" constant="21" id="dg5-ED-Kuu"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                    <color key="textColor" red="0.1137254902" green="0.32156862749999998" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="km2-Ul-v9P">
+                    <rect key="frame" x="310" y="10" width="0.0" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" id="Kat-ep-fdc"/>
+                        <constraint firstAttribute="height" constant="21" id="yoo-fJ-Tdc"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NFh-M6-ptR">
+                    <rect key="frame" x="300" y="15" width="10" height="10"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="10" id="1qu-ae-lgB"/>
+                        <constraint firstAttribute="height" constant="10" id="QiE-b7-is7"/>
+                    </constraints>
+                    <state key="normal" image="ico_arrow_teal"/>
+                </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ts1-jU-1aW">
+                    <rect key="frame" x="0.0" y="39.5" width="320" height="0.5"/>
+                    <color key="backgroundColor" red="0.76862745098039209" green="0.76862745098039209" blue="0.76862745098039209" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="0.5" id="9uU-cp-efc"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="3Zz-wM-Mkd"/>
+            <color key="backgroundColor" red="0.92549019607843142" green="0.92941176470588238" blue="0.90588235294117647" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="ts1-jU-1aW" secondAttribute="trailing" id="3aa-kU-aHU"/>
+                <constraint firstItem="J6R-eF-g1E" firstAttribute="centerY" secondItem="9iv-sM-74h" secondAttribute="centerY" id="5lm-hF-NPF"/>
+                <constraint firstItem="ts1-jU-1aW" firstAttribute="leading" secondItem="9iv-sM-74h" secondAttribute="leading" id="BgJ-jz-1eG"/>
+                <constraint firstItem="km2-Ul-v9P" firstAttribute="leading" secondItem="NFh-M6-ptR" secondAttribute="trailing" id="EdN-0l-Mpu"/>
+                <constraint firstAttribute="trailing" secondItem="km2-Ul-v9P" secondAttribute="trailing" constant="10" id="PCr-II-aGF"/>
+                <constraint firstItem="NFh-M6-ptR" firstAttribute="centerY" secondItem="9iv-sM-74h" secondAttribute="centerY" id="X7s-xD-IGT"/>
+                <constraint firstItem="J6R-eF-g1E" firstAttribute="leading" secondItem="9iv-sM-74h" secondAttribute="leading" constant="10" id="bTP-cW-h1x"/>
+                <constraint firstItem="km2-Ul-v9P" firstAttribute="top" secondItem="9iv-sM-74h" secondAttribute="top" constant="10" id="hAi-8A-WW6"/>
+                <constraint firstItem="3Zz-wM-Mkd" firstAttribute="bottom" secondItem="ts1-jU-1aW" secondAttribute="bottom" id="jSR-WY-vdC"/>
+            </constraints>
+            <point key="canvasLocation" x="-110.14492753623189" y="-3.3482142857142856"/>
+        </collectionReusableView>
+    </objects>
+    <resources>
+        <image name="ico_arrow_teal" width="26.5" height="26.5"/>
+    </resources>
+</document>

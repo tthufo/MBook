@@ -329,6 +329,8 @@
 {
     config = info;
     
+    NSLog(@"=====%@", info);
+    
     uID = [info getValueFromKey:@"id"];
     
     localUrl = @"";
