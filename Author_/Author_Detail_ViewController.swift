@@ -88,9 +88,9 @@ class Author_Detail_ViewController: UIViewController, UICollectionViewDataSource
     }
     
     func initBio(show: Bool) -> String {
-         let modifiedFont = String(format:"<span style=\"font-family: '-apple-system', 'HelveticaNeue'; font-size:17 \">%@</span>", self.config.getValueFromKey("info"))
+         let modifiedFont = String(format:"<span style=\"font-family: '-apple-system', 'HelveticaNeue'; font-size:16 \">%@</span>", self.config.getValueFromKey("info"))
         
-        let tempString = modifiedFont.html2String.count > (IS_IPAD ? 1000 : 120) ? modifiedFont.html2String.substring(to: 120) + "..." : modifiedFont.html2String
+        let tempString = modifiedFont.html2String.count > (IS_IPAD ? 120 : 120) ? modifiedFont.html2String.substring(to: 120) + "..." : modifiedFont.html2String
         
         return !show ? tempString : modifiedFont.html2String
     }
@@ -227,6 +227,25 @@ class Author_Detail_ViewController: UIViewController, UICollectionViewDataSource
         self.navigationController?.popViewController(animated: true)
     }
     
+    private func sizeBio(for indexPath: IndexPath) -> CGSize {
+       let cell = Bundle.main.loadNibNamed("Author_Bio_Cell", owner: self, options: nil)?.first as! UICollectionViewCell
+        
+       let title = self.withView(cell, tag: 1) as! UILabel
+       title.text = self.bioString
+        
+       cell.setNeedsLayout()
+       cell.layoutIfNeeded()
+
+       let width = collectionView.frame.width
+       let height: CGFloat = 0
+
+       let targetSize = CGSize(width: width, height: height)
+
+       let size = cell.contentView.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: .defaultHigh, verticalFittingPriority: .fittingSizeLevel)
+        
+       return size
+   }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -240,7 +259,7 @@ class Author_Detail_ViewController: UIViewController, UICollectionViewDataSource
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return indexPath.section != 0 ? CGSize(width: Int((self.screenWidth() / (IS_IPAD ? 5 : 3)) - 15), height: Int(((self.screenWidth() / (IS_IPAD ? 5 : 3)) - 15) * 1.72)) : CGSize(width: collectionView.frame.width, height: bioHeight)
+        return indexPath.section != 0 ? CGSize(width: Int((self.screenWidth() / (IS_IPAD ? 5 : 3)) - 15), height: Int(((self.screenWidth() / (IS_IPAD ? 5 : 3)) - 15) * 1.72)) : self.sizeBio(for: indexPath)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {

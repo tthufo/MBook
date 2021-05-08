@@ -33,8 +33,9 @@
   [[progressView layer] setCornerRadius:1.0f];
   
   CGFloat hue, sat, bri;
-  [[self tintColor] getHue:&hue saturation:&sat brightness:&bri alpha:nil];
-  [progressView setTintColor:[UIColor colorWithHue:hue saturation:(sat * 0.6f) brightness:bri alpha:1]];
+//  [[self tintColor] getHue:&hue saturation:&sat brightness:&bri alpha:nil];
+//  [progressView setTintColor:[UIColor colorWithHue:hue saturation:(sat * 0.6f) brightness:bri alpha:1]];
+    [progressView setTintColor:[UIColor redColor]];
   
   [self addSubview:progressView];
   
@@ -58,11 +59,13 @@
 }
 
 - (void)setTintColor:(UIColor *)tintColor {
-  [super setTintColor:tintColor];
+//  [super setTintColor:tintColor];
   
   CGFloat hue, sat, bri;
-  [[self tintColor] getHue:&hue saturation:&sat brightness:&bri alpha:nil];
-  [progressView setTintColor:[UIColor colorWithHue:hue saturation:(sat * 0.6f) brightness:bri alpha:1]];
+    [progressView setTintColor:[UIColor redColor]];
+
+//  [[self tintColor] getHue:&hue saturation:&sat brightness:&bri alpha:nil];
+//  [progressView setTintColor:[UIColor colorWithHue:hue saturation:(sat * 0.6f) brightness:bri alpha:1]];
 }
 
 - (void)setSecondaryTintColor:(UIColor *)tintColor {

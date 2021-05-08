@@ -392,7 +392,7 @@
 #pragma mark - UI Customization
 
 - (void)setTintColor:(UIColor *)tintColor {
-    [super setTintColor:tintColor];
+//    [super setTintColor:tintColor];
     
     [progressIndicator setTintColor:tintColor];
 }

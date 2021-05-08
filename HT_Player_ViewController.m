@@ -143,8 +143,8 @@
 }
 
 - (NSString*)iniBio:(BOOL)show {
-    NSString * modifiedFont = [NSString stringWithFormat:@"<span style=\"font-family: '-apple-system', 'HelveticaNeue'; font-size:17 \">%@</span>", self->tempBio];
-    NSString * tempString = [[self html2StringWithString:modifiedFont] length] > (IS_IPAD ? 1000 : 120) ? [NSString stringWithFormat:@"%@...", [[self html2StringWithString:modifiedFont] substringToIndex:120]] : [self html2StringWithString:modifiedFont];
+    NSString * modifiedFont = [NSString stringWithFormat:@"<span style=\"font-family: '-apple-system', 'HelveticaNeue'; font-size:16 \">%@</span>", self->tempBio];
+    NSString * tempString = [[self html2StringWithString:modifiedFont] length] > (IS_IPAD ? 120 : 120) ? [NSString stringWithFormat:@"%@...", [[self html2StringWithString:modifiedFont] substringToIndex:120]] : [self html2StringWithString:modifiedFont];
     
     return !show ? tempString : [self html2StringWithString:modifiedFont];
 }
@@ -375,9 +375,11 @@
 
     [((UIButton*)[self playerInfo][@"next"]) addTarget:self action:@selector(playNext) forControlEvents:UIControlEventTouchUpInside];
 
-    [((GUISlider*)[self playerInfo][@"slider"]) setThumbImage:[UIImage imageNamed:@"trans"] forState:UIControlStateNormal];
+    [((GUISlider*)[self playerInfo][@"slider"]) setThumbImage:[UIImage imageNamed:@"ico_round"] forState:UIControlStateNormal];
     
-    [((GUISlider*)[self playerInfo][@"slider"]) setThumbImage:[UIImage imageNamed:@"trans"] forState:UIControlStateHighlighted];
+    [((GUISlider*)[self playerInfo][@"slider"]) setThumbImage:[UIImage imageNamed:@"ico_round"] forState:UIControlStateHighlighted];
+    
+    [((GUISlider*)[self playerInfo][@"slider"]) setSecondaryTintColor:[UIColor redColor]];
     
     [((UIButton*)[self playerInfo][@"off"]) addTarget:self action:@selector(didPressDown) forControlEvents:UIControlEventTouchUpInside];
     
@@ -482,8 +484,6 @@
     {
         dict[array[[cell.subviews indexOfObject:v]]] = v;
     }
-
-//    NSLog(@"%@", dict);
     
     [((UIImageView*)dict[@"img"]) withBorder:@{@"Bcorner":@(6)}];
         
@@ -1386,6 +1386,25 @@
     return size;
 }
 
+- (CGSize)sizeForBio:(NSIndexPath*)indexPath {
+    UICollectionViewCell * cell = [[[NSBundle mainBundle] loadNibNamed:@"Author_Bio_Cell" owner:self options:nil] firstObject];
+    
+    UILabel * title = (UILabel*)[self withView:cell tag:1];
+    title.text = self->bioString;
+    
+    [cell setNeedsLayout];
+    [cell layoutIfNeeded];
+    
+    CGFloat width = collectionView.frame.size.width;
+    CGFloat height = 0;
+    
+    CGSize targetSize = CGSizeMake(width, height);
+    
+    CGSize size = [cell.contentView systemLayoutSizeFittingSize:targetSize withHorizontalFittingPriority: UILayoutPriorityDefaultHigh verticalFittingPriority:UILayoutPriorityFittingSizeLevel];
+    
+    return size;
+}
+
 #pragma Collection
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
@@ -1400,7 +1419,7 @@
 - (CGSize)collectionView:(UICollectionView *)_collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
 //    return indexPath.section == 1 ? CGSizeMake((screenWidth1 / (IS_IPAD ? 5 : 3)) - 15, ((screenWidth1 / (IS_IPAD ? 5 : 3)) - 15) * 1.72) : CGSizeMake(_collectionView.frame.size.width, 65);
-    return indexPath.section == 0 ? [self sizeFor:indexPath] : indexPath.section == 1 ? CGSizeMake(_collectionView.frame.size.width, self->bioHeight) : indexPath.section == 2 ? CGSizeMake(_collectionView.frame.size.width, detailList.count == 0 ? 0 : [[((NSDictionary*)detailList[indexPath.item]) getValueFromKey:@"height"] doubleValue]) : CGSizeMake(_collectionView.frame.size.width, 65);
+    return indexPath.section == 0 ? [self sizeFor:indexPath] : indexPath.section == 1 ? [self sizeForBio:indexPath] : indexPath.section == 2 ? CGSizeMake(_collectionView.frame.size.width, detailList.count == 0 ? 0 : [[((NSDictionary*)detailList[indexPath.item]) getValueFromKey:@"height"] doubleValue]) : CGSizeMake(_collectionView.frame.size.width, 65);
 }
 
 //- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
