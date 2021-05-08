@@ -28,17 +28,17 @@
     
     IBOutlet UIButton * play;
     
-    NSMutableArray * dataList, * chapList;
+    NSMutableArray * dataList, * chapList, * detailList;
     
-    NSMutableDictionary * playingData, * setupData;
+    NSMutableDictionary * playingData, * setupData, * tempInfo;
     
     IBOutlet UIImageView * avatar;
     
-    BOOL isResume, isSound;
+    BOOL isResume, isSound, showMore;
     
     NSDictionary * config;
     
-    NSString * localUrl, * playListName;
+    NSString * localUrl, * playListName, * tempBio, * bioString;
     
     IBOutlet GUISlider * slider;
     
@@ -47,13 +47,15 @@
     int totalPage;
     
     BOOL isLoadMore;
+    
+    float bioHeight;
 }
 
 @end
 
 @implementation HT_Player_ViewController
 
-@synthesize playerView, playState, topView, uID, controlView, controlViewIpad, collectionView;
+@synthesize playerView, playState, topView, uID, controlView, controlViewIpad, collectionView, retract;
 
 - (void)viewDidLoad
 {
@@ -63,11 +65,19 @@
     
     chapList = [NSMutableArray new];
 
-    setupData = [@{} mutableCopy];
+    detailList = [NSMutableArray new];
     
+    tempInfo = [NSMutableDictionary new];
+
+    setupData = [@{} mutableCopy];
+        
     topHeight.constant = screenWidth1 * 9 / 16;
     
     topHeightIpad.constant = screenWidth1 * 9 / 16;
+    
+    bioHeight = 0;
+    
+    retract = YES;
 
     if(![self getObject:@"settingOpt"])
     {
@@ -93,7 +103,11 @@
 - (void)didSetUpCollectionView {
     [collectionView withCell:@"TG_Map_Cell"];
     [collectionView withCell:@"TG_Book_Chap_Cell"];
-    [collectionView withHeaderOrFooter:@"Book_Detail_Title" andKind: UICollectionElementKindSectionHeader];
+    [collectionView withCell:@"Book_Detail_Infor"];
+    [collectionView withCell:@"Book_Detail_Option_Cell"];
+    [collectionView withCell:@"Author_Bio_Cell"];
+    [collectionView withCell:@"TG_Book_Detail_Cell"];
+    [collectionView withHeaderOrFooter:@"Book_Detail_Chap_Header" andKind: UICollectionElementKindSectionHeader];
 }
 
 - (void)parallaxHeader {
@@ -103,7 +117,6 @@
     collectionView.parallaxHeader.height = screenWidth1 * 9 / 16;
     collectionView.parallaxHeader.minimumHeight = [self isIphoneX] ? 64 : 64;
     [collectionView.parallaxHeader setParallaxHeaderDidScrollHandler:^(ParallaxHeader * header) {
-//        NSLog(@"%f", header.progress);
         for (UIView * v in controller.subviews) {
             if (v.tag != 1000 && v.tag != 1010101) {
                 if (v.tag == 9988 || v.tag == 9989 || v.tag == 9990) {
@@ -127,6 +140,13 @@
 
 - (void)backToTop {
     [collectionView setContentOffset:CGPointMake(0, - screenWidth1 * 9 / 16) animated:YES];
+}
+
+- (NSString*)iniBio:(BOOL)show {
+    NSString * modifiedFont = [NSString stringWithFormat:@"<span style=\"font-family: '-apple-system', 'HelveticaNeue'; font-size:17 \">%@</span>", self->tempBio];
+    NSString * tempString = [[self html2StringWithString:modifiedFont] length] > (IS_IPAD ? 1000 : 120) ? [NSString stringWithFormat:@"%@...", [[self html2StringWithString:modifiedFont] substringToIndex:120]] : [self html2StringWithString:modifiedFont];
+    
+    return !show ? tempString : [self html2StringWithString:modifiedFont];
 }
 
 - (void)playingState
@@ -328,9 +348,7 @@
 - (void)didStartPlayWith:(NSString*)vID andInfo:(NSDictionary*)info
 {
     config = info;
-    
-    NSLog(@"=====%@", info);
-    
+        
     uID = [info getValueFromKey:@"id"];
     
     localUrl = @"";
@@ -342,9 +360,7 @@
     [setupData addEntriesFromDictionary:info];
     
     playingData[@"cover"] = setupData[@"img"];
-    
-//    NSLog(@"%@", info);
-        
+            
     titleSong.text = info[@"name"];
     
     ((UILabel*)[self playerInfo][@"title"]).text = info[@"name"];
@@ -438,10 +454,12 @@
     pageIndex = 1;
     
     totalPage = 1;
-    
+        
     [self didRequestData];
      
     [self didRequestChapter];
+    
+    [self didRequestDetail];
     
     if ([info responseForKey:@"back_to_top"]) {
         [self backToTop];
@@ -1254,58 +1272,141 @@
     }];
 }
 
+- (void)didRequestDetail {
+    NSMutableDictionary * request = [[NSMutableDictionary alloc] initWithDictionary:@{@"session": Information.token,
+                                                                                      @"overrideAlert": @"1",
+    }];
+    
+    request[@"id"] = config[@"id"];
+    request[@"CMD_CODE"] = @"getBookDetail";
+
+    [[LTRequest sharedInstance] didRequestInfo:request withCache:^(NSString *cacheString) {
+        
+    } andCompletion:^(NSString *responseString, NSString *errorCode, NSError *error, BOOL isValidated, NSDictionary *header) {
+        NSDictionary * dict = [responseString objectFromJSONString];
+
+        if ([[dict getValueFromKey:@"error_code"] isEqualToString:@"0"] && dict[@"result"] != [NSNull null]) {
+            NSDictionary * result = [responseString objectFromJSONString][@"result"];
+
+            [self->detailList removeAllObjects];
+            
+            [self->detailList addObjectsFromArray:[self filter:result]];
+            
+            [self->tempInfo removeAllObjects];
+            
+            [self->tempInfo addEntriesFromDictionary:result];
+            
+            NSString * tem = @"Câu chuyện mở ra với bữa tiệc mừng của một thế giới phù thủy mà nhiều năm nay đã bị khủng hoảng bởi Chúa tể Hắc ám Voldemort. Đêm trước đó, Voldemort đã tìm thấy nơi sinh sống của gia đình Potter tại thung lũng Godric và giết chết Lily cũng như James Potter vì một lời tiên tri dự đoán sẽ ảnh hưởng đến Voldemort rằng hắn sẽ bị đánh bại bởi \"đứa trẻ sinh ra khi tháng bảy tàn đi\" mà Voldemort tin đứa trẻ là Harry Potter. Tuy vậy, khi hắn định giết Harry, Lời nguyền Chết chóc Avada Kedavra đã bật lại, Voldemort bị tiêu diệt, chỉ còn là một linh hồn, không sống mà cũng chẳng chết. Trong lúc đó, Harry bị lưu lại một vết sẹo hình tia chớp đặc biệt trên trán mình, dấu hiệu bên ngoài.";
+            
+            self->tempBio = tem;
+            
+            self->bioString = [self iniBio:self->showMore];
+            
+            [self->collectionView performBatchUpdates:^{
+                [self->collectionView reloadSections:[NSIndexSet indexSetWithIndex:0]];
+                [self->collectionView reloadSections:[NSIndexSet indexSetWithIndex:1]];
+                [self->collectionView reloadSections:[NSIndexSet indexSetWithIndex:2]];
+                [self->collectionView reloadData];
+            } completion:^(BOOL finished) {
+            }];
+        } else {
+            [self showToast:[[dict getValueFromKey:@"error_msg"] isEqualToString:@""] ? @"Lỗi xảy ra, mời bạn thử lại" : [dict getValueFromKey:@"error_msg"] andPos:0];
+        }
+        [self adjustInset];
+    }];
+}
+
+- (NSArray*)filter:(NSDictionary*)info {
+    NSArray * keys = @[@{@"key": @"header_cell", @"tag": @1, @"height": @44},
+                       @{@"key": @"category", @"title": @"Thể loại", @"tag": @2, @"height": @35},
+                       @{@"key": @"author", @"title": @"Tác giả", @"tag": @2, @"height": @35},
+                       @{@"key": @"publisher", @"title": @"Nhà xuất bản", @"tag": @2, @"height": @35},
+                       @{@"key": @"events", @"title": @"Tuyển tập", @"tag": @2, @"height": @35},
+                       @{@"key": @"publish_time", @"title": @"Ngày upload", @"arrow": @"1", @"tag": @2, @"height": @35},
+                       @{@"key": @"price", @"title": @"Giá mua lẻ", @"tag": @2, @"height": @35, @"unit": @" VND"},
+                       @{@"key": @"button_cell", @"tag": @4, @"height": @35},
+                       @{@"key": @"read_cell", @"tag": @6, @"height": @20},
+    ];
+    NSMutableArray * tempArray = [NSMutableArray new];
+    for (NSDictionary * key in keys) {
+        NSString * keying = [key getValueFromKey:@"key"];
+        if ([info responseForKey:keying]) {
+            NSMutableDictionary * dict = [NSMutableDictionary new];
+            if ([info[keying] isKindOfClass:[NSArray class]]) {
+                NSArray * tempArray = (NSArray*)info[keying];
+                if([keying isEqualToString:@"author"]) {
+                    dict[@"name"] = tempArray.count != 0 ? tempArray.count == 1 ? ((NSDictionary*)tempArray.firstObject)[@"name"] : @"Nhiều tác giả" : @"";
+                } else {
+                    dict[@"name"] = tempArray.count != 0 ? ((NSDictionary*)tempArray.firstObject)[@"name"] : @"";
+                }
+            } else {
+                dict[@"name"] = [info getValueFromKey:keying];
+            }
+            dict[@"key"] = keying;
+            dict[@"config"] = info[keying];
+            dict[@"title"] = [key getValueFromKey:@"title"];
+            dict[@"arrow"] = [[key getValueFromKey:@"arrow"] isEqualToString:@""] ? @"0" : @"1";
+            dict[@"tag"] = key[@"tag"];
+            dict[@"height"] = key[@"height"];
+            dict[@"unit"] = [key getValueFromKey:@"unit"];
+            if (![[dict getValueFromKey:@"name"] isEqualToString:@""]) {
+                [tempArray addObject:dict];
+            }
+        } else {
+            NSMutableDictionary * dict = [NSMutableDictionary new];
+            dict[@"key"] = keying;
+            dict[@"tag"] = key[@"tag"];
+            dict[@"height"] = key[@"height"];
+            [tempArray addObject:dict];
+        }
+    }
+    return tempArray;
+}
+
+- (CGSize)sizeFor:(NSIndexPath*)indexPath {
+    UICollectionViewCell * cell = [[[NSBundle mainBundle] loadNibNamed:@"Book_Detail_Infor" owner:self options:nil] firstObject];
+    
+    UILabel * title = (UILabel*)[self withView:cell tag:1];
+    title.text = [self->config getValueFromKey:@"name"];
+    
+    NSString * authorName = [self->config[@"author"] firstObject][@"name"];
+    UILabel * author = (UILabel*)[self withView:cell tag:2];
+    author.text = authorName;
+    
+    [cell setNeedsLayout];
+    [cell layoutIfNeeded];
+    
+    CGFloat width = collectionView.frame.size.width;
+    CGFloat height = 0;
+    
+    CGSize targetSize = CGSizeMake(width, height);
+    
+    CGSize size = [cell.contentView systemLayoutSizeFittingSize:targetSize withHorizontalFittingPriority: UILayoutPriorityDefaultHigh verticalFittingPriority:UILayoutPriorityFittingSizeLevel];
+    
+    return size;
+}
+
 #pragma Collection
 
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
+    return 4;
+}
 
 - (NSInteger)collectionView:(UICollectionView *)view numberOfItemsInSection:(NSInteger)section
 {
-    return section == 1 ? dataList.count : chapList.count == 1 ? 0 : chapList.count;
-}
-
-- (UICollectionViewCell *)collectionView:(UICollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    UICollectionViewCell *cell = [cv dequeueReusableCellWithReuseIdentifier:indexPath.section == 0 ? @"TG_Book_Chap_Cell" : @"TG_Map_Cell" forIndexPath:indexPath];
-    
-    if (indexPath.section == 0) {
-        NSDictionary * chap = chapList[indexPath.item];
-        
-        ((UILabel*)[self withView:cell tag:1]).text = [chap getValueFromKey:@"name"];
-        
-//        ((UILabel*)[self withView:cell tag:2]).text = [NSString stringWithFormat:@"%@ chữ Cập nhật %@", [chap getValueFromKey:@"total_character"], [chap getValueFromKey:@"publish_time"]];
-        
-        ((UILabel*)[self withView:cell tag:2]).text = [NSString stringWithFormat:@"Cập nhật %@", [chap getValueFromKey:@"publish_time"]];
-
-        ((UILabel*)[self withView:cell tag:5]).text = @"Nghe >";
-    }
-    
-    if (indexPath.section == 1) {
-        NSDictionary * book = dataList[indexPath.item];
-        
-        ((UILabel*)[self withView:cell tag:112]).text = [book getValueFromKey:@"name"];
-        
-        ((UILabel*)[self withView:cell tag:13]).text = ((NSArray*)book[@"author"]).count > 1 ? @"Nhiều tác giả" : book[@"author"][0][@"name"];
-        
-        [((UIImageView*)[self withView:cell tag:11]) imageUrlWithUrl:[book getValueFromKey:@"avatar"]];
-        
-        ((UIImageView*)[self withView:cell tag:999]).hidden = ![[book getValueFromKey:@"book_type"] isEqualToString:@"3"];
-    }
-    
-    return cell;
-}
-
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return 2;
+    return section == 0 || section == 1 ? 1 : section == 2 ? detailList.count : section == 3 ? retract ? 0 : chapList.count > 1 ? chapList.count : 0 : 0;
 }
 
 - (CGSize)collectionView:(UICollectionView *)_collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return indexPath.section == 1 ? CGSizeMake((screenWidth1 / (IS_IPAD ? 5 : 3)) - 15, ((screenWidth1 / (IS_IPAD ? 5 : 3)) - 15) * 1.72) : CGSizeMake(_collectionView.frame.size.width, 50);
+//    return indexPath.section == 1 ? CGSizeMake((screenWidth1 / (IS_IPAD ? 5 : 3)) - 15, ((screenWidth1 / (IS_IPAD ? 5 : 3)) - 15) * 1.72) : CGSizeMake(_collectionView.frame.size.width, 65);
+    return indexPath.section == 0 ? [self sizeFor:indexPath] : indexPath.section == 1 ? CGSizeMake(_collectionView.frame.size.width, self->bioHeight) : indexPath.section == 2 ? CGSizeMake(_collectionView.frame.size.width, detailList.count == 0 ? 0 : [[((NSDictionary*)detailList[indexPath.item]) getValueFromKey:@"height"] doubleValue]) : CGSizeMake(_collectionView.frame.size.width, 65);
 }
 
-- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
-{
-    return UIEdgeInsetsMake(4, 4, 4, 4);
-}
+//- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
+//{
+//    return UIEdgeInsetsMake(4, 4, 4, 4);
+//}
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
 {
@@ -1317,56 +1418,177 @@
     return 10.0;
 }
 
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+//    UICollectionViewCell *cell = [cv dequeueReusableCellWithReuseIdentifier:indexPath.section == 0 ? @"TG_Book_Chap_Cell" : @"TG_Map_Cell" forIndexPath:indexPath];
+    
+    UICollectionViewCell *cell = [cv dequeueReusableCellWithReuseIdentifier:indexPath.section == 0 ? @"Book_Detail_Infor" : indexPath.section == 1 ? @"Author_Bio_Cell" : indexPath.section == 2 ? @"Book_Detail_Option_Cell" : @"TG_Book_Chap_Cell" forIndexPath:indexPath];
+    
+    if (indexPath.section == 0) {
+                
+        UILabel * title = (UILabel*)[self withView:cell tag:1];
+        title.text = [self->config getValueFromKey:@"name"];
+        
+        NSString * authorName = [self->tempInfo[@"author"] firstObject][@"name"];
+        UILabel * author = (UILabel*)[self withView:cell tag:2];
+        author.text = authorName;
+        
+        CosmosView * rate = (CosmosView*)[self withView:cell tag: 3];
+        rate.rating = [[self->tempInfo getValueFromKey:@"rate"] isEqualToString:@""] ? 0 : [[self->tempInfo getValueFromKey:@"rate"] doubleValue];
+                                        
+        UIButton * viewCount = [self withView:cell tag: 4];
+        [viewCount setTitle:[self->tempInfo getValueFromKey:@"read_count"] forState: UIControlStateNormal];
+        
+        UIButton * likeCount = [self withView:cell tag: 5];
+        [likeCount setTitle:[self->tempInfo getValueFromKey:@"like_count"] forState: UIControlStateNormal];
+
+        UIButton * commentCount = [self withView:cell tag: 6];
+        [commentCount setTitle:[self->tempInfo getValueFromKey:@"comment_count"] forState: UIControlStateNormal];
+    }
+    
+    if (indexPath.section == 1) {
+        UILabel * title = [self withView:cell tag: 1];
+
+        title.text = bioString;
+        
+        bioHeight = [title sizeOfMultiLineLabel].height;
+        
+//        NSDictionary * book = dataList[indexPath.item];
+//
+//        ((UILabel*)[self withView:cell tag:112]).text = [book getValueFromKey:@"name"];
+//
+//        ((UILabel*)[self withView:cell tag:13]).text = ((NSArray*)book[@"author"]).count > 1 ? @"Nhiều tác giả" : book[@"author"][0][@"name"];
+//
+//        [((UIImageView*)[self withView:cell tag:11]) imageUrlWithUrl:[book getValueFromKey:@"avatar"]];
+//
+//        ((UIImageView*)[self withView:cell tag:999]).hidden = ![[book getValueFromKey:@"book_type"] isEqualToString:@"3"];
+    }
+    
+    if (indexPath.section == 2) {
+        NSDictionary * detail = detailList[indexPath.item];
+
+        NSString * tag = [detail getValueFromKey:@"tag"];
+        
+        if ([tag isEqualToString:@"1"]) {
+             for (UIView * v in cell.contentView.subviews) {
+                 v.hidden = v.tag != 1;
+             }
+        }
+         
+        if ([tag isEqualToString:@"2"]) {
+            UILabel * title = [self withView:cell tag: 2];
+            title.text = [detail getValueFromKey:@"title"];
+ 
+            UILabel * description = [self withView:cell tag: 3];
+            description.text = [NSString stringWithFormat:@"%@%@", [detail getValueFromKey:@"name"], [detail getValueFromKey:@"unit"]];
+             
+             for (UIView * v in cell.contentView.subviews) {
+                 v.hidden = v.tag != 2 && v.tag != 3;
+             }
+         }
+         
+        if ([tag isEqualToString:@"4"]) {
+            UIButton * readOrListen = [self withView:cell tag: 4];
+            UIButton * purchase = [self withView:cell tag: 5];
+             for (UIView *v in cell.contentView.subviews) {
+                 v.hidden = v.tag != 4 && v.tag != 5;
+             }
+         }
+         
+        if ([tag isEqualToString:@"6"]) {
+            UIButton * read = [self withView:cell tag: 6];
+            [read actionForTouch:@{} and:^(NSDictionary *touchInfo) {
+            }];
+             for (UIView * v in cell.contentView.subviews) {
+                 v.hidden = YES;
+             }
+         }
+    }
+    
+    if (indexPath.section == 3) {
+        NSDictionary * chap = chapList[indexPath.item];
+
+        ((UILabel*)[self withView:cell tag:1]).text = [chap getValueFromKey:@"name"];
+        
+        ((UILabel*)[self withView:cell tag:2]).text = [NSString stringWithFormat:@"%@ chữ Cập nhật %@", [chap getValueFromKey:@"total_character"], [chap getValueFromKey:@"publish_time"]];
+        
+        ((UILabel*)[self withView:cell tag:2]).text = [NSString stringWithFormat:@"Cập nhật %@", [chap getValueFromKey:@"publish_time"]];
+    }
+    
+    return cell;
+}
+
 - (void)collectionView:(UICollectionView *)_collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 0) {
+    if (indexPath.section == 3) {
         NSDictionary * chap = chapList[indexPath.item];
         config = chap;
+        retract = NO;
         [self didRequestContent];
     }
     if (indexPath.section == 1) {
-        NSDictionary * book = dataList[indexPath.item];
-        if ([[book getValueFromKey:@"book_type"] isEqualToString:@"3"]) {
-            config = book;
-            [self didRequestContent];
-            [self backToTop];
-        } else {
-            [self goDown];
-            Book_Detail_ViewController * detail = [Book_Detail_ViewController new];
-            NSMutableDictionary * information = [[NSMutableDictionary alloc] initWithDictionary:book];
-            information[@"url"] = @{@"CMD_CODE": @"getListBook", @"book_type": @(0), @"price": @(0), @"sorting": @(1)};
-            detail.config = information;
-            [[self CENTER] pushViewController:detail animated:YES];
-        }
+        UICollectionViewCell * cell = [collectionView cellForItemAtIndexPath:indexPath];
+        UILabel * title = [self withView:cell tag: 1];
+        showMore = !showMore;
+        bioString = [self iniBio:showMore];
+        title.text = bioString;
+        bioHeight = [title sizeOfMultiLineLabel].height;
+        [self->collectionView reloadSections:[NSIndexSet indexSetWithIndex:1]];
+        [self adjustInset];
+        
+//        NSDictionary * book = dataList[indexPath.item];
+//        if ([[book getValueFromKey:@"book_type"] isEqualToString:@"3"]) {
+//            config = book;
+//            [self didRequestContent];
+//            [self backToTop];
+//        } else {
+//            [self goDown];
+//            Book_Detail_ViewController * detail = [Book_Detail_ViewController new];
+//            NSMutableDictionary * information = [[NSMutableDictionary alloc] initWithDictionary:book];
+//            information[@"url"] = @{@"CMD_CODE": @"getListBook", @"book_type": @(0), @"price": @(0), @"sorting": @(1)};
+//            detail.config = information;
+//            [[self CENTER] pushViewController:detail animated:YES];
+//        }
     }
 }
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
-    UIView * view = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"Book_Detail_Title" forIndexPath:indexPath];
+    UIView * view = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"Book_Detail_Chap_Header" forIndexPath:indexPath];
     
-    ((UILabel*)[self withView:view tag:1]).text = indexPath.section == 0 ? @"Danh sách chương" : @"Có thể bạn thích";
+    ((UILabel*)[self withView:view tag: 1]).text = [NSString stringWithFormat:@"Nghe EBOOK (%lu CHƯƠNG)", (unsigned long)chapList.count];
+    double angle = retract ? 0 : M_PI;
+    
+    ((UIButton*)[self withView:view tag: 3]).transform = CGAffineTransformMakeRotation(angle);
+    [view actionForTouch:@{} and:^(NSDictionary *touchInfo) {
+        retract = !retract;
+        [self->collectionView performBatchUpdates:^{
+            [self->collectionView reloadSections:[NSIndexSet indexSetWithIndex:3]];
+        } completion:^(BOOL finished) {
+        }];
+    }];
     
     return view;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
-    return CGSizeMake(collectionView.frame.size.width, chapList.count == 1 ? 0 : 44);
+    return CGSizeMake(collectionView.frame.size.width, section == 3 ? chapList.count <= 1 ? 0 : 55 : 0);
 }
 
 
 - (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 2) {
-        if (pageIndex == 1) {
-            return;
-        }
-        
-        if (indexPath.item == dataList.count - 1) {
-            if(pageIndex <= totalPage) {
-                isLoadMore = YES;
-                [self didRequestData];
-            }
-        }
-    }
+//    if (indexPath.section == 2) {
+//        if (pageIndex == 1) {
+//            return;
+//        }
+//
+//        if (indexPath.item == dataList.count - 1) {
+//            if(pageIndex <= totalPage) {
+//                isLoadMore = YES;
+//                [self didRequestData];
+//            }
+//        }
+//    }
 }
 
 - (void)didReceiveMemoryWarning

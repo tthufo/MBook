@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="Book_Detail_ViewController" customModule="HearThis" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="Book_Detail_ViewController" customModule="MeBook" customModuleProvider="target">
             <connections>
                 <outlet property="collectionView" destination="NPj-gT-Jt0" id="VhE-4n-oA9"/>
                 <outlet property="view" destination="eCk-zh-DNg" id="w88-Fy-WXM"/>
@@ -33,16 +33,43 @@
                         <outlet property="delegate" destination="-1" id="N8X-0u-FC1"/>
                     </connections>
                 </collectionView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pDZ-4S-sOU">
+                    <rect key="frame" x="266" y="10" width="44" height="44"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="44" id="Bni-4M-t0g"/>
+                        <constraint firstAttribute="height" constant="44" id="rrq-ea-sWN"/>
+                    </constraints>
+                    <state key="normal" image="ico_like_white"/>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UUF-KU-HqZ">
+                    <rect key="frame" x="10" y="10" width="44" height="44"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="44" id="8Bk-M6-P2L"/>
+                        <constraint firstAttribute="height" constant="44" id="vEE-aM-ewE"/>
+                    </constraints>
+                    <state key="normal" image="ico_arrow_l_white"/>
+                    <connections>
+                        <action selector="didPressBack" destination="-1" eventType="touchUpInside" id="vxZ-85-7M3"/>
+                    </connections>
+                </button>
             </subviews>
+            <viewLayoutGuide key="safeArea" id="kwJ-XT-bva"/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="NPj-gT-Jt0" firstAttribute="top" secondItem="kwJ-XT-bva" secondAttribute="top" id="6Qu-jr-Xh9"/>
+                <constraint firstItem="UUF-KU-HqZ" firstAttribute="top" secondItem="kwJ-XT-bva" secondAttribute="top" constant="10" id="9tH-Kb-XZ8"/>
+                <constraint firstItem="kwJ-XT-bva" firstAttribute="trailing" secondItem="pDZ-4S-sOU" secondAttribute="trailing" constant="10" id="HsD-4x-BeD"/>
                 <constraint firstItem="NPj-gT-Jt0" firstAttribute="leading" secondItem="kwJ-XT-bva" secondAttribute="leading" id="LwA-Ds-5kJ"/>
+                <constraint firstItem="pDZ-4S-sOU" firstAttribute="top" secondItem="kwJ-XT-bva" secondAttribute="top" constant="10" id="QYH-Be-Z3k"/>
+                <constraint firstItem="UUF-KU-HqZ" firstAttribute="leading" secondItem="kwJ-XT-bva" secondAttribute="leading" constant="10" id="Uen-6Y-7LT"/>
                 <constraint firstItem="NPj-gT-Jt0" firstAttribute="bottom" secondItem="kwJ-XT-bva" secondAttribute="bottom" id="qm6-1z-Dpb"/>
                 <constraint firstItem="NPj-gT-Jt0" firstAttribute="trailing" secondItem="kwJ-XT-bva" secondAttribute="trailing" id="yBp-ae-ViM"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="kwJ-XT-bva"/>
             <point key="canvasLocation" x="138.75" y="144.71830985915494"/>
         </view>
     </objects>
+    <resources>
+        <image name="ico_arrow_l_white" width="33" height="33"/>
+        <image name="ico_like_white" width="33" height="33"/>
+    </resources>
 </document>

@@ -732,6 +732,8 @@ UIBackgroundTaskIdentifier bgTask;
 
 - (void)startPlaying:(NSString*)vID andInfo:(NSDictionary*)info
 {
+    [self PLAYER].retract = YES;
+    
     [[self PLAYER] didStartPlayWith:vID andInfo:info];
     
     if ([self isFullEmbed] || [info responseForKey:@"byPass"]) {

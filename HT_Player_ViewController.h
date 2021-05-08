@@ -33,6 +33,8 @@ typedef enum __playerState
 
 @property (strong, nonatomic) NSString *uID;
 
+@property (assign, nonatomic) BOOL retract;
+
 - (void)didStartPlayWith:(NSString*)vID andInfo:(NSDictionary*)info;
 
 - (void)initAvatar:(NSString*)url;

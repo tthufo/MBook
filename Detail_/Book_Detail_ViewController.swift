@@ -76,7 +76,6 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
                 
         collectionView.withHeaderOrFooter("Book_Detail_Chap_Header", andKind: UICollectionView.elementKindSectionHeader)
 
-                
         didRequestData(isShow: true)
     
         setupParallaxHeader()
@@ -191,10 +190,6 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
         let collectionViewInsets: UIEdgeInsets = UIEdgeInsets(top: CGFloat(self.headerHeight), left: 0.0, bottom: contentSizeHeight < CGFloat(collectionViewHeight - 64) ? CGFloat(collectionViewHeight - contentSizeHeight - 64) + CGFloat(embeded) : CGFloat(0 + embeded), right: 0.0)
          
         self.collectionView.contentInset = collectionViewInsets
-        
-//        let read = self.withView(headerView, tag: 33) as! UIButton
-
-//        read.isHidden = chapList.count > 1
     }
     
     func didRequestData(isShow: Bool) {
@@ -296,9 +291,9 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
             
             self.detailList.addObjects(from: self.filter(info: result["result"] as! NSDictionary) as! [Any])
             
-            self.tempInfo.addEntries(from: result["result"] as! [AnyHashable : Any])
+            self.tempInfo.removeAllObjects()
             
-//            print("---", (((result["result"] as! NSDictionary)["publisher"] as! NSArray).firstObject as! NSDictionary)["description"])
+            self.tempInfo.addEntries(from: result["result"] as! [AnyHashable : Any])
             
             let tem = "Câu chuyện mở ra với bữa tiệc mừng của một thế giới phù thủy mà nhiều năm nay đã bị khủng hoảng bởi Chúa tể Hắc ám Voldemort. Đêm trước đó, Voldemort đã tìm thấy nơi sinh sống của gia đình Potter tại thung lũng Godric và giết chết Lily cũng như James Potter vì một lời tiên tri dự đoán sẽ ảnh hưởng đến Voldemort rằng hắn sẽ bị đánh bại bởi \"đứa trẻ sinh ra khi tháng bảy tàn đi\" mà Voldemort tin đứa trẻ là Harry Potter. Tuy vậy, khi hắn định giết Harry, Lời nguyền Chết chóc Avada Kedavra đã bật lại, Voldemort bị tiêu diệt, chỉ còn là một linh hồn, không sống mà cũng chẳng chết. Trong lúc đó, Harry bị lưu lại một vết sẹo hình tia chớp đặc biệt trên trán mình, dấu hiệu bên ngoài."
             
@@ -520,8 +515,6 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
         
         if indexPath.section == 0 {
             
-            
-            
             let title = self.withView(cell, tag: 1) as! UILabel
             title.text = self.config.getValueFromKey("name")
                     
@@ -531,9 +524,7 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
             
             let rate = self.withView(cell, tag: 3) as! CosmosView
             rate.rating = Double(self.tempInfo.getValueFromKey("rating")) ?? 0
-                        
-            print(self.tempInfo.getValueFromKey("rating"))
-            
+                                    
             let viewCount = self.withView(cell, tag: 4) as! UIButton
             viewCount.setTitle(self.tempInfo.getValueFromKey("read_count"), for: .normal)
             
@@ -558,7 +549,6 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
            let detail = detailList[indexPath.item] as! NSDictionary
 
            if detail.getValueFromKey("tag") == "1" {
-//                let header = self.withView(cell, tag: 1) as! UILabel
                 for v in cell.contentView.subviews {
                     v.isHidden = v.tag != 1
                 }
@@ -566,11 +556,9 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
             
             if detail.getValueFromKey("tag") == "2" {
                let title = self.withView(cell, tag: 2) as! UILabel
-//               title.isHidden = false
                title.text = detail.getValueFromKey("title")
     
                let description = self.withView(cell, tag: 3) as! UILabel
-//               description.isHidden = false
                 description.text = "%@%@".format(parameters: detail.getValueFromKey("name"), detail.getValueFromKey("unit"))
                 
                 for v in cell.contentView.subviews {
@@ -580,9 +568,7 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
             
             if detail.getValueFromKey("tag") == "4" {
                 let readOrListen = self.withView(cell, tag: 4) as! UIButton
-//                readOrListen.isHidden = false
                 let purchase = self.withView(cell, tag: 5) as! UIButton
-//                purchase.isHidden = false
                 for v in cell.contentView.subviews {
                     v.isHidden = v.tag != 4 && v.tag != 5
                 }
@@ -590,7 +576,9 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
             
             if detail.getValueFromKey("tag") == "6" {
                 let read = self.withView(cell, tag: 6) as! UIButton
-//                read.isHidden = false
+                read.action(forTouch: [:]) { (objc) in
+                    self.didRequestPackage(book: self.config)
+                }
                 for v in cell.contentView.subviews {
                     v.isHidden = v.tag != 6
                 }
@@ -638,6 +626,12 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        if indexPath.section == 3 {//chapter
+            let chap = chapList[indexPath.item] as! NSDictionary
+            self.didRequestPackage(book: chap)
+        }
+        
         if indexPath.section == 2 {
 //            let bookInfo:NSMutableDictionary = NSMutableDictionary.init(dictionary: (dataList[indexPath.item] as! NSDictionary))
 //            bookInfo["url"] = self.config["url"]
@@ -654,10 +648,7 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
 //                self.didRequestDetail()
 //            })
         }
-        if indexPath.section == 1 { //chapter
-//            let chap = chapList[indexPath.item] as! NSDictionary
-//            self.didRequestPackage(book: chap)
-            
+        if indexPath.section == 1 { //bio
             let cell = collectionView.cellForItem(at: indexPath)
             let title = self.withView(cell, tag: 1) as! UILabel
             showMore = !showMore
@@ -667,7 +658,7 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
             self.collectionView.reloadSections(IndexSet(integer: 0))
             self.adjustInset()
         }
-        if indexPath.section == 0 { //detail
+        if indexPath.section == 0 {
             
 //            print(detailList[indexPath.item])
 //            let data = detailList[indexPath.item] as! NSDictionary
@@ -677,7 +668,7 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "Book_Detail_Chap_Header", for: indexPath as IndexPath)
-        (self.withView(view, tag: 1) as! UILabel).text = "NGHE EBOOK (%i CHƯƠNG)".format(parameters: self.chapList.count)
+        (self.withView(view, tag: 1) as! UILabel).text = "Đọc EBOOK (%i CHƯƠNG)".format(parameters: self.chapList.count)
         let angle = self.retract ? 0 : CGFloat.pi
         
         (self.withView(view, tag: 3) as! UIButton).transform = CGAffineTransform(rotationAngle: angle)

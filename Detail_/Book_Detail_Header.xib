@@ -22,7 +22,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="320" height="220"/>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
-                <button opaque="NO" alpha="0.0" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CTW-p0-eqB">
+                <button hidden="YES" opaque="NO" alpha="0.0" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CTW-p0-eqB">
                     <rect key="frame" x="8" y="93.5" width="33" height="33"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="33" id="87f-Ec-OOd"/>
@@ -128,7 +128,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="448" height="306"/>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
-                <button opaque="NO" alpha="0.0" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3RU-iS-5ZR">
+                <button hidden="YES" opaque="NO" alpha="0.0" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3RU-iS-5ZR">
                     <rect key="frame" x="8" y="153.5" width="33" height="33"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="33" id="3LN-Q7-Lg7"/>

@@ -573,6 +573,10 @@ extension UIViewController {
         }
         return tempArray
     }
+    
+    @objc func html2String(string: NSString) -> NSString {
+        return (string as String).html2String as NSString
+    }
 }
 
 extension UITableView {
@@ -917,6 +921,7 @@ extension String {
         return html2AttributedString?.string ?? ""
     }
 }
+
 
 @IBDesignable extension UIView {
 
