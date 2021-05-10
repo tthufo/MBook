@@ -24,7 +24,7 @@
             
     IBOutlet UIView * controlView, * controlViewIpad;
     
-    IBOutlet NSLayoutConstraint * topHeight, * topHeightIpad;
+    IBOutlet NSLayoutConstraint * topHeight, * topHeightIpad, * leftGap, * rightGap;
     
     IBOutlet UIButton * play;
     
@@ -1584,6 +1584,7 @@
         [self->collectionView performBatchUpdates:^{
             [self->collectionView reloadSections:[NSIndexSet indexSetWithIndex:3]];
         } completion:^(BOOL finished) {
+            [self adjustInset];
         }];
     }];
     

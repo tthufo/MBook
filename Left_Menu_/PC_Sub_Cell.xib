@@ -46,7 +46,7 @@
                         </constraints>
                     </view>
                 </subviews>
-                <color key="backgroundColor" red="0.87058823529411766" green="0.92156862745098034" blue="0.91764705882352937" alpha="1" colorSpace="calibratedRGB"/>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
                     <constraint firstItem="vqm-x9-KBT" firstAttribute="top" secondItem="XZa-WF-aAd" secondAttribute="top" constant="10" id="2vA-oP-e82"/>
                     <constraint firstAttribute="bottom" secondItem="vqm-x9-KBT" secondAttribute="bottom" constant="10" id="8tc-RG-rLa"/>
@@ -59,7 +59,7 @@
                     <constraint firstItem="QBp-x5-pLS" firstAttribute="leading" secondItem="XZa-WF-aAd" secondAttribute="leading" constant="35" id="y1c-Zc-9FN"/>
                 </constraints>
             </tableViewCellContentView>
-            <color key="backgroundColor" red="0.87058823529411766" green="0.92156862745098034" blue="0.91764705882352937" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <point key="canvasLocation" x="-286.95652173913044" y="-36.495535714285715"/>
         </tableViewCell>
     </objects>

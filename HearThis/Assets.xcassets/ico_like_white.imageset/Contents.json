@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "ico_like_white.png",
+      "filename" : "ico_heart_line.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "ico_like_white@2x.png",
+      "filename" : "ico_heart_line@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "ico_like_white@3x.png",
+      "filename" : "ico_heart_line@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

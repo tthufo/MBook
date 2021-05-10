@@ -694,6 +694,24 @@ extension UIView {
         return nil
     }
     
+    @objc var leadingConstaint: NSLayoutConstraint? {
+         get {
+             return constraints.first(where: {
+                 $0.firstAttribute == .leading && $0.relation == .equal
+             })
+         }
+         set { setNeedsLayout() }
+     }
+     
+    @objc var trailingConstaint: NSLayoutConstraint? {
+         get {
+             return constraints.first(where: {
+                 $0.firstAttribute == .trailing && $0.relation == .equal
+             })
+         }
+         set { setNeedsLayout() }
+     }
+    
    @objc var heightConstaint: NSLayoutConstraint? {
         get {
             return constraints.first(where: {

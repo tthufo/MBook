@@ -106,6 +106,8 @@
 		FC908BA32645243A00176E13 /* Book_Detail_Option_Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC908BA22645243900176E13 /* Book_Detail_Option_Cell.xib */; };
 		FC908BA62645C67600176E13 /* Book_Detail_Chap_Header.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC908BA52645C67500176E13 /* Book_Detail_Chap_Header.xib */; };
 		FC908BA92645CF3B00176E13 /* CosmosDistrib.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC908BA82645CF3A00176E13 /* CosmosDistrib.swift */; };
+		FC908BD6264983C000176E13 /* News_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC908BD4264983B900176E13 /* News_ViewController.swift */; };
+		FC908BD7264983C000176E13 /* News_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC908BD5264983B900176E13 /* News_ViewController.xib */; };
 		FC91B731243120F400AA6671 /* GUISlider.m in Sources */ = {isa = PBXBuildFile; fileRef = FC91B72E243120F400AA6671 /* GUISlider.m */; };
 		FC91B732243120F400AA6671 /* GUIPlayerView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC91B72F243120F400AA6671 /* GUIPlayerView.m */; };
 		FC91B7352431217F00AA6671 /* XMLReader.m in Sources */ = {isa = PBXBuildFile; fileRef = FC91B7332431217F00AA6671 /* XMLReader.m */; };
@@ -315,6 +317,8 @@
 		FC908BA22645243900176E13 /* Book_Detail_Option_Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Book_Detail_Option_Cell.xib; sourceTree = "<group>"; };
 		FC908BA52645C67500176E13 /* Book_Detail_Chap_Header.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Book_Detail_Chap_Header.xib; sourceTree = "<group>"; };
 		FC908BA82645CF3A00176E13 /* CosmosDistrib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CosmosDistrib.swift; sourceTree = "<group>"; };
+		FC908BD4264983B900176E13 /* News_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = News_ViewController.swift; sourceTree = "<group>"; };
+		FC908BD5264983B900176E13 /* News_ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = News_ViewController.xib; sourceTree = "<group>"; };
 		FC91B72D243120F400AA6671 /* GUIPlayerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GUIPlayerView.h; sourceTree = SOURCE_ROOT; };
 		FC91B72E243120F400AA6671 /* GUISlider.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GUISlider.m; sourceTree = SOURCE_ROOT; };
 		FC91B72F243120F400AA6671 /* GUIPlayerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GUIPlayerView.m; sourceTree = SOURCE_ROOT; };
@@ -701,6 +705,8 @@
 				FCBC347C263DCD9600AC9621 /* Transaction_Fail.xib */,
 				FCBC347F263FFB2600AC9621 /* User_Infor_ViewController.swift */,
 				FCBC3480263FFB2600AC9621 /* User_Infor_ViewController.xib */,
+				FC908BD4264983B900176E13 /* News_ViewController.swift */,
+				FC908BD5264983B900176E13 /* News_ViewController.xib */,
 			);
 			path = Account_;
 			sourceTree = "<group>";
@@ -1023,6 +1029,7 @@
 				FC78396A2438EA6400470148 /* First_Tab_ViewController.xib in Resources */,
 				FCC965B01DA75BF60025971E /* HT_Player_Cell.xib in Resources */,
 				FC69D4422440D500006D57D9 /* Book_Detail_Header.xib in Resources */,
+				FC908BD7264983C000176E13 /* News_ViewController.xib in Resources */,
 				FC9467D425FD4BD800175288 /* PC_Confirm_ViewController.xib in Resources */,
 				FC130B8B24461D1A00D64012 /* List_Header_Cell.xib in Resources */,
 				FC69D43124405879006D57D9 /* TG_Room_Cell_10.xib in Resources */,
@@ -1126,6 +1133,7 @@
 				FC23EB95243A4C8F003E5E1A /* List_Book_ViewController.swift in Sources */,
 				FC9467D325FD4BD800175288 /* PC_Confirm_ViewController.swift in Sources */,
 				FC130B942446353100D64012 /* Book_Inner_ViewController.swift in Sources */,
+				FC908BD6264983C000176E13 /* News_ViewController.swift in Sources */,
 				FC7F32B5244A0731007429F7 /* XPathQuery.m in Sources */,
 				FC7F32B4244A0731007429F7 /* TFHpple.m in Sources */,
 				FCB3CD691DA4DDE9002FABDD /* HT_Genres_ViewController.m in Sources */,

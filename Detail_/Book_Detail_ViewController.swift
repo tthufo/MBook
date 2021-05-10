@@ -595,6 +595,10 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
             
             if detail.getValueFromKey("tag") == "6" {
                 let read = self.withView(cell, tag: 6) as! UIButton
+                if IS_IPAD {
+                    read.leadingConstaint?.constant = 1200
+                    read.trailingConstaint?.constant = 1200
+                }
                 read.action(forTouch: [:]) { (objc) in
                     self.didRequestPackage(book: self.config)
                 }
@@ -696,6 +700,7 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
             self.collectionView.performBatchUpdates {
                 self.collectionView.reloadSections(IndexSet(integer: 3))
             } completion: { (done) in
+                self.adjustInset()
             }
         }
         return view

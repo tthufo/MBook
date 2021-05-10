@@ -180,15 +180,18 @@ class First_Tab_ViewController: UIViewController {
 //            }
 //        }
         
-        EM_MenuView.init(restrict: ["line3": "MUA GÓI"]).show { (index, obj, menu) in
-            if index == 4 {
-
-            }
-        }
+//        EM_MenuView.init(restrict: ["line3": "MUA GÓI"]).show { (index, obj, menu) in
+//            if index == 4 {
+//
+//            }
+//        }
         
 //        self.center()?.pushViewController(Transaction_ViewController.init(), animated: true)
         
 //        self.center()?.pushViewController(User_Infor_ViewController.init(), animated: true)
+        
+        self.center()?.pushViewController(News_ViewController.init(), animated: true)
+
     }
 }
 

@@ -234,6 +234,8 @@ extension TG_Intro_ViewController: UITableViewDataSource, UITableViewDelegate {
                  
         (self.withView(cell, tag: 11) as! UILabel).text = data.getValueFromKey("name")
         
+        cell.backgroundColor = AVHexColor.color(withHexString: "#DEEBEA")
+        
         return cell
     }
     

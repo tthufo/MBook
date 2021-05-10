@@ -175,12 +175,12 @@
     
     [top actionForTouch:@{} and:^(NSDictionary *touchInfo) {
         isHot = NO;
-        [tableView reloadData];
+        [tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
     }];
     
     [hot actionForTouch:@{} and:^(NSDictionary *touchInfo) {
         isHot = YES;
-        [tableView reloadData];
+        [tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
     }];
         
     return section == 0 ? nil : header;
