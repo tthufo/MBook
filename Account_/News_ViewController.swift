@@ -16,6 +16,8 @@ class News_ViewController: UIViewController {
     
     @IBOutlet var sideGapRight: NSLayoutConstraint!
     
+    var dataList = [["image": "https://homepages.cae.wisc.edu/~ece533/images/airplane.png", "title": "sàdsabas ádf ấdưewer ưer f. ádfasf. ádfdfewrewr r ewfadsaf ẻtrt êt ẻt ểtwer ưerew wer rter êtrtr "], ["image": "https://homepages.cae.wisc.edu/~ece533/images/airplane.png", "title": "sàdsaba ưewrwe. ưerew. ửew ưer ưes ádfs sdf à ádf à à"], ["image": "https://homepages.cae.wisc.edu/~ece533/images/airplane.png", "title": "sàdsabas à shttps://homepages.cae.wisc.edu/~ece533/images/airplane.png"], ["image": "https://homepages.cae.wisc.edu/~ece533/images/airplane.png", "title": "sàds abas rtwrwe e rưe rưerwe ấ ádf ádfsad f"]]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -29,9 +31,7 @@ class News_ViewController: UIViewController {
         
         tableView.rowHeight = UITableView.automaticDimension
         
-        tableView.withCell("Transaction_Cell")
-        
-        tableView.withCell("Transaction_Fail")
+        tableView.withCell("News_Cell")
     }
     
     @IBAction func didPressBack() {
@@ -46,13 +46,19 @@ extension News_ViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return dataList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: indexPath.row == 1 ? "Transaction_Cell" : "Transaction_Fail", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "News_Cell", for: indexPath) as! News_Cell
+        
+        let dict = dataList[indexPath.row]
                 
+        cell.avatarImage.imageUrl(url: dict["image"]!)
+        
+        cell.titleLabel.text = dict["title"]!
+        
         return cell
     }
     
