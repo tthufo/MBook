@@ -96,7 +96,9 @@
     nav3.tabBarItem.selectedImage = [UIImage imageNamed:@"book_active"];
 
 
-    PC_Info_ViewController * fourth = [PC_Info_ViewController new];
+//    PC_Info_ViewController * fourth = [PC_Info_ViewController new];
+    
+    User_Infor_ViewController *fourth = [User_Infor_ViewController new];
     
 //    fourth.title = @"Tài khoản";
     

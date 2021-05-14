@@ -21,6 +21,19 @@ class User_Infor_ViewController: UIViewController {
     @IBOutlet var sideGapRight: NSLayoutConstraint!
     
     @IBOutlet var login_bg_height: NSLayoutConstraint!
+    
+    let refreshControl = UIRefreshControl()
+    
+    @IBOutlet var avatar: UIImageView!
+
+    var avatarTemp: UIImage!
+    
+    @IBOutlet var name: UILabel!
+    
+    @IBOutlet var phone: UILabel!
+
+    @IBOutlet var email: UILabel!
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,11 +45,203 @@ class User_Infor_ViewController: UIViewController {
             
             login_bg_height.constant = 390
         }
+        self.viewInfor()
+        
+        tableView.refreshControl = refreshControl
+        
+        refreshControl.addTarget(self, action: #selector(didReload(_:)), for: .valueChanged)
     }
     
-    @IBAction func didPressBack() {
-        self.navigationController?.popViewController(animated: true)
+    @objc func didReload(_ sender: Any) {
+        self.didGetInfo()
     }
+    
+    @IBAction func didPressEdit() {
+        self.center()?.pushViewController(PC_Inner_Info_ViewController.init(), animated: true)
+    }
+    
+    @IBAction func didPressBuy() {
+        print("dfsfdf")
+    }
+    
+    func viewInfor() {
+        name.text = Information.userInfo?.getValueFromKey("name")
+        phone.text = Information.userInfo?.getValueFromKey("phone")
+        email.text = Information.userInfo?.getValueFromKey("email")
+        if Information.avatar != nil {
+            avatarTemp = Information.avatar
+            avatar.image = avatarTemp
+        } else {
+            avatar.imageUrlHolder(url: (Information.userInfo?.getValueFromKey("avatar"))!, holder: "ic_avatar")
+        }
+    }
+    
+    func didGetInfo() {
+        LTRequest.sharedInstance()?.didRequestInfo(["CMD_CODE":"getUserInfo",
+                                                     "session": Information.token ?? "",
+                                                    "overrideAlert":"1",
+                                                    "overrideLoading":"1",
+                                                    "host":self], withCache: { (cacheString) in
+        }, andCompletion: { (response, errorCode, error, isValid, object) in
+            let result = response?.dictionize() ?? [:]
+            self.refreshControl.endRefreshing()
+            
+            if result.getValueFromKey("error_code") != "0" || result["result"] is NSNull {
+                self.showToast(response?.dictionize().getValueFromKey("error_msg") == "" ? "Lỗi xảy ra, mời bạn thử lại" : response?.dictionize().getValueFromKey("error_msg"), andPos: 0)
+                return
+            }
+                   
+            let preInfo: NSMutableDictionary = (response?.dictionize()["result"] as! NSDictionary).reFormat()
+                        
+            self.add(preInfo as? [AnyHashable : Any], andKey: "info")
+
+            Information.saveInfo()
+            
+            self.viewInfor()
+        })
+    }
+    
+    @IBAction func didPressImage() {
+        EM_MenuView.init(settingMenu: [:]).show(completion: { (indexing, obj, menu) in
+            switch indexing {
+            case 1:
+//                self.didPressPreview(image: self.avatarTemp != nil ? self.avatarTemp as Any: Information.userInfo?.getValueFromKey("avatar") as Any)
+                break
+            case 2:
+                Permission.shareInstance()?.askCamera { (camType) in
+                    switch (camType) {
+                    case .authorized:
+                        DispatchQueue.main.async(execute: {
+                            Media.shareInstance().startPickImage(withOption: true, andBase: nil, andRoot: self, andCompletion: { (image) in
+                                if image != nil {
+                                    self.didPressSubmit(image: image as! UIImage)
+                                }
+                            })
+                        })
+                        break
+                    case .denied:
+                        self.showToast("Bạn chưa cho phép sử dụng Camera", andPos: 0)
+                        break
+                    case .per_denied:
+                        self.showToast("Bạn chưa cho phép sử dụng Camera", andPos: 0)
+                        break
+                    case .per_granted:
+                        DispatchQueue.main.async(execute: {
+                            Media.shareInstance().startPickImage(withOption: true, andBase: nil, andRoot: self, andCompletion: { (image) in
+                                if image != nil {
+                                    self.didPressSubmit(image: image as! UIImage)
+                                }
+                            })
+                        })
+                        break
+                    case .restricted:
+                        self.showToast("Bạn chưa cho phép sử dụng Camera", andPos: 0)
+                        break
+                    default:
+                        break
+                    }
+                }
+                break
+            case 3:
+                Permission.shareInstance()?.askGallery { (camType) in
+                   switch (camType) {
+                   case .authorized:
+                        DispatchQueue.main.async(execute: {
+                           Media.shareInstance().startPickImage(withOption: false, andBase: nil, andRoot: self, andCompletion: { (image) in
+                               if image != nil {
+                                self.didPressSubmit(image: image as! UIImage)
+                               }
+                           })
+                       })
+                       break
+                   case .denied:
+                       self.showToast("Bạn chưa cho phép sử dụng Bộ sưu tập", andPos: 0)
+                       break
+                   case .per_denied:
+                       self.showToast("Bạn chưa cho phép sử dụng Bộ sưu tập", andPos: 0)
+                       break
+                   case .per_granted:
+                        DispatchQueue.main.async(execute: {
+                           Media.shareInstance().startPickImage(withOption: false, andBase: nil, andRoot: self, andCompletion: { (image) in
+                               if image != nil {
+                                self.didPressSubmit(image: image as! UIImage)
+                               }
+                           })
+                        })
+                       break
+                   case .restricted:
+                       self.showToast("Bạn chưa cho phép sử dụng Bộ sưu tập", andPos: 0)
+                       break
+                   default:
+                       break
+                   }
+               }
+                break
+            default:
+                break
+            }
+        })
+    }
+    
+    @IBAction func didPressSubmit(image: UIImage) {
+        let data: NSMutableDictionary =
+            self.avatarTemp != nil ? ["CMD_CODE":"updateUserInfo",
+                                         "session": Information.token ?? "",
+                                         "avatar": self.avatarTemp != nil ? self.avatarTemp.imageString() : "",
+//                                         "sex": sex ?? "",
+                                         "email":email.text as Any,
+                                         "name":name.text as Any,
+                                         "phone":phone.text as Any,
+//                                         "birthday": birthday.text as Any,
+//                                         "address":address.text as Any,
+                                        "overrideAlert":"1",
+                                        "overrideLoading":"1",
+                                        "host":self]
+                                        :
+                                        ["CMD_CODE":"updateUserInfo",
+                                         "session": Information.token ?? "",
+//                                         "sex": sex ?? "",
+                                         "email":email.text as Any,
+                                         "name":name.text as Any,
+                                         "phone":phone.text as Any,
+//                                         "birthday": birthday.text as Any,
+//                                         "address":address.text as Any,
+                                        "overrideAlert":"1",
+                                        "overrideLoading":"1",
+                                        "host":self]
+        
+        LTRequest.sharedInstance()?.didRequestInfo((data as! [AnyHashable : Any]), withCache: { (cacheString) in
+       }, andCompletion: { (response, errorCode, error, isValid, object) in
+           let result = response?.dictionize() ?? [:]
+                                               
+           if result.getValueFromKey("error_code") != "0" || result["result"] is NSNull {
+//               self.showToast(response?.dictionize().getValueFromKey("error_msg") == "" ? "Lỗi xảy ra, mời bạn thử lại" : response?.dictionize().getValueFromKey("error_msg"), andPos: 0)
+               print(response)
+                EM_MenuView.init(confirm: ["image": "fail", "line1": "Cập nhật không thành công", "line2": "Xin lỗi quý khách vì sự cố này \nVui lòng thử lại sau", "line3": "Về trang Cá nhân"]).show { (index, obj, menu) in
+                    if index == 4 {
+        
+                    } else {
+        
+                    }
+                }
+               return
+           }
+//           self.showToast("Cập nhật thông tin thành công", andPos: 0)
+            EM_MenuView.init(confirm: ["image": "success", "line1": "Đổi avatar thành công", "line2": "Thông tin của quý khách đã được cập nhật", "line3": "Về trang Cá nhân"]).show { (index, obj, menu) in
+                if index == 4 {
+
+                } else {
+
+                }
+            }
+        
+            self.avatarTemp = image
+            self.avatar.image = image
+            Information.avatar = image
+           
+            self.didGetInfo()
+       })
+   }
 }
 
 extension User_Infor_ViewController: UITableViewDataSource, UITableViewDelegate {

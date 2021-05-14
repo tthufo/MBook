@@ -85,7 +85,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ico_corner_top" translatesAutoresizingMaskIntoConstraints="NO" id="s7P-cd-GVj">
-                        <rect key="frame" x="20" y="7" width="25" height="25"/>
+                        <rect key="frame" x="20" y="6" width="25" height="25"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="25" id="Stw-9z-G5W"/>
                             <constraint firstAttribute="width" constant="25" id="hyz-gu-ao4"/>
@@ -124,7 +124,7 @@
                     <constraint firstAttribute="trailing" secondItem="K0W-HG-Mtd" secondAttribute="trailing" constant="11" id="ccm-ar-3XD"/>
                     <constraint firstItem="rsU-C0-1kF" firstAttribute="leading" secondItem="W3e-Rb-1Cr" secondAttribute="trailing" constant="12" id="dtq-Dz-ekk"/>
                     <constraint firstItem="T8C-V1-SZZ" firstAttribute="leading" secondItem="eKm-44-0I4" secondAttribute="leading" constant="20" id="j5u-Ss-0IJ"/>
-                    <constraint firstItem="s7P-cd-GVj" firstAttribute="top" secondItem="eKm-44-0I4" secondAttribute="top" constant="7" id="jgQ-S8-ifM"/>
+                    <constraint firstItem="s7P-cd-GVj" firstAttribute="top" secondItem="eKm-44-0I4" secondAttribute="top" constant="6" id="jgQ-S8-ifM"/>
                     <constraint firstItem="Pbg-mN-naX" firstAttribute="leading" secondItem="WAf-UP-r62" secondAttribute="trailing" constant="12" id="k6D-TT-qfP"/>
                     <constraint firstItem="K0W-HG-Mtd" firstAttribute="top" secondItem="fdH-1U-Xij" secondAttribute="bottom" constant="4" id="lAG-mM-9YP"/>
                     <constraint firstItem="W3e-Rb-1Cr" firstAttribute="leading" secondItem="eKm-44-0I4" secondAttribute="leading" constant="20" id="qrS-BE-tsA"/>
@@ -139,7 +139,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="ico_corner_top" width="29.5" height="29.5"/>
+        <image name="ico_corner_top" width="31.5" height="31.5"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

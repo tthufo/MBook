@@ -103,7 +103,7 @@
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CHỌN KÊNH THANH TOÁN" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6L2-AV-RRr">
                         <rect key="frame" x="10" y="10" width="210" height="21"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="210" id="Nv3-2P-Aob"/>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="210" id="Nv3-2P-Aob"/>
                             <constraint firstAttribute="height" constant="21" id="Xkr-F1-fEM"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -114,23 +114,23 @@
                         <rect key="frame" x="0.0" y="39" width="414" height="80"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kgp-fV-G7Z">
-                                <rect key="frame" x="0.0" y="0.0" width="83" height="80"/>
+                                <rect key="frame" x="0.0" y="0.0" width="92" height="80"/>
                                 <state key="normal" image="ic_momo"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GhG-p8-VFp">
-                                <rect key="frame" x="83" y="0.0" width="82.5" height="80"/>
+                                <rect key="frame" x="92" y="0.0" width="92" height="80"/>
                                 <state key="normal" image="ic_airpay"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nz6-EW-ChF">
-                                <rect key="frame" x="165.5" y="0.0" width="83" height="80"/>
+                                <rect key="frame" x="184" y="0.0" width="76.5" height="80"/>
                                 <state key="normal" image="ic_vnpay"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="bbY-tf-ixB">
-                                <rect key="frame" x="248.5" y="0.0" width="82.5" height="80"/>
+                                <rect key="frame" x="260.5" y="0.0" width="77" height="80"/>
                                 <state key="normal" image="ic_nganluong"/>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c6p-To-FD0">
-                                <rect key="frame" x="331" y="0.0" width="83" height="80"/>
+                                <rect key="frame" x="337.5" y="0.0" width="76.5" height="80"/>
                                 <state key="normal" image="ic_sms"/>
                             </button>
                         </subviews>
@@ -192,8 +192,8 @@
     </objects>
     <resources>
         <image name="bg_login-1" width="266.5" height="136.5"/>
-        <image name="ic_airpay" width="53" height="53"/>
-        <image name="ic_momo" width="53" height="53"/>
+        <image name="ic_airpay" width="63.5" height="63.5"/>
+        <image name="ic_momo" width="63.5" height="63.5"/>
         <image name="ic_nganluong" width="53" height="53"/>
         <image name="ic_sms" width="53" height="53"/>
         <image name="ic_vnpay" width="53" height="53"/>

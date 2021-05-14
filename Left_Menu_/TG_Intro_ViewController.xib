@@ -133,7 +133,7 @@
         </view>
     </objects>
     <resources>
-        <image name="btn_upgrade" width="33" height="53"/>
+        <image name="btn_upgrade" width="55.5" height="89"/>
         <image name="ic_avatar" width="116.5" height="116.5"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
