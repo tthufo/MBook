@@ -32,7 +32,7 @@
                                 <constraint firstAttribute="width" constant="44" id="6Dy-LB-yba"/>
                                 <constraint firstAttribute="height" constant="44" id="LbK-4p-J7z"/>
                             </constraints>
-                            <state key="normal" image="icon_back"/>
+                            <state key="normal" image="ico_arrow_l_white"/>
                             <connections>
                                 <action selector="didPressBack" destination="-1" eventType="touchUpInside" id="1uk-ih-9DT"/>
                             </connections>
@@ -132,7 +132,7 @@
     </objects>
     <resources>
         <image name="ic_menu_down" width="33" height="33"/>
-        <image name="icon_back" width="33" height="33"/>
+        <image name="ico_arrow_l_white" width="33" height="33"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

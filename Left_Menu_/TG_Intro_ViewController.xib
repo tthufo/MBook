@@ -64,6 +64,9 @@
                                         <constraint firstAttribute="height" constant="88" id="lHA-zG-riQ"/>
                                     </constraints>
                                     <state key="normal" backgroundImage="btn_upgrade"/>
+                                    <connections>
+                                        <action selector="didPressPurchase" destination="-1" eventType="touchUpInside" id="GrF-nz-4Wq"/>
+                                    </connections>
                                 </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e5B-Ou-Lo5">
                                     <rect key="frame" x="106" y="38" width="145" height="37"/>

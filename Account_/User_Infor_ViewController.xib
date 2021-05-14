@@ -424,11 +424,11 @@
     <resources>
         <image name="bg_login-1" width="266.5" height="136.5"/>
         <image name="ic_avatar" width="116.5" height="116.5"/>
-        <image name="ico_book" width="39.5" height="39"/>
-        <image name="ico_camera" width="33" height="33"/>
-        <image name="ico_edit" width="33" height="33"/>
-        <image name="ico_glass" width="39.5" height="39"/>
-        <image name="ico_vip" width="33" height="33.5"/>
+        <image name="ico_book" width="80" height="79.5"/>
+        <image name="ico_camera" width="47.5" height="47.5"/>
+        <image name="ico_edit" width="31.5" height="31.5"/>
+        <image name="ico_glass" width="80" height="79.5"/>
+        <image name="ico_vip" width="58.5" height="58.5"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

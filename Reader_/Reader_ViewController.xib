@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -36,7 +37,7 @@
                                 <constraint firstAttribute="width" constant="44" id="09j-km-4d4"/>
                                 <constraint firstAttribute="height" constant="44" id="Tzn-wc-R2o"/>
                             </constraints>
-                            <state key="normal" image="icon_back"/>
+                            <state key="normal" image="ico_arrow_l_white"/>
                             <connections>
                                 <action selector="didPressBack" destination="-1" eventType="touchUpInside" id="FUB-eJ-IbR"/>
                             </connections>
@@ -62,7 +63,7 @@
                             </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" red="0.0" green="0.60784313729999995" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.11764705882352941" green="0.5725490196078431" blue="0.5490196078431373" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="64" id="CCy-SP-z56"/>
                         <constraint firstItem="YMH-aa-Yna" firstAttribute="top" secondItem="tH1-YX-68o" secondAttribute="top" constant="16" id="IJS-25-24j"/>
@@ -92,7 +93,7 @@
                 </progressView>
                 <view hidden="YES" clipsSubviews="YES" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="1Kd-We-2c1" customClass="PDFView">
                     <rect key="frame" x="0.0" y="108" width="414" height="754"/>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </view>
                 <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LpR-aG-b8R">
                     <rect key="frame" x="371" y="60" width="35" height="35"/>
@@ -134,6 +135,7 @@
                     </constraints>
                 </view>
             </subviews>
+            <viewLayoutGuide key="safeArea" id="eug-p7-zIe"/>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="8JW-Su-IJf" firstAttribute="trailing" secondItem="eug-p7-zIe" secondAttribute="trailing" id="0EJ-ck-YTh"/>
@@ -163,14 +165,21 @@
                 <constraint firstItem="oQl-Jm-Jd2" firstAttribute="top" secondItem="tH1-YX-68o" secondAttribute="bottom" id="yzR-mo-fLh"/>
                 <constraint firstItem="LpR-aG-b8R" firstAttribute="top" secondItem="eug-p7-zIe" secondAttribute="top" constant="16" id="zBK-JK-tdS"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="eug-p7-zIe"/>
             <point key="canvasLocation" x="137.68115942028987" y="114.50892857142857"/>
         </view>
     </objects>
+    <designables>
+        <designable name="BXk-iU-bGX">
+            <size key="intrinsicContentSize" width="-1" height="1.5"/>
+        </designable>
+    </designables>
     <resources>
         <image name="full-screen-dark" width="50.5" height="50.5"/>
         <image name="full-screen-light" width="50.5" height="50.5"/>
-        <image name="icon_back" width="33" height="33"/>
+        <image name="ico_arrow_l_white" width="33" height="33"/>
         <image name="reload" width="42.5" height="42.5"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

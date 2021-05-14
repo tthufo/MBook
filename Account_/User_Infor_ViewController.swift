@@ -61,7 +61,14 @@ class User_Infor_ViewController: UIViewController {
     }
     
     @IBAction func didPressBuy() {
-        print("dfsfdf")
+        let vip = VIP_ViewController.init()
+        vip.callBack = { info in
+            print(info)
+        }
+        let nav = UINavigationController.init(rootViewController: vip)
+        nav.isNavigationBarHidden = true
+        nav.modalPresentationStyle = .fullScreen
+        self.center().present(nav, animated: true, completion: nil)
     }
     
     func viewInfor() {

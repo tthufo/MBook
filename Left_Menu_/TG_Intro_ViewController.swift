@@ -138,6 +138,18 @@ class TG_Intro_ViewController: UIViewController {
     @IBAction func didPressFAQ() {
 
     }
+    
+    @IBAction func didPressPurchase() {
+        let vip = VIP_ViewController.init()
+        vip.callBack = { info in
+            print(info)
+        }
+        let nav = UINavigationController.init(rootViewController: vip)
+        nav.isNavigationBarHidden = true
+        nav.modalPresentationStyle = .fullScreen
+        self.root()?.showCenterPanel(animated: true)
+        self.center().present(nav, animated: true, completion: nil)
+    }
 }
 
 extension TG_Intro_ViewController: UITableViewDataSource, UITableViewDelegate {

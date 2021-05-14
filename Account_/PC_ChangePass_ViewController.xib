@@ -42,7 +42,7 @@
                                 <constraint firstAttribute="width" constant="44" id="9Eg-Yf-JTa"/>
                                 <constraint firstAttribute="height" constant="44" id="wK9-j8-pky"/>
                             </constraints>
-                            <state key="normal" image="icon_back"/>
+                            <state key="normal" image="ico_arrow_l_white"/>
                             <connections>
                                 <action selector="didPressBack" destination="-1" eventType="touchUpInside" id="3Xc-es-8MF"/>
                             </connections>
@@ -397,9 +397,9 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="ico_arrow_l_white" width="33" height="33"/>
         <image name="ico_hide" width="33" height="33"/>
-        <image name="ico_lock" width="33" height="33"/>
-        <image name="icon_back" width="33" height="33"/>
+        <image name="ico_lock" width="31.5" height="31.5"/>
         <systemColor name="darkTextColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

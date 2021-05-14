@@ -31,7 +31,7 @@
                                 <constraint firstAttribute="width" constant="44" id="N2N-pz-UUX"/>
                                 <constraint firstAttribute="height" constant="44" id="NbH-t3-iuw"/>
                             </constraints>
-                            <state key="normal" image="icon_back"/>
+                            <state key="normal" image="ico_arrow_l_white"/>
                             <connections>
                                 <action selector="didPressBack" destination="-1" eventType="touchUpInside" id="zgo-VJ-nkI"/>
                             </connections>
@@ -58,7 +58,7 @@
                         </button>
                     </subviews>
                     <viewLayoutGuide key="safeArea" id="aRE-dT-FeD"/>
-                    <color key="backgroundColor" red="0.0" green="0.60784313729999995" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.1176470588" green="0.57254901960000004" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstItem="zBk-MB-z4z" firstAttribute="leading" secondItem="2Vo-MR-vDZ" secondAttribute="trailing" constant="8" id="3xQ-33-MgL"/>
                         <constraint firstItem="2Vo-MR-vDZ" firstAttribute="leading" secondItem="aRE-dT-FeD" secondAttribute="leading" constant="8" id="57S-Ea-FsH"/>
@@ -116,6 +116,6 @@
     </designables>
     <resources>
         <image name="ic_search" width="50.5" height="50.5"/>
-        <image name="icon_back" width="33" height="33"/>
+        <image name="ico_arrow_l_white" width="33" height="33"/>
     </resources>
 </document>

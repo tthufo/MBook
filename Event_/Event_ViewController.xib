@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="Event_ViewController" customModule="HearThis" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="Event_ViewController" customModule="MeBook" customModuleProvider="target">
             <connections>
                 <outlet property="collectionView" destination="kal-1n-Ycj" id="Tlm-Gc-Ywe"/>
                 <outlet property="titleLabel" destination="etz-qV-5td" id="g7e-Mh-Efg"/>
@@ -29,7 +29,7 @@
                                 <constraint firstAttribute="height" constant="44" id="b08-rx-rHL"/>
                                 <constraint firstAttribute="width" constant="44" id="dqW-oz-Xxh"/>
                             </constraints>
-                            <state key="normal" image="icon_back"/>
+                            <state key="normal" image="ico_arrow_l_white"/>
                             <connections>
                                 <action selector="didPressBack" destination="-1" eventType="touchUpInside" id="da8-hh-9GW"/>
                             </connections>
@@ -56,7 +56,8 @@
                             </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" red="0.0" green="0.60784313729999995" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <viewLayoutGuide key="safeArea" id="BGV-lD-IHW"/>
+                    <color key="backgroundColor" red="0.1176470588" green="0.57254901960000004" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstItem="0n4-Eg-Rac" firstAttribute="top" secondItem="BGV-lD-IHW" secondAttribute="top" constant="10" id="QNF-0T-wbD"/>
                         <constraint firstItem="0n4-Eg-Rac" firstAttribute="leading" secondItem="BGV-lD-IHW" secondAttribute="leading" constant="8" id="TyO-2q-fl4"/>
@@ -66,7 +67,6 @@
                         <constraint firstAttribute="height" constant="64" id="tSu-if-W6N"/>
                         <constraint firstItem="BGV-lD-IHW" firstAttribute="trailing" secondItem="8i0-TN-8Ei" secondAttribute="trailing" constant="8" id="wxV-eV-JIN"/>
                     </constraints>
-                    <viewLayoutGuide key="safeArea" id="BGV-lD-IHW"/>
                 </view>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="kal-1n-Ycj">
                     <rect key="frame" x="10" y="72" width="355" height="585"/>
@@ -83,6 +83,7 @@
                     </connections>
                 </collectionView>
             </subviews>
+            <viewLayoutGuide key="safeArea" id="rxw-mG-x0N"/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="p28-1X-exE" firstAttribute="leading" secondItem="rxw-mG-x0N" secondAttribute="leading" id="1tr-VB-TEg"/>
@@ -93,12 +94,11 @@
                 <constraint firstItem="p28-1X-exE" firstAttribute="trailing" secondItem="rxw-mG-x0N" secondAttribute="trailing" id="jgG-FS-PAl"/>
                 <constraint firstItem="p28-1X-exE" firstAttribute="top" secondItem="rxw-mG-x0N" secondAttribute="top" id="xmh-nc-obP"/>
             </constraints>
-            <viewLayoutGuide key="safeArea" id="rxw-mG-x0N"/>
             <point key="canvasLocation" x="140" y="145.27736131934034"/>
         </view>
     </objects>
     <resources>
         <image name="ic_search" width="50.5" height="50.5"/>
-        <image name="icon_back" width="33" height="33"/>
+        <image name="ico_arrow_l_white" width="33" height="33"/>
     </resources>
 </document>

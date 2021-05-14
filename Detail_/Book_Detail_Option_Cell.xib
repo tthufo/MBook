@@ -86,7 +86,7 @@
                     </label>
                     <button hidden="YES" opaque="NO" clipsSubviews="YES" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4n6-1z-9gG">
                         <rect key="frame" x="19" y="-1" width="376" height="52"/>
-                        <color key="backgroundColor" red="0.1137254902" green="0.32156862749999998" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.1176470588" green="0.57254901960000004" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="52" id="VD8-f2-HTj"/>
                         </constraints>

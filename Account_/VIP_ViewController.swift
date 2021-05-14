@@ -16,7 +16,6 @@ class VIP_ViewController: UIViewController {
 
     @IBOutlet var top_bg_height: NSLayoutConstraint!
 
-    
     @IBOutlet var sideGapLeft: NSLayoutConstraint!
     
     @IBOutlet var sideGapRight: NSLayoutConstraint!
@@ -24,6 +23,8 @@ class VIP_ViewController: UIViewController {
     @IBOutlet var sideGapTop: NSLayoutConstraint!
 
     var dataList: NSMutableArray!
+    
+    @objc var callBack: ((_ info: Any)->())?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -81,7 +82,12 @@ class VIP_ViewController: UIViewController {
 //    }
     
     @IBAction func didPressBack() {
-        self.navigationController?.popViewController(animated: true)
+        if self.isModal {
+            self.dismiss(animated: true, completion: nil)
+        } else {
+            self.navigationController?.popViewController(animated: true)
+        }
+        callBack?(["bla": "blo"])
     }
 }
 

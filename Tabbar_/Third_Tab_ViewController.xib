@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -94,7 +94,8 @@
                             </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" red="0.0" green="0.60784313729999995" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <viewLayoutGuide key="safeArea" id="gCf-Ly-5Gv"/>
+                    <color key="backgroundColor" red="0.1176470588" green="0.57254901960000004" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstItem="uuo-e1-Ocn" firstAttribute="centerX" secondItem="26d-QX-CoH" secondAttribute="centerX" id="E5y-qt-QOz"/>
                         <constraint firstAttribute="height" constant="64" id="IqF-1P-2D3"/>
@@ -104,7 +105,6 @@
                         <constraint firstItem="9Tv-eH-ghu" firstAttribute="leading" secondItem="gCf-Ly-5Gv" secondAttribute="leading" constant="8" id="pPm-Fv-UKa"/>
                         <constraint firstItem="gCf-Ly-5Gv" firstAttribute="trailing" secondItem="Cob-he-1oy" secondAttribute="trailing" constant="8" id="pV8-DV-OFA"/>
                     </constraints>
-                    <viewLayoutGuide key="safeArea" id="gCf-Ly-5Gv"/>
                 </view>
                 <imageView hidden="YES" alpha="0.40000000000000002" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="left" translatesAutoresizingMaskIntoConstraints="NO" id="YcA-tQ-sE7">
                     <rect key="frame" x="0.0" y="64" width="30" height="35"/>
@@ -121,6 +121,7 @@
                     </constraints>
                 </imageView>
             </subviews>
+            <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="iwt-Y2-oOI" firstAttribute="trailing" secondItem="Q5M-cg-NOt" secondAttribute="trailing" id="93b-3E-05u"/>
@@ -136,7 +137,6 @@
                 <constraint firstItem="YcA-tQ-sE7" firstAttribute="top" secondItem="26d-QX-CoH" secondAttribute="bottom" id="v2g-ks-alp"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <viewLayoutGuide key="safeArea" id="Q5M-cg-NOt"/>
             <point key="canvasLocation" x="-133" y="-1"/>
         </view>
     </objects>
