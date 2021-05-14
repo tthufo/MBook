@@ -48,21 +48,21 @@
                         </userDefinedRuntimeAttributes>
                     </label>
                     <button hidden="YES" opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qo4-HU-hrN">
-                        <rect key="frame" x="10" y="15.5" width="99.5" height="19"/>
+                        <rect key="frame" x="10" y="10" width="111.5" height="30"/>
                         <constraints>
                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="85.5" id="5sD-AE-yfh"/>
-                            <constraint firstAttribute="height" constant="19" id="icD-vi-I8Y"/>
+                            <constraint firstAttribute="height" constant="30" id="icD-vi-I8Y"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                        <state key="normal" title="Đọc Ebook" image="ico_watch">
+                        <state key="normal" title="Đọc Ebook" image="ico_audio">
                             <color key="titleColor" red="0.1176470588" green="0.57254901960000004" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
                         </state>
                     </button>
                     <button hidden="YES" opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zm6-7I-Phy">
-                        <rect key="frame" x="309.5" y="15.5" width="94.5" height="19.5"/>
+                        <rect key="frame" x="297.5" y="10" width="106.5" height="30"/>
                         <constraints>
                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="82" id="Mi0-QI-UtX"/>
-                            <constraint firstAttribute="height" constant="19.5" id="oua-tb-Xuu"/>
+                            <constraint firstAttribute="height" constant="30" id="oua-tb-Xuu"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
                         <state key="normal" title=" Mua ngay" image="ico_buy">
@@ -123,7 +123,7 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="ico_buy" width="19.5" height="19.5"/>
-        <image name="ico_watch" width="19.5" height="19.5"/>
+        <image name="ico_audio" width="31.5" height="31.5"/>
+        <image name="ico_buy" width="31.5" height="31.5"/>
     </resources>
 </document>
