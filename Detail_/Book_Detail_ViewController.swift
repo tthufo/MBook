@@ -587,7 +587,22 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
             
             if detail.getValueFromKey("tag") == "4" {
                 let readOrListen = self.withView(cell, tag: 4) as! UIButton
+                
                 let purchase = self.withView(cell, tag: 5) as! UIButton
+                purchase.action(forTouch: [:]) { (obj) in
+                    
+                    let checkInfo = NSMutableDictionary.init(dictionary: self.tempInfo)
+                    checkInfo["is_package"] = "0"
+                    
+                    let checkOut = Check_Out_ViewController.init()
+                    checkOut.info = checkInfo
+                    
+                    let nav = UINavigationController.init(rootViewController: checkOut)
+                    nav.isNavigationBarHidden = true
+                    nav.modalPresentationStyle = .fullScreen
+                    
+                    self.present(nav, animated: true, completion: nil)
+                }
                 for v in cell.contentView.subviews {
                     v.isHidden = v.tag != 4 && v.tag != 5
                 }

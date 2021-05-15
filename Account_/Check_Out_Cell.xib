@@ -57,7 +57,7 @@
                         <rect key="frame" x="243" y="16" width="61" height="25"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="25" id="4FM-ST-CzS"/>
-                            <constraint firstAttribute="width" constant="61" id="tls-ER-bXu"/>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="61" id="tls-ER-bXu"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" red="0.1176470588" green="0.57254901960000004" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -71,7 +71,7 @@
                     <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qai-Is-V44">
                         <rect key="frame" x="243" y="49" width="61" height="21"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="61" id="Zex-ha-lrl"/>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="61" id="Zex-ha-lrl"/>
                             <constraint firstAttribute="height" constant="21" id="fEo-80-EPk"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>

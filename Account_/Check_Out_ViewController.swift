@@ -21,8 +21,8 @@ class Check_Out_ViewController: UIViewController {
     @IBOutlet var sideGapRight: NSLayoutConstraint!
     
     @IBOutlet var nextButton: UIButton!
-
-    var isPackage: Bool = true
+    
+    var info: NSDictionary!
     
     var names = [["check": "0", "name": "ic_momo"], ["check": "0", "name": "ic_airpay"], ["check": "0", "name": "ic_vnpay"], ["check": "0", "name": "ic_nganluong"], ["check": "0", "name": "ic_sms"]]
 
@@ -49,7 +49,15 @@ class Check_Out_ViewController: UIViewController {
     }
 
     @IBAction func didPressBack() {
-        self.navigationController?.popViewController(animated: true)
+        if self.isPackage {
+            self.navigationController?.popViewController(animated: true)
+            return
+        }
+        if self.isModal {
+            self.dismiss(animated: true, completion: nil)
+        } else {
+            self.navigationController?.popViewController(animated: true)
+        }
     }
     
     @IBAction func didPressNext() {
@@ -58,6 +66,10 @@ class Check_Out_ViewController: UIViewController {
     
     @IBAction func didPressCancel() {
         
+    }
+    
+    var isPackage: Bool {
+        return self.info.getValueFromKey("is_package") == "1"
     }
 }
 
@@ -102,13 +114,49 @@ extension Check_Out_ViewController: UITableViewDataSource, UITableViewDelegate {
                     (bacton as! UIButton).setImage(self.names[indexing as! Int]["check"] == "1" ? UIImage(named: self.names[indexing as! Int]["name"]!) : UIImage(named: self.names[indexing as! Int]["name"]!)?.noir, for: .normal)
                 }
             }
-                
             
             return optionCell!
         }
         
         let cell = tableView.dequeueReusableCell(withIdentifier: self.isPackage ? (indexPath.row == 0 ? "Vip_Cell" : "Check_Out_Cell") : "Check_Out_Book_Cell", for: indexPath)
+        
+        if self.isPackage {
+            if indexPath.row == 0 {
+                let vip = self.withView(cell, tag: 1) as! UILabel
+                            
+                vip.text = self.info.getValueFromKey("vip")
                 
+                let price = self.withView(cell, tag: 2) as! UILabel
+                
+                price.text = self.info.getValueFromKey("price")
+
+                let des = self.withView(cell, tag: 3) as! UILabel
+
+                des.text = self.info.getValueFromKey("des")
+            } else {
+                let vip = self.withView(cell, tag: 1) as! UILabel
+                            
+                vip.text = "MeeBook " + self.info.getValueFromKey("vip")
+                
+                let price = self.withView(cell, tag: 2) as! UILabel
+                
+                price.text = self.info.getValueFromKey("price")
+            }
+        } else {
+            let title = self.withView(cell, tag: 1) as! UILabel
+            title.text = self.info.getValueFromKey("name")
+                    
+            let authorName = ((self.info["author"] as! NSArray).firstObject as! NSDictionary).getValueFromKey("name")
+            let author = self.withView(cell, tag: 2) as! UILabel
+            author.text = authorName
+            
+            let price = self.withView(cell, tag: 3) as! UILabel
+            price.text = self.info.getValueFromKey("price") + " đ"
+            
+            let backgroundImage = self.withView(cell, tag:11) as! UIImageView
+            backgroundImage.imageUrl(url: self.info.getValueFromKey("avatar"))
+        }
+        
         return cell
     }
     

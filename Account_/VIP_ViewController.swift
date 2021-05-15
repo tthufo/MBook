@@ -139,13 +139,13 @@ extension VIP_ViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-//        let data = dataList![indexPath.row] as! NSDictionary
-//        let expDate = (data.getValueFromKey("expireTime")! as NSString).date(withFormat: "dd/MM/yyyy")
-//        let isRegistered = data.getValueFromKey("status") == "1" && expDate! > Date()
-
-        let checkOut = Check_Out_ViewController.init()
         
-        checkOut.isPackage = indexPath.row == 0
+        let data = dataList![indexPath.row] as! NSDictionary
+        let checkInfo = NSMutableDictionary.init(dictionary: data)
+        checkInfo["is_package"] = "1"
+        
+        let checkOut = Check_Out_ViewController.init()
+        checkOut.info = checkInfo
         
         self.navigationController?.pushViewController(checkOut, animated: true)
     }
