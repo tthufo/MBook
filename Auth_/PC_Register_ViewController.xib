@@ -88,9 +88,10 @@
                     </userDefinedRuntimeAttributes>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VUR-Jk-dao">
-                    <rect key="frame" x="8" y="604" width="359" height="30"/>
+                    <rect key="frame" x="8" y="620" width="359" height="30"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="30" id="bRS-9t-CgR"/>
+                        <constraint firstAttribute="height" constant="30" id="DJU-YM-DB8"/>
+                        <constraint firstAttribute="width" constant="359" id="r2P-Ua-Gzy"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                     <state key="normal" title="Đã có tài khoản">
@@ -130,16 +131,15 @@
                 <constraint firstItem="a3g-V7-dhm" firstAttribute="leading" secondItem="fOA-5y-drT" secondAttribute="leading" id="9p8-7g-uFP"/>
                 <constraint firstItem="zO2-ne-CnB" firstAttribute="top" secondItem="NEh-1t-dY6" secondAttribute="top" id="A4s-Vo-hRo"/>
                 <constraint firstItem="cuN-1G-CS3" firstAttribute="leading" secondItem="fOA-5y-drT" secondAttribute="leading" id="AIo-aj-3xH"/>
+                <constraint firstItem="fOA-5y-drT" firstAttribute="bottom" secondItem="VUR-Jk-dao" secondAttribute="bottom" constant="17" id="FKk-0V-T29"/>
                 <constraint firstItem="zO2-ne-CnB" firstAttribute="trailing" secondItem="fOA-5y-drT" secondAttribute="trailing" id="KcS-c8-jQx"/>
-                <constraint firstItem="jRN-h1-tXz" firstAttribute="top" secondItem="VUR-Jk-dao" secondAttribute="bottom" constant="2" id="L13-fO-HVM"/>
-                <constraint firstItem="fOA-5y-drT" firstAttribute="trailing" secondItem="VUR-Jk-dao" secondAttribute="trailing" constant="8" id="PEZ-Fh-Ufo"/>
                 <constraint firstItem="zO2-ne-CnB" firstAttribute="leading" secondItem="fOA-5y-drT" secondAttribute="leading" id="Pam-vr-zth"/>
                 <constraint firstItem="cPt-Fj-KLX" firstAttribute="trailing" secondItem="fOA-5y-drT" secondAttribute="trailing" id="Rzu-xi-eqs"/>
                 <constraint firstItem="zO2-ne-CnB" firstAttribute="bottom" secondItem="fOA-5y-drT" secondAttribute="bottom" id="S9W-NC-e6y"/>
                 <constraint firstItem="zO2-ne-CnB" firstAttribute="bottom" secondItem="fOA-5y-drT" secondAttribute="bottom" id="VgH-Eu-zz4"/>
                 <constraint firstItem="cuN-1G-CS3" firstAttribute="trailing" secondItem="fOA-5y-drT" secondAttribute="trailing" id="XMC-0s-hDQ"/>
                 <constraint firstItem="zO2-ne-CnB" firstAttribute="leading" secondItem="fOA-5y-drT" secondAttribute="leading" id="bVy-M3-Fpm"/>
-                <constraint firstItem="VUR-Jk-dao" firstAttribute="leading" secondItem="fOA-5y-drT" secondAttribute="leading" constant="8" id="blM-Os-Hos"/>
+                <constraint firstItem="VUR-Jk-dao" firstAttribute="centerX" secondItem="NEh-1t-dY6" secondAttribute="centerX" id="cCj-pA-9D8"/>
                 <constraint firstItem="pb1-tb-9vR" firstAttribute="top" secondItem="fOA-5y-drT" secondAttribute="top" constant="8" id="dFe-SP-eK6"/>
                 <constraint firstItem="fOA-5y-drT" firstAttribute="bottom" secondItem="jRN-h1-tXz" secondAttribute="bottom" constant="10" id="ea6-xR-xxd"/>
                 <constraint firstItem="zO2-ne-CnB" firstAttribute="top" secondItem="NEh-1t-dY6" secondAttribute="top" id="faL-i9-0Py"/>

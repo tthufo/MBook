@@ -199,14 +199,21 @@ class PC_Register_ViewController: UIViewController, UITextFieldDelegate {
             let result = response?.dictionize() ?? [:]
                                     
             if result.getValueFromKey("status") != "OK" {
-                self.showToast(response?.dictionize().getValueFromKey("data") == "" ? "Lỗi xảy ra, mời bạn thử lại" : response?.dictionize().getValueFromKey("data"), andPos: 0)
+//                self.showToast(response?.dictionize().getValueFromKey("data") == "" ? "Lỗi xảy ra, mời bạn thử lại" : response?.dictionize().getValueFromKey("data"), andPos: 0)
+                EM_MenuView.init(confirm: ["image": "fail", "line1": "Đăng ký không thành công", "line2": "Xin lỗi bạn về sự cố này, vui lòng thử lại sau", "line3": "Thoát"]).show { (index, obj, menu) in
+                    if index == 4 {
+                    }
+                }
                 return
             }
             
-            self.showToast("Đăng ký thành công", andPos: 0)
+//            self.showToast("Đăng ký thành công", andPos: 0)
             
-            self.navigationController?.popViewController(animated: true)
-
+            EM_MenuView.init(confirm: ["image": "success", "line1": "Tài khoản mới đã tạo", "line2": "Thông tin đăng nhận đã được gửi tới\n hòm thư/tin nhắn", "line3": "Về trang Đăng nhập"]).show { (index, obj, menu) in
+                if index == 4 {
+                    self.navigationController?.popViewController(animated: true)
+                }
+            }
         })
     }
     

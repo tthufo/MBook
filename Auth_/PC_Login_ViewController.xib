@@ -268,7 +268,7 @@
                         <action selector="didPressSubmitWithPhoneNumber:" destination="-1" eventType="touchUpInside" id="uzJ-qM-UyM"/>
                     </connections>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="hoặc đăng nhập qua" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O86-LG-nJb">
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="hoặc đăng nhập qua" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O86-LG-nJb">
                     <rect key="frame" x="129.33333333333337" y="277" width="155.66666666666663" height="21"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="i0I-sh-yNW"/>
@@ -278,7 +278,7 @@
                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Cj-Gi-Lyc">
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Cj-Gi-Lyc">
                     <rect key="frame" x="184" y="313" width="46" height="44"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="56E-Jb-QIl"/>
@@ -286,7 +286,7 @@
                     </constraints>
                     <state key="normal" backgroundImage="btn_fb"/>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g55-II-xED">
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g55-II-xED">
                     <rect key="frame" x="235" y="313" width="46" height="44"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="46" id="Fq5-Me-S6Y"/>
@@ -294,7 +294,7 @@
                     </constraints>
                     <state key="normal" backgroundImage="btn_google"/>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dGw-Vw-6Qz">
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dGw-Vw-6Qz">
                     <rect key="frame" x="133" y="313" width="46" height="44"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="KSf-96-4bd"/>
@@ -353,8 +353,8 @@
         <image name="btn_fb" width="33.333332061767578" height="33.333332061767578"/>
         <image name="btn_google" width="33.333332061767578" height="33.333332061767578"/>
         <image name="ico_hide" width="33.333332061767578" height="33.333332061767578"/>
-        <image name="ico_lock" width="33.333332061767578" height="33.333332061767578"/>
-        <image name="ico_user" width="33.333332061767578" height="33.333332061767578"/>
+        <image name="ico_lock" width="32" height="32"/>
+        <image name="ico_user" width="32" height="32"/>
         <image name="logo" width="142" height="61.333332061767578"/>
     </resources>
 </document>

@@ -922,7 +922,7 @@
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = 7546H2CFFT;
 						LastSwiftMigration = 1130;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -1310,8 +1310,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = HearThis/MeBook.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development: Nguyen Ngoc Quang (589UWV5PGW)";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7546H2CFFT;
 				ENABLE_BITCODE = NO;
@@ -1402,7 +1402,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.agri.ebook;
 				PRODUCT_NAME = MeBook;
 				PROVISIONING_PROFILE = "d4f4ddc3-6615-47d3-9900-2f2822cb0a06";
-				PROVISIONING_PROFILE_SPECIFIER = Ebook_Dev;
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "HearThis/HearThis-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;

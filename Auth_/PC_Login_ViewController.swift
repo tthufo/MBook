@@ -34,7 +34,7 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
 
     @IBOutlet var passErr: UILabel!
     
-    @IBOutlet var sumitText: UILabel!
+//    @IBOutlet var sumitText: UILabel!
     
     @IBOutlet var bottom: MarqueeLabel!
     
@@ -182,7 +182,7 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
                self.pass.text = Information.log!["pass"] as? String
                self.submit.isEnabled = self.uName.text?.count != 0 && self.pass.text?.count != 0
                self.submit.alpha = self.uName.text?.count != 0 && self.pass.text?.count != 0 ? 1 : 0.5
-               self.sumitText.alpha = self.uName.text?.count != 0 && self.pass.text?.count != 0 ? 1 : 0.5
+//               self.sumitText.alpha = self.uName.text?.count != 0 && self.pass.text?.count != 0 ? 1 : 0.5
            }
            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6, execute: {
               if self.logOut == "logIn" {
@@ -291,7 +291,7 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
                                 self.pass.text = Information.log!["pass"] as? String
                                 self.submit.isEnabled = self.uName.text?.count != 0 && self.pass.text?.count != 0
                                 self.submit.alpha = self.uName.text?.count != 0 && self.pass.text?.count != 0 ? 1 : 0.5
-                                self.sumitText.alpha = self.uName.text?.count != 0 && self.pass.text?.count != 0 ? 1 : 0.5
+//                                self.sumitText.alpha = self.uName.text?.count != 0 && self.pass.text?.count != 0 ? 1 : 0.5
                             }
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.6, execute: {
                                 if self.logOut == "logIn" {
@@ -352,7 +352,7 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
 //                self.isSms = true
 //            }
 //        }
-        self.navigationController?.pushViewController(PC_Confirm_ViewController.init(), animated: true)
+        self.navigationController?.pushViewController(PC_Register_ViewController.init(), animated: true)
     }
     
     func checkPhone() -> Bool {
@@ -500,7 +500,7 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
                 if self.submit != nil {
                    self.submit.isEnabled = self.uName.text?.count != 0 && self.pass.text?.count != 0
                    self.submit.alpha = self.uName.text?.count != 0 && self.pass.text?.count != 0 ? 1 : 0.5
-                   self.sumitText.alpha = self.uName.text?.count != 0 && self.pass.text?.count != 0 ? 1 : 0.5
+//                   self.sumitText.alpha = self.uName.text?.count != 0 && self.pass.text?.count != 0 ? 1 : 0.5
                 }
             }
        })

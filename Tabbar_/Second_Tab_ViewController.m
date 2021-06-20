@@ -27,6 +27,8 @@
     int totalPage;
     
     BOOL isLoadMore, isHot;
+    
+    float tempHeight;
 }
 
 @end
@@ -43,6 +45,8 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    tempHeight = 0;
     
     pageIndex = 1;
     
@@ -175,12 +179,18 @@
     
     [top actionForTouch:@{} and:^(NSDictionary *touchInfo) {
         isHot = NO;
-        [tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
+        [tableView beginUpdates];
+        [tableView reloadData];
+//        [tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
+        [tableView endUpdates];
     }];
     
     [hot actionForTouch:@{} and:^(NSDictionary *touchInfo) {
         isHot = YES;
-        [tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
+        [tableView beginUpdates];
+        [tableView reloadData];
+//        [tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
+        [tableView endUpdates];
     }];
         
     return section == 0 ? nil : header;
@@ -191,10 +201,10 @@
     return 1;
 }
 
-- (CGFloat)tableView:(UITableView *)_tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return UITableViewAutomaticDimension;
-}
+//- (CGFloat)tableView:(UITableView *)_tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    return UITableViewAutomaticDimension;
+//}
 
 - (NSInteger)tableView:(UITableView *)_tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -203,7 +213,8 @@
 
 - (CGFloat)tableView:(UITableView *)_tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return indexPath.section == 0 ? [config[@"height"] floatValue] : 155;
+    NSLog(@"%f", tempHeight);
+    return indexPath.section == 0 ? tempHeight == 0 ? [config[@"height"] floatValue] : tempHeight : 155;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)_tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -241,13 +252,13 @@
         rectIn.size.width = rect.size.width * (indexPath.row % 2 == 0 ? 16 : 30) / 100;
         
         progress.inner.frame = rectIn;
-        
 
     } else {
         ((TG_Room_Cell_N *)cell).config = self->config;
         ((TG_Room_Cell_N *)cell).returnValue = ^(float value) {
             self->config[@"height"] = [NSString stringWithFormat:@"%f", value];
             self->config[@"loaded"] = @YES;
+            self->tempHeight = value;
             [tableView reloadData];
         };
         ((TG_Room_Cell_N *)cell).callBack = ^(id infor) {
@@ -260,7 +271,7 @@
             NSMutableDictionary * bookInfo = [[NSMutableDictionary alloc] initWithDictionary:[self removeKey:self->config]];
             [bookInfo addEntriesFromDictionary:(NSDictionary*)infor];
             bookDetail.config = bookInfo;
-            [self.navigationController pushViewController:bookDetail animated:YES];
+            [[self CENTER] pushViewController:bookDetail animated:YES];
         };
 
         UIButton * more = (UIButton*)[self withView:cell tag:12];

@@ -107,7 +107,7 @@
                                 <constraint firstAttribute="height" constant="33" id="Xfg-NU-9g5"/>
                             </constraints>
                         </imageView>
-                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Số điện thoại" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Pat-VY-7gL">
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Nhập email hoặc số điện thoại" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Pat-VY-7gL">
                             <rect key="frame" x="57" y="21" width="281" height="30"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>

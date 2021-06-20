@@ -721,6 +721,10 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
         return view
     }
     
+    func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
+        view.layer.zPosition = 0.0
+    }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize(width: collectionView.frame.width, height: section == 3 ? chapList.count <= 1 ? 0 : 55 : 0)
     }

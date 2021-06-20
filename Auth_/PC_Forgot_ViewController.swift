@@ -181,11 +181,11 @@ class PC_Forgot_ViewController: UIViewController , UITextFieldDelegate {
     
     @IBAction func didPressSubmit() {
         self.view.endEditing(true)
-        isValid = self.checkPhone()
-        if !isValid {
-            validPhone()
-            return
-        }
+//        isValid = self.checkPhone()
+//        if !isValid {
+//            validPhone()
+//            return
+//        }
         LTRequest.sharedInstance()?.didRequestInfo(["CMD_CODE":"forgetPassword",
                                                     "username":convertPhone(),
                                                     "overrideAlert":"1",
@@ -195,13 +195,21 @@ class PC_Forgot_ViewController: UIViewController , UITextFieldDelegate {
             let result = response?.dictionize() ?? [:]
                                     
             if result.getValueFromKey("error_code") != "0" || result["result"] is NSNull {
-               self.showToast(response?.dictionize().getValueFromKey("error_msg") == "" ? "Lỗi xảy ra, mời bạn thử lại" : response?.dictionize().getValueFromKey("error_msg"), andPos: 0)
+//               self.showToast(response?.dictionize().getValueFromKey("error_msg") == "" ? "Lỗi xảy ra, mời bạn thử lại" : response?.dictionize().getValueFromKey("error_msg"), andPos: 0)
+                EM_MenuView.init(confirm: ["image": "fail", "line1": "Lấy lại mật khẩu không thành công", "line2": "Xin lỗi bạn về sự cố này, vui lòng thử lại sau", "line3": "Thoát"]).show { (index, obj, menu) in
+                    if index == 4 {
+                    }
+                }
                 return
             }
             
-            self.showToast("Lấy lại mật khẩu thành công. Mật khẩu mới sẽ đưởi gửi về số điện thoại %@".format(parameters: self.uName.text!), andPos: 0)
-
-            self.didPressBack()
+//            self.showToast("Lấy lại mật khẩu thành công. Mật khẩu mới sẽ đưởi gửi về số điện thoại %@".format(parameters: self.uName.text!), andPos: 0)
+//
+            EM_MenuView.init(confirm: ["image": "success", "line1": "Mật khẩu mới đã tạo", "line2": "Vui lòng kiểm tra hòm thư/tin nhắn\n để lấy mật khẩu mới", "line3": "Về trang Đăng nhập"]).show { (index, obj, menu) in
+                if index == 4 {
+                    self.didPressBack()
+                }
+            }
         })
     }
     
@@ -232,12 +240,12 @@ class PC_Forgot_ViewController: UIViewController , UITextFieldDelegate {
     
     func validPhone() {
           uNameErr.alpha = isValid ? 0 : 1
-          uNameBg.backgroundColor = isValid ? UIColor.black : UIColor.red
+          uNameBg.backgroundColor = isValid ? UIColor.white : UIColor.red
       }
     
     @objc func textIsChanging(_ textField:UITextField) {
         isValid = true
-        validPhone()
+//        validPhone()
     }
     
     func toolBar() -> UIToolbar {
