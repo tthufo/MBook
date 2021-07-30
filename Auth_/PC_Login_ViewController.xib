@@ -278,28 +278,37 @@
                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Cj-Gi-Lyc">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Cj-Gi-Lyc">
                     <rect key="frame" x="184" y="313" width="46" height="44"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="56E-Jb-QIl"/>
                         <constraint firstAttribute="width" constant="46" id="uvl-j8-ZRz"/>
                     </constraints>
                     <state key="normal" backgroundImage="btn_fb"/>
+                    <connections>
+                        <action selector="didPressFB" destination="-1" eventType="touchUpInside" id="TKY-jY-Fby"/>
+                    </connections>
                 </button>
-                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g55-II-xED">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g55-II-xED">
                     <rect key="frame" x="235" y="313" width="46" height="44"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="46" id="Fq5-Me-S6Y"/>
                         <constraint firstAttribute="height" constant="44" id="MjF-qQ-Ny7"/>
                     </constraints>
                     <state key="normal" backgroundImage="btn_google"/>
+                    <connections>
+                        <action selector="didPressGG" destination="-1" eventType="touchUpInside" id="z2p-91-KIy"/>
+                    </connections>
                 </button>
-                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dGw-Vw-6Qz">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dGw-Vw-6Qz">
                     <rect key="frame" x="133" y="313" width="46" height="44"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="44" id="KSf-96-4bd"/>
                         <constraint firstAttribute="width" constant="46" id="ouL-Dw-t90"/>
                     </constraints>
+                    <connections>
+                        <action selector="handleLogInWithAppleID" destination="-1" eventType="touchUpInside" id="kgN-7i-L1M"/>
+                    </connections>
                 </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="FsA-gY-oh5"/>

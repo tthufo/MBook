@@ -46,7 +46,11 @@
     }];
     
     [[FirePush shareInstance] didRegister];
+
+    [[GG_PlugIn shareInstance] application:application didFinishLaunchingWithOptions:launchOptions];
     
+    [[FB_Plugin shareInstance] application:application didFinishLaunchingWithOptions:launchOptions];
+
     [Information saveToken];
     
     [Information saveInfo];
@@ -195,6 +199,18 @@ UIBackgroundTaskIdentifier bgTask;
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
     [[FirePush shareInstance] didReiciveToken:deviceToken withType:0];
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    
+    NSString *stringURL = [ url absoluteString];
+    if([stringURL containsString:@"fb"]) {
+        return [[FB_Plugin shareInstance] application:application openURL:url sourceApplication:sourceApplication annotation:annotation];
+    } else {
+        return [[GG_PlugIn shareInstance] application:application openURL:url sourceApplication:sourceApplication annotation:annotation];
+    }
+    
+    return YES;
 }
 
 @end

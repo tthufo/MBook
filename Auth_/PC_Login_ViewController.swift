@@ -9,9 +9,10 @@
 import UIKit
 import MarqueeLabel
 import MessageUI
+import AuthenticationServices
 
 class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageComposeViewControllerDelegate {
-  
+    
     @IBOutlet var logo: UIImageView!
     
     @IBOutlet var bg: UIImageView!
@@ -575,5 +576,60 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
         self.dismiss(animated: true, completion: {
             self.isSms = false
         })
+    }
+    
+    @IBAction func handleLogInWithAppleID() {
+         let request = ASAuthorizationAppleIDProvider().createRequest()
+         request.requestedScopes = [.fullName, .email]
+         
+         let controller = ASAuthorizationController(authorizationRequests: [request])
+         
+         controller.delegate = self
+         controller.presentationContextProvider = self
+         
+         controller.performRequests()
+     }
+    
+    @IBAction func didPressGG() {
+       self.view.endEditing(true)
+       GG_PlugIn.shareInstance()?.startLogGoogle(completion: { (responseString, object, errorCode, description, error) in
+            if object != nil {
+//                self.socialLogin(type: "google", token: (object as! NSDictionary).getValueFromKey("access_token"));
+//                let token = (object as! NSDictionary).getValueFromKey("access_token")
+                print(object)
+            }
+        }, andHost: self)
+   }
+    
+    @IBAction func didPressFB() {
+        self.view.endEditing(true)
+        FB_Plugin.shareInstance()?.startLoginFacebook(completion: { (responseString, object, errorCode, description, error) in
+            if object != nil {
+//                self.socialLogin(type: "facebook", token: ((object as! NSDictionary)["info"] as! NSDictionary).getValueFromKey("access_token"));
+                let token = ((object as! NSDictionary)["info"] as! NSDictionary).getValueFromKey("id")
+                print(token)
+            }
+        })
+      }
+}
+
+extension PC_Login_ViewController: ASAuthorizationControllerDelegate {
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+        switch authorization.credential {
+        case let appleIDCredential as ASAuthorizationAppleIDCredential:
+            let userIdentifier = appleIDCredential.user
+        
+            print("--->", userIdentifier)
+        
+            break
+        default:
+            break
+        }
+    }
+}
+
+extension PC_Login_ViewController: ASAuthorizationControllerPresentationContextProviding {
+    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+           return self.view.window!
     }
 }

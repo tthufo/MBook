@@ -16,5 +16,6 @@ pod 'FireBasePod'
 pod 'FSPagerView'
 pod 'ParallaxHeader', '~> 3.0.0'
 pod "ExpandableLabel"
-
+pod 'FBPod', '~> 0.1.1'
+pod 'GGPod', '~> 0.1'
 end

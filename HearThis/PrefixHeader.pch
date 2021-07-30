@@ -145,4 +145,9 @@
 
 #import "FirePush.h"
 
+#import "GG_PlugIn.h"
+
+#import "FB_Plugin.h"
+
+
 #endif /* PrefixHeader_pch */

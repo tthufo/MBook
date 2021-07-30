@@ -33,6 +33,7 @@
 		FC23EB94243A4C8F003E5E1A /* List_Book_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC23EB92243A4C8F003E5E1A /* List_Book_ViewController.xib */; };
 		FC23EB95243A4C8F003E5E1A /* List_Book_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC23EB93243A4C8F003E5E1A /* List_Book_ViewController.swift */; };
 		FC23EB97243A4CB9003E5E1A /* TG_Map_Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC23EB96243A4CB9003E5E1A /* TG_Map_Cell.xib */; };
+		FC3F62DB26B48F6200A13820 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FC3F62DA26B48F6200A13820 /* GoogleService-Info.plist */; };
 		FC40A0FC243EFE5C0096B9DB /* TG_Room_Cell_4.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC40A0F8243EFE5B0096B9DB /* TG_Room_Cell_4.xib */; };
 		FC40A0FD243EFE5C0096B9DB /* TG_Room_Cell_1.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC40A0F9243EFE5B0096B9DB /* TG_Room_Cell_1.xib */; };
 		FC40A0FE243EFE5C0096B9DB /* TG_Room_Cell_3.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC40A0FA243EFE5C0096B9DB /* TG_Room_Cell_3.xib */; };
@@ -176,7 +177,6 @@
 		FCC965B01DA75BF60025971E /* HT_Player_Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCC965AF1DA75BF60025971E /* HT_Player_Cell.xib */; };
 		FCC965B21DA75C060025971E /* HT_Player_Item.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCC965B11DA75C060025971E /* HT_Player_Item.xib */; };
 		FCD0E59F1DA8F93500DF2ABF /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = FCD0E59E1DA8F93500DF2ABF /* libz.tbd */; };
-		FCD36BFC2437BE2D009BB530 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FCD36BFB2437BE2D009BB530 /* GoogleService-Info.plist */; };
 		FCD381872444D78E004D78C9 /* CustomFlowLayou.m in Sources */ = {isa = PBXBuildFile; fileRef = FCD381862444D78E004D78C9 /* CustomFlowLayou.m */; };
 		FCD979892447693D00970A4E /* Reader_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD979872447693D00970A4E /* Reader_ViewController.swift */; };
 		FCD9798A2447693D00970A4E /* Reader_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCD979882447693D00970A4E /* Reader_ViewController.xib */; };
@@ -225,6 +225,7 @@
 		FC23EB92243A4C8F003E5E1A /* List_Book_ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = List_Book_ViewController.xib; sourceTree = "<group>"; };
 		FC23EB93243A4C8F003E5E1A /* List_Book_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = List_Book_ViewController.swift; sourceTree = "<group>"; };
 		FC23EB96243A4CB9003E5E1A /* TG_Map_Cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TG_Map_Cell.xib; sourceTree = "<group>"; };
+		FC3F62DA26B48F6200A13820 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FC40A0F8243EFE5B0096B9DB /* TG_Room_Cell_4.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TG_Room_Cell_4.xib; sourceTree = "<group>"; };
 		FC40A0F9243EFE5B0096B9DB /* TG_Room_Cell_1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TG_Room_Cell_1.xib; sourceTree = "<group>"; };
 		FC40A0FA243EFE5C0096B9DB /* TG_Room_Cell_3.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TG_Room_Cell_3.xib; sourceTree = "<group>"; };
@@ -402,7 +403,6 @@
 		FCC965AF1DA75BF60025971E /* HT_Player_Cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HT_Player_Cell.xib; sourceTree = "<group>"; };
 		FCC965B11DA75C060025971E /* HT_Player_Item.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HT_Player_Item.xib; sourceTree = "<group>"; };
 		FCD0E59E1DA8F93500DF2ABF /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
-		FCD36BFB2437BE2D009BB530 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FCD381852444D78E004D78C9 /* CustomFlowLayou.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomFlowLayou.h; sourceTree = "<group>"; };
 		FCD381862444D78E004D78C9 /* CustomFlowLayou.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomFlowLayou.m; sourceTree = "<group>"; };
 		FCD979872447693D00970A4E /* Reader_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reader_ViewController.swift; sourceTree = "<group>"; };
@@ -529,7 +529,7 @@
 				FC7551001DAE4640007992DF /* Default-568h@2x.png */,
 				FC7551011DAE4640007992DF /* Default.png */,
 				FC7551021DAE4640007992DF /* Default~iphone.png */,
-				FCD36BFB2437BE2D009BB530 /* GoogleService-Info.plist */,
+				FC3F62DA26B48F6200A13820 /* GoogleService-Info.plist */,
 				FC1AD7CE1DA40CA8002BA7EC /* Supporting Files */,
 			);
 			path = HearThis;
@@ -922,7 +922,7 @@
 						CreatedOnToolsVersion = 8.0;
 						DevelopmentTeam = 7546H2CFFT;
 						LastSwiftMigration = 1130;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -962,6 +962,7 @@
 				FCFB516D1DD075E200D49FB2 /* actions.plist in Resources */,
 				FCAB62C72639675300E26484 /* VIP_ViewController.xib in Resources */,
 				FC0A8FB42437770E001A75AF /* PC_Login_ViewController.xib in Resources */,
+				FC3F62DB26B48F6200A13820 /* GoogleService-Info.plist in Resources */,
 				FCB238D3244355770034B40B /* Event_Cell.xib in Resources */,
 				FCB782E71DA414D400BDF913 /* Second_Tab_ViewController.xib in Resources */,
 				FC640A921DAAAE2800DAEF55 /* TT_Synced_ViewController.xib in Resources */,
@@ -1043,7 +1044,6 @@
 				FCBC34852640668900AC9621 /* Author_Cell.xib in Resources */,
 				FCB238CC244235D70034B40B /* Author_Bio_Cell.xib in Resources */,
 				FC1AD7DE1DA40CA8002BA7EC /* LaunchScreen.storyboard in Resources */,
-				FCD36BFC2437BE2D009BB530 /* GoogleService-Info.plist in Resources */,
 				FCBC348E26407A0900AC9621 /* Tag.xib in Resources */,
 				FC908BDA264A840200176E13 /* News_Cell.xib in Resources */,
 				FCAD57F2243DB7E400101A47 /* TG_Room_Cell_Banner_1.xib in Resources */,
@@ -1072,12 +1072,16 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-HearThis/Pods-HearThis-resources.sh",
+				"${PODS_ROOT}/FBSDKCoreKit/FacebookSDKStrings.bundle",
+				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/MBCircularProgressBar/MBCircularProgressBar.bundle",
 				"${PODS_ROOT}/NSDate+TimeAgo/NSDateTimeAgo.bundle",
 				"${PODS_ROOT}/SVProgressHUD/SVProgressHUD/SVProgressHUD.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/FacebookSDKStrings.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MBCircularProgressBar.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/NSDateTimeAgo.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SVProgressHUD.bundle",
@@ -1310,114 +1314,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = HearThis/MeBook.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 7546H2CFFT;
-				ENABLE_BITCODE = NO;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					"$(PROJECT_DIR)",
-				);
-				GCC_PREFIX_HEADER = HearThis/PrefixHeader.pch;
-				HEADER_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"${PODS_ROOT}/Headers/Public\"",
-					"\"${PODS_ROOT}/Headers/Public/AFNetworking\"",
-					"\"${PODS_ROOT}/Headers/Public/AVHexColor\"",
-					"\"${PODS_ROOT}/Headers/Public/AllPod\"",
-					"\"${PODS_ROOT}/Headers/Public/CRToast\"",
-					"\"${PODS_ROOT}/Headers/Public/FSPagerView\"",
-					"\"${PODS_ROOT}/Headers/Public/FireBasePod\"",
-					"\"${PODS_ROOT}/Headers/Public/Firebase\"",
-					"\"${PODS_ROOT}/Headers/Public/FirebaseAnalyticsInterop\"",
-					"\"${PODS_ROOT}/Headers/Public/FirebaseCore\"",
-					"\"${PODS_ROOT}/Headers/Public/FirebaseCoreDiagnostics\"",
-					"\"${PODS_ROOT}/Headers/Public/FirebaseCoreDiagnosticsInterop\"",
-					"\"${PODS_ROOT}/Headers/Public/FirebaseInstallations\"",
-					"\"${PODS_ROOT}/Headers/Public/FirebaseInstanceID\"",
-					"\"${PODS_ROOT}/Headers/Public/FirebaseMessaging\"",
-					"\"${PODS_ROOT}/Headers/Public/GoogleDataTransport\"",
-					"\"${PODS_ROOT}/Headers/Public/GoogleDataTransportCCTSupport\"",
-					"\"${PODS_ROOT}/Headers/Public/GoogleUtilities\"",
-					"\"${PODS_ROOT}/Headers/Public/IAPHelper\"",
-					"\"${PODS_ROOT}/Headers/Public/JASidePanels\"",
-					"\"${PODS_ROOT}/Headers/Public/JSONKit-NoWarning\"",
-					"\"${PODS_ROOT}/Headers/Public/MBCircularProgressBar\"",
-					"\"${PODS_ROOT}/Headers/Public/MYNStickyFlowLayout\"",
-					"\"${PODS_ROOT}/Headers/Public/NSDate+TimeAgo\"",
-					"\"${PODS_ROOT}/Headers/Public/PromisesObjC\"",
-					"\"${PODS_ROOT}/Headers/Public/Protobuf\"",
-					"\"${PODS_ROOT}/Headers/Public/Reachability\"",
-					"\"${PODS_ROOT}/Headers/Public/SDWebImage\"",
-					"\"${PODS_ROOT}/Headers/Public/SVProgressHUD\"",
-					"\"${PODS_ROOT}/Headers/Public/Toast\"",
-					"\"${PODS_ROOT}/Headers/Public/XCDYouTubeKit\"",
-					"\"${PODS_ROOT}/Headers/Public/nanopb\"",
-					"$(inherited)",
-					"${PODS_ROOT}/Firebase/CoreOnly/Sources",
-					"\"${PODS_TARGET_SRCROOT}/Sources/FBLPromises/include\"",
-					"$(SDKROOT)/usr/include/libxml2",
-				);
-				INFOPLIST_FILE = HearThis/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/AFNetworking\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/AVHexColor\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/AllPod\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/CRToast\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/ExpandableLabel\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/FSPagerView\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/FireBasePod\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseCore\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseCoreDiagnostics\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseInstallations\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseInstanceID\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseMessaging\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/GoogleDataTransport\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/GoogleDataTransportCCTSupport\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/GoogleUtilities\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/IAPHelper\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/JASidePanels\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/JSONKit-NoWarning\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/MBCircularProgressBar\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/MYNStickyFlowLayout\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/MarqueeLabel\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/NSDate+TimeAgo\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/ParallaxHeader\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/PromisesObjC\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/Protobuf\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/Reachability\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/ReachabilitySwift\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/SDWebImage\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/SVProgressHUD\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/Toast\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/XCDYouTubeKit\"",
-					"\"${PODS_CONFIGURATION_BUILD_DIR}/nanopb\"",
-					"$(SDKROOT)/usr/include/libxml2",
-				);
-				MARKETING_VERSION = 1.3;
-				PRODUCT_BUNDLE_IDENTIFIER = com.agri.ebook;
-				PRODUCT_NAME = MeBook;
-				PROVISIONING_PROFILE = "d4f4ddc3-6615-47d3-9900-2f2822cb0a06";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "HearThis/HearThis-Bridging-Header.h";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		FC1AD7E41DA40CA8002BA7EC /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 57B771C8FC9DB06500C15CB5 /* Pods-HearThis.release.xcconfig */;
-			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = HearThis/MeBook.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Distribution: AGRIMEDIA WEATHER AND AGRICULTURE SOLUTION JOINT STOCK COMPANY (7546H2CFFT)";
+				CODE_SIGN_IDENTITY = "Apple Development: Nguyen Ngoc Quang (589UWV5PGW)";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7546H2CFFT;
@@ -1467,7 +1364,114 @@
 					"$(SDKROOT)/usr/include/libxml2",
 				);
 				INFOPLIST_FILE = HearThis/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/AFNetworking\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/AVHexColor\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/AllPod\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/CRToast\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/ExpandableLabel\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FSPagerView\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FireBasePod\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseCore\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseCoreDiagnostics\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseInstallations\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseInstanceID\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseMessaging\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/GoogleDataTransport\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/GoogleDataTransportCCTSupport\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/GoogleUtilities\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/IAPHelper\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/JASidePanels\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/JSONKit-NoWarning\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MBCircularProgressBar\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MYNStickyFlowLayout\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/MarqueeLabel\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/NSDate+TimeAgo\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/ParallaxHeader\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/PromisesObjC\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Protobuf\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Reachability\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/ReachabilitySwift\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SDWebImage\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SVProgressHUD\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/Toast\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/XCDYouTubeKit\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/nanopb\"",
+					"$(SDKROOT)/usr/include/libxml2",
+				);
+				MARKETING_VERSION = 1.3;
+				PRODUCT_BUNDLE_IDENTIFIER = com.agri.ebook;
+				PRODUCT_NAME = MeBook;
+				PROVISIONING_PROFILE = "d4f4ddc3-6615-47d3-9900-2f2822cb0a06";
+				PROVISIONING_PROFILE_SPECIFIER = Ebook_Dev;
+				SWIFT_OBJC_BRIDGING_HEADER = "HearThis/HearThis-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		FC1AD7E41DA40CA8002BA7EC /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 57B771C8FC9DB06500C15CB5 /* Pods-HearThis.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = HearThis/MeBook.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Distribution: 3D ART DESIGN CONSULTANCY AND TECHNOLOGY SOLUTION JOINT STOCK COMPANY (3L2APQ2D3U)";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7546H2CFFT;
+				ENABLE_BITCODE = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				GCC_PREFIX_HEADER = HearThis/PrefixHeader.pch;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/AFNetworking\"",
+					"\"${PODS_ROOT}/Headers/Public/AVHexColor\"",
+					"\"${PODS_ROOT}/Headers/Public/AllPod\"",
+					"\"${PODS_ROOT}/Headers/Public/CRToast\"",
+					"\"${PODS_ROOT}/Headers/Public/FSPagerView\"",
+					"\"${PODS_ROOT}/Headers/Public/FireBasePod\"",
+					"\"${PODS_ROOT}/Headers/Public/Firebase\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseAnalyticsInterop\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseCore\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseCoreDiagnostics\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseCoreDiagnosticsInterop\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseInstallations\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseInstanceID\"",
+					"\"${PODS_ROOT}/Headers/Public/FirebaseMessaging\"",
+					"\"${PODS_ROOT}/Headers/Public/GoogleDataTransport\"",
+					"\"${PODS_ROOT}/Headers/Public/GoogleDataTransportCCTSupport\"",
+					"\"${PODS_ROOT}/Headers/Public/GoogleUtilities\"",
+					"\"${PODS_ROOT}/Headers/Public/IAPHelper\"",
+					"\"${PODS_ROOT}/Headers/Public/JASidePanels\"",
+					"\"${PODS_ROOT}/Headers/Public/JSONKit-NoWarning\"",
+					"\"${PODS_ROOT}/Headers/Public/MBCircularProgressBar\"",
+					"\"${PODS_ROOT}/Headers/Public/MYNStickyFlowLayout\"",
+					"\"${PODS_ROOT}/Headers/Public/NSDate+TimeAgo\"",
+					"\"${PODS_ROOT}/Headers/Public/PromisesObjC\"",
+					"\"${PODS_ROOT}/Headers/Public/Protobuf\"",
+					"\"${PODS_ROOT}/Headers/Public/Reachability\"",
+					"\"${PODS_ROOT}/Headers/Public/SDWebImage\"",
+					"\"${PODS_ROOT}/Headers/Public/SVProgressHUD\"",
+					"\"${PODS_ROOT}/Headers/Public/Toast\"",
+					"\"${PODS_ROOT}/Headers/Public/XCDYouTubeKit\"",
+					"\"${PODS_ROOT}/Headers/Public/nanopb\"",
+					"$(inherited)",
+					"${PODS_ROOT}/Firebase/CoreOnly/Sources",
+					"\"${PODS_TARGET_SRCROOT}/Sources/FBLPromises/include\"",
+					"$(SDKROOT)/usr/include/libxml2",
+				);
+				INFOPLIST_FILE = HearThis/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

@@ -26,3 +26,7 @@
 #import "Publisher_ViewController.h"
 
 #import "TFHpple.h"
+
+#import "GG_PlugIn.h"
+
+#import "FB_Plugin.h"
