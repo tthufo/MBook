@@ -18,8 +18,24 @@
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
 	<string>$(MARKETING_VERSION)</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLName</key>
+			<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb344485997341684</string>
+				<string>com.googleusercontent.apps.734924855568-hg2lnltoaao0gggb8qjnbqbfo1akqjlm</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
+	<key>FacebookAppID</key>
+	<string>344485997341684</string>
+	<key>FacebookDisplayName</key>
+	<string>MEBOOK</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -73,26 +89,10 @@
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 	<key>host</key>
-	<string>http://api-mebook.tgphim.vn/processrequest/</string>
+	<string>http://api-mebook.weatherplus.vn/processrequest/</string>
 	<key>lang</key>
 	<false/>
 	<key>showAds</key>
 	<true/>
-	<key>CFBundleURLTypes</key>
-	<array>
-		<dict>
-			<key>CFBundleURLName</key>
-			<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
-			<key>CFBundleURLSchemes</key>
-			<array>
-				<string>fb344485997341684</string>
-				<string>com.googleusercontent.apps.734924855568-hg2lnltoaao0gggb8qjnbqbfo1akqjlm</string>
-			</array>
-		</dict>
-	</array>
-	<key>FacebookAppID</key>
-	<string>344485997341684</string>
-	<key>FacebookDisplayName</key>
-	<string>MEBOOK</string>
 </dict>
 </plist>

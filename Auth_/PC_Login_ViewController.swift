@@ -29,6 +29,8 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
     
     @IBOutlet var submit: UIButton!
     
+    @IBOutlet var email_reg: UIButton!
+    
     @IBOutlet var uNameErr: UILabel!
     
     @IBOutlet var uNameView: UIView!
@@ -86,6 +88,8 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
         let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
         
         bottom.text = "MEBOOK © 2020 - Ver %@".format(parameters: appVersion!)
+        
+        email_reg.setBackgroundImage(UIImage(named: "ico_email-1")?.withTintColor(UIColor.orange), for: .normal)
         
         getPhoneNumber()
     }
@@ -180,9 +184,10 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
        }) { (done) in
            if logged {
                self.uName.text = Information.log!["name"] as? String
-               self.pass.text = Information.log!["pass"] as? String
-               self.submit.isEnabled = self.uName.text?.count != 0 && self.pass.text?.count != 0
-               self.submit.alpha = self.uName.text?.count != 0 && self.pass.text?.count != 0 ? 1 : 0.5
+               self.pass.text = Information.log!["pass"] as? String    //CHECK HERE
+            
+//               self.submit.isEnabled = self.uName.text?.count != 0 && self.pass.text?.count != 0
+//               self.submit.alpha = self.uName.text?.count != 0 && self.pass.text?.count != 0 ? 1 : 0.5
 //               self.sumitText.alpha = self.uName.text?.count != 0 && self.pass.text?.count != 0 ? 1 : 0.5
            }
            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6, execute: {
@@ -342,18 +347,14 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
         isCheck = !isCheck
     }
     
-    @IBAction func didPressRegister() {
+    @IBAction func didPressRegister(sender: UIButton) {
         self.view.endEditing(true)
-//        if (MFMessageComposeViewController.canSendText()) {
-//            let controller = MFMessageComposeViewController()
-//            controller.body = "EB"
-//            controller.recipients = ["1352"]
-//            controller.messageComposeDelegate = self
-//            self.present(controller, animated: true) {
-//                self.isSms = true
-//            }
-//        }
-        self.navigationController?.pushViewController(PC_Register_ViewController.init(), animated: true)
+        
+        let reg = PC_Register_ViewController.init()
+        
+        reg.isPhone = sender.tag == 11 ? true : false
+        
+        self.navigationController?.pushViewController(reg, animated: true)
     }
     
     func checkPhone() -> Bool {
@@ -404,6 +405,8 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
                          
         let logged = Information.log != nil ? Information.log?.getValueFromKey("name") != "" && Information.log?.getValueFromKey("pass") != "" ? true : false : false
                 
+        let social_logged = self.getObject("social")
+        
         if is3G {
             self.uName.text = (phoneNumber as! String)
             requestLogin(request: ["username":phoneNumber,
@@ -412,30 +415,33 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
             print("3G")
         } else {
             if logged {
-                requestLogin(request: ["username":convertPhone(),
+                requestLogin(request: ["username":uName.text as Any, //convertPhone(),
                                        "password":pass.text as Any,
                                        "login_type":"WIFI"])
                 print("LOGIN")
-            } else {
+            } else if social_logged == nil {
                 print("BUTTON")
                 if phoneNumber is UIButton {
-                    isValid = self.checkPhone()
-                    if !isValid {
-                        validPhone()
-                        return
-                    }
-                    print(convertPhone())
-                    requestLogin(request: ["username":convertPhone(),
+//                    isValid = self.checkPhone()
+//                    if !isValid {
+//                        validPhone()
+//                        return
+//                    }
+//                    print(convertPhone())
+                    requestLogin(request: ["username":uName.text as Any, //convertPhone(),
                                             "password":pass.text as Any,
                                             "login_type":"WIFI"])
                 }
+            } else {
+                print("SOCIAL")
+                didRequestLoginSocial(info: social_logged! as NSDictionary)
             }
         }
     }
     
     func requestLogin(request: NSDictionary) {
         let requesting = NSMutableDictionary.init(dictionary: ["CMD_CODE":"login",
-                                                               "push_token": FirePush.shareInstance()?.deviceToken() ?? self.uniqueDeviceId(),
+                                                               "push_token": FirePush.shareInstance()?.deviceToken() ?? self.uniqueDeviceId()!,
                                                                 "platform":"IOS",
                                                                 "overrideAlert":"1",
                                                                 "overrideLoading":"1",
@@ -445,7 +451,7 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
         }, andCompletion: { (response, errorCode, error, isValid, object) in
             let result = response?.dictionize() ?? [:]
                         
-            print(result)
+//            print(result)
 
             if result.getValueFromKey("error_code") != "0" || result["result"] is NSNull {
                 self.showToast("Không có thông tin tài khoản. Liên hệ quản trị viên để được tài trợ.", andPos: 0)
@@ -462,10 +468,10 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
 
             Information.saveToken()
             
-            print(Information.userInfo as Any)
+//            print(Information.userInfo as Any)
             
             if Information.check == "1" {
-                self.didRequestPackage()   //CHECK PACKAGE
+                self.didRequestPackage()   //CHECK PACKAGE ---> check this shit
 //                (UIApplication.shared.delegate as! AppDelegate).changeRoot(false) //CHECK PACKAGE
             } else {
                 (UIApplication.shared.delegate as! AppDelegate).changeRoot(false) //CHECK PACKAGE
@@ -487,22 +493,77 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
                return
             }
         
+            print("++++", result)
+        
             if !self.checkRegister(package: response?.dictionize()["result"] as! NSArray) {
 //                self.showToast("Xin chào " + self.uName.text! + ", Quý khách chưa đăng ký dịch vụ, hãy bấm \"Đăng ký\" để sử dụng dịch vụ", andPos: 0)
 //                (UIApplication.shared.delegate as! AppDelegate).changeRoot(false) //dev check
             } else {
-                (UIApplication.shared.delegate as! AppDelegate).changeRoot(false)
-                if self.uName != nil {
-                   self.uName.text = ""
-                }
-                if self.pass != nil {
-                   self.pass.text = ""
-                }
-                if self.submit != nil {
-                   self.submit.isEnabled = self.uName.text?.count != 0 && self.pass.text?.count != 0
-                   self.submit.alpha = self.uName.text?.count != 0 && self.pass.text?.count != 0 ? 1 : 0.5
-//                   self.sumitText.alpha = self.uName.text?.count != 0 && self.pass.text?.count != 0 ? 1 : 0.5
-                }
+//                (UIApplication.shared.delegate as! AppDelegate).changeRoot(false)
+//                if self.uName != nil {
+//                   self.uName.text = ""
+//                }
+//                if self.pass != nil {
+//                   self.pass.text = ""
+//                }
+//                if self.submit != nil {
+//                   self.submit.isEnabled = self.uName.text?.count != 0 && self.pass.text?.count != 0
+//                   self.submit.alpha = self.uName.text?.count != 0 && self.pass.text?.count != 0 ? 1 : 0.5
+////                   self.sumitText.alpha = self.uName.text?.count != 0 && self.pass.text?.count != 0 ? 1 : 0.5
+//                }
+            }
+       })
+    }
+    
+    func didRequestLoginSocial(info: NSDictionary) {
+        LTRequest.sharedInstance()?.didRequestInfo(["CMD_CODE":"socialLogin",
+                                                    "push_token": FirePush.shareInstance()?.deviceToken() ?? self.uniqueDeviceId() as Any,
+                                                     "platform":"IOS",
+                                                     "provider":info.getValueFromKey("provider") ?? "",
+                                                     "access_token":info.getValueFromKey("accessToken") ?? "",
+                                                     "avatar":info.getValueFromKey("avatar") ?? "",
+                                                     "email":info.getValueFromKey("email") ?? "",
+                                                     "id":info.getValueFromKey("id") ?? "",
+                                                     "name":info.getValueFromKey("name") ?? "",
+                                                     "overrideAlert":"1",
+                                                     "overrideLoading":"1",
+                                                     "host":self], withCache: { (cacheString) in
+       }, andCompletion: { (response, errorCode, error, isValid, object) in
+            let result = response?.dictionize() ?? [:]
+                                           
+            if result.getValueFromKey("error_code") != "0" || result["result"] is NSNull {
+               self.showToast(response?.dictionize().getValueFromKey("error_msg") == "" ? "Lỗi xảy ra, mời bạn thử lại" : response?.dictionize().getValueFromKey("error_msg"), andPos: 0)
+               return
+            }
+        
+            print(result)
+
+            if result.getValueFromKey("error_code") != "0" || result["result"] is NSNull {
+                self.showToast("Không có thông tin tài khoản. Liên hệ quản trị viên để được tài trợ.", andPos: 0)
+                return
+            }
+                                                
+//            self.add(["name":self.uName.text as Any, "pass":self.pass.text as Any], andKey: "log")
+
+            self.add((response?.dictionize()["result"] as! NSDictionary).reFormat() as? [AnyHashable : Any], andKey: "info")
+
+            Information.saveInfo()
+
+            self.addValue((response?.dictionize()["result"] as! NSDictionary).getValueFromKey("session"), andKey: "token")
+
+            Information.saveToken()
+        
+            self.add((info as! [AnyHashable : Any]), andKey: "social")
+            
+//            print(Information.userInfo as Any)
+            
+            if Information.check == "1" { // --------> Check This shit
+                print("package")
+                self.didRequestPackage()   //CHECK PACKAGE
+    //                (UIApplication.shared.delegate as! AppDelegate).changeRoot(false) //CHECK PACKAGE
+            } else {
+                print("changeroot")
+                (UIApplication.shared.delegate as! AppDelegate).changeRoot(false) //CHECK PACKAGE
             }
        })
     }
@@ -567,9 +628,9 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
     
     @objc func textIsChanging(_ textField:UITextField) {
         isValid = true
-        validPhone()
-        submit.isEnabled = uName.text?.count != 0 && pass.text?.count != 0
-        submit.alpha = uName.text?.count != 0 && pass.text?.count != 0 ? 1 : 0.5
+//        validPhone()
+//        submit.isEnabled = uName.text?.count != 0 && pass.text?.count != 0
+//        submit.alpha = uName.text?.count != 0 && pass.text?.count != 0 ? 1 : 0.5
     }
     
     func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
@@ -594,9 +655,20 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
        self.view.endEditing(true)
        GG_PlugIn.shareInstance()?.startLogGoogle(completion: { (responseString, object, errorCode, description, error) in
             if object != nil {
-//                self.socialLogin(type: "google", token: (object as! NSDictionary).getValueFromKey("access_token"));
-//                let token = (object as! NSDictionary).getValueFromKey("access_token")
-                print(object)
+//                print("-->", object)
+                let info = (object as! NSDictionary)
+                let gID = info.getValueFromKey("uId")
+                let accessToken = info.getValueFromKey("accessToken")
+                let avatar = info.getValueFromKey("avatar")
+                let name = info.getValueFromKey("fullName")
+                let email = info.getValueFromKey("email")
+                self.didRequestLoginSocial(info: ["provider": "google",
+                                                  "id":gID ?? "",
+                                                  "accessToken":accessToken ?? "",
+                                                  "avatar":avatar ?? "",
+                                                  "name":name ?? "",
+                                                  "email":email ?? ""
+                ])
             }
         }, andHost: self)
    }
@@ -605,9 +677,19 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
         self.view.endEditing(true)
         FB_Plugin.shareInstance()?.startLoginFacebook(completion: { (responseString, object, errorCode, description, error) in
             if object != nil {
-//                self.socialLogin(type: "facebook", token: ((object as! NSDictionary)["info"] as! NSDictionary).getValueFromKey("access_token"));
-                let token = ((object as! NSDictionary)["info"] as! NSDictionary).getValueFromKey("id")
-                print(token)
+//                print("-->", object)
+                let info = ((object as! NSDictionary)["info"] as! NSDictionary)
+                let fID = info.getValueFromKey("id")
+                let accessToken = info.getValueFromKey("accessToken")
+                let avatar = info.getValueFromKey("avatar")
+                let name = info.getValueFromKey("name")
+                self.didRequestLoginSocial(info: ["provider": "facebook",
+                                                  "id":fID ?? "",
+                                                  "accessToken":accessToken ?? "",
+                                                  "avatar":avatar ?? "",
+                                                  "name":name ?? "",
+                                                  "email":""
+                ])
             }
         })
       }

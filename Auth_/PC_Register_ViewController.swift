@@ -89,6 +89,8 @@ class PC_Register_ViewController: UIViewController, UITextFieldDelegate {
     var confirmEmail: Bool = false
 
     var confirmPhone: Bool = false
+    
+    var isPhone: Bool = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -98,7 +100,9 @@ class PC_Register_ViewController: UIViewController, UITextFieldDelegate {
         
         kb = KeyBoard.shareInstance()
 
-        dataList = NSMutableArray.init(array: [logoCell, nameCell, emailCell, phoneCell, submitCell])
+//        dataList = NSMutableArray.init(array: [logoCell, nameCell, emailCell, phoneCell, submitCell])
+        
+        dataList = NSMutableArray.init(array: isPhone ? [logoCell, phoneCell, submitCell] : [logoCell, emailCell, submitCell])
         
         self.tableView.contentInset = UIEdgeInsets(top: 64, left: 0, bottom: 0, right: 0)
         
@@ -106,10 +110,11 @@ class PC_Register_ViewController: UIViewController, UITextFieldDelegate {
         
         bottom.text = "MEBOOK © 2020 - Ver %@".format(parameters: appVersion!)
         
-        uName.addTarget(self, action: #selector(textIsChanging), for: .editingChanged)
-        pass.addTarget(self, action: #selector(textIsChanging), for: .editingChanged)
+//        uName.addTarget(self, action: #selector(textIsChanging), for: .editingChanged)
+//        pass.addTarget(self, action: #selector(textIsChanging), for: .editingChanged)
+//
+//        rePass.addTarget(self, action: #selector(textRePassIsChanging), for: .editingChanged)
         
-        rePass.addTarget(self, action: #selector(textRePassIsChanging), for: .editingChanged)
         email.addTarget(self, action: #selector(textEmailIsChanging), for: .editingChanged)
         phone.addTarget(self, action: #selector(textPhoneIsChanging), for: .editingChanged)
 
@@ -142,11 +147,16 @@ class PC_Register_ViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func didPressAgreed() {
         self.view.endEditing(true)
-        let isEmail: Bool = email.text?.count != 0 && (email.text?.isValidEmail())!
+//        let isEmailValid: Bool = email.text?.count != 0 && (email.text?.isValidEmail())!
+//        let isPhoneValid: Bool = checkPhone()
+        
         self.policyBtn.setImage(UIImage(named: self.agreed ? "ico_select" : "ico_select_active"), for: .normal)
         self.agreed = !self.agreed
-        submit.isEnabled = agreed && uName.text?.count != 0 && email.text?.count != 0 && isEmail
-        submit.alpha = agreed && uName.text?.count != 0 && email.text?.count != 0 && isEmail ? 1 : 0.5
+        
+//        submit.isEnabled = agreed && uName.text?.count != 0 && email.text?.count != 0 && isEmail
+//        submit.alpha = agreed && uName.text?.count != 0 && email.text?.count != 0 && isEmail ? 1 : 0.5
+//        submit.isEnabled = agreed && (self.isPhone ? isPhoneValid : (email.text?.count != 0 && isEmailValid))
+//        submit.alpha = agreed && (self.isPhone ? isPhoneValid : email.text?.count != 0 && isEmailValid) ? 1 : 0.5
     }
     
     @IBAction func didPressConfirm(sender: UIButton) {
@@ -171,15 +181,68 @@ class PC_Register_ViewController: UIViewController, UITextFieldDelegate {
     @IBAction func didPressSubmit() {
         self.view.endEditing(true)
         isValid = self.checkPhone()
-        if !isValid {
-            validPhone()
-            return
+        if isPhone {
+            if !isValid {
+                validPhone()
+                return
+            }
+        } else {
+            let isEmail: Bool = email.text?.count != 0 && (email.text?.isValidEmail())!
+            if isEmail {
+                
+            } else {
+                emailError.alpha = 1
+                return
+            }
         }
-        self.confirm = true
-            
-        self.topLine.text = "Vui lòng chọn phương thức nhận mật khẩu"
         
-        self.tableView.reloadData()
+        if !agreed {
+            self.showToast("Hãy đồng ý với các điều khoản sử dụng", andPos: 0)
+        }
+        
+        self.didPressSignup()
+        
+//        self.confirm = true
+//
+//        self.topLine.text = "Vui lòng chọn phương thức nhận mật khẩu"
+//
+//        self.tableView.reloadData()
+    }
+    
+    @IBAction func didPressSignup() {
+        LTRequest.sharedInstance()?.didRequestInfo(["CMD_CODE":"signin",
+                                                    "username": isPhone ? self.convertPhone() : email.text,
+                                                    "overrideAlert":"1",
+                                                    "overrideLoading":"1",
+                                                    "postFix":"auth",
+                                                    "host":self], withCache: { (cacheString) in
+        }, andCompletion: { (response, errorCode, error, isValid, object) in
+            let result = response?.dictionize() ?? [:]
+                                    
+//            {
+//                "result": null,
+//                "cmd_code": "signin",
+//                "error_code": 1,
+//                "error_msg": "Số điện thoại đã được đăng ký"
+//            }
+            
+            if result.getValueFromKey("error_code") != "0" {
+//                self.showToast(response?.dictionize().getValueFromKey("data") == "" ? "Lỗi xảy ra, mời bạn thử lại" : response?.dictionize().getValueFromKey("data"), andPos: 0)
+                EM_MenuView.init(confirm: ["image": "fail", "line1": "Đăng ký không thành công", "line2": result.getValueFromKey("error_msg") as Any, "line3": "Thoát"]).show { (index, obj, menu) in
+                    if index == 4 {
+                    }
+                }
+                return
+            }
+            
+//            self.showToast("Đăng ký thành công", andPos: 0)
+            
+            EM_MenuView.init(confirm: ["image": "success", "line1": "Tài khoản mới đã tạo", "line2": "Thông tin đăng nhận đã được gửi tới\n" + (self.isPhone ? "tin nhắn" : "hòm thư"), "line3": "Về trang Đăng nhập"]).show { (index, obj, menu) in
+                if index == 4 {
+                    self.navigationController?.popViewController(animated: true)
+                }
+            }
+        })
     }
     
     @IBAction func didPressRequest() {
@@ -238,12 +301,14 @@ class PC_Register_ViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc func textEmailIsChanging(_ textField:UITextField) {
-        let isEmail: Bool = email.text?.count != 0 && (email.text?.isValidEmail())!
-        let isMatch: Bool = true//pass.text?.count != 0 && rePass.text?.count != 0 && pass.text == rePass.text
-        emailBG.backgroundColor = isEmail ? .white : .white
-        emailError.alpha = isEmail ? 0 : 1
-        submit.isEnabled = agreed && uName.text?.count != 0 && email.text?.count != 0 && isEmail && isMatch
-        submit.alpha = agreed && uName.text?.count != 0 && email.text?.count != 0 && isEmail && isMatch ? 1 : 0.5
+//        let isEmail: Bool = email.text?.count != 0 && (email.text?.isValidEmail())!
+//        let isMatch: Bool = true//pass.text?.count != 0 && rePass.text?.count != 0 && pass.text == rePass.text
+//        emailBG.backgroundColor = isEmail ? .white : .white
+//        emailError.alpha = isEmail ? 0 : 1
+//        submit.isEnabled = agreed && uName.text?.count != 0 && email.text?.count != 0 && isEmail && isMatch
+//        submit.alpha = agreed && uName.text?.count != 0 && email.text?.count != 0 && isEmail && isMatch ? 1 : 0.5
+        emailBG.backgroundColor = .white
+        emailError.alpha = 0
     }
     
    @objc func textIsChanging(_ textField:UITextField) {
@@ -289,8 +354,8 @@ class PC_Register_ViewController: UIViewController, UITextFieldDelegate {
     }
     
     func validPhone() {
-          phoneError.alpha = isValid ? 0 : 1
-          phoneBG.backgroundColor = isValid ? UIColor.white : UIColor.white
+        phoneError.alpha = isValid ? 0 : 1
+        phoneBG.backgroundColor = isValid ? .white : .white
       }
     
     @objc func textPhoneIsChanging(_ textField:UITextField) {
@@ -302,7 +367,8 @@ class PC_Register_ViewController: UIViewController, UITextFieldDelegate {
 extension PC_Register_ViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return indexPath.row == 0 ? 158 : confirm ? 240 : indexPath.row == 4 ? 150 : 93
+//        return indexPath.row == 0 ? 158 : confirm ? 240 : indexPath.row == 4 ? 150 : 93
+        return indexPath.row == 0 ? 158 : confirm ? 240 : indexPath.row == 2 ? 150 : 93
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
