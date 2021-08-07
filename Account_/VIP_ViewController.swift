@@ -22,6 +22,8 @@ class VIP_ViewController: UIViewController {
 
     @IBOutlet var sideGapTop: NSLayoutConstraint!
 
+    let refreshControl = UIRefreshControl()
+
     var dataList: NSMutableArray!
     
     @objc var callBack: ((_ info: Any)->())?
@@ -36,50 +38,129 @@ class VIP_ViewController: UIViewController {
             sideGapLeft.constant = 100
             sideGapRight.constant = 100
             
-            sideGapTop.constant = 250
+//            sideGapTop.constant = 250
         } else {
-            sideGapTop.constant = 150
+//            sideGapTop.constant = 150
         }
+        
+        tableView.refreshControl = refreshControl
+           
+        refreshControl.tintColor = UIColor.black
+        
+        refreshControl.addTarget(self, action: #selector(didRequestPack), for: .valueChanged)
 
-        tableView.estimatedRowHeight = 150
+        tableView.estimatedRowHeight = UITableView.automaticDimension
         
         tableView.rowHeight = UITableView.automaticDimension
         
         tableView.withCell("Vip_Cell")
         
-        dataList = [["price": "365.000 đ", "vip": "VIP12", "des": "Đọc trọn bộ kho sách VIP 365 ngày *"], ["price": "90.000 đ", "vip": "VIP3", "des": "Đọc trọn bộ kho sách VIP 90 ngày *"], ["price": "30.000 đ", "vip": "VIP1", "des": "Đọc trọn bộ kho sách VIP 30 ngày *"], ["price": "3.000 đ", "vip": "VIPD", "des": "Đọc trọn bộ kho sách VIP 1 ngày *"]]
+        dataList = NSMutableArray.init()
+        
+        didRequestPack()
     }
     
-    @objc func didReload(_ sender: Any) {
-//       didRequestPackage()
+    @objc func didRequestPack() {
+        didRequestAll()
     }
     
-//    func didRequestPackage() {
-//        LTRequest.sharedInstance()?.didRequestInfo(["CMD_CODE":"getPackageInfo",
+    func didRequestAll() {
+        LTRequest.sharedInstance()?.didRequestInfo(["CMD_CODE":"getPaymentPackage",
+                                                    "header":["session":Information.token == nil ? "" : Information.token!],
+                                                    "session":NSNull(),
+                                                    "overrideAlert":"1",
+                                                    "overrideLoading":"1",
+                                                    "host":self], withCache: { (cacheString) in
+       }, andCompletion: { (response, errorCode, error, isValid, object) in
+           let result = response?.dictionize() ?? [:]
+           self.refreshControl.endRefreshing()
+        
+           if result.getValueFromKey("error_code") != "0" || result["result"] is NSNull {
+               self.showToast(response?.dictionize().getValueFromKey("error_msg") == "" ? "Lỗi xảy ra, mời bạn thử lại" : response?.dictionize().getValueFromKey("error_msg"), andPos: 0)
+               return
+           }
+        
+           self.dataList.removeAllObjects()
+
+           let package = (result["result"] as! NSArray)
+
+           self.dataList.addObjects(from: package.withMutable())
+            
+            LTRequest.sharedInstance()?.didRequestInfo(["cmd_code":"getPackageInfo",
+                                                        "header":["session":Information.token == nil ? "" : Information.token!],
+//                                                        "session": NSNull(),
+                                                        "overrideAlert":"1",
+                                                        "overrideLoading":"1",
+                                                        "host":self], withCache: { (cacheString) in
+           }, andCompletion: { (response, errorCode, error, isValid, object) in
+               let result = response?.dictionize() ?? [:]
+               self.refreshControl.endRefreshing()
+            
+               if result.getValueFromKey("error_code") != "0" || result["result"] is NSNull {
+                   self.showToast(response?.dictionize().getValueFromKey("error_msg") == "" ? "Lỗi xảy ra, mời bạn thử lại" : response?.dictionize().getValueFromKey("error_msg"), andPos: 0)
+                   return
+               }
+                        
+
+               let payment = (result["result"] as! NSArray)
+    
+               self.dataList.addObjects(from: payment.withMutable())
+    
+               self.tableView.reloadData()
+           })
+       })
+    }
+    
+    func didRequestPackage() {
+        LTRequest.sharedInstance()?.didRequestInfo(["CMD_CODE":"getPackageInfo",
+                                                    "header":["session":Information.token == nil ? "" : Information.token!],
+                                                    "overrideAlert":"1",
+                                                    "overrideLoading":"1",
+                                                    "host":self], withCache: { (cacheString) in
+       }, andCompletion: { (response, errorCode, error, isValid, object) in
+           let result = response?.dictionize() ?? [:]
+           self.refreshControl.endRefreshing()
+        
+           if result.getValueFromKey("error_code") != "0" || result["result"] is NSNull {
+               self.showToast(response?.dictionize().getValueFromKey("error_msg") == "" ? "Lỗi xảy ra, mời bạn thử lại" : response?.dictionize().getValueFromKey("error_msg"), andPos: 0)
+               return
+           }
+                
+           self.dataList.removeAllObjects()
+
+           let data = (result["result"] as! NSArray)
+
+           self.dataList.addObjects(from: data.withMutable())
+                  
+           self.tableView.reloadData()
+       })
+    }
+    
+    func didRequestPayment() {
+        LTRequest.sharedInstance()?.didRequestInfo(["CMD_CODE":"getPaymentPackage",
+//                                                    "header":["session":Information.token == nil ? "" : Information.token!],
 //                                                    "session":Information.token ?? "",
-//                                                    "overrideAlert":"1",
-//                                                    "overrideLoading":"1",
-//                                                    "host":self], withCache: { (cacheString) in
-//       }, andCompletion: { (response, errorCode, error, isValid, object) in
-//           let result = response?.dictionize() ?? [:]
-//           self.refreshControl.endRefreshing()
-//        
-//           if result.getValueFromKey("error_code") != "0" || result["result"] is NSNull {
-//               self.showToast(response?.dictionize().getValueFromKey("error_msg") == "" ? "Lỗi xảy ra, mời bạn thử lại" : response?.dictionize().getValueFromKey("error_msg"), andPos: 0)
-//               return
-//           }
-//        
-//        print(result)
-//        
-//           self.dataList.removeAllObjects()
-//
-//           let data = (result["result"] as! NSArray)
-//
-//           self.dataList.addObjects(from: data.withMutable())
-//                  
-//           self.tableView.reloadData()
-//       })
-//    }
+                                                    "overrideAlert":"1",
+                                                    "overrideLoading":"1",
+                                                    "host":self], withCache: { (cacheString) in
+       }, andCompletion: { (response, errorCode, error, isValid, object) in
+           let result = response?.dictionize() ?? [:]
+           self.refreshControl.endRefreshing()
+        
+           if result.getValueFromKey("error_code") != "0" || result["result"] is NSNull {
+               self.showToast(response?.dictionize().getValueFromKey("error_msg") == "" ? "Lỗi xảy ra, mời bạn thử lại" : response?.dictionize().getValueFromKey("error_msg"), andPos: 0)
+               return
+           }
+                
+           self.dataList.removeAllObjects()
+
+           let data = (result["result"] as! NSArray)
+
+           self.dataList.addObjects(from: data.withMutable())
+
+           self.tableView.reloadData()
+       })
+    }
     
     @IBAction func didPressBack() {
         if self.isModal {
@@ -109,7 +190,7 @@ extension VIP_ViewController: UITableViewDataSource, UITableViewDelegate {
                 
         let vip = self.withView(cell, tag: 1) as! UILabel
                     
-        vip.text = data.getValueFromKey("vip")
+        vip.text = data.getValueFromKey("package_code")
         
         let price = self.withView(cell, tag: 2) as! UILabel
         
@@ -117,7 +198,7 @@ extension VIP_ViewController: UITableViewDataSource, UITableViewDelegate {
 
         let des = self.withView(cell, tag: 3) as! UILabel
 
-        des.text = data.getValueFromKey("des")
+        des.text = data.getValueFromKey("info")
 
 //        if isRegistered {
 //            button.setTitle("Đang sử dụng Gói " + data.getValueFromKey("package_code"), for: .normal)

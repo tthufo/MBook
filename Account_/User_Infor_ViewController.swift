@@ -15,6 +15,8 @@ class User_Infor_ViewController: UIViewController {
     @IBOutlet var headerCell: UITableViewCell!
     
     @IBOutlet var inforCell: UITableViewCell!
+    
+    @IBOutlet var optionCell: UITableViewCell!
 
     @IBOutlet var sideGapLeft: NSLayoutConstraint!
     
@@ -34,6 +36,12 @@ class User_Infor_ViewController: UIViewController {
 
     @IBOutlet var email: UILabel!
 
+    @IBOutlet var changePass: UILabel!
+
+    @IBOutlet var transaction: UILabel!
+
+    @IBOutlet var logout: UILabel!
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,6 +58,48 @@ class User_Infor_ViewController: UIViewController {
         tableView.refreshControl = refreshControl
         
         refreshControl.addTarget(self, action: #selector(didReload(_:)), for: .valueChanged)
+        
+        changePass.action(forTouch: [:]) { (objc) in
+            self.center()?.pushViewController(PC_ChangePass_ViewController.init(), animated: true)
+        }
+        
+        transaction.action(forTouch: [:]) { (objc) in
+            
+        }
+        
+        logout.action(forTouch: [:]) { (objc) in
+            DropAlert.shareInstance()?.alert(withInfor: ["cancel":"Thoát", "buttons":["Đăng xuất"], "title":"Thông báo", "message": "Bạn có muốn đăng xuất khỏi tài khoản ?"], andCompletion: { (index, objc) in
+                if index == 0 {
+                    if self.isEmbed() {
+                        self.unEmbed()
+                    }
+                    Information.removeInfo()
+                    self.requestLogout()
+                    FB_Plugin.shareInstance().signoutFacebook()
+                    GG_PlugIn.shareInstance().signOutGoogle()
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+                        (UIApplication.shared.delegate as! AppDelegate).changeRoot(true)
+                    })
+                }
+            })
+        }
+    }
+    
+    func requestLogout() {
+        LTRequest.sharedInstance()?.didRequestInfo(["CMD_CODE":"logout",
+                                                    "user_id":Information.userInfo?.getValueFromKey("user_id") ?? "",
+                                                    "header":["session":Information.token == nil ? "" : Information.token!],
+                                                    "device_id":FirePush.shareInstance()?.deviceToken() ?? "",
+                                                    "overrideAlert":"1",
+                                                    "host":self], withCache: { (cacheString) in
+        }, andCompletion: { (response, errorCode, error, isValid, object) in
+            let result = response?.dictionize() ?? [:]
+            if result.getValueFromKey("ERR_CODE") != "0" {
+                self.showToast(response?.dictionize().getValueFromKey("ERR_MSG"), andPos: 0)
+                return
+            }
+        
+        })
     }
     
     @objc func didReload(_ sender: Any) {
@@ -85,6 +135,7 @@ class User_Infor_ViewController: UIViewController {
     
     func didGetInfo() {
         LTRequest.sharedInstance()?.didRequestInfo(["CMD_CODE":"getUserInfo",
+                                                    "header":["session":Information.token == nil ? "" : Information.token!],
                                                      "session": Information.token ?? "",
                                                     "overrideAlert":"1",
                                                     "overrideLoading":"1",
@@ -194,6 +245,7 @@ class User_Infor_ViewController: UIViewController {
         let data: NSMutableDictionary =
             self.avatarTemp != nil ? ["CMD_CODE":"updateUserInfo",
                                          "session": Information.token ?? "",
+                                         "header":["session":Information.token == nil ? "" : Information.token!],
                                          "avatar": self.avatarTemp != nil ? self.avatarTemp.imageString() : "",
 //                                         "sex": sex ?? "",
                                          "email":email.text as Any,
@@ -206,6 +258,7 @@ class User_Infor_ViewController: UIViewController {
                                         "host":self]
                                         :
                                         ["CMD_CODE":"updateUserInfo",
+                                         "header":["session":Information.token == nil ? "" : Information.token!],
                                          "session": Information.token ?? "",
 //                                         "sex": sex ?? "",
                                          "email":email.text as Any,
@@ -254,16 +307,16 @@ class User_Infor_ViewController: UIViewController {
 extension User_Infor_ViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return indexPath.row == 0 ? 620 : 255
+        return indexPath.row == 0 ? 620 : indexPath.row == 1 ? 255 : 200
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return 3
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        return indexPath.row == 0 ? headerCell! : inforCell!
+        return indexPath.row == 0 ? headerCell! : indexPath.row == 1 ? inforCell! : optionCell!
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

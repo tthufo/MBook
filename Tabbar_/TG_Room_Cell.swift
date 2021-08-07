@@ -75,7 +75,11 @@ class TG_Room_Cell: UITableViewCell, FSPagerViewDataSource,FSPagerViewDelegate, 
     }
 
     func requestBanner() {
-        let request = NSMutableDictionary.init(dictionary: ["session":Information.token ?? "", "overrideAlert":"1"])
+        let request = NSMutableDictionary.init(dictionary: [
+                                                "header":["session":Information.token == nil ? "" : Information.token!],
+                                                "session":Information.token ?? "",
+                                                "overrideAlert":"1"]
+        )
         request.addEntries(from: self.config["url"] as! [AnyHashable : Any])
         LTRequest.sharedInstance()?.didRequestInfo((request as! [AnyHashable : Any]), withCache: { (cacheString) in
           }, andCompletion: { (response, errorCode, error, isValid, object) in

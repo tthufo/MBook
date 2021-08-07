@@ -51,6 +51,7 @@ class Event_ViewController: UIViewController, UICollectionViewDataSource, UIColl
     
     func didRequestData(isShow: Bool) {
         let request = NSMutableDictionary.init(dictionary: [
+                                                            "header":["session":Information.token == nil ? "" : Information.token!],
                                                             "session":Information.token ?? "",
                                                             "overrideAlert":"1",
                                                             "overrideLoading":isShow ? 1 : 0,

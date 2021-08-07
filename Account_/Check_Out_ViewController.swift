@@ -22,6 +22,8 @@ class Check_Out_ViewController: UIViewController {
     
     @IBOutlet var nextButton: UIButton!
     
+    var dataList: NSMutableArray!
+    
     var info: NSDictionary!
     
     var names = [["check": "0", "name": "ic_momo"], ["check": "0", "name": "ic_airpay"], ["check": "0", "name": "ic_vnpay"], ["check": "0", "name": "ic_nganluong"], ["check": "0", "name": "ic_sms"]]
@@ -46,6 +48,35 @@ class Check_Out_ViewController: UIViewController {
         tableView.withCell("Check_Out_Cell")
         
         tableView.withCell("Check_Out_Book_Cell")
+        
+        dataList = NSMutableArray.init()
+    }
+    
+    func didRequestPaymentChannel() {
+        LTRequest.sharedInstance()?.didRequestInfo(["CMD_CODE":"getPaymentChannel",
+                                                    "header":["session":Information.token == nil ? "" : Information.token!],
+                                                    "page_index": NSNull(),
+                                                    "page_size": NSNull(),
+                                                    "session": NSNull(),
+                                                    "overrideAlert":"1",
+                                                    "overrideLoading":"1",
+                                                    "host":self], withCache: { (cacheString) in
+       }, andCompletion: { (response, errorCode, error, isValid, object) in
+           let result = response?.dictionize() ?? [:]
+        
+           if result.getValueFromKey("error_code") != "0" || result["result"] is NSNull {
+               self.showToast(response?.dictionize().getValueFromKey("error_msg") == "" ? "Lỗi xảy ra, mời bạn thử lại" : response?.dictionize().getValueFromKey("error_msg"), andPos: 0)
+               return
+           }
+                
+           self.dataList.removeAllObjects()
+
+           let data = (result["result"] as! NSArray)
+
+           self.dataList.addObjects(from: data.withMutable())
+                  
+           self.tableView.reloadData()
+       })
     }
 
     @IBAction func didPressBack() {
@@ -124,7 +155,7 @@ extension Check_Out_ViewController: UITableViewDataSource, UITableViewDelegate {
             if indexPath.row == 0 {
                 let vip = self.withView(cell, tag: 1) as! UILabel
                             
-                vip.text = self.info.getValueFromKey("vip")
+                vip.text = self.info.getValueFromKey("package_code")
                 
                 let price = self.withView(cell, tag: 2) as! UILabel
                 
@@ -132,7 +163,7 @@ extension Check_Out_ViewController: UITableViewDataSource, UITableViewDelegate {
 
                 let des = self.withView(cell, tag: 3) as! UILabel
 
-                des.text = self.info.getValueFromKey("des")
+                des.text = self.info.getValueFromKey("info")
             } else {
                 let vip = self.withView(cell, tag: 1) as! UILabel
                             

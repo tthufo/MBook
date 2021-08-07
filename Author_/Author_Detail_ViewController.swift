@@ -177,6 +177,7 @@ class Author_Detail_ViewController: UIViewController, UICollectionViewDataSource
     
     func didRequestData(isShow: Bool) {
         let request = NSMutableDictionary.init(dictionary: ["CMD_CODE":"getListBook",
+                                                            "header":["session":Information.token == nil ? "" : Information.token!],
                                                             "session":Information.token ?? "",
                                                             "page_index": self.pageIndex,
                                                             "page_size": 10,

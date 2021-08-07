@@ -97,6 +97,7 @@
 - (void)didRequestData:(BOOL)isShow
 {
     [[LTRequest sharedInstance] didRequestInfo:@{@"CMD_CODE":@"getListStory",
+                                                 @"header":@{@"session":Information.token == nil ? @"" : Information.token},
                                                  @"session":Information.token,
                                                  @"page_index": @(pageIndex),
                                                  @"page_size": @(12),

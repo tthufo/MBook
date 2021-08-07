@@ -79,7 +79,8 @@ class Author_ViewController: UIViewController, UICollectionViewDataSource, UICol
         let request = NSMutableDictionary.init(dictionary: [
                                                             "CMD_CODE": "getListAuthor",
                                                             "keyword": keyword == "TẤT CẢ" ? NSNull.init() : keyword ?? "",
-                                                            "session":Information.token ?? "",
+                                                            "header":["session":Information.token == nil ? "" : Information.token!],
+                                                            "session":Information.token ?? "" as Any,
                                                             "page_index": self.pageIndex,
                                                             "page_size": 10,
                                                             "overrideAlert":"1",

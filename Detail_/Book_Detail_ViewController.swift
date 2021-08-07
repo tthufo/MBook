@@ -194,6 +194,7 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
     
     func didRequestData(isShow: Bool) {
         let request = NSMutableDictionary.init(dictionary: [
+                                                            "header":["session":Information.token == nil ? "" : Information.token!],
                                                             "session":Information.token ?? "",
                                                             "page_index": self.pageIndex,
                                                             "page_size": 10,
@@ -235,6 +236,7 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
     
     func didRequestChapter() {
          let request = NSMutableDictionary.init(dictionary: [
+                                                            "header":["session":Information.token == nil ? "" : Information.token!],
                                                              "session":Information.token ?? "",
                                                              "overrideAlert":"1",
                                                              ])
@@ -272,6 +274,7 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
     
     func didRequestDetail() {
         let request = NSMutableDictionary.init(dictionary: [
+                                                            "header":["session":Information.token == nil ? "" : Information.token!],
                                                             "session":Information.token ?? "",
                                                             "overrideAlert":"1",
                                                             ])
@@ -320,6 +323,7 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
     
     func didRequestUrlBook(book: NSDictionary) {
         let request = NSMutableDictionary.init(dictionary: [
+                                                            "header":["session":Information.token == nil ? "" : Information.token!],
                                                             "session":Information.token ?? "",
                                                             "overrideAlert":"1",
                                                             ])
@@ -349,7 +353,13 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
     }
     
     func didRequestPackage(book: NSDictionary) {
+        
+        self.didRequestUrlBook(book: book)
+
+        return
+        
            let request = NSMutableDictionary.init(dictionary: [
+                                                               "header":["session":Information.token == nil ? "" : Information.token!],
                                                                "session":Information.token ?? "",
                                                                "overrideAlert":"1",
                                                                ])

@@ -85,6 +85,7 @@
 - (void)didRequestData:(BOOL)isShow
 {
     NSMutableDictionary * request = [[NSMutableDictionary alloc] initWithDictionary:@{@"session":Information.token,
+                                                                                      @"header":@{@"session":Information.token == nil ? @"" : Information.token},
                                                                                       @"page_index": @(pageIndex),
                                                                                       @"page_size": @(12),
                                                                                       @"overrideError":@"1",

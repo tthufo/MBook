@@ -258,6 +258,7 @@ class PC_Inner_Info_ViewController: UIViewController, UITextFieldDelegate {
     
     func didGetInfo() {
         LTRequest.sharedInstance()?.didRequestInfo(["CMD_CODE":"getUserInfo",
+                                                    "header":["session":Information.token == nil ? "" : Information.token!],
                                                      "session": Information.token ?? "",
                                                     "overrideAlert":"1",
                                                     "overrideLoading":"1",
@@ -272,7 +273,7 @@ class PC_Inner_Info_ViewController: UIViewController, UITextFieldDelegate {
                    
             let preInfo: NSMutableDictionary = (response?.dictionize()["result"] as! NSDictionary).reFormat()
             
-            preInfo["birthday"] = self.convertDate(date: preInfo.getValueFromKey("birthday"))
+//            preInfo["birthday"] = self.convertDate(date: preInfo.getValueFromKey("birthday"))
             
             self.add(preInfo as? [AnyHashable : Any], andKey: "info")
 
@@ -297,6 +298,7 @@ class PC_Inner_Info_ViewController: UIViewController, UITextFieldDelegate {
 //                                        "host":self]
 //                                        :
                                         ["CMD_CODE":"updateUserInfo",
+                                         "header":["session":Information.token == nil ? "" : Information.token!],
                                          "session": Information.token ?? "",
 //                                         "sex": sex ?? "",
                                          "email":email.text as Any,

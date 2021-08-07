@@ -183,8 +183,8 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
 
        }) { (done) in
            if logged {
-               self.uName.text = Information.log!["name"] as? String
-               self.pass.text = Information.log!["pass"] as? String    //CHECK HERE
+            self.uName.text = Information.log?.getValueFromKey("name")
+               self.pass.text = Information.log?.getValueFromKey("pass")   //CHECK HERE
             
 //               self.submit.isEnabled = self.uName.text?.count != 0 && self.pass.text?.count != 0
 //               self.submit.alpha = self.uName.text?.count != 0 && self.pass.text?.count != 0 ? 1 : 0.5
@@ -392,6 +392,17 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
         return phone!
     }
     
+    func stringIsNumber(_ string:String) -> Bool {
+        var allNumber: Bool = true
+        for character in string{
+            if !character.isNumber{
+                allNumber = false
+                return allNumber
+            }
+        }
+        return allNumber
+    }
+    
     @IBAction func didPressSubmit(phoneNumber: Any) {
         self.view.endEditing(true)
         var is3G = false
@@ -415,7 +426,7 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
             print("3G")
         } else {
             if logged {
-                requestLogin(request: ["username":uName.text as Any, //convertPhone(),
+                requestLogin(request: ["username": self.stringIsNumber(uName.text!) ? convertPhone() : uName.text!,
                                        "password":pass.text as Any,
                                        "login_type":"WIFI"])
                 print("LOGIN")
@@ -428,7 +439,7 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
 //                        return
 //                    }
 //                    print(convertPhone())
-                    requestLogin(request: ["username":uName.text as Any, //convertPhone(),
+                    requestLogin(request: ["username":self.stringIsNumber(uName.text!) ? convertPhone() : uName.text!,
                                             "password":pass.text as Any,
                                             "login_type":"WIFI"])
                 }
@@ -470,7 +481,7 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
             
 //            print(Information.userInfo as Any)
             
-            if Information.check == "1" {
+            if Information.check == "0" {
                 self.didRequestPackage()   //CHECK PACKAGE ---> check this shit
 //                (UIApplication.shared.delegate as! AppDelegate).changeRoot(false) //CHECK PACKAGE
             } else {
@@ -481,6 +492,7 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
     
     func didRequestPackage() {
         LTRequest.sharedInstance()?.didRequestInfo(["CMD_CODE":"getPackageInfo",
+                                                    "header":["session":Information.token == nil ? "" : Information.token!],
                                                     "session":Information.token ?? "",
                                                     "overrideAlert":"1",
                                                     "overrideLoading":"1",
@@ -517,7 +529,7 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
     
     func didRequestLoginSocial(info: NSDictionary) {
         LTRequest.sharedInstance()?.didRequestInfo(["CMD_CODE":"socialLogin",
-                                                    "push_token": FirePush.shareInstance()?.deviceToken() ?? self.uniqueDeviceId() as Any,
+                                                     "push_token": FirePush.shareInstance()?.deviceToken() ?? self.uniqueDeviceId() as Any,
                                                      "platform":"IOS",
                                                      "provider":info.getValueFromKey("provider") ?? "",
                                                      "access_token":info.getValueFromKey("accessToken") ?? "",
@@ -536,8 +548,6 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
                return
             }
         
-            print(result)
-
             if result.getValueFromKey("error_code") != "0" || result["result"] is NSNull {
                 self.showToast("Không có thông tin tài khoản. Liên hệ quản trị viên để được tài trợ.", andPos: 0)
                 return
@@ -554,10 +564,8 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
             Information.saveToken()
         
             self.add((info as! [AnyHashable : Any]), andKey: "social")
-            
-//            print(Information.userInfo as Any)
-            
-            if Information.check == "1" { // --------> Check This shit
+                        
+            if Information.check == "0" { // --------> Check This shit
                 print("package")
                 self.didRequestPackage()   //CHECK PACKAGE
     //                (UIApplication.shared.delegate as! AppDelegate).changeRoot(false) //CHECK PACKAGE
@@ -655,7 +663,6 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
        self.view.endEditing(true)
        GG_PlugIn.shareInstance()?.startLogGoogle(completion: { (responseString, object, errorCode, description, error) in
             if object != nil {
-//                print("-->", object)
                 let info = (object as! NSDictionary)
                 let gID = info.getValueFromKey("uId")
                 let accessToken = info.getValueFromKey("accessToken")
@@ -701,7 +708,16 @@ extension PC_Login_ViewController: ASAuthorizationControllerDelegate {
         case let appleIDCredential as ASAuthorizationAppleIDCredential:
             let userIdentifier = appleIDCredential.user
         
-            print("--->", userIdentifier)
+            let name = appleIDCredential.fullName
+            
+            let email = appleIDCredential.email
+            
+            let u = appleIDCredential.user
+            
+            let le = appleIDCredential.identityToken
+            
+
+            print("--->", userIdentifier, name, email, u, String(data: le!, encoding: .utf8))
         
             break
         default:

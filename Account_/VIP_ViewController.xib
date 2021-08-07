@@ -76,7 +76,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6P9-hL-c0B">
-                    <rect key="frame" x="5" y="124" width="365" height="489"/>
+                    <rect key="frame" x="5" y="74" width="365" height="539"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="Fjo-B5-oQh"/>
@@ -89,7 +89,7 @@
             <constraints>
                 <constraint firstItem="GoS-qN-RI7" firstAttribute="top" secondItem="6P9-hL-c0B" secondAttribute="bottom" constant="8" id="0jd-Sz-VvM"/>
                 <constraint firstItem="pgN-Xj-m7A" firstAttribute="centerX" secondItem="MhB-T9-doX" secondAttribute="centerX" id="5YD-Kb-wwr"/>
-                <constraint firstItem="6P9-hL-c0B" firstAttribute="top" secondItem="gIC-Fe-9zC" secondAttribute="bottom" constant="60" id="6rj-yS-C6a"/>
+                <constraint firstItem="6P9-hL-c0B" firstAttribute="top" secondItem="gIC-Fe-9zC" secondAttribute="bottom" constant="10" id="6rj-yS-C6a"/>
                 <constraint firstItem="gIC-Fe-9zC" firstAttribute="top" secondItem="r0D-X2-Vtr" secondAttribute="top" constant="20" id="8M3-F5-lsw"/>
                 <constraint firstItem="iu2-ni-heW" firstAttribute="leading" secondItem="r0D-X2-Vtr" secondAttribute="leading" id="Ali-bh-rHb"/>
                 <constraint firstItem="gii-nJ-gXF" firstAttribute="leading" secondItem="r0D-X2-Vtr" secondAttribute="leading" id="B6K-Lb-Gqp"/>

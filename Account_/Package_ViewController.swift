@@ -54,8 +54,37 @@ class Package_ViewController: UIViewController, MFMessageComposeViewControllerDe
        didRequestPackage()
     }
     
+    func didRequestPayment() {
+        LTRequest.sharedInstance()?.didRequestInfo(["CMD_CODE":"getPaymentPackage",
+                                                    "header":["session":Information.token == nil ? "" : Information.token!],
+                                                    "session":Information.token ?? "",
+                                                    "overrideAlert":"1",
+                                                    "overrideLoading":"1",
+                                                    "host":self], withCache: { (cacheString) in
+       }, andCompletion: { (response, errorCode, error, isValid, object) in
+           let result = response?.dictionize() ?? [:]
+           self.refreshControl.endRefreshing()
+        
+           if result.getValueFromKey("error_code") != "0" || result["result"] is NSNull {
+               self.showToast(response?.dictionize().getValueFromKey("error_msg") == "" ? "Lỗi xảy ra, mời bạn thử lại" : response?.dictionize().getValueFromKey("error_msg"), andPos: 0)
+               return
+           }
+        
+        print(result)
+        
+//           self.dataList.removeAllObjects()
+//
+//           let data = (result["result"] as! NSArray)
+//
+//           self.dataList.addObjects(from: data.withMutable())
+//                  
+//           self.tableView.reloadData()
+       })
+    }
+    
     func didRequestPackage() {
         LTRequest.sharedInstance()?.didRequestInfo(["CMD_CODE":"getPackageInfo",
+                                                    "header":["session":Information.token == nil ? "" : Information.token!],
                                                     "session":Information.token ?? "",
                                                     "overrideAlert":"1",
                                                     "overrideLoading":"1",

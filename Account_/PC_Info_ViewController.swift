@@ -100,7 +100,7 @@ class PC_Info_ViewController: UIViewController {
     
     func postNotification(ids: NSArray) {
         LTRequest.sharedInstance()?.didRequestInfo(["absoluteLink":"".urlGet(postFix: "notification/subcribe"),
-                                                                          "header":["Authorization":Information.token == nil ? "" : Information.token!],
+                                                                          "header":["session":Information.token == nil ? "" : Information.token!],
                                                                           "ids": ids,
                                                                           "overrideAlert":"1",
                                                                           "overrideLoading":"1",
@@ -120,7 +120,7 @@ class PC_Info_ViewController: UIViewController {
     
     func didRequestNotification() {
         LTRequest.sharedInstance()?.didRequestInfo(["absoluteLink":"".urlGet(postFix: "subcribe"),
-                                                   "header":["Authorization":Information.token == nil ? "" : Information.token!],
+                                                   "header":["session":Information.token == nil ? "" : Information.token!],
                                                    "is_subcribe": self.getValue("push") == "1" ? false : true ,
                                                    "overrideAlert":"1",
                                                    "overrideLoading":"1",

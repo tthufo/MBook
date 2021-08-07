@@ -1179,6 +1179,7 @@
 
 - (void)didRequestData {
     NSMutableDictionary * request = [[NSMutableDictionary alloc] initWithDictionary:@{@"session": Information.token,
+                                                                                      @"header":@{@"session":Information.token == nil ? @"" : Information.token},
                                                                                       @"page_index": @(pageIndex),
                                                                                       @"page_size": @(10),
                                                                                       @"book_type": @(0),
@@ -1215,6 +1216,7 @@
 
 - (void)didRequestChapter {
     NSMutableDictionary * request = [[NSMutableDictionary alloc] initWithDictionary:@{@"session": Information.token,
+                                                                                      @"header":@{@"session":Information.token == nil ? @"" : Information.token},
                                                                                       @"book_type": @(0),
                                                                                       @"price": @(0), @"sorting": @(1),
                                                                                       @"overrideAlert": @"1",
@@ -1244,7 +1246,9 @@
 }
 
 - (void)didRequestContent {
-    NSMutableDictionary * request = [[NSMutableDictionary alloc] initWithDictionary:@{@"session": Information.token,
+    NSMutableDictionary * request = [[NSMutableDictionary alloc] initWithDictionary:@{
+                                                                                        @"header":@{@"session":Information.token == nil ? @"" : Information.token},
+                                                                                        @"session": Information.token,
                                                                                       @"overrideAlert": @"1",
     }];
     
@@ -1273,8 +1277,10 @@
 }
 
 - (void)didRequestDetail {
-    NSMutableDictionary * request = [[NSMutableDictionary alloc] initWithDictionary:@{@"session": Information.token,
-                                                                                      @"overrideAlert": @"1",
+    NSMutableDictionary * request = [[NSMutableDictionary alloc] initWithDictionary:@{
+        @"header":@{@"session":Information.token == nil ? @"" : Information.token},
+        @"session": Information.token,
+        @"overrideAlert": @"1",
     }];
     
     request[@"id"] = config[@"id"];

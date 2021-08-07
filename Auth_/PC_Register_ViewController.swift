@@ -211,7 +211,7 @@ class PC_Register_ViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func didPressSignup() {
         LTRequest.sharedInstance()?.didRequestInfo(["CMD_CODE":"signin",
-                                                    "username": isPhone ? self.convertPhone() : email.text,
+                                                    "username": isPhone ? self.convertPhone() : email.text as Any,
                                                     "overrideAlert":"1",
                                                     "overrideLoading":"1",
                                                     "postFix":"auth",

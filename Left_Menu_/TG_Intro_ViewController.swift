@@ -94,6 +94,7 @@ class TG_Intro_ViewController: UIViewController {
     
     @objc func didRequestNotification() {
         LTRequest.sharedInstance()?.didRequestInfo(["CMD_CODE":"getBookCategory",
+                                                    "header":["session":Information.token == nil ? "" : Information.token!],
                                                     "session":Information.token ?? "",
                                                     "overrideAlert":"1",
                                                     ], withCache: { (cacheString) in

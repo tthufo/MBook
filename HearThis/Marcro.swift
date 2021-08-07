@@ -477,6 +477,7 @@ extension UIViewController {
     
     func didRequestMP3Link(info: NSDictionary) {
          let request = NSMutableDictionary.init(dictionary: [
+                                                             "header":["session":Information.token == nil ? "" : Information.token!],
                                                              "session":Information.token ?? "",
                                                              "overrideAlert":"1",
                                                              ])
@@ -502,7 +503,13 @@ extension UIViewController {
      }
     
     @objc func didRequestUrl(info: NSDictionary) {
+        
+        self.didRequestMP3Link(info: info)
+
+        return
+        
         let request = NSMutableDictionary.init(dictionary: [
+                                                            "header":["session":Information.token == nil ? "" : Information.token!],
                                                             "session":Information.token ?? "",
                                                             "overrideAlert":"1",
                                                             "overrideLoading":"1",

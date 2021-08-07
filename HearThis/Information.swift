@@ -116,6 +116,7 @@ class Information: NSObject {
     
     @objc static func removeInfo() {
         
+        self.remove("social")
         
         self.removeValue("token")
 
