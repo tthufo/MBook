@@ -13,6 +13,10 @@ class Check_Out_ViewController: UIViewController {
     @IBOutlet var tableView: UITableView!
     
     @IBOutlet var optionCell: UITableViewCell!
+    
+    @IBOutlet var buttonCell: UITableViewCell!
+
+    @IBOutlet var bankCell: UITableViewCell!
 
     @IBOutlet var login_bg_height: NSLayoutConstraint!
 
@@ -22,10 +26,16 @@ class Check_Out_ViewController: UIViewController {
     
     @IBOutlet var nextButton: UIButton!
     
+    var expand: Bool = false
+
     var dataList: NSMutableArray!
     
     var info: NSDictionary!
     
+    var paymentInfoBank = NSMutableDictionary()
+    
+    var paymentInfoGate = NSMutableDictionary()
+
     var names = [["check": "0", "name": "ic_momo"], ["check": "0", "name": "ic_airpay"], ["check": "0", "name": "ic_vnpay"], ["check": "0", "name": "ic_nganluong"], ["check": "0", "name": "ic_sms"]]
 
     override func viewDidLoad() {
@@ -49,15 +59,30 @@ class Check_Out_ViewController: UIViewController {
         
         tableView.withCell("Check_Out_Book_Cell")
         
+        tableView.withCell("Payment_Option_Cell")
+
         dataList = NSMutableArray.init()
     }
     
-    func didRequestPaymentChannel() {
-        LTRequest.sharedInstance()?.didRequestInfo(["CMD_CODE":"getPaymentChannel",
+    func didRequestPayment() {
+        
+        if expand && paymentInfoBank.allKeys.count == 0 {
+            self.showToast("Bạn chưa chọn ngân hàng để thanh toán", andPos: 0)
+            return
+        }
+        
+        let payment = expand ? self.paymentInfoBank : self.paymentInfoGate
+
+        LTRequest.sharedInstance()?.didRequestInfo(["CMD_CODE":"purchaseOrder",
                                                     "header":["session":Information.token == nil ? "" : Information.token!],
-                                                    "page_index": NSNull(),
-                                                    "page_size": NSNull(),
-                                                    "session": NSNull(),
+                                                    "items": [[
+                                                        "amount": self.info.getValueFromKey("price") ?? "",
+                                                        "item_id": self.info.getValueFromKey("id") ?? "",
+                                                        "item_type": "package",
+                                                        "quantity": 1
+                                                    ]],
+                                                    "payment_detail_id": expand ? payment.getValueFromKey("payment_detail_id") : "0",
+                                                    "payment_id": payment.getValueFromKey("payment_id") ?? "",
                                                     "overrideAlert":"1",
                                                     "overrideLoading":"1",
                                                     "host":self], withCache: { (cacheString) in
@@ -68,15 +93,15 @@ class Check_Out_ViewController: UIViewController {
                self.showToast(response?.dictionize().getValueFromKey("error_msg") == "" ? "Lỗi xảy ra, mời bạn thử lại" : response?.dictionize().getValueFromKey("error_msg"), andPos: 0)
                return
            }
-                
-           self.dataList.removeAllObjects()
-
-           let data = (result["result"] as! NSArray)
-
-           self.dataList.addObjects(from: data.withMutable())
-                  
-           self.tableView.reloadData()
-       })
+        
+            let payment = Payment_ViewController.init()
+                        
+            payment.info = self.info
+        
+            payment.requestUrl = (result["result"] as! NSDictionary).getValueFromKey("redirect")
+            
+            self.navigationController?.pushViewController(payment, animated: true)
+        })
     }
 
     @IBAction func didPressBack() {
@@ -92,7 +117,7 @@ class Check_Out_ViewController: UIViewController {
     }
     
     @IBAction func didPressNext() {
-        
+        self.didRequestPayment()
     }
     
     @IBAction func didPressCancel() {
@@ -107,85 +132,100 @@ class Check_Out_ViewController: UIViewController {
 extension Check_Out_ViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return indexPath.row == (self.isPackage ? 2 : 1) ? 330 : self.isPackage ? UITableView.automaticDimension : 260
+        return indexPath.row == 0 ? (self.isPackage ? UITableView.automaticDimension : 260) : indexPath.row == (self.isPackage ? 2 : 1) ? expand ? 280 : 130 : indexPath.row == (self.isPackage ? 3 : 2) ? 120 : UITableView.automaticDimension
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.isPackage ? 3 : 2
+        return self.isPackage ? 4 : 3
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if indexPath.row == (self.isPackage ? 2 : 1) {
-            
-            let stack = self.withView(optionCell, tag: 1) as! UIStackView
-                        
-            for i in 0 ..< stack.subviews.count {
-                let button = stack.subviews[i]
-                let checked = self.names[i]["check"] == "1"
-                (button as! UIButton).setImage(checked ? UIImage(named: self.names[i]["name"]!) : UIImage(named: self.names[i]["name"]!)?.noir, for: .normal)
-                (button as! UIButton).action(forTouch: ["index": i, "button": button]) { (obc) in
-                    let indexing = obc!["index"]
-                    let bacton = obc!["button"]
-                    let checking = self.names[indexing as! Int]["check"] == "0"
-                    if checking {
-                        for k in 0 ..< stack.subviews.count {
-                            let btn = stack.subviews[k]
-                            self.names[k]["check"] = "0"
-                            (btn as! UIButton).setImage(UIImage(named: self.names[k]["name"]!)?.noir, for: .normal)
-                        }
-                        self.names[indexing as! Int]["check"] = "1"
-                        self.nextButton.isEnabled = true
-                        self.nextButton.alpha = 1
-                    } else {
-                        self.names[indexing as! Int]["check"] = "0"
-                        self.nextButton.isEnabled = false
-                        self.nextButton.alpha = 0.5
-                    }
-                    (bacton as! UIButton).setImage(self.names[indexing as! Int]["check"] == "1" ? UIImage(named: self.names[indexing as! Int]["name"]!) : UIImage(named: self.names[indexing as! Int]["name"]!)?.noir, for: .normal)
-                }
-            }
-            
-            return optionCell!
+        if indexPath.row == (self.isPackage ? 3 : 2) {
+            return buttonCell!
         }
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: self.isPackage ? (indexPath.row == 0 ? "Vip_Cell" : "Check_Out_Cell") : "Check_Out_Book_Cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: self.isPackage ? (indexPath.row == 0 ? "Vip_Cell" : indexPath.row == 1 ? "Check_Out_Cell" : "Payment_Option_Cell") : "Check_Out_Book_Cell", for: indexPath)
         
         if self.isPackage {
+            
             if indexPath.row == 0 {
                 let vip = self.withView(cell, tag: 1) as! UILabel
-                            
+
                 vip.text = self.info.getValueFromKey("package_code")
-                
+
                 let price = self.withView(cell, tag: 2) as! UILabel
-                
+
                 price.text = self.info.getValueFromKey("price")
 
                 let des = self.withView(cell, tag: 3) as! UILabel
 
                 des.text = self.info.getValueFromKey("info")
-            } else {
+            }
+            
+            if indexPath.row == 1 {
                 let vip = self.withView(cell, tag: 1) as! UILabel
-                            
+
                 vip.text = "MeeBook " + self.info.getValueFromKey("vip")
-                
+
                 let price = self.withView(cell, tag: 2) as! UILabel
-                
+
                 price.text = self.info.getValueFromKey("price")
             }
+            
+            if indexPath.row == 2 {
+                (cell as! Payment_Option_Cell).callBack = { value in
+                    let details = (value as! NSDictionary)["details"] as! NSArray
+                    self.expand = details.count == 0 ? false : true
+                    if details.count == 0 {
+                        self.paymentInfoGate.removeAllObjects()
+                        self.paymentInfoGate.addEntries(from: value as! [AnyHashable : Any])
+                    }
+                    tableView.reloadData()
+                }
+                
+                (cell as! Payment_Option_Cell).chooseBank = { bank in
+                    print(bank)
+                    self.paymentInfoBank.removeAllObjects()
+                    self.paymentInfoBank.addEntries(from: bank as! [AnyHashable : Any])
+                }
+            }
+            
         } else {
-            let title = self.withView(cell, tag: 1) as! UILabel
-            title.text = self.info.getValueFromKey("name")
-                    
-            let authorName = ((self.info["author"] as! NSArray).firstObject as! NSDictionary).getValueFromKey("name")
-            let author = self.withView(cell, tag: 2) as! UILabel
-            author.text = authorName
             
-            let price = self.withView(cell, tag: 3) as! UILabel
-            price.text = self.info.getValueFromKey("price") + " đ"
+            if indexPath.row == 0 {
+                let title = self.withView(cell, tag: 1) as! UILabel
+                title.text = self.info.getValueFromKey("name")
+                        
+                let authorName = ((self.info["author"] as! NSArray).firstObject as! NSDictionary).getValueFromKey("name")
+                let author = self.withView(cell, tag: 2) as! UILabel
+                author.text = authorName
+                
+                let price = self.withView(cell, tag: 3) as! UILabel
+                price.text = self.info.getValueFromKey("price") + " đ"
+                
+                let backgroundImage = self.withView(cell, tag:11) as! UIImageView
+                backgroundImage.imageUrl(url: self.info.getValueFromKey("avatar"))
+            }
             
-            let backgroundImage = self.withView(cell, tag:11) as! UIImageView
-            backgroundImage.imageUrl(url: self.info.getValueFromKey("avatar"))
+            if indexPath.row == 1 {
+                (cell as! Payment_Option_Cell).callBack = { value in
+                    let details = (value as! NSDictionary)["details"] as! NSArray
+                    self.expand = details.count == 0 ? false : true
+                    if details.count == 0 {
+                        self.paymentInfoGate.removeAllObjects()
+                        self.paymentInfoGate.addEntries(from: value as! [AnyHashable : Any])
+                    }
+                    tableView.reloadData()
+                }
+                
+                (cell as! Payment_Option_Cell).chooseBank = { bank in
+                    self.paymentInfoBank.removeAllObjects()
+                    self.paymentInfoBank.addEntries(from: bank as! [AnyHashable : Any])
+                    print(bank)
+                }
+            }
+            
         }
         
         return cell

@@ -99,6 +99,11 @@
 		FC7A98CF2444AC370038C226 /* TagFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7A98CE2444AC370038C226 /* TagFlowLayout.swift */; };
 		FC7A98D12444AD010038C226 /* Tag_Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC7A98D02444AD010038C226 /* Tag_Cell.xib */; };
 		FC7A98D32444B0420038C226 /* Tag_Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7A98D22444B0420038C226 /* Tag_Cell.swift */; };
+		FC7AFA7826C04A0500D3C2D2 /* Third_Tab_New_ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC7AFA7626C04A0500D3C2D2 /* Third_Tab_New_ViewController.m */; };
+		FC7AFA7926C04A0500D3C2D2 /* Third_Tab_New_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC7AFA7726C04A0500D3C2D2 /* Third_Tab_New_ViewController.xib */; };
+		FC7AFA8526C054FF00D3C2D2 /* Payment_Option_Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC7AFA8326C054FF00D3C2D2 /* Payment_Option_Cell.xib */; };
+		FC7AFA8E26C05A6500D3C2D2 /* Payment_Option_Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7AFA8D26C05A6500D3C2D2 /* Payment_Option_Cell.swift */; };
+		FC7AFA9226C05BF900D3C2D2 /* Payment_Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC7AFA9126C05BF900D3C2D2 /* Payment_Cell.xib */; };
 		FC7F32B4244A0731007429F7 /* TFHpple.m in Sources */ = {isa = PBXBuildFile; fileRef = FC7F32AF244A0730007429F7 /* TFHpple.m */; };
 		FC7F32B5244A0731007429F7 /* XPathQuery.m in Sources */ = {isa = PBXBuildFile; fileRef = FC7F32B0244A0730007429F7 /* XPathQuery.m */; };
 		FC7F32B6244A0731007429F7 /* TFHppleElement.m in Sources */ = {isa = PBXBuildFile; fileRef = FC7F32B3244A0731007429F7 /* TFHppleElement.m */; };
@@ -178,6 +183,9 @@
 		FCC965B21DA75C060025971E /* HT_Player_Item.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCC965B11DA75C060025971E /* HT_Player_Item.xib */; };
 		FCD0E59F1DA8F93500DF2ABF /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = FCD0E59E1DA8F93500DF2ABF /* libz.tbd */; };
 		FCD381872444D78E004D78C9 /* CustomFlowLayou.m in Sources */ = {isa = PBXBuildFile; fileRef = FCD381862444D78E004D78C9 /* CustomFlowLayou.m */; };
+		FCD5D0D526C0F03C00E13257 /* Bank_Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCD5D0D426C0F03C00E13257 /* Bank_Cell.xib */; };
+		FCD5D0DA26C1239100E13257 /* Payment_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD5D0D826C1239100E13257 /* Payment_ViewController.swift */; };
+		FCD5D0DB26C1239100E13257 /* Payment_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCD5D0D926C1239100E13257 /* Payment_ViewController.xib */; };
 		FCD979892447693D00970A4E /* Reader_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCD979872447693D00970A4E /* Reader_ViewController.swift */; };
 		FCD9798A2447693D00970A4E /* Reader_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCD979882447693D00970A4E /* Reader_ViewController.xib */; };
 		FCE38C4A243E4B6C003864BC /* OwnTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCE38C49243E4B6C003864BC /* OwnTableView.swift */; };
@@ -308,6 +316,12 @@
 		FC7A98CE2444AC370038C226 /* TagFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagFlowLayout.swift; sourceTree = "<group>"; };
 		FC7A98D02444AD010038C226 /* Tag_Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Tag_Cell.xib; sourceTree = "<group>"; };
 		FC7A98D22444B0420038C226 /* Tag_Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag_Cell.swift; sourceTree = "<group>"; };
+		FC7AFA7526C04A0500D3C2D2 /* Third_Tab_New_ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Third_Tab_New_ViewController.h; sourceTree = "<group>"; };
+		FC7AFA7626C04A0500D3C2D2 /* Third_Tab_New_ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Third_Tab_New_ViewController.m; sourceTree = "<group>"; };
+		FC7AFA7726C04A0500D3C2D2 /* Third_Tab_New_ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Third_Tab_New_ViewController.xib; sourceTree = "<group>"; };
+		FC7AFA8326C054FF00D3C2D2 /* Payment_Option_Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Payment_Option_Cell.xib; sourceTree = "<group>"; };
+		FC7AFA8D26C05A6500D3C2D2 /* Payment_Option_Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Payment_Option_Cell.swift; sourceTree = "<group>"; };
+		FC7AFA9126C05BF900D3C2D2 /* Payment_Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Payment_Cell.xib; sourceTree = "<group>"; };
 		FC7F32AE244A0730007429F7 /* TFHppleElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TFHppleElement.h; sourceTree = "<group>"; };
 		FC7F32AF244A0730007429F7 /* TFHpple.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TFHpple.m; sourceTree = "<group>"; };
 		FC7F32B0244A0730007429F7 /* XPathQuery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XPathQuery.m; sourceTree = "<group>"; };
@@ -405,6 +419,9 @@
 		FCD0E59E1DA8F93500DF2ABF /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		FCD381852444D78E004D78C9 /* CustomFlowLayou.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomFlowLayou.h; sourceTree = "<group>"; };
 		FCD381862444D78E004D78C9 /* CustomFlowLayou.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomFlowLayou.m; sourceTree = "<group>"; };
+		FCD5D0D426C0F03C00E13257 /* Bank_Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Bank_Cell.xib; sourceTree = "<group>"; };
+		FCD5D0D826C1239100E13257 /* Payment_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Payment_ViewController.swift; sourceTree = "<group>"; };
+		FCD5D0D926C1239100E13257 /* Payment_ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Payment_ViewController.xib; sourceTree = "<group>"; };
 		FCD979872447693D00970A4E /* Reader_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reader_ViewController.swift; sourceTree = "<group>"; };
 		FCD979882447693D00970A4E /* Reader_ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Reader_ViewController.xib; sourceTree = "<group>"; };
 		FCE38C49243E4B6C003864BC /* OwnTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OwnTableView.swift; sourceTree = "<group>"; };
@@ -655,6 +672,9 @@
 				FC130B922446353100D64012 /* Book_Inner_ViewController.swift */,
 				FC130B932446353100D64012 /* Book_Inner_ViewController.xib */,
 				FCBC3494264153B700AC9621 /* Book_List_Header.xib */,
+				FC7AFA7526C04A0500D3C2D2 /* Third_Tab_New_ViewController.h */,
+				FC7AFA7626C04A0500D3C2D2 /* Third_Tab_New_ViewController.m */,
+				FC7AFA7726C04A0500D3C2D2 /* Third_Tab_New_ViewController.xib */,
 			);
 			path = Tabbar_;
 			sourceTree = "<group>";
@@ -713,6 +733,12 @@
 				FC908BD5264983B900176E13 /* News_ViewController.xib */,
 				FC908BDC264A894D00176E13 /* News_Cell.swift */,
 				FC908BD9264A840100176E13 /* News_Cell.xib */,
+				FCD5D0D426C0F03C00E13257 /* Bank_Cell.xib */,
+				FC7AFA8D26C05A6500D3C2D2 /* Payment_Option_Cell.swift */,
+				FC7AFA8326C054FF00D3C2D2 /* Payment_Option_Cell.xib */,
+				FC7AFA9126C05BF900D3C2D2 /* Payment_Cell.xib */,
+				FCD5D0D826C1239100E13257 /* Payment_ViewController.swift */,
+				FCD5D0D926C1239100E13257 /* Payment_ViewController.xib */,
 			);
 			path = Account_;
 			sourceTree = "<group>";
@@ -957,10 +983,12 @@
 			files = (
 				FCFB51761DD0EFE300D49FB2 /* M_Detail_ViewController.xib in Resources */,
 				FCB238BB244186E10034B40B /* Book_Detail_Title.xib in Resources */,
+				FC7AFA9226C05BF900D3C2D2 /* Payment_Cell.xib in Resources */,
 				FC771C4A263B1FB2005851FA /* Check_Out_ViewController.xib in Resources */,
 				FCB238E524437D410034B40B /* Event_Detail_ViewController.xib in Resources */,
 				FCFB516D1DD075E200D49FB2 /* actions.plist in Resources */,
 				FCAB62C72639675300E26484 /* VIP_ViewController.xib in Resources */,
+				FCD5D0D526C0F03C00E13257 /* Bank_Cell.xib in Resources */,
 				FC0A8FB42437770E001A75AF /* PC_Login_ViewController.xib in Resources */,
 				FC3F62DB26B48F6200A13820 /* GoogleService-Info.plist in Resources */,
 				FCB238D3244355770034B40B /* Event_Cell.xib in Resources */,
@@ -978,6 +1006,7 @@
 				FC0A8FB12437770E001A75AF /* PC_Forgot_ViewController.xib in Resources */,
 				FC40A0FE243EFE5C0096B9DB /* TG_Room_Cell_3.xib in Resources */,
 				FC40A0FD243EFE5C0096B9DB /* TG_Room_Cell_1.xib in Resources */,
+				FC7AFA8526C054FF00D3C2D2 /* Payment_Option_Cell.xib in Resources */,
 				FC69D42F24405879006D57D9 /* TG_Room_Cell_8.xib in Resources */,
 				FC40A0FC243EFE5C0096B9DB /* TG_Room_Cell_4.xib in Resources */,
 				FC69D43224405879006D57D9 /* TG_Room_Cell_6.xib in Resources */,
@@ -1028,6 +1057,7 @@
 				FC130B952446353100D64012 /* Book_Inner_ViewController.xib in Resources */,
 				FCC965B21DA75C060025971E /* HT_Player_Item.xib in Resources */,
 				FC78397A2438F37F00470148 /* PC_Info_ViewController.xib in Resources */,
+				FCD5D0DB26C1239100E13257 /* Payment_ViewController.xib in Resources */,
 				FC69D4342440595B006D57D9 /* TG_Room_Cell_Banner_0.xib in Resources */,
 				FC771C4D263B3FB2005851FA /* Check_Out_Cell.xib in Resources */,
 				FCB238CA2442329C0034B40B /* Author_Detail_Header.xib in Resources */,
@@ -1040,6 +1070,7 @@
 				FC9467D425FD4BD800175288 /* PC_Confirm_ViewController.xib in Resources */,
 				FC130B8B24461D1A00D64012 /* List_Header_Cell.xib in Resources */,
 				FC69D43124405879006D57D9 /* TG_Room_Cell_10.xib in Resources */,
+				FC7AFA7926C04A0500D3C2D2 /* Third_Tab_New_ViewController.xib in Resources */,
 				FC78398424391F6700470148 /* TG_Intro_ViewController.xib in Resources */,
 				FCBC34852640668900AC9621 /* Author_Cell.xib in Resources */,
 				FCB238CC244235D70034B40B /* Author_Bio_Cell.xib in Resources */,
@@ -1136,6 +1167,7 @@
 				FC7F32B6244A0731007429F7 /* TFHppleElement.m in Sources */,
 				FC7550E31DAC85DE007992DF /* HT_Feed_ViewController.m in Sources */,
 				FCE38C4A243E4B6C003864BC /* OwnTableView.swift in Sources */,
+				FC7AFA8E26C05A6500D3C2D2 /* Payment_Option_Cell.swift in Sources */,
 				FC640A861DAAAD8C00DAEF55 /* List.m in Sources */,
 				FCC965AA1DA5F4200025971E /* HT_Player_ViewController.m in Sources */,
 				FCD979892447693D00970A4E /* Reader_ViewController.swift in Sources */,
@@ -1165,6 +1197,7 @@
 				FCBC3481263FFB2600AC9621 /* User_Infor_ViewController.swift in Sources */,
 				FC640A811DAAAD8B00DAEF55 /* CoreModel.xcdatamodel in Sources */,
 				FC908BDD264A894D00176E13 /* News_Cell.swift in Sources */,
+				FC7AFA7826C04A0500D3C2D2 /* Third_Tab_New_ViewController.m in Sources */,
 				FC78398524391F6700470148 /* TG_Intro_ViewController.swift in Sources */,
 				FCB3CD711DA4E3FA002FABDD /* ItemCell.m in Sources */,
 				FC1AD7D61DA40CA8002BA7EC /* ViewController.m in Sources */,
@@ -1178,6 +1211,7 @@
 				FC7A98D32444B0420038C226 /* Tag_Cell.swift in Sources */,
 				FC91B731243120F400AA6671 /* GUISlider.m in Sources */,
 				FC908BA92645CF3B00176E13 /* CosmosDistrib.swift in Sources */,
+				FCD5D0DA26C1239100E13257 /* Payment_ViewController.swift in Sources */,
 				FC7550F01DAC959A007992DF /* HT_Detail_ViewController.m in Sources */,
 				FC91B732243120F400AA6671 /* GUIPlayerView.m in Sources */,
 				FC1AD7D31DA40CA8002BA7EC /* AppDelegate.m in Sources */,

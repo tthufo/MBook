@@ -10,11 +10,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="Check_Out_ViewController" customModule="MeBook" customModuleProvider="target">
             <connections>
+                <outlet property="buttonCell" destination="XGK-m6-WBL" id="10z-OQ-o5N"/>
                 <outlet property="login_bg_height" destination="ous-Pz-s2p" id="Ec9-Fn-74K"/>
-                <outlet property="nextButton" destination="6ub-ms-Nr9" id="gwQ-aL-a0A"/>
                 <outlet property="optionCell" destination="RMv-LN-pgY" id="Zf7-DP-gH4"/>
-                <outlet property="sideGapLeft" destination="8bi-ji-YVU" id="Sm6-qW-jdu"/>
-                <outlet property="sideGapRight" destination="9pR-Hp-Cgt" id="uTI-Ot-i9I"/>
+                <outlet property="sideGapLeft" destination="xZN-0W-bhG" id="MMs-BG-ozz"/>
+                <outlet property="sideGapRight" destination="7Wc-u9-mkT" id="qns-eb-1W9"/>
                 <outlet property="tableView" destination="eva-AU-Hl3" id="8vs-oe-7MX"/>
                 <outlet property="view" destination="sxv-TR-xOZ" id="voV-A9-9Du"/>
             </connections>
@@ -93,11 +93,11 @@
             </constraints>
             <point key="canvasLocation" x="63.200000000000003" y="67.016491754122939"/>
         </view>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="330" id="RMv-LN-pgY">
-            <rect key="frame" x="0.0" y="0.0" width="414" height="330"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="135" id="RMv-LN-pgY">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="135"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="RMv-LN-pgY" id="F2e-oM-XqV">
-                <rect key="frame" x="0.0" y="0.0" width="414" height="330"/>
+                <rect key="frame" x="0.0" y="0.0" width="414" height="135"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CHỌN KÊNH THANH TOÁN" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6L2-AV-RRr">
@@ -139,11 +139,43 @@
                             <constraint firstAttribute="height" constant="80" id="JkM-Gs-MzL"/>
                         </constraints>
                     </stackView>
-                    <button opaque="NO" clipsSubviews="YES" alpha="0.5" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6ub-ms-Nr9">
-                        <rect key="frame" x="18" y="137" width="378" height="52"/>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="6L2-AV-RRr" firstAttribute="leading" secondItem="F2e-oM-XqV" secondAttribute="leading" constant="10" id="0Lf-Mv-57I"/>
+                    <constraint firstAttribute="trailing" secondItem="gtO-v7-YYi" secondAttribute="trailing" id="8k0-kE-t88"/>
+                    <constraint firstItem="6L2-AV-RRr" firstAttribute="top" secondItem="F2e-oM-XqV" secondAttribute="top" constant="10" id="k9z-vD-714"/>
+                    <constraint firstItem="gtO-v7-YYi" firstAttribute="leading" secondItem="F2e-oM-XqV" secondAttribute="leading" id="ogc-V1-YIi"/>
+                    <constraint firstItem="gtO-v7-YYi" firstAttribute="top" secondItem="6L2-AV-RRr" secondAttribute="bottom" constant="8" symbolic="YES" id="yEn-dD-oGn"/>
+                </constraints>
+            </tableViewCellContentView>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <point key="canvasLocation" x="-814.39999999999998" y="-329.68515742128938"/>
+        </tableViewCell>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="122" id="XGK-m6-WBL">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="123"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="XGK-m6-WBL" id="hls-Ny-BZA">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="123"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hgl-Mn-8f6">
+                        <rect key="frame" x="10" y="85" width="394" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="vtF-a4-6dl"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                        <state key="normal" title="Huỷ giao dịch">
+                            <color key="titleColor" red="0.1176470588" green="0.57254901960000004" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
+                        </state>
+                        <connections>
+                            <action selector="didPressCancel" destination="-1" eventType="touchUpInside" id="QR9-QE-lQJ"/>
+                        </connections>
+                    </button>
+                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZEt-db-wnv">
+                        <rect key="frame" x="18" y="10" width="378" height="52"/>
                         <color key="backgroundColor" red="0.1176470588" green="0.57254901960000004" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="52" id="P9A-4w-Mvb"/>
+                            <constraint firstAttribute="height" constant="52" id="xo9-Q1-71w"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="21"/>
                         <state key="normal" title="Tiếp tục">
@@ -155,39 +187,22 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                         <connections>
-                            <action selector="didPressNext" destination="-1" eventType="touchUpInside" id="g8P-8x-BR4"/>
-                        </connections>
-                    </button>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S7T-9w-iUm">
-                        <rect key="frame" x="149" y="270" width="116" height="30"/>
-                        <constraints>
-                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="46" id="GhG-4c-NEM"/>
-                            <constraint firstAttribute="height" constant="30" id="ISJ-KP-Obm"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                        <state key="normal" title="Huỷ giao dịch">
-                            <color key="titleColor" red="0.1176470588" green="0.57254901960000004" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
-                        </state>
-                        <connections>
-                            <action selector="didPressCancel" destination="-1" eventType="touchUpInside" id="ROs-VT-EfO"/>
+                            <action selector="didPressNext" destination="-1" eventType="touchUpInside" id="c1h-uC-sXm"/>
                         </connections>
                     </button>
                 </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
-                    <constraint firstItem="6L2-AV-RRr" firstAttribute="leading" secondItem="F2e-oM-XqV" secondAttribute="leading" constant="10" id="0Lf-Mv-57I"/>
-                    <constraint firstAttribute="trailing" secondItem="gtO-v7-YYi" secondAttribute="trailing" id="8k0-kE-t88"/>
-                    <constraint firstItem="S7T-9w-iUm" firstAttribute="centerX" secondItem="F2e-oM-XqV" secondAttribute="centerX" id="NVM-eM-f6t"/>
-                    <constraint firstAttribute="trailing" secondItem="6ub-ms-Nr9" secondAttribute="trailing" constant="18" id="PAj-q0-RLx"/>
-                    <constraint firstItem="6ub-ms-Nr9" firstAttribute="top" secondItem="gtO-v7-YYi" secondAttribute="bottom" constant="18" id="W1k-Xk-hht"/>
-                    <constraint firstItem="6ub-ms-Nr9" firstAttribute="leading" secondItem="F2e-oM-XqV" secondAttribute="leading" constant="18" id="fAh-BU-jg8"/>
-                    <constraint firstItem="6L2-AV-RRr" firstAttribute="top" secondItem="F2e-oM-XqV" secondAttribute="top" constant="10" id="k9z-vD-714"/>
-                    <constraint firstItem="S7T-9w-iUm" firstAttribute="top" secondItem="6ub-ms-Nr9" secondAttribute="bottom" constant="81" id="ncU-sN-F4n"/>
-                    <constraint firstItem="gtO-v7-YYi" firstAttribute="leading" secondItem="F2e-oM-XqV" secondAttribute="leading" id="ogc-V1-YIi"/>
-                    <constraint firstItem="gtO-v7-YYi" firstAttribute="top" secondItem="6L2-AV-RRr" secondAttribute="bottom" constant="8" symbolic="YES" id="yEn-dD-oGn"/>
+                    <constraint firstAttribute="bottom" secondItem="Hgl-Mn-8f6" secondAttribute="bottom" constant="8" id="4pC-Hn-qad"/>
+                    <constraint firstAttribute="trailing" secondItem="ZEt-db-wnv" secondAttribute="trailing" constant="18" id="7Wc-u9-mkT"/>
+                    <constraint firstItem="ZEt-db-wnv" firstAttribute="top" secondItem="hls-Ny-BZA" secondAttribute="top" constant="10" id="VT7-gZ-1y9"/>
+                    <constraint firstItem="Hgl-Mn-8f6" firstAttribute="leading" secondItem="hls-Ny-BZA" secondAttribute="leading" constant="10" id="btx-Xb-8cy"/>
+                    <constraint firstAttribute="trailing" secondItem="Hgl-Mn-8f6" secondAttribute="trailing" constant="10" id="g6m-9G-OUu"/>
+                    <constraint firstItem="ZEt-db-wnv" firstAttribute="leading" secondItem="hls-Ny-BZA" secondAttribute="leading" constant="18" id="xZN-0W-bhG"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-            <point key="canvasLocation" x="-814.39999999999998" y="-127.736131934033"/>
+            <point key="canvasLocation" x="-814.39999999999998" y="163.26836581709148"/>
         </tableViewCell>
     </objects>
     <resources>

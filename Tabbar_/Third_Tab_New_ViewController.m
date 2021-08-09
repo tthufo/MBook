@@ -1,16 +1,16 @@
 //
-//  HT_Search_ViewController.m
+//  Third_Tab_New_ViewController.m
 //  HearThis
 //
-//  Created by Thanh Hai Tran on 10/4/16.
-//  Copyright © 2016 Thanh Hai Tran. All rights reserved.
+//  Created by Thanh Hai Tran on 8/9/21.
+//  Copyright © 2021 Thanh Hai Tran. All rights reserved.
 //
 
-#import "Second_Tab_ViewController.h"
+#import "Third_Tab_New_ViewController.h"
 
 #import "MeBook-Swift.h"
 
-@interface Second_Tab_ViewController ()
+@interface Third_Tab_New_ViewController ()
 {
     IBOutlet UITableView * tableView;
     
@@ -33,7 +33,7 @@
 
 @end
 
-@implementation Second_Tab_ViewController
+@implementation Third_Tab_New_ViewController
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -154,131 +154,51 @@
 
 #pragma TableView
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    return 1;
-}
-
-- (CGFloat)tableView:(UITableView *)_tableView heightForHeaderInSection:(NSInteger)section
-{
-    return section == 0 ? 1 : 40;
-}
-
-- (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-    UIView * header = [[NSBundle mainBundle] loadNibNamed:@"Book_List_Header" owner:self options:nil][0];
-    
-    UIButton * hot = (UIButton*)[self withView:header tag:1];
-    
-    UIButton * top = (UIButton*)[self withView:header tag:2];
-
-    [hot setTitleColor:[AVHexColor colorWithHexString: isHot ? @"#1E928C" : @"#FFFFFF"] forState:UIControlStateNormal];
-    [hot setBackgroundImage:[UIImage imageNamed: isHot ? @"ico_tab_white" : @"ico_tab_teal"] forState:UIControlStateNormal];
-    
-    [top setTitleColor:[AVHexColor colorWithHexString: isHot ? @"#FFFFFF" : @"1E928C"] forState:UIControlStateNormal];
-    [top setBackgroundImage:[UIImage imageNamed: isHot ? @"ico_tab_teal" : @"ico_tab_white"] forState:UIControlStateNormal];
-    
-    [top actionForTouch:@{} and:^(NSDictionary *touchInfo) {
-        isHot = NO;
-        [tableView beginUpdates];
-        [tableView reloadData];
-//        [tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
-        [tableView endUpdates];
-    }];
-    
-    [hot actionForTouch:@{} and:^(NSDictionary *touchInfo) {
-        isHot = YES;
-        [tableView beginUpdates];
-        [tableView reloadData];
-//        [tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
-        [tableView endUpdates];
-    }];
-        
-    return section == 0 ? nil : header;
-}
-
-- (CGFloat)tableView:(UITableView *)_tableView heightForFooterInSection:(NSInteger)section
-{
-    return 1;
-}
 
 - (NSInteger)tableView:(UITableView *)_tableView numberOfRowsInSection:(NSInteger)section
 {
-    return section == 0 ? 1 : dataList.count;
+    return dataList.count;
 }
 
 - (CGFloat)tableView:(UITableView *)_tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"%f", tempHeight);
-    return indexPath.section == 0 ? tempHeight == 0 ? [config[@"height"] floatValue] : tempHeight : 155;
+    return 155;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)_tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell * cell = [_tableView dequeueReusableCellWithIdentifier: indexPath.section == 0 ? @"TG_Room_Cell_0" : @"Book_List_Cell" forIndexPath:indexPath];
+    UITableViewCell * cell = [_tableView dequeueReusableCellWithIdentifier: @"Book_List_Cell" forIndexPath:indexPath];
     
-    if (indexPath.section == 1) {
         
-        cell.contentView.backgroundColor = [AVHexColor colorWithHexString:@"#ECEDE7"];
-        
-        NSDictionary * list = dataList[indexPath.row];
-        
-        [(UIImageView*)[self withView:cell tag:1] imageUrlWithUrl: [list getValueFromKey:@"avatar"]];
-        
-        [(UILabel*)[self withView:cell tag:2] setText: [list getValueFromKey:@"name"]];
+    cell.contentView.backgroundColor = [AVHexColor colorWithHexString:@"#ECEDE7"];
+    
+    NSDictionary * list = dataList[indexPath.row];
+    
+    [(UIImageView*)[self withView:cell tag:1] imageUrlWithUrl: [list getValueFromKey:@"avatar"]];
+    
+    [(UILabel*)[self withView:cell tag:2] setText: [list getValueFromKey:@"name"]];
 
-        [(UILabel*)[self withView:cell tag:3] setText: ((NSArray*)list[@"author"]).count > 1 ? @"Nhiều tác giả" : list[@"author"][0][@"name"]];
+    [(UILabel*)[self withView:cell tag:3] setText: ((NSArray*)list[@"author"]).count > 1 ? @"Nhiều tác giả" : list[@"author"][0][@"name"]];
 
-        [(UILabel*)[self withView:cell tag:4] setText: ((NSArray*)list[@"category"]).count > 1 ? @"Đang cập nhật" : list[@"category"][0][@"name"]];
+    [(UILabel*)[self withView:cell tag:4] setText: ((NSArray*)list[@"category"]).count > 1 ? @"Đang cập nhật" : list[@"category"][0][@"name"]];
 
-        [(UILabel*)[self withView:cell tag:5] setText: [NSString stringWithFormat:@"%@ chương", [list getValueFromKey:@"total_chapter"]]];
+    [(UILabel*)[self withView:cell tag:5] setText: [NSString stringWithFormat:@"%@ chương", [list getValueFromKey:@"total_chapter"]]];
 
 //        [(UILabel*)[self withView:cell tag:6] setText: [list[@"newest_chapter"] isEqual:[NSNull null]] ? @"Đang cập nhật" : list[@"newest_chapter"][@"name"]];
-        
-        [(UILabel*)[self withView:cell tag:11] setText: [NSString stringWithFormat:@"%li", indexPath.row + 1]];
-        
-        Progress * progress = ((Progress*)[self withView:cell tag:12]);
-        
-        progress.percentage.text = indexPath.row % 2 == 0 ? @"16 %" : @"30 %";
-        
-        CGRect rect = progress.outer.frame;
-        
-        CGRect rectIn = progress.inner.frame;
+    
+    [(UILabel*)[self withView:cell tag:11] setText: [NSString stringWithFormat:@"%li", indexPath.row + 1]];
+    
+    Progress * progress = ((Progress*)[self withView:cell tag:12]);
+    
+    progress.percentage.text = indexPath.row % 2 == 0 ? @"16 %" : @"30 %";
+    
+    CGRect rect = progress.outer.frame;
+    
+    CGRect rectIn = progress.inner.frame;
 
-        rectIn.size.width = rect.size.width * (indexPath.row % 2 == 0 ? 16 : 30) / 100;
-        
-        progress.inner.frame = rectIn;
-
-    } else {
-        ((TG_Room_Cell_N *)cell).config = self->config;
-        ((TG_Room_Cell_N *)cell).returnValue = ^(float value) {
-            self->config[@"height"] = [NSString stringWithFormat:@"%f", value];
-            self->config[@"loaded"] = @YES;
-            self->tempHeight = value;
-            [tableView reloadData];
-        };
-        ((TG_Room_Cell_N *)cell).callBack = ^(id infor) {
-            if ([[(NSDictionary*)infor getValueFromKey:@"book_type"] isEqualToString:@"3"]) {
-                [self didRequestUrlWithInfo:(NSDictionary*)infor];
-                return;
-            }
-            
-            Book_Detail_ViewController * bookDetail = [Book_Detail_ViewController new];
-            NSMutableDictionary * bookInfo = [[NSMutableDictionary alloc] initWithDictionary:[self removeKey:self->config]];
-            [bookInfo addEntriesFromDictionary:(NSDictionary*)infor];
-            bookDetail.config = bookInfo;
-            [[self CENTER] pushViewController:bookDetail animated:YES];
-        };
-
-        UIButton * more = (UIButton*)[self withView:cell tag:12];
-        
-        [more actionForTouch:@{} and:^(NSDictionary *touchInfo) {
-            List_Book_ViewController * list = [List_Book_ViewController new];
-            list.config = [self removeKey:self->config];
-            [self.navigationController pushViewController:list animated:YES];
-        }];
-
-    }
+    rectIn.size.width = rect.size.width * (indexPath.row % 2 == 0 ? 16 : 30) / 100;
+    
+    progress.inner.frame = rectIn;
  
     return cell;
 }

@@ -16,6 +16,8 @@
 
 #import "Third_Tab_ViewController.h"
 
+#import "Third_Tab_New_ViewController.h"
+
 #import "MeBook-Swift.h"
 
 #import <StoreKit/StoreKit.h>
@@ -82,7 +84,7 @@
     nav2.tabBarItem.selectedImage = [UIImage imageNamed:@"shop_active"];
 
 
-    Third_Tab_ViewController * third = [Third_Tab_ViewController new];
+    Third_Tab_New_ViewController * third = [Third_Tab_New_ViewController new];
     
 //    third.title = @"Tủ sách";
     

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Payment_Option_Cell" rowHeight="279" id="KGk-i7-Jjw" customClass="Payment_Option_Cell" customModule="MeBook" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="344" height="280"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="344" height="280"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="CHỌN KÊNH THANH TOÁN" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Dgs-Jv-GIQ">
+                        <rect key="frame" x="10" y="7" width="210" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="210" id="mSR-bs-p1T"/>
+                            <constraint firstAttribute="height" constant="21" id="npO-X1-iEw"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" red="0.1176470588" green="0.57254901960000004" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="jLL-ex-izN">
+                        <rect key="frame" x="10" y="38" width="324" height="71"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="71" id="Sj4-oV-Oym"/>
+                        </constraints>
+                        <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="jOy-nU-chu">
+                            <size key="itemSize" width="128" height="128"/>
+                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        </collectionViewFlowLayout>
+                        <connections>
+                            <outlet property="dataSource" destination="KGk-i7-Jjw" id="vdY-60-8eX"/>
+                            <outlet property="delegate" destination="KGk-i7-Jjw" id="Mgu-Ga-gv5"/>
+                        </connections>
+                    </collectionView>
+                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fD3-Jj-Rom">
+                        <rect key="frame" x="10" y="117" width="324" height="153"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <connections>
+                            <outlet property="dataSource" destination="KGk-i7-Jjw" id="gYn-zn-ATT"/>
+                            <outlet property="delegate" destination="KGk-i7-Jjw" id="mWy-Hl-ns1"/>
+                        </connections>
+                    </tableView>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="fD3-Jj-Rom" secondAttribute="trailing" constant="10" id="4A4-Rz-K6p"/>
+                    <constraint firstAttribute="bottom" secondItem="fD3-Jj-Rom" secondAttribute="bottom" constant="10" id="Dgs-et-imp"/>
+                    <constraint firstItem="jLL-ex-izN" firstAttribute="top" secondItem="Dgs-Jv-GIQ" secondAttribute="bottom" constant="10" id="EBM-ls-7za"/>
+                    <constraint firstItem="fD3-Jj-Rom" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="Qqk-ur-AGx"/>
+                    <constraint firstAttribute="trailing" secondItem="jLL-ex-izN" secondAttribute="trailing" constant="10" id="aVJ-p8-e2k"/>
+                    <constraint firstItem="fD3-Jj-Rom" firstAttribute="top" secondItem="jLL-ex-izN" secondAttribute="bottom" constant="8" symbolic="YES" id="hTf-a4-sDj"/>
+                    <constraint firstItem="Dgs-Jv-GIQ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="7" id="iu8-oI-xSa"/>
+                    <constraint firstItem="jLL-ex-izN" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="nFG-Bo-qK6"/>
+                    <constraint firstItem="Dgs-Jv-GIQ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="rDe-ES-atF"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="aW0-zy-SZf"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <connections>
+                <outlet property="collectionView" destination="jLL-ex-izN" id="Rp6-c5-Hd5"/>
+                <outlet property="tableView" destination="fD3-Jj-Rom" id="r2w-yD-AFA"/>
+            </connections>
+            <point key="canvasLocation" x="56.521739130434788" y="102.79017857142857"/>
+        </tableViewCell>
+    </objects>
+</document>
