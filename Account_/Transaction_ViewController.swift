@@ -127,12 +127,12 @@ extension Transaction_ViewController: UITableViewDataSource, UITableViewDelegate
         
         if data.getValueFromKey("status") == "1" {
             let title = self.withView(cell, tag: 1) as! UILabel
-            title.text = createTime + " - " + "Đã thanh toán " + packageName + " - " + price + " VND"
+            title.text = "%@ - Đã thanh toán %@ - %@ VND".format(parameters: createTime as! CVarArg, packageName as! CVarArg, price as! CVarArg)
             let des = self.withView(cell, tag: 2) as! UILabel
-            des.text = "Hạn sử dụng gói " + packageName + " tới hết ngày " + dateTime
+            des.text = "Hạn sử dụng gói %@ tới hết ngày %@".format(parameters: createTime as! CVarArg, dateTime as! CVarArg)
         } else {
             let title = self.withView(cell, tag: 1) as! UILabel
-            title.text = createTime + " - " + "Thanh toán " + packageName + " không thành công"
+            title.text = "%@ - Thanh toán %@ không thành công".format(parameters: createTime as! CVarArg, packageName as! CVarArg)
         }
         
         return cell
