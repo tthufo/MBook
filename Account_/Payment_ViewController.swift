@@ -50,9 +50,7 @@ class Payment_ViewController: UIViewController, WKUIDelegate, WKNavigationDelega
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
                 
         let link = navigationAction.request.url?.absoluteString
-            
-        print("-->", info, link)
-        
+                    
         if link!.contains("http://mebook_wp//purchaseorder") {
             if link!.contains("status=1") {
                 EM_MenuView.init(confirm: ["image": "success", "line1": "Đăng ký thành công gói " + info.getValueFromKey("package_code"), "line2": "", "line3": "Về trang Cá nhân"]).show { (index, obj, menu) in

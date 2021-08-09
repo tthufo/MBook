@@ -20,7 +20,7 @@
     
     NSMutableArray * dataList;
     
-    NSMutableDictionary * config;
+    NSMutableArray * config;
         
     int pageIndex;
     
@@ -72,18 +72,32 @@
         NSLog(@"%@", infor);
     };
     
-    config = [@{
-        @"title": @"EBOOK Mới Nhất", @"url": [@{
-                @"CMD_CODE" : @"getListBook",
-                @"page_index": @1,
-                @"page_size": @24,
-                @"book_type": @0,
-                @"price": @0,
-                @"sorting": @1 } mutableCopy],
-        @"height": @0,
-        @"directon": @"horizontal",
-        @"loaded": @NO
-    } mutableCopy];
+    config = [@[
+        [@{
+                @"title": @"EBOOK MỚI NHẤT", @"url": [@{
+                        @"CMD_CODE" : @"getListBook",
+                        @"page_index": @1,
+                        @"page_size": @24,
+                        @"book_type": @0,
+                        @"price": @0,
+                        @"sorting": @1 } mutableCopy],
+                @"height": @0,
+                @"directon": @"horizontal",
+                @"loaded": @NO
+            } mutableCopy],
+        [@{
+                @"title": @"KHUYÊN ĐỌC", @"url": [@{
+                        @"CMD_CODE" : @"getListPromotionBook",
+                        @"page_index": @1,
+                        @"page_size": @24,
+                        @"book_type": @0,
+                        @"price": @0,
+                        @"sorting": @1 } mutableCopy],
+                @"height": @0,
+                @"directon": @"horizontal",
+                @"loaded": @NO
+            } mutableCopy]
+    ] mutableCopy];
 }
 
 - (void)didReloadData
@@ -156,7 +170,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return 2;
 }
 
 - (CGFloat)tableView:(UITableView *)_tableView heightForHeaderInSection:(NSInteger)section
@@ -166,51 +180,35 @@
 
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UIView * header = [[NSBundle mainBundle] loadNibNamed:@"Book_List_Header" owner:self options:nil][0];
+    UIView * header = [[NSBundle mainBundle] loadNibNamed:@"Book_List_Header" owner:self options:nil][1];
     
-    UIButton * hot = (UIButton*)[self withView:header tag:1];
+    UILabel * title = (UILabel*)[self withView:header tag:22];
     
-    UIButton * top = (UIButton*)[self withView:header tag:2];
-
-    [hot setTitleColor:[AVHexColor colorWithHexString: isHot ? @"#1E928C" : @"#FFFFFF"] forState:UIControlStateNormal];
-    [hot setBackgroundImage:[UIImage imageNamed: isHot ? @"ico_tab_white" : @"ico_tab_teal"] forState:UIControlStateNormal];
+    title.text = @"MỚI CẬP NHẬT";
     
-    [top setTitleColor:[AVHexColor colorWithHexString: isHot ? @"#FFFFFF" : @"1E928C"] forState:UIControlStateNormal];
-    [top setBackgroundImage:[UIImage imageNamed: isHot ? @"ico_tab_teal" : @"ico_tab_white"] forState:UIControlStateNormal];
-    
-    [top actionForTouch:@{} and:^(NSDictionary *touchInfo) {
-        isHot = NO;
-        [tableView beginUpdates];
-        [tableView reloadData];
-//        [tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
-        [tableView endUpdates];
-    }];
-    
-    [hot actionForTouch:@{} and:^(NSDictionary *touchInfo) {
-        isHot = YES;
-        [tableView beginUpdates];
-        [tableView reloadData];
-//        [tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
-        [tableView endUpdates];
-    }];
+    UIButton * extra = (UIButton*)[self withView:header tag:12];
         
+    [extra actionForTouch:@{} and:^(NSDictionary *touchInfo) {
+        
+    }];
+    
     return section == 0 ? nil : header;
 }
 
 - (CGFloat)tableView:(UITableView *)_tableView heightForFooterInSection:(NSInteger)section
 {
-    return 1;
+    return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)_tableView numberOfRowsInSection:(NSInteger)section
 {
-    return section == 0 ? 1 : dataList.count;
+    return section == 0 ? config.count : dataList.count;
 }
 
 - (CGFloat)tableView:(UITableView *)_tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSLog(@"%f", tempHeight);
-    return indexPath.section == 0 ? tempHeight == 0 ? [config[@"height"] floatValue] : tempHeight : 155;
+    return indexPath.section == 0 ? tempHeight == 0 ? [config[indexPath.row][@"height"] floatValue] : tempHeight : 165;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)_tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -219,7 +217,7 @@
     
     if (indexPath.section == 1) {
         
-        cell.contentView.backgroundColor = [AVHexColor colorWithHexString:@"#ECEDE7"];
+//        cell.contentView.backgroundColor = [AVHexColor colorWithHexString:@"#ECEDE7"];
         
         NSDictionary * list = dataList[indexPath.row];
         
@@ -233,11 +231,17 @@
 
         [(UILabel*)[self withView:cell tag:5] setText: [NSString stringWithFormat:@"%@ chương", [list getValueFromKey:@"total_chapter"]]];
 
-//        [(UILabel*)[self withView:cell tag:6] setText: [list[@"newest_chapter"] isEqual:[NSNull null]] ? @"Đang cập nhật" : list[@"newest_chapter"][@"name"]];
+        [(UILabel*)[self withView:cell tag:14] setText: [list[@"newest_chapter"] isEqual:[NSNull null]] ? @"Đang cập nhật" : list[@"newest_chapter"][@"name"]];
+        
+        ((UILabel*)[self withView:cell tag:14]).alpha = 1;
         
         [(UILabel*)[self withView:cell tag:11] setText: [NSString stringWithFormat:@"%li", indexPath.row + 1]];
         
+        ((UIImageView*)[self withView:cell tag:15]).alpha = 1;
+        
         Progress * progress = ((Progress*)[self withView:cell tag:12]);
+        
+        progress.alpha = 0;
         
         progress.percentage.text = indexPath.row % 2 == 0 ? @"16 %" : @"30 %";
         
@@ -250,10 +254,10 @@
         progress.inner.frame = rectIn;
 
     } else {
-        ((TG_Room_Cell_N *)cell).config = self->config;
+        ((TG_Room_Cell_N *)cell).config = self->config[indexPath.row];
         ((TG_Room_Cell_N *)cell).returnValue = ^(float value) {
-            self->config[@"height"] = [NSString stringWithFormat:@"%f", value];
-            self->config[@"loaded"] = @YES;
+            self->config[indexPath.row][@"height"] = [NSString stringWithFormat:@"%f", value];
+            self->config[indexPath.row][@"loaded"] = @YES;
             self->tempHeight = value;
             [tableView reloadData];
         };
@@ -264,7 +268,7 @@
             }
             
             Book_Detail_ViewController * bookDetail = [Book_Detail_ViewController new];
-            NSMutableDictionary * bookInfo = [[NSMutableDictionary alloc] initWithDictionary:[self removeKey:self->config]];
+            NSMutableDictionary * bookInfo = [[NSMutableDictionary alloc] initWithDictionary:[self removeKey:self->config[indexPath.row]]];
             [bookInfo addEntriesFromDictionary:(NSDictionary*)infor];
             bookDetail.config = bookInfo;
             [[self CENTER] pushViewController:bookDetail animated:YES];
@@ -274,7 +278,7 @@
         
         [more actionForTouch:@{} and:^(NSDictionary *touchInfo) {
             List_Book_ViewController * list = [List_Book_ViewController new];
-            list.config = [self removeKey:self->config];
+            list.config = [self removeKey:self->config[indexPath.row]];
             [self.navigationController pushViewController:list animated:YES];
         }];
 
@@ -289,13 +293,13 @@
     
     NSDictionary * list = dataList[indexPath.row];
 
-    NSMutableDictionary * config = [[NSMutableDictionary alloc] initWithDictionary:list];
+    NSMutableDictionary * configuration = [[NSMutableDictionary alloc] initWithDictionary:list];
     
-    config[@"url"] = @{@"CMD_CODE":@"getListBook"};
+    configuration[@"url"] = @{@"CMD_CODE":@"getListBook"};
 
     Book_Detail_ViewController * bookDetail = [Book_Detail_ViewController new];
             
-    bookDetail.config = config;
+    bookDetail.config = configuration;
     
     [[self CENTER] pushViewController:bookDetail animated:YES];
 }

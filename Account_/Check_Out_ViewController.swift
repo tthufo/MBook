@@ -81,7 +81,7 @@ class Check_Out_ViewController: UIViewController {
                                                         "item_type": "package",
                                                         "quantity": 1
                                                     ]],
-                                                    "payment_detail_id": expand ? payment.getValueFromKey("payment_detail_id") : "0",
+                                                    "payment_detail_id": expand ? payment.getValueFromKey("payment_detail_id") as Any : "0",
                                                     "payment_id": payment.getValueFromKey("payment_id") ?? "",
                                                     "overrideAlert":"1",
                                                     "overrideLoading":"1",
@@ -121,7 +121,11 @@ class Check_Out_ViewController: UIViewController {
     }
     
     @IBAction func didPressCancel() {
-        
+        EM_MenuView.init(cancel: ["line1": "Quý khách muốn huỷ đăng ký ?"]).show { (index, obj, menu) in
+            if index == 3 {
+                self.navigationController?.popViewController(animated: true)
+            }
+        }
     }
     
     var isPackage: Bool {
@@ -156,7 +160,7 @@ extension Check_Out_ViewController: UITableViewDataSource, UITableViewDelegate {
 
                 let price = self.withView(cell, tag: 2) as! UILabel
 
-                price.text = self.info.getValueFromKey("price")
+                price.text = self.info.getValueFromKey("price") + " đ"
 
                 let des = self.withView(cell, tag: 3) as! UILabel
 
@@ -166,11 +170,11 @@ extension Check_Out_ViewController: UITableViewDataSource, UITableViewDelegate {
             if indexPath.row == 1 {
                 let vip = self.withView(cell, tag: 1) as! UILabel
 
-                vip.text = "MeeBook " + self.info.getValueFromKey("vip")
+                vip.text = self.info.getValueFromKey("name")
 
                 let price = self.withView(cell, tag: 2) as! UILabel
 
-                price.text = self.info.getValueFromKey("price")
+                price.text = self.info.getValueFromKey("price") + " đ"
             }
             
             if indexPath.row == 2 {

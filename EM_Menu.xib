@@ -520,7 +520,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view alpha="0.65000000000000002" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mHm-tE-T2H">
+                <view alpha="0.29999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mHm-tE-T2H">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
@@ -707,8 +707,8 @@
         <image name="ic_camera" width="49.5" height="32"/>
         <image name="ic_gallery" width="49.5" height="32"/>
         <image name="ic_view" width="16" height="16"/>
-        <image name="ico_success" width="66.5" height="65.5"/>
-        <image name="ico_vip" width="33" height="33.5"/>
+        <image name="ico_success" width="106.5" height="106.5"/>
+        <image name="ico_vip" width="58.5" height="58.5"/>
         <image name="xxxx" width="33" height="33"/>
         <systemColor name="darkTextColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

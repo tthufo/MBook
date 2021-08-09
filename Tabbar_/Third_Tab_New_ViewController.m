@@ -170,7 +170,7 @@
     UITableViewCell * cell = [_tableView dequeueReusableCellWithIdentifier: @"Book_List_Cell" forIndexPath:indexPath];
     
         
-    cell.contentView.backgroundColor = [AVHexColor colorWithHexString:@"#ECEDE7"];
+//    cell.contentView.backgroundColor = [AVHexColor colorWithHexString:@"#ECEDE7"];
     
     NSDictionary * list = dataList[indexPath.row];
     

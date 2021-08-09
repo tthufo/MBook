@@ -423,15 +423,16 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
             requestLogin(request: ["username":phoneNumber,
 //                                   "password":pass.text as Any,
                                    "login_type":"3G"])
+            Information.allPackage = "1"
             print("3G")
         } else {
             if logged {
-                requestLogin(request: ["username": self.stringIsNumber(uName.text!) ? convertPhone() : uName.text!,
+                requestLogin(request: ["username":self.stringIsNumber(uName.text!) ? convertPhone() : uName.text!,
                                        "password":pass.text as Any,
                                        "login_type":"WIFI"])
-                print("LOGIN")
+                Information.allPackage = self.stringIsNumber(uName.text!) ? "1" : "0"
+                print("LOGIN_LOGGED")
             } else if social_logged == nil {
-                print("BUTTON")
                 if phoneNumber is UIButton {
 //                    isValid = self.checkPhone()
 //                    if !isValid {
@@ -442,10 +443,13 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
                     requestLogin(request: ["username":self.stringIsNumber(uName.text!) ? convertPhone() : uName.text!,
                                             "password":pass.text as Any,
                                             "login_type":"WIFI"])
+                    Information.allPackage = self.stringIsNumber(uName.text!) ? "1" : "0"
+                    print("BUTTON")
                 }
             } else {
-                print("SOCIAL")
                 didRequestLoginSocial(info: social_logged! as NSDictionary)
+                Information.allPackage = "0"
+                print("SOCIAL")
             }
         }
     }
@@ -462,8 +466,6 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
         }, andCompletion: { (response, errorCode, error, isValid, object) in
             let result = response?.dictionize() ?? [:]
                         
-//            print(result)
-
             if result.getValueFromKey("error_code") != "0" || result["result"] is NSNull {
                 self.showToast("Không có thông tin tài khoản. Liên hệ quản trị viên để được tài trợ.", andPos: 0)
                 return
@@ -478,9 +480,7 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
             self.addValue((response?.dictionize()["result"] as! NSDictionary).getValueFromKey("session"), andKey: "token")
 
             Information.saveToken()
-            
-//            print(Information.userInfo as Any)
-            
+                        
             if Information.check == "0" {
                 self.didRequestPackage()   //CHECK PACKAGE ---> check this shit
 //                (UIApplication.shared.delegate as! AppDelegate).changeRoot(false) //CHECK PACKAGE

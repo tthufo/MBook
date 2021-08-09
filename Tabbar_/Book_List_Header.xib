@@ -57,8 +57,56 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="-346.39999999999998" y="-330.13493253373315"/>
         </view>
+        <view contentMode="scaleToFill" id="Wbx-Ap-0eG">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="42"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IQZ-Ud-STP">
+                    <rect key="frame" x="187.5" y="-23" width="0.0" height="65"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="65" id="NfZ-Hq-wmF"/>
+                        <constraint firstAttribute="width" id="hbi-4I-UZC"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" tag="12" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uLd-dn-IXS">
+                    <rect key="frame" x="279" y="2.5" width="88" height="37"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="37" id="F13-su-GXa"/>
+                        <constraint firstAttribute="width" constant="88" id="RWD-O3-Azq"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                    <state key="normal" title="xem thêm" image="ico_aright">
+                        <color key="titleColor" red="0.0078431372550000003" green="0.57254901960000004" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" tag="22" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zUe-Pe-0Dl">
+                    <rect key="frame" x="16" y="2.5" width="0.0" height="37"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="37" id="FV5-LG-x1E"/>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" id="WF0-C3-M2m"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
+                    <color key="textColor" red="0.0078431372550000003" green="0.57254901960000004" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="5M8-UN-tvS"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="IQZ-Ud-STP" firstAttribute="bottom" secondItem="5M8-UN-tvS" secondAttribute="bottom" id="2OC-jy-dfL"/>
+                <constraint firstItem="zUe-Pe-0Dl" firstAttribute="centerY" secondItem="Wbx-Ap-0eG" secondAttribute="centerY" id="dO9-NS-utj"/>
+                <constraint firstItem="uLd-dn-IXS" firstAttribute="centerY" secondItem="Wbx-Ap-0eG" secondAttribute="centerY" id="fDd-wM-YBN"/>
+                <constraint firstItem="IQZ-Ud-STP" firstAttribute="centerX" secondItem="Wbx-Ap-0eG" secondAttribute="centerX" id="hpV-eU-7Dk"/>
+                <constraint firstItem="5M8-UN-tvS" firstAttribute="trailing" secondItem="uLd-dn-IXS" secondAttribute="trailing" constant="8" id="pLD-FZ-bcd"/>
+                <constraint firstItem="zUe-Pe-0Dl" firstAttribute="leading" secondItem="5M8-UN-tvS" secondAttribute="leading" constant="16" id="rM5-Vi-HVL"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-346" y="-245"/>
+        </view>
     </objects>
     <resources>
+        <image name="ico_aright" width="17" height="34.5"/>
         <image name="ico_tab_teal" width="159.5" height="31.5"/>
         <image name="ico_tab_white" width="159.5" height="31.5"/>
         <systemColor name="systemBackgroundColor">

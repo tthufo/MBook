@@ -8,7 +8,9 @@
 
 import UIKit
 
-class VIP_ViewController: UIViewController {
+import MessageUI
+
+class VIP_ViewController: UIViewController, MFMessageComposeViewControllerDelegate {
 
     @IBOutlet var tableView: UITableView!
     
@@ -61,7 +63,11 @@ class VIP_ViewController: UIViewController {
     }
     
     @objc func didRequestPack() {
-        didRequestAll()
+        if Information.allPackage == "1" {
+            didRequestAll()
+        } else {
+            didRequestPayment()
+        }
     }
     
     func didRequestAll() {
@@ -82,13 +88,12 @@ class VIP_ViewController: UIViewController {
         
            self.dataList.removeAllObjects()
 
-           let package = (result["result"] as! NSArray)
+           let payment = (result["result"] as! NSArray)
 
-           self.dataList.addObjects(from: package.withMutable())
+           self.dataList.addObjects(from: payment.withMutable())
             
             LTRequest.sharedInstance()?.didRequestInfo(["cmd_code":"getPackageInfo",
                                                         "header":["session":Information.token == nil ? "" : Information.token!],
-//                                                        "session": NSNull(),
                                                         "overrideAlert":"1",
                                                         "overrideLoading":"1",
                                                         "host":self], withCache: { (cacheString) in
@@ -102,10 +107,14 @@ class VIP_ViewController: UIViewController {
                }
                         
 
-               let payment = (result["result"] as! NSArray)
-    
-               self.dataList.addObjects(from: payment.withMutable())
-    
+               let package = (result["result"] as! NSArray)
+            
+                for pack in package {
+                    if (pack as! NSDictionary).getValueFromKey("reg_keyword") != "OB" {
+                        self.dataList.add(pack)
+                    }
+                }
+        
                self.tableView.reloadData()
            })
        })
@@ -138,8 +147,7 @@ class VIP_ViewController: UIViewController {
     
     func didRequestPayment() {
         LTRequest.sharedInstance()?.didRequestInfo(["CMD_CODE":"getPaymentPackage",
-//                                                    "header":["session":Information.token == nil ? "" : Information.token!],
-//                                                    "session":Information.token ?? "",
+                                                    "header":["session":Information.token == nil ? "" : Information.token!],
                                                     "overrideAlert":"1",
                                                     "overrideLoading":"1",
                                                     "host":self], withCache: { (cacheString) in
@@ -194,26 +202,18 @@ extension VIP_ViewController: UITableViewDataSource, UITableViewDelegate {
         
         let price = self.withView(cell, tag: 2) as! UILabel
         
-        price.text = data.getValueFromKey("price")
+        let pricing = data.getValueFromKey("price")
+        
+        let result = pricing!.replacingOccurrences( of:"[^0-9]", with: "", options: .regularExpression)
 
+        price.text = result + " đ"
+
+
+        
         let des = self.withView(cell, tag: 3) as! UILabel
 
         des.text = data.getValueFromKey("info")
-
-//        if isRegistered {
-//            button.setTitle("Đang sử dụng Gói " + data.getValueFromKey("package_code"), for: .normal)
-//
-//            button.setBackgroundImage(UIImage.init(named: "trans"), for: .normal)
-//
-//            button.backgroundColor = AVHexColor.color(withHexString: "#009BB4")
-//
-//            title.text = (data["info"] as? String)! + ". Hết hạn sử dụng ngày " + data.getValueFromKey("expireTime")
-//
-//        } else {
-//            button.setTitle("%@ %@".format(parameters: ((data["name"] as? String)!), ((data["price"] as? String)!)), for: .normal)
-//
-//            title.text = (data["info"] as? String)!
-//        }
+        
         
         return cell
     }
@@ -222,6 +222,30 @@ extension VIP_ViewController: UITableViewDataSource, UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         
         let data = dataList![indexPath.row] as! NSDictionary
+        let expiring = data.getValueFromKey("expireTime") == "" ? data.getValueFromKey("expire_time") : data.getValueFromKey("expireTime")
+        let expDate = (expiring! as NSString).date(withFormat: "dd/MM/yyyy")
+        let isRegistered = data.getValueFromKey("status") == "1" && expDate! > Date()
+        
+        if data.getValueFromKey("reg_shortcode") == "" {
+            if isRegistered {
+                self.showToast("Bạn đã đăng ký " + data.getValueFromKey("name"), andPos: 0)
+                return
+            }
+        } else {
+            if !isRegistered {
+                if (MFMessageComposeViewController.canSendText()) {
+                    let controller = MFMessageComposeViewController()
+                    controller.body = data.getValueFromKey("reg_keyword")
+                    controller.recipients = [data.getValueFromKey("reg_shortcode")]
+                    controller.messageComposeDelegate = self
+                    self.present(controller, animated: true, completion: nil)
+                }
+            } else {
+                self.showToast("Bạn đã đăng ký " + data.getValueFromKey("name"), andPos: 0)
+            }
+            return
+        }
+        
         let checkInfo = NSMutableDictionary.init(dictionary: data)
         checkInfo["is_package"] = "1"
         
@@ -230,5 +254,8 @@ extension VIP_ViewController: UITableViewDataSource, UITableViewDelegate {
         
         self.navigationController?.pushViewController(checkOut, animated: true)
     }
-
+    
+    func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
+        self.dismiss(animated: true, completion: nil)
+    }
 }

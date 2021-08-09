@@ -27,6 +27,8 @@ class Information: NSObject {
     
     static var log: NSDictionary?
     
+    static var allPackage: String?
+    
     @objc static func saveToken() {
         if self.getValue("token") != nil {
             token = "%@".format(parameters: self.getValue("token"))

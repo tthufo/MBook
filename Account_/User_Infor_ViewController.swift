@@ -64,7 +64,7 @@ class User_Infor_ViewController: UIViewController {
         }
         
         transaction.action(forTouch: [:]) { (objc) in
-            
+            self.center()?.pushViewController(Transaction_ViewController.init(), animated: true)
         }
         
         logout.action(forTouch: [:]) { (objc) in
@@ -276,7 +276,6 @@ class User_Infor_ViewController: UIViewController {
                                                
            if result.getValueFromKey("error_code") != "0" || result["result"] is NSNull {
 //               self.showToast(response?.dictionize().getValueFromKey("error_msg") == "" ? "Lỗi xảy ra, mời bạn thử lại" : response?.dictionize().getValueFromKey("error_msg"), andPos: 0)
-               print(response)
                 EM_MenuView.init(confirm: ["image": "fail", "line1": "Cập nhật không thành công", "line2": "Xin lỗi quý khách vì sự cố này \nVui lòng thử lại sau", "line3": "Về trang Cá nhân"]).show { (index, obj, menu) in
                     if index == 4 {
         
