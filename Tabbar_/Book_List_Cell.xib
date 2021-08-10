@@ -126,8 +126,16 @@
                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" tag="16" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ico_audio" translatesAutoresizingMaskIntoConstraints="NO" id="ySk-jw-z6u">
+                        <rect key="frame" x="79" y="107" width="27" height="26"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="27" id="btU-q7-MHs"/>
+                            <constraint firstAttribute="height" constant="26" id="wVs-An-JdF"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="ySk-jw-z6u" firstAttribute="leading" secondItem="eKm-44-0I4" secondAttribute="leading" constant="79" id="47P-7W-WSL"/>
                     <constraint firstItem="s7P-cd-GVj" firstAttribute="leading" secondItem="eKm-44-0I4" secondAttribute="leading" constant="20" id="7G6-ww-ghv"/>
                     <constraint firstItem="fdH-1U-Xij" firstAttribute="top" secondItem="eKm-44-0I4" secondAttribute="top" constant="7" id="8c3-dw-4su"/>
                     <constraint firstItem="Ex3-hZ-l5I" firstAttribute="leading" secondItem="eKm-44-0I4" secondAttribute="leading" constant="20" symbolic="YES" id="Ak0-sN-ttI"/>
@@ -135,6 +143,7 @@
                     <constraint firstItem="K0W-HG-Mtd" firstAttribute="leading" secondItem="WAf-UP-r62" secondAttribute="trailing" constant="12" id="CUO-X3-bko"/>
                     <constraint firstItem="xCm-F3-fkP" firstAttribute="leading" secondItem="Ex3-hZ-l5I" secondAttribute="trailing" constant="8" symbolic="YES" id="HKP-JI-ls9"/>
                     <constraint firstItem="Tjq-ps-R5d" firstAttribute="leading" secondItem="WAf-UP-r62" secondAttribute="trailing" constant="12" id="KpV-aC-nqt"/>
+                    <constraint firstItem="ySk-jw-z6u" firstAttribute="top" secondItem="eKm-44-0I4" secondAttribute="top" constant="107" id="MtQ-m3-HN0"/>
                     <constraint firstItem="Pbg-mN-naX" firstAttribute="top" secondItem="K0W-HG-Mtd" secondAttribute="bottom" constant="4" id="OBo-Lv-H3D"/>
                     <constraint firstAttribute="trailing" secondItem="Pbg-mN-naX" secondAttribute="trailing" constant="11" id="U1j-u7-fOC"/>
                     <constraint firstAttribute="trailing" secondItem="fdH-1U-Xij" secondAttribute="trailing" constant="11" id="U6O-OP-PE0"/>
@@ -161,6 +170,7 @@
     </objects>
     <resources>
         <image name="ic_hieusach_active" width="33" height="33"/>
+        <image name="ico_audio" width="31.5" height="31.5"/>
         <image name="ico_corner_top" width="31.5" height="31.5"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

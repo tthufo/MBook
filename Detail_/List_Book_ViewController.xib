@@ -13,6 +13,7 @@
                 <outlet property="collectionView" destination="ysb-le-BiT" id="aWA-FN-pgH"/>
                 <outlet property="counter" destination="UaE-wm-tiP" id="BA6-T9-ZJX"/>
                 <outlet property="counterHeight" destination="YKH-aC-imr" id="jeH-TA-B8p"/>
+                <outlet property="tagView" destination="sTg-uP-7vi" id="SR5-Kh-6Fb"/>
                 <outlet property="titleLabel" destination="zBk-MB-z4z" id="szK-o7-L5i"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -44,8 +45,28 @@
                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="scrollDuration">
+                                    <real key="value" value="1"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="scrollRate">
+                                    <real key="value" value="1"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="leadingBuffer">
+                                    <real key="value" value="2"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="trailingBuffer">
+                                    <real key="value" value="2"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="fadeLength">
+                                    <real key="value" value="2"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="animationDelay">
+                                    <real key="value" value="1"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oUp-fl-eBe">
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oUp-fl-eBe">
                             <rect key="frame" x="323" y="10" width="44" height="44"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="44" id="KB8-Iu-b46"/>
@@ -71,7 +92,7 @@
                     </constraints>
                 </view>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="ysb-le-BiT">
-                    <rect key="frame" x="10" y="109" width="355" height="548"/>
+                    <rect key="frame" x="10" y="149" width="355" height="508"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="GGg-Vo-GQx">
                         <size key="itemSize" width="50" height="50"/>
@@ -93,19 +114,32 @@
                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sTg-uP-7vi" customClass="Tag_View" customModule="MeBook" customModuleProvider="target">
+                    <rect key="frame" x="10" y="109" width="355" height="32"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="32" id="aCo-o9-CX6"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="secret" value="normal"/>
+                    </userDefinedRuntimeAttributes>
+                </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="UaE-wm-tiP" secondAttribute="trailing" constant="10" id="6ex-q1-rYy"/>
+                <constraint firstItem="ysb-le-BiT" firstAttribute="top" secondItem="sTg-uP-7vi" secondAttribute="bottom" constant="8" symbolic="YES" id="A6U-rg-Xxr"/>
                 <constraint firstItem="UaE-wm-tiP" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="BaP-FR-0C0"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ysb-le-BiT" secondAttribute="trailing" constant="10" id="JKY-pz-WZt"/>
                 <constraint firstItem="UaE-wm-tiP" firstAttribute="top" secondItem="5Mz-Xc-I1R" secondAttribute="bottom" constant="8" id="Ojj-Zm-H1d"/>
-                <constraint firstItem="ysb-le-BiT" firstAttribute="top" secondItem="UaE-wm-tiP" secondAttribute="bottom" constant="8" id="VH3-lC-aBi"/>
+                <constraint firstItem="ysb-le-BiT" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="PaB-H6-7aX"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="sTg-uP-7vi" secondAttribute="trailing" constant="10" id="SY5-6C-Pxs"/>
                 <constraint firstItem="5Mz-Xc-I1R" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="Ypa-Hk-Os4"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="ysb-le-BiT" secondAttribute="bottom" constant="10" id="fH9-sB-2ww"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ysb-le-BiT" secondAttribute="trailing" constant="10" id="fP7-sy-Pqa"/>
-                <constraint firstItem="ysb-le-BiT" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="oqw-ig-SEC"/>
+                <constraint firstItem="sTg-uP-7vi" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="ZD7-0t-gaa"/>
+                <constraint firstItem="sTg-uP-7vi" firstAttribute="top" secondItem="UaE-wm-tiP" secondAttribute="bottom" constant="8" symbolic="YES" id="gMC-FY-hZg"/>
                 <constraint firstItem="5Mz-Xc-I1R" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="sH1-d4-s5Q"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="ysb-le-BiT" secondAttribute="bottom" constant="10" id="shL-Rs-1oo"/>
                 <constraint firstItem="5Mz-Xc-I1R" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="uL4-S6-6yx"/>
             </constraints>
             <point key="canvasLocation" x="140" y="145.27736131934034"/>

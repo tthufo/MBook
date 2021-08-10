@@ -59,6 +59,8 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
 
     let topGap = IS_IPHONE_5 ? 200 : 240
 
+    var lock: Bool = false
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -119,6 +121,14 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
         
         kb.keyboard { (height, isOn) in
                         
+            if self.lock {
+                return
+            }
+            
+            if IS_IPAD {
+                return
+            }
+            
             if self.isSms {
                 return
             }
@@ -384,6 +394,9 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
     
     func convertPhone() -> String {
         let phone = uName.text
+        if phone!.count < 2 {
+            return phone!
+        }
         if phone?.substring(to: 2) == "84" {
             return phone!
         } else if phone?.substring(to: 1) == "0"  {
@@ -648,6 +661,7 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
     }
     
     @IBAction func handleLogInWithAppleID() {
+         self.lock = true
          let request = ASAuthorizationAppleIDProvider().createRequest()
          request.requestedScopes = [.fullName, .email]
          
@@ -661,6 +675,7 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
     
     @IBAction func didPressGG() {
        self.view.endEditing(true)
+       self.lock = true
        GG_PlugIn.shareInstance()?.startLogGoogle(completion: { (responseString, object, errorCode, description, error) in
             if object != nil {
                 let info = (object as! NSDictionary)
@@ -677,14 +692,15 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
                                                   "email":email ?? ""
                 ])
             }
+            self.lock = false
         }, andHost: self)
    }
     
     @IBAction func didPressFB() {
         self.view.endEditing(true)
+        self.lock = true
         FB_Plugin.shareInstance()?.startLoginFacebook(completion: { (responseString, object, errorCode, description, error) in
             if object != nil {
-//                print("-->", object)
                 let info = ((object as! NSDictionary)["info"] as! NSDictionary)
                 let fID = info.getValueFromKey("id")
                 let accessToken = info.getValueFromKey("accessToken")
@@ -698,6 +714,7 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
                                                   "email":""
                 ])
             }
+            self.lock = false
         })
       }
 }
@@ -706,23 +723,27 @@ extension PC_Login_ViewController: ASAuthorizationControllerDelegate {
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         switch authorization.credential {
         case let appleIDCredential as ASAuthorizationAppleIDCredential:
-            let userIdentifier = appleIDCredential.user
-        
-            let name = appleIDCredential.fullName
-            
-            let email = appleIDCredential.email
-            
-            let u = appleIDCredential.user
-            
+            let aID = appleIDCredential.user
+    
             let le = appleIDCredential.identityToken
-            
 
-            print("--->", userIdentifier, name, email, u, String(data: le!, encoding: .utf8))
+            self.didRequestLoginSocial(info: ["provider": "apple",
+                                              "id":aID ,
+                                              "accessToken":String(data: le!, encoding: .utf8) ?? "",
+                                              "avatar":"",
+                                              "name":"",
+                                              "email":""
+            ])
+            print("--->", aID, String(data: le!, encoding: .utf8))
         
             break
         default:
             break
         }
+    }
+    
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+        self.lock = false
     }
 }
 

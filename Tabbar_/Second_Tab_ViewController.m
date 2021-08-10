@@ -67,9 +67,27 @@
     [refreshControl addTarget:self action:@selector(didReloadData) forControlEvents:UIControlEventValueChanged];
     
     [self didRequestData:YES];
-    
+        
+    __weak typeof(self) weakSelf = self;
     tagView.callBack = ^(NSDictionary *infor) {
         NSLog(@"%@", infor);
+        if ([[infor getValueFromKey:@"action"] isEqualToString:@"custom"]) {
+            [weakSelf didPressVip];
+        } else {
+            List_Book_ViewController * listBook = [List_Book_ViewController new];
+            NSMutableDictionary * bookInfo = [[NSMutableDictionary alloc] initWithDictionary:@{
+                @"url": @{
+                        @"CMD_CODE":@"getListBook",
+                        @"book_type":@(0),
+                        @"price": @(0),
+                        @"sorting": @(1),
+                        @"tag_id": [infor getValueFromKey:@"id"]
+                },
+                @"title": [infor getValueFromKey:@"name"]
+            }];
+            listBook.config = bookInfo;
+            [weakSelf.CENTER pushViewController:listBook animated:YES];
+        }
     };
     
     config = [@[
@@ -98,6 +116,17 @@
                 @"loaded": @NO
             } mutableCopy]
     ] mutableCopy];
+}
+
+- (void)didPressVip {
+    VIP_ViewController * vip = [VIP_ViewController new];
+    vip.callBack = ^(NSDictionary *infor) {
+        
+    };
+    UINavigationController * nav = [[UINavigationController alloc] initWithRootViewController:vip];
+    nav.navigationBarHidden = YES;
+    nav.modalPresentationStyle = UIModalPresentationFullScreen;
+    [[self CENTER] presentViewController:nav animated:YES completion:nil];
 }
 
 - (void)didReloadData

@@ -80,6 +80,9 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="32" id="rcz-lZ-gFv"/>
                     </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="secret" value="add"/>
+                    </userDefinedRuntimeAttributes>
                 </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="sDJ-ru-WKV"/>

@@ -68,8 +68,27 @@
     
     [self didRequestData:YES];
     
+    __weak typeof(self) weakSelf = self;
+
     tagView.callBack = ^(NSDictionary *infor) {
         NSLog(@"%@", infor);
+        if ([[infor getValueFromKey:@"action"] isEqualToString:@"custom"]) {
+            ((HT_Root_ViewController*)[weakSelf TABBAR]).selectedIndex = 1;
+        } else {
+            List_Book_ViewController * listBook = [List_Book_ViewController new];
+            NSMutableDictionary * bookInfo = [[NSMutableDictionary alloc] initWithDictionary:@{
+                @"url": @{
+                        @"CMD_CODE":@"getListBook",
+                        @"book_type":@(0),
+                        @"price": @(0),
+                        @"sorting": @(1),
+                        @"tag_id": [infor getValueFromKey:@"id"]
+                },
+                @"title": [infor getValueFromKey:@"name"]
+            }];
+            listBook.config = bookInfo;
+            [weakSelf.CENTER pushViewController:listBook animated:YES];
+        }
     };
     
     config = [@{
@@ -96,13 +115,12 @@
 
 - (void)didRequestData:(BOOL)isShow
 {
-    [[LTRequest sharedInstance] didRequestInfo:@{@"CMD_CODE":@"getListStory",
+    [[LTRequest sharedInstance] didRequestInfo:@{@"CMD_CODE":@"getListBookPurchaseByUser",
                                                  @"header":@{@"session":Information.token == nil ? @"" : Information.token},
-                                                 @"session":Information.token,
                                                  @"page_index": @(pageIndex),
                                                  @"page_size": @(12),
-                                                 @"price": @(0),
-                                                 @"sorting": @(1),
+                                                 @"price": @(1),
+                                                 @"book_type": @(0),
                                                  @"overrideError":@"1",
                                                  @"overrideLoading":@"1",
                                                  @"host":self
@@ -199,6 +217,10 @@
     rectIn.size.width = rect.size.width * (indexPath.row % 2 == 0 ? 16 : 30) / 100;
     
     progress.inner.frame = rectIn;
+    
+    UIImageView * audio = ((Progress*)[self withView:cell tag:16]);
+
+    audio.hidden = ![[list getValueFromKey: @"book_type"] isEqualToString:@"3"];
  
     return cell;
 }

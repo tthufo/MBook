@@ -30,13 +30,15 @@ class List_Book_ViewController: UIViewController, UICollectionViewDataSource, UI
 
     @IBOutlet var collectionView: UICollectionView!
         
+    @IBOutlet var tagView: Tag_View!
+
     var dataList: NSMutableArray!
     
     override func viewDidLoad() {
         super.viewDidLoad()
                 
         titleLabel.text = config.getValueFromKey("title")
-        
+                
         dataList = NSMutableArray.init()
         
         collectionView.withCell("TG_Map_Cell")
@@ -48,6 +50,14 @@ class List_Book_ViewController: UIViewController, UICollectionViewDataSource, UI
         didRequestData(isShow: true)
         
         counterHeight.constant = config.response(forKey: "counter") ? 29 : 0
+        
+        tagView.callBack = { info in
+            let temp = NSMutableDictionary.init(dictionary: self.config)
+            temp["tag_id"] = (info as! NSDictionary).getValueFromKey("id")
+            self.titleLabel.text = (info as! NSDictionary).getValueFromKey("name")
+            self.config = temp
+            self.didReload(self.refreshControl)
+        }
     }
     
     @objc func didReload(_ sender: Any) {
