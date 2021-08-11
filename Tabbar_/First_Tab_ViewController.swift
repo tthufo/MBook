@@ -240,7 +240,7 @@ extension First_Tab_ViewController: UITableViewDataSource, UITableViewDelegate {
                 }
                 let bookDetail = Book_Detail_ViewController.init()
                 let bookInfo = NSMutableDictionary.init(dictionary: self.removeKey(info: conf))
-                bookInfo.addEntries(from: info as! [AnyHashable : Any])
+                bookInfo.addEntries(from: info as! [AnyHashable : Any])                
                 bookDetail.config = bookInfo
                 self.center()?.pushViewController(bookDetail, animated: true)
             }

@@ -39,9 +39,12 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
     
     var detailList: NSMutableArray!
     
+    
     let headerHeight = IS_IPAD ? 340 : 220
     
     var tempBio: String = ""
+    
+    var catId: String = ""
     
     var tempInfo: NSMutableDictionary!
     
@@ -55,7 +58,7 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
         chapList = NSMutableArray.init()
         
         detailList = NSMutableArray.init()
-        
+                
         tempInfo = NSMutableDictionary.init()
 
         collectionView.withCell("TG_Map_Cell")
@@ -76,8 +79,8 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
                 
         collectionView.withHeaderOrFooter("Book_Detail_Chap_Header", andKind: UICollectionView.elementKindSectionHeader)
 
-        didRequestData(isShow: true)
-    
+        collectionView.withHeaderOrFooter("Book_Detail_Gap", andKind: UICollectionView.elementKindSectionHeader)
+            
         setupParallaxHeader()
     }
     
@@ -139,13 +142,12 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
             title.alpha = 1 - parallaxHeader.progress
             avatar.alpha = parallaxHeader.progress
             name.alpha = parallaxHeader.progress
-//            read.alpha = parallaxHeader.progress
             description.alpha = parallaxHeader.progress
         }
         
-        self.didRequestChapter()
-
         self.didRequestDetail()
+
+        self.didRequestChapter()
     }
     
     func setupInfo() {
@@ -201,8 +203,13 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
                                                             "overrideAlert":"1",
                                                             "overrideLoading":isShow ? 1 : 0,
                                                             "host":self])
+        let bookInfo = NSMutableDictionary.init(dictionary: self.config["url"] as! NSDictionary)
         
-        request.addEntries(from: self.config["url"] as! [AnyHashable : Any])
+        bookInfo["category_id"] = self.catId
+        
+        bookInfo["sorting"] = Int.random(in: 1..<7)
+        
+        request.addEntries(from: bookInfo as! [AnyHashable : Any])
                         
         LTRequest.sharedInstance()?.didRequestInfo((request as! [AnyHashable : Any]), withCache: { (cacheString) in
         }, andCompletion: { (response, errorCode, error, isValid, object) in
@@ -228,7 +235,7 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
 
             self.dataList.addObjects(from: Information.check == "0" ? filter.withMutable() : data.withMutable())
             
-//            self.collectionView.reloadSections(IndexSet(integer: 2))
+            self.collectionView.reloadSections(IndexSet(integer: 4))
             
             self.adjustInset()
         })
@@ -236,7 +243,7 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
     
     func didRequestChapter() {
          let request = NSMutableDictionary.init(dictionary: [
-                                                            "header":["session":Information.token == nil ? "" : Information.token!],
+                                                             "header":["session":Information.token == nil ? "" : Information.token!],
                                                              "session":Information.token ?? "",
                                                              "overrideAlert":"1",
                                                              ])
@@ -259,11 +266,9 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
 
              self.chapList.addObjects(from: data as! [Any])
              
-            self.collectionView.performBatchUpdates {
+             self.collectionView.performBatchUpdates {
                 
-                self.collectionView.reloadSections(IndexSet(integer: 3))
-
-//                self.collectionView.reloadData()
+             self.collectionView.reloadSections(IndexSet(integer: 3))
                 
             } completion: { (done) in
                 
@@ -290,19 +295,26 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
                 return
             }
             
+            let data = result["result"] as! NSDictionary
+            
+            self.catId = (data["category"] as! NSArray).count == 0 ? "0" : ((data["category"] as! NSArray).firstObject as! NSDictionary).getValueFromKey("id")
+            
+            self.didRequestData(isShow: true)
+            
             self.detailList.removeAllObjects()
             
-            self.detailList.addObjects(from: self.filter(info: result["result"] as! NSDictionary) as! [Any])
+            self.detailList.addObjects(from: self.filter(info: data) as! [Any])
             
             self.tempInfo.removeAllObjects()
             
             self.tempInfo.addEntries(from: result["result"] as! [AnyHashable : Any])
             
-            let tem = "Câu chuyện mở ra với bữa tiệc mừng của một thế giới phù thủy mà nhiều năm nay đã bị khủng hoảng bởi Chúa tể Hắc ám Voldemort. Đêm trước đó, Voldemort đã tìm thấy nơi sinh sống của gia đình Potter tại thung lũng Godric và giết chết Lily cũng như James Potter vì một lời tiên tri dự đoán sẽ ảnh hưởng đến Voldemort rằng hắn sẽ bị đánh bại bởi \"đứa trẻ sinh ra khi tháng bảy tàn đi\" mà Voldemort tin đứa trẻ là Harry Potter. Tuy vậy, khi hắn định giết Harry, Lời nguyền Chết chóc Avada Kedavra đã bật lại, Voldemort bị tiêu diệt, chỉ còn là một linh hồn, không sống mà cũng chẳng chết. Trong lúc đó, Harry bị lưu lại một vết sẹo hình tia chớp đặc biệt trên trán mình, dấu hiệu bên ngoài."
             
-            self.tempBio = tem//(((result["result"] as! NSDictionary)["publisher"] as! NSArray).firstObject as! NSDictionary)["description"] as! String
+            
+            self.tempBio = (data["publisher"] as! NSArray).count == 0 ? "" : ((data["publisher"] as! NSArray).firstObject as! NSDictionary)["description"] as! String
             
             self.bioString = self.initBio(show: self.showMore)
+            
             
             self.collectionView.performBatchUpdates {
                 
@@ -311,6 +323,8 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
                 self.collectionView.reloadSections(IndexSet(integer: 1))
     
                 self.collectionView.reloadSections(IndexSet(integer: 2))
+                
+                self.collectionView.reloadSections(IndexSet(integer: 3))
     
                 self.collectionView.reloadData()
                 
@@ -352,6 +366,17 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
         })
     }
     
+//    {
+//        "book_type": 0,
+//        "category_id": 102,
+//        "cmd_code": "getListBook",
+//        "page_index": 1,
+//        "page_size": 12,
+//        "price": 0,
+//        "session": "583E5F74A021F306E00DBB0E08D73518",
+//        "sorting": 6
+//    }
+    
     func didRequestPackage(book: NSDictionary) {
         
         self.didRequestUrlBook(book: book)
@@ -373,7 +398,6 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
                    return
                }
                if !self.checkRegister(package: response?.dictionize()["result"] as! NSArray, type: "EBOOK") {
-//                self.showToast("Xin chào " + (Information.userInfo?.getValueFromKey("phone"))! + ", Quý khách chưa đăng ký gói EBOOK hãy đăng ký để trải nghiệm dịch vụ.", andPos: 0)
                    self.center()?.pushViewController(Package_ViewController.init(), animated: true)
                } else {
                    self.didRequestUrlBook(book: book)
@@ -516,16 +540,15 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
    }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 4
+        return 5
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return section == 0 || section == 1 ? 1 : section == 2 ? detailList.count : section == 3 ? self.retract ? 0 : chapList.count > 1 ? chapList.count : 0 : 0 //section == 2 ? dataList.count : section == 1 ? chapList.count > 1 ? chapList.count : 0 : detailList.count
+        return section == 0 || section == 1 ? 1 : section == 2 ? detailList.count : section == 3 ? self.retract ? 0 : chapList.count > 1 ? chapList.count : 0 : dataList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return indexPath.section == 0 ? size(for: indexPath) : indexPath.section == 1 ? sizeBio(for: indexPath) : indexPath.section == 2 ? CGSize(width: collectionView.frame.width, height: detailList.count == 0 ? 0 : (detailList[indexPath.item] as! NSDictionary)["height"] as! CGFloat) : CGSize(width: collectionView.frame.width, height: 65)
-//        return indexPath.section == 2 ? CGSize(width: Int((self.screenWidth() / (IS_IPAD ? 5 : 3)) - 15), height: Int(((self.screenWidth() / (IS_IPAD ? 5 : 3)) - 15) * 1.72)) : CGSize(width: collectionView.frame.width, height: indexPath.section == 1 ? 50 : 40)
+        return indexPath.section == 0 ? size(for: indexPath) : indexPath.section == 1 ? sizeBio(for: indexPath) : indexPath.section == 2 ? CGSize(width: collectionView.frame.width, height: detailList.count == 0 ? 0 : (detailList[indexPath.item] as! NSDictionary)["height"] as! CGFloat) : indexPath.section == 3 ? CGSize(width: collectionView.frame.width, height: 65) : CGSize(width: Int((self.screenWidth() / (IS_IPAD ? 5 : 3)) - 15), height: Int(((self.screenWidth() / (IS_IPAD ? 5 : 3)) - 15) * 1.72))
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -538,9 +561,9 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: indexPath.section == 2 ? "TG_Map_Cell" : indexPath.section == 1 ? "TG_Book_Chap_Cell" : "TG_Book_Detail_Cell", for: indexPath as IndexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: indexPath.section == 0 ? "Book_Detail_Infor" : indexPath.section == 1 ? "Author_Bio_Cell" : indexPath.section == 2 ? "Book_Detail_Option_Cell" : indexPath.section == 3 ? "TG_Book_Chap_Cell" : "TG_Map_Cell", for: indexPath as IndexPath)
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: indexPath.section == 0 ? "Book_Detail_Infor" : indexPath.section == 1 ? "Author_Bio_Cell" : indexPath.section == 2 ? "Book_Detail_Option_Cell" : "TG_Book_Chap_Cell", for: indexPath as IndexPath)
+        
         
         if indexPath.section == 0 {
             
@@ -562,8 +585,9 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
             
             let voteCount = self.withView(cell, tag: 6) as! UIButton
             voteCount.setTitle(self.tempInfo.getValueFromKey("comment_count"), for: .normal)
-            
         }
+        
+        
         
         if indexPath.section == 1 {
             
@@ -574,9 +598,13 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
             bioHeight = title.sizeOfMultiLineLabel().height
         }
         
+        
+        
+        
         if indexPath.section == 2 {
            let detail = detailList[indexPath.item] as! NSDictionary
-
+           
+            print("-->", detail)
            if detail.getValueFromKey("tag") == "1" {
                 for v in cell.contentView.subviews {
                     v.isHidden = v.tag != 1
@@ -632,25 +660,6 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
                 }
             }
             
-            
-            
-//            let data = dataList[indexPath.item] as! NSDictionary
-//
-//            let title = self.withView(cell, tag: 112) as! UILabel
-//
-//            title.text = data.getValueFromKey("name")
-//
-//            let description = self.withView(cell, tag: 13) as! UILabel
-//
-//            description.text = (data["author"] as! NSArray).count > 1 ? "Nhiều tác giả" : (((data["author"] as! NSArray)[0]) as! NSDictionary).getValueFromKey("name")
-//
-//            let image = self.withView(cell, tag: 11) as! UIImageView
-//
-//            image.imageUrl(url: data.getValueFromKey("avatar"))
-//
-//            let player = self.withView(cell, tag: 999) as! UIImageView
-//
-//            player.isHidden = data.getValueFromKey("book_type") != "3"
         }
         
         if indexPath.section == 3 {
@@ -670,32 +679,31 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
 
             arrow.text = "Đọc >"
         }
+        
+        if indexPath.section == 4 {
+            let data = dataList[indexPath.item] as! NSDictionary
+
+            let title = self.withView(cell, tag: 112) as! UILabel
+
+            title.text = data.getValueFromKey("name")
+
+            let description = self.withView(cell, tag: 13) as! UILabel
+
+            description.text = (data["author"] as! NSArray).count > 1 ? "Nhiều tác giả" : (((data["author"] as! NSArray)[0]) as! NSDictionary).getValueFromKey("name")
+
+            let image = self.withView(cell, tag: 11) as! UIImageView
+
+            image.imageUrl(url: data.getValueFromKey("avatar"))
+
+            let player = self.withView(cell, tag: 999) as! UIImageView
+
+            player.isHidden = data.getValueFromKey("book_type") != "3"
+        }
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        if indexPath.section == 3 {//chapter
-            let chap = chapList[indexPath.item] as! NSDictionary
-            self.didRequestPackage(book: chap)
-        }
-        
-        if indexPath.section == 2 {
-//            let bookInfo:NSMutableDictionary = NSMutableDictionary.init(dictionary: (dataList[indexPath.item] as! NSDictionary))
-//            bookInfo["url"] = self.config["url"]
-//            if bookInfo.getValueFromKey("book_type") == "3" {
-//               self.didRequestUrl(info: bookInfo)
-//               return
-//            }
-//            self.config = bookInfo
-//            self.setupInfo()
-//            collectionView.setContentOffset(CGPoint.init(x: 0, y: -headerHeight), animated: true)
-//            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
-//                self.didReload(self.refreshControl)
-//                self.didRequestChapter()
-//                self.didRequestDetail()
-//            })
-        }
         if indexPath.section == 1 { //bio
             let cell = collectionView.cellForItem(at: indexPath)
             let title = self.withView(cell, tag: 1) as! UILabel
@@ -706,15 +714,42 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
             self.collectionView.reloadSections(IndexSet(integer: 0))
             self.adjustInset()
         }
-        if indexPath.section == 0 {
-            
-//            print(detailList[indexPath.item])
-//            let data = detailList[indexPath.item] as! NSDictionary
-//            self.didGoToType(object: data)
+        
+        if indexPath.section == 2 {//detail
+            print(detailList[indexPath.item])
+            let data = detailList[indexPath.item] as! NSDictionary
+            self.didGoToType(object: data)
+        }
+        
+        if indexPath.section == 3 {//chapter
+            let chap = chapList[indexPath.item] as! NSDictionary
+            self.didRequestPackage(book: chap)
+        }
+        
+        if indexPath.section == 4 {
+            let bookInfo:NSMutableDictionary = NSMutableDictionary.init(dictionary: (dataList[indexPath.item] as! NSDictionary))
+            bookInfo["url"] = self.config["url"]
+            if bookInfo.getValueFromKey("book_type") == "3" {
+               self.didRequestUrl(info: bookInfo)
+               return
+            }
+            self.config = bookInfo
+            self.setupInfo()
+            collectionView.setContentOffset(CGPoint.init(x: 0, y: -headerHeight), animated: true)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+                self.didReload(self.refreshControl)
+                self.didRequestChapter()
+                self.didRequestDetail()
+            })
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        if indexPath.section == 4 {
+            let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "Book_Detail_Gap", for: indexPath as IndexPath)
+
+            return view
+        }
         let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "Book_Detail_Chap_Header", for: indexPath as IndexPath)
         (self.withView(view, tag: 1) as! UILabel).text = "Đọc EBOOK (%i CHƯƠNG)".format(parameters: self.chapList.count)
         let angle = self.retract ? 0 : CGFloat.pi
@@ -736,22 +771,22 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: collectionView.frame.width, height: section == 3 ? chapList.count <= 1 ? 0 : 55 : 0)
+        return CGSize(width: collectionView.frame.width, height: section == 3 ? chapList.count <= 1 ? 0 : 55 : section == 4 ? 40 : 0)
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         
-//        if indexPath.section == 2 {
-//            if self.pageIndex == 1 {
-//              return
-//            }
-//          
-//            if indexPath.item == dataList.count - 1 {
-//              if self.pageIndex <= self.totalPage {
-//                  self.isLoadMore = true
-//                  self.didRequestData(isShow: false)
-//              }
-//           }
-//        }
+        if indexPath.section == 4 {
+            if self.pageIndex == 1 {
+              return
+            }
+          
+            if indexPath.item == dataList.count - 1 {
+              if self.pageIndex <= self.totalPage {
+                  self.isLoadMore = true
+                  self.didRequestData(isShow: false)
+              }
+           }
+        }
     }
 }

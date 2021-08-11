@@ -129,7 +129,7 @@
     </objects>
     <resources>
         <image name="ico_comment" width="26.5" height="26.5"/>
-        <image name="ico_like" width="26.5" height="26.5"/>
-        <image name="ico_read" width="26.5" height="26.5"/>
+        <image name="ico_like" width="21" height="18.5"/>
+        <image name="ico_read" width="29.5" height="26.5"/>
     </resources>
 </document>

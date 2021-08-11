@@ -42,7 +42,7 @@
                     </constraints>
                     <state key="normal" image="ico_arrow_teal"/>
                 </button>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ts1-jU-1aW">
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ts1-jU-1aW">
                     <rect key="frame" x="0.0" y="39.5" width="320" height="0.5"/>
                     <color key="backgroundColor" red="0.76862745098039209" green="0.76862745098039209" blue="0.76862745098039209" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
