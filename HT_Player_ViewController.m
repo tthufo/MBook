@@ -424,7 +424,7 @@
     }
     else
     {
-        [(UIImageView*)[self playerInfo][@"img"] sd_setImageWithURL:[NSURL URLWithString: info[@"avatar"]] placeholderImage:kAvatar completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
+        [(UIImageView*)[self playerInfo][@"img"] sd_setImageWithURL:[NSURL URLWithString: [info getValueFromKey: @"avatar"]] placeholderImage:kAvatar completed:^(UIImage *image, NSError *error, SDImageCacheType cacheType, NSURL *imageURL) {
             if (error) return;
             if (image && cacheType == SDImageCacheTypeNone)
             {
@@ -1254,6 +1254,44 @@
     }];
 }
 
+- (void)didRequestReaderContent {
+    NSMutableDictionary * request = [[NSMutableDictionary alloc] initWithDictionary:@{
+                                                                                @"header":@{@"session":Information.token == nil ? @"" : Information.token},
+                                                                                @"session": Information.token,
+                                                                                @"overrideAlert": @"1",
+    }];
+    
+    request[@"id"] = [tempInfo[@"related"] getValueFromKey: @"id"];
+    request[@"CMD_CODE"] = @"getBookContent";
+
+    [[LTRequest sharedInstance] didRequestInfo:request withCache:^(NSString *cacheString) {
+        
+    } andCompletion:^(NSString *responseString, NSString *errorCode, NSError *error, BOOL isValidated, NSDictionary *header) {
+        NSDictionary * dict = [responseString objectFromJSONString];
+
+        if ([[dict getValueFromKey:@"error_code"] isEqualToString:@"0"] && dict[@"result"] != [NSNull null]) {
+            
+            [self goDown];
+
+            NSDictionary * dict = [responseString objectFromJSONString][@"result"];
+
+            NSMutableDictionary * bookInfo = [[NSMutableDictionary alloc] initWithDictionary:tempInfo[@"related"]];
+           
+            Reader_ViewController * reader = [Reader_ViewController new];
+            
+            bookInfo[@"file_url"] = [dict getValueFromKey:@"file_url"];
+            
+            reader.config = bookInfo;
+                        
+            [[self CENTER] pushViewController:reader animated:YES];
+            
+        } else {
+            [self showToast:[[dict getValueFromKey:@"error_msg"] isEqualToString:@""] ? @"Lỗi xảy ra, mời bạn thử lại" : [dict getValueFromKey:@"error_msg"] andPos:0];
+        }
+        [self adjustInset];
+    }];
+}
+
 - (void)didRequestContent {
     NSMutableDictionary * request = [[NSMutableDictionary alloc] initWithDictionary:@{
                                                                                 @"header":@{@"session":Information.token == nil ? @"" : Information.token},
@@ -1308,8 +1346,8 @@
             [self didRequestData];
             
             [self->detailList removeAllObjects];
-            
-            [self->detailList addObjectsFromArray:[self filter:result]];
+                        
+            [self->detailList addObjectsFromArray:[self filter:result relate: ![result[@"related"] isEqual:[NSNull null]]]];
             
             [self->tempInfo removeAllObjects];
             
@@ -1335,8 +1373,8 @@
     }];
 }
 
-- (NSArray*)filter:(NSDictionary*)info {
-    NSArray * keys = @[@{@"key": @"header_cell", @"tag": @1, @"height": @44},
+- (NSArray*)filter:(NSDictionary*)info relate:(BOOL)relate {
+    NSArray * keys = relate ? @[@{@"key": @"header_cell", @"tag": @1, @"height": @44},
                        @{@"key": @"category", @"title": @"Thể loại", @"tag": @2, @"height": @35},
                        @{@"key": @"author", @"title": @"Tác giả", @"tag": @2, @"height": @35},
                        @{@"key": @"publisher", @"title": @"Nhà xuất bản", @"tag": @2, @"height": @35},
@@ -1345,7 +1383,18 @@
                        @{@"key": @"price", @"title": @"Giá mua lẻ", @"tag": @2, @"height": @35, @"unit": @" VND"},
                        @{@"key": @"button_cell", @"tag": @4, @"height": @35},
                        @{@"key": @"read_cell", @"tag": @6, @"height": @20},
-    ];
+    ] :
+    @[@{@"key": @"header_cell", @"tag": @1, @"height": @44},
+                       @{@"key": @"category", @"title": @"Thể loại", @"tag": @2, @"height": @35},
+                       @{@"key": @"author", @"title": @"Tác giả", @"tag": @2, @"height": @35},
+                       @{@"key": @"publisher", @"title": @"Nhà xuất bản", @"tag": @2, @"height": @35},
+                       @{@"key": @"events", @"title": @"Tuyển tập", @"tag": @2, @"height": @35},
+                       @{@"key": @"publish_time", @"title": @"Ngày upload", @"arrow": @"1", @"tag": @2, @"height": @35},
+                       @{@"key": @"price", @"title": @"Giá mua lẻ", @"tag": @2, @"height": @35, @"unit": @" VND"},
+//                       @{@"key": @"button_cell", @"tag": @4, @"height": @35},
+                       @{@"key": @"read_cell", @"tag": @6, @"height": @20},
+    ]
+    ;
     NSMutableArray * tempArray = [NSMutableArray new];
     for (NSDictionary * key in keys) {
         NSString * keying = [key getValueFromKey:@"key"];
@@ -1518,7 +1567,26 @@
          
         if ([tag isEqualToString:@"4"]) {
             UIButton * readOrListen = [self withView:cell tag: 4];
+            [readOrListen setImage:[UIImage imageNamed:@"ico_reading"] forState:UIControlStateNormal];
+            [readOrListen actionForTouch:@{} and:^(NSDictionary *touchInfo) {
+                [self didRequestReaderContent];
+            }];
             UIButton * purchase = [self withView:cell tag: 5];
+            [purchase actionForTouch:@{} and:^(NSDictionary *touchInfo) {
+                [self didPressPause: nil];
+                NSMutableDictionary * checkInfo = [[NSMutableDictionary alloc] initWithDictionary:tempInfo];
+                [checkInfo addEntriesFromDictionary:tempInfo[@"related"]];
+                checkInfo[@"is_package"] = @"0";
+                
+                Check_Out_ViewController * checkOut = [Check_Out_ViewController new];
+                checkOut.info = checkInfo;
+                
+                UINavigationController * nav = [[UINavigationController alloc] initWithRootViewController:checkOut];
+                nav.navigationBarHidden = YES;
+                nav.modalPresentationStyle = UIModalPresentationFullScreen;
+                [self presentViewController:nav animated:YES completion:nil];
+
+            }];
              for (UIView *v in cell.contentView.subviews) {
                  v.hidden = v.tag != 4 && v.tag != 5;
              }

@@ -71,8 +71,8 @@ class TG_Intro_ViewController: UIViewController {
             if Information.userInfo != nil {
                 avatar.imageUrlHolder(url: (Information.userInfo?.getValueFromKey("avatar"))!, holder: "ic_avatar")
                 avatar.action(forTouch: [:]) { (objc) in
-                        self.center()?.pushViewController(PC_Inner_Info_ViewController.init(), animated: true)
-                        self.root()?.showCenterPanel(animated: true)
+                    (self.tabbar()!).selectedIndex = 3
+                    self.root()?.showCenterPanel(animated: true)
                 }
             }
         } else {
@@ -126,6 +126,16 @@ class TG_Intro_ViewController: UIViewController {
             self.dataList.add(NSMutableDictionary.init(dictionary:["avatar": "id", "name": "Tuyển tập chọn lọc", "sub_category": [], "open": "0", "id": "99100"]))
 
             self.dataList.add(NSMutableDictionary.init(dictionary:["avatar": "id", "name": "Nhà xuất bản", "sub_category": [], "open": "0", "id": "99101"]))
+            
+            let menu = [
+                NSMutableDictionary.init(dictionary:["avatar": "id", "name": "", "sub_category": [], "open": "0", "id": "100001"]),
+                NSMutableDictionary.init(dictionary:["avatar": "id", "name": "Giới thiệu Mebook", "sub_category": [], "open": "0", "id": "10000"]),
+                NSMutableDictionary.init(dictionary:["avatar": "id", "name": "Điều khoản sử dụng", "sub_category": [], "open": "0", "id": "10001"]),
+                NSMutableDictionary.init(dictionary:["avatar": "id", "name": "Tổng đài hỗ trợ", "sub_category": [], "open": "0", "id": "10002"]),
+                NSMutableDictionary.init(dictionary:["avatar": "id", "name": "Phản hồi dịch vụ", "sub_category": [], "open": "0", "id": "10003"])
+            ]
+            
+            self.dataList.addObjects(from: menu)
 
             self.tableView.reloadData()
         })
@@ -156,7 +166,9 @@ class TG_Intro_ViewController: UIViewController {
 extension TG_Intro_ViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 50
+        let sec = (dataList[section] as! NSMutableDictionary);
+        let id = sec.getValueFromKey("id")
+        return id == "100001" ? 0.5 : 40
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -180,9 +192,7 @@ extension TG_Intro_ViewController: UITableViewDataSource, UITableViewDelegate {
             sec["open"] = sec.getValueFromKey("open") == "0" ? "1" : "0"
             tableView.reloadSections(NSIndexSet(index: section) as IndexSet, with: .automatic)
         }
-        
-        head.backgroundColor = sec.getValueFromKey("open") != "0" ? AVHexColor.color(withHexString: "#DEEBEA") : .clear
-        
+                
         let angle = sec.getValueFromKey("open") == "0" ? 0 : CGFloat.pi
         
         (self.withView(head, tag: 12) as! UIButton).transform = CGAffineTransform(rotationAngle: angle)
@@ -191,6 +201,8 @@ extension TG_Intro_ViewController: UITableViewDataSource, UITableViewDelegate {
         
         let id = sec.getValueFromKey("id")
         
+        head.backgroundColor = id == "100001" ? .lightGray : sec.getValueFromKey("open") != "0" ? AVHexColor.color(withHexString: "#DEEBEA") : .clear
+
         if subMenu {
             head.action(forTouch: [:]) { (obj) in
                 if id == "9999" {
@@ -205,6 +217,22 @@ extension TG_Intro_ViewController: UITableViewDataSource, UITableViewDelegate {
                     let publisher = Publisher_ViewController.init()
                     publisher.config = ["url": ["CMD_CODE": "getListPublishingHouse"]]
                     self.center()?.pushViewController(publisher, animated: true)
+                } else
+                if id == "100001"{
+                    
+                } else
+                if id == "10001" || id == "10000" {
+                    let payment = Payment_ViewController.init()
+                    let allInfo = NSMutableDictionary.init(dictionary: ["title": sec.getValueFromKey("name") ?? "", "url": id == "10000" ? "getServiceInfo" : "getPolicy"])
+                    payment.info = allInfo
+                    self.center()?.pushViewController(payment, animated: true)
+                } else
+                if id == "10002"{
+                    self.callNumber(phoneNumber: "19001595")
+                } else
+                if id == "10003"{
+                    let feedBack = Feed_Back_ViewController.init()
+                    self.center()?.pushViewController(feedBack, animated: true)
                 } else {
                     let list = List_Book_ViewController.init()
                     list.config = ["url": ["CMD_CODE":"getListBook",

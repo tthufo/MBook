@@ -35,7 +35,7 @@ class Author_Detail_ViewController: UIViewController, UICollectionViewDataSource
     
     var bioHeight: CGFloat = 0
     
-    let sectionTitle = ["", "Tác phẩm", "Tác giả khác"]
+    let sectionTitle = ["GIỚI THIỆU", "TÁC PHẨM", "TÁC GIẢ KHÁC"]
     
     var bioString: String!
     
@@ -365,12 +365,12 @@ class Author_Detail_ViewController: UIViewController, UICollectionViewDataSource
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "Book_Detail_Title", for: indexPath as IndexPath)
-        (self.withView(view, tag: 1) as! UILabel).text = indexPath.section == 0 ? "" : sectionTitle[indexPath.section]
+        (self.withView(view, tag: 1) as! UILabel).text = indexPath.section == 0 ? "GIỚI THIỆU" : sectionTitle[indexPath.section]
         return view
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: collectionView.frame.width, height: section == 0 ? 0 : section == 2 ? chapList.count == 0 ? 0 : 44 : 44)
+        return CGSize(width: collectionView.frame.width, height: section == 0 ? 44 : section == 2 ? chapList.count == 0 ? 0 : 44 : 44)
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {

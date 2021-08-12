@@ -40,6 +40,12 @@
                                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                             <integer key="value" value="44"/>
                                         </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="layer.borderUIColor">
+                                            <color key="value" red="0.1176470588" green="0.57254901960000004" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                                            <real key="value" value="0.5"/>
+                                        </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                 </imageView>
                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nio-bG-Y4A">
@@ -84,9 +90,17 @@
                                         <constraint firstAttribute="height" constant="0.5" id="mbz-JY-Lmw"/>
                                     </constraints>
                                 </view>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ico_vip" translatesAutoresizingMaskIntoConstraints="NO" id="U2a-eu-b3j">
+                                    <rect key="frame" x="67" y="31" width="30" height="30"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="30" id="Bqd-7l-v0K"/>
+                                        <constraint firstAttribute="height" constant="30" id="waI-IA-J5A"/>
+                                    </constraints>
+                                </imageView>
                             </subviews>
                             <color key="backgroundColor" red="0.92549019610000005" green="0.92941176469999998" blue="0.90588235289999997" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
+                                <constraint firstItem="U2a-eu-b3j" firstAttribute="top" secondItem="6Nu-LM-5aW" secondAttribute="top" constant="31" id="4KS-8H-8gd"/>
                                 <constraint firstItem="TM9-dK-nIh" firstAttribute="leading" secondItem="6Nu-LM-5aW" secondAttribute="leading" id="7ug-Za-4fS"/>
                                 <constraint firstAttribute="bottom" secondItem="TM9-dK-nIh" secondAttribute="bottom" id="9AR-9s-kWR"/>
                                 <constraint firstItem="e5B-Ou-Lo5" firstAttribute="top" secondItem="6Nu-LM-5aW" secondAttribute="top" constant="38" id="BWx-IO-M6j"/>
@@ -95,6 +109,7 @@
                                 <constraint firstItem="Nio-bG-Y4A" firstAttribute="top" secondItem="e5B-Ou-Lo5" secondAttribute="bottom" constant="8" symbolic="YES" id="Q1W-gH-2RZ"/>
                                 <constraint firstItem="e5B-Ou-Lo5" firstAttribute="leading" secondItem="hqr-8h-tDc" secondAttribute="trailing" constant="8" symbolic="YES" id="Usq-Vf-60n"/>
                                 <constraint firstItem="hqr-8h-tDc" firstAttribute="top" secondItem="6Nu-LM-5aW" secondAttribute="top" constant="31" id="V0a-cm-MA0"/>
+                                <constraint firstItem="U2a-eu-b3j" firstAttribute="leading" secondItem="6Nu-LM-5aW" secondAttribute="leading" constant="67" id="W7i-bj-LaB"/>
                                 <constraint firstItem="4xK-pA-qhv" firstAttribute="leading" secondItem="e5B-Ou-Lo5" secondAttribute="trailing" constant="8" symbolic="YES" id="bVd-3m-Jzb"/>
                                 <constraint firstItem="4xK-pA-qhv" firstAttribute="top" secondItem="6Nu-LM-5aW" secondAttribute="top" constant="31" id="ePG-jZ-58A"/>
                                 <constraint firstAttribute="trailing" secondItem="TM9-dK-nIh" secondAttribute="trailing" id="gDj-YG-4Rm"/>
@@ -138,6 +153,7 @@
     <resources>
         <image name="btn_upgrade" width="55.5" height="89"/>
         <image name="ic_avatar" width="116.5" height="116.5"/>
+        <image name="ico_vip" width="58.5" height="58.5"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

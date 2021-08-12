@@ -30,7 +30,7 @@ class Check_Out_ViewController: UIViewController {
 
     var dataList: NSMutableArray!
     
-    var info: NSDictionary!
+    @objc var info: NSDictionary!
     
     var paymentInfoBank = NSMutableDictionary()
     
@@ -96,7 +96,13 @@ class Check_Out_ViewController: UIViewController {
         
             let payment = Payment_ViewController.init()
                         
-            payment.info = self.info
+            let allInfo = NSMutableDictionary.init(dictionary: self.info)
+        
+            allInfo["title"] = "Thanh toán"
+        
+            allInfo["payment"] = "1"
+        
+            payment.info = allInfo
         
             payment.requestUrl = (result["result"] as! NSDictionary).getValueFromKey("redirect")
             
@@ -123,7 +129,11 @@ class Check_Out_ViewController: UIViewController {
     @IBAction func didPressCancel() {
         EM_MenuView.init(cancel: ["line1": "Quý khách muốn huỷ đăng ký ?"]).show { (index, obj, menu) in
             if index == 3 {
-                self.navigationController?.popViewController(animated: true)
+                if self.isModal {
+                    self.dismiss(animated: true, completion: nil)
+                } else {
+                    self.navigationController?.popViewController(animated: true)
+                }
             }
         }
     }
@@ -149,7 +159,7 @@ extension Check_Out_ViewController: UITableViewDataSource, UITableViewDelegate {
             return buttonCell!
         }
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: self.isPackage ? (indexPath.row == 0 ? "Vip_Cell" : indexPath.row == 1 ? "Check_Out_Cell" : "Payment_Option_Cell") : "Check_Out_Book_Cell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: self.isPackage ? (indexPath.row == 0 ? "Vip_Cell" : indexPath.row == 1 ? "Check_Out_Cell" : "Payment_Option_Cell") : indexPath.row == 0 ? "Check_Out_Book_Cell" : "Payment_Option_Cell", for: indexPath)
         
         if self.isPackage {
             
@@ -222,7 +232,7 @@ extension Check_Out_ViewController: UITableViewDataSource, UITableViewDelegate {
                     }
                     tableView.reloadData()
                 }
-                
+
                 (cell as! Payment_Option_Cell).chooseBank = { bank in
                     self.paymentInfoBank.removeAllObjects()
                     self.paymentInfoBank.addEntries(from: bank as! [AnyHashable : Any])

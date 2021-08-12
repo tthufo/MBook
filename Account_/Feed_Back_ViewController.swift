@@ -55,7 +55,7 @@ class Feed_Back_ViewController: UIViewController, UITextFieldDelegate {
         super.viewWillAppear(animated)
         
         kb.keyboard { (height, isOn) in
-            self.tableView.contentInset = UIEdgeInsets(top: 64, left: 0, bottom: isOn ? (height - 0) : 0, right: 0)
+            self.tableView.contentInset = UIEdgeInsets(top: 24, left: 0, bottom: isOn ? (height - 0) : 0, right: 0)
         }
     }
     
@@ -105,7 +105,7 @@ class Feed_Back_ViewController: UIViewController, UITextFieldDelegate {
 extension Feed_Back_ViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 715
+        return 675
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

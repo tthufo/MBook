@@ -12,7 +12,7 @@ import MarqueeLabel
 
 class Reader_ViewController: UIViewController {
 
-    var config: NSDictionary!
+    @objc var config: NSDictionary!
     
     @IBOutlet var titleLabel: MarqueeLabel!
     

@@ -303,7 +303,8 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
             
             self.detailList.removeAllObjects()
             
-            self.detailList.addObjects(from: self.filter(info: data) as! [Any])
+                        
+            self.detailList.addObjects(from: self.filter(info: data, relate: !(data["related"] is NSNull)) as! [Any])
             
             self.tempInfo.removeAllObjects()
             
@@ -365,20 +366,10 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
            self.adjustInset()
         })
     }
-    
-//    {
-//        "book_type": 0,
-//        "category_id": 102,
-//        "cmd_code": "getListBook",
-//        "page_index": 1,
-//        "page_size": 12,
-//        "price": 0,
-//        "session": "583E5F74A021F306E00DBB0E08D73518",
-//        "sorting": 6
-//    }
-    
+
     func didRequestPackage(book: NSDictionary) {
         
+        print("-->", book)
         self.didRequestUrlBook(book: book)
 
         return
@@ -405,8 +396,8 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
            })
        }
     
-    func filter(info: NSDictionary) -> NSArray {
-        let keys = [["key": "header_cell", "tag": 1, "height": 44],
+    func filter(info: NSDictionary, relate: Bool) -> NSArray {
+        let keys = relate ? [["key": "header_cell", "tag": 1, "height": 44],
                    ["key": "category", "title": "Thể loại", "tag": 2, "height": 35 ],
                    ["key": "author", "title": "Tác giả", "tag": 2, "height": 35],
                    ["key": "publisher", "title": "Nhà xuất bản", "tag": 2, "height": 35],
@@ -414,6 +405,16 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
                    ["key": "publish_time", "title": "Ngày upload", "arrow": "1", "tag": 2, "height": 35],
                    ["key": "price", "title": "Giá mua lẻ", "tag": 2, "height": 35, "unit": " VND"],
                    ["key": "button_cell", "tag": 4, "height": 35],
+                   ["key": "read_cell", "tag": 6, "height": 90],
+        ] :
+        [["key": "header_cell", "tag": 1, "height": 44],
+                   ["key": "category", "title": "Thể loại", "tag": 2, "height": 35 ],
+                   ["key": "author", "title": "Tác giả", "tag": 2, "height": 35],
+                   ["key": "publisher", "title": "Nhà xuất bản", "tag": 2, "height": 35],
+                   ["key": "events", "title": "Tuyển tập", "tag": 2, "height": 35],
+                   ["key": "publish_time", "title": "Ngày upload", "arrow": "1", "tag": 2, "height": 35],
+                   ["key": "price", "title": "Giá mua lẻ", "tag": 2, "height": 35, "unit": " VND"],
+//                   ["key": "button_cell", "tag": 4, "height": 35],
                    ["key": "read_cell", "tag": 6, "height": 90],
         ]
                  
@@ -604,7 +605,6 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
         if indexPath.section == 2 {
            let detail = detailList[indexPath.item] as! NSDictionary
            
-            print("-->", detail)
            if detail.getValueFromKey("tag") == "1" {
                 for v in cell.contentView.subviews {
                     v.isHidden = v.tag != 1
@@ -625,6 +625,12 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
             
             if detail.getValueFromKey("tag") == "4" {
                 let readOrListen = self.withView(cell, tag: 4) as! UIButton
+                readOrListen.setTitleColor(UIColor.orange, for: .normal)
+                readOrListen.action(forTouch: [:]) { (objc) in
+                    let bookInfo:NSMutableDictionary = NSMutableDictionary.init(dictionary: (self.tempInfo["related"] as! NSDictionary))
+                    bookInfo["url"] = self.config["url"]
+                    self.didRequestUrl(info: bookInfo)
+                }
                 
                 let purchase = self.withView(cell, tag: 5) as! UIButton
                 purchase.action(forTouch: [:]) { (obj) in

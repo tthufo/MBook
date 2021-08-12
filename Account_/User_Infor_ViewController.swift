@@ -30,7 +30,11 @@ class User_Infor_ViewController: UIViewController {
 
     var avatarTemp: UIImage!
     
+    @IBOutlet var account: UILabel!
+
     @IBOutlet var name: UILabel!
+    
+    @IBOutlet var userName: UILabel!
     
     @IBOutlet var phone: UILabel!
 
@@ -122,7 +126,9 @@ class User_Infor_ViewController: UIViewController {
     }
     
     func viewInfor() {
+        account.text = "userID" + (Information.userInfo?.getValueFromKey("user_id"))!
         name.text = Information.userInfo?.getValueFromKey("name")
+        userName.text = Information.userInfo?.getValueFromKey("name")
         phone.text = Information.userInfo?.getValueFromKey("phone")
         email.text = Information.userInfo?.getValueFromKey("email")
         if Information.avatar != nil {
@@ -306,7 +312,7 @@ class User_Infor_ViewController: UIViewController {
 extension User_Infor_ViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return indexPath.row == 0 ? 620 : indexPath.row == 1 ? 255 : 200
+        return indexPath.row == 0 ? 600 : indexPath.row == 1 ? 255 : 200
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

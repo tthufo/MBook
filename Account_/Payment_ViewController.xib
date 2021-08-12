@@ -10,6 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="Payment_ViewController" customModule="MeBook" customModuleProvider="target">
             <connections>
+                <outlet property="titleLabel" destination="4H9-WR-aVZ" id="mej-VL-fS4"/>
                 <outlet property="view" destination="AeQ-TS-5jO" id="Lmk-Lb-awH"/>
                 <outlet property="webView" destination="2dX-hn-Svw" id="hoN-Rv-JUZ"/>
             </connections>
