@@ -14,11 +14,15 @@ import UIKit
 
     @IBOutlet var contentView: UIView!
 
+    @objc var initValue: String!
+    
     @objc var typing: String!
         
     var dataList: NSMutableArray!
     
     @objc var callBack: ((_ info: Any)->())?
+    
+    @objc var loadDone: ((_ info: Any)->())?
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
@@ -51,13 +55,32 @@ import UIKit
                 
            self.dataList.removeAllObjects()
 
-           let data = (result["result"] as! NSArray)
+           let data = (result["result"] as! NSArray).withMutable()
+        
+           for dat in data! {
+            if self.initValue != nil && self.initValue == (dat as! NSMutableDictionary).getValueFromKey("name") {
+                    (dat as! NSMutableDictionary)["check"] = "1"
 
-           self.dataList.addObjects(from: data.withMutable())
+                }
+                (dat as! NSMutableDictionary)["check"] = "0"
+           }
+        
+           self.dataList.addObjects(from: data!)
 
            self.collectionView.reloadData()
         
+           self.loadDone?("")
+        
        })
+    }
+    
+    func reloading(tag: String) {
+        for dat in dataList {
+             if tag == (dat as! NSMutableDictionary).getValueFromKey("name") {
+                 (dat as! NSMutableDictionary)["check"] = "1"
+             }
+        }
+        self.collectionView.reloadData()
     }
     
     func setUp() {
@@ -104,6 +127,7 @@ import UIKit
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: indexPath.item == 0 ? self.typing == "vip" ? "Tag_Button" : self.typing == "add" ? "Tag_Add" : "Tag" : "Tag", for: indexPath as IndexPath)
+        
         if self.typing != "normal" {
             if indexPath.item != 0 {
                 let data = dataList[indexPath.item - 1] as! NSDictionary
@@ -111,14 +135,7 @@ import UIKit
                 let title = self.withView(cell, tag: 9) as! UILabel
 
                 title.text = data.getValueFromKey("name")
-
-    //            let check = false // (data["check"] as! String) == "1"
-
-    //            title.withBorder(["Bhex": check ? "#C2DEDC" : "#7DBAB6",
-    //                              "Bground": check ? "#C2DEDC" : "#FFFFFF",
-    //                              "Bcorner": 16, "Bwidth": "1"])
-    //
-    //            title.textColor = AVHexColor.color(withHexString: check ? "#1D5266" : "#7DBAB6")
+                
             }
             
             return cell
@@ -128,6 +145,15 @@ import UIKit
             let title = self.withView(cell, tag: 9) as! UILabel
 
             title.text = data.getValueFromKey("name")
+            
+            let check = (data["check"] as! String) == "1"
+
+            title.withBorder(["Bhex": check ? "#C2DEDC" : "#7DBAB6",
+                              "Bground": check ? "#C2DEDC" : "#FFFFFF",
+                              "Bcorner": 16, "Bwidth": "1"])
+
+            title.textColor = AVHexColor.color(withHexString: check ? "#1D5266" : "#7DBAB6")
+            
         }
         return cell
     }
@@ -141,20 +167,30 @@ import UIKit
                 callBack?(dataList[indexPath.item - 1])
             }
         } else {
+            for i in 0 ..< dataList.count {
+                (dataList[i] as! NSMutableDictionary)["check"] = "0"
+            }
+
+            (dataList[indexPath.item - 0] as! NSMutableDictionary)["check"] = "1"
+
+            collectionView.reloadData()
+            
             callBack?(dataList[indexPath.item - 0])
         }
+        
 //        if indexPath.item != 0 {
 //            for i in 0 ..< dataList.count {
-//                dataList[i]["check"] = "0"
+//                (dataList[i] as! NSMutableDictionary)["check"] = "0"
 //            }
 //
-//            dataList[indexPath.item - 1]["check"] = "1"
+//            (dataList[indexPath.item - 1] as! NSMutableDictionary)["check"] = "1"
 //
-//            callBack?(dataList[indexPath.item - 0])
+////            callBack?(dataList[indexPath.item - 0])
 //
 //            collectionView.reloadData()
-//        } else {
-//            callBack?(["data": "Mua VIP"])
+//        }
+//        else {
+////            callBack?(["data": "Mua VIP"])
 //        }
     }
 }

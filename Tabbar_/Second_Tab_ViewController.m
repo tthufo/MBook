@@ -18,6 +18,10 @@
     
     IBOutlet Tag_View * tagView;
     
+    IBOutlet UIImageView * searchBtn;
+    
+    IBOutlet UITextField * searchView;
+    
     NSMutableArray * dataList;
     
     NSMutableArray * config;
@@ -38,6 +42,8 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    searchView.text = Information.searchValue == nil ? @"" : Information.searchValue;
     
     [self didEmbed];
 }
@@ -116,6 +122,24 @@
                 @"loaded": @NO
             } mutableCopy]
     ] mutableCopy];
+    
+    [searchBtn imageColorWithColor:[UIColor lightGrayColor]];
+    
+    [searchBtn actionForTouch:@{} and:^(NSDictionary *touchInfo) {
+        
+    }];
+    
+    [searchView addTarget:self action:@selector(textIsChanging:) forControlEvents:UIControlEventValueChanged];
+}
+
+- (void)textIsChanging:(UITextField*)textField {
+    Information.searchValue = textField.text;
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [searchView resignFirstResponder];
+    return YES;
 }
 
 - (void)didPressVip {

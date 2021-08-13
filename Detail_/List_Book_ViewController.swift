@@ -50,13 +50,17 @@ class List_Book_ViewController: UIViewController, UICollectionViewDataSource, UI
         didRequestData(isShow: true)
         
         counterHeight.constant = config.response(forKey: "counter") ? 29 : 0
-        
+                
         tagView.callBack = { info in
             let temp = NSMutableDictionary.init(dictionary: self.config.reFormat())
             (temp["url"] as! NSMutableDictionary)["tag_id"] = (info as! NSDictionary).getValueFromKey("id")
             self.titleLabel.text = (info as! NSDictionary).getValueFromKey("name")
             self.config = temp
             self.didReload(self.refreshControl)
+        }
+        
+        tagView.loadDone = { done in
+            self.tagView.reloading(tag: self.config.getValueFromKey("title"))
         }
     }
     

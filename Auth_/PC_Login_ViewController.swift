@@ -95,9 +95,7 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
         
         getPhoneNumber()
     }
-    
-    //USING FIREPUSH PROJECT CONSOLE
-    
+        
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
 //        if uName != nil {

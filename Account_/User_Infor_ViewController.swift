@@ -17,6 +17,8 @@ class User_Infor_ViewController: UIViewController {
     @IBOutlet var inforCell: UITableViewCell!
     
     @IBOutlet var optionCell: UITableViewCell!
+    
+    @IBOutlet var optionCell_S: UITableViewCell!
 
     @IBOutlet var sideGapLeft: NSLayoutConstraint!
     
@@ -43,9 +45,16 @@ class User_Infor_ViewController: UIViewController {
     @IBOutlet var changePass: UILabel!
 
     @IBOutlet var transaction: UILabel!
+    
+    @IBOutlet var transaction_S: UILabel!
 
     @IBOutlet var logout: UILabel!
+    
+    @IBOutlet var logout_S: UILabel!
 
+    @IBOutlet var searchBtn: UIImageView!
+
+    @IBOutlet var searchView: UITextField!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,22 +80,60 @@ class User_Infor_ViewController: UIViewController {
             self.center()?.pushViewController(Transaction_ViewController.init(), animated: true)
         }
         
-        logout.action(forTouch: [:]) { (objc) in
-            DropAlert.shareInstance()?.alert(withInfor: ["cancel":"Thoát", "buttons":["Đăng xuất"], "title":"Thông báo", "message": "Bạn có muốn đăng xuất khỏi tài khoản ?"], andCompletion: { (index, objc) in
-                if index == 0 {
-                    if self.isEmbed() {
-                        self.unEmbed()
-                    }
-                    Information.removeInfo()
-                    self.requestLogout()
-                    FB_Plugin.shareInstance().signoutFacebook()
-                    GG_PlugIn.shareInstance().signOutGoogle()
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
-                        (UIApplication.shared.delegate as! AppDelegate).changeRoot(true)
-                    })
-                }
-            })
+        transaction_S.action(forTouch: [:]) { (objc) in
+            self.center()?.pushViewController(Transaction_ViewController.init(), animated: true)
         }
+        
+        logout.action(forTouch: [:]) { (objc) in
+            self.didPressLogOut()
+        }
+        
+        logout_S.action(forTouch: [:]) { (objc) in
+            self.didPressLogOut()
+        }
+        
+        searchBtn.imageColor(color: .lightGray)
+        
+        searchBtn.action(forTouch: [:]) { (objc) in
+            
+        }
+        searchView.addTarget(self, action: #selector(textIsChanging), for: .editingChanged)
+    }
+    
+    @objc func textIsChanging(_ textField:UITextField) {
+        Information.searchValue = textField.text
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+       searchView.resignFirstResponder()
+       return true
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        searchView.text = Information.searchValue ?? ""
+    }
+    
+    func didPressLogOut() {
+        DropAlert.shareInstance()?.alert(withInfor: ["cancel":"Thoát", "buttons":["Đăng xuất"], "title":"Thông báo", "message": "Bạn có muốn đăng xuất khỏi tài khoản ?"], andCompletion: { (index, objc) in
+            if index == 0 {
+                if self.isEmbed() {
+                    self.unEmbed()
+                }
+                Information.removeInfo()
+                self.requestLogout()
+                FB_Plugin.shareInstance().signoutFacebook()
+                GG_PlugIn.shareInstance().signOutGoogle()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+                    (UIApplication.shared.delegate as! AppDelegate).changeRoot(true)
+                })
+            }
+        })
+    }
+    
+    @IBAction func didPressMenu() {
+        self.root()?.toggleLeftPanel(nil)
     }
     
     func requestLogout() {
@@ -312,7 +359,8 @@ class User_Infor_ViewController: UIViewController {
 extension User_Infor_ViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return indexPath.row == 0 ? 600 : indexPath.row == 1 ? 255 : 200
+        let social_logged = self.getObject("social")
+        return indexPath.row == 0 ? 600 : indexPath.row == 1 ? 255 : social_logged != nil ? 145 : 200 // 145
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -320,8 +368,9 @@ extension User_Infor_ViewController: UITableViewDataSource, UITableViewDelegate 
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let social_logged = self.getObject("social")
         
-        return indexPath.row == 0 ? headerCell! : indexPath.row == 1 ? inforCell! : optionCell!
+        return indexPath.row == 0 ? headerCell! : indexPath.row == 1 ? inforCell! : social_logged != nil ? optionCell_S : optionCell!
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

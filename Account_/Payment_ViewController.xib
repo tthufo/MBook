@@ -39,7 +39,7 @@
                                 <constraint firstAttribute="width" constant="44" id="b1M-f2-gMG"/>
                                 <constraint firstAttribute="height" constant="44" id="eHJ-04-rEc"/>
                             </constraints>
-                            <state key="normal" image="icon_back"/>
+                            <state key="normal" image="ico_arrow_l_white"/>
                             <connections>
                                 <action selector="didPressBack" destination="-1" eventType="touchUpInside" id="raR-Iq-hYq"/>
                             </connections>
@@ -90,6 +90,6 @@
     </objects>
     <resources>
         <image name="ic_search" width="50.5" height="50.5"/>
-        <image name="icon_back" width="33" height="33"/>
+        <image name="ico_arrow_l_white" width="33" height="33"/>
     </resources>
 </document>

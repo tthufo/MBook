@@ -29,6 +29,8 @@ class Information: NSObject {
     
     static var allPackage: String?
     
+    @objc static var searchValue: String?
+    
     @objc static func saveToken() {
         if self.getValue("token") != nil {
             token = "%@".format(parameters: self.getValue("token"))

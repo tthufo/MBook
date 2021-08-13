@@ -19,6 +19,8 @@ class Search_ViewController: UIViewController, UICollectionViewDataSource, UICol
     var totalPage: Int = 1
      
     var isLoadMore: Bool = false
+    
+    @IBOutlet var tagView: Tag_View!
         
     @IBOutlet var topView: UIView!
     
@@ -67,24 +69,36 @@ class Search_ViewController: UIViewController, UICollectionViewDataSource, UICol
 
         sizingCell = (cellNib.instantiate(withOwner: nil, options: nil) as NSArray).firstObject as! Tag_Cell?
 
-        self.flowLayout.sectionInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
+//        self.flowLayout.sectionInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
 
-        collectionView.register(cellNib, forCellWithReuseIdentifier: "Tag_Cell")
+//        collectionView.register(cellNib, forCellWithReuseIdentifier: "Tag_Cell")
 
-        collectionView.withHeaderOrFooter("Book_Detail_Title", andKind: UICollectionView.elementKindSectionHeader)
+//        collectionView.withHeaderOrFooter("Book_Detail_Title", andKind: UICollectionView.elementKindSectionHeader)
 
+        searchField.text = config.getValueFromKey("search")
+        
         searchField.addTarget(self, action: #selector(searchTextChange), for: .editingChanged)
             
-        reloadHistory()
+        searchTextChange(searchField)
         
-        didRequestTag()
+        
+        tagView.callBack = { info in
+//            let temp = NSMutableDictionary.init(dictionary: self.config.reFormat())
+//            (temp["url"] as! NSMutableDictionary)["tag_id"] = (info as! NSDictionary).getValueFromKey("id")
+//            self.titleLabel.text = (info as! NSDictionary).getValueFromKey("name")
+//            self.config = temp
+//            self.didReload(self.refreshControl)
+        }
+//        reloadHistory()
+//
+//        didRequestTag()
     }
     
-    func reloadHistory() {
-        historyList.removeAllObjects()
-        historyList.addObjects(from: self.getHistory())
-        collectionView.reloadData()
-    }
+//    func reloadHistory() {
+//        historyList.removeAllObjects()
+//        historyList.addObjects(from: self.getHistory())
+//        collectionView.reloadData()
+//    }
     
     @objc func searchTextChange(_ textField:UITextField) {
         let hasText = textField.text?.replacingOccurrences(of: " ", with: "") == ""
@@ -93,10 +107,12 @@ class Search_ViewController: UIViewController, UICollectionViewDataSource, UICol
             self.topView.layoutIfNeeded()
         }
         deleteButton.alpha = hasText ? 0 : 1
-        collectionBook.alpha = hasText ? 0 : 1
         if !hasText {
             NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(self.reloading), object: nil)
             self.perform(#selector(self.reloading), with: nil, afterDelay: 0.5)
+        }
+        if textField.text?.count == 0 {
+            NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(self.reloading), object: nil)
         }
     }
     
@@ -115,7 +131,7 @@ class Search_ViewController: UIViewController, UICollectionViewDataSource, UICol
             self.topView.layoutIfNeeded()
         }
         deleteButton.alpha = 0
-        collectionBook.alpha = 0
+//        collectionBook.alpha = 1
         searchField.text = ""
         bookList.removeAllObjects()
         collectionBook.reloadData()
@@ -130,7 +146,7 @@ class Search_ViewController: UIViewController, UICollectionViewDataSource, UICol
         super.viewWillAppear(animated)
         
         kb.keyboard { (height, isOn) in
-            self.collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: isOn ? (height - 0) : 0, right: 0)
+//            self.collectionView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: isOn ? (height - 0) : 0, right: 0)
             self.collectionBook.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: isOn ? (height - 0) : 0, right: 0)
         }
      }
@@ -140,33 +156,6 @@ class Search_ViewController: UIViewController, UICollectionViewDataSource, UICol
         pageIndex = 1
         totalPage = 1
         didRequestData(isShow: true)
-    }
-    
-    func didRequestTag() {
-        let request = NSMutableDictionary.init(dictionary: ["CMD_CODE":"getListTag",
-                                                            "header":["session":Information.token == nil ? "" : Information.token!],
-                                                           "session":Information.token ?? "",
-                                                           "overrideAlert":"1",
-                                                           "overrideLoading":"1",
-                                                           "host":self])
-       LTRequest.sharedInstance()?.didRequestInfo((request as! [AnyHashable : Any]), withCache: { (cacheString) in
-       }, andCompletion: { (response, errorCode, error, isValid, object) in
-           self.refreshControl.endRefreshing()
-           let result = response?.dictionize() ?? [:]
-           
-           if result.getValueFromKey("error_code") != "0" || result["result"] is NSNull {
-               self.showToast(response?.dictionize().getValueFromKey("error_msg") == "" ? "Lỗi xảy ra, mời bạn thử lại" : response?.dictionize().getValueFromKey("error_msg"), andPos: 0)
-               return
-           }
-        
-           self.dataList.removeAllObjects()
-
-           let data = (result["result"] as! NSArray)
-
-           self.dataList.addObjects(from: data.withMutable())
-           
-           self.collectionView.reloadData()
-       })
     }
     
     func didRequestData(isShow: Bool) {
@@ -214,33 +203,16 @@ class Search_ViewController: UIViewController, UICollectionViewDataSource, UICol
         self.navigationController?.popViewController(animated: true)
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-    
-    func configureCell(cell: Tag_Cell, forIndexPath indexPath: NSIndexPath) {
-        if indexPath.section == 0 {
-            let tag = dataList[indexPath.item] as! NSDictionary
-            cell.tagName.text = (tag["name"] as! String)
-        } else {
-            cell.tagName.text = (historyList[indexPath.item] as! String)
-        }
-    }
-    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return collectionView != self.collectionView ? 1 : 2
+        return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return collectionView == self.collectionView ? section == 0 ? dataList.count : historyList.count : bookList.count
+        return bookList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        if collectionView != self.collectionView {
             return CGSize(width: Int((self.screenWidth() / (IS_IPAD ? 5 : 3)) - 15), height: Int(((self.screenWidth() / (IS_IPAD ? 5 : 3)) - 15) * 1.72))
-        }
-        self.configureCell(cell: self.sizingCell!, forIndexPath: indexPath as NSIndexPath)
-        return self.sizingCell!.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -253,11 +225,8 @@ class Search_ViewController: UIViewController, UICollectionViewDataSource, UICol
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: collectionView != self.collectionView ? "TG_Map_Cell" : "Tag_Cell", for: indexPath as IndexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TG_Map_Cell", for: indexPath as IndexPath)
         
-        if collectionView == self.collectionView {
-            self.configureCell(cell: cell as! Tag_Cell, forIndexPath: indexPath as NSIndexPath)
-        } else {
             let data = bookList[indexPath.item] as! NSDictionary
 
             let title = self.withView(cell, tag: 112) as! UILabel
@@ -275,31 +244,22 @@ class Search_ViewController: UIViewController, UICollectionViewDataSource, UICol
             let player = self.withView(cell, tag: 999) as! UIImageView
             
             player.isHidden = data.getValueFromKey("book_type") != "3"
-        }
         
         return cell
     }
     
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "Book_Detail_Title", for: indexPath as IndexPath)
-        (self.withView(view, tag: 1) as! UILabel).text = sectionTitle[indexPath.section]
-        (self.withView(view, tag: 3) as! UIButton).alpha = indexPath.section == 1 ? 1 : 0
-        (self.withView(view, tag: 3) as! UIButton).action(forTouch: [:]) { (obj) in
-            self.removeHistory()
-            self.reloadHistory()
-        }
-       return view
-    }
+//    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+//        let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "Book_Detail_Title", for: indexPath as IndexPath)
+//       return view
+//    }
        
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: collectionView.frame.width, height: collectionView != self.collectionView ? 0 : 44)
-    }
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+//        return CGSize(width: collectionView.frame.width, height: 44)
+//    }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if collectionView != self.collectionView {
+//        if collectionView != self.collectionView {
             let data = bookList[indexPath.item] as! NSDictionary
-            self.addHistory(data.getValueFromKey("name"))
-            self.reloadHistory()
             if data.getValueFromKey("book_type") == "3" {
                 self.didRequestUrl(info: (data ))
                 return
@@ -309,38 +269,43 @@ class Search_ViewController: UIViewController, UICollectionViewDataSource, UICol
              bookInfo.addEntries(from: data as! [AnyHashable : Any])
              bookDetail.config = bookInfo
              self.navigationController?.pushViewController(bookDetail, animated: true)
-        } else {
-            if indexPath.section == 0 {
-                let data = dataList[indexPath.item] as! NSDictionary
-                let listBook = List_Book_ViewController.init()
-                let bookInfo = NSMutableDictionary.init(dictionary: ["url": ["CMD_CODE":"getListBook", "book_type": 0, "price": 0, "sorting": 1, "tag_id": data.getValueFromKey("id") as Any], "title": data.getValueFromKey("name") as Any])
-                listBook.config = bookInfo
-                self.navigationController?.pushViewController(listBook, animated: true)
-            } else {
-                searchField.text = (historyList[indexPath.item] as! String)
-                didReload(refreshControl)
-                collectionBook.alpha = 1
-                deleteButton.alpha = 1
-                UIView.animate(withDuration: 0.3) {
-                    self.deleteWidth.constant = 44
-                    self.topView.layoutIfNeeded()
-                }
-            }
-        }
+//        } else {
+//            if indexPath.section == 0 {
+//                let data = dataList[indexPath.item] as! NSDictionary
+//                let listBook = List_Book_ViewController.init()
+//                let bookInfo = NSMutableDictionary.init(dictionary: ["url": ["CMD_CODE":"getListBook", "book_type": 0, "price": 0, "sorting": 1, "tag_id": data.getValueFromKey("id") as Any], "title": data.getValueFromKey("name") as Any])
+//                listBook.config = bookInfo
+//                self.navigationController?.pushViewController(listBook, animated: true)
+//            } else {
+//                searchField.text = (historyList[indexPath.item] as! String)
+//                didReload(refreshControl)
+//                collectionBook.alpha = 1
+//                deleteButton.alpha = 1
+//                UIView.animate(withDuration: 0.3) {
+//                    self.deleteWidth.constant = 44
+//                    self.topView.layoutIfNeeded()
+//                }
+//            }
+//        }
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if collectionView == self.collectionView {
+//        if collectionView == self.collectionView {
             if self.pageIndex == 1 {
                return
             }
 
-            if indexPath.item == dataList.count - 1 {
+            if indexPath.item == bookList.count - 1 {
                if self.pageIndex <= self.totalPage {
                    self.isLoadMore = true
                    self.didRequestData(isShow: false)
                }
             }
-        }
+//        }
     }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+    
 }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class First_Tab_ViewController: UIViewController {
+class First_Tab_ViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet var tableView: OwnTableView!
     
@@ -26,6 +26,9 @@ class First_Tab_ViewController: UIViewController {
     
     @IBOutlet var bg_top: UIImageView!
 
+    @IBOutlet var searchBtn: UIImageView!
+
+    @IBOutlet var searchView: UITextField!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -134,6 +137,29 @@ class First_Tab_ViewController: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
             self.didReload()
         })
+        
+        searchBtn.imageColor(color: .lightGray)
+        
+        searchBtn.action(forTouch: [:]) { (objc) in
+            self.didPressSearch()
+        }
+        
+        searchView.addTarget(self, action: #selector(textIsChanging), for: .editingChanged)
+    }
+    
+    @objc func textIsChanging(_ textField:UITextField) {
+        Information.searchValue = textField.text
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        searchView.resignFirstResponder()
+       return true
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        searchView.text = Information.searchValue ?? ""
     }
     
     @objc func didReload() {
@@ -151,10 +177,9 @@ class First_Tab_ViewController: UIViewController {
     }
     
     @IBAction func didPressSearch() {
-        
-//        let search = Search_ViewController.init()
-//        search.config = [:]
-        self.center()?.pushViewController(VIP_ViewController.init(), animated: true)
+        let search = Search_ViewController.init()
+        search.config = ["search": searchView.text ?? ""]
+        self.center()?.pushViewController(search, animated: true)
         
 //        EM_MenuView.init(confirm: ["image": "success", "line1": "Cập nhật không thành công", "line2": "Xin lỗi quý khách vì sự cố này \nVui lòng thử lại sau", "line3": "Về trang cá nhân"]).show { (index, obj, menu) in
 //            if index == 4 {
