@@ -95,7 +95,7 @@
                         <constraint firstItem="QQn-G4-hll" firstAttribute="leading" secondItem="y4c-3n-YtP" secondAttribute="trailing" constant="8" symbolic="YES" id="ud4-vf-sT3"/>
                     </constraints>
                 </view>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Ynp-MN-O5t">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Ynp-MN-O5t">
                     <rect key="frame" x="0.0" y="114" width="320" height="454"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="sDq-n8-Z9i"/>

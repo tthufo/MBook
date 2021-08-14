@@ -16,6 +16,8 @@ class PC_Inner_Info_ViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet var cell: UITableViewCell!
     
+    @IBOutlet var userId: UITextField!
+
     @IBOutlet var phone: UITextField!
     
     @IBOutlet var name: UITextField!
@@ -76,6 +78,8 @@ class PC_Inner_Info_ViewController: UIViewController, UITextFieldDelegate {
             self.view.endEditing(true)
         }
                            
+        userId.text = "userID" + (Information.userInfo?.getValueFromKey("user_id"))!
+
         phone.text = Information.userInfo?.getValueFromKey("phone")
 
         name.text = Information.userInfo?.getValueFromKey("name")

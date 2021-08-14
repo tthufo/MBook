@@ -8,7 +8,7 @@
 
 import UIKit
 
-class User_Infor_ViewController: UIViewController {
+class User_Infor_ViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet var tableView: UITableView!
     
@@ -95,9 +95,15 @@ class User_Infor_ViewController: UIViewController {
         searchBtn.imageColor(color: .lightGray)
         
         searchBtn.action(forTouch: [:]) { (objc) in
-            
+            self.didPressSearch()
         }
         searchView.addTarget(self, action: #selector(textIsChanging), for: .editingChanged)
+    }
+    
+    func didPressSearch() {
+        let search = Search_ViewController.init()
+        search.config = ["search": searchView.text ?? ""]
+        self.center()?.pushViewController(search, animated: true)
     }
     
     @objc func textIsChanging(_ textField:UITextField) {
@@ -113,6 +119,12 @@ class User_Infor_ViewController: UIViewController {
         super.viewWillAppear(animated)
         
         searchView.text = Information.searchValue ?? ""
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        self.view.endEditing(true)
     }
     
     func didPressLogOut() {
@@ -133,6 +145,7 @@ class User_Infor_ViewController: UIViewController {
     }
     
     @IBAction func didPressMenu() {
+        self.view.endEditing(true)
         self.root()?.toggleLeftPanel(nil)
     }
     

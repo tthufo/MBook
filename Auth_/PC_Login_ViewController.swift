@@ -445,12 +445,10 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
                 print("LOGIN_LOGGED")
             } else if social_logged == nil {
                 if phoneNumber is UIButton {
-//                    isValid = self.checkPhone()
-//                    if !isValid {
-//                        validPhone()
-//                        return
-//                    }
-//                    print(convertPhone())
+                    if !uName.hasText || !pass.hasText {
+                        self.showToast("Bạn chưa nhập đủ thông tin", andPos: 0)
+                        return
+                    }
                     requestLogin(request: ["username":self.stringIsNumber(uName.text!) ? convertPhone() : uName.text!,
                                             "password":pass.text as Any,
                                             "login_type":"WIFI"])

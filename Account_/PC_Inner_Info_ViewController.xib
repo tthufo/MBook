@@ -22,6 +22,7 @@
                 <outlet property="sideGapRight" destination="aHU-uk-H4I" id="LJ3-Rq-PYs"/>
                 <outlet property="submit" destination="07x-R2-Zyy" id="X37-5Z-35N"/>
                 <outlet property="tableView" destination="EcH-8A-Ufc" id="57Z-bu-a0C"/>
+                <outlet property="userId" destination="vhC-T0-lBC" id="Gvb-AV-geT"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -799,10 +800,10 @@
         <image name="ic_name" width="23.5" height="23.5"/>
         <image name="ic_sex" width="23.5" height="23.5"/>
         <image name="ico_arrow_l_white" width="33" height="33"/>
-        <image name="ico_email" width="33" height="33"/>
-        <image name="ico_phone" width="33" height="33"/>
-        <image name="ico_smile" width="33" height="33"/>
-        <image name="ico_user" width="33" height="33"/>
+        <image name="ico_email" width="31.5" height="31.5"/>
+        <image name="ico_phone" width="31.5" height="31.5"/>
+        <image name="ico_smile" width="31.5" height="31.5"/>
+        <image name="ico_user" width="31.5" height="31.5"/>
         <image name="mail_y" width="33" height="33"/>
         <image name="phone_g" width="33" height="33"/>
         <image name="radio_ac" width="38.5" height="36.5"/>

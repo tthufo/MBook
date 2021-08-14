@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Author_ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UIGestureRecognizerDelegate {
+class Author_ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UIGestureRecognizerDelegate, UITextFieldDelegate {
     
     let refreshControl = UIRefreshControl()
     
@@ -21,6 +21,8 @@ class Author_ViewController: UIViewController, UICollectionViewDataSource, UICol
     var isLoadMore: Bool = false
     
     var isOn: Bool = true
+    
+    var isSearch: Bool = false
 
     var keyword: NSString!
 
@@ -29,8 +31,16 @@ class Author_ViewController: UIViewController, UICollectionViewDataSource, UICol
     @IBOutlet var collectionFilter: UICollectionView!
 
     @IBOutlet var arrow: UIImageView!
+    
+    @IBOutlet var searchBg: UIView!
+    
+    @IBOutlet var searchView: UITextField!
+    
+    @IBOutlet var searchBtn: UIImageView!
 
     @IBOutlet var filterButton: UIButton!
+
+    @IBOutlet var searchButton: UIButton!
 
     var dataList: NSMutableArray!
     
@@ -52,6 +62,57 @@ class Author_ViewController: UIViewController, UICollectionViewDataSource, UICol
         didRequestData(isShow: true)
         
         keyword = "TẤT CẢ"
+        
+        searchBtn.imageColor(color: .lightGray)
+        
+        searchView.addTarget(self, action: #selector(textIsChanging), for: .editingChanged)
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        searchView.resignFirstResponder()
+       return true
+    }
+    
+    @objc func textIsChanging(_ textField:UITextField) {
+        let hasText = textField.text?.replacingOccurrences(of: " ", with: "") == ""
+        if !hasText {
+            NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(self.reloading), object: nil)
+            self.perform(#selector(self.reloading), with: nil, afterDelay: 0.8)
+        }
+    }
+    
+    @objc func reloading() {
+        self.didReload(refreshControl)
+    }
+    
+    func searchVisible(show: Bool) {
+        searchBg.isHidden = show
+        searchView.isHidden = show
+    }
+    
+    @IBAction func didPressSearch(sender: UIButton) {
+        self.searchVisible(show: isSearch)
+        searchButton.setImage(UIImage(named: !isSearch ? "icon_close" : "ic_search"), for: .normal)
+        if isSearch {
+            searchView.text = ""
+            keyword = "TẤT CẢ"
+            filterButton.setTitle("TẤT CẢ", for: .normal)
+            filterButton.isEnabled = true
+            arrow.isHidden = false
+            self.didReload(refreshControl)
+            searchView.resignFirstResponder()
+        } else {
+            if !isOn {
+                filter()
+            }
+            filterButton.setTitle("KẾT QUẢ PHÙ HỢP NHẤT", for: .normal)
+            filterButton.isEnabled = false
+            arrow.isHidden = true
+            keyword = "TẤT CẢ"
+            self.didReload(refreshControl)
+            searchView.becomeFirstResponder()
+        }
+        isSearch = !isSearch
     }
     
     func filter() {
@@ -78,11 +139,11 @@ class Author_ViewController: UIViewController, UICollectionViewDataSource, UICol
     func didRequestData(isShow: Bool) {
         let request = NSMutableDictionary.init(dictionary: [
                                                             "CMD_CODE": "getListAuthor",
-                                                            "keyword": keyword == "TẤT CẢ" ? NSNull.init() : keyword ?? "",
+                                                            "keyword": isSearch ? searchView.text ?? "" : (keyword == "TẤT CẢ" ? NSNull.init() : keyword ?? ""),
                                                             "header":["session":Information.token == nil ? "" : Information.token!],
-                                                            "session":Information.token ?? "" as Any,
+                                                            "session":Information.token ?? "",
                                                             "page_index": self.pageIndex,
-                                                            "page_size": 10,
+                                                            "page_size": 12,
                                                             "overrideAlert":"1",
                                                             "overrideLoading":isShow ? 1 : 0,
                                                             "host":self])
@@ -95,7 +156,8 @@ class Author_ViewController: UIViewController, UICollectionViewDataSource, UICol
                 self.showToast(response?.dictionize().getValueFromKey("error_msg") == "" ? "Lỗi xảy ra, mời bạn thử lại" : response?.dictionize().getValueFromKey("error_msg"), andPos: 0)
                 return
             }
-                        
+            
+
             self.totalPage = (result["result"] as! NSDictionary)["total_page"] as! Int
             
             self.pageIndex += 1

@@ -58,11 +58,7 @@ import UIKit
            let data = (result["result"] as! NSArray).withMutable()
         
            for dat in data! {
-            if self.initValue != nil && self.initValue == (dat as! NSMutableDictionary).getValueFromKey("name") {
-                    (dat as! NSMutableDictionary)["check"] = "1"
-
-                }
-                (dat as! NSMutableDictionary)["check"] = "0"
+              (dat as! NSMutableDictionary)["check"] = "0"
            }
         
            self.dataList.addObjects(from: data!)

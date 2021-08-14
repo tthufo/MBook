@@ -70,8 +70,8 @@ class PC_Forgot_ViewController: UIViewController , UITextFieldDelegate {
         
         submit.setTitle(typing == "register" ? "Đăng ký" : "Lấy mật khẩu", for: .normal)
         
-        reminder.boldSubstring("Meebook")
-        reminder.colorSubstring("Meebook", color: AVHexColor.color(withHexString: "#1e928c"))
+        reminder.boldSubstring("Mebook")
+        reminder.colorSubstring("Mebook", color: AVHexColor.color(withHexString: "#1e928c"))
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -157,12 +157,7 @@ class PC_Forgot_ViewController: UIViewController , UITextFieldDelegate {
         
         return true
     }
-    
-//    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-//        let updatedString = (textField.text as NSString?)?.replacingCharacters(in: range, with: string)
-//        count.text = "%i/10".format(parameters: updatedString!.count > 10 ? 10 : updatedString!.count)
-//        return updatedString!.count >= 11 ? false : true
-//    }
+
     
     @IBAction func didPressBack() {
         self.view.endEditing(true)
@@ -171,6 +166,9 @@ class PC_Forgot_ViewController: UIViewController , UITextFieldDelegate {
     
     func convertPhone() -> String {
        let phone = uName.text
+        if phone!.count < 2 {
+            return phone!
+        }
        if phone?.substring(to: 2) == "84" {
            return phone!
        } else if phone?.substring(to: 1) == "0"  {
@@ -179,15 +177,27 @@ class PC_Forgot_ViewController: UIViewController , UITextFieldDelegate {
        return phone!
     }
     
+    func stringIsNumber(_ string:String) -> Bool {
+        var allNumber: Bool = true
+        for character in string{
+            if !character.isNumber{
+                allNumber = false
+                return allNumber
+            }
+        }
+        return allNumber
+    }
+    
     @IBAction func didPressSubmit() {
         self.view.endEditing(true)
-//        isValid = self.checkPhone()
-//        if !isValid {
-//            validPhone()
-//            return
-//        }
+        
+        if !uName.hasText {
+            self.showToast("Bạn chưa nhập thông tin", andPos: 0)
+            return
+        }
+
         LTRequest.sharedInstance()?.didRequestInfo(["CMD_CODE":"forgetPassword",
-                                                    "username":convertPhone(),
+                                                    "username":self.stringIsNumber(uName.text!) ? convertPhone() : uName.text!,
                                                     "overrideAlert":"1",
                                                     "overrideLoading":"1",
                                                     "host":self], withCache: { (cacheString) in

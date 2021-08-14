@@ -48,6 +48,13 @@
     [self didEmbed];
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+        
+    [self.view endEditing:YES];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -126,7 +133,7 @@
     [searchBtn imageColorWithColor:[UIColor lightGrayColor]];
     
     [searchBtn actionForTouch:@{} and:^(NSDictionary *touchInfo) {
-        
+        [self didPressSearch];
     }];
     
     [searchView addTarget:self action:@selector(textIsChanging:) forControlEvents:UIControlEventValueChanged];
@@ -212,11 +219,14 @@
 }
 
 - (IBAction)didPressMenu:(id)sender {
+    [self.view endEditing:YES];
     [[self ROOT] toggleLeftPanel:sender];
 }
 
-- (IBAction)didPressSearch:(id)sender {
-    [[self CENTER] pushViewController:[Search_ViewController new] animated:YES];
+- (void)didPressSearch {
+    Search_ViewController * search = [Search_ViewController new];
+    search.config = @{@"search": searchView.text};
+    [[self CENTER] pushViewController:search animated:YES];
 }
 
 #pragma TableView

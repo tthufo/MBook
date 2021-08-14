@@ -95,8 +95,8 @@ class PC_Register_ViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        topLine.boldSubstring("Meebook")
-        topLine.colorSubstring("Meebook", color: AVHexColor.color(withHexString: "#1e928c"))
+        topLine.boldSubstring("Mebook")
+        topLine.colorSubstring("Mebook", color: AVHexColor.color(withHexString: "#1e928c"))
         
         kb = KeyBoard.shareInstance()
 
@@ -168,16 +168,6 @@ class PC_Register_ViewController: UIViewController, UITextFieldDelegate {
         submitConfirmBtn.alpha = 1
     }
     
-    
-//    "CMD_CODE": "auth/",
-//    "Department": "",
-//    "Email": "tthufo@gmail.com",
-//    "FullName": "",
-//    "Password": "123456",
-//    "PhoneNumber": "",
-//    "ReRegisterPassword": "123456",
-//    "UserName": "tthufo"
-    
     @IBAction func didPressSubmit() {
         self.view.endEditing(true)
         isValid = self.checkPhone()
@@ -198,6 +188,7 @@ class PC_Register_ViewController: UIViewController, UITextFieldDelegate {
         
         if !agreed {
             self.showToast("Hãy đồng ý với các điều khoản sử dụng", andPos: 0)
+            return
         }
         
         self.didPressSignup()
@@ -281,13 +272,14 @@ class PC_Register_ViewController: UIViewController, UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-           if textField == uName {
-               email.becomeFirstResponder()
-           } else if textField == email {
-               phone.becomeFirstResponder()
-           } else if textField == phone {
-               self.view.endEditing(true)
-           }
+//           if textField == uName {
+//               email.becomeFirstResponder()
+//           } else if textField == email {
+//               phone.becomeFirstResponder()
+//           } else if textField == phone {
+//               self.view.endEditing(true)
+//           }
+           self.view.endEditing(true)
            return true
        }
     

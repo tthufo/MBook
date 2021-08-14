@@ -162,6 +162,12 @@ class First_Tab_ViewController: UIViewController, UITextFieldDelegate {
         searchView.text = Information.searchValue ?? ""
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        self.view.endEditing(true)
+    }
+    
     @objc func didReload() {
         for dict in self.config {
             (dict as! NSMutableDictionary)["loaded"] = false
@@ -173,10 +179,11 @@ class First_Tab_ViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func didPressMenu() {
+        self.view.endEditing(true)
         self.root()?.toggleLeftPanel(nil)
     }
     
-    @IBAction func didPressSearch() {
+    func didPressSearch() {
         let search = Search_ViewController.init()
         search.config = ["search": searchView.text ?? ""]
         self.center()?.pushViewController(search, animated: true)
