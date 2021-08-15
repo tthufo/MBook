@@ -183,6 +183,17 @@ class First_Tab_ViewController: UIViewController, UITextFieldDelegate {
         self.root()?.toggleLeftPanel(nil)
     }
     
+    @IBAction func didPressBuy() {
+        let vip = VIP_ViewController.init()
+        vip.callBack = { info in
+            print(info)
+        }
+        let nav = UINavigationController.init(rootViewController: vip)
+        nav.isNavigationBarHidden = true
+        nav.modalPresentationStyle = .fullScreen
+        self.center().present(nav, animated: true, completion: nil)
+    }
+    
     func didPressSearch() {
         let search = Search_ViewController.init()
         search.config = ["search": searchView.text ?? ""]

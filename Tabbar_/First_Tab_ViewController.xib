@@ -90,6 +90,9 @@
                                 <constraint firstAttribute="height" constant="44" id="uxI-kW-ltn"/>
                             </constraints>
                             <state key="normal" image="ico_vip"/>
+                            <connections>
+                                <action selector="didPressBuy" destination="-1" eventType="touchUpInside" id="JrZ-lc-OxL"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" red="0.11764705882352941" green="0.5725490196078431" blue="0.5490196078431373" alpha="1" colorSpace="calibratedRGB"/>

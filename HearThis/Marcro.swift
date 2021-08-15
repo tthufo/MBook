@@ -199,7 +199,7 @@ extension UIImageView {
                if ((image != nil) && cacheType == .none)
                {
                    UIView.transition(with: self, duration: 0.3, options: .transitionCrossDissolve, animations: {
-                       self.image = image
+                        self.image = image
                    }, completion: nil)
                }
            }
@@ -406,6 +406,29 @@ extension UITextField {
 }
 
 extension UIViewController {
+    
+    @objc func preCachePayment() {
+        LTRequest.sharedInstance()?.didRequestInfo(["CMD_CODE":"getPaymentChannel",
+                                                    "header":["session":Information.token == nil ? "" : Information.token!],
+                                                    "page_index": NSNull(),
+                                                    "page_size": NSNull(),
+                                                    "session": NSNull(),
+                                                    "overrideAlert":"1",
+                                                    "overrideLoading":"1",
+                                                    "host":self], withCache: { (cacheString) in
+       }, andCompletion: { (response, errorCode, error, isValid, object) in
+           let result = response?.dictionize() ?? [:]
+        
+           if result.getValueFromKey("error_code") != "0" || result["result"] is NSNull {
+               return
+           }
+                        
+            let data = result["result"] as! NSArray
+            for dat in data {
+                UIImageView.init().imageUrlHolder(url: (dat as! NSDictionary).getValueFromKey("avatar_url"), holder: "icon_payment")
+            }
+       })
+    }
     
     var isModal: Bool {
         

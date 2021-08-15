@@ -38,6 +38,8 @@
     
     [self initTabBar];
     
+    [self preCachePayment];
+    
 //    UIScreenEdgePanGestureRecognizer *pan = [[UIScreenEdgePanGestureRecognizer alloc] initWithTarget:self
 //                                                                                              action:@selector(handlePan:)];
 //    [pan setEdges:UIRectEdgeLeft];

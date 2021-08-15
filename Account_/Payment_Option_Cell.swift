@@ -21,14 +21,14 @@ class Payment_Option_Cell: UITableViewCell, UICollectionViewDelegate, UICollecti
     var dataList: NSMutableArray!
 
     var bankList: NSMutableArray!
-    
+        
     var bankInfo: NSDictionary!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         dataList = NSMutableArray.init()
         bankList = NSMutableArray.init()
-        
+
         self.collectionView.withCell("Payment_Cell")
         self.tableView.withCell("Bank_Cell")
         self.didRequestPaymentChannel()
@@ -63,11 +63,11 @@ class Payment_Option_Cell: UITableViewCell, UICollectionViewDelegate, UICollecti
         
             for n in 0...data.count - 1 {
                 (data[n] as! NSMutableDictionary)["check"] = n == 0 ? "1" : "0"
-                for detail in (data[n] as! NSDictionary)["details"] as! NSArray {
-                    (detail as! NSMutableDictionary)["check"] = "0"
-                }
+//                for detail in (data[n] as! NSDictionary)["details"] as! NSArray {
+//                    (detail as! NSMutableDictionary)["check"] = "0"
+//                }
             }
-         
+                
             self.dataList.addObjects(from: data as! [Any])
                   
             self.callBack?(self.dataList[0])
@@ -103,11 +103,11 @@ class Payment_Option_Cell: UITableViewCell, UICollectionViewDelegate, UICollecti
         let data = dataList[indexPath.item] as! NSDictionary
 
         let image = self.withView(cell, tag: 1) as! UIImageView
-
+         
         image.imageUrlHolder(url: data.getValueFromKey("avatar_url"), holder: "icon_payment")
         
         let image_temp = image.image
-        
+
         if data.getValueFromKey("check") == "0" {
             image.image = image_temp?.noir
         } else {

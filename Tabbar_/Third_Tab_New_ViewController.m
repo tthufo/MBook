@@ -25,6 +25,8 @@
     NSMutableArray * dataList;
     
     NSMutableDictionary * config;
+    
+    NSDictionary * userTag;
         
     int pageIndex;
     
@@ -59,6 +61,10 @@
 {
     [super viewDidLoad];
     
+    userTag = @{@"book_type": @(0),
+               @"cmd_code":@"getListBookPurchaseByUser",
+                @"price": @(1)};
+    
     tempHeight = 0;
     
     pageIndex = 1;
@@ -88,19 +94,8 @@
         if ([[infor getValueFromKey:@"action"] isEqualToString:@"custom"]) {
             ((HT_Root_ViewController*)[weakSelf TABBAR]).selectedIndex = 1;
         } else {
-            List_Book_ViewController * listBook = [List_Book_ViewController new];
-            NSMutableDictionary * bookInfo = [[NSMutableDictionary alloc] initWithDictionary:@{
-                @"url": @{
-                        @"CMD_CODE":@"getListBook",
-                        @"book_type":@(0),
-                        @"price": @(0),
-                        @"sorting": @(1),
-                        @"tag_id": [infor getValueFromKey:@"id"]
-                },
-                @"title": [infor getValueFromKey:@"name"]
-            }];
-            listBook.config = bookInfo;
-            [weakSelf.CENTER pushViewController:listBook animated:YES];
+            userTag = infor;
+            [weakSelf didReloadData];
         }
     };
     
@@ -146,16 +141,18 @@
 
 - (void)didRequestData:(BOOL)isShow
 {
-    [[LTRequest sharedInstance] didRequestInfo:@{@"CMD_CODE":@"getListBookPurchaseByUser",
-                                                 @"header":@{@"session":Information.token == nil ? @"" : Information.token},
-                                                 @"page_index": @(pageIndex),
-                                                 @"page_size": @(12),
-                                                 @"price": @(1),
-                                                 @"book_type": @(0),
-                                                 @"overrideError":@"1",
-                                                 @"overrideLoading":@"1",
-                                                 @"host":self
-    } withCache:^(NSString *cacheString) {
+    NSMutableDictionary * requestInfo = [[NSMutableDictionary alloc] initWithDictionary:@{
+        @"header":@{@"session":Information.token == nil ? @"" : Information.token},
+        @"page_index": @(pageIndex),
+        @"page_size": @(12),
+        @"overrideError":@"1",
+        @"overrideLoading":@"1",
+        @"host":self
+    }];
+    
+    [requestInfo addEntriesFromDictionary:userTag];
+    
+    [[LTRequest sharedInstance] didRequestInfo:requestInfo withCache:^(NSString *cacheString) {
     } andCompletion:^(NSString *responseString, NSString* errorCode, NSError *error, BOOL isValidated, NSDictionary * object) {
         
         [refreshControl endRefreshing];
@@ -198,6 +195,17 @@
     [[self ROOT] toggleLeftPanel:sender];
 }
 
+- (IBAction)didPressBuy:(id)sender {
+    VIP_ViewController * vip = [VIP_ViewController new];
+    vip.callBack = ^(NSDictionary *infor) {
+        NSLog(@"%@", infor);
+    };
+    UINavigationController * nav = [[UINavigationController alloc] initWithRootViewController:vip];
+    nav.navigationBarHidden = YES;
+    nav.modalPresentationStyle = UIModalPresentationFullScreen;
+    [[self CENTER] presentViewController:nav animated:YES completion:nil];
+}
+
 - (void)didPressSearch {
     Search_ViewController * search = [Search_ViewController new];
     search.config = @{@"search": searchView.text};
@@ -221,7 +229,6 @@
 {
     UITableViewCell * cell = [_tableView dequeueReusableCellWithIdentifier: @"Book_List_Cell" forIndexPath:indexPath];
     
-        
 //    cell.contentView.backgroundColor = [AVHexColor colorWithHexString:@"#ECEDE7"];
     
     NSDictionary * list = dataList[indexPath.row];
@@ -232,15 +239,19 @@
 
     [(UILabel*)[self withView:cell tag:3] setText: ((NSArray*)list[@"author"]).count > 1 ? @"Nhiều tác giả" : list[@"author"][0][@"name"]];
 
-    [(UILabel*)[self withView:cell tag:4] setText: ((NSArray*)list[@"category"]).count > 1 ? @"Đang cập nhật" : list[@"category"][0][@"name"]];
+    [(UILabel*)[self withView:cell tag:4] setText: [list responseForKey:@"category"] ? ((NSArray*)list[@"category"]).count > 1 ? @"Đang cập nhật" : list[@"category"][0][@"name"] : @"Đang cập nhật"];
 
-    [(UILabel*)[self withView:cell tag:5] setText: [NSString stringWithFormat:@"%@ chương", [list getValueFromKey:@"total_chapter"]]];
+    ((UILabel*)[self withView:cell tag:5]).hidden = YES;
+    
+//    [(UILabel*)[self withView:cell tag:5] setText: [NSString stringWithFormat:@"%@ chương", [list getValueFromKey:@"total_chapter"]]];
 
 //        [(UILabel*)[self withView:cell tag:6] setText: [list[@"newest_chapter"] isEqual:[NSNull null]] ? @"Đang cập nhật" : list[@"newest_chapter"][@"name"]];
     
     [(UILabel*)[self withView:cell tag:11] setText: [NSString stringWithFormat:@"%li", indexPath.row + 1]];
     
     Progress * progress = ((Progress*)[self withView:cell tag:12]);
+    
+    progress.hidden = NO;
     
     progress.percentage.text = indexPath.row % 2 == 0 ? @"16 %" : @"30 %";
     

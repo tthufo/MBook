@@ -223,6 +223,17 @@
     [[self ROOT] toggleLeftPanel:sender];
 }
 
+- (IBAction)didPressBuy:(id)sender {
+    VIP_ViewController * vip = [VIP_ViewController new];
+    vip.callBack = ^(NSDictionary *infor) {
+        NSLog(@"%@", infor);
+    };
+    UINavigationController * nav = [[UINavigationController alloc] initWithRootViewController:vip];
+    nav.navigationBarHidden = YES;
+    nav.modalPresentationStyle = UIModalPresentationFullScreen;
+    [[self CENTER] presentViewController:nav animated:YES completion:nil];
+}
+
 - (void)didPressSearch {
     Search_ViewController * search = [Search_ViewController new];
     search.config = @{@"search": searchView.text};

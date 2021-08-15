@@ -20,6 +20,27 @@ import UIKit
         
     var dataList: NSMutableArray!
     
+    var defaultList = NSMutableArray.init(array: [ NSMutableDictionary.init(dictionary: ["check":"1", "name":"Tất cả",
+                                                                                         "book_type": 0,
+                                                                                         "cmd_code": "getListBookPurchaseByUser",
+                                                                                         "price": 1]),
+                                                   NSMutableDictionary.init(dictionary: ["check":"0", "name":"EBook",
+                                                                                         "book_type": 1,
+                                                                                         "cmd_code": "getListBookPurchaseByUser",
+                                                                                         "price": 1]),
+                                                   NSMutableDictionary.init(dictionary: ["check":"0", "name":"Truyện",
+                                                                                         "book_type": 2,
+                                                                                         "cmd_code": "getListBookPurchaseByUser",
+                                                                                         "price": 1]),
+                                                   NSMutableDictionary.init(dictionary: ["check":"0", "name":"Sách nói",
+                                                                                         "book_type": 3,
+                                                                                         "cmd_code": "getListBookPurchaseByUser",
+                                                                                         "price": 1]),
+                                                   NSMutableDictionary.init(dictionary: ["check":"0", "name":"Sách miễn phí",
+                                                                                         "book_type": 0,
+                                                                                         "cmd_code": "getListReadOfUser",
+                                                                                         "price": 1])])
+    
     @objc var callBack: ((_ info: Any)->())?
     
     @objc var loadDone: ((_ info: Any)->())?
@@ -95,7 +116,7 @@ import UIKit
         if self.typing != "normal" {
             if indexPath.item != 0 {
                 let label = UILabel(frame: CGRect.zero)
-                label.text = (dataList[indexPath.item - 1] as! NSDictionary).getValueFromKey("name")
+                label.text = self.typing == "add" ? (defaultList[indexPath.item - 1] as! NSDictionary).getValueFromKey("name") : (dataList[indexPath.item - 1] as! NSDictionary).getValueFromKey("name")
                 label.sizeToFit()
                 return CGSize(width: label.frame.width + 20, height: self.bounds.size.height)
             }
@@ -109,7 +130,7 @@ import UIKit
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dataList == nil ? 0 : dataList.count +  (self.typing == "normal" ? 0 : 1)
+        return dataList == nil ? 0 : (self.typing == "add" ? defaultList.count : dataList.count) + (self.typing == "normal" ? 0 : 1)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -126,17 +147,26 @@ import UIKit
         
         if self.typing != "normal" {
             if indexPath.item != 0 {
-                let data = dataList[indexPath.item - 1] as! NSDictionary
+                let data = self.typing == "add" ? defaultList[indexPath.item - 1] as! NSDictionary : dataList[indexPath.item - 1] as! NSDictionary
 
                 let title = self.withView(cell, tag: 9) as! UILabel
 
                 title.text = data.getValueFromKey("name")
                 
+                if self.typing == "add" {
+                    let check = (data["check"] as! String) == "1"
+
+                    title.withBorder(["Bhex": check ? "#C2DEDC" : "#7DBAB6",
+                                      "Bground": check ? "#C2DEDC" : "#FFFFFF",
+                                      "Bcorner": 16, "Bwidth": "1"])
+
+                    title.textColor = AVHexColor.color(withHexString: check ? "#1D5266" : "#7DBAB6")
+                }
             }
             
             return cell
         } else {
-            let data = dataList[indexPath.item - 0] as! NSDictionary
+            let data = dataList[indexPath.item] as! NSDictionary
 
             let title = self.withView(cell, tag: 9) as! UILabel
 
@@ -160,7 +190,19 @@ import UIKit
             if indexPath.item == 0 {
                 callBack?(["action": "custom"])
             } else {
-                callBack?(dataList[indexPath.item - 1])
+                if self.typing == "add" {
+                    for i in 0 ..< defaultList.count {
+                        (defaultList[i] as! NSMutableDictionary)["check"] = "0"
+                    }
+
+                    (defaultList[indexPath.item - 1] as! NSMutableDictionary)["check"] = "1"
+
+                    collectionView.reloadData()
+                    
+                    callBack?(defaultList[indexPath.item - 1])
+                } else {
+                    callBack?(dataList[indexPath.item - 1])
+                }
             }
         } else {
             for i in 0 ..< dataList.count {
@@ -173,21 +215,6 @@ import UIKit
             
             callBack?(dataList[indexPath.item - 0])
         }
-        
-//        if indexPath.item != 0 {
-//            for i in 0 ..< dataList.count {
-//                (dataList[i] as! NSMutableDictionary)["check"] = "0"
-//            }
-//
-//            (dataList[indexPath.item - 1] as! NSMutableDictionary)["check"] = "1"
-//
-////            callBack?(dataList[indexPath.item - 0])
-//
-//            collectionView.reloadData()
-//        }
-//        else {
-////            callBack?(["data": "Mua VIP"])
-//        }
     }
 }
 
