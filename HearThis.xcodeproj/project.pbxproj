@@ -132,6 +132,8 @@
 		FCAD57F1243DB7E400101A47 /* TG_Room_Cell_0.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCAD57ED243DB7E300101A47 /* TG_Room_Cell_0.xib */; };
 		FCAD57F2243DB7E400101A47 /* TG_Room_Cell_Banner_1.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCAD57EE243DB7E300101A47 /* TG_Room_Cell_Banner_1.xib */; };
 		FCAD57F3243DB7E400101A47 /* TG_Room_Cell_N.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAD57EF243DB7E400101A47 /* TG_Room_Cell_N.swift */; };
+		FCB0054A26C9132800222D26 /* Bank_List_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB0054826C9132800222D26 /* Bank_List_ViewController.swift */; };
+		FCB0054B26C9132900222D26 /* Bank_List_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCB0054926C9132800222D26 /* Bank_List_ViewController.xib */; };
 		FCB238B92441858D0034B40B /* TG_Book_Detail_Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCB238B82441858D0034B40B /* TG_Book_Detail_Cell.xib */; };
 		FCB238BB244186E10034B40B /* Book_Detail_Title.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCB238BA244186E10034B40B /* Book_Detail_Title.xib */; };
 		FCB238BD2441B6960034B40B /* TG_Book_Chap_Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCB238BC2441B6960034B40B /* TG_Book_Chap_Cell.xib */; };
@@ -361,6 +363,8 @@
 		FCAD57ED243DB7E300101A47 /* TG_Room_Cell_0.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TG_Room_Cell_0.xib; sourceTree = "<group>"; };
 		FCAD57EE243DB7E300101A47 /* TG_Room_Cell_Banner_1.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TG_Room_Cell_Banner_1.xib; sourceTree = "<group>"; };
 		FCAD57EF243DB7E400101A47 /* TG_Room_Cell_N.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TG_Room_Cell_N.swift; sourceTree = "<group>"; };
+		FCB0054826C9132800222D26 /* Bank_List_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bank_List_ViewController.swift; sourceTree = "<group>"; };
+		FCB0054926C9132800222D26 /* Bank_List_ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Bank_List_ViewController.xib; sourceTree = "<group>"; };
 		FCB238B82441858D0034B40B /* TG_Book_Detail_Cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TG_Book_Detail_Cell.xib; sourceTree = "<group>"; };
 		FCB238BA244186E10034B40B /* Book_Detail_Title.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Book_Detail_Title.xib; sourceTree = "<group>"; };
 		FCB238BC2441B6960034B40B /* TG_Book_Chap_Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TG_Book_Chap_Cell.xib; sourceTree = "<group>"; };
@@ -730,6 +734,8 @@
 				FC771C48263B1FB2005851FA /* Check_Out_ViewController.xib */,
 				FC771C4C263B3FB1005851FA /* Check_Out_Cell.xib */,
 				FC771C50263BFBAA005851FA /* Check_Out_Book_Cell.xib */,
+				FCB0054826C9132800222D26 /* Bank_List_ViewController.swift */,
+				FCB0054926C9132800222D26 /* Bank_List_ViewController.xib */,
 				FCBC346F263D986D00AC9621 /* Feed_Back_ViewController.swift */,
 				FCBC3470263D986D00AC9621 /* Feed_Back_ViewController.xib */,
 				FCBC3474263DC73400AC9621 /* Transaction_ViewController.swift */,
@@ -1030,6 +1036,7 @@
 				FC783989243922C100470148 /* PC_Sub_Cell.xib in Resources */,
 				FCB238C2244218DB0034B40B /* Author_ViewController.xib in Resources */,
 				FC7A98D12444AD010038C226 /* Tag_Cell.xib in Resources */,
+				FCB0054B26C9132900222D26 /* Bank_List_ViewController.xib in Resources */,
 				FCF8A5B6244F54AD00E815E8 /* Package_Reg_Cell.xib in Resources */,
 				FC7550E41DAC85DE007992DF /* HT_Feed_ViewController.xib in Resources */,
 				FCC965AB1DA5F4200025971E /* HT_Player_ViewController.xib in Resources */,
@@ -1235,6 +1242,7 @@
 				FC78398E2439C23700470148 /* Third_Tab_ViewController.m in Sources */,
 				FC0A8FB02437770E001A75AF /* PC_Register_ViewController.swift in Sources */,
 				FCBC3476263DC73400AC9621 /* Transaction_ViewController.swift in Sources */,
+				FCB0054A26C9132800222D26 /* Bank_List_ViewController.swift in Sources */,
 				FCD381872444D78E004D78C9 /* CustomFlowLayou.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

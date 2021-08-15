@@ -22,6 +22,8 @@ class Payment_Option_Cell: UITableViewCell, UICollectionViewDelegate, UICollecti
 
     var bankList: NSMutableArray!
     
+    var bankInfo: NSDictionary!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         dataList = NSMutableArray.init()
@@ -139,38 +141,33 @@ class Payment_Option_Cell: UITableViewCell, UICollectionViewDelegate, UICollecti
 extension Payment_Option_Cell: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
+        return 75
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return bankList.count
+        return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "Bank_Cell", for: indexPath)
 
-        let data = bankList[indexPath.row] as! NSDictionary
-        let label = self.withView(cell, tag: 2) as! UILabel
-        label.text = data.getValueFromKey("name")
-        let check = self.withView(cell, tag: 1) as! UIImageView
-        check.image = UIImage(named: data.getValueFromKey("check") == "0" ? "ico_select" : "ico_select_active")
-
+        if bankInfo != nil {
+            let label = self.withView(cell, tag: 2) as! UILabel
+            label.text = bankInfo.getValueFromKey("name")
+            
+            let check = self.withView(cell, tag: 1) as! UIImageView
+            check.imageUrlHolder(url: bankInfo.getValueFromKey("avatar_url"), holder: "icon_payment_square")
+        }
+        
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        for i in 0 ..< bankList.count {
-            (bankList[i] as! NSMutableDictionary)["check"] = "0"
-        }
+        self.chooseBank!(bankList as Any)
 
-        (bankList[indexPath.row] as! NSMutableDictionary)["check"] = "1"
-        
-        self.chooseBank!(bankList[indexPath.row])
-        
-        tableView.reloadData()
     }
 }
 

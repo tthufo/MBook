@@ -146,7 +146,7 @@ class Check_Out_ViewController: UIViewController {
 extension Check_Out_ViewController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return indexPath.row == 0 ? (self.isPackage ? UITableView.automaticDimension : 260) : indexPath.row == (self.isPackage ? 2 : 1) ? expand ? 280 : 130 : indexPath.row == (self.isPackage ? 3 : 2) ? 120 : UITableView.automaticDimension
+        return indexPath.row == 0 ? (self.isPackage ? UITableView.automaticDimension : 260) : indexPath.row == (self.isPackage ? 2 : 1) ? expand ? 195 : 130 : indexPath.row == (self.isPackage ? 3 : 2) ? 120 : UITableView.automaticDimension
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -199,9 +199,16 @@ extension Check_Out_ViewController: UITableViewDataSource, UITableViewDelegate {
                 }
                 
                 (cell as! Payment_Option_Cell).chooseBank = { bank in
-                    print(bank)
-                    self.paymentInfoBank.removeAllObjects()
-                    self.paymentInfoBank.addEntries(from: bank as! [AnyHashable : Any])
+                    let bankList = Bank_List_ViewController.init()
+                    bankList.selectBank = { selectedBank in
+                        self.paymentInfoBank.removeAllObjects()
+                        self.paymentInfoBank.addEntries(from: selectedBank as! [AnyHashable : Any])
+                        (cell as! Payment_Option_Cell).bankInfo = self.paymentInfoBank
+                        (cell as! Payment_Option_Cell).tableView.reloadData()
+                        print(bank)
+                    }
+                    bankList.bankList = bank as! NSMutableArray
+                    self.present(bankList, animated: true, completion: nil)
                 }
             }
             
@@ -234,9 +241,16 @@ extension Check_Out_ViewController: UITableViewDataSource, UITableViewDelegate {
                 }
 
                 (cell as! Payment_Option_Cell).chooseBank = { bank in
-                    self.paymentInfoBank.removeAllObjects()
-                    self.paymentInfoBank.addEntries(from: bank as! [AnyHashable : Any])
-                    print(bank)
+                    let bankList = Bank_List_ViewController.init()
+                    bankList.selectBank = { selectedBank in
+                        self.paymentInfoBank.removeAllObjects()
+                        self.paymentInfoBank.addEntries(from: selectedBank as! [AnyHashable : Any])
+                        (cell as! Payment_Option_Cell).bankInfo = self.paymentInfoBank
+                        (cell as! Payment_Option_Cell).tableView.reloadData()
+                        print(bank)
+                    }
+                    bankList.bankList = bank as! NSMutableArray
+                    self.present(bankList, animated: true, completion: nil)
                 }
             }
             
