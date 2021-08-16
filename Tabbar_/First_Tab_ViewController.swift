@@ -30,6 +30,8 @@ class First_Tab_ViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet var searchView: UITextField!
 
+    @IBOutlet var buyBtn: UIButton!
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -158,7 +160,7 @@ class First_Tab_ViewController: UIViewController, UITextFieldDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        buyBtn.isHidden = Information.isVip
         searchView.text = Information.searchValue ?? ""
     }
     
@@ -198,43 +200,6 @@ class First_Tab_ViewController: UIViewController, UITextFieldDelegate {
         let search = Search_ViewController.init()
         search.config = ["search": searchView.text ?? ""]
         self.center()?.pushViewController(search, animated: true)
-        
-//        EM_MenuView.init(confirm: ["image": "success", "line1": "Cập nhật không thành công", "line2": "Xin lỗi quý khách vì sự cố này \nVui lòng thử lại sau", "line3": "Về trang cá nhân"]).show { (index, obj, menu) in
-//            if index == 4 {
-//
-//            } else {
-//
-//            }
-//        }
-        
-//        EM_MenuView.init(confirm: ["image": "error", "line2": "Trang hiện đang gặp sự cố! \nXin quý khách vui lòng quay lại sau", "line3": "Về trang trước"]).show { (index, obj, menu) in
-//            if index == 4 {
-//
-//            } else {
-//
-//            }
-//        }
-        
-//        EM_MenuView.init(cancel: ["line1": "Quý khách muốn huỷ thay đổi ?"]).show { (index, obj, menu) in
-//            if index == 2 {
-//
-//            } else {
-//
-//            }
-//        }
-        
-//        EM_MenuView.init(restrict: ["line3": "MUA GÓI"]).show { (index, obj, menu) in
-//            if index == 4 {
-//
-//            }
-//        }
-        
-//        self.center()?.pushViewController(Transaction_ViewController.init(), animated: true)
-        
-//        self.center()?.pushViewController(User_Infor_ViewController.init(), animated: true)
-        
-//        self.center()?.pushViewController(News_ViewController.init(), animated: true)
-
     }
 }
 

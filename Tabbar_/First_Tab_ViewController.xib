@@ -14,6 +14,7 @@
                 <outlet property="banner_bg_height" destination="nhL-dL-67P" id="cds-Bb-499"/>
                 <outlet property="bg_banner" destination="HtY-hz-uT7" id="Rav-7f-udE"/>
                 <outlet property="bg_top" destination="g5P-W0-jZw" id="AgT-nY-SR8"/>
+                <outlet property="buyBtn" destination="iSg-GY-BhK" id="wEl-aT-Ixg"/>
                 <outlet property="login_bg_height" destination="TdY-Ze-5ia" id="P9h-th-2B0"/>
                 <outlet property="searchBtn" destination="8oi-PT-8yx" id="sRS-eH-WZK"/>
                 <outlet property="searchView" destination="qCj-lZ-8Dn" id="6qc-eA-Kp8"/>

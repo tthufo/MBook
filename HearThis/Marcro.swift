@@ -406,7 +406,7 @@ extension UITextField {
 }
 
 extension UIViewController {
-    
+        
     @objc func preCachePayment() {
         LTRequest.sharedInstance()?.didRequestInfo(["CMD_CODE":"getPaymentChannel",
                                                     "header":["session":Information.token == nil ? "" : Information.token!],
@@ -525,6 +525,86 @@ extension UIViewController {
          })
      }
     
+    @objc func checkVipStatus() {
+        let paymentList = NSMutableArray()
+        let packageList = NSMutableArray()
+        LTRequest.sharedInstance()?.didRequestInfo(["CMD_CODE":"getPaymentPackage",
+                                                    "header":["session":Information.token == nil ? "" : Information.token!],
+                                                    "session":NSNull(),
+                                                    "overrideAlert":"1",
+                                                    "overrideLoading":"1",
+                                                    "host":self], withCache: { (cacheString) in
+       }, andCompletion: { (response, errorCode, error, isValid, object) in
+           let result = response?.dictionize() ?? [:]
+        
+           if result.getValueFromKey("error_code") != "0" || result["result"] is NSNull {
+               self.showToast(response?.dictionize().getValueFromKey("error_msg") == "" ? "Lỗi xảy ra, mời bạn thử lại" : response?.dictionize().getValueFromKey("error_msg"), andPos: 0)
+               return
+           }
+        
+           let payment = (result["result"] as! NSArray)
+
+           paymentList.addObjects(from: payment.withMutable())
+            
+            LTRequest.sharedInstance()?.didRequestInfo(["cmd_code":"getPackageInfo",
+                                                        "header":["session":Information.token == nil ? "" : Information.token!],
+                                                        "overrideAlert":"1",
+                                                        "overrideLoading":"1",
+                                                        "host":self], withCache: { (cacheString) in
+           }, andCompletion: { (response, errorCode, error, isValid, object) in
+               let result = response?.dictionize() ?? [:]
+            
+               if result.getValueFromKey("error_code") != "0" || result["result"] is NSNull {
+                   self.showToast(response?.dictionize().getValueFromKey("error_msg") == "" ? "Lỗi xảy ra, mời bạn thử lại" : response?.dictionize().getValueFromKey("error_msg"), andPos: 0)
+                   return
+               }
+                        
+
+               let package = (result["result"] as! NSArray).withMutable()
+                                 
+               packageList.addObjects(from: package!)
+            
+               print( "is_VIP", self.isVip(paymentList: paymentList, packageList: packageList))
+               
+               Information.isVip = self.isVip(paymentList: paymentList, packageList: packageList)
+            })
+       })
+    }
+    
+    func isVip(paymentList: NSMutableArray, packageList: NSMutableArray) -> Bool {
+        var isVip = false
+        let groupPackage = NSMutableArray()
+        for pay in paymentList {
+            let payment = (pay as! NSDictionary)
+            let dateKey = payment.getValueFromKey("expireTime") == "" ? payment.getValueFromKey("expire_time") : payment.getValueFromKey("expireTime")
+            let expDate = (dateKey! as NSString).date(withFormat: "dd/MM/yyyy")
+                        
+            if payment.getValueFromKey("status") == "1" && Date() < expDate! {
+                Information.packageInfo = "Gói " + payment.getValueFromKey("package_code") + " - HSD " + dateKey!
+                isVip = true
+                return isVip
+            }
+        }
+        
+        for pack in packageList {
+            let package = (pack as! NSDictionary)
+            let dateKey = package.getValueFromKey("expireTime") == "" ? package.getValueFromKey("expire_time") : package.getValueFromKey("expireTime")
+            let expDate = (dateKey! as NSString).date(withFormat: "dd/MM/yyyy")
+                        
+            if (package.getValueFromKey("reg_keyword") == "EB" || package.getValueFromKey("reg_keyword") == "AU") && package.getValueFromKey("status") == "1" && Date() < expDate! {
+                groupPackage.add("valid")
+            }
+        }
+        
+        isVip = groupPackage.count == 2 ? true : false
+        
+        if isVip {
+            Information.packageInfo = "Gói AU + EB"
+        }
+        
+        return isVip
+    }
+    
     @objc func didRequestUrl(info: NSDictionary) {
         
         self.didRequestMP3Link(info: info)
@@ -551,7 +631,6 @@ extension UIViewController {
                 if self.isFullEmbed() {
                     self.goDown()
                 }
-//                self.showToast("Xin chào " + (Information.userInfo?.getValueFromKey("phone"))! + ", Quý khách chưa đăng ký gói AUDIO hãy đăng ký để trải nghiệm dịch vụ.", andPos: 0)
                 self.center()?.pushViewController(Package_ViewController.init(), animated: true)
             } else {
                 self.didRequestMP3Link(info: info)

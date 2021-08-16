@@ -22,6 +22,8 @@
     
     IBOutlet UITextField * searchView;
     
+    IBOutlet UIButton * buyBtn;
+
     NSMutableArray * dataList;
     
     NSMutableArray * config;
@@ -42,6 +44,8 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    buyBtn.hidden = Information.isVip;
     
     searchView.text = Information.searchValue == nil ? @"" : Information.searchValue;
     

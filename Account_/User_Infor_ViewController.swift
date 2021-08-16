@@ -51,10 +51,22 @@ class User_Infor_ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var logout: UILabel!
     
     @IBOutlet var logout_S: UILabel!
+    
+    @IBOutlet var des: UILabel!
 
     @IBOutlet var searchBtn: UIImageView!
 
+    @IBOutlet var vipIcon: UIImageView!
+
+    @IBOutlet var vipIcon_B: UIImageView!
+
+    @IBOutlet var des_B: UILabel!
+    
+    @IBOutlet var buyBtn_B: UIButton!
+
     @IBOutlet var searchView: UITextField!
+
+    @IBOutlet var buyBtn: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -117,8 +129,13 @@ class User_Infor_ViewController: UIViewController, UITextFieldDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        vipIcon.isHidden = !Information.isVip
+        vipIcon_B.isHidden = Information.isVip
+        buyBtn.isHidden = Information.isVip
+        buyBtn_B.isHidden = Information.isVip
         searchView.text = Information.searchValue ?? ""
+        des.text = Information.packageInfo
+        des_B.isHidden = Information.isVip
     }
     
     override func viewWillDisappear(_ animated: Bool) {

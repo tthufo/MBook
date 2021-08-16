@@ -134,6 +134,9 @@
 		FCAD57F3243DB7E400101A47 /* TG_Room_Cell_N.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCAD57EF243DB7E400101A47 /* TG_Room_Cell_N.swift */; };
 		FCB0054A26C9132800222D26 /* Bank_List_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB0054826C9132800222D26 /* Bank_List_ViewController.swift */; };
 		FCB0054B26C9132900222D26 /* Bank_List_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCB0054926C9132800222D26 /* Bank_List_ViewController.xib */; };
+		FCB0055026CACC7000222D26 /* Table_Content_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB0054E26CACC7000222D26 /* Table_Content_ViewController.swift */; };
+		FCB0055126CACC7000222D26 /* Table_Content_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCB0054F26CACC7000222D26 /* Table_Content_ViewController.xib */; };
+		FCB0055426CACE3000222D26 /* Table_Content_Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCB0055326CACE3000222D26 /* Table_Content_Cell.xib */; };
 		FCB238B92441858D0034B40B /* TG_Book_Detail_Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCB238B82441858D0034B40B /* TG_Book_Detail_Cell.xib */; };
 		FCB238BB244186E10034B40B /* Book_Detail_Title.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCB238BA244186E10034B40B /* Book_Detail_Title.xib */; };
 		FCB238BD2441B6960034B40B /* TG_Book_Chap_Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCB238BC2441B6960034B40B /* TG_Book_Chap_Cell.xib */; };
@@ -365,6 +368,9 @@
 		FCAD57EF243DB7E400101A47 /* TG_Room_Cell_N.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TG_Room_Cell_N.swift; sourceTree = "<group>"; };
 		FCB0054826C9132800222D26 /* Bank_List_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bank_List_ViewController.swift; sourceTree = "<group>"; };
 		FCB0054926C9132800222D26 /* Bank_List_ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Bank_List_ViewController.xib; sourceTree = "<group>"; };
+		FCB0054E26CACC7000222D26 /* Table_Content_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Table_Content_ViewController.swift; sourceTree = "<group>"; };
+		FCB0054F26CACC7000222D26 /* Table_Content_ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Table_Content_ViewController.xib; sourceTree = "<group>"; };
+		FCB0055326CACE3000222D26 /* Table_Content_Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Table_Content_Cell.xib; sourceTree = "<group>"; };
 		FCB238B82441858D0034B40B /* TG_Book_Detail_Cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TG_Book_Detail_Cell.xib; sourceTree = "<group>"; };
 		FCB238BA244186E10034B40B /* Book_Detail_Title.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Book_Detail_Title.xib; sourceTree = "<group>"; };
 		FCB238BC2441B6960034B40B /* TG_Book_Chap_Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TG_Book_Chap_Cell.xib; sourceTree = "<group>"; };
@@ -924,6 +930,9 @@
 			children = (
 				FCD979872447693D00970A4E /* Reader_ViewController.swift */,
 				FCD979882447693D00970A4E /* Reader_ViewController.xib */,
+				FCB0054E26CACC7000222D26 /* Table_Content_ViewController.swift */,
+				FCB0054F26CACC7000222D26 /* Table_Content_ViewController.xib */,
+				FCB0055326CACE3000222D26 /* Table_Content_Cell.xib */,
 			);
 			path = Reader_;
 			sourceTree = "<group>";
@@ -1048,6 +1057,7 @@
 				FCB238C424421BC20034B40B /* Author_Filter_Cell.xib in Resources */,
 				FCBC3495264153B800AC9621 /* Book_List_Header.xib in Resources */,
 				FCB238C824422DFB0034B40B /* Author_Detail_ViewController.xib in Resources */,
+				FCB0055126CACC7000222D26 /* Table_Content_ViewController.xib in Resources */,
 				FCB238E124435C410034B40B /* Publisher_Cell.xib in Resources */,
 				FC7550FC1DACDB53007992DF /* M_Menu.xib in Resources */,
 				FCAB62CA2639731400E26484 /* Vip_Cell.xib in Resources */,
@@ -1108,6 +1118,7 @@
 				FC78397B2438F37F00470148 /* PC_Inner_Info_ViewController.xib in Resources */,
 				FC7550EC1DAC8E95007992DF /* HT_Genres_Cell.xib in Resources */,
 				FC1AD7D91DA40CA8002BA7EC /* Main.storyboard in Resources */,
+				FCB0055426CACE3000222D26 /* Table_Content_Cell.xib in Resources */,
 				FC7551041DAE4640007992DF /* Default.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1184,6 +1195,7 @@
 				FC771C49263B1FB2005851FA /* Check_Out_ViewController.swift in Sources */,
 				FCAD57F0243DB7E400101A47 /* TG_Room_Cell.swift in Sources */,
 				FC7F32B6244A0731007429F7 /* TFHppleElement.m in Sources */,
+				FCB0055026CACC7000222D26 /* Table_Content_ViewController.swift in Sources */,
 				FC7550E31DAC85DE007992DF /* HT_Feed_ViewController.m in Sources */,
 				FCE38C4A243E4B6C003864BC /* OwnTableView.swift in Sources */,
 				FC7AFA8E26C05A6500D3C2D2 /* Payment_Option_Cell.swift in Sources */,

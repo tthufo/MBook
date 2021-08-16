@@ -19,6 +19,12 @@ class TG_Intro_ViewController: UIViewController {
     @IBOutlet var phoneNo: UILabel!
 
     @IBOutlet var avatar: UIImageView!
+    
+    @IBOutlet var vipIcon: UIImageView!
+
+    @IBOutlet var buyBtn: UIButton!
+
+    @IBOutlet var widthBuyBtn: NSLayoutConstraint!
 
     @IBOutlet var widthConstant: NSLayoutConstraint!
 
@@ -86,10 +92,14 @@ class TG_Intro_ViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-                
+        
+        widthBuyBtn.constant = Information.isVip ? 0 : 56
+        
+        vipIcon.isHidden = !Information.isVip
+                        
         userName.text = Information.userInfo?.getValueFromKey("name") == "" ? "Vô danh" : Information.userInfo?.getValueFromKey("name")
         
-        phoneNo.text = " " + (Information.userInfo?.getValueFromKey("phone"))! + "  "
+        phoneNo.text = " " + (Information.packageInfo) + "  "
     }
     
     @objc func didRequestNotification() {

@@ -107,14 +107,15 @@ class VIP_ViewController: UIViewController, MFMessageComposeViewControllerDelega
                }
                         
 
-               let package = (result["result"] as! NSArray)
+               let package = (result["result"] as! NSArray).withMutable()
             
-                for pack in package {
+                for pack in package! as NSArray  {
                     if (pack as! NSDictionary).getValueFromKey("reg_keyword") != "OB" {
+                        (pack as! NSMutableDictionary)["normal"] = "1"
                         self.dataList.add(pack)
                     }
                 }
-        
+                                 
                self.tableView.reloadData()
            })
        })
@@ -137,9 +138,13 @@ class VIP_ViewController: UIViewController, MFMessageComposeViewControllerDelega
                 
            self.dataList.removeAllObjects()
 
-           let data = (result["result"] as! NSArray)
+           let data = (result["result"] as! NSArray).withMutable()
+        
+            for item in data as! NSArray {
+                (item as! NSMutableDictionary)["normal"] = "1"
+            }
 
-           self.dataList.addObjects(from: data.withMutable())
+           self.dataList.addObjects(from: data!)
                   
            self.tableView.reloadData()
        })
@@ -208,7 +213,9 @@ extension VIP_ViewController: UITableViewDataSource, UITableViewDelegate {
 
         price.text = result + " đ"
 
+        let icon = self.withView(cell, tag: 99) as! UIImageView
 
+        icon.isHidden = data.getValueFromKey("normal") == "1" ? true : false
         
         let des = self.withView(cell, tag: 3) as! UILabel
 

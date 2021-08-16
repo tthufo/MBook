@@ -353,16 +353,33 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
                 return
             }
             
-            let reader = Reader_ViewController.init()
+//            do {
+//                let path = self.pdfFile(fileName: book.getValueFromKey("id"))
+//                let url = URL(fileURLWithPath: path)
+//                let reader = try Reader_ViewController.init()
+//
+//                let bookInfo = NSMutableDictionary.init(dictionary: book)
+//
+//                bookInfo["file_url"] = (result["result"] as! NSDictionary).getValueFromKey("file_url")
+//
+//                reader.config = bookInfo
+//
+//                self.navigationController?.pushViewController(reader, animated: true)
+//
+//             } catch {
+//                 print(error)
+//             }
             
+            let reader = Reader_ViewController()
+
             let bookInfo = NSMutableDictionary.init(dictionary: book)
-            
+
             bookInfo["file_url"] = (result["result"] as! NSDictionary).getValueFromKey("file_url")
-            
+
             reader.config = bookInfo
-            
+
             self.navigationController?.pushViewController(reader, animated: true)
-            
+
            self.adjustInset()
         })
     }

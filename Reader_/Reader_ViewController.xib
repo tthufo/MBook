@@ -14,6 +14,7 @@
                 <outlet property="cover" destination="8JW-Su-IJf" id="tLy-Ss-WCF"/>
                 <outlet property="downLoad" destination="BXk-iU-bGX" id="fDj-bo-OJ4"/>
                 <outlet property="failLabel" destination="5Ao-PB-nqt" id="TIc-Jg-vdt"/>
+                <outlet property="pageNumber" destination="ySy-S1-1mM" id="PTQ-cw-mhL"/>
                 <outlet property="pdfView" destination="1Kd-We-2c1" id="foz-n6-PAf"/>
                 <outlet property="restart" destination="I6S-Zs-M4F" id="Xw6-UP-G8G"/>
                 <outlet property="showFull" destination="LpR-aG-b8R" id="Jhr-IS-PhC"/>
@@ -37,12 +38,12 @@
                                 <constraint firstAttribute="width" constant="44" id="09j-km-4d4"/>
                                 <constraint firstAttribute="height" constant="44" id="Tzn-wc-R2o"/>
                             </constraints>
-                            <state key="normal" image="ico_arrow_l_white"/>
+                            <state key="normal" image="ico_menu"/>
                             <connections>
-                                <action selector="didPressBack" destination="-1" eventType="touchUpInside" id="FUB-eJ-IbR"/>
+                                <action selector="didPressContent" destination="-1" eventType="touchUpInside" id="5QJ-Iu-cqQ"/>
                             </connections>
                         </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YMH-aa-Yna">
+                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YMH-aa-Yna">
                             <rect key="frame" x="60" y="16" width="289" height="33"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="33" id="aq4-G7-qoK"/>
@@ -57,9 +58,9 @@
                                 <constraint firstAttribute="width" constant="35" id="dfR-62-H41"/>
                                 <constraint firstAttribute="height" constant="35" id="gqV-9x-V96"/>
                             </constraints>
-                            <state key="normal" image="full-screen-light"/>
+                            <state key="normal" image="icon_close"/>
                             <connections>
-                                <action selector="didPressFull" destination="-1" eventType="touchUpInside" id="0qz-Pi-2Yy"/>
+                                <action selector="didPressBack" destination="-1" eventType="touchUpInside" id="2jr-GS-uqB"/>
                             </connections>
                         </button>
                     </subviews>
@@ -93,7 +94,23 @@
                 </progressView>
                 <view hidden="YES" clipsSubviews="YES" contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="1Kd-We-2c1" customClass="PDFView">
                     <rect key="frame" x="0.0" y="108" width="414" height="754"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="--" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ySy-S1-1mM">
+                            <rect key="frame" x="186" y="725" width="42" height="21"/>
+                            <constraints>
+                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="42" id="Gtl-Xc-rgI"/>
+                                <constraint firstAttribute="height" constant="21" id="fBS-Tz-XFp"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                            <color key="textColor" red="0.1176470588" green="0.57254901960000004" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstItem="ySy-S1-1mM" firstAttribute="centerX" secondItem="1Kd-We-2c1" secondAttribute="centerX" id="bOw-ks-r4n"/>
+                        <constraint firstAttribute="bottom" secondItem="ySy-S1-1mM" secondAttribute="bottom" constant="8" id="tOs-eg-R35"/>
+                    </constraints>
                 </view>
                 <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LpR-aG-b8R">
                     <rect key="frame" x="371" y="60" width="35" height="35"/>
@@ -101,9 +118,9 @@
                         <constraint firstAttribute="width" constant="35" id="PXg-70-xox"/>
                         <constraint firstAttribute="height" constant="35" id="qa3-0i-xjh"/>
                     </constraints>
-                    <state key="normal" image="full-screen-dark"/>
+                    <state key="normal" image="icon_close"/>
                     <connections>
-                        <action selector="didPressFull" destination="-1" eventType="touchUpInside" id="KIq-g4-JFn"/>
+                        <action selector="didPressBack" destination="-1" eventType="touchUpInside" id="mAB-s1-Vik"/>
                     </connections>
                 </button>
                 <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I6S-Zs-M4F">
@@ -174,9 +191,8 @@
         </designable>
     </designables>
     <resources>
-        <image name="full-screen-dark" width="50.5" height="50.5"/>
-        <image name="full-screen-light" width="50.5" height="50.5"/>
-        <image name="ico_arrow_l_white" width="33" height="33"/>
+        <image name="ico_menu" width="31.5" height="31.5"/>
+        <image name="icon_close" width="33" height="33"/>
         <image name="reload" width="42.5" height="42.5"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

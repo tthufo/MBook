@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="Third_Tab_New_ViewController">
             <connections>
+                <outlet property="buyBtn" destination="QQn-G4-hll" id="v0u-t2-Q8g"/>
                 <outlet property="searchBtn" destination="wJ9-Sk-oX3" id="iic-Tp-YOg"/>
                 <outlet property="searchView" destination="HSE-69-uW9" id="FIr-kk-IL9"/>
                 <outlet property="tableView" destination="Ynp-MN-O5t" id="xq3-2s-dXD"/>

@@ -145,6 +145,7 @@
 //    UIView * line = [[UIView alloc] initWithFrame:CGRectMake(0, 0, screenWidth1, 1)];
 //    line.backgroundColor = [UIColor redColor];
 //    [self.tabBar addSubview: line];
+//    [self checkVipStatus];
 }
 
 - (void)reAdsAdd

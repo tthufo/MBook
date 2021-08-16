@@ -29,6 +29,10 @@ class Information: NSObject {
     
     static var allPackage: String?
     
+    @objc static var isVip: Bool = false
+    
+    @objc static var packageInfo: String = "Tài khoản giới hạn"
+    
     @objc static var searchValue: String?
     
     @objc static func saveToken() {
