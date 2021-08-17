@@ -24,7 +24,7 @@ class TG_Room_Cell_Cube: UITableViewCell, UICollectionViewDelegate, UICollection
     
     @objc var callBack: ((_ info: Any)->())?
 
-    let itemHeight = Int(((screenWidth() / (IS_IPAD ? 4 : 2)) - 15) * 1.80)
+    let itemHeight = Int(((screenWidth() / (IS_IPAD ? 3 : 2)) - 15) * 0.6) //Int(((screenWidth() / (IS_IPAD ? 4 : 2)) - 15) * 1.80)
         
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -80,20 +80,24 @@ class TG_Room_Cell_Cube: UITableViewCell, UICollectionViewDelegate, UICollection
            self.collectionView.reloadData()
            
             if self.config.getValueFromKey("direction") == "vertical" {
-                self.returnValue?(self.dataList.count == 0 ? 0 : Float(self.itemHeight * (self.dataList.count % (IS_IPAD ? 4 : 2) == 0 ? self.dataList.count / (IS_IPAD ? 4 : 2) : (self.dataList.count / (IS_IPAD ? 4 : 2)) + 1)) + 60)
+                self.returnValue?(self.dataList.count == 0 ? 0 : Float(self.itemHeight * (self.dataList.count % (IS_IPAD ? 3 : 2) == 0 ? self.dataList.count / (IS_IPAD ? 3 : 2) : (self.dataList.count / (IS_IPAD ? 3 : 2)) + 1)) + 60)
             } else {
                 self.returnValue?(self.dataList.count == 0 ? 0 : Float(self.itemHeight) + 60)
             }
         
        })
    }
+    
+    func eventSize() -> CGSize {
+        return CGSize(width: Int((self.screenWidth() / (IS_IPAD ? 3 : 2)) - 15), height: Int(((self.screenWidth() / (IS_IPAD ? 3 : 2)) - 15) * 0.6))
+    }
         
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.dataList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: Int((self.screenWidth() / (IS_IPAD ? 4 : 2)) - 15), height: itemHeight)
+        return eventSize()// CGSize(width: Int((self.screenWidth() / (IS_IPAD ? 4 : 2)) - 15), height: itemHeight)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -125,7 +129,7 @@ class TG_Room_Cell_Cube: UITableViewCell, UICollectionViewDelegate, UICollection
         
         let data = dataList[indexPath.item] as! NSDictionary
 
-        callBack?(data)
+        callBack?(["selection": data, "data": dataList])
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

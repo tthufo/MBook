@@ -258,6 +258,13 @@ extension First_Tab_ViewController: UITableViewDataSource, UITableViewDelegate {
                     eventDetail.chapList = (info as! NSDictionary)["data"] as! NSMutableArray
                     self.center()?.pushViewController(eventDetail, animated: true)
                 }
+                let more = self.withView((cell as! TG_Room_Cell_Cube), tag: 122) as! UIButton
+                
+                more.action(forTouch:[:]) { (obj) in
+                    let event = Event_ViewController.init()
+                    event.config = ["url": ["CMD_CODE": "getHomeEvent", "position": 0], "title": "Tuyển tập chọn lọc"]
+                    self.center()?.pushViewController(event, animated: true)
+                }
             }
         } else {
             (cell as! TG_Room_Cell_N).config = (config[indexPath.row] as! NSDictionary)
