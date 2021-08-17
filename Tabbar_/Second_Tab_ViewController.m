@@ -118,8 +118,8 @@
                 @"title": @"EBOOK MỚI NHẤT", @"url": [@{
                         @"CMD_CODE" : @"getListBook",
                         @"page_index": @1,
-                        @"page_size": @24,
-                        @"book_type": @0,
+                        @"page_size": @25,
+                        @"book_type": @1,
                         @"price": @0,
                         @"sorting": @1 } mutableCopy],
                 @"height": @0,
@@ -130,10 +130,8 @@
                 @"title": @"KHUYÊN ĐỌC", @"url": [@{
                         @"CMD_CODE" : @"getListPromotionBook",
                         @"page_index": @1,
-                        @"page_size": @24,
-                        @"book_type": @0,
-                        @"price": @0,
-                        @"sorting": @1 } mutableCopy],
+                        @"page_size": @24
+                        } mutableCopy],
                 @"height": @0,
                 @"directon": @"horizontal",
                 @"loaded": @NO
@@ -300,9 +298,7 @@
     UITableViewCell * cell = [_tableView dequeueReusableCellWithIdentifier: indexPath.section == 0 ? @"TG_Room_Cell_0" : @"Book_List_Cell" forIndexPath:indexPath];
     
     if (indexPath.section == 1) {
-        
-//        cell.contentView.backgroundColor = [AVHexColor colorWithHexString:@"#ECEDE7"];
-        
+                
         NSDictionary * list = dataList[indexPath.row];
         
         [(UIImageView*)[self withView:cell tag:1] imageUrlWithUrl: [list getValueFromKey:@"avatar"]];
@@ -347,9 +343,7 @@
         };
         ((TG_Room_Cell_N *)cell).callBack = ^(id infor) {
             if ([[(NSDictionary*)infor getValueFromKey:@"book_type"] isEqualToString:@"3"]) {
-                [self didRequestUrlWithInfo:(NSDictionary*)infor callBack:^(NSDictionary * value) {
-                    
-                }];
+                [self didRequestMP3LinkWithInfo:(NSDictionary*)infor];
                 return;
             }
             

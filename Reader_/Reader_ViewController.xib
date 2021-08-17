@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="Reader_ViewController" customModule="MeBook" customModuleProvider="target">
             <connections>
+                <outlet property="chapter" destination="E5Q-k8-K84" id="QO3-Nn-OK8"/>
                 <outlet property="cover" destination="8JW-Su-IJf" id="tLy-Ss-WCF"/>
                 <outlet property="downLoad" destination="BXk-iU-bGX" id="fDj-bo-OJ4"/>
                 <outlet property="failLabel" destination="5Ao-PB-nqt" id="TIc-Jg-vdt"/>
@@ -32,7 +33,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tH1-YX-68o">
                     <rect key="frame" x="0.0" y="44" width="414" height="64"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E5Q-k8-K84">
+                        <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="E5Q-k8-K84">
                             <rect key="frame" x="8" y="10" width="44" height="44"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="44" id="09j-km-4d4"/>

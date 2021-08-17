@@ -141,6 +141,8 @@ class Reader_ViewController: UIViewController {
     @IBOutlet var restart: UIButton!
 
     @IBOutlet var showFull: UIButton!
+    
+    @IBOutlet var chapter: UIButton!
 
     @IBOutlet var pdfView: PDFView!
 
@@ -250,37 +252,13 @@ class Reader_ViewController: UIViewController {
         if let document = PDFDocument(url: URL(fileURLWithPath: path)) {
             self.pdfDocument = document
             self.pageNumber.text = "%i / %i".format(parameters: 1, document.documentRef?.numberOfPages as! CVarArg)
+            self.chapter.isEnabled = true
         } else {
             self.failLabel.alpha = 1
             self.failLabel.text = "Không mở được file PDF, mời bạn tải lại."
             self.restart.alpha = 1
             self.cover.alpha = 1
         }
-//        self.pdfDocument = PDFDocument(url: URL(fileURLWithPath: path)) {
-//            pdfView.autoresizesSubviews = true
-//            pdfView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-//            pdfView.displayDirection = .horizontal
-//            pdfView.displayMode = IS_IPAD ? .twoUpContinuous : .singlePageContinuous
-//            pdfView.displaysPageBreaks = false
-////            pdfView.scaleFactorForSizeToFit = true
-//            pdfView.minScaleFactor = 1.0
-//            pdfView.scaleFactor = 0.6
-//            pdfView.maxScaleFactor = 4.0
-//            pdfView.autoScales = false
-//            pdfView.setValue(true, forKey: "forcesTopAlignment")
-//            pdfView.displayMode = .singlePageContinuous
-//            pdfView.autoScales = true
-//            pdfView.translatesAutoresizingMaskIntoConstraints = false
-//            pdfView.setValue(true, forKey: "forcesTopAlignment")
-//            pdfView.document = pdfDocument
-            
-//        }
-//        else {
-//            self.failLabel.alpha = 1
-//            self.failLabel.text = "Không mở được file PDF, mời bạn tải lại."
-//            self.restart.alpha = 1
-//            self.cover.alpha = 1
-//        }
     }
 
     func didDownload() {

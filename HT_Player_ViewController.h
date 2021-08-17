@@ -45,9 +45,10 @@ typedef enum __playerState
 
 - (NSDictionary*)playerInfo;
 
-- (IBAction)playNext;
+- (IBAction)playNext:(UIButton*)sender;
 
-- (IBAction)playPrevious;
+- (IBAction)playPrevious:(UIButton*)sender;
+
 
 - (void)backToTop;
 

@@ -18,7 +18,7 @@ class Payment_ViewController: UIViewController, WKUIDelegate, WKNavigationDelega
     var requestUrl: String!
     
     var info: NSDictionary!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -82,7 +82,7 @@ class Payment_ViewController: UIViewController, WKUIDelegate, WKNavigationDelega
             if link!.contains("status=1") {
                 EM_MenuView.init(confirm: ["image": "success", "line1": "Đăng ký thành công gói " + info.getValueFromKey("package_code"), "line2": "", "line3": "Về trang Cá nhân"]).show { (index, obj, menu) in
                     if index == 4 {
-                        self.didPressBack()
+                        self.dismiss(animated: true, completion: nil)
                     } else {
 
                     }

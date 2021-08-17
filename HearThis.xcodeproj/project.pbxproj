@@ -40,6 +40,8 @@
 		FC40A0FF243EFE5C0096B9DB /* TG_Room_Cell_2.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC40A0FB243EFE5C0096B9DB /* TG_Room_Cell_2.xib */; };
 		FC40A101243EFE680096B9DB /* TG_Room_Cell_5.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC40A100243EFE680096B9DB /* TG_Room_Cell_5.xib */; };
 		FC43399C2436493A00CFD50E /* Navigation_ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC43399B2436493A00CFD50E /* Navigation_ViewController.m */; };
+		FC51D29926CC4F0500F5DA2F /* TG_Room_Cell_Cube.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC51D29726CC4F0500F5DA2F /* TG_Room_Cell_Cube.swift */; };
+		FC51D29A26CC4F0500F5DA2F /* TG_Room_Cell_Cube.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC51D29826CC4F0500F5DA2F /* TG_Room_Cell_Cube.xib */; };
 		FC640A811DAAAD8B00DAEF55 /* CoreModel.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = FC640A721DAAAD8B00DAEF55 /* CoreModel.xcdatamodel */; };
 		FC640A821DAAAD8C00DAEF55 /* DownLoad.m in Sources */ = {isa = PBXBuildFile; fileRef = FC640A741DAAAD8B00DAEF55 /* DownLoad.m */; };
 		FC640A831DAAAD8C00DAEF55 /* DownloadManager.m in Sources */ = {isa = PBXBuildFile; fileRef = FC640A761DAAAD8B00DAEF55 /* DownloadManager.m */; };
@@ -250,6 +252,8 @@
 		FC40A100243EFE680096B9DB /* TG_Room_Cell_5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TG_Room_Cell_5.xib; sourceTree = "<group>"; };
 		FC43399A2436493A00CFD50E /* Navigation_ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Navigation_ViewController.h; sourceTree = "<group>"; };
 		FC43399B2436493A00CFD50E /* Navigation_ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Navigation_ViewController.m; sourceTree = "<group>"; };
+		FC51D29726CC4F0500F5DA2F /* TG_Room_Cell_Cube.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TG_Room_Cell_Cube.swift; sourceTree = "<group>"; };
+		FC51D29826CC4F0500F5DA2F /* TG_Room_Cell_Cube.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TG_Room_Cell_Cube.xib; sourceTree = "<group>"; };
 		FC640A721DAAAD8B00DAEF55 /* CoreModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreModel.xcdatamodel; sourceTree = "<group>"; };
 		FC640A731DAAAD8B00DAEF55 /* DownLoad.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DownLoad.h; sourceTree = "<group>"; };
 		FC640A741DAAAD8B00DAEF55 /* DownLoad.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DownLoad.m; sourceTree = "<group>"; };
@@ -682,6 +686,8 @@
 				FCAD57EC243DB7E300101A47 /* TG_Room_Cell.swift */,
 				FC69D4332440595B006D57D9 /* TG_Room_Cell_Banner_0.xib */,
 				FCAD57EE243DB7E300101A47 /* TG_Room_Cell_Banner_1.xib */,
+				FC51D29726CC4F0500F5DA2F /* TG_Room_Cell_Cube.swift */,
+				FC51D29826CC4F0500F5DA2F /* TG_Room_Cell_Cube.xib */,
 				FCB782E31DA414D400BDF913 /* Second_Tab_ViewController.h */,
 				FCB782E41DA414D400BDF913 /* Second_Tab_ViewController.m */,
 				FCB782E51DA414D400BDF913 /* Second_Tab_ViewController.xib */,
@@ -1014,6 +1020,7 @@
 				FC771C4A263B1FB2005851FA /* Check_Out_ViewController.xib in Resources */,
 				FCB238E524437D410034B40B /* Event_Detail_ViewController.xib in Resources */,
 				FCFB516D1DD075E200D49FB2 /* actions.plist in Resources */,
+				FC51D29A26CC4F0500F5DA2F /* TG_Room_Cell_Cube.xib in Resources */,
 				FCAB62C72639675300E26484 /* VIP_ViewController.xib in Resources */,
 				FCD5D0D526C0F03C00E13257 /* Bank_Cell.xib in Resources */,
 				FC0A8FB42437770E001A75AF /* PC_Login_ViewController.xib in Resources */,
@@ -1196,6 +1203,7 @@
 				FC640A851DAAAD8C00DAEF55 /* Item.m in Sources */,
 				FC0A8FB7243779F0001A75AF /* Marcro.swift in Sources */,
 				FC771C49263B1FB2005851FA /* Check_Out_ViewController.swift in Sources */,
+				FC51D29926CC4F0500F5DA2F /* TG_Room_Cell_Cube.swift in Sources */,
 				FCAD57F0243DB7E400101A47 /* TG_Room_Cell.swift in Sources */,
 				FC7F32B6244A0731007429F7 /* TFHppleElement.m in Sources */,
 				FCB0055026CACC7000222D26 /* Table_Content_ViewController.swift in Sources */,

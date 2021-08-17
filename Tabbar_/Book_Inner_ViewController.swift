@@ -139,9 +139,7 @@ class Book_Inner_ViewController: UIViewController, UICollectionViewDataSource, U
         let bookInfo = NSMutableDictionary.init(dictionary: data)
         bookInfo["url"] = ["CMD_CODE":"getListBook"]
          if data.getValueFromKey("book_type") == "3" {
-           self.didRequestUrl(info: bookInfo, callBack: { value in
-            
-           })
+            self.didRequestMP3Link(info: bookInfo)
            return
          }
          let bookDetail = Book_Detail_ViewController.init()

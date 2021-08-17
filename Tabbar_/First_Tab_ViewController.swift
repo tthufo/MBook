@@ -47,7 +47,9 @@ class First_Tab_ViewController: UIViewController, UITextFieldDelegate {
         
         tableView.withCell("TG_Room_Cell_Banner_0")
 
-        tableView.withCell("TG_Room_Cell_Banner_1")
+//        tableView.withCell("TG_Room_Cell_Banner_1")
+        
+        tableView.withCell("TG_Room_Cell_Cube")
 
         tableView.withCell("TG_Room_Cell_0")
 
@@ -80,52 +82,58 @@ class First_Tab_ViewController: UIViewController, UITextFieldDelegate {
         refreshControl.addTarget(self, action: #selector(didReload), for: .valueChanged)
         
         config = NSArray.init(array: [["url": ["CMD_CODE":"getHomeEvent", //getHomeEvent
-                                               "page_index": 1,
-                                               "page_size": 24,
                                                "position": 1,
                                         ], "height": 0, "loaded": false, "ident": "TG_Room_Cell_Banner_0"],
-                                      ["title":"Mới nhất",
+        
+        
+                                      ["title":"MỚI NHẤT",
                                        "url": ["CMD_CODE":"getListBook",
                                           "page_index": 1,
-                                          "page_size": 24,
+                                          "page_size": 25,
                                           "book_type": 0,
                                           "price": 0,
                                           "sorting": 1,
                                         ], "height": 0, "direction": "horizontal", "loaded": false],
-                                      ["title":"Truyện mới nhất",
+        
+        
+                                      ["title":"SÁCH NÓI",
                                        "url": ["CMD_CODE":"getListBook",
                                            "page_index": 1,
-                                           "page_size": 24,
-                                           "book_type": 2,
+                                           "page_size": 25,
+                                           "book_type": 3,
                                            "price": 0,
                                            "sorting": 1,
                                        ], "height": 0, "direction": "horizontal", "loaded": false],
-                                      ["title":"Sách nói",
+        
+        
+        
+                                      ["title":"MIỄN PHÍ HOT",
                                        "url": ["CMD_CODE":"getListBook",
                                           "page_index": 1,
-                                          "page_size": 24,
-                                          "book_type": 3,
-                                          "price": 0,
-                                          "sorting": 1,
-                                      ], "height": 0, "direction": "horizontal", "loaded": false],
-                                      ["title":"Đọc nhiều nhất",
-                                       "url": ["CMD_CODE":"getListBook",
-                                          "page_index": 1,
-                                          "page_size": 24,
+                                          "page_size": 9,
                                           "book_type": 0,
-                                          "price": 0,
-                                          "sorting": 3,
+                                          "price": 1,
+                                          "sorting": 1,
                                       ], "height": 0, "direction": "vertical", "loaded": false],
-                                      ["title":"Sách hay khuyên đọc",
-                                        "url": ["CMD_CODE":"getListPromotionBook",
+        
+    
+        
+                                      ["title":"TRUYỆN TRANH",
+                                        "url": ["CMD_CODE":"getListBook",
+                                           "book_type": 0,
+                                           "category_id": 181,
                                            "page_index": 1,
-                                           "page_size": 24,
+                                           "page_size": 25,
+                                           "price": 0,
+                                           "sorting": 1
                                          ], "height": 0, "direction": "horizontal", "loaded": false],
-//                                      ["url": ["CMD_CODE":"getHomeEvent",
-//                                               "page_index": 1,
-//                                               "page_size": 24,
-//                                               "position": 2,
-//                                      ], "height": 0, "loaded": false, "ident": "TG_Room_Cell_Banner_1"],
+        
+        
+                                      ["title":"TUYỂN TẬP CHỌN LỌC",
+                                        "url": ["CMD_CODE":"getHomeEvent",
+                                               "position": 2,
+                                      ], "height": 0, "direction": "vertical", "loaded": false, "ident": "TG_Room_Cell_Cube"],
+        
 //                                      ["title":"Sách hay khuyên đọc",
 //                                                             "url": ["CMD_CODE":"getListBook",
 //                                                                "page_index": 1,
@@ -134,6 +142,8 @@ class First_Tab_ViewController: UIViewController, UITextFieldDelegate {
 //                                                                "price": 2,
 //                                                                "sorting": 1,
 //                                                            ], "height": 0, "direction": "vertical", "loaded": false],
+        
+        
         ]).withMutable() as NSArray?
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
@@ -222,17 +232,32 @@ extension First_Tab_ViewController: UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: conf.getValueFromKey("ident") != "" ? conf.getValueFromKey("ident") : "TG_Room_Cell_%i".format(parameters: indexPath.row) , for: indexPath)
         
         if(conf.getValueFromKey("ident") != "") {
-            (cell as! TG_Room_Cell).config = (config[indexPath.row] as! NSDictionary)
-            (cell as! TG_Room_Cell).returnValue = { value in
-                (self.config[indexPath.row] as! NSMutableDictionary)["height"] = value
-                (self.config[indexPath.row] as! NSMutableDictionary)["loaded"] = true
-                tableView.reloadData()
-            }
-            (cell as! TG_Room_Cell).callBack = { info in
-                let eventDetail = Event_Detail_ViewController.init()
-                eventDetail.config = ((info as! NSDictionary)["selection"] as! NSDictionary)
-                eventDetail.chapList = (info as! NSDictionary)["data"] as! NSMutableArray
-                self.center()?.pushViewController(eventDetail, animated: true)
+            if conf.getValueFromKey("ident") == "TG_Room_Cell_Banner_0" {
+                (cell as! TG_Room_Cell).config = (config[indexPath.row] as! NSDictionary)
+                (cell as! TG_Room_Cell).returnValue = { value in
+                    (self.config[indexPath.row] as! NSMutableDictionary)["height"] = value
+                    (self.config[indexPath.row] as! NSMutableDictionary)["loaded"] = true
+                    tableView.reloadData()
+                }
+                (cell as! TG_Room_Cell).callBack = { info in
+                    let eventDetail = Event_Detail_ViewController.init()
+                    eventDetail.config = ((info as! NSDictionary)["selection"] as! NSDictionary)
+                    eventDetail.chapList = (info as! NSDictionary)["data"] as! NSMutableArray
+                    self.center()?.pushViewController(eventDetail, animated: true)
+                }
+            } else {
+                (cell as! TG_Room_Cell_Cube).config = (config[indexPath.row] as! NSDictionary)
+                (cell as! TG_Room_Cell_Cube).returnValue = { value in
+                    (self.config[indexPath.row] as! NSMutableDictionary)["height"] = value
+                    (self.config[indexPath.row] as! NSMutableDictionary)["loaded"] = true
+                    tableView.reloadData()
+                }
+                (cell as! TG_Room_Cell_Cube).callBack = { info in
+                    let eventDetail = Event_Detail_ViewController.init()
+                    eventDetail.config = ((info as! NSDictionary)["selection"] as! NSDictionary)
+                    eventDetail.chapList = (info as! NSDictionary)["data"] as! NSMutableArray
+                    self.center()?.pushViewController(eventDetail, animated: true)
+                }
             }
         } else {
             (cell as! TG_Room_Cell_N).config = (config[indexPath.row] as! NSDictionary)
@@ -243,9 +268,7 @@ extension First_Tab_ViewController: UITableViewDataSource, UITableViewDelegate {
             }
             (cell as! TG_Room_Cell_N).callBack = { info in
                 if (info as! NSDictionary).getValueFromKey("book_type") == "3" {
-                    self.didRequestUrl(info: (info as! NSDictionary), callBack: { value in
-                        
-                    })
+                    self.didRequestMP3Link(info: (info as! NSDictionary))
                     return
                 }
                 let bookDetail = Book_Detail_ViewController.init()

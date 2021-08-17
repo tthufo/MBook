@@ -38,7 +38,7 @@
     
     NSDictionary * config;
     
-    NSString * localUrl, * playListName, * tempBio, * bioString, * catId;
+    NSString * localUrl, * playListName, * tempBio, * bioString, * catId, * mp3URL;
     
     IBOutlet GUISlider * slider;
     
@@ -46,7 +46,7 @@
     
     int totalPage;
     
-    BOOL isLoadMore;
+    BOOL isLoadMore, isBlock;
     
     float bioHeight;
 }
@@ -60,6 +60,10 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    mp3URL = @"";
+    
+    isBlock = NO;
     
     dataList = [NSMutableArray new];
     
@@ -356,6 +360,8 @@
     
     playListName = @"";
     
+    isBlock = NO;
+    
     [setupData removeAllObjects];
     
     [setupData addEntriesFromDictionary:info];
@@ -372,9 +378,9 @@
     
      [((UIButton*)[self playerInfo][@"playTop"]) addTarget:self action:@selector(didPressPause:) forControlEvents:UIControlEventTouchUpInside];
     
-    [((UIButton*)[self playerInfo][@"back"]) addTarget:self action:@selector(playPrevious) forControlEvents:UIControlEventTouchUpInside];
+    [((UIButton*)[self playerInfo][@"back"]) addTarget:self action:@selector(playPrevious:) forControlEvents:UIControlEventTouchUpInside];
 
-    [((UIButton*)[self playerInfo][@"next"]) addTarget:self action:@selector(playNext) forControlEvents:UIControlEventTouchUpInside];
+    [((UIButton*)[self playerInfo][@"next"]) addTarget:self action:@selector(playNext:) forControlEvents:UIControlEventTouchUpInside];
 
     [((GUISlider*)[self playerInfo][@"slider"]) setThumbImage:[UIImage imageNamed:@"ico_round"] forState:UIControlStateNormal];
     
@@ -410,10 +416,9 @@
     BOOL isDownload = [info responseForKey:@"download"];
     
     NSString *url = isIpod ? info[@"assetUrl"] : isDownload ? [NSString stringWithFormat:@"%@.mp3", [[[self pathFile] stringByAppendingPathComponent:info[@"name"]] stringByAppendingPathComponent:info[@"name"]]] : info[@"stream_url"];
-    
-    [self didPlayingWithUrl: isIpod ? [NSURL URLWithString:url] : isDownload ? [NSURL fileURLWithPath:url] : [NSURL URLWithString:url]];
-    
 
+//    [self didPlayingWithUrl: isIpod ? [NSURL URLWithString:url] : isDownload ? [NSURL fileURLWithPath:url] : [NSURL URLWithString:url]];
+    
 //    ((UIButton*)[self playerInfo][@"sync"]).enabled = !isIpod && !isDownload;
     
     if(isIpod)
@@ -458,7 +463,7 @@
     
     totalPage = 1;
         
-    [self didRequestDetail];
+    [self didRequestDetail: url];
      
     [self didRequestChapter];
         
@@ -535,22 +540,22 @@
     playerView = [[GUIPlayerView alloc] initWithFrame:CGRectMake(0, 64, width, width * 9.0f / 16.0f) andInfo:playingData];
     
     [playerView setDelegate:self];
-    
+            
     if(uri)
     {
         [playerView setVideoURL:uri];
-        
+
         [playerView prepareAndPlayAutomatically:YES];
     }
-    
+
     [self startOrStop:YES];
-    
+
     avatar.userInteractionEnabled = NO;
-    
+
     titleSong.userInteractionEnabled = NO;
-    
+
     play.enabled = NO;
-    
+
     ((UIButton*)[self playerInfo][@"play"]).enabled = NO;
 }
 
@@ -717,6 +722,9 @@
 {
     if(![self.playerView isPlaying])
     {
+        if (sender.tag == 22 && !isBlock) {
+            [self goUp];
+        }
         [self.playerView play];
         
         [self fadeVolume];
@@ -733,13 +741,21 @@
     [self playingState:[self.playerView isPlaying]];
 }
 
-- (IBAction)playNext
+- (IBAction)playNext:(UIButton*)sender;
 {
+    NSLog(@"--->%i", sender.tag);
+    if (sender.tag == 33 && !isBlock) {
+        [self goUp];
+    }
     [self didPlayNextOrPre:YES];
 }
 
-- (IBAction)playPrevious
+- (IBAction)playPrevious:(UIButton*)sender;
 {
+    NSLog(@"--->%i", sender.tag);
+    if (sender.tag == 11 && !isBlock) {
+        [self goUp];
+    }
     [self didPlayNextOrPre:NO];
 }
 
@@ -823,9 +839,7 @@
     
     playingInfo[@"byPass"] = @"1";
     
-    [self didRequestUrlWithInfo:playingInfo callBack:^(NSDictionary * value) {
-        
-    }];
+    [self didRequestMP3LinkWithInfo:playingInfo];
     
 //    if([self.playerView.options[@"shuffle"] isEqualToString:@"1"])
 //    {
@@ -843,7 +857,6 @@
 //            break;
     }
 }
-
 
 - (int)activeIndex
 {
@@ -949,23 +962,23 @@
 - (void)playerReadyToPlay
 {
     [self showInforPlayer:@{@"img":[setupData responseForKey:@"img"] ? setupData[@"img"] : kAvatar,@"song":[setupData responseForKey:@"name"] ? setupData[@"name"] : @"No Title"}];
-    
+
     [self playingState:YES];
     
-    if(isResume)
-    {
-        [self.playerView seekTo:[[self getObject:@"leftOver"][@"seek"] floatValue]];
-        
-        [[self ROOT] embed];
-                
-        [self didSaveProgress];
-
-        [self.playerView setVolume:0];
-        
-        [self.playerView performSelector:@selector(pause) withObject:nil afterDelay:0.1];
-        
-        isResume = NO;
-    }
+//    if(isResume)
+//    {
+//        [self.playerView seekTo:[[self getObject:@"leftOver"][@"seek"] floatValue]];
+//
+//        [[self ROOT] embed];
+//
+//        [self didSaveProgress];
+//
+//        [self.playerView setVolume:0];
+//
+//        [self.playerView performSelector:@selector(pause) withObject:nil afterDelay:0.1];
+//
+//        isResume = NO;
+//    }
     
     avatar.userInteractionEnabled = YES;
     
@@ -976,13 +989,40 @@
     ((UIButton*)[self playerInfo][@"play"]).enabled = YES;
     
     [self startOrStop:NO];
+    
+    if (isBlock) {
+        return;
+    }
+    [self didPressPause:nil];
+    
+    if (![[tempInfo getValueFromKey:@"price"] isEqualToString:@"0"]) {
+        [self didRequestUrlWithInfo:tempInfo callBack:^(NSDictionary * info) {
+            if([info responseForKey:@"fail"]) {
+                
+            } else {
+                NSTimeInterval delayInSeconds = 0.8;
+                dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+                dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+                    [self didPressPause:nil];
+                });
+                isBlock = YES;
+            }
+        }];
+    } else {
+        NSTimeInterval delayInSeconds = 0.8;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            [self didPressPause:nil];
+        });
+        isBlock = YES;
+    }
 }
 
 - (void)playerDidEndPlaying
 {
     [self playingState:NO];
     
-    [self playNext];
+    [self playNext:nil];
     
     return;
     
@@ -1102,6 +1142,8 @@
 
 - (void)showInforPlayer:(NSDictionary*)dict
 {
+    NSLog(@"--->%@", dict);
+    
     MPMediaItemArtwork *albumArt = [[MPMediaItemArtwork alloc] initWithImage: dict[@"img"]];
     
     NSArray *keys = [NSArray arrayWithObjects: MPMediaItemPropertyArtist, MPMediaItemPropertyArtwork, MPMediaItemPropertyPlaybackDuration, MPNowPlayingInfoPropertyPlaybackRate, nil];
@@ -1348,6 +1390,7 @@
             if ([[dict getValueFromKey:@"status"] isEqualToString:@"1"]) {
                 [self showToast:@"Audio đã mua" andPos:0];
             } else {
+                [self didPressPause: nil];
                 NSMutableDictionary * checkInfo = [[NSMutableDictionary alloc] initWithDictionary:book];
                 checkInfo[@"is_package"] = @"0";
                 
@@ -1366,7 +1409,7 @@
     }];
 }
 
-- (void)didRequestDetail {
+- (void)didRequestDetail:(NSString*)url {
     NSMutableDictionary * request = [[NSMutableDictionary alloc] initWithDictionary:@{
         @"header":@{@"session":Information.token == nil ? @"" : Information.token},
         @"session": Information.token,
@@ -1408,6 +1451,8 @@
                 [self->collectionView reloadSections:[NSIndexSet indexSetWithIndex:2]];
                 [self->collectionView reloadData];
             } completion:^(BOOL finished) {
+                    mp3URL = url;
+                    [self didPlayingWithUrl:[NSURL URLWithString:url]];
             }];
         } else {
             [self showToast:[[dict getValueFromKey:@"error_msg"] isEqualToString:@""] ? @"Lỗi xảy ra, mời bạn thử lại" : [dict getValueFromKey:@"error_msg"] andPos:0];
@@ -1548,7 +1593,6 @@
     return 10.0;
 }
 
-
 - (UICollectionViewCell *)collectionView:(UICollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
 //    UICollectionViewCell *cell = [cv dequeueReusableCellWithReuseIdentifier:indexPath.section == 0 ? @"TG_Book_Chap_Cell" : @"TG_Map_Cell" forIndexPath:indexPath];
@@ -1615,13 +1659,14 @@
             UIButton * readOrListen = [self withView:cell tag: 4];
             readOrListen.hidden = [self->tempInfo[@"related"] isEqual:[NSNull null]];
             [readOrListen setImage:[UIImage imageNamed:@"ico_reading"] forState:UIControlStateNormal];
+            [readOrListen setTitle:@"Đọc Ebook" forState:UIControlStateNormal];
+            [readOrListen setTitleColor:[AVHexColor colorWithHexString:@"#1E928C"] forState:UIControlStateNormal];
             [readOrListen actionForTouch:@{} and:^(NSDictionary *touchInfo) {
                 [self didRequestReaderContent];
             }];
             UIButton * purchase = [self withView:cell tag: 5];
             purchase.hidden = [[self->tempInfo getValueFromKey:@"price"] isEqualToString:@"0"];
             [purchase actionForTouch:@{} and:^(NSDictionary *touchInfo) {
-                [self didPressPause: nil];
                 [self didRequestItemInfo:self->tempInfo];
             }];
          }

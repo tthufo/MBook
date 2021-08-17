@@ -182,11 +182,11 @@
         }
         else if (event.subtype == UIEventSubtypeRemoteControlNextTrack)
         {
-            [controller playNext];
+            [controller playNext:nil];
         }
         else if (event.subtype == UIEventSubtypeRemoteControlPreviousTrack)
         {
-            [controller playPrevious];
+            [controller playPrevious:nil];
         }
     }
 }

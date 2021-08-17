@@ -498,7 +498,7 @@ extension UIViewController {
         }
     }
     
-    func didRequestMP3Link(info: NSDictionary) {
+    @objc func didRequestMP3Link(info: NSDictionary) {
          let request = NSMutableDictionary.init(dictionary: [
                                                              "header":["session":Information.token == nil ? "" : Information.token!],
                                                              "session":Information.token ?? "",
@@ -625,19 +625,9 @@ extension UIViewController {
     }
     
     @objc func didRequestUrl(info: NSDictionary, callBack: ((_ info: Any)->())?) {
-        self.didRequestMP3Link(info: info)
-        return
-        
+
         let isAudio = info.getValueFromKey("book_type") == "3"
-        if info.getValueFromKey("price") == "0" {
-            if isAudio {
-//                self.didRequestMP3Link(info: info)
-            } else {
-                ///book action
-//                callback(["price":"0"])
-            }
-            return
-        }
+
         let paymentList = NSMutableArray()
         let packageList = NSMutableArray()
         let request = NSMutableDictionary.init(dictionary: [
@@ -660,10 +650,9 @@ extension UIViewController {
             
             if (result["result"] as! NSDictionary).getValueFromKey("status") == "1" {
                 if isAudio {
-                    self.didRequestMP3Link(info: info)
+                    callBack!(["success":"1", "audio":"1"])
                 } else {
-                    ////book action
-//                    callback(["vip":"0"])
+                    callBack!(["success":"1", "book":"1"])
                 }
                 return
             }
@@ -706,19 +695,19 @@ extension UIViewController {
                                    
                     if self.isVip(paymentList: paymentList, packageList: packageList) {
                         if isAudio {
-                            self.didRequestMP3Link(info: info)
+                            callBack!(["success":"1", "audio":"1"])
                         } else {
-//                            callback(["vip":"0"])
-                            ////book action
+                            callBack!(["success":"1", "book":"1"])
                         }
                     } else {
                         if self.checkRegister(package: packageList, types: isAudio ? ["AUDIOBOOK"] : ["EBOOK", "OBMEBOOK"]) {
                             if isAudio {
-                                self.didRequestMP3Link(info: info)
+                                callBack!(["success":"1", "audio":"1"])
                             } else {
-                                ////book action
+                                callBack!(["success":"1", "book":"1"])
                             }
                         } else {
+                            callBack!(["fail":"1", "audio":"1"])
                             self.didPressBuy(isAudio: isAudio)
                         }
                     }
@@ -726,18 +715,19 @@ extension UIViewController {
             } else {
                 if self.isVip(paymentList: paymentList, packageList: packageList) {
                     if isAudio {
-                        self.didRequestMP3Link(info: info)
+                        callBack!(["success":"1", "audio":"1"])
                     } else {
-                        ////book action
+                        callBack!(["success":"1", "book":"1"])
                     }
                 } else {
                     if self.checkRegister(package: packageList, types: isAudio ? ["AUDIOBOOK"] : ["EBOOK", "OBMEBOOK"]) {
                         if isAudio {
-                            self.didRequestMP3Link(info: info)
+                            callBack!(["success":"1", "audio":"1"])
                         } else {
-                            ////book action
+                            callBack!(["success":"1", "book":"1"])
                         }
                     } else {
+                        callBack!(["fail":"1", "audio":"1"])
                         self.didPressBuy(isAudio: isAudio)
                     }
                 }
