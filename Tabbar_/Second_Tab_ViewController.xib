@@ -16,6 +16,7 @@
                 <outlet property="searchView" destination="0Vg-X7-wdo" id="tlC-bR-z1P"/>
                 <outlet property="tableView" destination="Qza-1l-HTV" id="g3G-5y-vCB"/>
                 <outlet property="tagView" destination="UWH-fe-PkK" id="ErU-E0-ITN"/>
+                <outlet property="tagView_Vip" destination="5D7-oe-ZYW" id="4cw-uv-CYl"/>
                 <outlet property="view" destination="3kU-PG-sYP" id="hKh-BZ-4Pr"/>
             </connections>
         </placeholder>
@@ -107,7 +108,7 @@
                         <outlet property="delegate" destination="-1" id="WFg-Nv-avS"/>
                     </connections>
                 </tableView>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UWH-fe-PkK" customClass="Tag_View" customModule="MeBook" customModuleProvider="target">
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UWH-fe-PkK" customClass="Tag_View" customModule="MeBook" customModuleProvider="target">
                     <rect key="frame" x="10" y="74" width="300" height="32"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
@@ -117,16 +118,26 @@
                         <userDefinedRuntimeAttribute type="string" keyPath="secret" value="vip"/>
                     </userDefinedRuntimeAttributes>
                 </view>
+                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5D7-oe-ZYW" customClass="Tag_View_Vip" customModule="MeBook" customModuleProvider="target">
+                    <rect key="frame" x="10" y="74" width="300" height="32"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="32" id="Rxw-Dk-EPI"/>
+                    </constraints>
+                </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="W3e-U0-vWI"/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="W3e-U0-vWI" firstAttribute="trailing" secondItem="UWH-fe-PkK" secondAttribute="trailing" constant="10" id="DNp-yx-xOg"/>
+                <constraint firstItem="W3e-U0-vWI" firstAttribute="trailing" secondItem="5D7-oe-ZYW" secondAttribute="trailing" constant="10" id="K7b-66-u2Y"/>
+                <constraint firstItem="5D7-oe-ZYW" firstAttribute="leading" secondItem="W3e-U0-vWI" secondAttribute="leading" constant="10" id="RQn-cU-myv"/>
                 <constraint firstItem="Qza-1l-HTV" firstAttribute="leading" secondItem="W3e-U0-vWI" secondAttribute="leading" id="TTn-yk-AYm"/>
                 <constraint firstItem="Gur-fu-bRv" firstAttribute="leading" secondItem="W3e-U0-vWI" secondAttribute="leading" id="Vdj-Sa-GXr"/>
                 <constraint firstItem="Qza-1l-HTV" firstAttribute="top" secondItem="UWH-fe-PkK" secondAttribute="bottom" constant="8" symbolic="YES" id="Xt4-wc-62x"/>
                 <constraint firstItem="UWH-fe-PkK" firstAttribute="top" secondItem="Gur-fu-bRv" secondAttribute="bottom" constant="10" id="ado-46-eQx"/>
                 <constraint firstItem="UWH-fe-PkK" firstAttribute="leading" secondItem="W3e-U0-vWI" secondAttribute="leading" constant="10" id="ecw-38-UVJ"/>
+                <constraint firstItem="5D7-oe-ZYW" firstAttribute="top" secondItem="Gur-fu-bRv" secondAttribute="bottom" constant="10" id="fZD-o5-QRl"/>
                 <constraint firstItem="Gur-fu-bRv" firstAttribute="top" secondItem="W3e-U0-vWI" secondAttribute="top" id="pVm-27-p04"/>
                 <constraint firstItem="Qza-1l-HTV" firstAttribute="trailing" secondItem="W3e-U0-vWI" secondAttribute="trailing" id="tTy-wb-s32"/>
                 <constraint firstItem="Gur-fu-bRv" firstAttribute="trailing" secondItem="W3e-U0-vWI" secondAttribute="trailing" id="uMJ-cw-gcO"/>

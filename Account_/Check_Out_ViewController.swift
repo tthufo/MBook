@@ -78,7 +78,7 @@ class Check_Out_ViewController: UIViewController {
                                                     "items": [[
                                                         "amount": self.info.getValueFromKey("price") ?? "",
                                                         "item_id": self.info.getValueFromKey("id") ?? "",
-                                                        "item_type": "package",
+                                                        "item_type": self.isPackage ? "package" : "item",
                                                         "quantity": 1
                                                     ]],
                                                     "payment_detail_id": expand ? payment.getValueFromKey("payment_detail_id") as Any : "0",

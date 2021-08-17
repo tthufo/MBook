@@ -823,7 +823,9 @@
     
     playingInfo[@"byPass"] = @"1";
     
-    [self didRequestUrlWithInfo:playingInfo];
+    [self didRequestUrlWithInfo:playingInfo callBack:^(NSDictionary * value) {
+        
+    }];
     
 //    if([self.playerView.options[@"shuffle"] isEqualToString:@"1"])
 //    {
@@ -1323,6 +1325,47 @@
     }];
 }
 
+- (void)didRequestItemInfo:(NSDictionary*)book {
+    NSMutableDictionary * request = [[NSMutableDictionary alloc] initWithDictionary:@{
+                                                                                @"header":@{@"session":Information.token == nil ? @"" : Information.token},
+                                                                                @"session": Information.token,
+                                                                                @"item_id": [book getValueFromKey:@"id"],
+                                                                                @"item_type": @"item",
+                                                                                @"overrideAlert":@"1",
+                                                                                @"overrideLoading":@"1"
+    }];
+    
+    request[@"CMD_CODE"] = @"checkItemPurchaseInfo";
+
+    [[LTRequest sharedInstance] didRequestInfo:request withCache:^(NSString *cacheString) {
+        
+    } andCompletion:^(NSString *responseString, NSString *errorCode, NSError *error, BOOL isValidated, NSDictionary *header) {
+        NSDictionary * dict = [responseString objectFromJSONString];
+
+        if ([[dict getValueFromKey:@"error_code"] isEqualToString:@"0"] && dict[@"result"] != [NSNull null]) {
+            NSDictionary * dict = [responseString objectFromJSONString][@"result"];
+
+            if ([[dict getValueFromKey:@"status"] isEqualToString:@"1"]) {
+                [self showToast:@"Audio đã mua" andPos:0];
+            } else {
+                NSMutableDictionary * checkInfo = [[NSMutableDictionary alloc] initWithDictionary:book];
+                checkInfo[@"is_package"] = @"0";
+                
+                Check_Out_ViewController * checkOut = [Check_Out_ViewController new];
+                checkOut.info = checkInfo;
+                
+                UINavigationController * nav = [[UINavigationController alloc] initWithRootViewController:checkOut];
+                nav.navigationBarHidden = YES;
+                nav.modalPresentationStyle = UIModalPresentationFullScreen;
+                [self presentViewController:nav animated:YES completion:nil];
+            }
+            
+        } else {
+            [self showToast:[[dict getValueFromKey:@"error_msg"] isEqualToString:@""] ? @"Lỗi xảy ra, mời bạn thử lại" : [dict getValueFromKey:@"error_msg"] andPos:0];
+        }
+    }];
+}
+
 - (void)didRequestDetail {
     NSMutableDictionary * request = [[NSMutableDictionary alloc] initWithDictionary:@{
         @"header":@{@"session":Information.token == nil ? @"" : Information.token},
@@ -1347,7 +1390,7 @@
             
             [self->detailList removeAllObjects];
                         
-            [self->detailList addObjectsFromArray:[self filter:result relate: ![result[@"related"] isEqual:[NSNull null]]]];
+            [self->detailList addObjectsFromArray:[self filter:result relate: ![[result getValueFromKey:@"price"] isEqualToString:@"0"] || ![result[@"related"] isEqual:[NSNull null]]]];
             
             [self->tempInfo removeAllObjects];
             
@@ -1566,30 +1609,21 @@
          }
          
         if ([tag isEqualToString:@"4"]) {
+            for (UIView *v in cell.contentView.subviews) {
+                v.hidden = v.tag != 4 && v.tag != 5;
+            }
             UIButton * readOrListen = [self withView:cell tag: 4];
+            readOrListen.hidden = [self->tempInfo[@"related"] isEqual:[NSNull null]];
             [readOrListen setImage:[UIImage imageNamed:@"ico_reading"] forState:UIControlStateNormal];
             [readOrListen actionForTouch:@{} and:^(NSDictionary *touchInfo) {
                 [self didRequestReaderContent];
             }];
             UIButton * purchase = [self withView:cell tag: 5];
+            purchase.hidden = [[self->tempInfo getValueFromKey:@"price"] isEqualToString:@"0"];
             [purchase actionForTouch:@{} and:^(NSDictionary *touchInfo) {
                 [self didPressPause: nil];
-                NSMutableDictionary * checkInfo = [[NSMutableDictionary alloc] initWithDictionary:tempInfo];
-                [checkInfo addEntriesFromDictionary:tempInfo[@"related"]];
-                checkInfo[@"is_package"] = @"0";
-                
-                Check_Out_ViewController * checkOut = [Check_Out_ViewController new];
-                checkOut.info = checkInfo;
-                
-                UINavigationController * nav = [[UINavigationController alloc] initWithRootViewController:checkOut];
-                nav.navigationBarHidden = YES;
-                nav.modalPresentationStyle = UIModalPresentationFullScreen;
-                [self presentViewController:nav animated:YES completion:nil];
-
+                [self didRequestItemInfo:self->tempInfo];
             }];
-             for (UIView *v in cell.contentView.subviews) {
-                 v.hidden = v.tag != 4 && v.tag != 5;
-             }
          }
          
         if ([tag isEqualToString:@"6"]) {

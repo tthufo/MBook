@@ -261,7 +261,9 @@ class Search_ViewController: UIViewController, UICollectionViewDataSource, UICol
 //        if collectionView != self.collectionView {
             let data = bookList[indexPath.item] as! NSDictionary
             if data.getValueFromKey("book_type") == "3" {
-                self.didRequestUrl(info: (data ))
+                self.didRequestUrl(info: (data ), callBack: { value in
+                    
+                })
                 return
             }
             let bookDetail = Book_Detail_ViewController.init()

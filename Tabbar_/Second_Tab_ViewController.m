@@ -18,6 +18,8 @@
     
     IBOutlet Tag_View * tagView;
     
+    IBOutlet Tag_View_Vip * tagView_Vip;
+    
     IBOutlet UIImageView * searchBtn;
     
     IBOutlet UITextField * searchView;
@@ -46,6 +48,10 @@
     [super viewWillAppear:animated];
     
     buyBtn.hidden = Information.isVip;
+    
+    tagView.hidden = Information.isVip;
+    
+    tagView_Vip.hidden = !Information.isVip;
     
     searchView.text = Information.searchValue == nil ? @"" : Information.searchValue;
     
@@ -341,7 +347,9 @@
         };
         ((TG_Room_Cell_N *)cell).callBack = ^(id infor) {
             if ([[(NSDictionary*)infor getValueFromKey:@"book_type"] isEqualToString:@"3"]) {
-                [self didRequestUrlWithInfo:(NSDictionary*)infor];
+                [self didRequestUrlWithInfo:(NSDictionary*)infor callBack:^(NSDictionary * value) {
+                    
+                }];
                 return;
             }
             

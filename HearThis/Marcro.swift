@@ -525,6 +525,7 @@ extension UIViewController {
          })
      }
     
+    
     @objc func checkVipStatus() {
         let paymentList = NSMutableArray()
         let packageList = NSMutableArray()
@@ -545,29 +546,32 @@ extension UIViewController {
            let payment = (result["result"] as! NSArray)
 
            paymentList.addObjects(from: payment.withMutable())
-            
-            LTRequest.sharedInstance()?.didRequestInfo(["cmd_code":"getPackageInfo",
-                                                        "header":["session":Information.token == nil ? "" : Information.token!],
-                                                        "overrideAlert":"1",
-                                                        "overrideLoading":"1",
-                                                        "host":self], withCache: { (cacheString) in
-           }, andCompletion: { (response, errorCode, error, isValid, object) in
-               let result = response?.dictionize() ?? [:]
-            
-               if result.getValueFromKey("error_code") != "0" || result["result"] is NSNull {
-                   self.showToast(response?.dictionize().getValueFromKey("error_msg") == "" ? "Lỗi xảy ra, mời bạn thử lại" : response?.dictionize().getValueFromKey("error_msg"), andPos: 0)
-                   return
-               }
-                        
+            if Information.allPackage == "1" {
+                LTRequest.sharedInstance()?.didRequestInfo(["cmd_code":"getPackageInfo",
+                                                            "header":["session":Information.token == nil ? "" : Information.token!],
+                                                            "overrideAlert":"1",
+                                                            "overrideLoading":"1",
+                                                            "host":self], withCache: { (cacheString) in
+               }, andCompletion: { (response, errorCode, error, isValid, object) in
+                   let result = response?.dictionize() ?? [:]
+                
+                   if result.getValueFromKey("error_code") != "0" || result["result"] is NSNull {
+                       self.showToast(response?.dictionize().getValueFromKey("error_msg") == "" ? "Lỗi xảy ra, mời bạn thử lại" : response?.dictionize().getValueFromKey("error_msg"), andPos: 0)
+                       return
+                   }
+                            
 
-               let package = (result["result"] as! NSArray).withMutable()
-                                 
-               packageList.addObjects(from: package!)
-            
-               print( "is_VIP", self.isVip(paymentList: paymentList, packageList: packageList))
-               
-               Information.isVip = self.isVip(paymentList: paymentList, packageList: packageList)
-            })
+                   let package = (result["result"] as! NSArray).withMutable()
+                                     
+                   packageList.addObjects(from: package!)
+                
+                   print( "is_VIP", self.isVip(paymentList: paymentList, packageList: packageList))
+                   
+                   Information.isVip = self.isVip(paymentList: paymentList, packageList: packageList)
+                })
+            } else {
+                Information.isVip = self.isVip(paymentList: paymentList, packageList: packageList)
+            }
        })
     }
     
@@ -605,67 +609,203 @@ extension UIViewController {
         return isVip
     }
     
-    @objc func didRequestUrl(info: NSDictionary) {
-        
+    func didPressBuy(isAudio: Bool) {
+        let vip = VIP_ViewController.init()
+        vip.callBack = { info in
+            print(info)
+        }
+        let nav = UINavigationController.init(rootViewController: vip)
+        nav.isNavigationBarHidden = true
+        nav.modalPresentationStyle = .fullScreen
+        if isAudio {
+            self.player()?.present(nav, animated: true, completion: nil)
+        } else {
+            self.center().present(nav, animated: true, completion: nil)
+        }
+    }
+    
+    @objc func didRequestUrl(info: NSDictionary, callBack: ((_ info: Any)->())?) {
         self.didRequestMP3Link(info: info)
-
         return
         
+        let isAudio = info.getValueFromKey("book_type") == "3"
+        if info.getValueFromKey("price") == "0" {
+            if isAudio {
+//                self.didRequestMP3Link(info: info)
+            } else {
+                ///book action
+//                callback(["price":"0"])
+            }
+            return
+        }
+        let paymentList = NSMutableArray()
+        let packageList = NSMutableArray()
         let request = NSMutableDictionary.init(dictionary: [
                                                             "header":["session":Information.token == nil ? "" : Information.token!],
                                                             "session":Information.token ?? "",
+                                                            "item_id": info.getValueFromKey("id") ?? "",
+                                                            "item_type": "item",
                                                             "overrideAlert":"1",
-                                                            "overrideLoading":"1",
-                                                            "host": self.topviewcontroler() as Any,
+                                                            "overrideLoading":"1"
                                                             ])
-        request["CMD_CODE"] = "getPackageInfo"
+        request["CMD_CODE"] = "checkItemPurchaseInfo"
         LTRequest.sharedInstance()?.didRequestInfo((request as! [AnyHashable : Any]), withCache: { (cacheString) in
         }, andCompletion: { (response, errorCode, error, isValid, object) in
             let result = response?.dictionize() ?? [:]
-            self.hideSVHUD()
+            
             if result.getValueFromKey("error_code") != "0" || result["result"] is NSNull {
                 self.showToast(response?.dictionize().getValueFromKey("error_msg") == "" ? "Lỗi xảy ra, mời bạn thử lại" : response?.dictionize().getValueFromKey("error_msg"), andPos: 0)
                 return
             }
-            if !self.checkRegister(package: response?.dictionize()["result"] as! NSArray, type: "AUDIOBOOK") {
-                if self.isFullEmbed() {
-                    self.goDown()
+            
+            if (result["result"] as! NSDictionary).getValueFromKey("status") == "1" {
+                if isAudio {
+                    self.didRequestMP3Link(info: info)
+                } else {
+                    ////book action
+//                    callback(["vip":"0"])
                 }
-                self.center()?.pushViewController(Package_ViewController.init(), animated: true)
-            } else {
-                self.didRequestMP3Link(info: info)
+                return
             }
+            
+        LTRequest.sharedInstance()?.didRequestInfo(["CMD_CODE":"getPaymentPackage",
+                                                    "header":["session":Information.token == nil ? "" : Information.token!],
+                                                    "session":NSNull(),
+                                                    "overrideAlert":"1",
+                                                    "overrideLoading":"1",
+                                                    "host":self], withCache: { (cacheString) in
+       }, andCompletion: { (response, errorCode, error, isValid, object) in
+           let result = response?.dictionize() ?? [:]
+        
+           if result.getValueFromKey("error_code") != "0" || result["result"] is NSNull {
+               self.showToast(response?.dictionize().getValueFromKey("error_msg") == "" ? "Lỗi xảy ra, mời bạn thử lại" : response?.dictionize().getValueFromKey("error_msg"), andPos: 0)
+               return
+           }
+        
+           let payment = (result["result"] as! NSArray)
+
+           paymentList.addObjects(from: payment.withMutable())
+            if Information.allPackage == "1" {
+                LTRequest.sharedInstance()?.didRequestInfo(["cmd_code":"getPackageInfo",
+                                                            "header":["session":Information.token == nil ? "" : Information.token!],
+                                                            "overrideAlert":"1",
+                                                            "overrideLoading":"1",
+                                                            "host":self], withCache: { (cacheString) in
+               }, andCompletion: { (response, errorCode, error, isValid, object) in
+                   let result = response?.dictionize() ?? [:]
+                
+                   if result.getValueFromKey("error_code") != "0" || result["result"] is NSNull {
+                       self.showToast(response?.dictionize().getValueFromKey("error_msg") == "" ? "Lỗi xảy ra, mời bạn thử lại" : response?.dictionize().getValueFromKey("error_msg"), andPos: 0)
+                       return
+                   }
+                            
+
+                   let package = (result["result"] as! NSArray).withMutable()
+                                     
+                   packageList.addObjects(from: package!)
+                                   
+                    if self.isVip(paymentList: paymentList, packageList: packageList) {
+                        if isAudio {
+                            self.didRequestMP3Link(info: info)
+                        } else {
+//                            callback(["vip":"0"])
+                            ////book action
+                        }
+                    } else {
+                        if self.checkRegister(package: packageList, types: isAudio ? ["AUDIOBOOK"] : ["EBOOK", "OBMEBOOK"]) {
+                            if isAudio {
+                                self.didRequestMP3Link(info: info)
+                            } else {
+                                ////book action
+                            }
+                        } else {
+                            self.didPressBuy(isAudio: isAudio)
+                        }
+                    }
+                })
+            } else {
+                if self.isVip(paymentList: paymentList, packageList: packageList) {
+                    if isAudio {
+                        self.didRequestMP3Link(info: info)
+                    } else {
+                        ////book action
+                    }
+                } else {
+                    if self.checkRegister(package: packageList, types: isAudio ? ["AUDIOBOOK"] : ["EBOOK", "OBMEBOOK"]) {
+                        if isAudio {
+                            self.didRequestMP3Link(info: info)
+                        } else {
+                            ////book action
+                        }
+                    } else {
+                        self.didPressBuy(isAudio: isAudio)
+                    }
+                }
+            }
+           })
         })
+        
+//        self.didRequestMP3Link(info: info)
+//
+//        return
+//
+//        let request = NSMutableDictionary.init(dictionary: [
+//                                                            "header":["session":Information.token == nil ? "" : Information.token!],
+//                                                            "session":Information.token ?? "",
+//                                                            "overrideAlert":"1",
+//                                                            "overrideLoading":"1",
+//                                                            "host": self.topviewcontroler() as Any,
+//                                                            ])
+//        request["CMD_CODE"] = "getPackageInfo"
+//        LTRequest.sharedInstance()?.didRequestInfo((request as! [AnyHashable : Any]), withCache: { (cacheString) in
+//        }, andCompletion: { (response, errorCode, error, isValid, object) in
+//            let result = response?.dictionize() ?? [:]
+//            self.hideSVHUD()
+//            if result.getValueFromKey("error_code") != "0" || result["result"] is NSNull {
+//                self.showToast(response?.dictionize().getValueFromKey("error_msg") == "" ? "Lỗi xảy ra, mời bạn thử lại" : response?.dictionize().getValueFromKey("error_msg"), andPos: 0)
+//                return
+//            }
+//            if !self.checkRegister(package: response?.dictionize()["result"] as! NSArray, type: "AUDIOBOOK") {
+//                if self.isFullEmbed() {
+//                    self.goDown()
+//                }
+//                self.center()?.pushViewController(Package_ViewController.init(), animated: true)
+//            } else {
+//                self.didRequestMP3Link(info: info)
+//            }
+//        })
     }
     
-    func checkRegister(package: NSArray, type: String) -> Bool {
+    
+    func checkRegister(package: NSArray, types: NSArray) -> Bool {
         var isReg = false//Information.check == "1" ? false : true //// dev test package change to true
         if Information.check == "0" {
             return true
         }
         for dict in package {
-            if (dict as! NSDictionary).getValueFromKey("package_code") == type {
-                let expDate = ((dict as! NSDictionary).getValueFromKey("expireTime")! as NSString).date(withFormat: "dd/MM/yyyy")
-                
-                print("ALLOWING", expDate! > Date())
-                
-                if (dict as! NSDictionary).getValueFromKey("status") == "2" {
-                    self.showToast("Xin chào " + (Information.userInfo?.getValueFromKey("phone"))! + ", Quý khách chưa đăng ký gói " + (type == "AUDIOBOOK" ? "AUDIOBOOK" : "EBOOK") + " hãy đăng ký để trải nghiệm dịch vụ.", andPos: 0)
-                    isReg = false
-                    break
-                }
-                
-                if (dict as! NSDictionary).getValueFromKey("status") == "1" && Date() >= expDate!
-                    && (dict as! NSDictionary).getValueFromKey("package_code") == type {
-                    self.showToast("Tài khoản của Quý Khách đã hết hạn sử dụng. Vui lòng nạp thêm tiền vào tài khoản chính để tiếp tục sử dụng dịch vụ.", andPos: 0)
-                    isReg = false
-                    break
-                }
-                
-                if (dict as! NSDictionary).getValueFromKey("status") == "1" && Date() < expDate!
-                    && (dict as! NSDictionary).getValueFromKey("package_code") == type {
-                    isReg = true
-                    break
+            for typo in types {
+                let type = typo as! String
+                if (dict as! NSDictionary).getValueFromKey("package_code") == type {
+                    let expDate = ((dict as! NSDictionary).getValueFromKey("expireTime")! as NSString).date(withFormat: "dd/MM/yyyy")
+                    
+                    print("ALLOWING", expDate! > Date())
+                    
+                    if (dict as! NSDictionary).getValueFromKey("status") == "2" {
+                        isReg = false
+                        break
+                    }
+                    
+                    if (dict as! NSDictionary).getValueFromKey("status") == "1" && Date() >= expDate!
+                        && (dict as! NSDictionary).getValueFromKey("package_code") == type {
+                        isReg = false
+                        break
+                    }
+                    
+                    if (dict as! NSDictionary).getValueFromKey("status") == "1" && Date() < expDate!
+                        && (dict as! NSDictionary).getValueFromKey("package_code") == type {
+                        isReg = true
+                        break
+                    }
                 }
             }
         }

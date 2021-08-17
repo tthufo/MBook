@@ -99,7 +99,7 @@ class TG_Intro_ViewController: UIViewController {
                         
         userName.text = Information.userInfo?.getValueFromKey("name") == "" ? "Vô danh" : Information.userInfo?.getValueFromKey("name")
         
-        phoneNo.text = " " + (Information.packageInfo) + "  "
+        phoneNo.text = (Information.packageInfo)
     }
     
     @objc func didRequestNotification() {

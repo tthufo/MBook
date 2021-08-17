@@ -495,7 +495,7 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
 //                (UIApplication.shared.delegate as! AppDelegate).changeRoot(false) //CHECK PACKAGE
             } else {
 //                (UIApplication.shared.delegate as! AppDelegate).changeRoot(false) //CHECK PACKAGE
-                self.checkVipStatusLogin()
+                self.checkVipStatusLogin(isSocial: false)
             }
         })
     }
@@ -581,7 +581,7 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
     //                (UIApplication.shared.delegate as! AppDelegate).changeRoot(false) //CHECK PACKAGE
             } else {
                 print("changeroot")
-                self.checkVipStatus()
+                self.checkVipStatusLogin(isSocial: true)
             }
        })
     }
@@ -715,7 +715,7 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
         })
       }
     
-    func checkVipStatusLogin() {
+    func checkVipStatusLogin(isSocial: Bool) {
         let paymentList = NSMutableArray()
         let packageList = NSMutableArray()
         LTRequest.sharedInstance()?.didRequestInfo(["CMD_CODE":"getPaymentPackage",
@@ -735,32 +735,37 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
            let payment = (result["result"] as! NSArray)
 
            paymentList.addObjects(from: payment.withMutable())
-            
-            LTRequest.sharedInstance()?.didRequestInfo(["cmd_code":"getPackageInfo",
-                                                        "header":["session":Information.token == nil ? "" : Information.token!],
-                                                        "overrideAlert":"1",
-                                                        "overrideLoading":"1",
-                                                        "host":self], withCache: { (cacheString) in
-           }, andCompletion: { (response, errorCode, error, isValid, object) in
-               let result = response?.dictionize() ?? [:]
-            
-               if result.getValueFromKey("error_code") != "0" || result["result"] is NSNull {
-                   self.showToast(response?.dictionize().getValueFromKey("error_msg") == "" ? "Lỗi xảy ra, mời bạn thử lại" : response?.dictionize().getValueFromKey("error_msg"), andPos: 0)
-                   return
-               }
-                        
+            if !isSocial {
+                LTRequest.sharedInstance()?.didRequestInfo(["cmd_code":"getPackageInfo",
+                                                            "header":["session":Information.token == nil ? "" : Information.token!],
+                                                            "overrideAlert":"1",
+                                                            "overrideLoading":"1",
+                                                            "host":self], withCache: { (cacheString) in
+               }, andCompletion: { (response, errorCode, error, isValid, object) in
+                   let result = response?.dictionize() ?? [:]
+                
+                   if result.getValueFromKey("error_code") != "0" || result["result"] is NSNull {
+                       self.showToast(response?.dictionize().getValueFromKey("error_msg") == "" ? "Lỗi xảy ra, mời bạn thử lại" : response?.dictionize().getValueFromKey("error_msg"), andPos: 0)
+                       return
+                   }
+                            
 
-               let package = (result["result"] as! NSArray).withMutable()
-                                 
-               packageList.addObjects(from: package!)
-            
-               print( "is_VIP", self.isVipLogin(paymentList: paymentList, packageList: packageList))
-               
-               Information.isVip = self.isVipLogin(paymentList: paymentList, packageList: packageList)
-            
-               (UIApplication.shared.delegate as! AppDelegate).changeRoot(false) //CHECK PACKAGE
+                   let package = (result["result"] as! NSArray).withMutable()
+                                     
+                   packageList.addObjects(from: package!)
+                
+                   print( "is_VIP", self.isVipLogin(paymentList: paymentList, packageList: packageList))
+                   
+                   Information.isVip = self.isVipLogin(paymentList: paymentList, packageList: packageList)
+                
+                   (UIApplication.shared.delegate as! AppDelegate).changeRoot(false)
 
-           })
+               })
+            } else {
+                Information.isVip = self.isVipLogin(paymentList: paymentList, packageList: packageList)
+             
+                (UIApplication.shared.delegate as! AppDelegate).changeRoot(false)
+            }
        })
     }
     

@@ -304,7 +304,7 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
             self.detailList.removeAllObjects()
             
                         
-            self.detailList.addObjects(from: self.filter(info: data, relate: !(data["related"] is NSNull)) as! [Any])
+            self.detailList.addObjects(from: self.filter(info: data, relate: !(data["related"] is NSNull) || data.getValueFromKey("price") != "0") as! [Any])
             
             self.tempInfo.removeAllObjects()
             
@@ -353,23 +353,6 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
                 return
             }
             
-//            do {
-//                let path = self.pdfFile(fileName: book.getValueFromKey("id"))
-//                let url = URL(fileURLWithPath: path)
-//                let reader = try Reader_ViewController.init()
-//
-//                let bookInfo = NSMutableDictionary.init(dictionary: book)
-//
-//                bookInfo["file_url"] = (result["result"] as! NSDictionary).getValueFromKey("file_url")
-//
-//                reader.config = bookInfo
-//
-//                self.navigationController?.pushViewController(reader, animated: true)
-//
-//             } catch {
-//                 print(error)
-//             }
-            
             let reader = Reader_ViewController()
 
             let bookInfo = NSMutableDictionary.init(dictionary: book)
@@ -380,17 +363,53 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
 
             self.navigationController?.pushViewController(reader, animated: true)
 
-           self.adjustInset()
+            self.adjustInset()
         })
     }
+    
+    func didRequestItemInfo(book: NSDictionary) {
+       let request = NSMutableDictionary.init(dictionary: [
+                                                           "header":["session":Information.token == nil ? "" : Information.token!],
+                                                           "session":Information.token ?? "",
+                                                           "item_id": book.getValueFromKey("id") ?? "",
+                                                           "item_type": "item",
+                                                           "overrideAlert":"1",
+                                                           "overrideLoading":"1"
+                                                           ])
+       request["CMD_CODE"] = "checkItemPurchaseInfo"
+       LTRequest.sharedInstance()?.didRequestInfo((request as! [AnyHashable : Any]), withCache: { (cacheString) in
+       }, andCompletion: { (response, errorCode, error, isValid, object) in
+           let result = response?.dictionize() ?? [:]
+           
+           if result.getValueFromKey("error_code") != "0" || result["result"] is NSNull {
+               self.showToast(response?.dictionize().getValueFromKey("error_msg") == "" ? "Lỗi xảy ra, mời bạn thử lại" : response?.dictionize().getValueFromKey("error_msg"), andPos: 0)
+               return
+           }
+        
+        if (result["result"] as! NSDictionary).getValueFromKey("status") == "1" {
+            self.showToast("Sách đã được mua thành công", andPos: 0)
+        } else {
+            let checkInfo = NSMutableDictionary.init(dictionary: book)
+            checkInfo["is_package"] = "0"
+            
+            let checkOut = Check_Out_ViewController.init()
+            checkOut.info = checkInfo
+    
+            let nav = UINavigationController.init(rootViewController: checkOut)
+            nav.isNavigationBarHidden = true
+            nav.modalPresentationStyle = .fullScreen
+            
+            self.present(nav, animated: true, completion: nil)
+         }
+       })
+   }
 
     func didRequestPackage(book: NSDictionary) {
         
-        print("-->", book)
         self.didRequestUrlBook(book: book)
 
         return
-        
+
            let request = NSMutableDictionary.init(dictionary: [
                                                                "header":["session":Information.token == nil ? "" : Information.token!],
                                                                "session":Information.token ?? "",
@@ -405,11 +424,11 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
                    self.showToast(response?.dictionize().getValueFromKey("error_msg") == "" ? "Lỗi xảy ra, mời bạn thử lại" : response?.dictionize().getValueFromKey("error_msg"), andPos: 0)
                    return
                }
-               if !self.checkRegister(package: response?.dictionize()["result"] as! NSArray, type: "EBOOK") {
-                   self.center()?.pushViewController(Package_ViewController.init(), animated: true)
-               } else {
-                   self.didRequestUrlBook(book: book)
-               }
+//               if !self.checkRegister(package: response?.dictionize()["result"] as! NSArray, type: "EBOOK") {
+//                   self.center()?.pushViewController(Package_ViewController.init(), animated: true)
+//               } else {
+//                   self.didRequestUrlBook(book: book)
+//               }
            })
        }
     
@@ -582,7 +601,6 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: indexPath.section == 0 ? "Book_Detail_Infor" : indexPath.section == 1 ? "Author_Bio_Cell" : indexPath.section == 2 ? "Book_Detail_Option_Cell" : indexPath.section == 3 ? "TG_Book_Chap_Cell" : "TG_Map_Cell", for: indexPath as IndexPath)
         
         
-        
         if indexPath.section == 0 {
             
             let title = self.withView(cell, tag: 1) as! UILabel
@@ -639,33 +657,30 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
                     v.isHidden = v.tag != 2 && v.tag != 3
                 }
             }
+                        
+            
             
             if detail.getValueFromKey("tag") == "4" {
+                
+                for v in cell.contentView.subviews {
+                    v.isHidden = v.tag != 4 && v.tag != 5
+                }
+                
                 let readOrListen = self.withView(cell, tag: 4) as! UIButton
+                readOrListen.isHidden = (self.tempInfo["related"] is NSNull)
                 readOrListen.setTitleColor(UIColor.orange, for: .normal)
                 readOrListen.action(forTouch: [:]) { (objc) in
                     let bookInfo:NSMutableDictionary = NSMutableDictionary.init(dictionary: (self.tempInfo["related"] as! NSDictionary))
                     bookInfo["url"] = self.config["url"]
-                    self.didRequestUrl(info: bookInfo)
+                    self.didRequestUrl(info: bookInfo, callBack: { value in
+                        
+                    })
                 }
                 
                 let purchase = self.withView(cell, tag: 5) as! UIButton
+                purchase.isHidden = self.tempInfo.getValueFromKey("price") == "0"
                 purchase.action(forTouch: [:]) { (obj) in
-                    
-                    let checkInfo = NSMutableDictionary.init(dictionary: self.tempInfo)
-                    checkInfo["is_package"] = "0"
-                    
-                    let checkOut = Check_Out_ViewController.init()
-                    checkOut.info = checkInfo
-                    
-                    let nav = UINavigationController.init(rootViewController: checkOut)
-                    nav.isNavigationBarHidden = true
-                    nav.modalPresentationStyle = .fullScreen
-                    
-                    self.present(nav, animated: true, completion: nil)
-                }
-                for v in cell.contentView.subviews {
-                    v.isHidden = v.tag != 4 && v.tag != 5
+                    self.didRequestItemInfo(book: self.tempInfo)
                 }
             }
             
@@ -693,8 +708,6 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
             title.text = chap.getValueFromKey("name")
 
             let description = self.withView(cell, tag: 2) as! UILabel
-
-//            description.text = chap.getValueFromKey("total_character") + " chữ Cập nhật: " + chap.getValueFromKey("publish_time")
 
             description.text = "Cập nhật: " + chap.getValueFromKey("publish_time")
 
@@ -753,7 +766,9 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
             let bookInfo:NSMutableDictionary = NSMutableDictionary.init(dictionary: (dataList[indexPath.item] as! NSDictionary))
             bookInfo["url"] = self.config["url"]
             if bookInfo.getValueFromKey("book_type") == "3" {
-               self.didRequestUrl(info: bookInfo)
+               self.didRequestUrl(info: bookInfo, callBack: { value in
+                
+               })
                return
             }
             self.config = bookInfo

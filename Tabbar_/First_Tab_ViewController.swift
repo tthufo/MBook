@@ -243,7 +243,9 @@ extension First_Tab_ViewController: UITableViewDataSource, UITableViewDelegate {
             }
             (cell as! TG_Room_Cell_N).callBack = { info in
                 if (info as! NSDictionary).getValueFromKey("book_type") == "3" {
-                    self.didRequestUrl(info: (info as! NSDictionary))
+                    self.didRequestUrl(info: (info as! NSDictionary), callBack: { value in
+                        
+                    })
                     return
                 }
                 let bookDetail = Book_Detail_ViewController.init()
