@@ -49,6 +49,7 @@ typedef enum __playerState
 
 - (IBAction)playPrevious:(UIButton*)sender;
 
+- (void)adjustInset;
 
 - (void)backToTop;
 

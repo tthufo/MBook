@@ -95,6 +95,7 @@ extension UIView {
     }
 
     func firstSubview(withClassName className: String) -> UIView? {
+        print("-->", allSubviews.first { type(of: $0).description() == className })
         return allSubviews.first { type(of: $0).description() == className }
     }
 }
@@ -183,7 +184,7 @@ class Reader_ViewController: UIViewController {
         pdfView.usePageViewController(true, withViewOptions: [
             UIPageViewController.OptionsKey.interPageSpacing: 0
         ])
-        pdfView.overrideCenterAlign()
+//        pdfView.overrideCenterAlign()
         queueingScrollView?.showsHorizontalScrollIndicator = false
         subscribeToNotifications()
         

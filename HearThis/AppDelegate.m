@@ -583,6 +583,8 @@ UIBackgroundTaskIdentifier bgTask;
         
     } completion:^(BOOL finished) {
         
+        [[self PLAYER] adjustInset];
+        
         if([self isParallax]) {
             [self didEmbed];
             [self didEmbed:[self TOPVIEWCONTROLER]];

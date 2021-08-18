@@ -743,7 +743,6 @@
 
 - (IBAction)playNext:(UIButton*)sender;
 {
-    NSLog(@"--->%i", sender.tag);
     if (sender.tag == 33 && !isBlock) {
         [self goUp];
     }
@@ -752,7 +751,6 @@
 
 - (IBAction)playPrevious:(UIButton*)sender;
 {
-    NSLog(@"--->%i", sender.tag);
     if (sender.tag == 11 && !isBlock) {
         [self goUp];
     }

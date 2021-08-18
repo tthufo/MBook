@@ -612,16 +612,18 @@ extension UIViewController {
     func didPressBuy(isAudio: Bool) {
         let vip = VIP_ViewController.init()
         vip.callBack = { info in
-            print(info)
+            if self.isEmbed() {
+//                self.player()?.adjustInset()
+            }
         }
         let nav = UINavigationController.init(rootViewController: vip)
         nav.isNavigationBarHidden = true
         nav.modalPresentationStyle = .fullScreen
-        if isAudio {
-            self.player()?.present(nav, animated: true, completion: nil)
-        } else {
+//        if isAudio {
+//            self.player()?.present(nav, animated: true, completion: nil)
+//        } else {
             self.center().present(nav, animated: true, completion: nil)
-        }
+//        }
     }
     
     @objc func didRequestUrl(info: NSDictionary, callBack: ((_ info: Any)->())?) {
