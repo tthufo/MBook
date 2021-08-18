@@ -312,7 +312,7 @@ class Reader_ViewController: UIViewController {
             }
             self.present(nav, animated: true, completion: nil)
         } else {
-            self.showToast("Không có mục lục", andPos: 0)
+            self.showToast("Sách không có danh sách mục lục", andPos: 0)
         }
     }
 

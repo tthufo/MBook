@@ -86,7 +86,7 @@ class First_Tab_ViewController: UIViewController, UITextFieldDelegate {
                                         ], "height": 0, "loaded": false, "ident": "TG_Room_Cell_Banner_0"],
         
         
-                                      ["title":"MỚI NHẤT",
+                                      ["title":"SÁCH MỚI NHẤT",
                                        "url": ["CMD_CODE":"getListBook",
                                           "page_index": 1,
                                           "page_size": 25,
@@ -107,7 +107,7 @@ class First_Tab_ViewController: UIViewController, UITextFieldDelegate {
         
         
         
-                                      ["title":"MIỄN PHÍ HOT",
+                                      ["title":"SÁCH MIỄN PHÍ HOT",
                                        "url": ["CMD_CODE":"getListBook",
                                           "page_index": 1,
                                           "page_size": 9,

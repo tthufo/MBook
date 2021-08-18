@@ -29,6 +29,8 @@ class Information: NSObject {
     
     static var allPackage: String?
     
+    @objc static var loginType: String?
+    
     @objc static var isVip: Bool = false
     
     @objc static var packageInfo: String = "Tài khoản giới hạn"
@@ -123,6 +125,10 @@ class Information: NSObject {
     }
     
     @objc static func removeInfo() {
+        
+        self.searchValue = ""
+        
+        self.packageInfo = "Tài khoản giới hạn"
         
         self.remove("social")
         

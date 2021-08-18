@@ -23,20 +23,6 @@ class PC_Inner_Info_ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var name: UITextField!
     
     @IBOutlet var email: UITextField!
-
-//    @IBOutlet var birthday: UITextField!
-    
-//    @IBOutlet var address: UITextField!
-//
-//    @IBOutlet var avatar: UIImageView!
-//
-//    @IBOutlet var male: UIImageView!
-//
-//    @IBOutlet var female: UIImageView!
-    
-//    @IBOutlet var dateTime: UIView!
-
-//    var avatarTemp: UIImage!
     
     @IBOutlet var emailBG: UIView!
 
@@ -48,10 +34,6 @@ class PC_Inner_Info_ViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet var submit: UIButton!
 
-//    @IBOutlet var bottomHeight: NSLayoutConstraint!
-    
-//    var sex: String!
-    
     var kb: KeyBoard!
     
     @IBOutlet var sideGapLeft: NSLayoutConstraint!
@@ -80,61 +62,24 @@ class PC_Inner_Info_ViewController: UIViewController, UITextFieldDelegate {
                            
         userId.text = "userID" + (Information.userInfo?.getValueFromKey("user_id"))!
 
-        phone.text = Information.userInfo?.getValueFromKey("phone")
-
         name.text = Information.userInfo?.getValueFromKey("name")
         
+        
+        phone.text = Information.userInfo?.getValueFromKey("phone")
+
+        phone.isEnabled = Information.loginType != "phone"
+        
+        (self.withView(cell, tag: 68) as! UIView).backgroundColor = Information.loginType != "phone" ? .white : .secondarySystemBackground
+                        
         email.text = Information.userInfo?.getValueFromKey("email")
         
-//        let birtText = Information.userInfo?.getValueFromKey("birthday")?.components(separatedBy: " ").first
-//
-//        birthday.text = birtText
+        email.isEnabled = Information.loginType != "email"
+        
+        (self.withView(cell, tag: 69) as! UIView).backgroundColor = Information.loginType != "email" ? .white : .secondarySystemBackground
 
-//        address.text = Information.userInfo?.getValueFromKey("address")
-        
-//        sex = Information.userInfo?.getValueFromKey("sex")
-        
-//        if Information.avatar != nil {
-//            avatarTemp = Information.avatar
-//            avatar.image = avatarTemp
-//        } else {
-//        avatar.imageUrlHolder(url: (Information.userInfo?.getValueFromKey("avatar"))!, holder: "ic_avatar")
-                
-//        }
                 
         phone.addTarget(self, action: #selector(textRePassIsChanging), for: .editingChanged)
         email.addTarget(self, action: #selector(textEmailIsChanging), for: .editingChanged)
-        
-//        let isEmail: Bool = email.text?.count != 0 && (email.text?.isValidEmail())!
-//        let isMatch: Bool = phone.text?.count != 0 && phone.text?.count == 10
-          
-//        submit.isEnabled = phone.text?.count != 0 && email.text?.count != 0 && isEmail && isMatch
-//        submit.alpha = phone.text?.count != 0 && email.text?.count != 0 && isEmail && isMatch ? 1 : 0.5
-        
-//        avatar.action(forTouch: [:]) { (objc) in
-//            self.didPressPreview(image: self.avatarTemp != nil ? self.avatarTemp as Any: Information.userInfo?.getValueFromKey("avatar") as Any)
-//        }
-        
-//        self.male.image = UIImage.init(named: sex == "1" ? "radio_ac" : "radio_in")
-//        self.female.image = UIImage.init(named: sex == "1" ? "radio_in" : "radio_ac")
-//
-//        male.action(forTouch: [:]) { (objc) in
-//            self.female.image = UIImage.init(named: "radio_in")
-//            self.male.image = UIImage.init(named: "radio_ac")
-//            self.sex = "1"
-//        }
-//
-//        female.action(forTouch: [:]) { (objc) in
-//            self.female.image = UIImage.init(named: "radio_ac")
-//            self.male.image = UIImage.init(named: "radio_in")
-//            self.sex = "0"
-//        }
-        
-//        dateTime.action(forTouch: [:]) { (objc) in
-//            EM_MenuView.init(date: ["date": self.birthday.text as Any]).show { (index, obj, menu) in
-//                self.birthday.text = (obj as! NSDictionary).getValueFromKey("date")
-//            }
-//        }
 
         didGetInfo()
     }
@@ -357,9 +302,6 @@ class PC_Inner_Info_ViewController: UIViewController, UITextFieldDelegate {
         let isMatch: Bool = phone.text?.count != 0 && phone.text?.count == 10
         emailBG.backgroundColor = isEmail ? AVHexColor.color(withHexString: "#FFFFFF") : .red
         emailError.alpha = isEmail ? 0 : 1
-        
-//        submit.isEnabled = phone.text?.count != 0 && email.text?.count != 0 && isEmail && isMatch
-//        submit.alpha = phone.text?.count != 0 && email.text?.count != 0 && isEmail && isMatch ? 1 : 0.5
     }
     
     @objc func textRePassIsChanging(_ textField:UITextField) {
@@ -367,9 +309,6 @@ class PC_Inner_Info_ViewController: UIViewController, UITextFieldDelegate {
         let isMatch: Bool = phone.text?.count != 0 && phone.text?.count == 10
         rePassBG.backgroundColor = isMatch ? AVHexColor.color(withHexString: "#FFFFFF") : .red
         rePassError.alpha = isMatch ? 0 : 1
-        
-//        submit.isEnabled = phone.text?.count != 0 && email.text?.count != 0 && isEmail && isMatch
-//        submit.alpha = phone.text?.count != 0 && email.text?.count != 0 && isEmail && isMatch ? 1 : 0.5
     }
 }
 
@@ -384,6 +323,14 @@ extension PC_Inner_Info_ViewController: UITableViewDataSource, UITableViewDelega
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        (self.withView(cell, tag: 68) as! UIView).backgroundColor = Information.loginType != "phone" ? .white : .secondarySystemBackground
+        
+        phone.isEnabled = Information.loginType != "phone"
+        
+        email.isEnabled = Information.loginType != "email"
+        
+        (self.withView(cell, tag: 69) as! UIView).backgroundColor = Information.loginType != "email" ? .white : .secondarySystemBackground
         
         return cell
     }

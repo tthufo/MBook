@@ -197,27 +197,24 @@ class PC_Forgot_ViewController: UIViewController , UITextFieldDelegate {
         }
 
         LTRequest.sharedInstance()?.didRequestInfo(["CMD_CODE":"forgetPassword",
-                                                    "username":self.stringIsNumber(uName.text!) ? convertPhone() : uName.text!,
+                                                    "method_send_password":self.stringIsNumber(uName.text!) ? convertPhone() : uName.text!,
                                                     "overrideAlert":"1",
                                                     "overrideLoading":"1",
                                                     "host":self], withCache: { (cacheString) in
         }, andCompletion: { (response, errorCode, error, isValid, object) in
             let result = response?.dictionize() ?? [:]
                                     
-            if result.getValueFromKey("error_code") != "0" || result["result"] is NSNull {
-//               self.showToast(response?.dictionize().getValueFromKey("error_msg") == "" ? "Lỗi xảy ra, mời bạn thử lại" : response?.dictionize().getValueFromKey("error_msg"), andPos: 0)
+            if result.getValueFromKey("error_code") != "0" {
                 EM_MenuView.init(confirm: ["image": "fail", "line1": "Lấy lại mật khẩu không thành công", "line2": "Xin lỗi bạn về sự cố này, vui lòng thử lại sau", "line3": "Thoát"]).show { (index, obj, menu) in
                     if index == 4 {
                     }
                 }
                 return
             }
-            
-//            self.showToast("Lấy lại mật khẩu thành công. Mật khẩu mới sẽ đưởi gửi về số điện thoại %@".format(parameters: self.uName.text!), andPos: 0)
-//
-            EM_MenuView.init(confirm: ["image": "success", "line1": "Mật khẩu mới đã tạo", "line2": "Vui lòng kiểm tra hòm thư/tin nhắn\n để lấy mật khẩu mới", "line3": "Về trang Đăng nhập"]).show { (index, obj, menu) in
+
+            EM_MenuView.init(confirm: ["image": "success", "line1": "Mật khẩu mới đã tạo", "line2": "Vui lòng kiểm tra hòm thư hoặc tin nhắn\n để lấy mật khẩu mới", "line3": "Về trang Đăng nhập"]).show { (index, obj, menu) in
                 if index == 4 {
-                    self.didPressBack()
+                    self.navigationController?.popToRootViewController(animated: true)
                 }
             }
         })

@@ -431,17 +431,18 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
         
         if is3G {
             self.uName.text = (phoneNumber as! String)
-            requestLogin(request: ["username":phoneNumber,
-//                                   "password":pass.text as Any,
-                                   "login_type":"3G"])
             Information.allPackage = "1"
+            Information.loginType = "phone"
+            requestLogin(request: ["username":phoneNumber,
+                                   "login_type":"3G"])
             print("3G")
         } else {
             if logged {
+                Information.allPackage = self.stringIsNumber(uName.text!) ? "1" : "0"
+                Information.loginType = self.stringIsNumber(uName.text!) ? "phone" : "email"
                 requestLogin(request: ["username":self.stringIsNumber(uName.text!) ? convertPhone() : uName.text!,
                                        "password":pass.text as Any,
                                        "login_type":"WIFI"])
-                Information.allPackage = self.stringIsNumber(uName.text!) ? "1" : "0"
                 print("LOGIN_LOGGED")
             } else if social_logged == nil {
                 if phoneNumber is UIButton {
@@ -449,15 +450,17 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
                         self.showToast("Bạn chưa nhập đủ thông tin", andPos: 0)
                         return
                     }
+                    Information.allPackage = self.stringIsNumber(uName.text!) ? "1" : "0"
+                    Information.loginType = self.stringIsNumber(uName.text!) ? "phone" : "email"
                     requestLogin(request: ["username":self.stringIsNumber(uName.text!) ? convertPhone() : uName.text!,
                                             "password":pass.text as Any,
                                             "login_type":"WIFI"])
-                    Information.allPackage = self.stringIsNumber(uName.text!) ? "1" : "0"
                     print("BUTTON")
                 }
             } else {
-                didRequestLoginSocial(info: social_logged! as NSDictionary)
                 Information.allPackage = "0"
+                Information.loginType = "social"
+                didRequestLoginSocial(info: social_logged! as NSDictionary)
                 print("SOCIAL")
             }
         }
@@ -735,7 +738,7 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
            let payment = (result["result"] as! NSArray)
 
            paymentList.addObjects(from: payment.withMutable())
-            if !isSocial {
+           if Information.allPackage == "1" {
                 LTRequest.sharedInstance()?.didRequestInfo(["cmd_code":"getPackageInfo",
                                                             "header":["session":Information.token == nil ? "" : Information.token!],
                                                             "overrideAlert":"1",
@@ -819,7 +822,6 @@ extension PC_Login_ViewController: ASAuthorizationControllerDelegate {
                                               "name":"",
                                               "email":""
             ])
-            print("--->", aID, String(data: le!, encoding: .utf8))
         
             break
         default:

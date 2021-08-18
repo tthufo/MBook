@@ -134,13 +134,14 @@ class PC_ChangePass_ViewController: UIViewController, UITextFieldDelegate {
                                                     "old_password":oldPass.text as Any,
                                                     "new_password":newPass.text as Any,
                                                     "session":Information.token ?? "",
+                                                    
                                                     "overrideLoading":"1",
                                                     "overrideAlert":"1",
                                                     "host":self], withCache: { (cacheString) in
         }, andCompletion: { (response, errorCode, error, isValid, object) in
             let result = response?.dictionize() ?? [:]
 
-            if result.getValueFromKey("error_code") != "0" || result["result"] is NSNull {
+            if result.getValueFromKey("error_code") != "0" {
                 self.showToast(response?.dictionize().getValueFromKey("error_msg") == "" ? "Lỗi xảy ra, mời bạn thử lại" : response?.dictionize().getValueFromKey("error_msg"), andPos: 0)
                 return
             }

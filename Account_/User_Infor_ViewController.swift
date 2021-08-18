@@ -150,8 +150,8 @@ class User_Infor_ViewController: UIViewController, UITextFieldDelegate {
                 if self.isEmbed() {
                     self.unEmbed()
                 }
-                Information.removeInfo()
                 self.requestLogout()
+                Information.removeInfo()
                 FB_Plugin.shareInstance().signoutFacebook()
                 GG_PlugIn.shareInstance().signOutGoogle()
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
@@ -168,15 +168,15 @@ class User_Infor_ViewController: UIViewController, UITextFieldDelegate {
     
     func requestLogout() {
         LTRequest.sharedInstance()?.didRequestInfo(["CMD_CODE":"logout",
-                                                    "user_id":Information.userInfo?.getValueFromKey("user_id") ?? "",
+//                                                    "user_id":Information.userInfo?.getValueFromKey("user_id") ?? "",
                                                     "header":["session":Information.token == nil ? "" : Information.token!],
-                                                    "device_id":FirePush.shareInstance()?.deviceToken() ?? "",
+                                                    "push_token":FirePush.shareInstance()?.deviceToken() ?? "",
                                                     "overrideAlert":"1",
                                                     "host":self], withCache: { (cacheString) in
         }, andCompletion: { (response, errorCode, error, isValid, object) in
             let result = response?.dictionize() ?? [:]
             if result.getValueFromKey("ERR_CODE") != "0" {
-                self.showToast(response?.dictionize().getValueFromKey("ERR_MSG"), andPos: 0)
+//                self.showToast(response?.dictionize().getValueFromKey("ERR_MSG"), andPos: 0)
                 return
             }
         
@@ -205,9 +205,18 @@ class User_Infor_ViewController: UIViewController, UITextFieldDelegate {
     func viewInfor() {
         account.text = "userID" + (Information.userInfo?.getValueFromKey("user_id"))!
         name.text = Information.userInfo?.getValueFromKey("name")
-        userName.text = Information.userInfo?.getValueFromKey("name")
-        phone.text = Information.userInfo?.getValueFromKey("phone")
-        email.text = Information.userInfo?.getValueFromKey("email")
+        userName.text = Information.userInfo?.getValueFromKey("name") == "" ? "(Chưa cài đặt)" : Information.userInfo?.getValueFromKey("name")
+        if Information.userInfo?.getValueFromKey("name") == "" {
+            userName.textColor = .black
+        }
+        phone.text = Information.userInfo?.getValueFromKey("phone") == "" ? "(Chưa cài đặt)" : Information.userInfo?.getValueFromKey("phone")
+        if Information.userInfo?.getValueFromKey("phone") == "" {
+            phone.textColor = .black
+        }
+        email.text = Information.userInfo?.getValueFromKey("email") == "" ? "(Chưa cài đặt)" : Information.userInfo?.getValueFromKey("email")
+        if Information.userInfo?.getValueFromKey("email") == "" {
+            email.textColor = .black
+        }
         if Information.avatar != nil {
             avatarTemp = Information.avatar
             avatar.image = avatarTemp

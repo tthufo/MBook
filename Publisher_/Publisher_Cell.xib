@@ -10,18 +10,18 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Publisher_Cell" rowHeight="101" id="dPC-Ic-FeA">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="101"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Publisher_Cell" rowHeight="86" id="dPC-Ic-FeA">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="86"/>
             <autoresizingMask key="autoresizingMask"/>
-            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dPC-Ic-FeA" id="xek-8x-Akz">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="101"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dPC-Ic-FeA" id="xek-8x-Akz">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="86"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="hd1-Rf-Sar">
-                        <rect key="frame" x="7" y="7" width="86" height="86"/>
+                        <rect key="frame" x="7" y="7" width="70" height="70"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="86" id="0tN-e5-Xo0"/>
-                            <constraint firstAttribute="width" constant="86" id="xwC-tO-CSK"/>
+                            <constraint firstAttribute="height" constant="70" id="0tN-e5-Xo0"/>
+                            <constraint firstAttribute="width" constant="70" id="xwC-tO-CSK"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -29,15 +29,6 @@
                             </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fl2-lE-8Zb">
-                        <rect key="frame" x="101" y="41" width="208" height="19.5"/>
-                        <constraints>
-                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="19.5" id="TG4-oH-pem"/>
-                        </constraints>
-                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                        <color key="textColor" red="0.1137254902" green="0.32156862749999998" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
-                        <nil key="highlightedColor"/>
-                    </label>
                     <label hidden="YES" opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NeL-Mf-EN5">
                         <rect key="frame" x="101" y="32" width="208" height="18"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -53,26 +44,37 @@
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     </textView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Rq-eT-4Kz">
-                        <rect key="frame" x="8" y="100.5" width="312" height="0.5"/>
+                        <rect key="frame" x="8" y="84.5" width="312" height="0.5"/>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="0.5" id="kLy-l7-bII"/>
                         </constraints>
                     </view>
+                    <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fl2-lE-8Zb">
+                        <rect key="frame" x="85" y="31.5" width="224" height="21"/>
+                        <constraints>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="19.5" id="HJQ-pR-o4Z"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                        <color key="textColor" red="0.1137254902" green="0.32156862749999998" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="fl2-lE-8Zb" firstAttribute="centerY" secondItem="hd1-Rf-Sar" secondAttribute="centerY" id="27r-nR-dtX"/>
                     <constraint firstItem="hd1-Rf-Sar" firstAttribute="top" secondItem="xek-8x-Akz" secondAttribute="top" constant="7" id="3KI-h2-lDf"/>
+                    <constraint firstItem="fl2-lE-8Zb" firstAttribute="leading" secondItem="hd1-Rf-Sar" secondAttribute="trailing" constant="8" symbolic="YES" id="6RD-HV-Ypx"/>
+                    <constraint firstItem="2Rq-eT-4Kz" firstAttribute="top" secondItem="fl2-lE-8Zb" secondAttribute="bottom" constant="32" id="8Bu-YJ-Tyr"/>
+                    <constraint firstItem="fl2-lE-8Zb" firstAttribute="centerY" secondItem="xek-8x-Akz" secondAttribute="centerY" id="HlU-e0-RoL"/>
                     <constraint firstItem="2Rq-eT-4Kz" firstAttribute="leading" secondItem="xek-8x-Akz" secondAttribute="leading" constant="8" id="LSZ-Y6-pi2"/>
                     <constraint firstAttribute="bottom" secondItem="2Rq-eT-4Kz" secondAttribute="bottom" id="Tgn-NL-7Mb"/>
-                    <constraint firstAttribute="trailing" secondItem="fl2-lE-8Zb" secondAttribute="trailing" constant="11" id="c2e-oZ-WnK"/>
                     <constraint firstAttribute="trailing" secondItem="2Rq-eT-4Kz" secondAttribute="trailing" id="gF2-Ua-fVX"/>
                     <constraint firstItem="2Rq-eT-4Kz" firstAttribute="top" secondItem="hd1-Rf-Sar" secondAttribute="bottom" constant="7.5" id="hm7-RX-nBK"/>
                     <constraint firstItem="hd1-Rf-Sar" firstAttribute="leading" secondItem="xek-8x-Akz" secondAttribute="leading" constant="7" id="rTH-1E-eqm"/>
-                    <constraint firstItem="fl2-lE-8Zb" firstAttribute="centerY" secondItem="xek-8x-Akz" secondAttribute="centerY" id="tHf-a5-jDO"/>
-                    <constraint firstItem="fl2-lE-8Zb" firstAttribute="leading" secondItem="hd1-Rf-Sar" secondAttribute="trailing" constant="8" symbolic="YES" id="xPz-H3-7PK"/>
+                    <constraint firstAttribute="trailing" secondItem="fl2-lE-8Zb" secondAttribute="trailing" constant="11" id="wsc-r0-dtE"/>
                 </constraints>
             </tableViewCellContentView>
-            <point key="canvasLocation" x="-73.913043478260875" y="8.3705357142857135"/>
+            <point key="canvasLocation" x="-73.913043478260875" y="3.3482142857142856"/>
         </tableViewCell>
     </objects>
     <resources>

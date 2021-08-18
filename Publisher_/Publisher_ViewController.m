@@ -18,13 +18,22 @@
     
     UIRefreshControl * refreshControl;
     
-    NSMutableArray * dataList;
+    NSMutableArray * dataList, * tempList;
         
     int pageIndex;
     
     int totalPage;
     
-    BOOL isLoadMore;
+    BOOL isLoadMore, isSearch;
+    
+    IBOutlet UIView * searchBg;
+
+    IBOutlet UITextField * searchView;
+
+    IBOutlet UIButton * searchButton;
+    
+    IBOutlet NSLayoutConstraint * labelHeight;
+
 }
 
 @end
@@ -44,11 +53,15 @@
 {
     [super viewDidLoad];
     
+    labelHeight.constant = 0;
+    
     pageIndex = 1;
     
     totalPage = 1;
     
     dataList = [NSMutableArray new];
+    
+    tempList = [NSMutableArray new];
     
     [tableView withCell: @"Publisher_Cell"];
     
@@ -56,7 +69,7 @@
     
     tableView.rowHeight = UITableViewAutomaticDimension;
 
-    tableView.estimatedRowHeight = IS_IPAD ? 245 : 150;
+    tableView.estimatedRowHeight = IS_IPAD ? 140 : 86;
     
     refreshControl = [UIRefreshControl new];
     
@@ -64,7 +77,123 @@
     
     [refreshControl addTarget:self action:@selector(didReloadData) forControlEvents:UIControlEventValueChanged];
         
+    [searchView addTarget:self action:@selector(textIsChanging:) forControlEvents:UIControlEventValueChanged];
+    
     [self didRequestData:YES];
+}
+
+- (void)searchVisible:(BOOL)show {
+    searchBg.hidden = show;
+    searchView.hidden = show;
+}
+
+- (IBAction)didPressSearch:(UIButton*)sender {
+    [self searchVisible:isSearch];
+    [searchButton setImage:[UIImage imageNamed: !isSearch ? @"icon_close" : @"ic_search"] forState:UIControlStateNormal];
+//    searchButton.setImage(UIImage(named: !isSearch ? "icon_close" : "ic_search"), for: .normal)
+    if (isSearch) {
+        searchView.text = @"";
+        [searchView resignFirstResponder];
+        labelHeight.constant = 0;
+        [dataList removeAllObjects];
+        [dataList addObjectsFromArray:tempList];
+        [tableView reloadData];
+    } else {
+        [searchView becomeFirstResponder];
+        labelHeight.constant = 21;
+    }
+//    if isSearch {
+//        searchView.text = ""
+//        keyword = "TẤT CẢ"
+//        filterButton.setTitle("TẤT CẢ", for: .normal)
+//        filterButton.isEnabled = true
+//        arrow.isHidden = false
+//        self.didReload(refreshControl)
+//        searchView.resignFirstResponder()
+//    } else {
+//        if !isOn {
+//            filter()
+//        }
+//        filterButton.setTitle("KẾT QUẢ PHÙ HỢP NHẤT", for: .normal)
+//        filterButton.isEnabled = false
+//        arrow.isHidden = true
+//        keyword = "TẤT CẢ"
+//        self.didReload(refreshControl)
+//        searchView.becomeFirstResponder()
+//    }
+//    
+    isSearch = !isSearch;
+}
+
+- (NSString*)striping:(NSString*)value {
+    NSString *standard = [value stringByReplacingOccurrencesOfString:@"đ" withString:@"d"];
+    standard = [standard stringByReplacingOccurrencesOfString:@"Đ" withString:@"D"];
+    NSData *decode = [standard dataUsingEncoding:NSASCIIStringEncoding allowLossyConversion:YES];
+    NSString *ansi = [[NSString alloc] initWithData:decode encoding:NSASCIIStringEncoding];
+    return [ansi lowercaseString];
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    NSString * searchValue = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    
+    if ([searchValue isEqualToString:@""]) {
+        [dataList removeAllObjects];
+        [dataList addObjectsFromArray:tempList];
+        [tableView reloadData];
+        return YES;
+    }
+    
+    NSMutableArray * filterArray = [NSMutableArray new];
+    
+    for (NSDictionary * dict in tempList) {
+        if ([[self striping:[dict getValueFromKey:@"name"]] containsString:[self striping:searchValue]]) {
+            [filterArray addObject:dict];
+        }
+    }
+    
+//      NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"name contains[c] %@", ansi];
+//       NSArray * recherchemutablearray = [tempList filteredArrayUsingPredicate:resultPredicate];
+//
+    [dataList removeAllObjects];
+    [dataList addObjectsFromArray:filterArray];
+    [tableView reloadData];
+    return YES;
+}
+
+- (void)textIsChanging:(UITextField*)textField {
+    
+    if ([searchView.text isEqualToString:@""]) {
+        [dataList removeAllObjects];
+        [dataList addObjectsFromArray:tempList];
+        [tableView reloadData];
+        return;
+    }
+    
+//    NSMutableArray * filtered = [NSMutableArray new];
+//    for (NSDictionary * dict in tempList) {
+////        if([self striping:]) {
+////
+////        }
+//    }
+    
+      NSPredicate *resultPredicate = [NSPredicate predicateWithFormat:@"name contains[c] %@", textField.text];
+       NSArray * recherchemutablearray = [tempList filteredArrayUsingPredicate:resultPredicate];
+    
+//    for dict in tempList {
+//        if (strip((dict as! NSDictionary)["name"] as! String).replacingOccurrences(of: "Đ", with: "D").replacingOccurrences(of: "đ", with: "d")).containsIgnoringCase(find: strip(textField.text!)) {
+//            filtered.add(dict)
+//        }
+//    }
+//
+    [dataList removeAllObjects];
+    [dataList addObjectsFromArray:recherchemutablearray];
+    [tableView reloadData];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    return YES;
 }
 
 - (NSString *)inform:(NSString *)content {
@@ -113,9 +242,11 @@
                 if(!isLoadMore)
                 {
                     [dataList removeAllObjects];
+                    [tempList removeAllObjects];
                 }
                 
                 [dataList addObjectsFromArray:dict[@"result"][@"data"]];
+                [tempList addObjectsFromArray:dict[@"result"][@"data"]];
             } else {
                  [self showToast:[[dict getValueFromKey:@"error_msg"] isEqualToString:@""] ? @"Lỗi xảy ra, mời bạn thử lại" : [dict getValueFromKey:@"error_msg"] andPos:0];
             }
@@ -145,8 +276,6 @@
 - (CGFloat)tableView:(UITableView *)_tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return UITableViewAutomaticDimension;
-
-//    return UITableViewAutomaticDimension;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)_tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
