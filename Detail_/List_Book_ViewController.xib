@@ -90,6 +90,9 @@
                         <constraint firstAttribute="height" constant="64" id="qk3-Kx-hYm"/>
                         <constraint firstItem="aRE-dT-FeD" firstAttribute="trailing" secondItem="zBk-MB-z4z" secondAttribute="trailing" constant="60" id="swV-Ib-aqw"/>
                     </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="bgColorHex" value="#1E928C"/>
+                    </userDefinedRuntimeAttributes>
                 </view>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="ysb-le-BiT">
                     <rect key="frame" x="10" y="149" width="355" height="508"/>

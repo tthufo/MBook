@@ -24,7 +24,7 @@
                         <constraint firstAttribute="height" constant="33" id="3YE-wD-RHO"/>
                         <constraint firstAttribute="width" constant="33" id="AC3-Pc-2bY"/>
                     </constraints>
-                    <state key="normal" image="icon_back"/>
+                    <state key="normal" image="ico_arrow_l_white"/>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gGS-Qa-Bqg">
                     <rect key="frame" x="47" y="142.5" width="389" height="21"/>
@@ -99,7 +99,7 @@
                         <constraint firstAttribute="width" constant="33" id="Eps-Mf-Uoi"/>
                         <constraint firstAttribute="height" constant="33" id="kvm-F0-Z5x"/>
                     </constraints>
-                    <state key="normal" image="icon_back"/>
+                    <state key="normal" image="ico_arrow_l_white"/>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ReY-jJ-TAO">
                     <rect key="frame" x="47" y="75" width="261" height="21"/>
@@ -163,6 +163,6 @@
     </objects>
     <resources>
         <image name="bg_login" width="239.5" height="426.5"/>
-        <image name="icon_back" width="33" height="33"/>
+        <image name="ico_arrow_l_white" width="33" height="33"/>
     </resources>
 </document>

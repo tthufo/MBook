@@ -89,6 +89,9 @@
                         <constraint firstAttribute="height" constant="64" id="pp6-IQ-CPO"/>
                         <constraint firstItem="B82-XP-zj2" firstAttribute="leading" secondItem="tHn-ll-PiU" secondAttribute="trailing" constant="8" id="szO-O5-RRO"/>
                     </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="bgColorHex" value="#1E928C"/>
+                    </userDefinedRuntimeAttributes>
                 </view>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="onDrag" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="HO7-Kn-qFu">
                     <rect key="frame" x="0.0" y="143" width="320" height="425"/>

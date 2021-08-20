@@ -114,6 +114,9 @@
                         <constraint firstItem="G3s-w6-4zp" firstAttribute="leading" secondItem="Lcd-lY-gSU" secondAttribute="trailing" constant="45" id="mzS-ZY-ubt"/>
                         <constraint firstItem="JGf-wJ-xkL" firstAttribute="leading" secondItem="q2e-by-0OV" secondAttribute="trailing" constant="8" symbolic="YES" id="uan-LT-1J4"/>
                     </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="bgColorHex" value="#1E928C"/>
+                    </userDefinedRuntimeAttributes>
                 </view>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="135-H4-Ces">
                     <rect key="frame" x="10" y="123" width="300" height="435"/>

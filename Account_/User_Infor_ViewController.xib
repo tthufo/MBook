@@ -126,6 +126,9 @@
                         <constraint firstItem="iIQ-RA-sZC" firstAttribute="top" secondItem="mhR-99-ajO" secondAttribute="top" constant="10" id="rhJ-rE-Hns"/>
                         <constraint firstItem="ViO-dr-Mhe" firstAttribute="top" secondItem="mhR-99-ajO" secondAttribute="top" constant="15" id="syN-tT-MlL"/>
                     </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="bgColorHex" value="#1E928C"/>
+                    </userDefinedRuntimeAttributes>
                 </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>

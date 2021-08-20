@@ -64,6 +64,9 @@
                         <constraint firstItem="KVk-zg-EZA" firstAttribute="trailing" secondItem="bzA-YO-YgG" secondAttribute="trailing" constant="8" id="e4J-hM-ieD"/>
                         <constraint firstAttribute="height" constant="64" id="lFD-Yb-LbI"/>
                     </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="bgColorHex" value="#1E928C"/>
+                    </userDefinedRuntimeAttributes>
                 </view>
                 <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2dX-hn-Svw">
                     <rect key="frame" x="0.0" y="108" width="414" height="754"/>

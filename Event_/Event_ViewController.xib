@@ -44,7 +44,7 @@
                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8i0-TN-8Ei">
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8i0-TN-8Ei">
                             <rect key="frame" x="323" y="10" width="44" height="44"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="44" id="5lV-XZ-uiM"/>
@@ -67,6 +67,9 @@
                         <constraint firstAttribute="height" constant="64" id="tSu-if-W6N"/>
                         <constraint firstItem="BGV-lD-IHW" firstAttribute="trailing" secondItem="8i0-TN-8Ei" secondAttribute="trailing" constant="8" id="wxV-eV-JIN"/>
                     </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="bgColorHex" value="#1E928C"/>
+                    </userDefinedRuntimeAttributes>
                 </view>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="kal-1n-Ycj">
                     <rect key="frame" x="10" y="72" width="355" height="585"/>

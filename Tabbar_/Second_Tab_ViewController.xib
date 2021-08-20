@@ -99,6 +99,9 @@
                         <constraint firstItem="0Vg-X7-wdo" firstAttribute="leading" secondItem="JX1-Fa-cbG" secondAttribute="trailing" constant="16" id="ubH-hd-FM1"/>
                         <constraint firstItem="JX1-Fa-cbG" firstAttribute="top" secondItem="Gur-fu-bRv" secondAttribute="top" constant="10" id="xbB-d8-Dgj"/>
                     </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="bgColorHex" value="#1E928C"/>
+                    </userDefinedRuntimeAttributes>
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="onDrag" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="Qza-1l-HTV">
                     <rect key="frame" x="0.0" y="114" width="320" height="454"/>

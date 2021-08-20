@@ -64,6 +64,9 @@
                         <constraint firstItem="fw0-jl-3SV" firstAttribute="top" secondItem="2LD-zb-0xl" secondAttribute="top" constant="10" id="qZv-yk-AUA"/>
                         <constraint firstItem="v6b-pF-6eK" firstAttribute="leading" secondItem="2LD-zb-0xl" secondAttribute="leading" constant="8" id="tFw-tg-a4x"/>
                     </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="bgColorHex" value="#1E928C"/>
+                    </userDefinedRuntimeAttributes>
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qfj-1i-wDp">
                     <rect key="frame" x="0.0" y="108" width="414" height="754"/>

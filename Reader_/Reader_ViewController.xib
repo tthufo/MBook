@@ -76,6 +76,9 @@
                         <constraint firstItem="E5Q-k8-K84" firstAttribute="leading" secondItem="tH1-YX-68o" secondAttribute="leading" constant="8" id="l5L-J3-Cvh"/>
                         <constraint firstAttribute="trailing" secondItem="41J-L5-vvB" secondAttribute="trailing" constant="8" id="xvd-Ni-FWm"/>
                     </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="bgColorHex" value="#1E928C"/>
+                    </userDefinedRuntimeAttributes>
                 </view>
                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ySy-S1-1mM" customClass="MarginLabel" customModule="MeBook" customModuleProvider="target">
                     <rect key="frame" x="186" y="819" width="42" height="35"/>
@@ -199,7 +202,9 @@
         <designable name="BXk-iU-bGX">
             <size key="intrinsicContentSize" width="-1" height="1.5"/>
         </designable>
-        <designable name="ySy-S1-1mM"/>
+        <designable name="ySy-S1-1mM">
+            <size key="intrinsicContentSize" width="24" height="0.0"/>
+        </designable>
     </designables>
     <resources>
         <image name="ico_menu" width="31.5" height="31.5"/>

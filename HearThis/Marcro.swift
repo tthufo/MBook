@@ -1230,4 +1230,22 @@ extension String {
             return layer.shadowRadius
         }
     }
+    
+//    @IBInspectable var bgColor: UIColor {
+//        set {
+//            self.backgroundColor = newValue
+//        }
+//        get {
+//            return self.backgroundColor!
+//        }
+//    }
+    
+    @IBInspectable var bgColorHex: String {
+        set {
+            self.backgroundColor = AVHexColor.color(withHexString: newValue)
+        }
+        get {
+            return "#1E928C"
+        }
+    }
 }

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -27,7 +27,7 @@
                         <constraint firstAttribute="height" constant="33" id="oIq-v5-ZjQ"/>
                         <constraint firstAttribute="width" constant="33" id="rlC-OO-cLa"/>
                     </constraints>
-                    <state key="normal" image="icon_back"/>
+                    <state key="normal" image="ico_arrow_l_white"/>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8nP-0A-IsZ">
                     <rect key="frame" x="47" y="142.5" width="389" height="21"/>
@@ -68,6 +68,7 @@
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
+            <viewLayoutGuide key="safeArea" id="EPP-VA-1IV"/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="qUM-Rg-ohd" firstAttribute="leading" secondItem="MKc-CM-pAW" secondAttribute="leading" constant="8" id="2TP-1c-bSP"/>
@@ -92,7 +93,6 @@
                 <constraint firstItem="ou6-mg-uyH" firstAttribute="top" secondItem="MKc-CM-pAW" secondAttribute="top" id="v6u-cn-2aI"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <viewLayoutGuide key="safeArea" id="EPP-VA-1IV"/>
             <point key="canvasLocation" x="-840.57971014492762" y="-485.49107142857139"/>
         </view>
         <view contentMode="scaleToFill" id="feB-4V-Q7P">
@@ -112,7 +112,7 @@
                         <constraint firstAttribute="width" constant="33" id="QXn-1Q-UbX"/>
                         <constraint firstAttribute="height" constant="33" id="nUE-x4-7w0"/>
                     </constraints>
-                    <state key="normal" image="icon_back"/>
+                    <state key="normal" image="ico_arrow_l_white"/>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fug-nB-2Pb">
                     <rect key="frame" x="47" y="75" width="261" height="21"/>
@@ -153,6 +153,7 @@
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
+            <viewLayoutGuide key="safeArea" id="hRq-x5-B8e"/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="vQ2-px-bXc" firstAttribute="leading" secondItem="hRq-x5-B8e" secondAttribute="leading" constant="8" id="23h-4U-Xai"/>
@@ -177,11 +178,10 @@
                 <constraint firstItem="8dq-fa-adr" firstAttribute="top" secondItem="feB-4V-Q7P" secondAttribute="top" id="r5f-L7-M45"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <viewLayoutGuide key="safeArea" id="hRq-x5-B8e"/>
             <point key="canvasLocation" x="-242.0289855072464" y="-501.89732142857139"/>
         </view>
     </objects>
     <resources>
-        <image name="icon_back" width="33" height="33"/>
+        <image name="ico_arrow_l_white" width="33" height="33"/>
     </resources>
 </document>
