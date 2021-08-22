@@ -23,7 +23,7 @@
                             <constraint firstAttribute="width" constant="58" id="kw2-lg-fnE"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chọn phương thức" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Te-Bp-dvO">
+                    <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chọn phương thức thanh toán" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Te-Bp-dvO">
                         <rect key="frame" x="83" y="15" width="311" height="45"/>
                         <constraints>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="45" id="SEh-fV-3nX"/>

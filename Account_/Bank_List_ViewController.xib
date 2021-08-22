@@ -25,8 +25,8 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="miJ-Ut-9Uw">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="47"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chọn phương thức" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aFu-fX-RVf">
-                            <rect key="frame" x="89.5" y="13" width="141" height="21"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chọn phương thức thanh toán" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aFu-fX-RVf">
+                            <rect key="frame" x="46.5" y="13" width="227" height="21"/>
                             <constraints>
                                 <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="42" id="CRc-9u-cQk"/>
                                 <constraint firstAttribute="height" constant="21" id="hsX-fn-vmC"/>
@@ -36,7 +36,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iVQ-kT-uBn">
-                            <rect key="frame" x="8" y="1.5" width="44" height="44"/>
+                            <rect key="frame" x="5" y="1.5" width="44" height="44"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="44" id="WGD-da-Oxw"/>
                                 <constraint firstAttribute="height" constant="44" id="WV1-K5-eXz"/>
@@ -52,7 +52,7 @@
                         <constraint firstItem="aFu-fX-RVf" firstAttribute="top" secondItem="miJ-Ut-9Uw" secondAttribute="top" constant="13" id="1zF-BY-GaG"/>
                         <constraint firstItem="aFu-fX-RVf" firstAttribute="centerX" secondItem="miJ-Ut-9Uw" secondAttribute="centerX" id="4ko-ee-hBu"/>
                         <constraint firstAttribute="height" constant="47" id="ALX-E2-hKa"/>
-                        <constraint firstItem="iVQ-kT-uBn" firstAttribute="leading" secondItem="miJ-Ut-9Uw" secondAttribute="leading" constant="8" id="ciV-oT-mfj"/>
+                        <constraint firstItem="iVQ-kT-uBn" firstAttribute="leading" secondItem="miJ-Ut-9Uw" secondAttribute="leading" constant="5" id="ciV-oT-mfj"/>
                         <constraint firstItem="iVQ-kT-uBn" firstAttribute="centerY" secondItem="miJ-Ut-9Uw" secondAttribute="centerY" id="gn1-Gf-e9I"/>
                     </constraints>
                 </view>

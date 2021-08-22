@@ -219,7 +219,7 @@ class Author_ViewController: UIViewController, UICollectionViewDataSource, UICol
             
             let image = self.withView(cell, tag: 11) as! UIImageView
             
-            image.imageUrl(url: data.getValueFromKey("avatar"))
+            image.imageUrlHolder(url: data.getValueFromKey("avatar"), holder: "bg_author_default_img")
             
 //            let player = self.withView(cell, tag: 999) as! UIImageView
 //                       

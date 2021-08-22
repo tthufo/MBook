@@ -44,6 +44,10 @@ class Feed_Back_ViewController: UIViewController, UITextFieldDelegate {
         tableView.rowHeight = UITableView.automaticDimension
         
         feedBack.inputAccessoryView = self.toolBar()
+        
+        self.view.action(forTouch: [:]) { (objc) in
+            self.view.endEditing(true)
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -65,7 +69,19 @@ class Feed_Back_ViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func didPressNext() {
-        
+        self.view.endEditing(true)
+        if name.hasText && email.hasText && (email.text?.isValidEmail())! && feedBack.hasText {
+            name.text = ""
+            email.text = ""
+            feedBack.text = ""
+            self.showToast("Gửi phản hồi thành công", andPos: 0)
+        } else {
+            if !name.hasText || !email.hasText || !feedBack.hasText {
+                self.showToast("Bạn chưa nhập đầy đủ thông tin", andPos: 0)
+            } else if !(email.text?.isValidEmail())! {
+                self.showToast("Email không đúng định dạng", andPos: 0)
+            }
+        }
     }
     
     @IBAction func didPressCancel() {

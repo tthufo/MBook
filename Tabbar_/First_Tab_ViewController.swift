@@ -47,7 +47,7 @@ class First_Tab_ViewController: UIViewController, UITextFieldDelegate {
         
         tableView.withCell("TG_Room_Cell_Banner_0")
 
-//        tableView.withCell("TG_Room_Cell_Banner_1")
+        tableView.withCell("TG_Release_Cell")
         
         tableView.withCell("TG_Room_Cell_Cube")
 
@@ -129,7 +129,14 @@ class First_Tab_ViewController: UIViewController, UITextFieldDelegate {
                                          ], "height": 0, "direction": "horizontal", "loaded": false],
         
         
-                                      ["title":"TUYỂN TẬP CHỌN LỌC",
+                                      ["title":"SẮP PHÁT HÀNH",
+                                                             "url": ["CMD_CODE":"getUpcomingBookReleases",
+                                                                "page_index": 1,
+                                                                "page_size": 30,
+                                                            ], "height": 0, "direction": "horizontal", "loaded": false, "ident": "TG_Release_Cell"],
+        
+        
+                                      ["title":"TUYỂN TẬP",
                                         "url": ["CMD_CODE":"getHomeEvent",
                                                "position": 2,
                                       ], "height": 0, "direction": "vertical", "loaded": false, "ident": "TG_Room_Cell_Cube"],
@@ -245,7 +252,7 @@ extension First_Tab_ViewController: UITableViewDataSource, UITableViewDelegate {
                     eventDetail.chapList = (info as! NSDictionary)["data"] as! NSMutableArray
                     self.center()?.pushViewController(eventDetail, animated: true)
                 }
-            } else {
+            } else if conf.getValueFromKey("ident") == "TG_Room_Cell_Cube" {
                 (cell as! TG_Room_Cell_Cube).config = (config[indexPath.row] as! NSDictionary)
                 (cell as! TG_Room_Cell_Cube).returnValue = { value in
                     (self.config[indexPath.row] as! NSMutableDictionary)["height"] = value
@@ -264,6 +271,24 @@ extension First_Tab_ViewController: UITableViewDataSource, UITableViewDelegate {
                     let event = Event_ViewController.init()
                     event.config = ["url": ["CMD_CODE": "getHomeEvent", "position": 0], "title": "Tuyển tập chọn lọc"]
                     self.center()?.pushViewController(event, animated: true)
+                }
+            } else {
+                (cell as! TG_Release_Cell).config = (config[indexPath.row] as! NSDictionary)
+                (cell as! TG_Release_Cell).returnValue = { value in
+                    (self.config[indexPath.row] as! NSMutableDictionary)["height"] = value
+                    (self.config[indexPath.row] as! NSMutableDictionary)["loaded"] = true
+                    tableView.reloadData()
+                }
+                (cell as! TG_Release_Cell).callBack = { info in
+                    if (info as! NSDictionary).getValueFromKey("book_type") == "3" {
+                        self.didRequestMP3Link(info: (info as! NSDictionary))
+                        return
+                    }
+                    let bookDetail = Book_Detail_ViewController.init()
+                    let bookInfo = NSMutableDictionary.init(dictionary: self.removeKey(info: conf))
+                    bookInfo.addEntries(from: info as! [AnyHashable : Any])
+                    bookDetail.config = bookInfo
+                    self.center()?.pushViewController(bookDetail, animated: true)
                 }
             }
         } else {

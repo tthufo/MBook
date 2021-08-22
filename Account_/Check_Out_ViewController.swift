@@ -26,6 +26,8 @@ class Check_Out_ViewController: UIViewController {
     
     @IBOutlet var nextButton: UIButton!
     
+    var config = NSMutableDictionary()
+    
     var expand: Bool = false
 
     var dataList: NSMutableArray!
@@ -48,7 +50,9 @@ class Check_Out_ViewController: UIViewController {
             
             sideGapRight.constant = 100
         }
-
+        
+        config["loaded"] = false
+        
         tableView.estimatedRowHeight = 150
         
         tableView.rowHeight = UITableView.automaticDimension
@@ -62,6 +66,10 @@ class Check_Out_ViewController: UIViewController {
         tableView.withCell("Payment_Option_Cell")
 
         dataList = NSMutableArray.init()
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+            self.tableView.reloadData()
+        })
     }
     
     func didRequestPayment() {
@@ -188,7 +196,10 @@ extension Check_Out_ViewController: UITableViewDataSource, UITableViewDelegate {
             }
             
             if indexPath.row == 2 {
+                self.config.addEntries(from: ["itemPrice" :self.info.getValueFromKey("price") as Any])
+                (cell as! Payment_Option_Cell).config = self.config
                 (cell as! Payment_Option_Cell).callBack = { value in
+                    self.config["loaded"] = true
                     let details = (value as! NSDictionary)["details"] as! NSArray
                     self.expand = details.count == 0 ? false : true
                     if details.count == 0 {
@@ -230,7 +241,10 @@ extension Check_Out_ViewController: UITableViewDataSource, UITableViewDelegate {
             }
             
             if indexPath.row == 1 {
+                self.config.addEntries(from: ["itemPrice" :self.info.getValueFromKey("price") as Any])
+                (cell as! Payment_Option_Cell).config = self.config
                 (cell as! Payment_Option_Cell).callBack = { value in
+                    self.config["loaded"] = true
                     let details = (value as! NSDictionary)["details"] as! NSArray
                     self.expand = details.count == 0 ? false : true
                     if details.count == 0 {

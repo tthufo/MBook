@@ -10,6 +10,8 @@ import UIKit
 
 class Payment_Option_Cell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
+    @objc var config: NSDictionary!
+
     @IBOutlet var collectionView: UICollectionView!
     
     @IBOutlet var tableView: UITableView!
@@ -24,6 +26,14 @@ class Payment_Option_Cell: UITableViewCell, UICollectionViewDelegate, UICollecti
         
     var bankInfo: NSDictionary!
     
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        if !(self.config["loaded"] as! Bool) {
+            self.didRequestPaymentChannel()
+        }
+    }
+
     override func awakeFromNib() {
         super.awakeFromNib()
         dataList = NSMutableArray.init()
@@ -31,7 +41,6 @@ class Payment_Option_Cell: UITableViewCell, UICollectionViewDelegate, UICollecti
 
         self.collectionView.withCell("Payment_Cell")
         self.tableView.withCell("Bank_Cell")
-        self.didRequestPaymentChannel()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -41,9 +50,7 @@ class Payment_Option_Cell: UITableViewCell, UICollectionViewDelegate, UICollecti
     func didRequestPaymentChannel() {
         LTRequest.sharedInstance()?.didRequestInfo(["CMD_CODE":"getPaymentChannel",
                                                     "header":["session":Information.token == nil ? "" : Information.token!],
-                                                    "page_index": NSNull(),
-                                                    "page_size": NSNull(),
-                                                    "session": NSNull(),
+                                                    "item_price":Int(self.config.getValueFromKey("itemPrice")) as Any,
                                                     "overrideAlert":"1",
                                                     "overrideLoading":"1",
                                                     "host":self], withCache: { (cacheString) in

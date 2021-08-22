@@ -127,6 +127,9 @@
                         <view userInteractionEnabled="NO" alpha="0.0" tag="1000" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ioF-oH-b48">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="197"/>
                             <color key="backgroundColor" red="0.0" green="0.60784313729999995" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="bgColorHex" value="#1E928C"/>
+                            </userDefinedRuntimeAttributes>
                         </view>
                         <button opaque="NO" alpha="0.0" tag="9988" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KeB-LA-4GU">
                             <rect key="frame" x="8" y="76" width="44" height="44"/>
@@ -293,6 +296,9 @@
                         <view userInteractionEnabled="NO" alpha="0.0" tag="1000" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hEj-fz-UU7">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="197"/>
                             <color key="backgroundColor" red="0.0" green="0.60784313729999995" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="string" keyPath="bgColorHex" value="#1E928C"/>
+                            </userDefinedRuntimeAttributes>
                         </view>
                         <button opaque="NO" alpha="0.0" tag="9988" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="60b-OE-eij">
                             <rect key="frame" x="8" y="81" width="35" height="35"/>
@@ -581,7 +587,16 @@
         </tapGestureRecognizer>
     </objects>
     <designables>
+        <designable name="591-in-Scm">
+            <size key="intrinsicContentSize" width="-1" height="30"/>
+        </designable>
         <designable name="8uT-eY-7rd"/>
+        <designable name="gvk-hz-ibK">
+            <size key="intrinsicContentSize" width="-1" height="30"/>
+        </designable>
+        <designable name="p89-TW-Nhy">
+            <size key="intrinsicContentSize" width="-1" height="30"/>
+        </designable>
     </designables>
     <resources>
         <image name="back_D" width="99.5" height="99.5"/>

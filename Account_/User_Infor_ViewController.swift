@@ -399,7 +399,7 @@ extension User_Infor_ViewController: UITableViewDataSource, UITableViewDelegate 
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let social_logged = self.getObject("social")
-        return indexPath.row == 0 ? 600 : indexPath.row == 1 ? 255 : social_logged != nil ? 145 : 200 // 145
+        return indexPath.row == 0 ? 600 : indexPath.row == 1 ? 185 : social_logged != nil ? 120 : 155 
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

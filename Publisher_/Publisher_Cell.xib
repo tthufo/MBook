@@ -50,8 +50,8 @@
                             <constraint firstAttribute="height" constant="0.5" id="kLy-l7-bII"/>
                         </constraints>
                     </view>
-                    <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fl2-lE-8Zb">
-                        <rect key="frame" x="85" y="31.5" width="224" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fl2-lE-8Zb">
+                        <rect key="frame" x="85" y="32.5" width="224" height="19.5"/>
                         <constraints>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="19.5" id="HJQ-pR-o4Z"/>
                         </constraints>
@@ -64,7 +64,6 @@
                     <constraint firstItem="fl2-lE-8Zb" firstAttribute="centerY" secondItem="hd1-Rf-Sar" secondAttribute="centerY" id="27r-nR-dtX"/>
                     <constraint firstItem="hd1-Rf-Sar" firstAttribute="top" secondItem="xek-8x-Akz" secondAttribute="top" constant="7" id="3KI-h2-lDf"/>
                     <constraint firstItem="fl2-lE-8Zb" firstAttribute="leading" secondItem="hd1-Rf-Sar" secondAttribute="trailing" constant="8" symbolic="YES" id="6RD-HV-Ypx"/>
-                    <constraint firstItem="2Rq-eT-4Kz" firstAttribute="top" secondItem="fl2-lE-8Zb" secondAttribute="bottom" constant="32" id="8Bu-YJ-Tyr"/>
                     <constraint firstItem="fl2-lE-8Zb" firstAttribute="centerY" secondItem="xek-8x-Akz" secondAttribute="centerY" id="HlU-e0-RoL"/>
                     <constraint firstItem="2Rq-eT-4Kz" firstAttribute="leading" secondItem="xek-8x-Akz" secondAttribute="leading" constant="8" id="LSZ-Y6-pi2"/>
                     <constraint firstAttribute="bottom" secondItem="2Rq-eT-4Kz" secondAttribute="bottom" id="Tgn-NL-7Mb"/>

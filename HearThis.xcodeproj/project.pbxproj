@@ -96,6 +96,9 @@
 		FC783989243922C100470148 /* PC_Sub_Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC783988243922C100470148 /* PC_Sub_Cell.xib */; };
 		FC78398D2439C23700470148 /* Third_Tab_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC78398A2439C23600470148 /* Third_Tab_ViewController.xib */; };
 		FC78398E2439C23700470148 /* Third_Tab_ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC78398C2439C23700470148 /* Third_Tab_ViewController.m */; };
+		FC78AC0826D2D532000D5209 /* TG_Release_Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC78AC0626D2D532000D5209 /* TG_Release_Cell.swift */; };
+		FC78AC0926D2D533000D5209 /* TG_Release_Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC78AC0726D2D532000D5209 /* TG_Release_Cell.xib */; };
+		FC78AC0C26D2D646000D5209 /* TG_Release.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC78AC0B26D2D646000D5209 /* TG_Release.xib */; };
 		FC7A98CC2444ABC70038C226 /* Search_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7A98CA2444ABC70038C226 /* Search_ViewController.swift */; };
 		FC7A98CD2444ABC70038C226 /* Search_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC7A98CB2444ABC70038C226 /* Search_ViewController.xib */; };
 		FC7A98CF2444AC370038C226 /* TagFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7A98CE2444AC370038C226 /* TagFlowLayout.swift */; };
@@ -324,6 +327,9 @@
 		FC78398A2439C23600470148 /* Third_Tab_ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Third_Tab_ViewController.xib; sourceTree = "<group>"; };
 		FC78398B2439C23600470148 /* Third_Tab_ViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Third_Tab_ViewController.h; sourceTree = "<group>"; };
 		FC78398C2439C23700470148 /* Third_Tab_ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Third_Tab_ViewController.m; sourceTree = "<group>"; };
+		FC78AC0626D2D532000D5209 /* TG_Release_Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TG_Release_Cell.swift; sourceTree = "<group>"; };
+		FC78AC0726D2D532000D5209 /* TG_Release_Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TG_Release_Cell.xib; sourceTree = "<group>"; };
+		FC78AC0B26D2D646000D5209 /* TG_Release.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TG_Release.xib; sourceTree = "<group>"; };
 		FC7A98CA2444ABC70038C226 /* Search_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Search_ViewController.swift; sourceTree = "<group>"; };
 		FC7A98CB2444ABC70038C226 /* Search_ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Search_ViewController.xib; sourceTree = "<group>"; };
 		FC7A98CE2444AC370038C226 /* TagFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagFlowLayout.swift; sourceTree = "<group>"; };
@@ -702,6 +708,9 @@
 				FC7AFA7526C04A0500D3C2D2 /* Third_Tab_New_ViewController.h */,
 				FC7AFA7626C04A0500D3C2D2 /* Third_Tab_New_ViewController.m */,
 				FC7AFA7726C04A0500D3C2D2 /* Third_Tab_New_ViewController.xib */,
+				FC78AC0626D2D532000D5209 /* TG_Release_Cell.swift */,
+				FC78AC0726D2D532000D5209 /* TG_Release_Cell.xib */,
+				FC78AC0B26D2D646000D5209 /* TG_Release.xib */,
 			);
 			path = Tabbar_;
 			sourceTree = "<group>";
@@ -1034,6 +1043,7 @@
 				FCFB516C1DD075E200D49FB2 /* Action.xib in Resources */,
 				FC7550F91DACDB53007992DF /* EM_Menu.xib in Resources */,
 				FC69D4402440D435006D57D9 /* Book_Detail_ViewController.xib in Resources */,
+				FC78AC0926D2D533000D5209 /* TG_Release_Cell.xib in Resources */,
 				FC908BA32645243A00176E13 /* Book_Detail_Option_Cell.xib in Resources */,
 				FC0A8FB32437770E001A75AF /* PC_Register_ViewController.xib in Resources */,
 				FCB238E724437DB80034B40B /* Event_Detail_Header.xib in Resources */,
@@ -1097,6 +1107,7 @@
 				FC69D4342440595B006D57D9 /* TG_Room_Cell_Banner_0.xib in Resources */,
 				FC771C4D263B3FB2005851FA /* Check_Out_Cell.xib in Resources */,
 				FCB238CA2442329C0034B40B /* Author_Detail_Header.xib in Resources */,
+				FC78AC0C26D2D646000D5209 /* TG_Release.xib in Resources */,
 				FC40A0FF243EFE5C0096B9DB /* TG_Room_Cell_2.xib in Resources */,
 				FCAD4AA82434FD1A00387AF6 /* MenuList.plist in Resources */,
 				FC78396A2438EA6400470148 /* First_Tab_ViewController.xib in Resources */,
@@ -1199,6 +1210,7 @@
 				FCAD57F3243DB7E400101A47 /* TG_Room_Cell_N.swift in Sources */,
 				FC7550FB1DACDB53007992DF /* M_Menu.m in Sources */,
 				FCB238C1244218DB0034B40B /* Author_ViewController.swift in Sources */,
+				FC78AC0826D2D532000D5209 /* TG_Release_Cell.swift in Sources */,
 				FC43399C2436493A00CFD50E /* Navigation_ViewController.m in Sources */,
 				FC640A851DAAAD8C00DAEF55 /* Item.m in Sources */,
 				FC0A8FB7243779F0001A75AF /* Marcro.swift in Sources */,

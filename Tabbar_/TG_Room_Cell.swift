@@ -42,7 +42,7 @@ class TG_Room_Cell: UITableViewCell, FSPagerViewDataSource,FSPagerViewDelegate, 
     public func pagerView(_ pagerView: FSPagerView, cellForItemAt index: Int) -> FSPagerViewCell {
         let cell = pagerView.dequeueReusableCell(withReuseIdentifier: "cell", at: index)
         let image = (images![index] as! NSDictionary).getValueFromKey("avatar")
-        cell.imageView?.imageUrl(url: image!)
+        cell.imageView?.imageUrlHolder(url: image!, holder: "bg_thumb_default_img")
         cell.imageView?.contentMode = .scaleAspectFill
         return cell
     }

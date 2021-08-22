@@ -1,14 +1,14 @@
 //
-//  TG_Room_Cell_N.swift
+//  TG_Release_Cell.swift
 //  TourGuide
 //
-//  Created by Mac on 7/13/18.
-//  Copyright © 2018 Mac. All rights reserved.
+//  Created by Mac on 8/22/2021.
+//  Copyright © 2021 Mac. All rights reserved.
 //
 
 import UIKit
 
-class TG_Room_Cell_N: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout  {
+class TG_Release_Cell: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout  {
 
     @IBOutlet var collectionView: UICollectionView!
     
@@ -24,7 +24,7 @@ class TG_Room_Cell_N: UITableViewCell, UICollectionViewDelegate, UICollectionVie
     
     @objc var callBack: ((_ info: Any)->())?
 
-    let itemHeight = Int(((screenWidth() / (IS_IPAD ? 5 : 3)) - 15) * 1.80)
+    let itemHeight = 60// Int(((screenWidth() / (IS_IPAD ? 5 : 3)) - 15) * 1.80)
         
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -46,11 +46,11 @@ class TG_Room_Cell_N: UITableViewCell, UICollectionViewDelegate, UICollectionVie
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        collectionView.withCell("TG_Map_Cell")
+        collectionView.withCell("TG_Release")
         
-        self.backgroundColor = .clear
-        
-        self.contentView.backgroundColor = .clear
+//        self.backgroundColor = .clear
+//
+//        self.contentView.backgroundColor = .clear
                 
         dataList = NSMutableArray.init()
     }
@@ -95,7 +95,7 @@ class TG_Room_Cell_N: UITableViewCell, UICollectionViewDelegate, UICollectionVie
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: Int((self.screenWidth() / (IS_IPAD ? 5 : 3)) - 15), height: itemHeight)
+        return CGSize(width: 200, height: itemHeight)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -108,26 +108,18 @@ class TG_Room_Cell_N: UITableViewCell, UICollectionViewDelegate, UICollectionVie
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TG_Map_Cell", for: indexPath as IndexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TG_Release", for: indexPath as IndexPath)
         
         let data = dataList[indexPath.item] as! NSDictionary
 
-        let title = self.withView(cell, tag: 112) as! UILabel
+        let title = self.withView(cell, tag: 1) as! UILabel
 
-        title.text = data.getValueFromKey("name")
+        title.text = data.getValueFromKey("publish_time")
 
-        let description = self.withView(cell, tag: 13) as! UILabel
+        let description = self.withView(cell, tag: 2) as! UILabel
 
-        description.text = (data["author"] as! NSArray).count > 1 ? "Nhiều tác giả" : (((data["author"] as! NSArray)[0]) as! NSDictionary).getValueFromKey("name")
+        description.text = data.getValueFromKey("name")
 
-        let image = self.withView(cell, tag: 11) as! UIImageView
-
-        image.imageUrl(url: data.getValueFromKey("avatar"))
-        
-        let player = self.withView(cell, tag: 999) as! UIImageView
-        
-        player.isHidden = data.getValueFromKey("book_type") != "3" ? true : false
-                
         return cell
     }
 

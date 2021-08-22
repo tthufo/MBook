@@ -80,29 +80,13 @@
                         <userDefinedRuntimeAttribute type="string" keyPath="bgColorHex" value="#1E928C"/>
                     </userDefinedRuntimeAttributes>
                 </view>
-                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ySy-S1-1mM" customClass="MarginLabel" customModule="MeBook" customModuleProvider="target">
-                    <rect key="frame" x="186" y="819" width="42" height="35"/>
-                    <color key="backgroundColor" red="0.1176470588" green="0.57254901960000004" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hyh-zg-4NE">
+                    <rect key="frame" x="0.0" y="108" width="20" height="754"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="35" id="IAi-e2-sth"/>
-                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="42" id="qrB-tf-Rls"/>
+                        <constraint firstAttribute="width" constant="20" id="1Os-Yp-TEY"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
-                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <nil key="highlightedColor"/>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                            <integer key="value" value="17"/>
-                        </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="boolean" keyPath="keyPath" value="YES"/>
-                        <userDefinedRuntimeAttribute type="number" keyPath="leftInset">
-                            <real key="value" value="12"/>
-                        </userDefinedRuntimeAttribute>
-                        <userDefinedRuntimeAttribute type="number" keyPath="rightInset">
-                            <real key="value" value="12"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
-                </label>
+                </view>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8JW-Su-IJf">
                     <rect key="frame" x="0.0" y="108" width="414" height="754"/>
                 </imageView>
@@ -145,6 +129,33 @@
                         <action selector="didPressRestart" destination="-1" eventType="touchUpInside" id="X5L-b8-NHV"/>
                     </connections>
                 </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Z9B-nU-mit">
+                    <rect key="frame" x="0.0" y="812" width="414" height="50"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                </view>
+                <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ySy-S1-1mM" customClass="MarginLabel" customModule="MeBook" customModuleProvider="target">
+                    <rect key="frame" x="186" y="819" width="42" height="35"/>
+                    <color key="backgroundColor" red="0.1176470588" green="0.57254901960000004" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="35" id="IAi-e2-sth"/>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="42" id="qrB-tf-Rls"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <integer key="value" value="17"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="keyPath" value="YES"/>
+                        <userDefinedRuntimeAttribute type="number" keyPath="leftInset">
+                            <real key="value" value="12"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="rightInset">
+                            <real key="value" value="12"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </label>
                 <label opaque="NO" userInteractionEnabled="NO" alpha="0.0" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lỗi xảy ra, mời bạn tải lại." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Ao-PB-nqt">
                     <rect key="frame" x="92.5" y="482" width="229" height="23"/>
                     <constraints>
@@ -155,13 +166,6 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hyh-zg-4NE">
-                    <rect key="frame" x="0.0" y="108" width="20" height="754"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="20" id="1Os-Yp-TEY"/>
-                    </constraints>
-                </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="eug-p7-zIe"/>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -179,18 +183,22 @@
                 <constraint firstItem="tH1-YX-68o" firstAttribute="trailing" secondItem="eug-p7-zIe" secondAttribute="trailing" id="HoS-V6-Hez"/>
                 <constraint firstItem="oQl-Jm-Jd2" firstAttribute="trailing" secondItem="eug-p7-zIe" secondAttribute="trailing" id="Jl0-ON-LfE"/>
                 <constraint firstItem="BXk-iU-bGX" firstAttribute="centerY" secondItem="Xit-aY-mf9" secondAttribute="centerY" id="KjT-dn-krh"/>
+                <constraint firstItem="Z9B-nU-mit" firstAttribute="top" secondItem="1Kd-We-2c1" secondAttribute="bottom" id="PJ8-Ig-kpn"/>
                 <constraint firstItem="tH1-YX-68o" firstAttribute="leading" secondItem="eug-p7-zIe" secondAttribute="leading" id="PJl-ip-Glv"/>
                 <constraint firstItem="ySy-S1-1mM" firstAttribute="centerX" secondItem="Xit-aY-mf9" secondAttribute="centerX" id="R6Z-fL-ZeW"/>
                 <constraint firstItem="5Ao-PB-nqt" firstAttribute="top" secondItem="I6S-Zs-M4F" secondAttribute="bottom" constant="9" id="VSc-2P-UZp"/>
                 <constraint firstItem="1Kd-We-2c1" firstAttribute="leading" secondItem="eug-p7-zIe" secondAttribute="leading" id="Yfl-Z0-G6s"/>
                 <constraint firstItem="8JW-Su-IJf" firstAttribute="bottom" secondItem="eug-p7-zIe" secondAttribute="bottom" id="bix-1j-XfK"/>
                 <constraint firstItem="BXk-iU-bGX" firstAttribute="centerX" secondItem="Xit-aY-mf9" secondAttribute="centerX" id="cKD-gW-kkB"/>
+                <constraint firstItem="Z9B-nU-mit" firstAttribute="bottom" secondItem="eug-p7-zIe" secondAttribute="bottom" id="fJT-3v-8BI"/>
                 <constraint firstItem="Hyh-zg-4NE" firstAttribute="bottom" secondItem="eug-p7-zIe" secondAttribute="bottom" id="fOm-n6-sUK"/>
                 <constraint firstItem="Hyh-zg-4NE" firstAttribute="leading" secondItem="eug-p7-zIe" secondAttribute="leading" id="gpJ-ut-NTn"/>
                 <constraint firstItem="8JW-Su-IJf" firstAttribute="top" secondItem="tH1-YX-68o" secondAttribute="bottom" id="kmv-l3-8uE"/>
                 <constraint firstItem="tH1-YX-68o" firstAttribute="top" secondItem="eug-p7-zIe" secondAttribute="top" id="meu-za-thE"/>
+                <constraint firstItem="Z9B-nU-mit" firstAttribute="trailing" secondItem="eug-p7-zIe" secondAttribute="trailing" id="sJJ-Co-jiN"/>
                 <constraint firstItem="oQl-Jm-Jd2" firstAttribute="leading" secondItem="eug-p7-zIe" secondAttribute="leading" id="vlU-q7-sIh"/>
                 <constraint firstItem="eug-p7-zIe" firstAttribute="trailing" secondItem="LpR-aG-b8R" secondAttribute="trailing" constant="8" id="wUl-Q2-ldl"/>
+                <constraint firstItem="Z9B-nU-mit" firstAttribute="leading" secondItem="eug-p7-zIe" secondAttribute="leading" id="yLC-PM-gCW"/>
                 <constraint firstItem="eug-p7-zIe" firstAttribute="bottom" secondItem="ySy-S1-1mM" secondAttribute="bottom" constant="8" id="yOg-iv-CAR"/>
                 <constraint firstItem="oQl-Jm-Jd2" firstAttribute="top" secondItem="tH1-YX-68o" secondAttribute="bottom" id="yzR-mo-fLh"/>
                 <constraint firstItem="LpR-aG-b8R" firstAttribute="top" secondItem="eug-p7-zIe" secondAttribute="top" constant="16" id="zBK-JK-tdS"/>
@@ -202,9 +210,7 @@
         <designable name="BXk-iU-bGX">
             <size key="intrinsicContentSize" width="-1" height="1.5"/>
         </designable>
-        <designable name="ySy-S1-1mM">
-            <size key="intrinsicContentSize" width="24" height="0.0"/>
-        </designable>
+        <designable name="ySy-S1-1mM"/>
     </designables>
     <resources>
         <image name="ico_menu" width="31.5" height="31.5"/>
