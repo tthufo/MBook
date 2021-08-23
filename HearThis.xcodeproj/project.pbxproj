@@ -100,6 +100,8 @@
 		FC78AC0926D2D533000D5209 /* TG_Release_Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC78AC0726D2D532000D5209 /* TG_Release_Cell.xib */; };
 		FC78AC0C26D2D646000D5209 /* TG_Release.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC78AC0B26D2D646000D5209 /* TG_Release.xib */; };
 		FC78AC0F26D38A42000D5209 /* Event_Detail_Infor.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC78AC0E26D38A42000D5209 /* Event_Detail_Infor.xib */; };
+		FC78AC1326D3FF9B000D5209 /* List_Book_List_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC78AC1126D3FF9B000D5209 /* List_Book_List_ViewController.swift */; };
+		FC78AC1426D3FF9C000D5209 /* List_Book_List_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC78AC1226D3FF9B000D5209 /* List_Book_List_ViewController.xib */; };
 		FC7A98CC2444ABC70038C226 /* Search_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7A98CA2444ABC70038C226 /* Search_ViewController.swift */; };
 		FC7A98CD2444ABC70038C226 /* Search_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC7A98CB2444ABC70038C226 /* Search_ViewController.xib */; };
 		FC7A98CF2444AC370038C226 /* TagFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7A98CE2444AC370038C226 /* TagFlowLayout.swift */; };
@@ -332,6 +334,8 @@
 		FC78AC0726D2D532000D5209 /* TG_Release_Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TG_Release_Cell.xib; sourceTree = "<group>"; };
 		FC78AC0B26D2D646000D5209 /* TG_Release.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TG_Release.xib; sourceTree = "<group>"; };
 		FC78AC0E26D38A42000D5209 /* Event_Detail_Infor.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Event_Detail_Infor.xib; sourceTree = "<group>"; };
+		FC78AC1126D3FF9B000D5209 /* List_Book_List_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = List_Book_List_ViewController.swift; sourceTree = "<group>"; };
+		FC78AC1226D3FF9B000D5209 /* List_Book_List_ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = List_Book_List_ViewController.xib; sourceTree = "<group>"; };
 		FC7A98CA2444ABC70038C226 /* Search_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Search_ViewController.swift; sourceTree = "<group>"; };
 		FC7A98CB2444ABC70038C226 /* Search_ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Search_ViewController.xib; sourceTree = "<group>"; };
 		FC7A98CE2444AC370038C226 /* TagFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagFlowLayout.swift; sourceTree = "<group>"; };
@@ -735,6 +739,8 @@
 				FC908BA22645243900176E13 /* Book_Detail_Option_Cell.xib */,
 				FC908BA82645CF3A00176E13 /* CosmosDistrib.swift */,
 				FCC6953226C3D4020048114E /* Book_Detail_Gap.xib */,
+				FC78AC1126D3FF9B000D5209 /* List_Book_List_ViewController.swift */,
+				FC78AC1226D3FF9B000D5209 /* List_Book_List_ViewController.xib */,
 			);
 			path = Detail_;
 			sourceTree = "<group>";
@@ -1061,6 +1067,7 @@
 				FCAD4AA92434FD1A00387AF6 /* SC_Menu.xib in Resources */,
 				FC23EB91243A4087003E5E1A /* Book_List_Cell.xib in Resources */,
 				FCB238B92441858D0034B40B /* TG_Book_Detail_Cell.xib in Resources */,
+				FC78AC1426D3FF9C000D5209 /* List_Book_List_ViewController.xib in Resources */,
 				FC640A901DAAAE2800DAEF55 /* TT_Sync_Header.xib in Resources */,
 				FC7839872439204C00470148 /* PC_Header_Tab.xib in Resources */,
 				FCBC3477263DC73400AC9621 /* Transaction_ViewController.xib in Resources */,
@@ -1230,6 +1237,7 @@
 				FCC965AA1DA5F4200025971E /* HT_Player_ViewController.m in Sources */,
 				FCD979892447693D00970A4E /* Reader_ViewController.swift in Sources */,
 				FCB238E424437D410034B40B /* Event_Detail_ViewController.swift in Sources */,
+				FC78AC1326D3FF9B000D5209 /* List_Book_List_ViewController.swift in Sources */,
 				FCC965AE1DA5FD790025971E /* TT_Panel_ViewController.m in Sources */,
 				FC23EB95243A4C8F003E5E1A /* List_Book_ViewController.swift in Sources */,
 				FC9467D325FD4BD800175288 /* PC_Confirm_ViewController.swift in Sources */,

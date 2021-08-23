@@ -1576,10 +1576,10 @@
     return indexPath.section == 0 ? [self sizeFor:indexPath] : indexPath.section == 1 ? [self sizeForBio:indexPath] : indexPath.section == 2 ? CGSizeMake(_collectionView.frame.size.width, detailList.count == 0 ? 0 : [[((NSDictionary*)detailList[indexPath.item]) getValueFromKey:@"height"] doubleValue]) : indexPath.section == 3 ? CGSizeMake(_collectionView.frame.size.width, 65) : CGSizeMake((screenWidth1 / (IS_IPAD ? 5 : 3)) - 15, ((screenWidth1 / (IS_IPAD ? 5 : 3)) - 15) * 1.72);
 }
 
-//- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
-//{
-//    return UIEdgeInsetsMake(4, 4, 4, 4);
-//}
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
+{
+    return section == 5 ? UIEdgeInsetsMake(0, 5, 0, 5) : UIEdgeInsetsMake(0, 0, 0, 0);
+}
 
 - (CGFloat)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout minimumLineSpacingForSectionAtIndex:(NSInteger)section
 {

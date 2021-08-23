@@ -594,6 +594,10 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
         return indexPath.section == 0 ? size(for: indexPath) : indexPath.section == 1 ? sizeBio(for: indexPath) : indexPath.section == 2 ? CGSize(width: collectionView.frame.width, height: detailList.count == 0 ? 0 : (detailList[indexPath.item] as! NSDictionary)["height"] as! CGFloat) : indexPath.section == 3 ? CGSize(width: collectionView.frame.width, height: 65) : CGSize(width: Int((self.screenWidth() / (IS_IPAD ? 5 : 3)) - 15), height: Int(((self.screenWidth() / (IS_IPAD ? 5 : 3)) - 15) * 1.72))
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return section == 4 ? UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5) : UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0.0
     }

@@ -271,7 +271,8 @@
     UIButton * extra = (UIButton*)[self withView:header tag:12];
         
     [extra actionForTouch:@{} and:^(NSDictionary *touchInfo) {
-        
+        List_Book_List_ViewController * list = [List_Book_List_ViewController new];
+        [[self CENTER] pushViewController:list animated:YES];
     }];
     
     return section == 0 ? nil : header;
@@ -289,7 +290,6 @@
 
 - (CGFloat)tableView:(UITableView *)_tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"%f", tempHeight);
     return indexPath.section == 0 ? tempHeight == 0 ? [config[indexPath.row][@"height"] floatValue] : tempHeight : 165;
 }
 

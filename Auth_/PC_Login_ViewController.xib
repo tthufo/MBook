@@ -269,8 +269,8 @@
                         <action selector="didPressSubmitWithPhoneNumber:" destination="-1" eventType="touchUpInside" id="uzJ-qM-UyM"/>
                     </connections>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="hoặc đăng nhập qua" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O86-LG-nJb">
-                    <rect key="frame" x="129.33333333333337" y="317" width="155.66666666666663" height="21"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hoặc đăng nhập qua" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O86-LG-nJb">
+                    <rect key="frame" x="128" y="317" width="158.33333333333337" height="21"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="i0I-sh-yNW"/>
                         <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="42" id="rUD-Xw-ZIR"/>
