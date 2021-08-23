@@ -18,6 +18,12 @@ class Event_Detail_ViewController: UIViewController, UICollectionViewDataSource,
     let refreshControl = UIRefreshControl()
     
     var config: NSDictionary!
+    
+    var bioString: String!
+    
+    var tempBio: String = ""
+    
+    var showMore: Bool = false
 
     var pageIndex: Int = 1
      
@@ -37,7 +43,7 @@ class Event_Detail_ViewController: UIViewController, UICollectionViewDataSource,
     
     var bioHeight: CGFloat = 0
     
-    let sectionTitle = ["", "", "Tuyển tập khác"]
+    let sectionTitle = ["", "", "DANH SÁCH", "TUYỀN TẬP KHÁC"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,6 +59,8 @@ class Event_Detail_ViewController: UIViewController, UICollectionViewDataSource,
         collectionView.withCell("TG_Book_Detail_Cell")
 
         collectionView.withCell("TG_Book_Chap_Cell")
+        
+        collectionView.withCell("Event_Detail_Infor")
         
         collectionView.withCell("Event_Cell")
 
@@ -204,11 +212,33 @@ class Event_Detail_ViewController: UIViewController, UICollectionViewDataSource,
 
             let data = ((result["result"] as! NSDictionary)["data"] as! NSArray)
 
+//            print("--->", self.config)
+            
+//            self.tempBio = (data["publisher"] as! NSArray).count == 0 ? "" : ((data["publisher"] as! NSArray).firstObject as! NSDictionary)["description"] as! String
+            
+            self.tempBio = self.config.getValueFromKey("description")
+            
+            self.bioString = self.initBio(show: self.showMore)
+            
             self.dataList.addObjects(from: data.withMutable())
             
             self.collectionView.reloadData()
             
-            self.collectionView.reloadSections(IndexSet(integer: 1))
+            self.collectionView.performBatchUpdates {
+                
+                self.collectionView.reloadSections(IndexSet(integer: 0))
+
+                self.collectionView.reloadSections(IndexSet(integer: 1))
+    
+                self.collectionView.reloadSections(IndexSet(integer: 2))
+                
+                self.collectionView.reloadSections(IndexSet(integer: 3))
+    
+                self.collectionView.reloadData()
+                
+            } completion: { (done) in
+                
+            }
             
             self.adjustInset()
                         
@@ -231,7 +261,54 @@ class Event_Detail_ViewController: UIViewController, UICollectionViewDataSource,
     }
     
     func chapSize() -> CGSize {
-        return CGSize(width: collectionView.frame.width, height: 50)
+        return CGSize(width: collectionView.frame.width, height: 65)
+    }
+    
+    private func size(for indexPath: IndexPath) -> CGSize {
+       let cell = Bundle.main.loadNibNamed("Event_Detail_Infor", owner: self, options: nil)?.first as! UICollectionViewCell
+        
+       let title = self.withView(cell, tag: 1) as! UILabel
+       title.text = self.config.getValueFromKey("name")
+                        
+       cell.setNeedsLayout()
+       cell.layoutIfNeeded()
+
+       let width = collectionView.frame.width
+       let height: CGFloat = 0
+
+       let targetSize = CGSize(width: width, height: height)
+
+       let size = cell.contentView.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: .defaultHigh, verticalFittingPriority: .fittingSizeLevel)
+
+       return size
+   }
+    
+    private func sizeBio(for indexPath: IndexPath) -> CGSize {
+       let cell = Bundle.main.loadNibNamed("Author_Bio_Cell", owner: self, options: nil)?.first as! UICollectionViewCell
+        
+       let title = self.withView(cell, tag: 1) as! UILabel
+       title.text = self.bioString
+        
+       cell.setNeedsLayout()
+       cell.layoutIfNeeded()
+
+       let width = collectionView.frame.width
+       let height: CGFloat = 0
+
+       let targetSize = CGSize(width: width, height: height)
+
+       let size = cell.contentView.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: .defaultHigh, verticalFittingPriority: .fittingSizeLevel)
+        
+       return size
+   }
+    
+    func initBio(show: Bool) -> String {
+        let modifiedFont = String(format:"<span style=\"font-family: '-apple-system', 'HelveticaNeue'; font-size:16 \">%@</span>", self.tempBio
+         )
+                
+        let tempString = modifiedFont.html2String.count > (IS_IPAD ? 120 : 120) ? modifiedFont.html2String.substring(to: 120) + "..." : modifiedFont.html2String
+        
+        return !show ? tempString : modifiedFont.html2String
     }
     
     override func didReceiveMemoryWarning() {
@@ -239,16 +316,21 @@ class Event_Detail_ViewController: UIViewController, UICollectionViewDataSource,
     }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 3
+        return 4
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return section == 1 ? dataList.count : section == 2 ? tempList.count : bioHeight == 0 ? 1 : 1
+        return section == 2 ? dataList.count : section == 3 ? tempList.count : 1
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return indexPath.section == 2 ? eventSize() : indexPath.section == 1 ? (self.config.getValueFromKey("event_type") == "1" ? bookSize() : chapSize() ) : CGSize(width: collectionView.frame.width, height: self.returnSize(self.config.getValueFromKey("description")) + 10)
+        return indexPath.section == 3 ? eventSize() : indexPath.section == 2 ? (self.config.getValueFromKey("event_type") == "1" ? bookSize() : chapSize()) : indexPath.section == 0 ? size(for: indexPath) : sizeBio(for: indexPath)
     }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return section == 2 || section == 3 ? UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5) :  UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    }
+    
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0.0
@@ -260,16 +342,33 @@ class Event_Detail_ViewController: UIViewController, UICollectionViewDataSource,
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: indexPath.section == 2 ? "Event_Cell" : indexPath.section == 1 ? (self.config.getValueFromKey("event_type") == "1" ? "TG_Map_Cell" : "TG_Book_Chap_Cell") : "Author_Bio_Cell", for: indexPath as IndexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: indexPath.section == 0 ? "Event_Detail_Infor" : indexPath.section == 3 ? "Event_Cell" : indexPath.section == 2 ? (self.config.getValueFromKey("event_type") == "1" ? "TG_Map_Cell" : "TG_Book_Chap_Cell") : "Author_Bio_Cell", for: indexPath as IndexPath)
         
         if indexPath.section == 0 {
 
-           let title = self.withView(cell, tag: 1) as! UILabel
-
-            title.text = self.config.getValueFromKey("description")
+            let title = self.withView(cell, tag: 1) as! UILabel
+            title.text = self.config.getValueFromKey("name")
+            
+            let viewCount = self.withView(cell, tag: 4) as! UIButton
+            viewCount.setTitle("0", for: .normal)
+            
+            let likeCount = self.withView(cell, tag: 5) as! UIButton
+            likeCount.setTitle(self.config.getValueFromKey("like_count"), for: .normal)
+            
+            let voteCount = self.withView(cell, tag: 6) as! UIButton
+            voteCount.setTitle("0", for: .normal)
         }
         
         if indexPath.section == 1 {
+            
+            let title = self.withView(cell, tag: 1) as! UILabel
+
+            title.text = bioString
+            
+            bioHeight = title.sizeOfMultiLineLabel().height
+        }
+        
+        if indexPath.section == 2 {
             let data = dataList[indexPath.item] as! NSDictionary
 
             if self.config.getValueFromKey("event_type") == "1" {
@@ -304,7 +403,7 @@ class Event_Detail_ViewController: UIViewController, UICollectionViewDataSource,
             }
         }
         
-        if indexPath.section == 2 {
+        if indexPath.section == 3 {
            let data = tempList[indexPath.item] as! NSDictionary
            
            let book = self.withView(cell, tag: 12) as! UILabel
@@ -320,7 +419,19 @@ class Event_Detail_ViewController: UIViewController, UICollectionViewDataSource,
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if indexPath.section == 1 {
+        
+        if indexPath.section == 1 { //bio
+            let cell = collectionView.cellForItem(at: indexPath)
+            let title = self.withView(cell, tag: 1) as! UILabel
+            showMore = !showMore
+            bioString = initBio(show: showMore)
+            title.text = bioString
+            bioHeight = title.sizeOfMultiLineLabel().height
+            self.collectionView.reloadSections(IndexSet(integer: 0))
+            self.adjustInset()
+        }
+        
+        if indexPath.section == 2 {
             let data = dataList[indexPath.item] as! NSDictionary
             let bookInfo = NSMutableDictionary.init(dictionary: data)
             bookInfo["url"] = ["CMD_CODE":"getListBook"];
@@ -333,7 +444,7 @@ class Event_Detail_ViewController: UIViewController, UICollectionViewDataSource,
             self.center()?.pushViewController(bookDetail, animated: true)
         }
         
-        if indexPath.section == 2 {
+        if indexPath.section == 3 {
             self.config = (tempList[indexPath.item] as! NSDictionary)
             self.filterEvent()
             self.collectionView.reloadSections(IndexSet(integer: 0))
@@ -352,7 +463,7 @@ class Event_Detail_ViewController: UIViewController, UICollectionViewDataSource,
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: collectionView.frame.width, height: section != 2 ? 0 : section == 2 ? tempList.count == 0 ? 0 : 44 : 44)
+        return CGSize(width: collectionView.frame.width, height: section == 0 || section == 1 ? 0 : section == 2 ? dataList.count == 0 ? 0 : 44 : section == 3 ? tempList.count == 0 ? 0 : 44 : 44)
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {

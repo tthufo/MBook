@@ -30,6 +30,8 @@
                 <outlet property="phone" destination="qLU-2A-mfM" id="wHK-py-jpM"/>
                 <outlet property="searchBtn" destination="BMt-d7-hd0" id="12l-Ae-z88"/>
                 <outlet property="searchView" destination="ViO-dr-Mhe" id="mTC-QU-yU9"/>
+                <outlet property="sideGapLeft" destination="JV9-dS-rgd" id="7iN-Nh-1kK"/>
+                <outlet property="sideGapRight" destination="kaV-Oc-vZe" id="RnN-a2-STS"/>
                 <outlet property="tableView" destination="4r3-QZ-m1Q" id="ITc-6S-rFu"/>
                 <outlet property="transaction" destination="G3K-nJ-DPE" id="hq3-1A-lex"/>
                 <outlet property="transaction_S" destination="cws-h4-Lbp" id="KYP-n9-OWJ"/>

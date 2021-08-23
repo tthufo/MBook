@@ -47,9 +47,7 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
     var catId: String = ""
     
     var tempInfo: NSMutableDictionary!
-    
-    let sectionTitle = ["Thông tin chi tiết", "Danh sách chương", "Có thể bạn thích"]
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
                         

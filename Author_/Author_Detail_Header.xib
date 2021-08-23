@@ -17,6 +17,9 @@
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" tag="6" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="iMC-1B-RgO">
                     <rect key="frame" x="0.0" y="0.0" width="448" height="306"/>
                     <color key="backgroundColor" red="0.0" green="0.60784313729999995" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="bgColorHex" value="#1E928C"/>
+                    </userDefinedRuntimeAttributes>
                 </imageView>
                 <button opaque="NO" alpha="0.0" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9GX-R3-tjw">
                     <rect key="frame" x="8" y="136.5" width="33" height="33"/>
@@ -92,6 +95,9 @@
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.0" tag="6" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JLJ-Gg-tCo">
                     <rect key="frame" x="0.0" y="0.0" width="320" height="171"/>
                     <color key="backgroundColor" red="0.0" green="0.60784313729999995" blue="0.70588235290000001" alpha="1" colorSpace="calibratedRGB"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="bgColorHex" value="#1E928C"/>
+                    </userDefinedRuntimeAttributes>
                 </imageView>
                 <button opaque="NO" alpha="0.0" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RjC-Ph-AyH">
                     <rect key="frame" x="8" y="69" width="33" height="33"/>

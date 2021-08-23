@@ -99,6 +99,7 @@
 		FC78AC0826D2D532000D5209 /* TG_Release_Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC78AC0626D2D532000D5209 /* TG_Release_Cell.swift */; };
 		FC78AC0926D2D533000D5209 /* TG_Release_Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC78AC0726D2D532000D5209 /* TG_Release_Cell.xib */; };
 		FC78AC0C26D2D646000D5209 /* TG_Release.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC78AC0B26D2D646000D5209 /* TG_Release.xib */; };
+		FC78AC0F26D38A42000D5209 /* Event_Detail_Infor.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC78AC0E26D38A42000D5209 /* Event_Detail_Infor.xib */; };
 		FC7A98CC2444ABC70038C226 /* Search_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7A98CA2444ABC70038C226 /* Search_ViewController.swift */; };
 		FC7A98CD2444ABC70038C226 /* Search_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC7A98CB2444ABC70038C226 /* Search_ViewController.xib */; };
 		FC7A98CF2444AC370038C226 /* TagFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC7A98CE2444AC370038C226 /* TagFlowLayout.swift */; };
@@ -330,6 +331,7 @@
 		FC78AC0626D2D532000D5209 /* TG_Release_Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TG_Release_Cell.swift; sourceTree = "<group>"; };
 		FC78AC0726D2D532000D5209 /* TG_Release_Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TG_Release_Cell.xib; sourceTree = "<group>"; };
 		FC78AC0B26D2D646000D5209 /* TG_Release.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TG_Release.xib; sourceTree = "<group>"; };
+		FC78AC0E26D38A42000D5209 /* Event_Detail_Infor.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Event_Detail_Infor.xib; sourceTree = "<group>"; };
 		FC7A98CA2444ABC70038C226 /* Search_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Search_ViewController.swift; sourceTree = "<group>"; };
 		FC7A98CB2444ABC70038C226 /* Search_ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Search_ViewController.xib; sourceTree = "<group>"; };
 		FC7A98CE2444AC370038C226 /* TagFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TagFlowLayout.swift; sourceTree = "<group>"; };
@@ -729,6 +731,7 @@
 				FCB238BA244186E10034B40B /* Book_Detail_Title.xib */,
 				FC908BA52645C67500176E13 /* Book_Detail_Chap_Header.xib */,
 				FC908B9F2644786000176E13 /* Book_Detail_Infor.xib */,
+				FC78AC0E26D38A42000D5209 /* Event_Detail_Infor.xib */,
 				FC908BA22645243900176E13 /* Book_Detail_Option_Cell.xib */,
 				FC908BA82645CF3A00176E13 /* CosmosDistrib.swift */,
 				FCC6953226C3D4020048114E /* Book_Detail_Gap.xib */,
@@ -1125,6 +1128,7 @@
 				FC1AD7DE1DA40CA8002BA7EC /* LaunchScreen.storyboard in Resources */,
 				FCBC348E26407A0900AC9621 /* Tag.xib in Resources */,
 				FC908BDA264A840200176E13 /* News_Cell.xib in Resources */,
+				FC78AC0F26D38A42000D5209 /* Event_Detail_Infor.xib in Resources */,
 				FCAD57F2243DB7E400101A47 /* TG_Room_Cell_Banner_1.xib in Resources */,
 				FCBC348B2640797F00AC9621 /* Tag_View.xib in Resources */,
 				FC69D42E24405879006D57D9 /* TG_Room_Cell_7.xib in Resources */,

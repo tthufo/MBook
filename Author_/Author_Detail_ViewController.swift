@@ -55,6 +55,8 @@ class Author_Detail_ViewController: UIViewController, UICollectionViewDataSource
         collectionView.withCell("TG_Book_Detail_Cell")
 
         collectionView.withCell("TG_Book_Chap_Cell")
+        
+        collectionView.withCell("Author_Cell")
 
         collectionView.refreshControl = refreshControl
         
@@ -63,6 +65,7 @@ class Author_Detail_ViewController: UIViewController, UICollectionViewDataSource
         collectionView.withHeaderOrFooter("Book_Detail_Title", andKind: UICollectionView.elementKindSectionHeader)
 
         didRequestData(isShow: true)
+        
         
         bioString = initBio(show: showMore)
         
@@ -260,11 +263,15 @@ class Author_Detail_ViewController: UIViewController, UICollectionViewDataSource
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return indexPath.section != 0 ? CGSize(width: Int((self.screenWidth() / (IS_IPAD ? 5 : 3)) - 15), height: Int(((self.screenWidth() / (IS_IPAD ? 5 : 3)) - 15) * 1.72)) : self.sizeBio(for: indexPath)
+        return indexPath.section == 1 ? CGSize(width: Int((self.screenWidth() / (IS_IPAD ? 5 : 3)) - 15), height: Int(((self.screenWidth() / (IS_IPAD ? 5 : 3)) - 15) * 1.72)) : indexPath.section == 2 ? CGSize(width: Int((self.screenWidth() / (IS_IPAD ? 5 : 3)) - 15), height: Int(((self.screenWidth() / (IS_IPAD ? 5 : 3)) - 15) * 1.5)) : self.sizeBio(for: indexPath)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return section == 1 ? UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5) : section == 2 ? UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10) :  UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0) 
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0.0
+        return 10.0
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
@@ -273,7 +280,7 @@ class Author_Detail_ViewController: UIViewController, UICollectionViewDataSource
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: indexPath.section != 0 ? "TG_Map_Cell" : "Author_Bio_Cell", for: indexPath as IndexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: indexPath.section == 1 ? "TG_Map_Cell" : indexPath.section == 2 ? "Author_Cell" : "Author_Bio_Cell", for: indexPath as IndexPath)
         
         if indexPath.section == 0 {
 
@@ -290,18 +297,14 @@ class Author_Detail_ViewController: UIViewController, UICollectionViewDataSource
             let title = self.withView(cell, tag: 112) as! UILabel
 
             title.text = data.getValueFromKey("name")
-
+            
             let description = self.withView(cell, tag: 13) as! UILabel
 
-            description.text = data.getValueFromKey("book_count") + " Tác phẩm"
-
-            let image = self.withView(cell, tag: 11) as! UIImageView
-
-            image.imageUrl(url: data.getValueFromKey("avatar"))
+            description.text = data.getValueFromKey("book_count")
             
-            let player = self.withView(cell, tag: 999) as! UIImageView
-                                
-            player.isHidden = true
+            let image = self.withView(cell, tag: 11) as! UIImageView
+            
+            image.imageUrlHolder(url: data.getValueFromKey("avatar"), holder: "bg_author_default_img")
         }
         
         if indexPath.section == 1 {
@@ -370,7 +373,7 @@ class Author_Detail_ViewController: UIViewController, UICollectionViewDataSource
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: collectionView.frame.width, height: section == 0 ? 44 : section == 2 ? chapList.count == 0 ? 0 : 44 : 44)
+        return CGSize(width: collectionView.frame.width, height: section == 0 ? 44 : section == 2 ? chapList.count == 0 ? 0 : 44 : dataList.count == 0 ? 0 : 44)
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {

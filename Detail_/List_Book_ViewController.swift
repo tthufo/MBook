@@ -53,6 +53,7 @@ class List_Book_ViewController: UIViewController, UICollectionViewDataSource, UI
                 
         tagView.callBack = { info in
             let temp = NSMutableDictionary.init(dictionary: self.config.reFormat())
+            (temp["url"] as! NSMutableDictionary)["CMD_CODE"] = "getListBook"
             (temp["url"] as! NSMutableDictionary)["tag_id"] = (info as! NSDictionary).getValueFromKey("id")
             self.titleLabel.text = (info as! NSDictionary).getValueFromKey("name")
             self.config = temp
@@ -76,7 +77,7 @@ class List_Book_ViewController: UIViewController, UICollectionViewDataSource, UI
                                                             "header":["session":Information.token == nil ? "" : Information.token!],
                                                             "session":Information.token ?? "",
                                                             "page_index": self.pageIndex,
-                                                            "page_size": 10,
+                                                            "page_size": 12,
                                                             "overrideAlert":"1",
                                                             "overrideLoading":isShow ? 1 : 0,
                                                             "host":self])

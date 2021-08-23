@@ -36,7 +36,7 @@ class Feed_Back_ViewController: UIViewController, UITextFieldDelegate {
         if IS_IPAD {
             sideGapLeft.constant = 100
             
-            sideGapRight.constant = 100
+            sideGapRight.constant = -100
         }
 
         tableView.estimatedRowHeight = 150

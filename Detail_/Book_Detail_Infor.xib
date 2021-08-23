@@ -65,7 +65,7 @@
                             <constraint firstAttribute="height" constant="23" id="hHj-CU-ra2"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                        <color key="textColor" red="0.1137254902" green="0.32156862749999998" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="textColor" red="0.1176470588" green="0.57254901960000004" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mf0-jj-ZZa">

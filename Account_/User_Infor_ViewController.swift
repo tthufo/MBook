@@ -72,9 +72,9 @@ class User_Infor_ViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
 
         if IS_IPAD {
-            sideGapLeft.constant = 100
-            
-            sideGapRight.constant = 100
+//            sideGapLeft.constant = 100
+//            
+//            sideGapRight.constant = 100
             
             login_bg_height.constant = 390
         }
