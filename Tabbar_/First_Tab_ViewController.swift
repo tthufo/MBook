@@ -110,7 +110,7 @@ class First_Tab_ViewController: UIViewController, UITextFieldDelegate {
                                       ["title":"SÁCH MIỄN PHÍ HOT",
                                        "url": ["CMD_CODE":"getListBook",
                                           "page_index": 1,
-                                          "page_size": 9,
+                                          "page_size": IS_IPAD ? 10 : 6,
                                           "book_type": 0,
                                           "price": 1,
                                           "sorting": 1,

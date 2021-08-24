@@ -696,6 +696,7 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
                 let name = info.getValueFromKey("fullName")
                 let email = info.getValueFromKey("email")
                 Information.loginType = ["email": "1"]
+                Information.allPackage = "0"
                 self.didRequestLoginSocial(info: ["provider": "google",
                                                   "id":gID ?? "",
                                                   "accessToken":accessToken ?? "",
@@ -719,6 +720,7 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
                 let avatar = info.getValueFromKey("avatar")
                 let name = info.getValueFromKey("name")
                 Information.loginType = [:]
+                Information.allPackage = "0"
                 self.didRequestLoginSocial(info: ["provider": "facebook",
                                                   "id":fID ?? "",
                                                   "accessToken":accessToken ?? "",
@@ -827,6 +829,7 @@ extension PC_Login_ViewController: ASAuthorizationControllerDelegate {
             let aID = appleIDCredential.user
             let le = appleIDCredential.identityToken
             Information.loginType = [:]
+            Information.allPackage = "0"
             self.didRequestLoginSocial(info: ["provider": "apple",
                                               "id":aID ,
                                               "accessToken":String(data: le!, encoding: .utf8) ?? "",
