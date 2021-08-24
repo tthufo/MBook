@@ -188,7 +188,11 @@ class User_Infor_ViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func didPressEdit() {
-        self.center()?.pushViewController(PC_Inner_Info_ViewController.init(), animated: true)
+        let editInfo = PC_Inner_Info_ViewController.init()
+        editInfo.callBack = { value in
+            self.didReload(self.refreshControl)
+        }
+        self.center()?.pushViewController(editInfo, animated: true)
     }
     
     @IBAction func didPressBuy() {
@@ -333,41 +337,20 @@ class User_Infor_ViewController: UIViewController, UITextFieldDelegate {
         })
     }
     
-    @IBAction func didPressSubmit(image: UIImage) {
-        let data: NSMutableDictionary =
-            self.avatarTemp != nil ? ["CMD_CODE":"updateUserInfo",
+    func didPressSubmit(image: UIImage) {
+        let data: NSMutableDictionary = ["CMD_CODE":"updateUserInfo",
                                          "session": Information.token ?? "",
                                          "header":["session":Information.token == nil ? "" : Information.token!],
-                                         "avatar": self.avatarTemp != nil ? self.avatarTemp.imageString() : "",
-//                                         "sex": sex ?? "",
-                                         "email":email.text as Any,
-                                         "name":name.text as Any,
-                                         "phone":phone.text as Any,
-//                                         "birthday": birthday.text as Any,
-//                                         "address":address.text as Any,
-                                        "overrideAlert":"1",
-                                        "overrideLoading":"1",
-                                        "host":self]
-                                        :
-                                        ["CMD_CODE":"updateUserInfo",
-                                         "header":["session":Information.token == nil ? "" : Information.token!],
-                                         "session": Information.token ?? "",
-//                                         "sex": sex ?? "",
-                                         "email":email.text as Any,
-                                         "name":name.text as Any,
-                                         "phone":phone.text as Any,
-//                                         "birthday": birthday.text as Any,
-//                                         "address":address.text as Any,
-                                        "overrideAlert":"1",
-                                        "overrideLoading":"1",
-                                        "host":self]
+                                         "avatar": image.imageString(),
+                                         "overrideAlert":"1",
+                                         "overrideLoading":"1",
+                                         "host":self]
         
         LTRequest.sharedInstance()?.didRequestInfo((data as! [AnyHashable : Any]), withCache: { (cacheString) in
        }, andCompletion: { (response, errorCode, error, isValid, object) in
            let result = response?.dictionize() ?? [:]
                                                
            if result.getValueFromKey("error_code") != "0" || result["result"] is NSNull {
-//               self.showToast(response?.dictionize().getValueFromKey("error_msg") == "" ? "Lỗi xảy ra, mời bạn thử lại" : response?.dictionize().getValueFromKey("error_msg"), andPos: 0)
                 EM_MenuView.init(confirm: ["image": "fail", "line1": "Cập nhật không thành công", "line2": "Xin lỗi quý khách vì sự cố này \nVui lòng thử lại sau", "line3": "Về trang Cá nhân"]).show { (index, obj, menu) in
                     if index == 4 {
         
@@ -378,18 +361,17 @@ class User_Infor_ViewController: UIViewController, UITextFieldDelegate {
                return
            }
 //           self.showToast("Cập nhật thông tin thành công", andPos: 0)
-            EM_MenuView.init(confirm: ["image": "success", "line1": "Đổi avatar thành công", "line2": "Thông tin của quý khách đã được cập nhật", "line3": "Về trang Cá nhân"]).show { (index, obj, menu) in
-                if index == 4 {
-
-                } else {
-
-                }
-            }
+//            EM_MenuView.init(confirm: ["image": "success", "line1": "Đổi ảnh đại diện thành công", "line2": "Thông tin của quý khách đã được cập nhật", "line3": "Về trang Cá nhân"]).show { (index, obj, menu) in
+//                if index == 4 {
+//
+//                } else {
+//
+//                }
+//            }
         
             self.avatarTemp = image
             self.avatar.image = image
             Information.avatar = image
-           
             self.didGetInfo()
        })
    }

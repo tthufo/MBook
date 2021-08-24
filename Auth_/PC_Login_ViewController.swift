@@ -432,14 +432,18 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
         if is3G {
             self.uName.text = (phoneNumber as! String)
             Information.allPackage = "1"
-            Information.loginType = "phone"
+            Information.loginType = ["phone": "1"]
             requestLogin(request: ["username":phoneNumber,
                                    "login_type":"3G"])
             print("3G")
         } else {
             if logged {
                 Information.allPackage = self.stringIsNumber(uName.text!) ? "1" : "0"
-                Information.loginType = self.stringIsNumber(uName.text!) ? "phone" : "email"
+                if self.stringIsNumber(uName.text!) {
+                    Information.loginType = ["phone": "1"]
+                } else {
+                    Information.loginType = ["email": "1"]
+                }
                 requestLogin(request: ["username":self.stringIsNumber(uName.text!) ? convertPhone() : uName.text!,
                                        "password":pass.text as Any,
                                        "login_type":"WIFI"])
@@ -451,7 +455,11 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
                         return
                     }
                     Information.allPackage = self.stringIsNumber(uName.text!) ? "1" : "0"
-                    Information.loginType = self.stringIsNumber(uName.text!) ? "phone" : "email"
+                    if self.stringIsNumber(uName.text!) {
+                        Information.loginType = ["phone": "1"]
+                    } else {
+                        Information.loginType = ["email": "1"]
+                    }
                     requestLogin(request: ["username":self.stringIsNumber(uName.text!) ? convertPhone() : uName.text!,
                                             "password":pass.text as Any,
                                             "login_type":"WIFI"])
@@ -459,7 +467,11 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
                 }
             } else {
                 Information.allPackage = "0"
-                Information.loginType = "social"
+                if (social_logged! as NSDictionary).getValueFromKey("provider") == "google" {
+                    Information.loginType = ["email": "1"]
+                } else {
+                    Information.loginType = [:]
+                }
                 didRequestLoginSocial(info: social_logged! as NSDictionary)
                 print("SOCIAL")
             }
@@ -566,7 +578,6 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
                 return
             }
                                                 
-//            self.add(["name":self.uName.text as Any, "pass":self.pass.text as Any], andKey: "log")
 
             self.add((response?.dictionize()["result"] as! NSDictionary).reFormat() as? [AnyHashable : Any], andKey: "info")
 
@@ -684,6 +695,7 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
                 let avatar = info.getValueFromKey("avatar")
                 let name = info.getValueFromKey("fullName")
                 let email = info.getValueFromKey("email")
+                Information.loginType = ["email": "1"]
                 self.didRequestLoginSocial(info: ["provider": "google",
                                                   "id":gID ?? "",
                                                   "accessToken":accessToken ?? "",
@@ -706,6 +718,7 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
                 let accessToken = info.getValueFromKey("accessToken")
                 let avatar = info.getValueFromKey("avatar")
                 let name = info.getValueFromKey("name")
+                Information.loginType = [:]
                 self.didRequestLoginSocial(info: ["provider": "facebook",
                                                   "id":fID ?? "",
                                                   "accessToken":accessToken ?? "",
@@ -812,9 +825,8 @@ extension PC_Login_ViewController: ASAuthorizationControllerDelegate {
         switch authorization.credential {
         case let appleIDCredential as ASAuthorizationAppleIDCredential:
             let aID = appleIDCredential.user
-    
             let le = appleIDCredential.identityToken
-
+            Information.loginType = [:]
             self.didRequestLoginSocial(info: ["provider": "apple",
                                               "id":aID ,
                                               "accessToken":String(data: le!, encoding: .utf8) ?? "",

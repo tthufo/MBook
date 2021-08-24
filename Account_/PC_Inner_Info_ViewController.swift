@@ -33,6 +33,8 @@ class PC_Inner_Info_ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var rePassError: UILabel!
     
     @IBOutlet var submit: UIButton!
+    
+    @objc var callBack: ((_ info: Any)->())?
 
     var kb: KeyBoard!
     
@@ -40,18 +42,12 @@ class PC_Inner_Info_ViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet var sideGapRight: NSLayoutConstraint!
     
-//    @IBOutlet var sideGapBottomLeft: NSLayoutConstraint!
-//
-//    @IBOutlet var sideGapBottomRight: NSLayoutConstraint!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         if IS_IPAD {
            sideGapLeft.constant = 100
            sideGapRight.constant = -100
-//           sideGapBottomLeft.constant = 100
-//           sideGapBottomRight.constant = 100
         }
         
         kb = KeyBoard.shareInstance()
@@ -67,21 +63,39 @@ class PC_Inner_Info_ViewController: UIViewController, UITextFieldDelegate {
         
         phone.text = Information.userInfo?.getValueFromKey("phone")
 
-        phone.isEnabled = Information.loginType != "phone"
-        
-        (self.withView(cell, tag: 68) as! UIView).backgroundColor = Information.loginType != "phone" ? .white : .secondarySystemBackground
-                        
         email.text = Information.userInfo?.getValueFromKey("email")
+
+        print(Information.loginType)
         
-        email.isEnabled = Information.loginType != "email"
+
         
-        (self.withView(cell, tag: 69) as! UIView).backgroundColor = Information.loginType != "email" ? .white : .secondarySystemBackground
+        if Information.loginType.response(forKey: "phone") {
+            let disablePhone = Information.loginType.response(forKey: "phone")
+            
+            phone.isEnabled = !disablePhone
+            
+            phone.isUserInteractionEnabled = !disablePhone
+            
+            rePassBG.backgroundColor = disablePhone ? .secondarySystemBackground : .white
+        }
+                        
+        if Information.loginType.response(forKey: "email") {
+
+            let disableEmail = Information.loginType.response(forKey: "email")
+
+            email.isEnabled = !disableEmail
+            
+            email.isUserInteractionEnabled = !disableEmail
+            
+            emailBG.backgroundColor = disableEmail ? .secondarySystemBackground : .white
+        }
 
                 
+        
         phone.addTarget(self, action: #selector(textRePassIsChanging), for: .editingChanged)
         email.addTarget(self, action: #selector(textEmailIsChanging), for: .editingChanged)
 
-        didGetInfo()
+        didGetInfo(isBack: false)
     }
     
     func convertDate(date: String) -> String {
@@ -205,7 +219,7 @@ class PC_Inner_Info_ViewController: UIViewController, UITextFieldDelegate {
         })
     }
     
-    func didGetInfo() {
+    func didGetInfo(isBack: Bool) {
         LTRequest.sharedInstance()?.didRequestInfo(["CMD_CODE":"getUserInfo",
                                                     "header":["session":Information.token == nil ? "" : Information.token!],
                                                      "session": Information.token ?? "",
@@ -221,40 +235,29 @@ class PC_Inner_Info_ViewController: UIViewController, UITextFieldDelegate {
             }
                    
             let preInfo: NSMutableDictionary = (response?.dictionize()["result"] as! NSDictionary).reFormat()
-            
-//            preInfo["birthday"] = self.convertDate(date: preInfo.getValueFromKey("birthday"))
-            
+                        
             self.add(preInfo as? [AnyHashable : Any], andKey: "info")
 
+            self.tableView.reloadData()
+            
             Information.saveInfo()
+            if isBack {
+                self.navigationController?.popViewController(animated: true)
+                
+                self.callBack!(["update": "1"])
+            }
         })
     }
     
     @IBAction func didPressSubmit() {
        self.view.endEditing(true)
         let data: NSMutableDictionary =
-//            self.avatarTemp != nil ? ["CMD_CODE":"updateUserInfo",
-//                                         "session": Information.token ?? "",
-//                                         "avatar": self.avatarTemp != nil ? self.avatarTemp.imageString() : "",
-//                                         "sex": sex ?? "",
-//                                         "email":email.text as Any,
-//                                         "name":name.text as Any,
-//                                         "phone":phone.text as Any,
-//                                         "birthday": birthday.text as Any,
-//                                         "address":address.text as Any,
-//                                        "overrideAlert":"1",
-//                                        "overrideLoading":"1",
-//                                        "host":self]
-//                                        :
                                         ["CMD_CODE":"updateUserInfo",
                                          "header":["session":Information.token == nil ? "" : Information.token!],
                                          "session": Information.token ?? "",
-//                                         "sex": sex ?? "",
                                          "email":email.text as Any,
                                          "name":name.text as Any,
                                          "phone":phone.text as Any,
-//                                         "birthday": birthday.text as Any,
-//                                         "address":address.text as Any,
                                         "overrideAlert":"1",
                                         "overrideLoading":"1",
                                         "host":self]
@@ -270,8 +273,8 @@ class PC_Inner_Info_ViewController: UIViewController, UITextFieldDelegate {
         
            self.showToast("Cập nhật thông tin thành công", andPos: 0)
            
-           self.didGetInfo()
-       })
+           self.didGetInfo(isBack: true)
+        })
    }
     
     @IBAction func didPressBack() {
@@ -293,7 +296,6 @@ class PC_Inner_Info_ViewController: UIViewController, UITextFieldDelegate {
 //       } else {
 //           self.view.endEditing(true)
 //       }
-       
        return true
    }
     
@@ -324,14 +326,27 @@ extension PC_Inner_Info_ViewController: UITableViewDataSource, UITableViewDelega
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        (self.withView(cell, tag: 68) as! UIView).backgroundColor = Information.loginType != "phone" ? .white : .secondarySystemBackground
-        
-        phone.isEnabled = Information.loginType != "phone"
-        
-        email.isEnabled = Information.loginType != "email"
-        
-        (self.withView(cell, tag: 69) as! UIView).backgroundColor = Information.loginType != "email" ? .white : .secondarySystemBackground
-        
+        if Information.loginType.response(forKey: "phone") {
+            let disablePhone = Information.loginType.response(forKey: "phone")
+            
+            phone.isEnabled = !disablePhone
+            
+            phone.isUserInteractionEnabled = !disablePhone
+            
+            rePassBG.backgroundColor = disablePhone ? .secondarySystemBackground : .white
+        }
+                        
+        if Information.loginType.response(forKey: "email") {
+
+            let disableEmail = Information.loginType.response(forKey: "email")
+
+            email.isEnabled = !disableEmail
+            
+            email.isUserInteractionEnabled = !disableEmail
+            
+            emailBG.backgroundColor = disableEmail ? .secondarySystemBackground : .white
+        }
+
         return cell
     }
 }

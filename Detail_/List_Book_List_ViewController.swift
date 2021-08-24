@@ -125,7 +125,21 @@ extension List_Book_List_ViewController: UITableViewDataSource, UITableViewDeleg
 
         let cell = tableView.dequeueReusableCell(withIdentifier:"Book_List_Cell", for: indexPath)
                 
-        (self.withView(cell, tag: 1) as! UIImageView).imageUrl(url: data.getValueFromKey("avatar"))
+        let bg = (self.withView(cell, tag: 100) as! UIView)
+
+        let booking = (self.withView(cell, tag: 1) as! UIImageView)
+            
+        booking.imageUrl(url: data.getValueFromKey("avatar"))
+                        
+        
+        booking.widthConstaint!.constant = CGFloat(bg.bookWidth())
+     
+        bg.widthConstaint!.constant = CGFloat(bg.bookWidth())
+
+        booking.heightConstaint!.constant = CGFloat(bg.bookHeight())
+        
+        bg.heightConstaint!.constant = CGFloat(bg.bookHeight())
+        
         
         (self.withView(cell, tag: 2) as! UILabel).text = data.getValueFromKey("name")
         

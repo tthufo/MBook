@@ -290,7 +290,7 @@
 
 - (CGFloat)tableView:(UITableView *)_tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return indexPath.section == 0 ? tempHeight == 0 ? [config[indexPath.row][@"height"] floatValue] : tempHeight : 165;
+    return indexPath.section == 0 ? tempHeight == 0 ? [config[indexPath.row][@"height"] floatValue] : tempHeight : UITableViewAutomaticDimension;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)_tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -301,7 +301,20 @@
                 
         NSDictionary * list = dataList[indexPath.row];
         
-        [(UIImageView*)[self withView:cell tag:1] imageUrlWithUrl: [list getValueFromKey:@"avatar"]];
+        UIView * bg = (UIView*)[self withView:cell tag:100];
+        
+        UIImageView * booking = (UIImageView*)[self withView:cell tag:1];
+        
+        [booking imageUrlWithUrl: [list getValueFromKey:@"avatar"]];
+        
+        booking.widthConstaint.constant = [bg bookWidth];
+     
+        bg.widthConstaint.constant = [bg bookWidth];
+
+        booking.heightConstaint.constant = [bg bookHeight];
+        
+        bg.heightConstaint.constant = [bg bookHeight];
+        
         
         [(UILabel*)[self withView:cell tag:2] setText: [list getValueFromKey:@"name"]];
 

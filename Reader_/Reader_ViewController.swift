@@ -254,6 +254,7 @@ class Reader_ViewController: UIViewController {
             self.pdfDocument = document
             self.pageNumber.text = "%i / %i".format(parameters: 1, document.documentRef?.numberOfPages as! CVarArg)
             self.chapter.isEnabled = true
+            self.pageNumber.isHidden = false
         } else {
             self.failLabel.alpha = 1
             self.failLabel.text = "Không mở được file PDF, mời bạn tải lại."

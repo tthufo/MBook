@@ -899,6 +899,16 @@ extension String {
 
 extension UIView {
     
+    @objc func bookHeight() -> Float {
+        let itemHeight = Float(((screenWidth() / (IS_IPAD ? 5 : 3)) - 15) * 1.80)
+        return itemHeight - 70
+    }
+    
+    @objc func bookWidth() -> Float {
+        let itemWidth = Float((self.screenWidth() / (IS_IPAD ? 5 : 3)) - 15)
+        return itemWidth - 20
+    }
+    
     func topRadius() {
         if #available(iOS 11.0, *){
             self.clipsToBounds = false

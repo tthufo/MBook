@@ -90,7 +90,12 @@ class VIP_ViewController: UIViewController, MFMessageComposeViewControllerDelega
 
            let payment = (result["result"] as! NSArray)
 
-           self.dataList.addObjects(from: payment.withMutable())
+            let descriptor: NSSortDescriptor = NSSortDescriptor(key: "price", ascending: true)
+            let sortedResults: NSArray = payment.sortedArray(using: [descriptor]) as NSArray
+        
+        print(sortedResults)
+        
+           self.dataList.addObjects(from: sortedResults.withMutable())
             
             LTRequest.sharedInstance()?.didRequestInfo(["cmd_code":"getPackageInfo",
                                                         "header":["session":Information.token == nil ? "" : Information.token!],
@@ -169,8 +174,13 @@ class VIP_ViewController: UIViewController, MFMessageComposeViewControllerDelega
 
            let data = (result["result"] as! NSArray)
 
-           self.dataList.addObjects(from: data.withMutable())
-
+            let descriptor: NSSortDescriptor = NSSortDescriptor(key: "price", ascending: true)
+            let sortedResults: NSArray = data.sortedArray(using: [descriptor]) as NSArray
+        
+           print(sortedResults)
+        
+           self.dataList.addObjects(from: sortedResults.withMutable())
+        
            self.tableView.reloadData()
        })
     }

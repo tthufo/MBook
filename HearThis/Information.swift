@@ -29,7 +29,7 @@ class Information: NSObject {
     
     static var allPackage: String?
     
-    @objc static var loginType: String?
+    @objc static var loginType: NSDictionary!
     
     @objc static var isVip: Bool = false
     
@@ -125,6 +125,12 @@ class Information: NSObject {
     }
     
     @objc static func removeInfo() {
+        
+        self.avatar = nil
+        
+        self.allPackage = "0"
+        
+        self.loginType = [:]
         
         self.searchValue = ""
         
