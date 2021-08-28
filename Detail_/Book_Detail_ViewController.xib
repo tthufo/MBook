@@ -11,6 +11,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="Book_Detail_ViewController" customModule="MeBook" customModuleProvider="target">
             <connections>
                 <outlet property="collectionView" destination="NPj-gT-Jt0" id="VhE-4n-oA9"/>
+                <outlet property="likeBtn" destination="pDZ-4S-sOU" id="oUx-kx-gGj"/>
                 <outlet property="view" destination="eCk-zh-DNg" id="w88-Fy-WXM"/>
             </connections>
         </placeholder>
@@ -40,6 +41,9 @@
                         <constraint firstAttribute="height" constant="44" id="rrq-ea-sWN"/>
                     </constraints>
                     <state key="normal" image="ico_like_white"/>
+                    <connections>
+                        <action selector="didRequestLike" destination="-1" eventType="touchUpInside" id="jdU-iz-azy"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UUF-KU-HqZ">
                     <rect key="frame" x="10" y="10" width="44" height="44"/>

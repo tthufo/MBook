@@ -213,6 +213,14 @@ UIBackgroundTaskIdentifier bgTask;
     return YES;
 }
 
+- (void)application:(UIApplication*)application didReceiveRemoteNotification:(nonnull NSDictionary *)userInfo fetchCompletionHandler:(nonnull void (^)(UIBackgroundFetchResult))completionHandler
+{
+    
+    if (application.applicationState == UIApplicationStateInactive || application.applicationState == UIApplicationStateBackground) {
+        NSLog(@"--->%@", userInfo);
+    }
+}
+
 @end
 
 @implementation NSObject (ext)
@@ -491,6 +499,12 @@ UIBackgroundTaskIdentifier bgTask;
             {
                 [self didEmbed:[((ViewPagerController*)[self LAST]) viewControllerAtIndex:[((ViewPagerController*)[self LAST]).indexSelected intValue]]];
             }
+        }
+        
+        
+        if([[self TOPVIEWCONTROLER] isKindOfClass:[Rating_ViewController class]])
+        {
+            ((Rating_ViewController*)[self TOPVIEWCONTROLER]).bottomGap.constant = 26;
         }
 
         [self PLAYER].playState = Normal;

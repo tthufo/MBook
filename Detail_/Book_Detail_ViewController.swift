@@ -15,6 +15,8 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
     
     @IBOutlet var collectionView: UICollectionView!
 
+    @IBOutlet var likeBtn: UIButton!
+
     @objc var config: NSDictionary!
     
     var headerView: UIView!
@@ -39,6 +41,8 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
     
     var detailList: NSMutableArray!
     
+    var ratingList: NSMutableArray!
+
     
     let headerHeight = IS_IPAD ? 340 : 220
     
@@ -57,6 +61,8 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
         
         detailList = NSMutableArray.init()
                 
+        ratingList = NSMutableArray.init()
+
         tempInfo = NSMutableDictionary.init()
 
         collectionView.withCell("TG_Map_Cell")
@@ -70,6 +76,8 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
         collectionView.withCell("TG_Book_Detail_Cell")
 
         collectionView.withCell("TG_Book_Chap_Cell")
+
+        collectionView.withCell("Book_Rating_Cell")
 
         collectionView.refreshControl = refreshControl
         
@@ -145,6 +153,8 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
         self.didRequestDetail()
 
         self.didRequestChapter()
+        
+        self.didRequestRating()
     }
     
     func setupInfo() {
@@ -189,6 +199,38 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
         let collectionViewInsets: UIEdgeInsets = UIEdgeInsets(top: CGFloat(self.headerHeight), left: 0.0, bottom: contentSizeHeight < CGFloat(collectionViewHeight - 64) ? CGFloat(collectionViewHeight - contentSizeHeight - 64) + CGFloat(embeded) : CGFloat(0 + embeded), right: 0.0)
          
         self.collectionView.contentInset = collectionViewInsets
+    }
+    
+   @IBAction func didRequestLike() {
+         let request = NSMutableDictionary.init(dictionary: [
+                                                             "header":["session":Information.token == nil ? "" : Information.token!],
+                                                             "session":Information.token ?? "",
+                                                             "overrideAlert":"1",
+                                                             ])
+            request["item_id"] = self.config.getValueFromKey("id")
+            request["CMD_CODE"] = "pushLikeItem"
+         LTRequest.sharedInstance()?.didRequestInfo((request as! [AnyHashable : Any]), withCache: { (cacheString) in
+         }, andCompletion: { (response, errorCode, error, isValid, object) in
+             self.refreshControl.endRefreshing()
+             let result = response?.dictionize() ?? [:]
+             
+             if result.getValueFromKey("error_code") != "0" || result["result"] is NSNull {
+                 self.showToast(response?.dictionize().getValueFromKey("error_msg") == "" ? "Lỗi xảy ra, mời bạn thử lại" : response?.dictionize().getValueFromKey("error_msg"), andPos: 0)
+                 return
+             }
+            
+            let tempConfig = NSMutableDictionary.init(dictionary: self.tempInfo)
+            
+            tempConfig["like_count"] = (result["result"] as! NSDictionary).getValueFromKey("like_count")
+            
+            self.tempInfo = tempConfig
+            
+            self.collectionView.reloadSections(IndexSet(integer: 0))
+            
+            let likeStatus = (result["result"] as! NSDictionary).getValueFromKey("like_status")
+            
+            self.likeBtn.setImage(likeStatus == "1" ? UIImage(named:"ico_like_fill")?.withTintColor(.systemPink) : UIImage(named:"ico_like_white"), for: .normal)
+         })
     }
     
     func didRequestData(isShow: Bool) {
@@ -307,7 +349,9 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
             
             self.tempInfo.addEntries(from: result["result"] as! [AnyHashable : Any])
             
+            let likeStatus = (result["result"] as! NSDictionary).getValueFromKey("like_status")
             
+            self.likeBtn.setImage(likeStatus == "1" ? UIImage(named:"ico_like_fill")?.withTintColor(.systemPink) : UIImage(named:"ico_like_white"), for: .normal)
             
             self.tempBio = (data["publisher"] as! NSArray).count == 0 ? "" : ((data["publisher"] as! NSArray).firstObject as! NSDictionary)["description"] as! String
             
@@ -331,6 +375,43 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
             }
             self.adjustInset()
         })
+    }
+    
+    func didRequestRating() {
+         let request = NSMutableDictionary.init(dictionary: [
+                                                             "header":["session":Information.token == nil ? "" : Information.token!],
+                                                             "session":Information.token ?? "",
+                                                             "overrideAlert":"1",
+                                                             "page_index": 1,
+                                                             "page_size": 3
+                                                             ])
+            request["item_id"] = self.config.getValueFromKey("id")
+            request["CMD_CODE"] = "getListRating"
+         LTRequest.sharedInstance()?.didRequestInfo((request as! [AnyHashable : Any]), withCache: { (cacheString) in
+         }, andCompletion: { (response, errorCode, error, isValid, object) in
+             self.refreshControl.endRefreshing()
+             let result = response?.dictionize() ?? [:]
+             
+             if result.getValueFromKey("error_code") != "0" || result["result"] is NSNull {
+                 self.showToast(response?.dictionize().getValueFromKey("error_msg") == "" ? "Lỗi xảy ra, mời bạn thử lại" : response?.dictionize().getValueFromKey("error_msg"), andPos: 0)
+                 return
+             }
+                     
+             self.ratingList.removeAllObjects()
+
+             let data = (result["result"] as! NSDictionary)["data"]
+
+             self.ratingList.addObjects(from: data as! [Any])
+             
+             self.collectionView.performBatchUpdates {
+                
+                 self.collectionView.reloadSections(IndexSet(integer: 4))
+                
+            } completion: { (done) in
+                
+            }
+             self.adjustInset()
+         })
     }
     
     func didRequestUrlBook(book: NSDictionary) {
@@ -441,9 +522,9 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
     func filter(info: NSDictionary, relate: Bool) -> NSArray {
         let keys = relate ? [["key": "header_cell", "tag": 1, "height": 44],
                    ["key": "category", "title": "Thể loại", "tag": 2, "height": 35 ],
-                   ["key": "author", "title": "Tác giả", "tag": 2, "height": 35],
-                   ["key": "publisher", "title": "Nhà xuất bản", "tag": 2, "height": 35],
-                   ["key": "events", "title": "Tuyển tập", "tag": 2, "height": 35],
+//                   ["key": "author", "title": "Tác giả", "tag": 2, "height": 35],
+//                   ["key": "publisher", "title": "Nhà xuất bản", "tag": 2, "height": 35],
+//                   ["key": "events", "title": "Tuyển tập", "tag": 2, "height": 35],
                    ["key": "publish_time", "title": "Ngày upload", "arrow": "1", "tag": 2, "height": 35],
                    ["key": "price", "title": "Giá mua lẻ", "tag": 2, "height": 35, "unit": " VND"],
                    ["key": "button_cell", "tag": 4, "height": 35],
@@ -451,9 +532,9 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
         ] :
         [["key": "header_cell", "tag": 1, "height": 44],
                    ["key": "category", "title": "Thể loại", "tag": 2, "height": 35 ],
-                   ["key": "author", "title": "Tác giả", "tag": 2, "height": 35],
-                   ["key": "publisher", "title": "Nhà xuất bản", "tag": 2, "height": 35],
-                   ["key": "events", "title": "Tuyển tập", "tag": 2, "height": 35],
+//                   ["key": "author", "title": "Tác giả", "tag": 2, "height": 35],
+//                   ["key": "publisher", "title": "Nhà xuất bản", "tag": 2, "height": 35],
+//                   ["key": "events", "title": "Tuyển tập", "tag": 2, "height": 35],
                    ["key": "publish_time", "title": "Ngày upload", "arrow": "1", "tag": 2, "height": 35],
                    ["key": "price", "title": "Giá mua lẻ", "tag": 2, "height": 35, "unit": " VND"],
 //                   ["key": "button_cell", "tag": 4, "height": 35],
@@ -563,6 +644,25 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
        return size
    }
     
+    private func sizeForRating(for indexPath: IndexPath) -> CGSize {
+       let cell = Bundle.main.loadNibNamed("Book_Rating_Cell", owner: self, options: nil)?.first as! UICollectionViewCell
+        
+       let rating = self.withView(cell, tag: 4) as! UILabel
+       rating.text = (self.ratingList[indexPath.item] as! NSDictionary).getValueFromKey("rating_content")
+        
+       cell.setNeedsLayout()
+       cell.layoutIfNeeded()
+
+       let width = collectionView.frame.width
+       let height: CGFloat = 0
+
+       let targetSize = CGSize(width: width, height: height)
+
+       let size = cell.contentView.systemLayoutSizeFitting(targetSize, withHorizontalFittingPriority: .defaultHigh, verticalFittingPriority: .fittingSizeLevel)
+
+       return size
+   }
+    
     private func sizeBio(for indexPath: IndexPath) -> CGSize {
        let cell = Bundle.main.loadNibNamed("Author_Bio_Cell", owner: self, options: nil)?.first as! UICollectionViewCell
         
@@ -583,19 +683,19 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
    }
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 5
+        return 6
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return section == 0 || section == 1 ? 1 : section == 2 ? detailList.count : section == 3 ? self.retract ? 0 : chapList.count > 1 ? chapList.count : 0 : dataList.count
+        return section == 0 || section == 1 ? 1 : section == 2 ? detailList.count : section == 3 ? self.retract ? 0 : chapList.count > 1 ? chapList.count : 0 : section == 4 ? ratingList.count > 0 ? ratingList.count : 0 : dataList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return indexPath.section == 0 ? size(for: indexPath) : indexPath.section == 1 ? sizeBio(for: indexPath) : indexPath.section == 2 ? CGSize(width: collectionView.frame.width, height: detailList.count == 0 ? 0 : (detailList[indexPath.item] as! NSDictionary)["height"] as! CGFloat) : indexPath.section == 3 ? CGSize(width: collectionView.frame.width, height: 65) : CGSize(width: Int((self.screenWidth() / (IS_IPAD ? 5 : 3)) - 15), height: Int(((self.screenWidth() / (IS_IPAD ? 5 : 3)) - 15) * 1.72))
+        return indexPath.section == 0 ? size(for: indexPath) : indexPath.section == 1 ? sizeBio(for: indexPath) : indexPath.section == 2 ? CGSize(width: collectionView.frame.width, height: detailList.count == 0 ? 0 : (detailList[indexPath.item] as! NSDictionary)["height"] as! CGFloat) : indexPath.section == 3 ? CGSize(width: collectionView.frame.width, height: 65) : indexPath.section == 4 ? sizeForRating(for: indexPath) : CGSize(width: Int((self.screenWidth() / (IS_IPAD ? 5 : 3)) - 15), height: Int(((self.screenWidth() / (IS_IPAD ? 5 : 3)) - 15) * 1.72))
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return section == 4 ? UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5) : UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+        return section == 5 ? UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5) : UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -608,7 +708,7 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: indexPath.section == 0 ? "Book_Detail_Infor" : indexPath.section == 1 ? "Author_Bio_Cell" : indexPath.section == 2 ? "Book_Detail_Option_Cell" : indexPath.section == 3 ? "TG_Book_Chap_Cell" : "TG_Map_Cell", for: indexPath as IndexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: indexPath.section == 0 ? "Book_Detail_Infor" : indexPath.section == 1 ? "Author_Bio_Cell" : indexPath.section == 2 ? "Book_Detail_Option_Cell" : indexPath.section == 3 ? "TG_Book_Chap_Cell" : indexPath.section == 4 ? "Book_Rating_Cell" : "TG_Map_Cell", for: indexPath as IndexPath)
         
         
         if indexPath.section == 0 {
@@ -727,6 +827,25 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
         }
         
         if indexPath.section == 4 {
+            let rating = ratingList[indexPath.item] as! NSDictionary
+
+            let image = self.withView(cell, tag: 1) as! UIImageView
+
+            image.imageUrl(url: rating.getValueFromKey("avatar"))
+            
+            let title = self.withView(cell, tag: 2) as! UILabel
+
+            title.text = rating.getValueFromKey("user_name")
+            
+            let rate = self.withView(cell, tag: 3) as! CosmosView
+            rate.rating = Double(rating.getValueFromKey("rating")) ?? 0
+
+            let description = self.withView(cell, tag: 4) as! UILabel
+
+            description.text = rating.getValueFromKey("rating_content")
+        }
+        
+        if indexPath.section == 5 {
             let data = dataList[indexPath.item] as! NSDictionary
 
             let title = self.withView(cell, tag: 112) as! UILabel
@@ -772,7 +891,7 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
             self.didRequestChapDetail(chap: chap)
         }
         
-        if indexPath.section == 4 {
+        if indexPath.section == 5 {
             let bookInfo:NSMutableDictionary = NSMutableDictionary.init(dictionary: (dataList[indexPath.item] as! NSDictionary))
             bookInfo["url"] = self.config["url"]
             if bookInfo.getValueFromKey("book_type") == "3" {
@@ -786,27 +905,40 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
                 self.didReload(self.refreshControl)
                 self.didRequestChapter()
                 self.didRequestDetail()
+                self.didRequestRating()
             })
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        if indexPath.section == 4 {
+        if indexPath.section == 5 {
             let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "Book_Detail_Gap", for: indexPath as IndexPath)
 
             return view
         }
         let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "Book_Detail_Chap_Header", for: indexPath as IndexPath)
-        (self.withView(view, tag: 1) as! UILabel).text = "ĐỌC EBOOK (%i CHƯƠNG)".format(parameters: self.chapList.count)
-        let angle = self.retract ? 0 : CGFloat.pi
-        
-        (self.withView(view, tag: 3) as! UIButton).transform = CGAffineTransform(rotationAngle: angle)
-        view.action(forTouch: [:]) { (objc) in
-            self.retract = !self.retract
-            self.collectionView.performBatchUpdates {
-                self.collectionView.reloadSections(IndexSet(integer: 3))
-            } completion: { (done) in
-                self.adjustInset()
+        (self.withView(view, tag: 1) as! UILabel).text = indexPath.section == 3 ? "ĐỌC EBOOK (%i CHƯƠNG)".format(parameters: self.chapList.count) :
+            "ĐÁNH GIÁ (%i)".format(parameters: self.ratingList.count)
+        if indexPath.section == 3 {
+            (self.withView(view, tag: 3) as! UIButton).setBackgroundImage(UIImage(named: "ico_arrow_teal"), for: .normal)
+            view.backgroundColor = AVHexColor.color(withHexString: "#F0F0EC")
+            let angle = self.retract ? 0 : CGFloat.pi
+            (self.withView(view, tag: 3) as! UIButton).transform = CGAffineTransform(rotationAngle: angle)
+            view.action(forTouch: [:]) { (objc) in
+                self.retract = !self.retract
+                self.collectionView.performBatchUpdates {
+                    self.collectionView.reloadSections(IndexSet(integer: 3))
+                } completion: { (done) in
+                    self.adjustInset()
+                }
+            }
+        } else {
+            (self.withView(view, tag: 4) as! UIButton).setBackgroundImage(UIImage(named: "ico_arrow_teal_r"), for: .normal)
+            view.backgroundColor = .white
+            view.action(forTouch: [:]) { (objc) in
+                let rating = Rating_ViewController.init()
+                rating.config = self.tempInfo
+                self.navigationController?.pushViewController(rating, animated: true)
             }
         }
         return view
@@ -817,12 +949,12 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: collectionView.frame.width, height: section == 3 ? chapList.count <= 1 ? 0 : 55 : section == 4 ? 40 : 0)
+        return CGSize(width: collectionView.frame.width, height: section == 3 ? chapList.count <= 1 ? 0 : 55 : section == 4 ? 55 : section == 5 ? 40 : 0)
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         
-        if indexPath.section == 4 {
+        if indexPath.section == 5 {
             if self.pageIndex == 1 {
               return
             }

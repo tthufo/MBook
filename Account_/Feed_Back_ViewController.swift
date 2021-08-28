@@ -71,10 +71,10 @@ class Feed_Back_ViewController: UIViewController, UITextFieldDelegate {
     @IBAction func didPressNext() {
         self.view.endEditing(true)
         if name.hasText && email.hasText && (email.text?.isValidEmail())! && feedBack.hasText {
+            self.didRequestFeedback()
             name.text = ""
             email.text = ""
             feedBack.text = ""
-            self.showToast("Gửi phản hồi thành công", andPos: 0)
         } else {
             if !name.hasText || !email.hasText || !feedBack.hasText {
                 self.showToast("Bạn chưa nhập đầy đủ thông tin", andPos: 0)
@@ -82,6 +82,31 @@ class Feed_Back_ViewController: UIViewController, UITextFieldDelegate {
                 self.showToast("Email không đúng định dạng", andPos: 0)
             }
         }
+    }
+    
+    func didRequestFeedback() {
+        let request = NSMutableDictionary.init(dictionary: [
+                                                            "content": feedBack.text ?? "",
+                                                            "email": email.text ?? "",
+                                                            "user_name": name.text ?? "",
+                                                            "header":["session":Information.token == nil ? "" : Information.token!],
+                                                            "session":Information.token ?? "",
+                                                            "overrideAlert":"1",
+                                                            ])
+        request["CMD_CODE"] = "sendFeedback"
+        LTRequest.sharedInstance()?.didRequestInfo((request as! [AnyHashable : Any]), withCache: { (cacheString) in
+        }, andCompletion: { (response, errorCode, error, isValid, object) in
+            let result = response?.dictionize() ?? [:]
+            
+            if result.getValueFromKey("error_code") != "0" || result["result"] is NSNull {
+                self.showToast(response?.dictionize().getValueFromKey("error_msg") == "" ? "Lỗi xảy ra, mời bạn thử lại" : response?.dictionize().getValueFromKey("error_msg"), andPos: 0)
+                return
+            }
+            
+            self.didPressBack()
+            
+            self.showToast("Gửi phản hồi thành công", andPos: 0)
+        })
     }
     
     @IBAction func didPressCancel() {

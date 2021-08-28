@@ -139,8 +139,8 @@ class TG_Intro_ViewController: UIViewController {
             
             let menu = [
                 NSMutableDictionary.init(dictionary:["avatar": "id", "name": "", "sub_category": [], "open": "0", "id": "100001"]),
-                NSMutableDictionary.init(dictionary:["avatar": "id", "name": "Thông tin ứng dụng", "sub_category": [], "open": "0", "id": "10000"]),
-                NSMutableDictionary.init(dictionary:["avatar": "id", "name": "Thoả thuận dịch vụ", "sub_category": [], "open": "0", "id": "10001"]),
+                NSMutableDictionary.init(dictionary:["avatar": "id", "name": "Giới thiệu Mebook", "sub_category": [], "open": "0", "id": "10000"]),
+                NSMutableDictionary.init(dictionary:["avatar": "id", "name": "Điều khoản sử dụng", "sub_category": [], "open": "0", "id": "10001"]),
                 NSMutableDictionary.init(dictionary:["avatar": "id", "name": "Tổng đài hỗ trợ", "sub_category": [], "open": "0", "id": "10002"]),
                 NSMutableDictionary.init(dictionary:["avatar": "id", "name": "Phản hồi dịch vụ", "sub_category": [], "open": "0", "id": "10003"])
             ]

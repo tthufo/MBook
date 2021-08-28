@@ -34,13 +34,19 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="elu-4T-1eW">
+                    <rect key="frame" x="300" y="15" width="10" height="10"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="10" id="C0r-uU-yT7"/>
+                        <constraint firstAttribute="height" constant="10" id="bDD-1g-7Rx"/>
+                    </constraints>
+                </button>
                 <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NFh-M6-ptR">
                     <rect key="frame" x="300" y="15" width="10" height="10"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="10" id="1qu-ae-lgB"/>
                         <constraint firstAttribute="height" constant="10" id="QiE-b7-is7"/>
                     </constraints>
-                    <state key="normal" image="ico_arrow_teal"/>
                 </button>
                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ts1-jU-1aW">
                     <rect key="frame" x="0.0" y="39.5" width="320" height="0.5"/>
@@ -55,7 +61,9 @@
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="ts1-jU-1aW" secondAttribute="trailing" id="3aa-kU-aHU"/>
                 <constraint firstItem="J6R-eF-g1E" firstAttribute="centerY" secondItem="9iv-sM-74h" secondAttribute="centerY" id="5lm-hF-NPF"/>
+                <constraint firstItem="elu-4T-1eW" firstAttribute="centerY" secondItem="9iv-sM-74h" secondAttribute="centerY" id="9FV-JV-7W7"/>
                 <constraint firstItem="ts1-jU-1aW" firstAttribute="leading" secondItem="9iv-sM-74h" secondAttribute="leading" id="BgJ-jz-1eG"/>
+                <constraint firstItem="km2-Ul-v9P" firstAttribute="leading" secondItem="elu-4T-1eW" secondAttribute="trailing" id="Db2-kJ-REh"/>
                 <constraint firstItem="km2-Ul-v9P" firstAttribute="leading" secondItem="NFh-M6-ptR" secondAttribute="trailing" id="EdN-0l-Mpu"/>
                 <constraint firstAttribute="trailing" secondItem="km2-Ul-v9P" secondAttribute="trailing" constant="10" id="PCr-II-aGF"/>
                 <constraint firstItem="NFh-M6-ptR" firstAttribute="centerY" secondItem="9iv-sM-74h" secondAttribute="centerY" id="X7s-xD-IGT"/>
@@ -66,7 +74,4 @@
             <point key="canvasLocation" x="-110.14492753623189" y="-3.3482142857142856"/>
         </collectionReusableView>
     </objects>
-    <resources>
-        <image name="ico_arrow_teal" width="26.5" height="26.5"/>
-    </resources>
 </document>

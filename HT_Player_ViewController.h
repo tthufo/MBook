@@ -29,6 +29,8 @@ typedef enum __playerState
 
 @property(nonatomic, retain) IBOutlet UIView * topView, * controlView, * controlViewIpad;
 
+@property(nonatomic, retain) IBOutlet UIButton * backBtn, * likeBtn;
+
 @property(nonatomic) PlayingState playState;
 
 @property (strong, nonatomic) NSString *uID;

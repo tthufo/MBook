@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_0" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="Rating_ViewController" customModule="MeBook" customModuleProvider="target">
+            <connections>
+                <outlet property="bottomGap" destination="PEx-vX-ncT" id="RPI-IZ-zOH"/>
+                <outlet property="collectionView" destination="pWm-xv-xat" id="T85-aT-TVz"/>
+                <outlet property="view" destination="FdS-Fc-VD2" id="Ish-bQ-Jug"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="FdS-Fc-VD2">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SDZ-jX-RdH">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="64"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YVT-7S-9hJ">
+                            <rect key="frame" x="8" y="10" width="44" height="44"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="YSN-aS-QhH"/>
+                                <constraint firstAttribute="width" constant="44" id="wAY-Nv-SqO"/>
+                            </constraints>
+                            <state key="normal" image="ico_arrow_l_white"/>
+                            <connections>
+                                <action selector="didPressBack" destination="-1" eventType="touchUpInside" id="H25-JD-Zvu"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Đánh giá" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wN2-eR-Wrh">
+                            <rect key="frame" x="121.5" y="22" width="77" height="21"/>
+                            <constraints>
+                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="42" id="Aa7-cb-D7I"/>
+                                <constraint firstAttribute="height" constant="21" id="zHk-LS-yLY"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="19"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qwy-0h-exI">
+                            <rect key="frame" x="268" y="12" width="44" height="44"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="MSF-FG-r4Q"/>
+                                <constraint firstAttribute="width" constant="44" id="cgP-Cw-YTZ"/>
+                            </constraints>
+                            <state key="normal" image="ic_search"/>
+                        </button>
+                    </subviews>
+                    <viewLayoutGuide key="safeArea" id="xQF-gY-7Td"/>
+                    <color key="backgroundColor" red="0.1176470588" green="0.57254901960000004" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstItem="xQF-gY-7Td" firstAttribute="trailing" secondItem="Qwy-0h-exI" secondAttribute="trailing" constant="8" id="CIT-bL-XP6"/>
+                        <constraint firstAttribute="height" constant="64" id="Fp8-sB-si3"/>
+                        <constraint firstItem="YVT-7S-9hJ" firstAttribute="leading" secondItem="xQF-gY-7Td" secondAttribute="leading" constant="8" id="YT4-6v-S78"/>
+                        <constraint firstItem="YVT-7S-9hJ" firstAttribute="top" secondItem="xQF-gY-7Td" secondAttribute="top" constant="10" id="Ydf-6U-mbZ"/>
+                        <constraint firstItem="wN2-eR-Wrh" firstAttribute="top" secondItem="xQF-gY-7Td" secondAttribute="top" constant="22" id="Zig-Fg-p7F"/>
+                        <constraint firstItem="Qwy-0h-exI" firstAttribute="top" secondItem="xQF-gY-7Td" secondAttribute="top" constant="12" id="cKy-dc-dIu"/>
+                        <constraint firstItem="wN2-eR-Wrh" firstAttribute="centerX" secondItem="SDZ-jX-RdH" secondAttribute="centerX" id="ytl-M5-P8F"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="bgColorHex" value="#1E928C"/>
+                    </userDefinedRuntimeAttributes>
+                </view>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="pWm-xv-xat">
+                    <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="XFG-S1-3DQ">
+                        <size key="itemSize" width="50" height="50"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="SRx-oa-BpT"/>
+                        <outlet property="delegate" destination="-1" id="W94-Md-8Or"/>
+                    </connections>
+                </collectionView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iWt-uQ-PBz">
+                    <rect key="frame" x="254" y="492" width="50" height="50"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="50" id="6Hf-oz-6VA"/>
+                        <constraint firstAttribute="height" constant="50" id="pbt-cc-dQQ"/>
+                    </constraints>
+                    <state key="normal" title="Button"/>
+                    <connections>
+                        <action selector="didPressRate" destination="-1" eventType="touchUpInside" id="y5Y-oF-D5u"/>
+                    </connections>
+                </button>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="Aua-Df-Mhr"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="Aua-Df-Mhr" firstAttribute="bottom" secondItem="iWt-uQ-PBz" secondAttribute="bottom" constant="26" id="PEx-vX-ncT"/>
+                <constraint firstItem="SDZ-jX-RdH" firstAttribute="trailing" secondItem="Aua-Df-Mhr" secondAttribute="trailing" id="RzX-a0-o8i"/>
+                <constraint firstItem="pWm-xv-xat" firstAttribute="top" secondItem="SDZ-jX-RdH" secondAttribute="bottom" id="bNx-HJ-091"/>
+                <constraint firstItem="pWm-xv-xat" firstAttribute="leading" secondItem="Aua-Df-Mhr" secondAttribute="leading" id="dP5-oB-nwZ"/>
+                <constraint firstItem="SDZ-jX-RdH" firstAttribute="top" secondItem="Aua-Df-Mhr" secondAttribute="top" id="du1-8l-zlL"/>
+                <constraint firstItem="Aua-Df-Mhr" firstAttribute="bottom" secondItem="pWm-xv-xat" secondAttribute="bottom" id="eEJ-x9-H2u"/>
+                <constraint firstItem="SDZ-jX-RdH" firstAttribute="leading" secondItem="Aua-Df-Mhr" secondAttribute="leading" id="gxZ-c4-2WK"/>
+                <constraint firstItem="Aua-Df-Mhr" firstAttribute="trailing" secondItem="pWm-xv-xat" secondAttribute="trailing" id="y5c-9R-h3P"/>
+                <constraint firstItem="Aua-Df-Mhr" firstAttribute="trailing" secondItem="iWt-uQ-PBz" secondAttribute="trailing" constant="16" id="zSK-Eh-7fw"/>
+            </constraints>
+            <point key="canvasLocation" x="139.13043478260872" y="144.64285714285714"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="ic_search" width="50.5" height="50.5"/>
+        <image name="ico_arrow_l_white" width="33" height="33"/>
+    </resources>
+</document>

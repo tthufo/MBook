@@ -700,8 +700,172 @@
             </constraints>
             <point key="canvasLocation" x="580" y="-62.518740629685162"/>
         </view>
+        <view contentMode="scaleToFill" id="SZn-DF-7hJ">
+            <rect key="frame" x="0.0" y="0.0" width="300" height="313"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ĐÁNH GIÁ" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="beP-cz-Ogk">
+                    <rect key="frame" x="0.0" y="0.0" width="300" height="39"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="39" id="Oxk-Ba-Opi"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                    <color key="textColor" red="0.0078431372550000003" green="0.57254901960000004" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EaB-RO-eFa" customClass="CosmosView" customModule="MeBook" customModuleProvider="target">
+                    <rect key="frame" x="50" y="40" width="200" height="35"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="35" id="Ovw-qc-vCZ"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="filledColor">
+                            <color key="value" red="0.94901960780000005" green="0.89019607840000003" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="emptyBorderColor">
+                            <color key="value" red="0.94901960780000005" green="0.89019607840000003" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="filledBorderColor">
+                            <color key="value" red="0.94901960780000005" green="0.89019607840000003" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="totalStars">
+                            <integer key="value" value="5"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="starSize">
+                            <real key="value" value="35"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="rating">
+                            <real key="value" value="0.0"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="emptyBorderWidth">
+                            <real key="value" value="2"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="filledBorderWidth">
+                            <real key="value" value="0.0"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="boolean" keyPath="updateOnTouch" value="YES"/>
+                        <userDefinedRuntimeAttribute type="number" keyPath="fillMode">
+                            <integer key="value" value="1"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="minTouchRating">
+                            <real key="value" value="0.0"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="image" keyPath="filledImage" value="GoldStarFilled"/>
+                        <userDefinedRuntimeAttribute type="image" keyPath="emptyImage" value="GoldStarEmpty"/>
+                    </userDefinedRuntimeAttributes>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chạm vào ngôi sao để đánh giá" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DeY-Zk-Gwe">
+                    <rect key="frame" x="0.0" y="75" width="300" height="20"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="CeE-10-OyD"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" red="0.0078431372550000003" green="0.57254901960000004" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ct4-wM-QMf">
+                    <rect key="frame" x="22" y="112" width="256" height="125"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="125" id="RZk-VK-Wu2"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <integer key="value" value="12"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                            <integer key="value" value="1"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="layer.borderUIColor">
+                            <color key="value" red="0.0078431372550000003" green="0.57254901960000004" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+                <textView clipsSubviews="YES" multipleTouchEnabled="YES" tag="2" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Koq-kh-Ma3">
+                    <rect key="frame" x="30" y="120" width="240" height="110"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="110" id="laQ-cM-y7p"/>
+                    </constraints>
+                    <color key="textColor" systemColor="labelColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
+                </textView>
+                <button opaque="NO" clipsSubviews="YES" tag="4" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Zl-11-qmK">
+                    <rect key="frame" x="165" y="247" width="125.5" height="46"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" red="0.14117647059999999" green="0.4039215686" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
+                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                    <state key="normal" title="Đóng">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <integer key="value" value="23"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </button>
+                <button opaque="NO" clipsSubviews="YES" tag="3" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DuV-oK-2vD">
+                    <rect key="frame" x="11" y="247" width="125.5" height="46"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
+                    <state key="normal" title="Đánh giá">
+                        <color key="titleColor" red="0.0078431372550000003" green="0.57254901960000004" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <integer key="value" value="23"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="layer.borderUIColor">
+                            <color key="value" red="0.36078431370000003" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                            <integer key="value" value="1"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="beP-cz-Ogk" firstAttribute="leading" secondItem="SZn-DF-7hJ" secondAttribute="leading" id="19H-03-Eg3"/>
+                <constraint firstAttribute="trailing" secondItem="DeY-Zk-Gwe" secondAttribute="trailing" id="25E-7b-3Sa"/>
+                <constraint firstItem="Ct4-wM-QMf" firstAttribute="leading" secondItem="SZn-DF-7hJ" secondAttribute="leading" constant="22" id="2ht-ge-lmP"/>
+                <constraint firstAttribute="trailing" secondItem="beP-cz-Ogk" secondAttribute="trailing" id="3Pp-30-1eF"/>
+                <constraint firstItem="EaB-RO-eFa" firstAttribute="leading" secondItem="SZn-DF-7hJ" secondAttribute="leading" constant="50" id="6ys-J1-GWx"/>
+                <constraint firstItem="DeY-Zk-Gwe" firstAttribute="leading" secondItem="SZn-DF-7hJ" secondAttribute="leading" id="JiT-uc-4RI"/>
+                <constraint firstAttribute="trailing" secondItem="EaB-RO-eFa" secondAttribute="trailing" constant="50" id="KBP-e9-Hg3"/>
+                <constraint firstItem="Ct4-wM-QMf" firstAttribute="top" secondItem="DeY-Zk-Gwe" secondAttribute="bottom" constant="17" id="R8l-Ci-COe"/>
+                <constraint firstItem="beP-cz-Ogk" firstAttribute="top" secondItem="SZn-DF-7hJ" secondAttribute="top" id="XCx-vA-GfG"/>
+                <constraint firstAttribute="trailing" secondItem="Ct4-wM-QMf" secondAttribute="trailing" constant="22" id="a0S-KV-56B"/>
+                <constraint firstItem="Koq-kh-Ma3" firstAttribute="top" secondItem="DeY-Zk-Gwe" secondAttribute="bottom" constant="25" id="caK-ks-9BV"/>
+                <constraint firstItem="Koq-kh-Ma3" firstAttribute="leading" secondItem="SZn-DF-7hJ" secondAttribute="leading" constant="30" id="d18-sY-aQ3"/>
+                <constraint firstItem="EaB-RO-eFa" firstAttribute="top" secondItem="SZn-DF-7hJ" secondAttribute="top" constant="40" id="jSe-K2-USs"/>
+                <constraint firstItem="DeY-Zk-Gwe" firstAttribute="top" secondItem="EaB-RO-eFa" secondAttribute="bottom" id="oLF-YI-X3E"/>
+                <constraint firstAttribute="trailing" secondItem="Koq-kh-Ma3" secondAttribute="trailing" constant="30" id="pHw-5f-LBf"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                    <integer key="value" value="8"/>
+                </userDefinedRuntimeAttribute>
+                <userDefinedRuntimeAttribute type="number" keyPath="layer.borderWidth">
+                    <integer key="value" value="0"/>
+                </userDefinedRuntimeAttribute>
+                <userDefinedRuntimeAttribute type="color" keyPath="layer.borderUIColor">
+                    <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </userDefinedRuntimeAttribute>
+            </userDefinedRuntimeAttributes>
+            <point key="canvasLocation" x="-1742.4000000000001" y="28.335832083958024"/>
+        </view>
     </objects>
     <resources>
+        <image name="GoldStarEmpty" width="53" height="51"/>
+        <image name="GoldStarFilled" width="53" height="51"/>
         <image name="gradient" width="79.5" height="10.5"/>
         <image name="ic_avatar" width="116.5" height="116.5"/>
         <image name="ic_camera" width="49.5" height="32"/>
@@ -715,6 +879,9 @@
         </systemColor>
         <systemColor name="groupTableViewBackgroundColor">
             <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

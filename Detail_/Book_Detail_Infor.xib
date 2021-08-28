@@ -56,6 +56,11 @@
                                 <real key="value" value="26"/>
                             </userDefinedRuntimeAttribute>
                             <userDefinedRuntimeAttribute type="boolean" keyPath="updateOnTouch" value="NO"/>
+                            <userDefinedRuntimeAttribute type="color" keyPath="filledBorderColor">
+                                <color key="value" systemColor="systemYellowColor"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="image" keyPath="filledImage" value="GoldStarFilled"/>
+                            <userDefinedRuntimeAttribute type="image" keyPath="emptyImage" value="GoldStarEmpty"/>
                         </userDefinedRuntimeAttributes>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GIỚI THIỆU" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0bu-1D-ggA">
@@ -128,8 +133,13 @@
         </collectionViewCell>
     </objects>
     <resources>
+        <image name="GoldStarEmpty" width="53" height="51"/>
+        <image name="GoldStarFilled" width="53" height="51"/>
         <image name="ico_comment" width="26.5" height="26.5"/>
         <image name="ico_like" width="21" height="18.5"/>
         <image name="ico_read" width="29.5" height="26.5"/>
+        <systemColor name="systemYellowColor">
+            <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
     </resources>
 </document>

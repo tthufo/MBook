@@ -40,6 +40,9 @@
 		FC40A0FF243EFE5C0096B9DB /* TG_Room_Cell_2.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC40A0FB243EFE5C0096B9DB /* TG_Room_Cell_2.xib */; };
 		FC40A101243EFE680096B9DB /* TG_Room_Cell_5.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC40A100243EFE680096B9DB /* TG_Room_Cell_5.xib */; };
 		FC43399C2436493A00CFD50E /* Navigation_ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC43399B2436493A00CFD50E /* Navigation_ViewController.m */; };
+		FC48C25426DA4499006D18DD /* Book_Rating_Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC48C25326DA4498006D18DD /* Book_Rating_Cell.xib */; };
+		FC48C25926DA8B8F006D18DD /* Rating_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC48C25726DA8B8E006D18DD /* Rating_ViewController.swift */; };
+		FC48C25A26DA8B8F006D18DD /* Rating_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC48C25826DA8B8E006D18DD /* Rating_ViewController.xib */; };
 		FC51D29926CC4F0500F5DA2F /* TG_Room_Cell_Cube.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC51D29726CC4F0500F5DA2F /* TG_Room_Cell_Cube.swift */; };
 		FC51D29A26CC4F0500F5DA2F /* TG_Room_Cell_Cube.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC51D29826CC4F0500F5DA2F /* TG_Room_Cell_Cube.xib */; };
 		FC640A811DAAAD8B00DAEF55 /* CoreModel.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = FC640A721DAAAD8B00DAEF55 /* CoreModel.xcdatamodel */; };
@@ -258,6 +261,9 @@
 		FC40A100243EFE680096B9DB /* TG_Room_Cell_5.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TG_Room_Cell_5.xib; sourceTree = "<group>"; };
 		FC43399A2436493A00CFD50E /* Navigation_ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Navigation_ViewController.h; sourceTree = "<group>"; };
 		FC43399B2436493A00CFD50E /* Navigation_ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Navigation_ViewController.m; sourceTree = "<group>"; };
+		FC48C25326DA4498006D18DD /* Book_Rating_Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Book_Rating_Cell.xib; sourceTree = "<group>"; };
+		FC48C25726DA8B8E006D18DD /* Rating_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rating_ViewController.swift; sourceTree = "<group>"; };
+		FC48C25826DA8B8E006D18DD /* Rating_ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Rating_ViewController.xib; sourceTree = "<group>"; };
 		FC51D29726CC4F0500F5DA2F /* TG_Room_Cell_Cube.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TG_Room_Cell_Cube.swift; sourceTree = "<group>"; };
 		FC51D29826CC4F0500F5DA2F /* TG_Room_Cell_Cube.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TG_Room_Cell_Cube.xib; sourceTree = "<group>"; };
 		FC640A721DAAAD8B00DAEF55 /* CoreModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreModel.xcdatamodel; sourceTree = "<group>"; };
@@ -737,10 +743,13 @@
 				FC908B9F2644786000176E13 /* Book_Detail_Infor.xib */,
 				FC78AC0E26D38A42000D5209 /* Event_Detail_Infor.xib */,
 				FC908BA22645243900176E13 /* Book_Detail_Option_Cell.xib */,
+				FC48C25326DA4498006D18DD /* Book_Rating_Cell.xib */,
 				FC908BA82645CF3A00176E13 /* CosmosDistrib.swift */,
 				FCC6953226C3D4020048114E /* Book_Detail_Gap.xib */,
 				FC78AC1126D3FF9B000D5209 /* List_Book_List_ViewController.swift */,
 				FC78AC1226D3FF9B000D5209 /* List_Book_List_ViewController.xib */,
+				FC48C25726DA8B8E006D18DD /* Rating_ViewController.swift */,
+				FC48C25826DA8B8E006D18DD /* Rating_ViewController.xib */,
 			);
 			path = Detail_;
 			sourceTree = "<group>";
@@ -1059,6 +1068,7 @@
 				FC0A8FB12437770E001A75AF /* PC_Forgot_ViewController.xib in Resources */,
 				FC40A0FE243EFE5C0096B9DB /* TG_Room_Cell_3.xib in Resources */,
 				FC40A0FD243EFE5C0096B9DB /* TG_Room_Cell_1.xib in Resources */,
+				FC48C25426DA4499006D18DD /* Book_Rating_Cell.xib in Resources */,
 				FC7AFA8526C054FF00D3C2D2 /* Payment_Option_Cell.xib in Resources */,
 				FC69D42F24405879006D57D9 /* TG_Room_Cell_8.xib in Resources */,
 				FC40A0FC243EFE5C0096B9DB /* TG_Room_Cell_4.xib in Resources */,
@@ -1096,6 +1106,7 @@
 				FCB238DF24435BF60034B40B /* Publisher_ViewController.xib in Resources */,
 				FC130B8F2446236B00D64012 /* Package_ViewController.xib in Resources */,
 				FCD9798A2447693D00970A4E /* Reader_ViewController.xib in Resources */,
+				FC48C25A26DA8B8F006D18DD /* Rating_ViewController.xib in Resources */,
 				FC7550EA1DAC869B007992DF /* HT_More_ViewController.xib in Resources */,
 				FC78397E2438F42400470148 /* PC_ChangePass_ViewController.xib in Resources */,
 				FC7551051DAE4640007992DF /* Default~iphone.png in Resources */,
@@ -1246,6 +1257,7 @@
 				FC7F32B5244A0731007429F7 /* XPathQuery.m in Sources */,
 				FC7F32B4244A0731007429F7 /* TFHpple.m in Sources */,
 				FCB3CD691DA4DDE9002FABDD /* HT_Genres_ViewController.m in Sources */,
+				FC48C25926DA8B8F006D18DD /* Rating_ViewController.swift in Sources */,
 				FCB3CD6D1DA4DEC9002FABDD /* UIViewController+Additional.m in Sources */,
 				FC640A911DAAAE2800DAEF55 /* TT_Synced_ViewController.m in Sources */,
 				FCAD57EB243DB6D800101A47 /* First_Tab_ViewController.swift in Sources */,

@@ -20,6 +20,53 @@
 
 @synthesize menuCompletion;
 
+- (id)initWithRate:(NSDictionary*)info
+{
+    self = [self init];
+    
+    [self setContainerView:[self didCreateRateView:info]];
+    
+    [self setUseMotionEffects:true];
+    
+    return self;
+}
+
+- (UIView*)didCreateRateView:(NSDictionary*)dict
+{
+    UIView *commentView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 300, 315)];
+    
+    [commentView setBackgroundColor:[UIColor clearColor]];
+    
+    UIView *contentView = [[NSBundle mainBundle] loadNibNamed:@"EM_Menu" owner:self options:nil][13];
+    
+    contentView.frame = CGRectMake(0, 0, 300, 315);
+    
+    
+    UIButton * rate = ((UIButton*)[self withView:contentView tag: 3]);
+        
+    [rate actionForTouch:@{} and:^(NSDictionary *touchInfo) {
+        
+        if(self.menuCompletion)
+        {
+            self.menuCompletion(3, @{}, self);
+        }
+        
+        [self close];
+    }];
+    
+    UIButton * action = ((UIButton*)[self withView:contentView tag: 4]);
+        
+    [action actionForTouch:@{} and:^(NSDictionary *touchInfo) {
+        
+        [self close];
+    }];
+    
+    [commentView addSubview:contentView];
+    
+    return commentView;
+}
+
+
 - (id)initWithRestrict:(NSDictionary*)info
 {
     self = [self init];

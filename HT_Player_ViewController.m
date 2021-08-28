@@ -28,7 +28,7 @@
     
     IBOutlet UIButton * play;
     
-    NSMutableArray * dataList, * chapList, * detailList;
+    NSMutableArray * dataList, * chapList, * detailList, * ratingList;
     
     NSMutableDictionary * playingData, * setupData, * tempInfo;
     
@@ -71,6 +71,8 @@
 
     detailList = [NSMutableArray new];
     
+    ratingList = [NSMutableArray new];
+    
     tempInfo = [NSMutableDictionary new];
 
     setupData = [@{} mutableCopy];
@@ -111,6 +113,7 @@
     [collectionView withCell:@"Book_Detail_Option_Cell"];
     [collectionView withCell:@"Author_Bio_Cell"];
     [collectionView withCell:@"TG_Book_Detail_Cell"];
+    [collectionView withCell:@"Book_Rating_Cell"];
     [collectionView withHeaderOrFooter:@"Book_Detail_Chap_Header" andKind: UICollectionElementKindSectionHeader];
     [collectionView withHeaderOrFooter:@"Book_Detail_Gap" andKind: UICollectionElementKindSectionHeader];
 }
@@ -118,6 +121,8 @@
 - (void)parallaxHeader {
     UIView * controller = IS_IPAD ? controlViewIpad : controlView;
     UIView * bg = [self withView:controller tag:1000];
+    UIView * imageView = [self withView:controller tag:10001];
+    UIButton * down = [self withView:controller tag:10002];
     collectionView.parallaxHeader.view = IS_IPAD ? controlViewIpad : controlView;
     collectionView.parallaxHeader.height = screenWidth1 * 9 / 16;
     collectionView.parallaxHeader.minimumHeight = [self isIphoneX] ? 64 : 64;
@@ -125,13 +130,15 @@
         for (UIView * v in controller.subviews) {
             if (v.tag != 1000 && v.tag != 1010101) {
                 if (v.tag == 9988 || v.tag == 9989 || v.tag == 9990) {
-                    v.alpha = 1 - header.progress;
+                    v.alpha = 0;//1 - header.progress;
                 } else {
                     v.alpha = header.progress;
                 }
             }
         }
-        bg.alpha = 1 - header.progress;
+        bg.alpha = 0;//1 - header.progress;
+        imageView.alpha = 1;
+        down.alpha = 0;
     }];
 }
 
@@ -466,6 +473,8 @@
     [self didRequestDetail: url];
      
     [self didRequestChapter];
+    
+    [self didRequestRating];
         
     if ([info responseForKey:@"back_to_top"]) {
         [self backToTop];
@@ -1140,8 +1149,6 @@
 
 - (void)showInforPlayer:(NSDictionary*)dict
 {
-    NSLog(@"--->%@", dict);
-    
     MPMediaItemArtwork *albumArt = [[MPMediaItemArtwork alloc] initWithImage: dict[@"img"]];
     
     NSArray *keys = [NSArray arrayWithObjects: MPMediaItemPropertyArtist, MPMediaItemPropertyArtwork, MPMediaItemPropertyPlaybackDuration, MPNowPlayingInfoPropertyPlaybackRate, nil];
@@ -1223,6 +1230,42 @@
     return min + arc4random_uniform((uint32_t)(max - min + 1));
 }
 
+- (IBAction)senderdidRequestLike:(UIButton*)sender {
+    NSMutableDictionary * request = [[NSMutableDictionary alloc] initWithDictionary:@{@"session": Information.token,
+                                                                                      @"header":@{@"session":Information.token == nil ? @"" : Information.token},
+                                                                                      @"overrideAlert": @"1",
+    }];
+    request[@"CMD_CODE"] = @"pushLikeItem";
+    request[@"item_id"] = config[@"id"];
+    [[LTRequest sharedInstance] didRequestInfo:request withCache:^(NSString *cacheString) {
+        
+    } andCompletion:^(NSString *responseString, NSString *errorCode, NSError *error, BOOL isValidated, NSDictionary *header) {
+        NSDictionary * dict = [responseString objectFromJSONString];
+    
+        if ([[dict getValueFromKey:@"error_code"] isEqualToString:@"0"] && dict[@"result"] != [NSNull null]) {
+            NSDictionary * dict = [responseString objectFromJSONString][@"result"];
+            
+            NSMutableDictionary * tempConfig = [[NSMutableDictionary alloc] initWithDictionary:self->tempInfo];
+
+            tempConfig[@"like_count"] = [dict getValueFromKey:@"like_count"];
+                        
+            self->tempInfo = tempConfig;
+                        
+            [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:0]];
+                        
+            BOOL likeStatus = [[dict getValueFromKey:@"like_status"] isEqualToString:@"1"];
+                        
+            [sender setImage: likeStatus ? [[UIImage imageNamed:@"ico_like_fill"] imageWithTintColor:[UIColor systemPinkColor]] : [UIImage imageNamed:@"ico_like_white"]
+                    forState:UIControlStateNormal];
+            
+        } else {
+            [self showToast:[[dict getValueFromKey:@"error_msg"] isEqualToString:@""] ? @"Lỗi xảy ra, mời bạn thử lại" : [dict getValueFromKey:@"error_msg"] andPos:0];
+        }
+        
+        [self adjustInset];
+    }];
+}
+
 - (void)didRequestData {
     NSMutableDictionary * request = [[NSMutableDictionary alloc] initWithDictionary:@{@"session": Information.token,
                                                                                       @"header":@{@"session":Information.token == nil ? @"" : Information.token},
@@ -1287,6 +1330,37 @@
             [chapList removeAllObjects];
             
             [chapList addObjectsFromArray: dict];
+            
+            [collectionView reloadData];
+        } else {
+            [self showToast:[[dict getValueFromKey:@"error_msg"] isEqualToString:@""] ? @"Lỗi xảy ra, mời bạn thử lại" : [dict getValueFromKey:@"error_msg"] andPos:0];
+        }
+        [self adjustInset];
+    }];
+}
+
+- (void)didRequestRating {
+    NSMutableDictionary * request = [[NSMutableDictionary alloc] initWithDictionary:@{@"session": Information.token,
+                                                                                      @"header":@{@"session":Information.token == nil ? @"" : Information.token},
+                                                                                      @"page_index": @(1),
+                                                                                      @"page_size": @(3),
+                                                                                      @"overrideAlert": @"1",
+    }];
+    
+    request[@"item_id"] = config[@"id"];
+    request[@"CMD_CODE"] = @"getListRating";
+
+    [[LTRequest sharedInstance] didRequestInfo:request withCache:^(NSString *cacheString) {
+        
+    } andCompletion:^(NSString *responseString, NSString *errorCode, NSError *error, BOOL isValidated, NSDictionary *header) {
+        NSDictionary * dict = [responseString objectFromJSONString];
+
+        if ([[dict getValueFromKey:@"error_code"] isEqualToString:@"0"] || dict[@"result"] == [NSNull null]) {
+            NSArray * dict = [responseString objectFromJSONString][@"result"][@"data"];
+                    
+            [ratingList removeAllObjects];
+            
+            [ratingList addObjectsFromArray: dict];
             
             [collectionView reloadData];
         } else {
@@ -1437,6 +1511,11 @@
             
             [self->tempInfo addEntriesFromDictionary:result];
             
+            BOOL likeStatus = [[result getValueFromKey:@"like_status"] isEqualToString:@"1"];
+                        
+            [self->_likeBtn setImage: likeStatus ? [[UIImage imageNamed:@"ico_like_fill"] imageWithTintColor:[UIColor systemPinkColor]] : [UIImage imageNamed:@"ico_like_white"]
+                    forState:UIControlStateNormal];
+            
             NSString * tem = ((NSArray*)result[@"publisher"]).count == 0 ? @"" : result[@"publisher"][0][@"description"];
             
             self->tempBio = tem;
@@ -1462,9 +1541,9 @@
 - (NSArray*)filter:(NSDictionary*)info relate:(BOOL)relate {
     NSArray * keys = relate ? @[@{@"key": @"header_cell", @"tag": @1, @"height": @44},
                        @{@"key": @"category", @"title": @"Thể loại", @"tag": @2, @"height": @35},
-                       @{@"key": @"author", @"title": @"Tác giả", @"tag": @2, @"height": @35},
-                       @{@"key": @"publisher", @"title": @"Nhà xuất bản", @"tag": @2, @"height": @35},
-                       @{@"key": @"events", @"title": @"Tuyển tập", @"tag": @2, @"height": @35},
+//                       @{@"key": @"author", @"title": @"Tác giả", @"tag": @2, @"height": @35},
+//                       @{@"key": @"publisher", @"title": @"Nhà xuất bản", @"tag": @2, @"height": @35},
+//                       @{@"key": @"events", @"title": @"Tuyển tập", @"tag": @2, @"height": @35},
                        @{@"key": @"publish_time", @"title": @"Ngày upload", @"arrow": @"1", @"tag": @2, @"height": @35},
                        @{@"key": @"price", @"title": @"Giá mua lẻ", @"tag": @2, @"height": @35, @"unit": @" VND"},
                        @{@"key": @"button_cell", @"tag": @4, @"height": @35},
@@ -1472,9 +1551,9 @@
     ] :
     @[@{@"key": @"header_cell", @"tag": @1, @"height": @44},
                        @{@"key": @"category", @"title": @"Thể loại", @"tag": @2, @"height": @35},
-                       @{@"key": @"author", @"title": @"Tác giả", @"tag": @2, @"height": @35},
-                       @{@"key": @"publisher", @"title": @"Nhà xuất bản", @"tag": @2, @"height": @35},
-                       @{@"key": @"events", @"title": @"Tuyển tập", @"tag": @2, @"height": @35},
+//                       @{@"key": @"author", @"title": @"Tác giả", @"tag": @2, @"height": @35},
+//                       @{@"key": @"publisher", @"title": @"Nhà xuất bản", @"tag": @2, @"height": @35},
+//                       @{@"key": @"events", @"title": @"Tuyển tập", @"tag": @2, @"height": @35},
                        @{@"key": @"publish_time", @"title": @"Ngày upload", @"arrow": @"1", @"tag": @2, @"height": @35},
                        @{@"key": @"price", @"title": @"Giá mua lẻ", @"tag": @2, @"height": @35, @"unit": @" VND"},
 //                       @{@"key": @"button_cell", @"tag": @4, @"height": @35},
@@ -1540,6 +1619,26 @@
     return size;
 }
 
+- (CGSize)sizeForRating:(NSIndexPath*)indexPath {
+    UICollectionViewCell * cell = [[[NSBundle mainBundle] loadNibNamed:@"Book_Rating_Cell" owner:self options:nil] firstObject];
+    
+    UILabel * title = (UILabel*)[self withView:cell tag:2];
+    NSDictionary * rating = ratingList[indexPath.item];
+    title.text = [rating getValueFromKey:@"rating_content"];
+    
+    [cell setNeedsLayout];
+    [cell layoutIfNeeded];
+    
+    CGFloat width = collectionView.frame.size.width;
+    CGFloat height = 0;
+    
+    CGSize targetSize = CGSizeMake(width, height);
+    
+    CGSize size = [cell.contentView systemLayoutSizeFittingSize:targetSize withHorizontalFittingPriority: UILayoutPriorityDefaultHigh verticalFittingPriority:UILayoutPriorityFittingSizeLevel];
+    
+    return size;
+}
+
 - (CGSize)sizeForBio:(NSIndexPath*)indexPath {
     UICollectionViewCell * cell = [[[NSBundle mainBundle] loadNibNamed:@"Author_Bio_Cell" owner:self options:nil] firstObject];
     
@@ -1562,18 +1661,17 @@
 #pragma Collection
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
-    return 5;
+    return 6;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)view numberOfItemsInSection:(NSInteger)section
 {
-    return section == 0 || section == 1 ? 1 : section == 2 ? detailList.count : section == 3 ? retract ? 0 : chapList.count > 1 ? chapList.count : 0 : dataList.count;
+    return section == 0 || section == 1 ? 1 : section == 2 ? detailList.count : section == 3 ? retract ? 0 : chapList.count > 1 ? chapList.count : 0 : section == 4 ? ratingList.count : dataList.count;
 }
 
 - (CGSize)collectionView:(UICollectionView *)_collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-//    return indexPath.section == 1 ? CGSizeMake((screenWidth1 / (IS_IPAD ? 5 : 3)) - 15, ((screenWidth1 / (IS_IPAD ? 5 : 3)) - 15) * 1.72) : CGSizeMake(_collectionView.frame.size.width, 65);
-    return indexPath.section == 0 ? [self sizeFor:indexPath] : indexPath.section == 1 ? [self sizeForBio:indexPath] : indexPath.section == 2 ? CGSizeMake(_collectionView.frame.size.width, detailList.count == 0 ? 0 : [[((NSDictionary*)detailList[indexPath.item]) getValueFromKey:@"height"] doubleValue]) : indexPath.section == 3 ? CGSizeMake(_collectionView.frame.size.width, 65) : CGSizeMake((screenWidth1 / (IS_IPAD ? 5 : 3)) - 15, ((screenWidth1 / (IS_IPAD ? 5 : 3)) - 15) * 1.72);
+    return indexPath.section == 0 ? [self sizeFor:indexPath] : indexPath.section == 1 ? [self sizeForBio:indexPath] : indexPath.section == 2 ? CGSizeMake(_collectionView.frame.size.width, detailList.count == 0 ? 0 : [[((NSDictionary*)detailList[indexPath.item]) getValueFromKey:@"height"] doubleValue]) : indexPath.section == 3 ? CGSizeMake(_collectionView.frame.size.width, 65) : indexPath.section == 4 ? [self sizeForRating:indexPath] : CGSizeMake((screenWidth1 / (IS_IPAD ? 5 : 3)) - 15, ((screenWidth1 / (IS_IPAD ? 5 : 3)) - 15) * 1.72);
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
@@ -1593,9 +1691,7 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)cv cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-//    UICollectionViewCell *cell = [cv dequeueReusableCellWithReuseIdentifier:indexPath.section == 0 ? @"TG_Book_Chap_Cell" : @"TG_Map_Cell" forIndexPath:indexPath];
-    
-    UICollectionViewCell *cell = [cv dequeueReusableCellWithReuseIdentifier:indexPath.section == 0 ? @"Book_Detail_Infor" : indexPath.section == 1 ? @"Author_Bio_Cell" : indexPath.section == 2 ? @"Book_Detail_Option_Cell" : indexPath.section == 3 ? @"TG_Book_Chap_Cell" : @"TG_Map_Cell" forIndexPath:indexPath];
+    UICollectionViewCell *cell = [cv dequeueReusableCellWithReuseIdentifier:indexPath.section == 0 ? @"Book_Detail_Infor" : indexPath.section == 1 ? @"Author_Bio_Cell" : indexPath.section == 2 ? @"Book_Detail_Option_Cell" : indexPath.section == 3 ? @"TG_Book_Chap_Cell" : indexPath.section == 4 ? @"Book_Rating_Cell" : @"TG_Map_Cell" forIndexPath:indexPath];
     
     if (indexPath.section == 0) {
                 
@@ -1610,6 +1706,7 @@
         rate.rating = [[self->tempInfo getValueFromKey:@"rate"] isEqualToString:@""] ? 0 : [[self->tempInfo getValueFromKey:@"rate"] doubleValue];
                                         
         UIButton * viewCount = [self withView:cell tag: 4];
+        [viewCount setImage:[UIImage imageNamed:@"ic_listen"] forState: UIControlStateNormal];
         [viewCount setTitle:[self->tempInfo getValueFromKey:@"read_count"] forState: UIControlStateNormal];
         
         UIButton * likeCount = [self withView:cell tag: 5];
@@ -1690,6 +1787,19 @@
     }
     
     if (indexPath.section == 4) {
+        NSDictionary * rating = ratingList[indexPath.item];
+
+        [((UIImageView*)[self withView:cell tag:1]) imageUrlWithUrl:[rating getValueFromKey:@"avatar"]];
+
+        ((UILabel*)[self withView:cell tag:2]).text = [rating getValueFromKey:@"user_name"];
+        
+        CosmosView * rate = (CosmosView*)[self withView:cell tag: 3];
+        rate.rating = [[rating getValueFromKey:@"rating"] isEqualToString:@""] ? 0 : [[rating getValueFromKey:@"rating"] doubleValue];
+                                       
+        ((UILabel*)[self withView:cell tag:4]).text = [rating getValueFromKey:@"rating_content"];
+    }
+    
+    if (indexPath.section == 5) {
         NSDictionary * book = dataList[indexPath.item];
 
         ((UILabel*)[self withView:cell tag:112]).text = [book getValueFromKey:@"name"];
@@ -1724,7 +1834,7 @@
         [self didRequestContent];
     }
     
-    if (indexPath.section == 4) {
+    if (indexPath.section == 5) {
         NSDictionary * book = dataList[indexPath.item];
         if ([[book getValueFromKey:@"book_type"] isEqualToString:@"3"]) {
             config = book;
@@ -1743,36 +1853,62 @@
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
     
-    if (indexPath.section == 4) {
+    if (indexPath.section == 5) {
         UIView * view = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"Book_Detail_Gap" forIndexPath:indexPath];
 
         return view;
     }
     UIView * view = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"Book_Detail_Chap_Header" forIndexPath:indexPath];
     
-    ((UILabel*)[self withView:view tag: 1]).text = [NSString stringWithFormat:@"Nghe EBOOK (%lu CHƯƠNG)", (unsigned long)chapList.count];
-    double angle = retract ? 0 : M_PI;
-    
-    ((UIButton*)[self withView:view tag: 3]).transform = CGAffineTransformMakeRotation(angle);
-    [view actionForTouch:@{} and:^(NSDictionary *touchInfo) {
-        retract = !retract;
-        [self->collectionView performBatchUpdates:^{
-            [self->collectionView reloadSections:[NSIndexSet indexSetWithIndex:3]];
-        } completion:^(BOOL finished) {
-            [self adjustInset];
+    ((UILabel*)[self withView:view tag: 1]).text = indexPath.section == 3 ? [NSString stringWithFormat:@"NGHE EBOOK (%lu CHƯƠNG)", (unsigned long)chapList.count] : [NSString stringWithFormat:@"ĐÁNH GIÁ (%lu)", (unsigned long)ratingList.count];
+    if (indexPath.section == 3) {
+        double angle = retract ? 0 : M_PI;
+        UIButton * arr = (UIButton*)[self withView:view tag: 3];
+        UIButton * arr_r = (UIButton*)[self withView:view tag: 4];
+        arr.hidden = NO;
+        arr_r.hidden = YES;
+        arr.transform = CGAffineTransformMakeRotation(angle);
+        [arr setBackgroundImage:[UIImage imageNamed:@"ico_arrow_teal"] forState:UIControlStateNormal];
+        view.backgroundColor = [AVHexColor colorWithHexString:@"#F0F0EC"];
+        [view actionForTouch:@{} and:^(NSDictionary *touchInfo) {
+            retract = !retract;
+            [self->collectionView performBatchUpdates:^{
+                [self->collectionView reloadSections:[NSIndexSet indexSetWithIndex:3]];
+            } completion:^(BOOL finished) {
+                [self adjustInset];
+            }];
         }];
-    }];
+    } else {
+        UIButton * arr = (UIButton*)[self withView:view tag: 3];
+        UIButton * arr_r = (UIButton*)[self withView:view tag: 4];
+        arr.hidden = YES;
+        arr_r.hidden = NO;
+        [arr_r setBackgroundImage:[UIImage imageNamed:@"ico_arrow_teal_r"] forState:UIControlStateNormal];
+        view.backgroundColor = [UIColor whiteColor];
+        [view actionForTouch:@{} and:^(NSDictionary *touchInfo) {
+            [self goDown];
+            if(![[self TOPVIEWCONTROLER] isKindOfClass:[Rating_ViewController class]]) {
+                Rating_ViewController * rating = [Rating_ViewController new];
+                NSDictionary * tempo = [[NSDictionary alloc] initWithDictionary:self->tempInfo];
+                rating.config = tempo;
+                [[self CENTER] pushViewController:rating animated:YES];
+            } else {
+                NSDictionary * tempo = [[NSDictionary alloc] initWithDictionary:self->tempInfo];
+                [(Rating_ViewController*)[self TOPVIEWCONTROLER] forceReloadWithConfig:tempo];
+            }
+        }];
+    }
     
     return view;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
-    return CGSizeMake(collectionView.frame.size.width, section == 3 ? chapList.count <= 1 ? 0 : 55 : section == 4 ? 40 : 0);
+    return CGSizeMake(collectionView.frame.size.width, section == 3 ? chapList.count <= 1 ? 0 : 55 : section == 4 ? 55 : section == 5 ? 40 : 0);
 }
 
 
 - (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 4) {
+    if (indexPath.section == 5) {
         if (pageIndex == 1) {
             return;
         }
