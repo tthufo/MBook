@@ -130,7 +130,7 @@ class Information: NSObject {
         
         self.allPackage = "0"
         
-        self.loginType = [:]
+        self.loginType = nil
         
         self.searchValue = ""
         

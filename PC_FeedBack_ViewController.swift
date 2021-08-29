@@ -49,10 +49,10 @@ class PC_FeedBack_ViewController: UIViewController {
     
         tableView.withCell("PC_FeedBack_Cell")
         
-        tableView.transform = CGAffineTransform(rotationAngle: (-.pi))
+//        tableView.transform = CGAffineTransform(rotationAngle: (-.pi))
         
         
-        tableView.transform = CGAffineTransform(scaleX: 1, y: -1)
+//        tableView.transform = CGAffineTransform(scaleX: 1, y: -1)
         
         tableView.refreshControl = refreshControl
         
@@ -226,7 +226,7 @@ extension PC_FeedBack_ViewController: UITableViewDataSource, UITableViewDelegate
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell  = tableView.dequeueReusableCell(withIdentifier: "PC_FeedBack_Cell", for: indexPath)
         
-        cell.contentView.transform = CGAffineTransform(scaleX: 1, y: -1)
+//        cell.contentView.transform = CGAffineTransform(scaleX: 1, y: -1)
         
         let data = dataList[indexPath.row] as! NSDictionary
         

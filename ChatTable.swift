@@ -45,7 +45,7 @@ class ChatTable: UITableView {
       let keyboardHeight = keyboardRectangle.height
 //      self.contentInset.top = keyboardHeight
       if keyboardHeight > 100 {
-        scrollToBottom()
+//        scrollToBottom()
       }
     }
   }

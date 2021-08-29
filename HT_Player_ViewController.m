@@ -38,6 +38,8 @@
     
     NSDictionary * config;
     
+    NSTimer * timer;
+    
     NSString * localUrl, * playListName, * tempBio, * bioString, * catId, * mp3URL;
     
     IBOutlet GUISlider * slider;
@@ -47,6 +49,8 @@
     int totalPage;
     
     int totalRateCount;
+    
+    int readTime;
     
     BOOL isLoadMore, isBlock;
     
@@ -84,6 +88,8 @@
     topHeightIpad.constant = screenWidth1 * 9 / 16;
     
     bioHeight = 0;
+    
+    readTime = 0;
     
     retract = YES;
 
@@ -150,6 +156,32 @@
     float contentSizeHeight = collectionView.collectionViewLayout.collectionViewContentSize.height;
     float collectionViewHeight = collectionView.frame.size.height;
     collectionView.contentInset = UIEdgeInsetsMake(headerHeight, 0, contentSizeHeight < (collectionViewHeight - 64) ? (collectionViewHeight - contentSizeHeight - 64 + embeded) : (0 + embeded), 0);
+}
+
+- (void)startTimer {
+    if(timer)
+    {
+        [timer invalidate];
+        timer = nil;
+    }
+    timer = [NSTimer scheduledTimerWithTimeInterval:1
+                                             target:self
+                                           selector:@selector(updateTime)
+                                           userInfo:nil
+                                            repeats:YES];
+}
+
+- (void)updateTime {
+    readTime += 1;
+    NSLog(@"--->%i", readTime);
+}
+
+- (void)stoptimer {
+    if(timer)
+    {
+        [timer invalidate];
+        timer = nil;
+    }
 }
 
 - (void)backToTop {
@@ -368,6 +400,8 @@
     localUrl = @"";
     
     playListName = @"";
+    
+    readTime = 0;
     
     isBlock = NO;
     
@@ -740,6 +774,8 @@
         }
         [self.playerView play];
         
+        [self startTimer];
+        
         [self fadeVolume];
         
         [titleSong resumeAnimations];
@@ -772,6 +808,7 @@
 
 - (void)didPlayNextOrPre:(BOOL)isNext
 {
+    [self didrequestLogTime];
 //    if(chapList.count == 0)
 //    {
 //        [self showToast:@"Music list is empty, please try other song" andPos:0];
@@ -930,11 +967,15 @@
     [titleSong pauseAnimations];
 
     [self didSaveProgress];
+    
+    [self stoptimer];
 }
 
 - (void)playerDidResume
 {
     [self playingState:YES];
+    
+    [self startTimer];
 }
 
 - (void)playerStalled
@@ -942,6 +983,8 @@
     [self playingState:NO];
     
     [self didSaveProgress];
+    
+    [self stoptimer];
 }
 
 - (void)playerFailedToPlayToEnd
@@ -951,6 +994,8 @@
     [self playingState:NO];
     
     [self showInforPlayer:@{@"img":kAvatar, @"song":@"Song not available"}];
+    
+    [self stoptimer];
     
 //    [self removeObject:@"leftOver"];
     
@@ -965,6 +1010,8 @@
     
     [self showInforPlayer:@{@"img":kAvatar, @"song":@"Song not available"}];
     
+    [self stoptimer];
+
 //    [self removeObject:@"leftOver"];
     
 //    [System removeValue:@"leftImg"];
@@ -1027,10 +1074,14 @@
         });
         isBlock = YES;
     }
+    
+    [self startTimer];
 }
 
 - (void)playerDidEndPlaying
 {
+    [self didrequestLogTime];
+
     [self playingState:NO];
     
     [self playNext:nil];
@@ -1220,6 +1271,8 @@
 
 - (IBAction)didPressDismiss
 {
+    [self didrequestLogTime];
+
     [self.playerView stop];
     
     [self.playerView clearSession];
@@ -1232,6 +1285,31 @@
 - (NSInteger)randomNumberBetween:(NSInteger)min maxNumber:(NSInteger)max
 {
     return min + arc4random_uniform((uint32_t)(max - min + 1));
+}
+
+- (void)didrequestLogTime {
+    if (readTime == 0) {
+        return;
+    }
+    NSMutableDictionary * request = [[NSMutableDictionary alloc] initWithDictionary:@{@"session": Information.token,
+                                                                                      @"header":@{@"session":Information.token == nil ? @"" : Information.token},
+                                                                                      @"start_time":[NSString currentDate:@"HH:mm dd/MM/yyyy"],
+                                                                                      @"time":@(readTime),
+                                                                                      @"overrideAlert": @"1",
+    }];
+    request[@"CMD_CODE"] = @"pushReadingLog";
+    request[@"item_id"] = config[@"id"];
+    [[LTRequest sharedInstance] didRequestInfo:request withCache:^(NSString *cacheString) {
+        
+    } andCompletion:^(NSString *responseString, NSString *errorCode, NSError *error, BOOL isValidated, NSDictionary *header) {
+        NSDictionary * dict = [responseString objectFromJSONString];
+    
+        if ([[dict getValueFromKey:@"error_code"] isEqualToString:@"0"] && dict[@"result"] != [NSNull null]) {
+        } else {
+            [self showToast:[[dict getValueFromKey:@"error_msg"] isEqualToString:@""] ? @"Lỗi xảy ra, mời bạn thử lại" : [dict getValueFromKey:@"error_msg"] andPos:0];
+        }
+    
+    }];
 }
 
 - (IBAction)senderdidRequestLike:(UIButton*)sender {
@@ -1862,6 +1940,7 @@
     if (indexPath.section == 5) {
         NSDictionary * book = dataList[indexPath.item];
         if ([[book getValueFromKey:@"book_type"] isEqualToString:@"3"]) {
+            [self didrequestLogTime];
             config = book;
             [self didRequestContent];
             [self backToTop];

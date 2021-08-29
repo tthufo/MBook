@@ -172,6 +172,13 @@ UIBackgroundTaskIdentifier bgTask;
         //        NSLog(@"Application will continue to run in background");
     }
     
+    NSLog(@"%@", @"applicationDidEnterBackground");
+    if (![self.window.rootViewController isKindOfClass:[UINavigationController class]]) {
+        if ([[self.window.rootViewController TOPVIEWCONTROLER] isKindOfClass:[Reader_ViewController class]]) {
+            [(Reader_ViewController*)[self.window.rootViewController TOPVIEWCONTROLER] stopTimer];
+        }
+    }
+    
     [[LTRequest sharedInstance] didClearBadge];
 }
 
@@ -182,12 +189,26 @@ UIBackgroundTaskIdentifier bgTask;
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-    
+    NSLog(@"%@", @"applicationDidBecomeActive");
+    if (![self.window.rootViewController isKindOfClass:[UINavigationController class]]) {
+        if ([[self.window.rootViewController TOPVIEWCONTROLER] isKindOfClass:[Reader_ViewController class]]) {
+            [(Reader_ViewController*)[self.window.rootViewController TOPVIEWCONTROLER] startTimer];
+        }
+    }
+
     [[FirePush shareInstance] connectToFcm];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application
 {
+    if (![self.window.rootViewController isKindOfClass:[UINavigationController class]]) {
+        if ([[self.window.rootViewController TOPVIEWCONTROLER] isKindOfClass:[Reader_ViewController class]]) {
+            [(Reader_ViewController*)[self.window.rootViewController TOPVIEWCONTROLER] didRequestLogTime];
+        }
+    }
+    
+    [[self.window.rootViewController PLAYER] didRequestLogTime];
+    
     for(DownLoad * down in [DownloadManager share].dataList)
     {
         if(!down.operationFinished && !down.operationBreaked)
@@ -268,6 +289,7 @@ UIBackgroundTaskIdentifier bgTask;
 
 - (UIViewController*)TOPVIEWCONTROLER
 {
+    NSLog(@"-->%@", [self ROOT]);
     return [((UINavigationController*)[self ROOT].centerPanel).viewControllers lastObject];
 }
 

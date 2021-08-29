@@ -123,16 +123,20 @@ extension Transaction_ViewController: UITableViewDataSource, UITableViewDelegate
         
         let date = ((data["items"] as! NSArray)[0] as! NSDictionary).getValueFromKey("expired_date") as! NSString
         
-        let dateTime = date.date(fromTimeStamp: "dd/MM/yyyy")
+        let typing = ((data["items"] as! NSArray)[0] as! NSDictionary).getValueFromKey("item_type") as! NSString
+
+        let isPackage = typing == "package"
+              
+        let dateTime = date //  self.convertDate(dateValue: milisecond)
         
         if data.getValueFromKey("status") == "1" {
             let title = self.withView(cell, tag: 1) as! UILabel
-            title.text = "%@ - Đã thanh toán %@ - %@ VND".format(parameters: createTime as! CVarArg, packageName as! CVarArg, price as! CVarArg)
+            title.text = "%@ - Đã thanh toán %@%@%@ - %@ VND".format(parameters: createTime!, isPackage ? "" : "sách \"", packageName!, isPackage ? "" : "\"", price!)
             let des = self.withView(cell, tag: 2) as! UILabel
-            des.text = "Hạn sử dụng gói %@ tới hết ngày %@".format(parameters: createTime as! CVarArg, dateTime as! CVarArg)
+            des.text = isPackage ? "Hạn sử dụng %@ %@ đến hết ngày %@".format(parameters: isPackage ? "gói" : "sách", packageName!, dateTime) : "Sách đã có trong tủ sách của bạn"
         } else {
             let title = self.withView(cell, tag: 1) as! UILabel
-            title.text = "%@ - Thanh toán %@ không thành công".format(parameters: createTime as! CVarArg, packageName as! CVarArg)
+            title.text = "%@ - Thanh toán %@%@%@ không thành công".format(parameters: createTime!, isPackage ? "" : "sách \"", packageName!, isPackage ? "" : "\"")
         }
         
         return cell
@@ -155,4 +159,12 @@ extension Transaction_ViewController: UITableViewDataSource, UITableViewDelegate
         }
     }
 
+    func convertDate(dateValue: Int) -> String {
+        let truncatedTime = Int(dateValue / 1000)
+        let date = Date(timeIntervalSinceNow: TimeInterval(truncatedTime))
+        let formatter = DateFormatter()
+        formatter.timeZone = TimeZone(abbreviation: "UTC")
+        formatter.dateFormat = "yyyy-MM-dd"
+        return formatter.string(from: date)
+    }
 }

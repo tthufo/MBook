@@ -93,6 +93,8 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
         
         email_reg.setBackgroundImage(UIImage(named: "ico_email-1")?.withTintColor(UIColor.orange), for: .normal)
         
+        check.setImage(UIImage(named: isCheck ? "ico_un_hide" : "ico_hide")?.withTintColor(AVHexColor.color(withHexString: "#1E928C")), for: .normal)
+        
         getPhoneNumber()
     }
         
@@ -351,7 +353,7 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
     
     @IBAction func didPressCheck() {
         pass.isSecureTextEntry = isCheck
-        check.setImage(UIImage(named: isCheck ? "ico_hide" : "ico_hide"), for: .normal)
+        check.setImage(UIImage(named: isCheck ? "ico_hide" : "ico_un_hide")?.withTintColor(AVHexColor.color(withHexString: "#1E928C")), for: .normal)
         isCheck = !isCheck
     }
     

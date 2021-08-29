@@ -55,4 +55,10 @@ typedef enum __playerState
 
 - (void)backToTop;
 
+- (void)startTimer;
+
+- (void)stopTimer;
+
+- (void)didRequestLogTime;
+
 @end

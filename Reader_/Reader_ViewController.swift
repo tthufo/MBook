@@ -128,6 +128,8 @@ import MarqueeLabel
 class Reader_ViewController: UIViewController {
 
     @objc var config: NSDictionary!
+    
+    @objc var timer: Timer!
 
     @IBOutlet var titleLabel: MarqueeLabel!
 
@@ -153,10 +155,39 @@ class Reader_ViewController: UIViewController {
 
     var show: Bool = false
     
+    var success: Bool = false
+
+    var readTime: Int = 0
+    
     var pdfDocument: PDFDocument!
 
     enum PDFError: Error {
         case failedToLoadPDFDocument
+    }
+    
+    @objc func startTimer() {
+        if !success {
+            return
+        }
+        if timer != nil {
+            timer.invalidate()
+            timer = nil
+        }
+        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(self.updateTime), userInfo: nil, repeats: true)
+    }
+    
+    @objc func stopTimer() {
+        if !success {
+            return
+        }
+        if timer != nil {
+            timer.invalidate()
+            timer = nil
+        }
+    }
+    
+    @objc func updateTime() {
+        readTime += 1
     }
 
     override func viewDidLoad() {
@@ -255,6 +286,8 @@ class Reader_ViewController: UIViewController {
             self.pageNumber.text = "%i / %i".format(parameters: 1, document.documentRef?.numberOfPages as! CVarArg)
             self.chapter.isEnabled = true
             self.pageNumber.isHidden = false
+            self.success = true
+            self.startTimer()
         } else {
             self.failLabel.alpha = 1
             self.failLabel.text = "Không mở được file PDF, mời bạn tải lại."
@@ -317,19 +350,44 @@ class Reader_ViewController: UIViewController {
             self.showToast("Sách không có danh sách mục lục", andPos: 0)
         }
     }
-
+    
     @IBAction func didPressBack() {
        unsubscribeFromNotifications()
+        self.stopTimer()
+        self.didRequestLogTime()
        self.navigationController?.popViewController(animated: true)
         if self.player()?.playState == Pause {
           self.embed()
        }
-        if downLoad.percentComplete > 0 && downLoad.percentComplete < 100 {
+       if downLoad.percentComplete > 0 && downLoad.percentComplete < 100 {
             downLoad.forceStop()
             if !self.existingFile(fileName: self.config.getValueFromKey("id")) {
                 self.deleteFile(fileName: self.pdfFile(fileName: self.config.getValueFromKey("id")))
             }
         }
+    }
+    
+    @objc func didRequestLogTime() {
+        if readTime == 0 {
+            return
+        }
+        LTRequest.sharedInstance()?.didRequestInfo(["CMD_CODE":"pushReadingLog",
+                                                    "header":["session":Information.token == nil ? "" : Information.token!],
+                                                    "session":Information.token ?? "",
+                                                    "item_id":self.config.getValueFromKey("id") ?? "",
+                                                    "start_time":NSString().currentDate("HH:mm dd/MM/yyyy")!,
+                                                    "time":readTime,
+                                                    "overrideAlert":"1",
+                                                    "overrideLoading":"1",
+                                                    "host":self], withCache: { (cacheString) in
+        }, andCompletion: { (response, errorCode, error, isValid, object) in
+            let result = response?.dictionize() ?? [:]
+            
+            if result.getValueFromKey("error_code") != "0" || result["result"] is NSNull {
+                self.showToast(response?.dictionize().getValueFromKey("error_msg") == "" ? "Lỗi xảy ra, mời bạn thử lại" : response?.dictionize().getValueFromKey("error_msg"), andPos: 0)
+                return
+            }
+        })
     }
 
     override func viewDidDisappear(_ animated: Bool) {

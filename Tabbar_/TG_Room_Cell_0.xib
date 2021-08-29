@@ -42,13 +42,13 @@
                         </connections>
                     </collectionView>
                     <button opaque="NO" alpha="0.0" tag="12" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="szO-ZB-roc">
-                        <rect key="frame" x="224" y="0.0" width="88" height="37"/>
+                        <rect key="frame" x="222" y="0.0" width="90" height="37"/>
                         <constraints>
                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="46" id="Oib-4X-jPY"/>
                             <constraint firstAttribute="height" constant="37" id="sYt-ZF-5A9"/>
                         </constraints>
                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
-                        <state key="normal" title="xem thêm" image="ico_aright">
+                        <state key="normal" title="Xem thêm" image="ico_aright">
                             <color key="titleColor" red="0.0078431372550000003" green="0.57254901960000004" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
                         </state>
                     </button>
