@@ -24,6 +24,8 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
     var pageIndex: Int = 1
      
     var totalPage: Int = 1
+    
+    var totalRateCount: Int = 0
      
     var isLoadMore: Bool = false
     
@@ -187,6 +189,8 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
         pageIndex = 1
         totalPage = 1
         didRequestData(isShow: true)
+        didRequestRating()
+        didRequestChapter()
     }
     
     func adjustInset() {
@@ -397,6 +401,8 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
                  return
              }
                      
+            self.totalRateCount = (result["result"] as! NSDictionary)["total_count"] as! Int
+
              self.ratingList.removeAllObjects()
 
              let data = (result["result"] as! NSDictionary)["data"]
@@ -731,6 +737,24 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
             
             let voteCount = self.withView(cell, tag: 6) as! UIButton
             voteCount.setTitle(self.tempInfo.getValueFromKey("comment_count"), for: .normal)
+            
+            voteCount.action(forTouch: [:]) { (obj) in
+                let feedBack = PC_FeedBack_ViewController.init()
+                feedBack.config = self.tempInfo
+                feedBack.callBack = { infor in
+                    let tempConfig = NSMutableDictionary.init(dictionary: self.tempInfo)
+                    
+                    tempConfig["comment_count"] = (infor as! NSDictionary).getValueFromKey("comment_count")
+                    
+                    self.tempInfo = tempConfig
+                    
+                    self.collectionView.reloadSections(IndexSet(integer: 0))
+                }
+                let nav = UINavigationController.init(rootViewController: feedBack)
+                nav.isNavigationBarHidden = true
+                nav.modalPresentationStyle = .fullScreen
+                self.center()?.present(nav, animated: true, completion: nil)
+            }
         }
         
         
@@ -918,8 +942,9 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
         }
         let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "Book_Detail_Chap_Header", for: indexPath as IndexPath)
         (self.withView(view, tag: 1) as! UILabel).text = indexPath.section == 3 ? "ĐỌC EBOOK (%i CHƯƠNG)".format(parameters: self.chapList.count) :
-            "ĐÁNH GIÁ (%i)".format(parameters: self.ratingList.count)
+            "ĐÁNH GIÁ (%i)".format(parameters: totalRateCount)
         if indexPath.section == 3 {
+            (self.withView(view, tag: 99) as! UILabel).isHidden = true
             (self.withView(view, tag: 3) as! UIButton).setBackgroundImage(UIImage(named: "ico_arrow_teal"), for: .normal)
             view.backgroundColor = AVHexColor.color(withHexString: "#F0F0EC")
             let angle = self.retract ? 0 : CGFloat.pi
@@ -933,12 +958,21 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
                 }
             }
         } else {
+            (self.withView(view, tag: 99) as! UILabel).isHidden = false
             (self.withView(view, tag: 4) as! UIButton).setBackgroundImage(UIImage(named: "ico_arrow_teal_r"), for: .normal)
             view.backgroundColor = .white
             view.action(forTouch: [:]) { (objc) in
                 let rating = Rating_ViewController.init()
                 rating.config = self.tempInfo
-                self.navigationController?.pushViewController(rating, animated: true)
+                rating.ratingMode = "book"
+                rating.callBack = { info in
+                    self.didRequestRating()
+                }
+                let nav = UINavigationController.init(rootViewController: rating)
+                nav.isNavigationBarHidden = true
+                nav.modalPresentationStyle = .fullScreen
+                
+                self.present(nav, animated: true, completion: nil)
             }
         }
         return view

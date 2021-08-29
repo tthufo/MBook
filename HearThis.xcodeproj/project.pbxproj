@@ -43,6 +43,13 @@
 		FC48C25426DA4499006D18DD /* Book_Rating_Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC48C25326DA4498006D18DD /* Book_Rating_Cell.xib */; };
 		FC48C25926DA8B8F006D18DD /* Rating_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC48C25726DA8B8E006D18DD /* Rating_ViewController.swift */; };
 		FC48C25A26DA8B8F006D18DD /* Rating_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC48C25826DA8B8E006D18DD /* Rating_ViewController.xib */; };
+		FC48C28226DB88FC006D18DD /* PC_FeedBack_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC48C27C26DB88F9006D18DD /* PC_FeedBack_ViewController.swift */; };
+		FC48C28326DB88FC006D18DD /* ChatAccessory.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC48C27D26DB88FA006D18DD /* ChatAccessory.xib */; };
+		FC48C28426DB88FC006D18DD /* PC_FeedBack_Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC48C27E26DB88FA006D18DD /* PC_FeedBack_Cell.xib */; };
+		FC48C28526DB88FC006D18DD /* ChatAccessory.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC48C27F26DB88FA006D18DD /* ChatAccessory.swift */; };
+		FC48C28626DB88FC006D18DD /* ChatTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC48C28026DB88FB006D18DD /* ChatTable.swift */; };
+		FC48C28726DB88FC006D18DD /* PC_FeedBack_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC48C28126DB88FB006D18DD /* PC_FeedBack_ViewController.xib */; };
+		FC48C28A26DB8E03006D18DD /* GrowingTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC48C28926DB8E03006D18DD /* GrowingTextView.swift */; };
 		FC51D29926CC4F0500F5DA2F /* TG_Room_Cell_Cube.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC51D29726CC4F0500F5DA2F /* TG_Room_Cell_Cube.swift */; };
 		FC51D29A26CC4F0500F5DA2F /* TG_Room_Cell_Cube.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC51D29826CC4F0500F5DA2F /* TG_Room_Cell_Cube.xib */; };
 		FC640A811DAAAD8B00DAEF55 /* CoreModel.xcdatamodel in Sources */ = {isa = PBXBuildFile; fileRef = FC640A721DAAAD8B00DAEF55 /* CoreModel.xcdatamodel */; };
@@ -264,6 +271,13 @@
 		FC48C25326DA4498006D18DD /* Book_Rating_Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Book_Rating_Cell.xib; sourceTree = "<group>"; };
 		FC48C25726DA8B8E006D18DD /* Rating_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rating_ViewController.swift; sourceTree = "<group>"; };
 		FC48C25826DA8B8E006D18DD /* Rating_ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Rating_ViewController.xib; sourceTree = "<group>"; };
+		FC48C27C26DB88F9006D18DD /* PC_FeedBack_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PC_FeedBack_ViewController.swift; sourceTree = "<group>"; };
+		FC48C27D26DB88FA006D18DD /* ChatAccessory.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatAccessory.xib; sourceTree = "<group>"; };
+		FC48C27E26DB88FA006D18DD /* PC_FeedBack_Cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PC_FeedBack_Cell.xib; sourceTree = "<group>"; };
+		FC48C27F26DB88FA006D18DD /* ChatAccessory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatAccessory.swift; sourceTree = "<group>"; };
+		FC48C28026DB88FB006D18DD /* ChatTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatTable.swift; sourceTree = "<group>"; };
+		FC48C28126DB88FB006D18DD /* PC_FeedBack_ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PC_FeedBack_ViewController.xib; sourceTree = "<group>"; };
+		FC48C28926DB8E03006D18DD /* GrowingTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GrowingTextView.swift; sourceTree = "<group>"; };
 		FC51D29726CC4F0500F5DA2F /* TG_Room_Cell_Cube.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TG_Room_Cell_Cube.swift; sourceTree = "<group>"; };
 		FC51D29826CC4F0500F5DA2F /* TG_Room_Cell_Cube.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TG_Room_Cell_Cube.xib; sourceTree = "<group>"; };
 		FC640A721DAAAD8B00DAEF55 /* CoreModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreModel.xcdatamodel; sourceTree = "<group>"; };
@@ -641,6 +655,13 @@
 		FC7550DF1DAC85B7007992DF /* Feed_ */ = {
 			isa = PBXGroup;
 			children = (
+				FC48C28926DB8E03006D18DD /* GrowingTextView.swift */,
+				FC48C27F26DB88FA006D18DD /* ChatAccessory.swift */,
+				FC48C27D26DB88FA006D18DD /* ChatAccessory.xib */,
+				FC48C28026DB88FB006D18DD /* ChatTable.swift */,
+				FC48C27E26DB88FA006D18DD /* PC_FeedBack_Cell.xib */,
+				FC48C27C26DB88F9006D18DD /* PC_FeedBack_ViewController.swift */,
+				FC48C28126DB88FB006D18DD /* PC_FeedBack_ViewController.xib */,
 				FC7550E01DAC85DE007992DF /* HT_Feed_ViewController.h */,
 				FC7550E11DAC85DE007992DF /* HT_Feed_ViewController.m */,
 				FC7550E21DAC85DE007992DF /* HT_Feed_ViewController.xib */,
@@ -1045,6 +1066,7 @@
 				FCB238BB244186E10034B40B /* Book_Detail_Title.xib in Resources */,
 				FC7AFA9226C05BF900D3C2D2 /* Payment_Cell.xib in Resources */,
 				FC771C4A263B1FB2005851FA /* Check_Out_ViewController.xib in Resources */,
+				FC48C28726DB88FC006D18DD /* PC_FeedBack_ViewController.xib in Resources */,
 				FCB238E524437D410034B40B /* Event_Detail_ViewController.xib in Resources */,
 				FCFB516D1DD075E200D49FB2 /* actions.plist in Resources */,
 				FC51D29A26CC4F0500F5DA2F /* TG_Room_Cell_Cube.xib in Resources */,
@@ -1148,9 +1170,11 @@
 				FC908BDA264A840200176E13 /* News_Cell.xib in Resources */,
 				FC78AC0F26D38A42000D5209 /* Event_Detail_Infor.xib in Resources */,
 				FCAD57F2243DB7E400101A47 /* TG_Room_Cell_Banner_1.xib in Resources */,
+				FC48C28326DB88FC006D18DD /* ChatAccessory.xib in Resources */,
 				FCBC348B2640797F00AC9621 /* Tag_View.xib in Resources */,
 				FC69D42E24405879006D57D9 /* TG_Room_Cell_7.xib in Resources */,
 				FCFB516F1DD086C500D49FB2 /* TT_List_Cell.xib in Resources */,
+				FC48C28426DB88FC006D18DD /* PC_FeedBack_Cell.xib in Resources */,
 				FCFB51711DD0E72700D49FB2 /* CellView.xib in Resources */,
 				FC78396C2438EC9400470148 /* SC_Menu_ViewController.xib in Resources */,
 				FCBC349126410EEE00AC9621 /* Tag_Button.xib in Resources */,
@@ -1270,6 +1294,7 @@
 				FC640A841DAAAD8C00DAEF55 /* History.m in Sources */,
 				FCB238C724422DFB0034B40B /* Author_Detail_ViewController.swift in Sources */,
 				FCAB62C62639675300E26484 /* VIP_ViewController.swift in Sources */,
+				FC48C28626DB88FC006D18DD /* ChatTable.swift in Sources */,
 				FC7550E91DAC869B007992DF /* HT_More_ViewController.m in Sources */,
 				FC0A8FB52437770E001A75AF /* PC_Forgot_ViewController.swift in Sources */,
 				FCBC3481263FFB2600AC9621 /* User_Infor_ViewController.swift in Sources */,
@@ -1280,6 +1305,7 @@
 				FC78398524391F6700470148 /* TG_Intro_ViewController.swift in Sources */,
 				FCB3CD711DA4E3FA002FABDD /* ItemCell.m in Sources */,
 				FC1AD7D61DA40CA8002BA7EC /* ViewController.m in Sources */,
+				FC48C28A26DB8E03006D18DD /* GrowingTextView.swift in Sources */,
 				FCB238D0244354AB0034B40B /* Event_ViewController.swift in Sources */,
 				FC7839792438F37F00470148 /* PC_Inner_Info_ViewController.swift in Sources */,
 				FCB238DE24435BF60034B40B /* Publisher_ViewController.m in Sources */,
@@ -1287,6 +1313,8 @@
 				FC7550FF1DACDD78007992DF /* YouTube.m in Sources */,
 				FC130B8E2446236B00D64012 /* Package_ViewController.swift in Sources */,
 				FC91B7352431217F00AA6671 /* XMLReader.m in Sources */,
+				FC48C28226DB88FC006D18DD /* PC_FeedBack_ViewController.swift in Sources */,
+				FC48C28526DB88FC006D18DD /* ChatAccessory.swift in Sources */,
 				FC7A98D32444B0420038C226 /* Tag_Cell.swift in Sources */,
 				FC91B731243120F400AA6671 /* GUISlider.m in Sources */,
 				FC908BA92645CF3B00176E13 /* CosmosDistrib.swift in Sources */,

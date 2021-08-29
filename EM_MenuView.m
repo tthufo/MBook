@@ -10,7 +10,9 @@
 
 #import "MBCircularProgressBarView.h"
 
-@interface EM_MenuView ()<UITableViewDataSource, UITableViewDelegate>
+#import "MeBook-Swift.h"
+
+@interface EM_MenuView ()<UITableViewDataSource, UITableViewDelegate, UITextViewDelegate>
 {
     NSMutableArray * dataList;
 }
@@ -41,6 +43,15 @@
     
     contentView.frame = CGRectMake(0, 0, 300, 315);
     
+    __block double ratingStar = 0;
+    CosmosView * rating = ((CosmosView*)[self withView:contentView tag: 1]);
+
+    rating.didTouchCosmos = ^(double rating) {
+        ratingStar = rating;
+    };
+    
+    UITextView * comment = ((UITextView*)[self withView:contentView tag: 2]);
+    comment.placeHolder = @"Viết đánh giá ...";
     
     UIButton * rate = ((UIButton*)[self withView:contentView tag: 3]);
         
@@ -48,10 +59,10 @@
         
         if(self.menuCompletion)
         {
-            self.menuCompletion(3, @{}, self);
+            self.menuCompletion(3, @{@"comment":comment.text, @"rating": [NSString stringWithFormat:@"%.1f", ratingStar]}, self);
         }
         
-        [self close];
+        [comment resignFirstResponder];
     }];
     
     UIButton * action = ((UIButton*)[self withView:contentView tag: 4]);

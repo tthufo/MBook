@@ -700,7 +700,7 @@
             </constraints>
             <point key="canvasLocation" x="580" y="-62.518740629685162"/>
         </view>
-        <view contentMode="scaleToFill" id="SZn-DF-7hJ">
+        <view clipsSubviews="YES" contentMode="scaleToFill" id="SZn-DF-7hJ">
             <rect key="frame" x="0.0" y="0.0" width="300" height="313"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
@@ -793,9 +793,12 @@
                     <color key="textColor" systemColor="labelColor"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" spellCheckingType="no" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
+                    <connections>
+                        <outlet property="delegate" destination="SZn-DF-7hJ" id="Bwq-pE-nZg"/>
+                    </connections>
                 </textView>
                 <button opaque="NO" clipsSubviews="YES" tag="4" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Zl-11-qmK">
-                    <rect key="frame" x="165" y="247" width="125.5" height="46"/>
+                    <rect key="frame" x="165" y="252" width="125.5" height="46"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" red="0.14117647059999999" green="0.4039215686" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
@@ -809,7 +812,7 @@
                     </userDefinedRuntimeAttributes>
                 </button>
                 <button opaque="NO" clipsSubviews="YES" tag="3" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DuV-oK-2vD">
-                    <rect key="frame" x="11" y="247" width="125.5" height="46"/>
+                    <rect key="frame" x="11" y="252" width="125.5" height="46"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>

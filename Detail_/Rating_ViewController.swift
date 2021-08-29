@@ -25,6 +25,10 @@ class Rating_ViewController: UIViewController, UICollectionViewDataSource, UICol
     var isLoadMore: Bool = false
 
     var ratingList: NSMutableArray!
+    
+    @objc var ratingMode: String = ""
+    
+    @objc var callBack: ((_ info: Any)->())?
         
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,7 +44,7 @@ class Rating_ViewController: UIViewController, UICollectionViewDataSource, UICol
         self.didRequestRating(isShow: true)
         
         if self.isEmbed() {
-            bottomGap.constant = 75
+//            bottomGap.constant = 75
         }
     }
     
@@ -96,34 +100,54 @@ class Rating_ViewController: UIViewController, UICollectionViewDataSource, UICol
          })
     }
  
-    func didRequestComment(chap: NSDictionary) {
+    func didRequestComment(comment: NSDictionary, menu: EM_MenuView) {
+        if comment.getValueFromKey("rating") == "0.0" {
+            self.showToast("Bạn chưa chọn đánh giá", andPos: 0)
+            return
+        }
+        if comment.getValueFromKey("comment") == "" {
+            self.showToast("Bạn chưa viết đánh giá", andPos: 0)
+            return
+        }
         let request = NSMutableDictionary.init(dictionary: [
                                                             "header":["session":Information.token == nil ? "" : Information.token!],
                                                             "session":Information.token ?? "",
+                                                            "item_id": self.config.getValueFromKey("id") as Any,
+                                                            "rating": comment.getValueFromKey("rating") as Any,
+                                                            "rating_content": comment.getValueFromKey("comment") as Any,
                                                             "overrideAlert":"1",
                                                             ])
-           request["id"] = chap.getValueFromKey("id")
-           request["CMD_CODE"] = "getBookDetail"
+        
+        request["CMD_CODE"] = "pushRateItem"
         LTRequest.sharedInstance()?.didRequestInfo((request as! [AnyHashable : Any]), withCache: { (cacheString) in
         }, andCompletion: { (response, errorCode, error, isValid, object) in
             self.refreshControl.endRefreshing()
             let result = response?.dictionize() ?? [:]
             
-            if result.getValueFromKey("error_code") != "0" || result["result"] is NSNull {
+            menu.close()
+
+            if result.getValueFromKey("error_code") != "0" {
                 self.showToast(response?.dictionize().getValueFromKey("error_msg") == "" ? "Lỗi xảy ra, mời bạn thử lại" : response?.dictionize().getValueFromKey("error_msg"), andPos: 0)
                 return
             }
             
+            self.callBack?([:])
+            
+            self.didReload(self.refreshControl)
         })
     }
     
     @IBAction func didPressBack() {
-        self.navigationController?.popViewController(animated: true)
+        self.dismiss(animated: true, completion: nil)
+//        self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func didPressRate() {
         EM_MenuView.init(rate: [:])?.show(completion: { (indexing, obj, menu) in
-            
+            if indexing == 3 {
+                print(obj)
+                self.didRequestComment(comment: obj as! NSDictionary, menu: menu!)
+            }
         })
     }
     

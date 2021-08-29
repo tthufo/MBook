@@ -46,6 +46,8 @@
     
     int totalPage;
     
+    int totalRateCount;
+    
     BOOL isLoadMore, isBlock;
     
     float bioHeight;
@@ -469,6 +471,8 @@
     pageIndex = 1;
     
     totalPage = 1;
+    
+    totalRateCount = 0;
         
     [self didRequestDetail: url];
      
@@ -1356,11 +1360,13 @@
         NSDictionary * dict = [responseString objectFromJSONString];
 
         if ([[dict getValueFromKey:@"error_code"] isEqualToString:@"0"] || dict[@"result"] == [NSNull null]) {
-            NSArray * dict = [responseString objectFromJSONString][@"result"][@"data"];
+            NSArray * array = dict[@"result"][@"data"];
                     
+            totalRateCount = [dict[@"result"][@"total_count"] intValue] ;
+            
             [ratingList removeAllObjects];
             
-            [ratingList addObjectsFromArray: dict];
+            [ratingList addObjectsFromArray: array];
             
             [collectionView reloadData];
         } else {
@@ -1714,6 +1720,25 @@
 
         UIButton * commentCount = [self withView:cell tag: 6];
         [commentCount setTitle:[self->tempInfo getValueFromKey:@"comment_count"] forState: UIControlStateNormal];
+        
+        [commentCount actionForTouch:@{} and:^(NSDictionary *touchInfo) {
+            PC_FeedBack_ViewController * rating = [PC_FeedBack_ViewController new];
+            NSDictionary * tempo = [[NSDictionary alloc] initWithDictionary:self->tempInfo];
+            rating.config = tempo;
+            rating.callBack  = ^(NSDictionary* info) {
+                NSMutableDictionary * tempConfig = [[NSMutableDictionary alloc] initWithDictionary:self->tempInfo];
+
+                tempConfig[@"comment_count"] = [info getValueFromKey:@"comment_count"];
+                            
+                self->tempInfo = tempConfig;
+                            
+                [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:0]];
+            };
+            UINavigationController * nav = [[UINavigationController alloc] initWithRootViewController:rating];
+            nav.navigationBarHidden = YES;
+            nav.modalPresentationStyle = UIModalPresentationFullScreen;
+            [self presentViewController:nav animated:YES completion:nil];
+        }];
     }
     
     if (indexPath.section == 1) {
@@ -1860,9 +1885,12 @@
     }
     UIView * view = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"Book_Detail_Chap_Header" forIndexPath:indexPath];
     
-    ((UILabel*)[self withView:view tag: 1]).text = indexPath.section == 3 ? [NSString stringWithFormat:@"NGHE EBOOK (%lu CHƯƠNG)", (unsigned long)chapList.count] : [NSString stringWithFormat:@"ĐÁNH GIÁ (%lu)", (unsigned long)ratingList.count];
+    ((UILabel*)[self withView:view tag: 1]).text = indexPath.section == 3 ? [NSString stringWithFormat:@"NGHE EBOOK (%lu CHƯƠNG)", (unsigned long)chapList.count] : [NSString stringWithFormat:@"ĐÁNH GIÁ (%i)", totalRateCount];
+    NSLog(@"-->%i", totalRateCount);
+    
     if (indexPath.section == 3) {
         double angle = retract ? 0 : M_PI;
+        ((UILabel*)[self withView:view tag: 99]).hidden = YES;
         UIButton * arr = (UIButton*)[self withView:view tag: 3];
         UIButton * arr_r = (UIButton*)[self withView:view tag: 4];
         arr.hidden = NO;
@@ -1879,6 +1907,7 @@
             }];
         }];
     } else {
+        ((UILabel*)[self withView:view tag: 99]).hidden = NO;
         UIButton * arr = (UIButton*)[self withView:view tag: 3];
         UIButton * arr_r = (UIButton*)[self withView:view tag: 4];
         arr.hidden = YES;
@@ -1886,16 +1915,31 @@
         [arr_r setBackgroundImage:[UIImage imageNamed:@"ico_arrow_teal_r"] forState:UIControlStateNormal];
         view.backgroundColor = [UIColor whiteColor];
         [view actionForTouch:@{} and:^(NSDictionary *touchInfo) {
-            [self goDown];
-            if(![[self TOPVIEWCONTROLER] isKindOfClass:[Rating_ViewController class]]) {
-                Rating_ViewController * rating = [Rating_ViewController new];
-                NSDictionary * tempo = [[NSDictionary alloc] initWithDictionary:self->tempInfo];
-                rating.config = tempo;
-                [[self CENTER] pushViewController:rating animated:YES];
-            } else {
-                NSDictionary * tempo = [[NSDictionary alloc] initWithDictionary:self->tempInfo];
-                [(Rating_ViewController*)[self TOPVIEWCONTROLER] forceReloadWithConfig:tempo];
-            }
+//            [self goDown];
+//            if(![[self TOPVIEWCONTROLER] isKindOfClass:[Rating_ViewController class]]) {
+//                Rating_ViewController * rating = [Rating_ViewController new];
+//                NSDictionary * tempo = [[NSDictionary alloc] initWithDictionary:self->tempInfo];
+//                rating.config = tempo;
+//                rating.ratingMode = @"audio";
+//                rating.callBack  = ^(NSDictionary* info) {
+//                    [self didRequestRating];
+//                };
+//                [[self CENTER] pushViewController:rating animated:YES];
+//            } else {
+//                NSDictionary * tempo = [[NSDictionary alloc] initWithDictionary:self->tempInfo];
+//                [(Rating_ViewController*)[self TOPVIEWCONTROLER] forceReloadWithConfig:tempo];
+//            }
+            Rating_ViewController * rating = [Rating_ViewController new];
+            NSDictionary * tempo = [[NSDictionary alloc] initWithDictionary:self->tempInfo];
+            rating.config = tempo;
+            rating.ratingMode = @"audio";
+            rating.callBack  = ^(NSDictionary* info) {
+                [self didRequestRating];
+            };
+            UINavigationController * nav = [[UINavigationController alloc] initWithRootViewController:rating];
+            nav.navigationBarHidden = YES;
+            nav.modalPresentationStyle = UIModalPresentationFullScreen;
+            [self presentViewController:nav animated:YES completion:nil];
         }];
     }
     
