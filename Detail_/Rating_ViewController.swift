@@ -143,9 +143,8 @@ class Rating_ViewController: UIViewController, UICollectionViewDataSource, UICol
     }
     
     @IBAction func didPressRate() {
-        EM_MenuView.init(rate: [:])?.show(completion: { (indexing, obj, menu) in
+        EM_MenuView.init(rate: [:])?.disableCompletion({ (indexing, obj, menu) in
             if indexing == 3 {
-                print(obj)
                 self.didRequestComment(comment: obj as! NSDictionary, menu: menu!)
             }
         })

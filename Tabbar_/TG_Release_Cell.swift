@@ -114,7 +114,7 @@ class TG_Release_Cell: UITableViewCell, UICollectionViewDelegate, UICollectionVi
 
         let title = self.withView(cell, tag: 1) as! UILabel
 
-        title.text = data.getValueFromKey("publish_time")
+        title.text = self.getDay(date: data.getValueFromKey("publish_time") as! NSString)
 
         let description = self.withView(cell, tag: 2) as! UILabel
 
@@ -132,5 +132,24 @@ class TG_Release_Cell: UITableViewCell, UICollectionViewDelegate, UICollectionVi
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+    }
+    
+    let weekDays = ["1": "CN", "2": "Thứ 2", "3": "Thứ 3", "4": "Thứ 4", "5": "Thứ 5", "6": "Thứ 6", "7": "Thứ 7"]
+    
+    func getDay(date: NSString) -> String {
+        if date == "" {
+            return ""
+        }
+        let dat = date.date(withFormat: "dd/MM/yyyy")
+        let dayNumber = dat!.dayNumberOfWeek()
+        let dateEl = date.components(separatedBy: "/")
+        
+        return weekDays["%i".format(parameters: dayNumber!)]! + "\n" + dateEl[0] + "/" + dateEl[1]
+    }
+}
+
+extension Date {
+    func dayNumberOfWeek() -> Int? {
+        return Calendar.current.dateComponents([.weekday], from: self).weekday
     }
 }

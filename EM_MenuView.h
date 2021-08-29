@@ -44,6 +44,8 @@ typedef void (^MenuCompletion)(int index, id object, EM_MenuView * menu);
 
 - (EM_MenuView*)showWithCompletion:(MenuCompletion)_completion;
 
+- (EM_MenuView*)disableCompletion:(MenuCompletion)_completion;
+
 @property(nonatomic,copy) MenuCompletion menuCompletion;
 
 @end

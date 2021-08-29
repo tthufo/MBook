@@ -1965,7 +1965,6 @@
     UIView * view = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"Book_Detail_Chap_Header" forIndexPath:indexPath];
     
     ((UILabel*)[self withView:view tag: 1]).text = indexPath.section == 3 ? [NSString stringWithFormat:@"NGHE EBOOK (%lu CHƯƠNG)", (unsigned long)chapList.count] : [NSString stringWithFormat:@"ĐÁNH GIÁ (%i)", totalRateCount];
-    NSLog(@"-->%i", totalRateCount);
     
     if (indexPath.section == 3) {
         double angle = retract ? 0 : M_PI;

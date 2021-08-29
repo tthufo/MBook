@@ -77,6 +77,11 @@
     return commentView;
 }
 
+- (BOOL)textViewShouldEndEditing:(UITextView *)textView {
+    [textView resignFirstResponder];
+    return YES;
+}
+
 
 - (id)initWithRestrict:(NSDictionary*)info
 {
@@ -726,6 +731,15 @@
     menuCompletion = _completion;
     
     [self show];
+    
+    return self;
+}
+
+- (EM_MenuView*)disableCompletion:(MenuCompletion)_completion
+{
+    menuCompletion = _completion;
+    
+    [self show:NO];
     
     return self;
 }
