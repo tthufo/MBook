@@ -93,7 +93,7 @@ class TG_Intro_ViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        widthBuyBtn.constant = Information.isVip ? 0 : 56
+        widthBuyBtn.constant = Information.isVip ? 0 : 36
         
         vipIcon.isHidden = !Information.isVip
                         

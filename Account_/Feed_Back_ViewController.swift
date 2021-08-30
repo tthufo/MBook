@@ -110,7 +110,7 @@ class Feed_Back_ViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func didPressCancel() {
-        EM_MenuView.init(cancel: ["line1": "Quý khách muốn huỷ phản hồi ?"]).show { (index, obj, menu) in
+        EM_MenuView.init(cancel: ["line1": "Quý khách muốn huỷ phản hồi ?"]).disableCompletion { (index, obj, menu) in
             if index == 3 {
                 self.navigationController?.popViewController(animated: true)
             }

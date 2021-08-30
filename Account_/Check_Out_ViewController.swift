@@ -135,7 +135,7 @@ class Check_Out_ViewController: UIViewController {
     }
     
     @IBAction func didPressCancel() {
-        EM_MenuView.init(cancel: ["line1": "Quý khách muốn huỷ đăng ký ?"]).show { (index, obj, menu) in
+        EM_MenuView.init(cancel: ["line1": "Quý khách muốn huỷ đăng ký ?"]).disableCompletion { (index, obj, menu) in
             if index == 3 {
                 if self.isModal {
                     self.dismiss(animated: true, completion: nil)
@@ -178,7 +178,9 @@ extension Check_Out_ViewController: UITableViewDataSource, UITableViewDelegate {
 
                 let price = self.withView(cell, tag: 2) as! UILabel
 
-                price.text = self.info.getValueFromKey("price") + " đ"
+                let pricing = self.info.getValueFromKey("price")! as NSString
+                        
+                price.text = addDot(number: pricing.integerValue) + " đ"
 
                 let des = self.withView(cell, tag: 3) as! UILabel
 
@@ -192,7 +194,9 @@ extension Check_Out_ViewController: UITableViewDataSource, UITableViewDelegate {
 
                 let price = self.withView(cell, tag: 2) as! UILabel
 
-                price.text = self.info.getValueFromKey("price") + " đ"
+                let pricing = self.info.getValueFromKey("price")! as NSString
+                        
+                price.text = addDot(number: pricing.integerValue) + " đ"
             }
             
             if indexPath.row == 2 {
@@ -234,7 +238,10 @@ extension Check_Out_ViewController: UITableViewDataSource, UITableViewDelegate {
                 author.text = authorName
                 
                 let price = self.withView(cell, tag: 3) as! UILabel
-                price.text = self.info.getValueFromKey("price") + " đ"
+                
+                let pricing = self.info.getValueFromKey("price")! as NSString
+                        
+                price.text = addDot(number: pricing.integerValue) + " đ"
                 
                 let backgroundImage = self.withView(cell, tag:11) as! UIImageView
                 backgroundImage.imageUrl(url: self.info.getValueFromKey("avatar"))
@@ -271,6 +278,17 @@ extension Check_Out_ViewController: UITableViewDataSource, UITableViewDelegate {
         }
         
         return cell
+    }
+    
+    func addDot(number: Int) -> String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currency
+        formatter.maximumFractionDigits = 0
+        formatter.currencySymbol = ""
+        formatter.decimalSeparator = "."
+        formatter.groupingSeparator = ""
+        let tem = formatter.string(from: NSNumber(value: number))!
+        return tem.replace(target: ",", withString: ".")
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

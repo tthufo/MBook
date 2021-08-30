@@ -136,7 +136,7 @@
 
 - (UIView*)didCreateCancelView:(NSDictionary*)dict
 {
-    UIView *commentView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.screenWidth, self.screenHeight - 0)];
+    UIView *commentView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 319, 198)];
     
     [commentView setBackgroundColor:[UIColor clearColor]];
     

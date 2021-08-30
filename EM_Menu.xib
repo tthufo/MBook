@@ -303,7 +303,7 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="-1432.5" y="1315"/>
         </view>
-        <view contentMode="scaleToFill" id="0KE-dG-pds">
+        <view clipsSubviews="YES" contentMode="scaleToFill" id="0KE-dG-pds">
             <rect key="frame" x="0.0" y="0.0" width="310" height="135"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
@@ -377,6 +377,11 @@
             </subviews>
             <color key="backgroundColor" red="0.86666666670000003" green="0.86666666670000003" blue="0.86666666670000003" alpha="1" colorSpace="calibratedRGB"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                    <integer key="value" value="10"/>
+                </userDefinedRuntimeAttribute>
+            </userDefinedRuntimeAttributes>
             <point key="canvasLocation" x="-654.375" y="1224.823943661972"/>
         </view>
         <view contentMode="scaleToFill" id="RSH-jD-L2p">
@@ -517,15 +522,15 @@
             <point key="canvasLocation" x="-159" y="-52"/>
         </view>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="GcM-SR-cAB">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <rect key="frame" x="0.0" y="0.0" width="319" height="198"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mHm-tE-T2H">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                    <color key="backgroundColor" white="0.0" alpha="0.14730963908450703" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <view alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mHm-tE-T2H">
+                    <rect key="frame" x="0.0" y="0.0" width="319" height="198"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Gs-QV-BAo">
-                    <rect key="frame" x="30" y="233.5" width="315" height="200"/>
+                    <rect key="frame" x="2" y="-1" width="315" height="200"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7ej-8x-ICR">
                             <rect key="frame" x="152.5" y="114" width="10" height="56"/>
@@ -608,7 +613,7 @@
                 </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="IQq-WL-hkT"/>
-            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="7Gs-QV-BAo" firstAttribute="centerX" secondItem="GcM-SR-cAB" secondAttribute="centerX" id="0UR-31-jJp"/>
                 <constraint firstItem="mHm-tE-T2H" firstAttribute="trailing" secondItem="IQq-WL-hkT" secondAttribute="trailing" id="7WR-HZ-3F3"/>
@@ -617,7 +622,8 @@
                 <constraint firstItem="mHm-tE-T2H" firstAttribute="bottom" secondItem="IQq-WL-hkT" secondAttribute="bottom" id="sEX-nQ-TUh"/>
                 <constraint firstItem="7Gs-QV-BAo" firstAttribute="centerY" secondItem="GcM-SR-cAB" secondAttribute="centerY" id="y9V-Wd-Xbd"/>
             </constraints>
-            <point key="canvasLocation" x="-1050.4000000000001" y="-61.619190404797607"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-1071.2" y="65.667166416791616"/>
         </view>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="zp0-84-Aal">
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>

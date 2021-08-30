@@ -217,11 +217,9 @@ extension VIP_ViewController: UITableViewDataSource, UITableViewDelegate {
         
         let price = self.withView(cell, tag: 2) as! UILabel
         
-        let pricing = data.getValueFromKey("price")
-        
-        let result = pricing!.replacingOccurrences( of:"[^0-9]", with: "", options: .regularExpression)
-
-        price.text = result + " đ"
+        let pricing = data.getValueFromKey("price")! as NSString
+                
+        price.text = addDot(number: pricing.integerValue) + " đ"
 
         let icon = self.withView(cell, tag: 99) as! UIImageView
 
@@ -231,8 +229,18 @@ extension VIP_ViewController: UITableViewDataSource, UITableViewDelegate {
 
         des.text = data.getValueFromKey("info")
         
-        
         return cell
+    }
+    
+    func addDot(number: Int) -> String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currency
+        formatter.maximumFractionDigits = 0
+        formatter.currencySymbol = ""
+        formatter.decimalSeparator = "."
+        formatter.groupingSeparator = ""
+        let tem = formatter.string(from: NSNumber(value: number))!
+        return tem.replace(target: ",", withString: ".")
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

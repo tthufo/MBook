@@ -283,7 +283,7 @@ class PC_Inner_Info_ViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func didPressCancel() {
-        EM_MenuView.init(cancel: ["line1": "Quý khách muốn huỷ thay đổi ?"]).show { (index, obj, menu) in
+        EM_MenuView.init(cancel: ["line1": "Quý khách muốn huỷ thay đổi ?"]).disableCompletion { (index, obj, menu) in
             if index == 3 {
                 self.navigationController?.popViewController(animated: true)
             }
