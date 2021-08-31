@@ -70,10 +70,10 @@
                     </constraints>
                 </view>
                 <button opaque="NO" tag="12" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uLd-dn-IXS">
-                    <rect key="frame" x="279" y="2.5" width="88" height="37"/>
+                    <rect key="frame" x="277" y="2.5" width="90" height="37"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="37" id="F13-su-GXa"/>
-                        <constraint firstAttribute="width" constant="88" id="RWD-O3-Azq"/>
+                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="88" id="RWD-O3-Azq"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                     <state key="normal" title="Xem thêm" image="ico_aright">

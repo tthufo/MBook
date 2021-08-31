@@ -84,14 +84,14 @@
                         <color key="textColor" red="0.46666666670000001" green="0.46666666670000001" blue="0.46666666670000001" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ico_corner_top" translatesAutoresizingMaskIntoConstraints="NO" id="s7P-cd-GVj">
+                    <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ico_corner_top" translatesAutoresizingMaskIntoConstraints="NO" id="s7P-cd-GVj">
                         <rect key="frame" x="20" y="6" width="25" height="25"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="25" id="Stw-9z-G5W"/>
                             <constraint firstAttribute="width" constant="25" id="hyz-gu-ao4"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" tag="11" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T8C-V1-SZZ">
+                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" tag="11" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T8C-V1-SZZ">
                         <rect key="frame" x="20" y="7" width="25" height="24"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="25" id="76S-sV-deS"/>

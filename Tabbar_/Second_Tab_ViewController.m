@@ -372,7 +372,7 @@
         [more actionForTouch:@{} and:^(NSDictionary *touchInfo) {
             List_Book_ViewController * list = [List_Book_ViewController new];
             list.config = [self removeKey:self->config[indexPath.row]];
-            [self.navigationController pushViewController:list animated:YES];
+            [[self CENTER] pushViewController:list animated:YES];
         }];
 
     }
