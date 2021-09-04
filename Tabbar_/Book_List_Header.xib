@@ -104,6 +104,52 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="-346" y="-245"/>
         </view>
+        <view contentMode="scaleToFill" id="2f2-cp-erA">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="42"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NM8-Bz-3zd">
+                    <rect key="frame" x="187.5" y="-23" width="0.0" height="65"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="65" id="Hwb-Wu-ams"/>
+                        <constraint firstAttribute="width" id="gzF-PY-aIu"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pa3-5G-emN">
+                    <rect key="frame" x="194.5" y="8" width="170.5" height="35"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="35" id="tIZ-fQ-dVQ"/>
+                    </constraints>
+                    <state key="normal" title="TOP ĐỘC GIẢ" backgroundImage="ico_tab_white">
+                        <color key="titleColor" red="0.0078431372550000003" green="0.57254901960000004" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                </button>
+                <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K58-Uk-kpV">
+                    <rect key="frame" x="10" y="8" width="170.5" height="35"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="35" id="YcM-3L-KAH"/>
+                    </constraints>
+                    <state key="normal" title="SÁCH HOT" backgroundImage="ico_tab_teal">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                </button>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="h02-A4-y0U"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="K58-Uk-kpV" firstAttribute="leading" secondItem="h02-A4-y0U" secondAttribute="leading" constant="10" id="5bL-ca-JK7"/>
+                <constraint firstItem="NM8-Bz-3zd" firstAttribute="centerX" secondItem="2f2-cp-erA" secondAttribute="centerX" id="BlQ-2B-jnW"/>
+                <constraint firstAttribute="bottom" secondItem="K58-Uk-kpV" secondAttribute="bottom" constant="-1" id="UIC-ID-Yud"/>
+                <constraint firstAttribute="bottom" secondItem="pa3-5G-emN" secondAttribute="bottom" constant="-1" id="dZt-po-ABz"/>
+                <constraint firstItem="NM8-Bz-3zd" firstAttribute="leading" secondItem="K58-Uk-kpV" secondAttribute="trailing" constant="7" id="f8T-n0-o6w"/>
+                <constraint firstItem="h02-A4-y0U" firstAttribute="trailing" secondItem="pa3-5G-emN" secondAttribute="trailing" constant="10" id="fPR-xd-lVW"/>
+                <constraint firstItem="NM8-Bz-3zd" firstAttribute="bottom" secondItem="h02-A4-y0U" secondAttribute="bottom" id="lHc-Sh-qX0"/>
+                <constraint firstItem="pa3-5G-emN" firstAttribute="leading" secondItem="NM8-Bz-3zd" secondAttribute="trailing" constant="7" id="lPB-qN-laO"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-346" y="-148"/>
+        </view>
     </objects>
     <resources>
         <image name="ico_aright" width="17" height="34.5"/>

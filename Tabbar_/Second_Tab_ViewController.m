@@ -26,7 +26,7 @@
     
     IBOutlet UIButton * buyBtn;
 
-    NSMutableArray * dataList;
+    NSMutableArray * dataList, *topList;
     
     NSMutableArray * config;
         
@@ -79,8 +79,12 @@
     
     dataList = [NSMutableArray new];
     
+    topList = [NSMutableArray new];
+
     [tableView withCell: @"Book_List_Cell"];
     
+    [tableView withCell: @"Book_Top_Cell"];
+
     [tableView withCell: @"TG_Room_Cell_0"];
 
     refreshControl = [UIRefreshControl new];
@@ -90,6 +94,8 @@
     [refreshControl addTarget:self action:@selector(didReloadData) forControlEvents:UIControlEventValueChanged];
     
     [self didRequestData:YES];
+    
+    [self didRequestTop:NO];
         
     __weak typeof(self) weakSelf = self;
     tagView.callBack = ^(NSDictionary *infor) {
@@ -174,17 +180,19 @@
     pageIndex = 1;
     totalPage = 1;
     [self didRequestData:YES];
+    [self didRequestTop:NO];
 }
 
-- (void)didRequestData:(BOOL)isShow
+
+- (void)didRequestTop:(BOOL)isShow
 {
-    [[LTRequest sharedInstance] didRequestInfo:@{@"CMD_CODE":@"getListStory",
+    [[LTRequest sharedInstance] didRequestInfo:@{@"CMD_CODE":@"getUserTable",
                                                  @"header":@{@"session":Information.token == nil ? @"" : Information.token},
                                                  @"session":Information.token,
-                                                 @"page_index": @(pageIndex),
-                                                 @"page_size": @(12),
-                                                 @"price": @(0),
-                                                 @"sorting": @(1),
+//                                                 @"page_index": @(pageIndex),
+//                                                 @"page_size": @(12),
+                                                 @"type": @(1),
+                                                 @"total_item": @(10),
                                                  @"overrideError":@"1",
                                                  @"overrideLoading":@"1",
                                                  @"host":self
@@ -201,23 +209,70 @@
             
             if (![dict[@"result"] isEqual:[NSNull null]]) {
             
-                totalPage = [dict[@"result"][@"total_page"] intValue];
+//                totalPage = [dict[@"result"][@"total_page"] intValue];
+//
+//                pageIndex += 1;
                   
-                pageIndex += 1;
+//                if(!isLoadMore)
+                {
+                    [topList removeAllObjects];
+                }
+                
+                [topList addObjectsFromArray:dict[@"result"]];
+            } else {
+                [self showToast:[[dict getValueFromKey:@"error_msg"] isEqualToString:@""] ? @"Lỗi xảy ra, mời bạn thử lại" : [dict getValueFromKey:@"error_msg"] andPos:0];
+            }
+        }
+        
+        [self->tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
+
+    }];
+}
+
+- (void)didRequestData:(BOOL)isShow
+{
+    [[LTRequest sharedInstance] didRequestInfo:@{@"CMD_CODE":@"getBookTable", //getListStory
+                                                 @"header":@{@"session":Information.token == nil ? @"" : Information.token},
+                                                 @"session":Information.token,
+//                                                 @"page_index": @(pageIndex),
+//                                                 @"page_size": @(12),
+//                                                 @"price": @(0),
+//                                                 @"sorting": @(1),
+                                                 @"type": @(1),
+                                                 @"total_item": @(10),
+                                                 @"overrideError":@"1",
+                                                 @"overrideLoading":@"1",
+                                                 @"host":self
+    } withCache:^(NSString *cacheString) {
+    } andCompletion:^(NSString *responseString, NSString* errorCode, NSError *error, BOOL isValidated, NSDictionary * object) {
+        
+        [refreshControl endRefreshing];
+        
+        [tableView performSelector:@selector(footerEndRefreshing) withObject:nil afterDelay:0.5];
+                        
+        if(isValidated)
+        {
+            NSDictionary * dict = [responseString objectFromJSONString];
+            
+            if (![dict[@"result"] isEqual:[NSNull null]]) {
+            
+//                totalPage = [dict[@"result"][@"total_page"] intValue];
+//
+//                pageIndex += 1;
                   
                 if(!isLoadMore)
                 {
                     [dataList removeAllObjects];
                 }
                 
-                [dataList addObjectsFromArray:dict[@"result"][@"data"]];
+                [dataList addObjectsFromArray:dict[@"result"]];
             } else {
                 [self showToast:[[dict getValueFromKey:@"error_msg"] isEqualToString:@""] ? @"Lỗi xảy ra, mời bạn thử lại" : [dict getValueFromKey:@"error_msg"] andPos:0];
             }
         }
         
-        [tableView reloadData];
-        
+        [self->tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
+
     }];
 }
 
@@ -250,6 +305,35 @@
 
 #pragma TableView
 
+- (UITableViewCell*)topCell:(UITableViewCell*)cell andInfo:(NSDictionary*)top {
+    
+    UIView * bg = (UIView*)[self withView:cell tag:100];
+    
+    UIImageView * booking = (UIImageView*)[self withView:cell tag:1];
+    
+    [booking imageUrlWithUrl: [top getValueFromKey:@"avatar"]];
+    
+    booking.widthConstaint.constant = [bg bookWidth];
+ 
+    bg.widthConstaint.constant = [bg bookWidth];
+
+    booking.heightConstaint.constant = [bg bookWidth];
+    
+    bg.heightConstaint.constant = [bg bookWidth];
+    
+    bg.layer.cornerRadius = [bg bookWidth] / 2;
+    
+    booking.layer.cornerRadius = [bg bookWidth] / 2;
+
+    [(UILabel*)[self withView:cell tag:2] setText: [top getValueFromKey:@"name"]];
+
+    [(UILabel*)[self withView:cell tag:3] setText: [NSString stringWithFormat:@"Đã đọc %@ tác phẩm", [top getValueFromKey:@"total_book"]]];
+
+    [(UILabel*)[self withView:cell tag:4] setText: [NSString stringWithFormat:@"Tham gia từ %@", [top getValueFromKey:@"register_date"]]];
+    
+    return cell;
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 2;
@@ -262,18 +346,32 @@
 
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UIView * header = [[NSBundle mainBundle] loadNibNamed:@"Book_List_Header" owner:self options:nil][1];
+    UIView * header = [[NSBundle mainBundle] loadNibNamed:@"Book_List_Header" owner:self options:nil][!isHot ? 0 : 2];
     
-    UILabel * title = (UILabel*)[self withView:header tag:22];
+    if (isHot) {
+        UIButton * top = [self withView:header tag:2];
+        [top actionForTouch:@{} and:^(NSDictionary *touchInfo) {
+            isHot = NO;
+            [self->tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
+        }];
+    } else {
+        UIButton * hot = [self withView:header tag:1];
+        [hot actionForTouch:@{} and:^(NSDictionary *touchInfo) {
+            isHot = YES;
+            [self->tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
+        }];
+    }
     
-    title.text = @"MỚI CẬP NHẬT";
-    
-    UIButton * extra = (UIButton*)[self withView:header tag:12];
-        
-    [extra actionForTouch:@{} and:^(NSDictionary *touchInfo) {
-        List_Book_List_ViewController * list = [List_Book_List_ViewController new];
-        [[self CENTER] pushViewController:list animated:YES];
-    }];
+//    UILabel * title = (UILabel*)[self withView:header tag:22];
+//
+//    title.text = @"MỚI CẬP NHẬT";
+//
+//    UIButton * extra = (UIButton*)[self withView:header tag:12];
+//
+//    [extra actionForTouch:@{} and:^(NSDictionary *touchInfo) {
+//        List_Book_List_ViewController * list = [List_Book_List_ViewController new];
+//        [[self CENTER] pushViewController:list animated:YES];
+//    }];
     
     return section == 0 ? nil : header;
 }
@@ -285,7 +383,7 @@
 
 - (NSInteger)tableView:(UITableView *)_tableView numberOfRowsInSection:(NSInteger)section
 {
-    return section == 0 ? config.count : dataList.count;
+    return section == 0 ? config.count : isHot ? dataList.count : topList.count;
 }
 
 - (CGFloat)tableView:(UITableView *)_tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -295,9 +393,14 @@
 
 - (UITableViewCell *)tableView:(UITableView *)_tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell * cell = [_tableView dequeueReusableCellWithIdentifier: indexPath.section == 0 ? @"TG_Room_Cell_0" : @"Book_List_Cell" forIndexPath:indexPath];
+    UITableViewCell * cell = [_tableView dequeueReusableCellWithIdentifier: indexPath.section == 0 ? @"TG_Room_Cell_0" : isHot ? @"Book_List_Cell" : @"Book_Top_Cell" forIndexPath:indexPath];
     
     if (indexPath.section == 1) {
+        
+        if (!isHot) {
+            NSDictionary * top = topList[indexPath.row];
+            return [self topCell:cell andInfo:top];
+        }
                 
         NSDictionary * list = dataList[indexPath.row];
         
