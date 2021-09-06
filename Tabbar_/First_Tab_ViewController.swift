@@ -88,6 +88,7 @@ class First_Tab_ViewController: UIViewController, UITextFieldDelegate {
         
                                       ["title":"MỚI NHẤT",
                                        "url": ["CMD_CODE":"getListBook",
+                                               "group_type":1,
                                           "page_index": 1,
                                           "page_size": 25,
                                           "book_type": 0,
@@ -98,6 +99,7 @@ class First_Tab_ViewController: UIViewController, UITextFieldDelegate {
         
                                       ["title":"SÁCH NÓI",
                                        "url": ["CMD_CODE":"getListBook",
+                                               "group_type":1,
                                            "page_index": 1,
                                            "page_size": 25,
                                            "book_type": 3,
@@ -109,6 +111,7 @@ class First_Tab_ViewController: UIViewController, UITextFieldDelegate {
         
                                       ["title":"MIỄN PHÍ HOT",
                                        "url": ["CMD_CODE":"getListBook",
+                                               "group_type":1,
                                           "page_index": 1,
                                           "page_size": IS_IPAD ? 10 : 6,
                                           "book_type": 0,
@@ -120,6 +123,7 @@ class First_Tab_ViewController: UIViewController, UITextFieldDelegate {
         
                                       ["title":"TRUYỆN TRANH",
                                         "url": ["CMD_CODE":"getListBook",
+                                                "group_type":1,
                                            "book_type": 0,
                                            "category_id": 181,
                                            "page_index": 1,

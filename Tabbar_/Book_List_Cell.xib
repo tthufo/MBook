@@ -84,7 +84,7 @@
                         <color key="textColor" red="0.46666666670000001" green="0.46666666670000001" blue="0.46666666670000001" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ico_corner_top" translatesAutoresizingMaskIntoConstraints="NO" id="s7P-cd-GVj">
+                    <imageView hidden="YES" clipsSubviews="YES" userInteractionEnabled="NO" tag="99" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ico_corner_top" translatesAutoresizingMaskIntoConstraints="NO" id="s7P-cd-GVj">
                         <rect key="frame" x="20" y="6" width="25" height="25"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="25" id="Stw-9z-G5W"/>

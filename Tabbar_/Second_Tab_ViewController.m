@@ -29,6 +29,8 @@
     NSMutableArray * dataList, *topList;
     
     NSMutableArray * config;
+    
+    NSMutableDictionary * state;
         
     int pageIndex;
     
@@ -46,6 +48,8 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    state = [@{@"hot": @"0", @"top": @"0"} mutableCopy];
     
     buyBtn.hidden = Information.isVip;
     
@@ -123,6 +127,7 @@
         [@{
                 @"title": @"EBOOK MỚI NHẤT", @"url": [@{
                         @"CMD_CODE" : @"getListBook",
+                        @"group_type":@(1),
                         @"page_index": @1,
                         @"page_size": @25,
                         @"book_type": @1,
@@ -135,6 +140,7 @@
         [@{
                 @"title": @"KHUYÊN ĐỌC", @"url": [@{
                         @"CMD_CODE" : @"getListPromotionBook",
+                        @"group_type":@(1),
                         @"page_index": @1,
                         @"page_size": @24
                         } mutableCopy],
@@ -183,14 +189,11 @@
     [self didRequestTop:NO];
 }
 
-
 - (void)didRequestTop:(BOOL)isShow
 {
     [[LTRequest sharedInstance] didRequestInfo:@{@"CMD_CODE":@"getUserTable",
                                                  @"header":@{@"session":Information.token == nil ? @"" : Information.token},
                                                  @"session":Information.token,
-//                                                 @"page_index": @(pageIndex),
-//                                                 @"page_size": @(12),
                                                  @"type": @(1),
                                                  @"total_item": @(10),
                                                  @"overrideError":@"1",
@@ -209,14 +212,7 @@
             
             if (![dict[@"result"] isEqual:[NSNull null]]) {
             
-//                totalPage = [dict[@"result"][@"total_page"] intValue];
-//
-//                pageIndex += 1;
-                  
-//                if(!isLoadMore)
-                {
-                    [topList removeAllObjects];
-                }
+                [topList removeAllObjects];
                 
                 [topList addObjectsFromArray:dict[@"result"]];
             } else {
@@ -234,11 +230,7 @@
     [[LTRequest sharedInstance] didRequestInfo:@{@"CMD_CODE":@"getBookTable", //getListStory
                                                  @"header":@{@"session":Information.token == nil ? @"" : Information.token},
                                                  @"session":Information.token,
-//                                                 @"page_index": @(pageIndex),
-//                                                 @"page_size": @(12),
-//                                                 @"price": @(0),
-//                                                 @"sorting": @(1),
-                                                 @"type": @(1),
+                                                 @"type": @(2),
                                                  @"total_item": @(10),
                                                  @"overrideError":@"1",
                                                  @"overrideLoading":@"1",
@@ -255,16 +247,8 @@
             NSDictionary * dict = [responseString objectFromJSONString];
             
             if (![dict[@"result"] isEqual:[NSNull null]]) {
-            
-//                totalPage = [dict[@"result"][@"total_page"] intValue];
-//
-//                pageIndex += 1;
-                  
-                if(!isLoadMore)
-                {
-                    [dataList removeAllObjects];
-                }
-                
+                [dataList removeAllObjects];
+        
                 [dataList addObjectsFromArray:dict[@"result"]];
             } else {
                 [self showToast:[[dict getValueFromKey:@"error_msg"] isEqualToString:@""] ? @"Lỗi xảy ra, mời bạn thử lại" : [dict getValueFromKey:@"error_msg"] andPos:0];
@@ -305,8 +289,10 @@
 
 #pragma TableView
 
-- (UITableViewCell*)topCell:(UITableViewCell*)cell andInfo:(NSDictionary*)top {
+- (UITableViewCell*)topCell:(UITableViewCell*)cell andInfo:(NSDictionary*)top andIndex:(NSIndexPath*)indexPath {
     
+    cell.backgroundColor = [AVHexColor colorWithHexString:@"#ECECE7"];
+
     UIView * bg = (UIView*)[self withView:cell tag:100];
     
     UIImageView * booking = (UIImageView*)[self withView:cell tag:1];
@@ -331,6 +317,10 @@
 
     [(UILabel*)[self withView:cell tag:4] setText: [NSString stringWithFormat:@"Tham gia từ %@", [top getValueFromKey:@"register_date"]]];
     
+    ((UILabel*)[self withView:cell tag:11]).hidden = NO;
+    
+    [(UILabel*)[self withView:cell tag:11] setText: [NSString stringWithFormat:@"%li", indexPath.row + 1]];
+
     return cell;
 }
 
@@ -341,12 +331,12 @@
 
 - (CGFloat)tableView:(UITableView *)_tableView heightForHeaderInSection:(NSInteger)section
 {
-    return section == 0 ? 1 : 40;
+    return section == 0 ? 1 : 45;
 }
 
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UIView * header = [[NSBundle mainBundle] loadNibNamed:@"Book_List_Header" owner:self options:nil][!isHot ? 0 : 2];
+    UIView * header = [[NSBundle mainBundle] loadNibNamed:@"Book_List_Header" owner:self options:nil][isHot ? 0 : 2];
     
     if (isHot) {
         UIButton * top = [self withView:header tag:2];
@@ -378,12 +368,38 @@
 
 - (CGFloat)tableView:(UITableView *)_tableView heightForFooterInSection:(NSInteger)section
 {
-    return 2;
+    return section == 0 ? 1 : 35;
+}
+
+- (nullable UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
+{
+    int condition = isHot && [state[@"hot"] isEqualToString:@"0"] ? 3 : !isHot && [state[@"top"] isEqualToString:@"0"] ? 3 : 4;
+    
+    UIView * footer = [[NSBundle mainBundle] loadNibNamed:@"Book_List_Header" owner:self options:nil][condition];
+    
+    UIButton * viewMore = [self withView:footer tag:1];
+    
+    viewMore.hidden = section == 0;
+    
+    footer.backgroundColor = section == 0 ? [UIColor clearColor] : [AVHexColor colorWithHexString:@"#ECECE7"];
+    
+    footer.backgroundColor = section == 0 ? [UIColor clearColor] : [AVHexColor colorWithHexString:@"#ECECE7"];
+
+    [viewMore actionForTouch:@{} and:^(NSDictionary *touchInfo) {
+        if(isHot) {
+            state[@"hot"] = [state[@"hot"] isEqualToString:@"0"] ? @"1" : @"0";
+        } else {
+            state[@"top"] = [state[@"top"] isEqualToString:@"0"] ? @"1" : @"0";
+        }
+        [self->tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
+    }];
+    
+    return footer;
 }
 
 - (NSInteger)tableView:(UITableView *)_tableView numberOfRowsInSection:(NSInteger)section
 {
-    return section == 0 ? config.count : isHot ? dataList.count : topList.count;
+    return section == 0 ? config.count : isHot ? dataList.count == 0 ? 0 : ([state[@"hot"] isEqualToString:@"0"] ? 3 : dataList.count) :topList.count == 0 ? 0 : ([state[@"top"] isEqualToString:@"0"] ? 3 : topList.count);
 }
 
 - (CGFloat)tableView:(UITableView *)_tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -399,9 +415,11 @@
         
         if (!isHot) {
             NSDictionary * top = topList[indexPath.row];
-            return [self topCell:cell andInfo:top];
+            return [self topCell:cell andInfo:top andIndex:indexPath];
         }
                 
+        cell.backgroundColor = [AVHexColor colorWithHexString:@"#ECECE7"];
+        
         NSDictionary * list = dataList[indexPath.row];
         
         UIView * bg = (UIView*)[self withView:cell tag:100];
@@ -433,6 +451,10 @@
         
         [(UILabel*)[self withView:cell tag:11] setText: [NSString stringWithFormat:@"%li", indexPath.row + 1]];
         
+        ((UILabel*)[self withView:cell tag:11]).hidden = NO;
+        
+        ((UIImageView*)[self withView:cell tag:99]).hidden = NO;
+
         ((UIImageView*)[self withView:cell tag:15]).alpha = 1;
         
         Progress * progress = ((Progress*)[self withView:cell tag:12]);
@@ -487,6 +509,10 @@
 {
     [_tableView deselectRowAtIndexPath:indexPath animated:YES];
     
+    if (!isHot) {
+        return;
+    }
+    
     NSDictionary * list = dataList[indexPath.row];
 
     NSMutableDictionary * configuration = [[NSMutableDictionary alloc] initWithDictionary:list];
@@ -501,16 +527,16 @@
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (pageIndex == 1) {
-        return;
-    }
-    
-    if (indexPath.row == dataList.count - 1) {
-        if (pageIndex <= totalPage) {
-            isLoadMore = YES;
-            [self didRequestData:NO];
-        }
-    }
+//    if (pageIndex == 1) {
+//        return;
+//    }
+//
+//    if (indexPath.row == dataList.count - 1) {
+//        if (pageIndex <= totalPage) {
+//            isLoadMore = YES;
+//            [self didRequestData:NO];
+//        }
+//    }
 }
 
 - (void)didReceiveMemoryWarning
