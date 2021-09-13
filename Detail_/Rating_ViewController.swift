@@ -131,6 +131,8 @@ class Rating_ViewController: UIViewController, UICollectionViewDataSource, UICol
                 return
             }
             
+            self.showToast("Đánh giá thành công", andPos: 0)
+            
             self.callBack?([:])
             
             self.didReload(self.refreshControl)

@@ -180,7 +180,7 @@ extension Check_Out_ViewController: UITableViewDataSource, UITableViewDelegate {
 
                 let pricing = self.info.getValueFromKey("price")! as NSString
                         
-                price.text = addDot(number: pricing.integerValue) + " đ"
+                price.text = addDot(number: pricing.integerValue) + "đ"
 
                 let des = self.withView(cell, tag: 3) as! UILabel
 
@@ -196,7 +196,7 @@ extension Check_Out_ViewController: UITableViewDataSource, UITableViewDelegate {
 
                 let pricing = self.info.getValueFromKey("price")! as NSString
                         
-                price.text = addDot(number: pricing.integerValue) + " đ"
+                price.text = addDot(number: pricing.integerValue) + "đ"
             }
             
             if indexPath.row == 2 {
@@ -241,7 +241,7 @@ extension Check_Out_ViewController: UITableViewDataSource, UITableViewDelegate {
                 
                 let pricing = self.info.getValueFromKey("price")! as NSString
                         
-                price.text = addDot(number: pricing.integerValue) + " đ"
+                price.text = addDot(number: pricing.integerValue) + "đ"
                 
                 let backgroundImage = self.withView(cell, tag:11) as! UIImageView
                 backgroundImage.imageUrl(url: self.info.getValueFromKey("avatar"))
@@ -285,10 +285,10 @@ extension Check_Out_ViewController: UITableViewDataSource, UITableViewDelegate {
         formatter.numberStyle = .currency
         formatter.maximumFractionDigits = 0
         formatter.currencySymbol = ""
-        formatter.decimalSeparator = "."
+        formatter.decimalSeparator = ","
         formatter.groupingSeparator = ""
         let tem = formatter.string(from: NSNumber(value: number))!
-        return tem.replace(target: ",", withString: ".")
+        return tem.replace(target: ",", withString: ",")
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

@@ -219,7 +219,7 @@ extension VIP_ViewController: UITableViewDataSource, UITableViewDelegate {
         
         let pricing = data.getValueFromKey("price")! as NSString
                 
-        price.text = addDot(number: pricing.integerValue) + " đ"
+        price.text = addDot(number: pricing.integerValue) + "đ"
 
         let icon = self.withView(cell, tag: 99) as! UIImageView
 
@@ -237,10 +237,10 @@ extension VIP_ViewController: UITableViewDataSource, UITableViewDelegate {
         formatter.numberStyle = .currency
         formatter.maximumFractionDigits = 0
         formatter.currencySymbol = ""
-        formatter.decimalSeparator = "."
+        formatter.decimalSeparator = ","
         formatter.groupingSeparator = ""
         let tem = formatter.string(from: NSNumber(value: number))!
-        return tem.replace(target: ",", withString: ".")
+        return tem.replace(target: ",", withString: ",")
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

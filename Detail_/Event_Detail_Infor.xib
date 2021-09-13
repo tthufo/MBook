@@ -56,6 +56,9 @@
                                 <real key="value" value="26"/>
                             </userDefinedRuntimeAttribute>
                             <userDefinedRuntimeAttribute type="boolean" keyPath="updateOnTouch" value="NO"/>
+                            <userDefinedRuntimeAttribute type="number" keyPath="fillMode">
+                                <integer key="value" value="2"/>
+                            </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GIỚI THIỆU" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rc3-Yg-QQe">

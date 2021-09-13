@@ -1627,6 +1627,38 @@
     }];
 }
 
+- (void)didRequestComment:(NSDictionary*)comment andMenu:(EM_MenuView*)menu {
+    NSMutableDictionary * request = [[NSMutableDictionary alloc] initWithDictionary:@{
+        @"header":@{@"session":Information.token == nil ? @"" : Information.token},
+        @"session": Information.token,
+        @"overrideAlert": @"1",
+        @"item_id": [config getValueFromKey:@"id"],
+        @"rating": [comment getValueFromKey:@"rating"],
+        @"rating_content": [comment getValueFromKey:@"comment"],
+        @"overrideAlert":@"1",
+    }];
+    
+    request[@"CMD_CODE"] = @"pushRateItem";
+
+    [[LTRequest sharedInstance] didRequestInfo:request withCache:^(NSString *cacheString) {
+        
+    } andCompletion:^(NSString *responseString, NSString *errorCode, NSError *error, BOOL isValidated, NSDictionary *header) {
+        NSDictionary * dict = [responseString objectFromJSONString];
+
+        [menu close];
+        
+        if ([[dict getValueFromKey:@"error_code"] isEqualToString:@"0"] && dict[@"result"] != [NSNull null]) {
+           
+            [self showToast:@"Đánh giá thành công" andPos:0];
+            
+            [self didRequestRating];
+            
+        } else {
+            [self showToast:[[dict getValueFromKey:@"error_msg"] isEqualToString:@""] ? @"Lỗi xảy ra, mời bạn thử lại" : [dict getValueFromKey:@"error_msg"] andPos:0];
+        }
+    }];
+}
+
 - (NSArray*)filter:(NSDictionary*)info relate:(BOOL)relate {
     NSArray * keys = relate ? @[@{@"key": @"header_cell", @"tag": @1, @"height": @44},
                        @{@"key": @"category", @"title": @"Thể loại", @"tag": @2, @"height": @35},
@@ -1792,7 +1824,15 @@
         author.text = authorName;
         
         CosmosView * rate = (CosmosView*)[self withView:cell tag: 3];
-        rate.rating = [[self->tempInfo getValueFromKey:@"rate"] isEqualToString:@""] ? 0 : [[self->tempInfo getValueFromKey:@"rate"] doubleValue];
+        rate.rating = [[self->tempInfo getValueFromKey:@"rating"] isEqualToString:@""] ? 0 : [[self->tempInfo getValueFromKey:@"rating"] doubleValue];
+        
+        [rate actionForTouch:@{} and:^(NSDictionary *touchInfo) {
+            [[[EM_MenuView alloc] initWithRate:@{}] disableCompletion:^(int index, id object, EM_MenuView *menu) {
+                if (index == 3) {
+                    [self didRequestComment:object andMenu:menu];
+                }
+            }];
+        }];
                                         
         UIButton * viewCount = [self withView:cell tag: 4];
         [viewCount setImage:[UIImage imageNamed:@"ic_listen"] forState: UIControlStateNormal];
