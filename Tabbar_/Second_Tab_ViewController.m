@@ -26,7 +26,7 @@
     
     IBOutlet UIButton * buyBtn;
 
-    NSMutableArray * dataList, *topList;
+    NSMutableArray * dataList, *topList, *proList;
     
     NSMutableArray * config;
     
@@ -39,6 +39,9 @@
     BOOL isLoadMore, isHot;
     
     float tempHeight;
+    
+    IBOutlet NSLayoutConstraint * login_bg_height;
+
 }
 
 @end
@@ -73,6 +76,10 @@
 {
     [super viewDidLoad];
     
+    if (IS_IPAD) {
+        login_bg_height.constant = 550;
+    }
+    
     tempHeight = 0;
     
     pageIndex = 1;
@@ -84,6 +91,8 @@
     dataList = [NSMutableArray new];
     
     topList = [NSMutableArray new];
+
+    proList = [NSMutableArray new];
 
     [tableView withCell: @"Book_List_Cell"];
     
@@ -100,6 +109,8 @@
     [self didRequestData:YES];
     
     [self didRequestTop:NO];
+    
+    [self didRequestPromo];
         
     __weak typeof(self) weakSelf = self;
     tagView.callBack = ^(NSDictionary *infor) {
@@ -187,6 +198,46 @@
     totalPage = 1;
     [self didRequestData:YES];
     [self didRequestTop:NO];
+    [self didRequestPromo];
+}
+
+- (void)didRequestPromo
+{
+    [[LTRequest sharedInstance] didRequestInfo:@{@"CMD_CODE":@"getListStory",
+                                                 @"header":@{@"session":Information.token == nil ? @"" : Information.token},
+                                                 @"session":Information.token,
+                                                 @"group_type": @(1),
+                                                 @"page_index": @(1),
+                                                 @"page_size": @(6),
+                                                 @"price": @(0),
+                                                 @"sorting": @(1),
+                                                 @"overrideError":@"1",
+                                                 @"overrideLoading":@"1",
+                                                 @"host":self
+    } withCache:^(NSString *cacheString) {
+    } andCompletion:^(NSString *responseString, NSString* errorCode, NSError *error, BOOL isValidated, NSDictionary * object) {
+        
+        [refreshControl endRefreshing];
+        
+        [tableView performSelector:@selector(footerEndRefreshing) withObject:nil afterDelay:0.5];
+                        
+        if(isValidated)
+        {
+            NSDictionary * dict = [responseString objectFromJSONString];
+            
+            if (![dict[@"result"] isEqual:[NSNull null]]) {
+            
+                [proList removeAllObjects];
+                
+                [proList addObjectsFromArray:dict[@"result"][@"data"]];
+            } else {
+                [self showToast:[[dict getValueFromKey:@"error_msg"] isEqualToString:@""] ? @"Lỗi xảy ra, mời bạn thử lại" : [dict getValueFromKey:@"error_msg"] andPos:0];
+            }
+        }
+        
+        [self->tableView reloadSections:[NSIndexSet indexSetWithIndex:2] withRowAnimation:UITableViewRowAnimationNone];
+
+    }];
 }
 
 - (void)didRequestTop:(BOOL)isShow
@@ -326,7 +377,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 2;
+    return 3;
 }
 
 - (CGFloat)tableView:(UITableView *)_tableView heightForHeaderInSection:(NSInteger)section
@@ -336,39 +387,41 @@
 
 - (nullable UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
-    UIView * header = [[NSBundle mainBundle] loadNibNamed:@"Book_List_Header" owner:self options:nil][isHot ? 0 : 2];
+    UIView * header = [[NSBundle mainBundle] loadNibNamed:@"Book_List_Header" owner:self options:nil][section == 2 ? 1 : isHot ? 0 : 2];
     
-    if (isHot) {
-        UIButton * top = [self withView:header tag:2];
-        [top actionForTouch:@{} and:^(NSDictionary *touchInfo) {
-            isHot = NO;
-            [self->tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
+    if (section == 2) {
+        UILabel * title = (UILabel*)[self withView:header tag:22];
+    
+        title.text = @"MỚI CẬP NHẬT";
+    
+        UIButton * extra = (UIButton*)[self withView:header tag:12];
+    
+        [extra actionForTouch:@{} and:^(NSDictionary *touchInfo) {
+            List_Book_List_ViewController * list = [List_Book_List_ViewController new];
+            [[self CENTER] pushViewController:list animated:YES];
         }];
     } else {
-        UIButton * hot = [self withView:header tag:1];
-        [hot actionForTouch:@{} and:^(NSDictionary *touchInfo) {
-            isHot = YES;
-            [self->tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
-        }];
+        if (isHot) {
+            UIButton * top = [self withView:header tag:2];
+            [top actionForTouch:@{} and:^(NSDictionary *touchInfo) {
+                isHot = NO;
+                [self->tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
+            }];
+        } else {
+            UIButton * hot = [self withView:header tag:1];
+            [hot actionForTouch:@{} and:^(NSDictionary *touchInfo) {
+                isHot = YES;
+                [self->tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
+            }];
+        }
     }
-    
-//    UILabel * title = (UILabel*)[self withView:header tag:22];
-//
-//    title.text = @"MỚI CẬP NHẬT";
-//
-//    UIButton * extra = (UIButton*)[self withView:header tag:12];
-//
-//    [extra actionForTouch:@{} and:^(NSDictionary *touchInfo) {
-//        List_Book_List_ViewController * list = [List_Book_List_ViewController new];
-//        [[self CENTER] pushViewController:list animated:YES];
-//    }];
     
     return section == 0 ? nil : header;
 }
 
 - (CGFloat)tableView:(UITableView *)_tableView heightForFooterInSection:(NSInteger)section
 {
-    return section == 0 ? 1 : 35;
+    return section != 1 ? 1 : 35;
 }
 
 - (nullable UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section
@@ -379,7 +432,7 @@
     
     UIButton * viewMore = [self withView:footer tag:1];
     
-    viewMore.hidden = section == 0;
+    viewMore.hidden = section != 1;
     
     footer.backgroundColor = section == 0 ? [UIColor clearColor] : [AVHexColor colorWithHexString:@"#ECECE7"];
     
@@ -394,12 +447,12 @@
         [self->tableView reloadSections:[NSIndexSet indexSetWithIndex:1] withRowAnimation:UITableViewRowAnimationNone];
     }];
     
-    return footer;
+    return section == 2 ? nil : footer;
 }
 
 - (NSInteger)tableView:(UITableView *)_tableView numberOfRowsInSection:(NSInteger)section
 {
-    return section == 0 ? config.count : isHot ? dataList.count == 0 ? 0 : ([state[@"hot"] isEqualToString:@"0"] ? 3 : dataList.count) :topList.count == 0 ? 0 : ([state[@"top"] isEqualToString:@"0"] ? 3 : topList.count);
+    return section == 2 ? proList.count : section == 0 ? config.count : isHot ? dataList.count == 0 ? 0 : ([state[@"hot"] isEqualToString:@"0"] ? 3 : dataList.count) :topList.count == 0 ? 0 : ([state[@"top"] isEqualToString:@"0"] ? 3 : topList.count);
 }
 
 - (CGFloat)tableView:(UITableView *)_tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -409,18 +462,20 @@
 
 - (UITableViewCell *)tableView:(UITableView *)_tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell * cell = [_tableView dequeueReusableCellWithIdentifier: indexPath.section == 0 ? @"TG_Room_Cell_0" : isHot ? @"Book_List_Cell" : @"Book_Top_Cell" forIndexPath:indexPath];
+    UITableViewCell * cell = [_tableView dequeueReusableCellWithIdentifier: indexPath.section == 2 ? @"Book_List_Cell" : indexPath.section == 0 ? @"TG_Room_Cell_0" : isHot ? @"Book_List_Cell" : @"Book_Top_Cell" forIndexPath:indexPath];
     
-    if (indexPath.section == 1) {
+    if (indexPath.section == 1 || indexPath.section == 2) {
         
-        if (!isHot) {
-            NSDictionary * top = topList[indexPath.row];
-            return [self topCell:cell andInfo:top andIndex:indexPath];
+        if (indexPath.section == 1) {
+            if (!isHot) {
+                NSDictionary * top = topList[indexPath.row];
+                return [self topCell:cell andInfo:top andIndex:indexPath];
+            }
         }
                 
-        cell.backgroundColor = [AVHexColor colorWithHexString:@"#ECECE7"];
+        cell.backgroundColor = indexPath.section == 1 ? [AVHexColor colorWithHexString: @"#ECECE7"] : [UIColor clearColor];
         
-        NSDictionary * list = dataList[indexPath.row];
+        NSDictionary * list = indexPath.section == 1 ? dataList[indexPath.row] : proList[indexPath.row];
         
         UIView * bg = (UIView*)[self withView:cell tag:100];
         
@@ -445,15 +500,17 @@
 
         [(UILabel*)[self withView:cell tag:5] setText: [NSString stringWithFormat:@"%@ chương", [list getValueFromKey:@"total_chapter"]]];
 
+        ((UILabel*)[self withView:cell tag:5]).hidden = indexPath.section == 1;
+        
         [(UILabel*)[self withView:cell tag:14] setText: [list[@"newest_chapter"] isEqual:[NSNull null]] ? @"Đang cập nhật" : list[@"newest_chapter"][@"name"]];
         
         ((UILabel*)[self withView:cell tag:14]).alpha = 1;
         
         [(UILabel*)[self withView:cell tag:11] setText: [NSString stringWithFormat:@"%li", indexPath.row + 1]];
         
-        ((UILabel*)[self withView:cell tag:11]).hidden = NO;
+        ((UILabel*)[self withView:cell tag:11]).hidden = indexPath.section == 1 ? NO : YES;
         
-        ((UIImageView*)[self withView:cell tag:99]).hidden = NO;
+        ((UIImageView*)[self withView:cell tag:99]).hidden = indexPath.section == 1 ? NO : YES;
 
         ((UIImageView*)[self withView:cell tag:15]).alpha = 1;
         
@@ -509,11 +566,13 @@
 {
     [_tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    if (!isHot) {
-        return;
+    if (indexPath.section == 1) {
+        if (!isHot) {
+            return;
+        }
     }
     
-    NSDictionary * list = dataList[indexPath.row];
+    NSDictionary * list = indexPath.section == 1 ? dataList[indexPath.row] : proList[indexPath.row];
 
     NSMutableDictionary * configuration = [[NSMutableDictionary alloc] initWithDictionary:list];
     
@@ -531,10 +590,10 @@
 //        return;
 //    }
 //
-//    if (indexPath.row == dataList.count - 1) {
+//    if (indexPath.row == proList.count - 1) {
 //        if (pageIndex <= totalPage) {
 //            isLoadMore = YES;
-//            [self didRequestData:NO];
+//            [self didRequestPromo];
 //        }
 //    }
 }

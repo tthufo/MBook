@@ -53,7 +53,7 @@
                 </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="1K1-le-nnA"/>
-            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="1K1-le-nnA" firstAttribute="trailing" secondItem="ijE-yh-5bf" secondAttribute="trailing" constant="10" id="3ro-7w-VEp"/>
                 <constraint firstItem="ijE-yh-5bf" firstAttribute="leading" secondItem="PIJ-ny-FKp" secondAttribute="trailing" constant="7" id="8iw-f0-zuy"/>
@@ -105,7 +105,7 @@
                 </label>
             </subviews>
             <viewLayoutGuide key="safeArea" id="5M8-UN-tvS"/>
-            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="IQZ-Ud-STP" firstAttribute="bottom" secondItem="5M8-UN-tvS" secondAttribute="bottom" id="2OC-jy-dfL"/>
                 <constraint firstItem="zUe-Pe-0Dl" firstAttribute="centerY" secondItem="Wbx-Ap-0eG" secondAttribute="centerY" id="dO9-NS-utj"/>
@@ -159,7 +159,7 @@
                 </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="h02-A4-y0U"/>
-            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="K58-Uk-kpV" firstAttribute="leading" secondItem="h02-A4-y0U" secondAttribute="leading" constant="10" id="5bL-ca-JK7"/>
                 <constraint firstItem="NM8-Bz-3zd" firstAttribute="centerX" secondItem="2f2-cp-erA" secondAttribute="centerX" id="BlQ-2B-jnW"/>

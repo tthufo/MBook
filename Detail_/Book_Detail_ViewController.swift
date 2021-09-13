@@ -248,6 +248,8 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
                                                             "host":self])
         let bookInfo = NSMutableDictionary.init(dictionary: self.config["url"] as! NSDictionary)
         
+        bookInfo.removeObject(forKey: "group_type")
+        
         bookInfo["category_id"] = self.catId
         
         bookInfo["sorting"] = Int.random(in: 1..<7)
@@ -855,7 +857,7 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
 
             let image = self.withView(cell, tag: 1) as! UIImageView
 
-            image.imageUrl(url: rating.getValueFromKey("avatar"))
+            image.imageUrlHolder(url: rating.getValueFromKey("avatar"), holder: "ic_avatar")
             
             let title = self.withView(cell, tag: 2) as! UILabel
 

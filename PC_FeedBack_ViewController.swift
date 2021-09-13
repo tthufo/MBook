@@ -232,7 +232,7 @@ extension PC_FeedBack_ViewController: UITableViewDataSource, UITableViewDelegate
         
         let ava = self.withView(cell, tag: 1) as! UIImageView
 
-        ava.imageUrlHolder(url: data.getValueFromKey("avatar"), holder: "bg_publisher_default_img")
+        ava.imageUrlHolder(url: data.getValueFromKey("avatar"), holder: "ic_avatar")
 
         
         let name = self.withView(cell, tag: 2) as! UILabel

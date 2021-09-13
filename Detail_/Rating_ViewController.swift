@@ -202,7 +202,9 @@ class Rating_ViewController: UIViewController, UICollectionViewDataSource, UICol
 
             let image = self.withView(cell, tag: 1) as! UIImageView
 
-            image.imageUrl(url: rating.getValueFromKey("avatar"))
+//            image.imageUrl(url: rating.getValueFromKey("avatar"))
+            image.imageUrlHolder(url: rating.getValueFromKey("avatar"), holder: "ic_avatar")
+
             
             let title = self.withView(cell, tag: 2) as! UILabel
 

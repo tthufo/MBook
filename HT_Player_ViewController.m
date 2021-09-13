@@ -784,6 +784,8 @@
     {
         [self.playerView pause];
         
+        [self stoptimer];
+        
         [self.playerView setVolume:0];
     }
     
@@ -1056,7 +1058,7 @@
     if (![[tempInfo getValueFromKey:@"price"] isEqualToString:@"0"]) {
         [self didRequestUrlWithInfo:tempInfo callBack:^(NSDictionary * info) {
             if([info responseForKey:@"fail"]) {
-                
+                [self stoptimer];
             } else {
                 NSTimeInterval delayInSeconds = 0.8;
                 dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
@@ -1271,6 +1273,8 @@
 
 - (IBAction)didPressDismiss
 {
+    [self stoptimer];
+    
     [self didrequestLogTime];
 
     [self.playerView stop];
@@ -1361,6 +1365,7 @@
     }];
     request[@"CMD_CODE"] = @"getListBook";
     request[@"category_id"] = catId;
+    [request removeObjectForKey:@"group_type"];
     request[@"sorting"] = @([self randomNumberBetween:1 maxNumber:6]);
     [[LTRequest sharedInstance] didRequestInfo:request withCache:^(NSString *cacheString) {
         
@@ -1892,7 +1897,7 @@
     if (indexPath.section == 4) {
         NSDictionary * rating = ratingList[indexPath.item];
 
-        [((UIImageView*)[self withView:cell tag:1]) imageUrlWithUrl:[rating getValueFromKey:@"avatar"]];
+        [((UIImageView*)[self withView:cell tag:1]) imageUrlHolderWithUrl:[rating getValueFromKey:@"avatar"] holder:@"ic_avatar"];
 
         ((UILabel*)[self withView:cell tag:2]).text = [rating getValueFromKey:@"user_name"];
         

@@ -32,6 +32,10 @@ class User_Infor_ViewController: UIViewController, UITextFieldDelegate {
 
     var avatarTemp: UIImage!
     
+    @IBOutlet var totalBook: UILabel!
+
+    @IBOutlet var totalTime: UILabel!
+    
     @IBOutlet var account: UILabel!
 
     @IBOutlet var name: UILabel!
@@ -136,6 +140,8 @@ class User_Infor_ViewController: UIViewController, UITextFieldDelegate {
         searchView.text = Information.searchValue ?? ""
         des.text = Information.packageInfo
         des_B.isHidden = Information.isVip
+        totalBook.text = (Information.userInfo?.getValueFromKey("total_book") == "" ? "0" : (Information.userInfo?.getValueFromKey("total_book"))!) + " cuốn"
+        totalTime.text = (Information.userInfo?.getValueFromKey("total_time") == "" ? "0" : (Information.userInfo?.getValueFromKey("total_time"))!) + " giờ"
     }
     
     override func viewWillDisappear(_ animated: Bool) {

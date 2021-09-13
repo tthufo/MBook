@@ -151,6 +151,11 @@
             <point key="canvasLocation" x="138.75" y="115.14084507042254"/>
         </view>
     </objects>
+    <designables>
+        <designable name="JxR-HW-6v5">
+            <size key="intrinsicContentSize" width="320" height="828"/>
+        </designable>
+    </designables>
     <resources>
         <image name="bg" width="208.5" height="114"/>
         <image name="bg_banner" width="373" height="115.5"/>
