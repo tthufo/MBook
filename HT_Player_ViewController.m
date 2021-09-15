@@ -1335,14 +1335,19 @@
 
             tempConfig[@"like_count"] = [dict getValueFromKey:@"like_count"];
                         
-            self->tempInfo = tempConfig;
+//            BOOL likeStatus = [[dict getValueFromKey:@"like_status"] isEqualToString:@"1"];
+
+            tempConfig[@"like_status"] = [dict getValueFromKey:@"like_status"];
+            
+            [self->tempInfo removeAllObjects];
+            
+            [self->tempInfo addEntriesFromDictionary:tempConfig];
+//            self->tempInfo = tempConfig;
                         
             [self.collectionView reloadSections:[NSIndexSet indexSetWithIndex:0]];
-                        
-            BOOL likeStatus = [[dict getValueFromKey:@"like_status"] isEqualToString:@"1"];
-                        
-            [sender setImage: likeStatus ? [[UIImage imageNamed:@"ico_like_fill"] imageWithTintColor:[UIColor systemPinkColor]] : [UIImage imageNamed:@"ico_like_white"]
-                    forState:UIControlStateNormal];
+                                                
+//            [sender setImage: likeStatus ? [[UIImage imageNamed:@"ico_like_fill"] imageWithTintColor:[UIColor systemPinkColor]] : [UIImage imageNamed:@"ico_like_white"]
+//                    forState:UIControlStateNormal];
             
         } else {
             [self showToast:[[dict getValueFromKey:@"error_msg"] isEqualToString:@""] ? @"Lỗi xảy ra, mời bạn thử lại" : [dict getValueFromKey:@"error_msg"] andPos:0];
@@ -1601,6 +1606,8 @@
             [self->tempInfo addEntriesFromDictionary:result];
             
             BOOL likeStatus = [[result getValueFromKey:@"like_status"] isEqualToString:@"1"];
+            
+            self->tempInfo[@"like_status"] = likeStatus ? @"1" : @"0";
                         
             [self->_likeBtn setImage: likeStatus ? [[UIImage imageNamed:@"ico_like_fill"] imageWithTintColor:[UIColor systemPinkColor]] : [UIImage imageNamed:@"ico_like_white"]
                     forState:UIControlStateNormal];
@@ -1628,13 +1635,18 @@
 }
 
 - (void)didRequestComment:(NSDictionary*)comment andMenu:(EM_MenuView*)menu {
+    if ([[comment getValueFromKey: @"rating"] isEqualToString:@"0.0"]) {
+        [self showToast:@"Bạn chưa chọn đánh giá" andPos:0];
+        return;
+    }
+    
     NSMutableDictionary * request = [[NSMutableDictionary alloc] initWithDictionary:@{
         @"header":@{@"session":Information.token == nil ? @"" : Information.token},
         @"session": Information.token,
         @"overrideAlert": @"1",
         @"item_id": [config getValueFromKey:@"id"],
         @"rating": [comment getValueFromKey:@"rating"],
-        @"rating_content": [comment getValueFromKey:@"comment"],
+        @"rating_content": [[comment getValueFromKey:@"comment"] isEqualToString:@""] ? @" " : [comment getValueFromKey:@"comment"] ,
         @"overrideAlert":@"1",
     }];
     
@@ -1650,6 +1662,10 @@
         if ([[dict getValueFromKey:@"error_code"] isEqualToString:@"0"] && dict[@"result"] != [NSNull null]) {
            
             [self showToast:@"Đánh giá thành công" andPos:0];
+            
+            self->tempInfo[@"rating"] = [dict[@"result"] getValueFromKey:@"rating"];
+            
+            [self->collectionView reloadSections:[NSIndexSet indexSetWithIndex:0]];
             
             [self didRequestRating];
             
@@ -1840,7 +1856,13 @@
         
         UIButton * likeCount = [self withView:cell tag: 5];
         [likeCount setTitle:[self->tempInfo getValueFromKey:@"like_count"] forState: UIControlStateNormal];
-
+        BOOL likeStatus = [[self->tempInfo getValueFromKey:@"like_status"] isEqualToString:@"1"];
+        [likeCount setImage: likeStatus ? [[UIImage imageNamed:@"ico_like"] imageWithTintColor:[UIColor systemPinkColor]] : [UIImage imageNamed:@"ico_like"]
+                forState:UIControlStateNormal];
+        [likeCount actionForTouch:@{} and:^(NSDictionary *touchInfo) {
+            [self senderdidRequestLike:nil];
+        }];
+        
         UIButton * commentCount = [self withView:cell tag: 6];
         [commentCount setTitle:[self->tempInfo getValueFromKey:@"comment_count"] forState: UIControlStateNormal];
         
@@ -2038,25 +2060,13 @@
         [arr_r setBackgroundImage:[UIImage imageNamed:@"ico_arrow_teal_r"] forState:UIControlStateNormal];
         view.backgroundColor = [UIColor whiteColor];
         [view actionForTouch:@{} and:^(NSDictionary *touchInfo) {
-//            [self goDown];
-//            if(![[self TOPVIEWCONTROLER] isKindOfClass:[Rating_ViewController class]]) {
-//                Rating_ViewController * rating = [Rating_ViewController new];
-//                NSDictionary * tempo = [[NSDictionary alloc] initWithDictionary:self->tempInfo];
-//                rating.config = tempo;
-//                rating.ratingMode = @"audio";
-//                rating.callBack  = ^(NSDictionary* info) {
-//                    [self didRequestRating];
-//                };
-//                [[self CENTER] pushViewController:rating animated:YES];
-//            } else {
-//                NSDictionary * tempo = [[NSDictionary alloc] initWithDictionary:self->tempInfo];
-//                [(Rating_ViewController*)[self TOPVIEWCONTROLER] forceReloadWithConfig:tempo];
-//            }
             Rating_ViewController * rating = [Rating_ViewController new];
             NSDictionary * tempo = [[NSDictionary alloc] initWithDictionary:self->tempInfo];
             rating.config = tempo;
             rating.ratingMode = @"audio";
             rating.callBack  = ^(NSDictionary* info) {
+                self->tempInfo[@"rating"] = [info getValueFromKey:@"rating"];
+                [self->collectionView reloadSections:[NSIndexSet indexSetWithIndex:0]];
                 [self didRequestRating];
             };
             UINavigationController * nav = [[UINavigationController alloc] initWithRootViewController:rating];

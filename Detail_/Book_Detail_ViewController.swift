@@ -227,12 +227,17 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
             
             tempConfig["like_count"] = (result["result"] as! NSDictionary).getValueFromKey("like_count")
             
-            self.tempInfo = tempConfig
+            let likeStatus = (result["result"] as! NSDictionary).getValueFromKey("like_status")
+
+            tempConfig["like_status"] = likeStatus
+    
+            self.tempInfo.removeAllObjects()
+            
+            self.tempInfo.addEntries(from: tempConfig as! [AnyHashable : Any])
+//            self.tempInfo = tempConfig
             
             self.collectionView.reloadSections(IndexSet(integer: 0))
-            
-            let likeStatus = (result["result"] as! NSDictionary).getValueFromKey("like_status")
-            
+                        
             self.likeBtn.setImage(likeStatus == "1" ? UIImage(named:"ico_like_fill")?.withTintColor(.systemPink) : UIImage(named:"ico_like_white"), for: .normal)
          })
     }
@@ -354,6 +359,8 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
             self.tempInfo.removeAllObjects()
             
             self.tempInfo.addEntries(from: result["result"] as! [AnyHashable : Any])
+            
+            self.tempInfo["like_status"] = (result["result"] as! NSDictionary).getValueFromKey("like_status") == "" ? "0" : "1"
             
             let likeStatus = (result["result"] as! NSDictionary).getValueFromKey("like_status")
             
@@ -626,16 +633,12 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
             self.showToast("Bạn chưa chọn đánh giá", andPos: 0)
             return
         }
-        if comment.getValueFromKey("comment") == "" {
-            self.showToast("Bạn chưa viết đánh giá", andPos: 0)
-            return
-        }
         let request = NSMutableDictionary.init(dictionary: [
                                                             "header":["session":Information.token == nil ? "" : Information.token!],
                                                             "session":Information.token ?? "",
                                                             "item_id": self.config.getValueFromKey("id") as Any,
                                                             "rating": comment.getValueFromKey("rating") as Any,
-                                                            "rating_content": comment.getValueFromKey("comment") as Any,
+                                                            "rating_content": comment.getValueFromKey("comment") == "" ? " " : comment.getValueFromKey("comment"),
                                                             "overrideAlert":"1",
                                                             ])
         
@@ -652,11 +655,13 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
                 return
             }
             
+            self.tempInfo["rating"] = (result["result"] as! NSDictionary).getValueFromKey("rating")
+            
+            self.collectionView.reloadSections(IndexSet(integer: 0))
+            
             self.showToast("Đánh giá thành công", andPos: 0)
                         
             self.didRequestRating()
-            
-            self.didRequestDetail()
         })
     }
     
@@ -783,6 +788,10 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
             
             let likeCount = self.withView(cell, tag: 5) as! UIButton
             likeCount.setTitle(self.tempInfo.getValueFromKey("like_count"), for: .normal)
+            likeCount.setImage(self.tempInfo.getValueFromKey("like_status") == "1" ? UIImage(named:"ico_like")?.withTintColor(.systemPink) : UIImage(named:"ico_like"), for: .normal)
+            likeCount.action(forTouch: [:]) { (obj) in
+                self.didRequestLike()
+            }
             
             let voteCount = self.withView(cell, tag: 6) as! UIButton
             voteCount.setTitle(self.tempInfo.getValueFromKey("comment_count"), for: .normal)
@@ -1015,8 +1024,9 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
                 rating.config = self.tempInfo
                 rating.ratingMode = "book"
                 rating.callBack = { info in
+                    self.tempInfo["rating"] = (info as! NSDictionary).getValueFromKey("rating")
+                    self.collectionView.reloadSections(IndexSet(integer: 0))
                     self.didRequestRating()
-                    self.didRequestDetail()
                 }
                 let nav = UINavigationController.init(rootViewController: rating)
                 nav.isNavigationBarHidden = true

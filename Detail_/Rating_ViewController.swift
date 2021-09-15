@@ -105,16 +105,12 @@ class Rating_ViewController: UIViewController, UICollectionViewDataSource, UICol
             self.showToast("Bạn chưa chọn đánh giá", andPos: 0)
             return
         }
-        if comment.getValueFromKey("comment") == "" {
-            self.showToast("Bạn chưa viết đánh giá", andPos: 0)
-            return
-        }
         let request = NSMutableDictionary.init(dictionary: [
                                                             "header":["session":Information.token == nil ? "" : Information.token!],
                                                             "session":Information.token ?? "",
                                                             "item_id": self.config.getValueFromKey("id") as Any,
                                                             "rating": comment.getValueFromKey("rating") as Any,
-                                                            "rating_content": comment.getValueFromKey("comment") as Any,
+                                                            "rating_content": comment.getValueFromKey("comment") == "" ? " " : comment.getValueFromKey("comment"),
                                                             "overrideAlert":"1",
                                                             ])
         
@@ -133,7 +129,7 @@ class Rating_ViewController: UIViewController, UICollectionViewDataSource, UICol
             
             self.showToast("Đánh giá thành công", andPos: 0)
             
-            self.callBack?([:])
+            self.callBack?(["rating": (result["result"] as! NSDictionary).getValueFromKey("rating")])
             
             self.didReload(self.refreshControl)
         })

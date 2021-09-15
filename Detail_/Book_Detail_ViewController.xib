@@ -34,7 +34,7 @@
                         <outlet property="delegate" destination="-1" id="N8X-0u-FC1"/>
                     </connections>
                 </collectionView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pDZ-4S-sOU">
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pDZ-4S-sOU">
                     <rect key="frame" x="266" y="10" width="44" height="44"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="44" id="Bni-4M-t0g"/>
