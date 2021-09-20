@@ -239,15 +239,21 @@
     
     UIImageView * booking = (UIImageView*)[self withView:cell tag:1];
     
+    UIImageView * covering = (UIImageView*)[self withView:cell tag:22];
+
     [booking imageUrlWithUrl: [list getValueFromKey:@"avatar"]];
     
     booking.widthConstaint.constant = [bg bookWidth];
  
     bg.widthConstaint.constant = [bg bookWidth];
 
+    covering.widthConstaint.constant = [bg bookWidth];
+
     booking.heightConstaint.constant = [bg bookHeight];
     
     bg.heightConstaint.constant = [bg bookHeight];
+        
+    covering.heightConstaint.constant = [bg bookHeight];
     
     [(UILabel*)[self withView:cell tag:2] setText: [list getValueFromKey:@"name"]];
 
@@ -294,6 +300,10 @@
     
     config[@"url"] = @{@"CMD_CODE":@"getListBook"};
 
+    if ([[list getValueFromKey: @"book_type"] isEqualToString:@"3"]) {
+        [self didRequestMP3LinkWithInfo:config];
+        return;
+    }
     Book_Detail_ViewController * bookDetail = [Book_Detail_ViewController new];
             
     bookDetail.config = config;

@@ -134,6 +134,27 @@
         }
     };
     
+    tagView_Vip.callBack = ^(NSDictionary *infor) {
+        NSLog(@"%@", infor);
+        if ([[infor getValueFromKey:@"action"] isEqualToString:@"custom"]) {
+            [weakSelf didPressVip];
+        } else {
+            List_Book_ViewController * listBook = [List_Book_ViewController new];
+            NSMutableDictionary * bookInfo = [[NSMutableDictionary alloc] initWithDictionary:@{
+                @"url": @{
+                        @"CMD_CODE":@"getListBook",
+                        @"book_type":@(0),
+                        @"price": @(0),
+                        @"sorting": @(1),
+                        @"tag_id": [infor getValueFromKey:@"id"]
+                },
+                @"title": [infor getValueFromKey:@"name"]
+            }];
+            listBook.config = bookInfo;
+            [weakSelf.CENTER pushViewController:listBook animated:YES];
+        }
+    };
+    
     config = [@[
         [@{
                 @"title": @"EBOOK MỚI NHẤT", @"url": [@{
@@ -481,16 +502,22 @@
         
         UIImageView * booking = (UIImageView*)[self withView:cell tag:1];
         
+        UIImageView * covering = (UIImageView*)[self withView:cell tag:22];
+
         [booking imageUrlWithUrl: [list getValueFromKey:@"avatar"]];
         
         booking.widthConstaint.constant = [bg bookWidth];
      
         bg.widthConstaint.constant = [bg bookWidth];
 
+        covering.widthConstaint.constant = [bg bookWidth];
+
         booking.heightConstaint.constant = [bg bookHeight];
         
         bg.heightConstaint.constant = [bg bookHeight];
         
+        covering.heightConstaint.constant = [bg bookHeight];
+
         
         [(UILabel*)[self withView:cell tag:2] setText: [list getValueFromKey:@"name"]];
 
@@ -527,6 +554,10 @@
         rectIn.size.width = rect.size.width * (indexPath.row % 2 == 0 ? 16 : 30) / 100;
         
         progress.inner.frame = rectIn;
+        
+        UIImageView * audio = ((Progress*)[self withView:cell tag:16]);
+
+        audio.hidden = ![[list getValueFromKey: @"book_type"] isEqualToString:@"3"];
 
     } else {
         ((TG_Room_Cell_N *)cell).config = self->config[indexPath.row];
@@ -577,6 +608,11 @@
     NSMutableDictionary * configuration = [[NSMutableDictionary alloc] initWithDictionary:list];
     
     configuration[@"url"] = @{@"CMD_CODE":@"getListBook"};
+    
+    if ([[list getValueFromKey: @"book_type"] isEqualToString:@"3"]) {
+        [self didRequestMP3LinkWithInfo: configuration];
+        return;
+    }
 
     Book_Detail_ViewController * bookDetail = [Book_Detail_ViewController new];
             

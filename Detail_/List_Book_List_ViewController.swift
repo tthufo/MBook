@@ -129,6 +129,8 @@ extension List_Book_List_ViewController: UITableViewDataSource, UITableViewDeleg
 
         let booking = (self.withView(cell, tag: 1) as! UIImageView)
             
+        let covering = (self.withView(cell, tag: 22) as! UIView)
+
         booking.imageUrl(url: data.getValueFromKey("avatar"))
                         
         
@@ -136,10 +138,14 @@ extension List_Book_List_ViewController: UITableViewDataSource, UITableViewDeleg
      
         bg.widthConstaint!.constant = CGFloat(bg.bookWidth())
 
+        covering.widthConstaint!.constant = CGFloat(bg.bookWidth())
+
         booking.heightConstaint!.constant = CGFloat(bg.bookHeight())
         
         bg.heightConstaint!.constant = CGFloat(bg.bookHeight())
         
+        covering.heightConstaint!.constant = CGFloat(bg.bookHeight())
+
         
         (self.withView(cell, tag: 2) as! UILabel).text = data.getValueFromKey("name")
         
@@ -172,6 +178,10 @@ extension List_Book_List_ViewController: UITableViewDataSource, UITableViewDeleg
         let configuration = NSMutableDictionary.init(dictionary: data)
         
         configuration["url"] = ["CMD_CODE":"getListBook"]
+        if data.getValueFromKey("book_type") == "3" {
+           self.didRequestMP3Link(info: configuration)
+           return
+        }
 
         let bookDetail = Book_Detail_ViewController.init()
                 
