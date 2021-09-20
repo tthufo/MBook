@@ -142,6 +142,7 @@ class User_Infor_ViewController: UIViewController, UITextFieldDelegate {
         des_B.isHidden = Information.isVip
         totalBook.text = (Information.userInfo?.getValueFromKey("total_book") == "" ? "0" : (Information.userInfo?.getValueFromKey("total_book"))!) + " cuốn"
         totalTime.text = (Information.userInfo?.getValueFromKey("total_time") == "" ? "0" : (Information.userInfo?.getValueFromKey("total_time"))!) + " giờ"
+        tableView.reloadData()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -358,6 +359,7 @@ class User_Infor_ViewController: UIViewController, UITextFieldDelegate {
                                                
            if result.getValueFromKey("error_code") != "0" || result["result"] is NSNull {
                 EM_MenuView.init(confirm: ["image": "fail", "line1": "Cập nhật không thành công", "line2": "Xin lỗi quý khách vì sự cố này \nVui lòng thử lại sau", "line3": "Về trang Cá nhân"]).show { (index, obj, menu) in
+                    (menu!).close()
                     if index == 4 {
         
                     } else {

@@ -1554,7 +1554,7 @@
             NSDictionary * dict = [responseString objectFromJSONString][@"result"];
 
             if ([[dict getValueFromKey:@"status"] isEqualToString:@"1"]) {
-                [self showToast:@"Audio đã mua thành công" andPos:0];
+                [self showToast: [NSString stringWithFormat:@"Mua sách nói \"%@\" thành công", [self->config getValueFromKey:@"name"]] andPos:0];
             } else {
                 [self didPressPause: nil];
                 NSMutableDictionary * checkInfo = [[NSMutableDictionary alloc] initWithDictionary:book];

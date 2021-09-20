@@ -480,7 +480,7 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
            }
         
         if (result["result"] as! NSDictionary).getValueFromKey("status") == "1" {
-            self.showToast("Sách đã được mua thành công", andPos: 0)
+            self.showToast("Mua sách đọc \"%@\" thành công".format(parameters: self.config.getValueFromKey("name")) , andPos: 0)
         } else {
             let checkInfo = NSMutableDictionary.init(dictionary: book)
             checkInfo["is_package"] = "0"

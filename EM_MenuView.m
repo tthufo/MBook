@@ -225,7 +225,7 @@
             self.menuCompletion(4, @{}, self);
         }
         
-        [self close];
+//        [self close];
     }];
     
     

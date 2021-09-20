@@ -208,11 +208,13 @@ class PC_Forgot_ViewController: UIViewController , UITextFieldDelegate {
                 EM_MenuView.init(confirm: ["image": "fail", "line1": "Lấy lại mật khẩu không thành công", "line2": "Xin lỗi bạn về sự cố này, vui lòng thử lại sau", "line3": "Thoát"]).show { (index, obj, menu) in
                     if index == 4 {
                     }
+                    (menu!).close()
                 }
                 return
             }
 
             EM_MenuView.init(confirm: ["image": "success", "line1": "Mật khẩu mới đã tạo", "line2": "Vui lòng kiểm tra hòm thư hoặc tin nhắn\n để lấy mật khẩu mới", "line3": "Về trang Đăng nhập"]).show { (index, obj, menu) in
+                (menu!).close()
                 if index == 4 {
                     self.navigationController?.popToRootViewController(animated: true)
                 }

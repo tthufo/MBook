@@ -220,6 +220,7 @@ class PC_Register_ViewController: UIViewController, UITextFieldDelegate {
             if result.getValueFromKey("error_code") != "0" {
 //                self.showToast(response?.dictionize().getValueFromKey("data") == "" ? "Lỗi xảy ra, mời bạn thử lại" : response?.dictionize().getValueFromKey("data"), andPos: 0)
                 EM_MenuView.init(confirm: ["image": "fail", "line1": "Đăng ký không thành công", "line2": result.getValueFromKey("error_msg") as Any, "line3": "Thoát"]).show { (index, obj, menu) in
+                    (menu!).close()
                     if index == 4 {
                     }
                 }
@@ -229,6 +230,7 @@ class PC_Register_ViewController: UIViewController, UITextFieldDelegate {
 //            self.showToast("Đăng ký thành công", andPos: 0)
             
             EM_MenuView.init(confirm: ["image": "success", "line1": "Tài khoản mới đã tạo", "line2": "Thông tin đăng nhận đã được gửi tới\n" + (self.isPhone ? "tin nhắn" : "hòm thư"), "line3": "Về trang Đăng nhập"]).show { (index, obj, menu) in
+                (menu!).close()
                 if index == 4 {
                     self.navigationController?.popViewController(animated: true)
                 }
@@ -255,6 +257,7 @@ class PC_Register_ViewController: UIViewController, UITextFieldDelegate {
             if result.getValueFromKey("status") != "OK" {
 //                self.showToast(response?.dictionize().getValueFromKey("data") == "" ? "Lỗi xảy ra, mời bạn thử lại" : response?.dictionize().getValueFromKey("data"), andPos: 0)
                 EM_MenuView.init(confirm: ["image": "fail", "line1": "Đăng ký không thành công", "line2": "Xin lỗi bạn về sự cố này, vui lòng thử lại sau", "line3": "Thoát"]).show { (index, obj, menu) in
+                    (menu!).close()
                     if index == 4 {
                     }
                 }
@@ -264,6 +267,7 @@ class PC_Register_ViewController: UIViewController, UITextFieldDelegate {
 //            self.showToast("Đăng ký thành công", andPos: 0)
             
             EM_MenuView.init(confirm: ["image": "success", "line1": "Tài khoản mới đã tạo", "line2": "Thông tin đăng nhận đã được gửi tới\n hòm thư/tin nhắn", "line3": "Về trang Đăng nhập"]).show { (index, obj, menu) in
+                (menu!).close()
                 if index == 4 {
                     self.navigationController?.popViewController(animated: true)
                 }

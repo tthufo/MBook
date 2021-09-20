@@ -493,6 +493,8 @@ UIBackgroundTaskIdentifier bgTask;
     {
         [[self PLAYER].playerView stop];
         
+        [[self PLAYER] stoptimer];
+        
         [[self PLAYER].playerView clean];
         
         [self PLAYER].playerView = nil;

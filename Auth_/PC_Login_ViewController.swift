@@ -493,6 +493,10 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
             let result = response?.dictionize() ?? [:]
                         
             if result.getValueFromKey("error_code") != "0" || result["result"] is NSNull {
+                if result.getValueFromKey("error_code") == "1" {
+                    self.showToast(result.getValueFromKey("error_msg"), andPos: 0)
+                    return
+                }
                 self.showToast("Không có thông tin tài khoản. Liên hệ quản trị viên để được tài trợ.", andPos: 0)
                 return
             }
