@@ -38,6 +38,12 @@ class PC_ChangePass_ViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet var reNewPass: UITextField!
     
+    @IBOutlet var oldPass_btn: UIButton!
+    
+    @IBOutlet var newPass_btn: UIButton!
+    
+    @IBOutlet var reNewPass_btn: UIButton!
+    
     @IBOutlet var submit: UIButton!
     
     @IBOutlet var oldPassErr: UILabel!
@@ -81,6 +87,13 @@ class PC_ChangePass_ViewController: UIViewController, UITextFieldDelegate {
         oldPass.addTarget(self, action: #selector(textOldIsChanging), for: .editingChanged)
         newPass.addTarget(self, action: #selector(textOldIsChanging), for: .editingChanged)
         reNewPass.addTarget(self, action: #selector(textIsChanging), for: .editingChanged)
+        
+        let fields = [oldPass_btn, newPass_btn, reNewPass_btn]
+
+        for field in fields {
+            (field!).setImage(UIImage(named: "ico_hide")?.withTintColor(AVHexColor.color(withHexString: "#1E928C")), for: .normal)
+            (field!).accessibilityLabel = "0"
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -120,14 +133,24 @@ class PC_ChangePass_ViewController: UIViewController, UITextFieldDelegate {
         let tag = sender.tag
 
         let fields = [oldPass, newPass, reNewPass]
+                
+        let check = sender.accessibilityLabel == "0" // sender.currentImage == UIImage(named: "ico_hide")?.withTintColor(AVHexColor.color(withHexString: "#1E928C"))
+                        
+        (fields[tag - 1])!.isSecureTextEntry = !check
+        
+        sender.setImage(UIImage(named: !check ? "ico_hide" : "ico_un_hide")?.withTintColor(AVHexColor.color(withHexString: "#1E928C")), for: .normal)
 
-        let check = sender.currentImage == UIImage(named: "design_ic_visibility_off")
-        (fields[tag - 1])!.isSecureTextEntry = check
-        sender.setImage(UIImage(named: !check ? "design_ic_visibility_off" : "design_ic_visibility"), for: .normal)
+        sender.accessibilityLabel = sender.accessibilityLabel == "0" ? "1" : "0"
     }
     
     @IBAction func didPressSubmit() {
         self.view.endEditing(true)
+        
+        if newPass.text!.count < 6 || reNewPass.text!.count < 6  {
+            self.showToast("Mật khẩu mới phải lớn hơn 6 chữ số", andPos: 0)
+            
+            return
+        }
         
         LTRequest.sharedInstance()?.didRequestInfo(["CMD_CODE":"changePassword",
                                                     "header":["session":Information.token == nil ? "" : Information.token!],

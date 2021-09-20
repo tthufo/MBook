@@ -16,11 +16,14 @@
                 <outlet property="cell4" destination="AwY-3P-Ktg" id="k31-H7-xvq"/>
                 <outlet property="newPass" destination="q0a-5x-zEk" id="JMu-3W-mQU"/>
                 <outlet property="newPassErr" destination="hDV-Pc-iIO" id="M4q-9L-NwR"/>
+                <outlet property="newPass_btn" destination="D4V-wt-lGm" id="0d9-fx-csV"/>
                 <outlet property="oldPass" destination="oeM-XT-BsP" id="nbz-Io-oh8"/>
                 <outlet property="oldPassErr" destination="PdM-hq-4jV" id="dni-1U-q31"/>
+                <outlet property="oldPass_btn" destination="wJ9-Bo-nQC" id="LTU-6s-HQs"/>
                 <outlet property="reNewBg" destination="D6l-IG-goW" id="hRK-k7-hby"/>
                 <outlet property="reNewPass" destination="j2F-L0-Ayu" id="yZy-af-4Uk"/>
                 <outlet property="reNewPassErr" destination="W0R-Ve-mLp" id="RE1-21-R2X"/>
+                <outlet property="reNewPass_btn" destination="cfF-MD-scc" id="95W-Fh-OJs"/>
                 <outlet property="sideGapLeft" destination="WdG-zA-A49" id="fPe-9u-38R"/>
                 <outlet property="sideGapRight" destination="QHF-kj-ekA" id="3zs-9w-MBf"/>
                 <outlet property="submit" destination="aak-n1-jZa" id="sv5-1Q-7Da"/>
