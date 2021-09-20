@@ -1003,6 +1003,8 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
             "ĐÁNH GIÁ (%i)".format(parameters: totalRateCount)
         if indexPath.section == 3 {
             (self.withView(view, tag: 99) as! UILabel).isHidden = true
+            (self.withView(view, tag: 3) as! UIButton).isHidden = false
+            (self.withView(view, tag: 4) as! UIButton).isHidden = true
             (self.withView(view, tag: 3) as! UIButton).setBackgroundImage(UIImage(named: "ico_arrow_teal"), for: .normal)
             view.backgroundColor = AVHexColor.color(withHexString: "#F0F0EC")
             let angle = self.retract ? 0 : CGFloat.pi
@@ -1017,6 +1019,8 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
             }
         } else {
             (self.withView(view, tag: 99) as! UILabel).isHidden = false
+            (self.withView(view, tag: 4) as! UIButton).isHidden = false
+            (self.withView(view, tag: 3) as! UIButton).isHidden = true
             (self.withView(view, tag: 4) as! UIButton).setBackgroundImage(UIImage(named: "ico_arrow_teal_r"), for: .normal)
             view.backgroundColor = .white
             view.action(forTouch: [:]) { (objc) in
