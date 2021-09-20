@@ -127,7 +127,11 @@ extension Transaction_ViewController: UITableViewDataSource, UITableViewDelegate
 
         let isPackage = typing == "package"
               
-        let dateTime = date //  self.convertDate(dateValue: milisecond)
+        var dateTime = "" 
+        
+        if date.length > 8 {
+            dateTime = self.getDate(str: date as String)
+        }
         
         if data.getValueFromKey("status") == "1" {
             let title = self.withView(cell, tag: 1) as! UILabel
@@ -158,6 +162,10 @@ extension Transaction_ViewController: UITableViewDataSource, UITableViewDelegate
            }
         }
     }
+    
+    func getDate(str: String) -> String {
+        return String(str.substring(to: 2)) + "/" + String(str.substring(with: 2..<4)) + "/" + String(str.substring(with: 4..<8))
+    }
 
     func convertDate(dateValue: Int) -> String {
         let truncatedTime = Int(dateValue / 1000)
@@ -166,5 +174,27 @@ extension Transaction_ViewController: UITableViewDataSource, UITableViewDelegate
         formatter.timeZone = TimeZone(abbreviation: "UTC")
         formatter.dateFormat = "yyyy-MM-dd"
         return formatter.string(from: date)
+    }
+}
+
+extension String {
+    func indexing(from: Int) -> Index {
+        return self.index(startIndex, offsetBy: from)
+    }
+
+    func substring_(from: Int) -> String {
+        let fromIndex = indexing(from: from)
+        return String(self[fromIndex...])
+    }
+
+    func substring_(to: Int) -> String {
+        let toIndex = indexing(from: to)
+        return String(self[..<toIndex])
+    }
+
+    func substring_(with r: Range<Int>) -> String {
+        let startIndex = indexing(from: r.lowerBound)
+        let endIndex = indexing(from: r.upperBound)
+        return String(self[startIndex..<endIndex])
     }
 }
