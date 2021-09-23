@@ -360,7 +360,7 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
             
             self.tempInfo.addEntries(from: result["result"] as! [AnyHashable : Any])
             
-            self.tempInfo["like_status"] = (result["result"] as! NSDictionary).getValueFromKey("like_status") == "" ? "0" : "1"
+            self.tempInfo["like_status"] = (result["result"] as! NSDictionary).getValueFromKey("like_status") // == "" ? "0" : "1"
             
             let likeStatus = (result["result"] as! NSDictionary).getValueFromKey("like_status")
             
