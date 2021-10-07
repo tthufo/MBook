@@ -278,9 +278,26 @@ class Reader_ViewController: UIViewController {
         }
     }
 
+    func pdfToText(fromPDF: String) -> String {
+//        let urlPath = Bundle.main.url(forResource: fromPDF, withExtension: "pdf")
+        let docContent = NSMutableAttributedString()
+        if let pdf = PDFDocument(url: URL(fileURLWithPath: fromPDF)) {
+            let pageCount = pdf.pageCount
+
+            for i in 1 ..< pageCount {
+                guard let page = pdf.page(at: i) else { continue }
+                guard let pageContent = page.attributedString else { continue }
+                docContent.append(pageContent)
+            }
+        }
+
+        return docContent.string
+    }
+    
     func viewPDF() {
         showHide(show: false)
         let path = self.pdfFile(fileName: self.config.getValueFromKey("id"))
+//        print("-->", self.pdfToText(fromPDF: path))
         if let document = PDFDocument(url: URL(fileURLWithPath: path)) {
             self.pdfDocument = document
             self.pageNumber.text = "%i / %i".format(parameters: 1, document.documentRef?.numberOfPages as! CVarArg)

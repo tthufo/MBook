@@ -31,18 +31,16 @@ class First_Tab_ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var searchView: UITextField!
 
     @IBOutlet var buyBtn: UIButton!
+    
+    var bg_view: UIImageView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if IS_IPAD {
-            login_bg_height.constant = 550
-        }
-        
         bg_banner.imageColor(color: AVHexColor.color(withHexString: "#1E928C"))
         
         bg_top.imageColor(color: AVHexColor.color(withHexString: "#1E928C"))
-
+        
         banner_bg_height.constant = CGFloat(screenWidth() * 9 / 16) - 70
         
         tableView.withCell("TG_Room_Cell_Banner_0")
@@ -73,12 +71,18 @@ class First_Tab_ViewController: UIViewController, UITextFieldDelegate {
 
         tableView.withCell("TG_Room_Cell_10")
         
+        let imaging = UIImage(named: "bg_banner")
+        
+        bg_view = UIImageView.init(frame: CGRect.init(x: 0, y: 0, width: Int(self.screenWidth()), height: Int(screenWidth() * 9 / 16) - 70))
+        
+        bg_view.image = imaging
+        
+        tableView.insertSubview(bg_view, at: 0)
+        
         dataList = NSMutableArray.init()
         
         tableView.refreshControl = refreshControl
-        
-        refreshControl.tintColor = .white
-        
+                
         refreshControl.addTarget(self, action: #selector(didReload), for: .valueChanged)
         
         config = NSArray.init(array: [["url": ["CMD_CODE":"getHomeEvent", //getHomeEvent
@@ -331,5 +335,9 @@ extension First_Tab_ViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        tableView.sendSubviewToBack(bg_view)
     }
 }
