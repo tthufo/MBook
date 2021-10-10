@@ -50,21 +50,7 @@ class TG_Intro_ViewController: UIViewController {
         tableView.withHeaderOrFooter("PC_Header_Tab")
         
         didRequestNotification()
-        
-//        if Information.check == "1" {
-//            avatar.imageUrlHolder(url: (Information.userInfo?.getValueFromKey("avatar"))!, holder: "ic_avatar")
-//            avatar.action(forTouch: [:]) { (objc) in
-//                    self.center()?.pushViewController(PC_Inner_Info_ViewController.init(), animated: true)
-//                    self.root()?.showCenterPanel(animated: true)
-//            }
-//        } else {
-//            avatar.image = UIImage.init(named: "logos-1")
-//        }
-//
-//        userName.alpha = Information.check == "1" ? 1 : 0
-//
-//        phoneNo.alpha = Information.check == "1" ? 1 : 0
-        
+
         reloadData()
     }
     
@@ -73,19 +59,19 @@ class TG_Intro_ViewController: UIViewController {
             return
         }
         
-        if Information.check == "1" {
-            if Information.userInfo != nil {
-                avatar.imageUrlHolder(url: (Information.userInfo?.getValueFromKey("avatar"))!, holder: "ic_avatar")
-                avatar.action(forTouch: [:]) { (objc) in
-                    (self.tabbar()!).selectedIndex = 3
-                    self.root()?.showCenterPanel(animated: true)
-                }
+//        if Information.check == "1" {
+        if Information.userInfo != nil {
+            avatar.imageUrlHolder(url: (Information.userInfo?.getValueFromKey("avatar"))!, holder: "ic_avatar")
+            avatar.action(forTouch: [:]) { (objc) in
+                (self.tabbar()!).selectedIndex = 3
+                self.root()?.showCenterPanel(animated: true)
             }
-        } else {
-            avatar.image = UIImage.init(named: "logos-1")
         }
+//        } else {
+//            avatar.image = UIImage.init(named: "logos-1")
+//        }
         
-        userName.alpha = Information.check == "1" ? 1 : 0
+//        userName.alpha = Information.check == "1" ? 1 : 0
         
         phoneNo.alpha = Information.check == "1" ? 1 : 0
     }
@@ -95,7 +81,7 @@ class TG_Intro_ViewController: UIViewController {
         
         widthBuyBtn.constant = Information.isVip ? 0 : 36
         
-        vipIcon.isHidden = !Information.isVip
+        vipIcon.isHidden = Information.check == "0" ? true : !Information.isVip
                         
         userName.text = Information.userInfo?.getValueFromKey("name") == "" ? "Vô danh" : Information.userInfo?.getValueFromKey("name")
         
@@ -174,6 +160,10 @@ class TG_Intro_ViewController: UIViewController {
 }
 
 extension TG_Intro_ViewController: UITableViewDataSource, UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 1
+    }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         let sec = (dataList[section] as! NSMutableDictionary);

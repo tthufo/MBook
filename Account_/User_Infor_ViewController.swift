@@ -20,6 +20,8 @@ class User_Infor_ViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet var optionCell_S: UITableViewCell!
 
+    @IBOutlet var optionCell_S_S: UITableViewCell!
+
     @IBOutlet var sideGapLeft: NSLayoutConstraint!
     
     @IBOutlet var sideGapRight: NSLayoutConstraint!
@@ -55,6 +57,8 @@ class User_Infor_ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var logout: UILabel!
     
     @IBOutlet var logout_S: UILabel!
+    
+    @IBOutlet var logout_S_S: UILabel!
     
     @IBOutlet var des: UILabel!
 
@@ -108,6 +112,10 @@ class User_Infor_ViewController: UIViewController, UITextFieldDelegate {
             self.didPressLogOut()
         }
         
+        logout_S_S.action(forTouch: [:]) { (objc) in
+            self.didPressLogOut()
+        }
+        
         searchBtn.imageColor(color: .lightGray)
         
         searchBtn.action(forTouch: [:]) { (objc) in
@@ -133,12 +141,13 @@ class User_Infor_ViewController: UIViewController, UITextFieldDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        vipIcon.isHidden = !Information.isVip
+        vipIcon.isHidden = Information.check == "0" ? true : !Information.isVip
         vipIcon_B.isHidden = Information.isVip
         buyBtn.isHidden = Information.isVip
         buyBtn_B.isHidden = Information.isVip
         searchView.text = Information.searchValue ?? ""
         des.text = Information.packageInfo
+        des.isHidden = Information.check == "0"
         des_B.isHidden = Information.isVip
         totalBook.text = (Information.userInfo?.getValueFromKey("total_book") == "" ? "0" : (Information.userInfo?.getValueFromKey("total_book"))!) + " cuốn"
         totalTime.text = (Information.userInfo?.getValueFromKey("total_time") == "" ? "0" : (Information.userInfo?.getValueFromKey("total_time"))!) + " giờ"
@@ -389,7 +398,7 @@ extension User_Infor_ViewController: UITableViewDataSource, UITableViewDelegate 
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let social_logged = self.getObject("social")
-        return indexPath.row == 0 ? Information.isVip ? 460 : 600 : indexPath.row == 1 ? 185 : social_logged != nil ? 120 : 155 
+        return indexPath.row == 0 ? Information.isVip ? 460 : 600 : indexPath.row == 1 ? 185 : Information.check == "0" ? 90 : social_logged != nil ? 120 : 155 
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -399,7 +408,7 @@ extension User_Infor_ViewController: UITableViewDataSource, UITableViewDelegate 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let social_logged = self.getObject("social")
         
-        return indexPath.row == 0 ? headerCell! : indexPath.row == 1 ? inforCell! : social_logged != nil ? optionCell_S : optionCell!
+        return indexPath.row == 0 ? headerCell! : indexPath.row == 1 ? inforCell! : Information.check == "0" ? optionCell_S_S : social_logged != nil ? optionCell_S : optionCell!
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

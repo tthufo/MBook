@@ -82,7 +82,6 @@
     return YES;
 }
 
-
 - (id)initWithRestrict:(NSDictionary*)info
 {
     self = [self init];

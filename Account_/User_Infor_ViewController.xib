@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -24,9 +24,11 @@
                 <outlet property="login_bg_height" destination="xwG-G8-xPv" id="6Tu-Qf-BuV"/>
                 <outlet property="logout" destination="Soo-d4-Oza" id="GSJ-d1-NnS"/>
                 <outlet property="logout_S" destination="lne-a1-ynl" id="ytn-Z2-8jr"/>
+                <outlet property="logout_S_S" destination="tgs-0Y-Z9u" id="IYO-pK-xSz"/>
                 <outlet property="name" destination="oQu-ie-Ps0" id="LrA-RR-7fq"/>
                 <outlet property="optionCell" destination="Cn9-3K-RHG" id="em0-7P-Tsa"/>
                 <outlet property="optionCell_S" destination="3GD-7v-5YQ" id="16p-DZ-QwQ"/>
+                <outlet property="optionCell_S_S" destination="WFI-fn-4Pz" id="qwR-Bn-QkP"/>
                 <outlet property="phone" destination="qLU-2A-mfM" id="wHK-py-jpM"/>
                 <outlet property="searchBtn" destination="BMt-d7-hd0" id="12l-Ae-z88"/>
                 <outlet property="searchView" destination="ViO-dr-Mhe" id="mTC-QU-yU9"/>
@@ -709,6 +711,63 @@
                 </constraints>
             </tableViewCellContentView>
             <point key="canvasLocation" x="-86.25" y="681.86619718309862"/>
+        </tableViewCell>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="90" id="WFI-fn-4Pz">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="91"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="WFI-fn-4Pz" id="bex-fX-RBo">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="91"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Đăng xuất" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tgs-0Y-Z9u">
+                        <rect key="frame" x="20" y="48" width="170" height="32"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="170" id="FdI-Ae-UGQ"/>
+                            <constraint firstAttribute="height" constant="32" id="skn-sg-LNg"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" red="0.1137254902" green="0.32156862749999998" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <integer key="value" value="8"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </label>
+                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TÙY CHỌN" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F3g-xD-Kmc">
+                        <rect key="frame" x="20" y="11" width="282" height="32"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="32" id="CkE-Or-ny1"/>
+                            <constraint firstAttribute="width" constant="282" id="DsV-Qh-j13"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" red="0.1176470588" green="0.57254901960000004" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                <integer key="value" value="8"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                    </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RVf-Vx-tK4">
+                        <rect key="frame" x="0.0" y="83" width="414" height="8"/>
+                        <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="8" id="5Mi-C5-KMg"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="RVf-Vx-tK4" firstAttribute="leading" secondItem="bex-fX-RBo" secondAttribute="leading" id="Cmi-gJ-dpc"/>
+                    <constraint firstAttribute="bottom" secondItem="RVf-Vx-tK4" secondAttribute="bottom" id="KvL-iM-KQF"/>
+                    <constraint firstItem="F3g-xD-Kmc" firstAttribute="top" secondItem="bex-fX-RBo" secondAttribute="top" constant="11" id="M47-dm-YTs"/>
+                    <constraint firstItem="tgs-0Y-Z9u" firstAttribute="top" secondItem="F3g-xD-Kmc" secondAttribute="bottom" constant="5" id="QUS-NJ-vPN"/>
+                    <constraint firstAttribute="trailing" secondItem="RVf-Vx-tK4" secondAttribute="trailing" id="VH3-Zd-CSr"/>
+                    <constraint firstItem="F3g-xD-Kmc" firstAttribute="leading" secondItem="bex-fX-RBo" secondAttribute="leading" constant="20" id="emw-g1-AXE"/>
+                    <constraint firstItem="tgs-0Y-Z9u" firstAttribute="leading" secondItem="bex-fX-RBo" secondAttribute="leading" constant="20" id="rzc-UK-djI"/>
+                </constraints>
+            </tableViewCellContentView>
+            <point key="canvasLocation" x="-86.25" y="839.26056338028172"/>
         </tableViewCell>
     </objects>
     <resources>
