@@ -156,6 +156,8 @@ class Reader_ViewController: UIViewController {
     var show: Bool = false
     
     var success: Bool = false
+    
+    var isRestricted: Bool = false
 
     var readTime: Int = 0
     
@@ -255,8 +257,36 @@ class Reader_ViewController: UIViewController {
     @objc private func pageChanged(notification: Notification) {
         if currentPageIndex() != nil && self.pdfDocument != nil {
             self.pageNumber.text = "%i / %i".format(parameters: Int(currentPageIndex().map(String.init)!)! + 1 ?? 1, self.pdfDocument.documentRef?.numberOfPages as! CVarArg)
+            
+            if Int(currentPageIndex().map(String.init)!)! + 1 == self.pdfDocument.documentRef?.numberOfPages {
+                if self.isRestricted {
+                    self.showRestricted()
+                }
+            }
         }
         print("Page changed: \(currentPageIndex().map(String.init) ?? "nil")")
+    }
+    
+    func showRestricted() {
+        EM_MenuView.init(restrict: ["line3": "MUA GÓI"]).disableCompletion { indexing, objc, menu in
+            if indexing == 4 {
+                self.didPressBuy()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1, execute: {
+                    self.didPressBack()
+                })
+            }
+        }
+    }
+    
+    @IBAction func didPressBuy() {
+        let vip = VIP_ViewController.init()
+        vip.callBack = { info in
+            print(info)
+        }
+        let nav = UINavigationController.init(rootViewController: vip)
+        nav.isNavigationBarHidden = true
+        nav.modalPresentationStyle = .fullScreen
+        self.center().present(nav, animated: true, completion: nil)
     }
 
     fileprivate var queueingScrollView: UIScrollView? {

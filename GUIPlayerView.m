@@ -532,6 +532,7 @@
 //    int timescale = currentItem.asset.duration.timescale;
 //    float time = value * (currentItem.asset.duration.value / timescale);
 //    [player seekToTime:CMTimeMakeWithSeconds(time, timescale)];
+    [player seekToTime:kCMTimeZero];
 }
 
 - (void)seek:(UISlider *)slider {

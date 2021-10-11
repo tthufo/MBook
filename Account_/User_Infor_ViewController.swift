@@ -86,6 +86,9 @@ class User_Infor_ViewController: UIViewController, UITextFieldDelegate {
             
             login_bg_height.constant = 390
         }
+        
+        self.didGetInfo(show: true)
+        
         self.viewInfor()
         
         tableView.refreshControl = refreshControl
@@ -200,7 +203,7 @@ class User_Infor_ViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc func didReload(_ sender: Any) {
-        self.didGetInfo()
+        self.didGetInfo(show: true)
     }
     
     @IBAction func didPressEdit() {
@@ -243,15 +246,18 @@ class User_Infor_ViewController: UIViewController, UITextFieldDelegate {
         } else {
             avatar.imageUrlHolder(url: (Information.userInfo?.getValueFromKey("avatar"))!, holder: "ic_avatar")
         }
+        
+        totalBook.text = (Information.userInfo?.getValueFromKey("total_book") == "" ? "0" : (Information.userInfo?.getValueFromKey("total_book"))!) + " cuốn"
+        totalTime.text = (Information.userInfo?.getValueFromKey("total_time") == "" ? "0" : (Information.userInfo?.getValueFromKey("total_time"))!) + " giờ"
     }
     
-    func didGetInfo() {
+    @objc func didGetInfo(show:Bool) {
         LTRequest.sharedInstance()?.didRequestInfo(["CMD_CODE":"getUserInfo",
                                                     "header":["session":Information.token == nil ? "" : Information.token!],
                                                      "session": Information.token ?? "",
                                                     "overrideAlert":"1",
                                                     "overrideLoading":"1",
-                                                    "host":self], withCache: { (cacheString) in
+                                                    "host": show ? self : nil], withCache: { (cacheString) in
         }, andCompletion: { (response, errorCode, error, isValid, object) in
             let result = response?.dictionize() ?? [:]
             self.refreshControl.endRefreshing()
@@ -377,6 +383,7 @@ class User_Infor_ViewController: UIViewController, UITextFieldDelegate {
                 }
                return
            }
+           
 //           self.showToast("Cập nhật thông tin thành công", andPos: 0)
 //            EM_MenuView.init(confirm: ["image": "success", "line1": "Đổi ảnh đại diện thành công", "line2": "Thông tin của quý khách đã được cập nhật", "line3": "Về trang Cá nhân"]).show { (index, obj, menu) in
 //                if index == 4 {
@@ -389,7 +396,7 @@ class User_Infor_ViewController: UIViewController, UITextFieldDelegate {
             self.avatarTemp = image
             self.avatar.image = image
             Information.avatar = image
-            self.didGetInfo()
+            self.didGetInfo(show: true)
        })
    }
 }

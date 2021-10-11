@@ -61,7 +61,7 @@
 
 @implementation HT_Player_ViewController
 
-@synthesize playerView, playState, topView, uID, controlView, controlViewIpad, collectionView, retract;
+@synthesize playerView, playState, topView, uID, controlView, controlViewIpad, collectionView, retract, isRestricted;
 
 - (void)viewDidLoad
 {
@@ -70,6 +70,8 @@
     mp3URL = @"";
     
     isBlock = NO;
+    
+    isRestricted = NO;
     
     dataList = [NSMutableArray new];
     
@@ -255,7 +257,7 @@
         case Normal:
         case Search:
         {
-            [self didStartPlayWith:isIpod ? dict[@"assetUrl"] : [dict getValueFromKey:@"id"] andInfo:dict];
+//            [self didStartPlayWith:isIpod ? dict[@"assetUrl"] : [dict getValueFromKey:@"id"] andInfo:dict];
             
 //            [self updateList:dict[@"dataList"]];
         }
@@ -404,6 +406,8 @@
     readTime = 0;
     
     isBlock = NO;
+    
+    isRestricted = NO;
     
     [setupData removeAllObjects];
     
@@ -774,7 +778,9 @@
         }
         [self.playerView play];
         
-        [self startTimer];
+        if (!isRestricted) {
+            [self startTimer];
+        }
         
         [self fadeVolume];
         
@@ -790,6 +796,19 @@
     }
     
     [self playingState:[self.playerView isPlaying]];
+}
+
+- (void)didCheckBuy {
+    if ([self.playerView isPlaying])
+    {
+        [self.playerView pause];
+        
+        [self stoptimer];
+        
+        [self.playerView setVolume:0];
+        
+        [self playingState: [self.playerView isPlaying]];
+    }
 }
 
 - (IBAction)playNext:(UIButton*)sender;
@@ -976,8 +995,9 @@
 - (void)playerDidResume
 {
     [self playingState:YES];
-    
-    [self startTimer];
+    if (!isRestricted) {
+        [self startTimer];
+    }
 }
 
 - (void)playerStalled
@@ -1021,24 +1041,9 @@
 
 - (void)playerReadyToPlay
 {
-    [self showInforPlayer:@{@"img":[setupData responseForKey:@"img"] ? setupData[@"img"] : kAvatar,@"song":[setupData responseForKey:@"name"] ? setupData[@"name"] : @"No Title"}];
+    [self showInforPlayer:@{@"img":[setupData responseForKey:@"img"] ? setupData[@"img"] : kAvatar, @"song":[setupData responseForKey:@"name"] ? setupData[@"name"] : @"No Title"}];
 
     [self playingState:YES];
-    
-//    if(isResume)
-//    {
-//        [self.playerView seekTo:[[self getObject:@"leftOver"][@"seek"] floatValue]];
-//
-//        [[self ROOT] embed];
-//
-//        [self didSaveProgress];
-//
-//        [self.playerView setVolume:0];
-//
-//        [self.playerView performSelector:@selector(pause) withObject:nil afterDelay:0.1];
-//
-//        isResume = NO;
-//    }
     
     avatar.userInteractionEnabled = YES;
     
@@ -1048,16 +1053,27 @@
     
     ((UIButton*)[self playerInfo][@"play"]).enabled = YES;
     
+    if (self.isRestricted) {
+        return;
+    }
+    
     [self startOrStop:NO];
     
     if (isBlock) {
         return;
     }
+    
     [self didPressPause:nil];
     
     if (![[tempInfo getValueFromKey:@"price"] isEqualToString:@"0"]) {
         [self didRequestUrlWithInfo:tempInfo callBack:^(NSDictionary * info) {
             if([info responseForKey:@"fail"]) {
+                if ([[tempInfo getValueFromKey: @"has_preview"] isEqualToString:@"0"]) {
+                    [self didPressBuyWithIsAudio: YES];
+                } else {
+                    self.isRestricted = YES;
+                    [self didPlayingWithUrl: [NSURL URLWithString: [tempInfo getValueFromKey:@"demo_path"]]];
+                }
                 [self stoptimer];
             } else {
                 NSTimeInterval delayInSeconds = 0.8;
@@ -1086,10 +1102,25 @@
 
     [self playingState:NO];
     
-    [self playNext:nil];
+    [self stoptimer];
+    
+    if (self.isRestricted) {
+        [[[EM_MenuView alloc] initWithRestrict:@{@"line3": @"MUA GÓI"}] disableCompletion:^(int index, id object, EM_MenuView *menu) {
+            if (index == 4) {
+                [self didPressBuyWithIsAudio: YES];
+            }
+        }];
+        [self.playerView seekTo:0];
+    } else {
+        [self playNext:nil];
+    }
     
     return;
     
+    
+    
+    
+////////////////////////////
     BOOL isIpod = [setupData responseForKey:@"ipod"];
     
 //    if([playingData[@"repeat"] isEqualToString:@"0"])
@@ -1190,7 +1221,7 @@
 
 - (void)playingState:(BOOL)isPlaying
 {
-    [play setImage:[UIImage imageNamed:isPlaying ? @"pause_s" : @"play_s"] forState:UIControlStateNormal];
+    [play setImage:[UIImage imageNamed: isPlaying ? @"pause_s" : @"play_s"] forState:UIControlStateNormal];
     
     [(UIButton*)[self playerInfo][@"play"] setImage:[UIImage imageNamed:isPlaying ? @"pause_D" : @"play_D"] forState:UIControlStateNormal];
     
@@ -1554,9 +1585,18 @@
             NSDictionary * dict = [responseString objectFromJSONString][@"result"];
 
             if ([[dict getValueFromKey:@"status"] isEqualToString:@"1"]) {
-                [self showToast: [NSString stringWithFormat:@"Mua sách nói \"%@\" thành công", [self->config getValueFromKey:@"name"]] andPos:0];
+//                [self showToast: [NSString stringWithFormat:@"Mua sách nói \"%@\" thành công", [self->config getValueFromKey:@"name"]] andPos:0];
+                if(![self.playerView isPlaying])
+                {
+                    [self.playerView play];
+                    if (!isRestricted) {
+                        [self startTimer];
+                    }
+                    [self fadeVolume];
+                    [titleSong resumeAnimations];
+                }
             } else {
-                [self didPressPause: nil];
+                [self didCheckBuy];
                 NSMutableDictionary * checkInfo = [[NSMutableDictionary alloc] initWithDictionary:book];
                 checkInfo[@"is_package"] = @"0";
                 

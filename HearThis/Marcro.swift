@@ -678,7 +678,7 @@ extension UIViewController {
         return isVip
     }
     
-    func didPressBuy(isAudio: Bool) {
+   @objc func didPressBuy(isAudio: Bool) {
         let vip = VIP_ViewController.init()
         vip.callBack = { info in
             if self.isEmbed() {
@@ -779,7 +779,7 @@ extension UIViewController {
                             }
                         } else {
                             callBack!(["fail":"1", "audio":"1"])
-                            self.didPressBuy(isAudio: isAudio)
+//                            self.didPressBuy(isAudio: isAudio)
                         }
                     }
                 })
@@ -799,7 +799,7 @@ extension UIViewController {
                         }
                     } else {
                         callBack!(["fail":"1", "audio":"1"])
-                        self.didPressBuy(isAudio: isAudio)
+//                        self.didPressBuy(isAudio: isAudio)
                     }
                 }
             }

@@ -90,11 +90,11 @@ class Payment_ViewController: UIViewController, WKUIDelegate, WKNavigationDelega
                 } else {
                     let mess = info.getValueFromKey("book_type") == "3" ? "sách nói" : "sách đọc"
                     messaging = "Bạn đã thanh toán " + mess + " \"" + info.getValueFromKey("name") + "\""
+                    self.player().isRestricted = false
                 }
-                
+                                
                 EM_MenuView.init(confirm: ["image": "success", "line1": "Giao dịch thành công", "line2": messaging, "line3": "Xác nhận"]).show { (index, obj, menu) in
                     if index == 4 {
-//                        self.didGetInfo(menu: menu!)
                         let social_logged = self.getObject("social")
                         self.checkVipStatusLogin(isSocial: social_logged == nil, menu: menu!)
                     } else {
@@ -159,22 +159,20 @@ class Payment_ViewController: UIViewController, WKUIDelegate, WKNavigationDelega
                    
                    Information.isVip = self.isVipLogin(paymentList: paymentList, packageList: packageList)
                 
-//                   (UIApplication.shared.delegate as! AppDelegate).changeRoot(false)
-
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.8, execute: {
                         menu.close()
                         self.dismiss(animated: true, completion: nil)
+                        self.didRequestMP3Link(info: self.info)
                     })
                 
                })
             } else {
                 Information.isVip = self.isVipLogin(paymentList: paymentList, packageList: packageList)
-             
-//                (UIApplication.shared.delegate as! AppDelegate).changeRoot(false)
-                
+                             
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.8, execute: {
                     menu.close()
                     self.dismiss(animated: true, completion: nil)
+                    self.didRequestMP3Link(info: self.info)
                 })
             }
        })

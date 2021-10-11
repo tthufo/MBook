@@ -446,18 +446,24 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
                 return
             }
             
-            let reader = Reader_ViewController()
-
-            let bookInfo = NSMutableDictionary.init(dictionary: book)
-
-            bookInfo["file_url"] = (result["result"] as! NSDictionary).getValueFromKey("file_url")
-
-            reader.config = bookInfo
-
-            self.navigationController?.pushViewController(reader, animated: true)
-
-            self.adjustInset()
+            self.showReader(book: book, urlPath: (result["result"] as! NSDictionary).getValueFromKey("file_url"), preview: false)
         })
+    }
+    
+    func showReader(book: NSDictionary, urlPath: String, preview: Bool) {
+        let reader = Reader_ViewController()
+        
+        reader.isRestricted = preview
+        
+        let bookInfo = NSMutableDictionary.init(dictionary: book)
+
+        bookInfo["file_url"] = urlPath
+
+        reader.config = bookInfo
+
+        self.navigationController?.pushViewController(reader, animated: true)
+
+        self.adjustInset()
     }
     
     func didRequestItemInfo(book: NSDictionary) {
@@ -480,7 +486,8 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
            }
         
         if (result["result"] as! NSDictionary).getValueFromKey("status") == "1" {
-            self.showToast("Mua sách đọc \"%@\" thành công".format(parameters: self.config.getValueFromKey("name")) , andPos: 0)
+//            self.showToast("Mua sách đọc \"%@\" thành công".format(parameters: self.config.getValueFromKey("name")) , andPos: 0)
+            self.didRequestUrlBook(book: self.tempInfo)
         } else {
             let checkInfo = NSMutableDictionary.init(dictionary: book)
             checkInfo["is_package"] = "0"
@@ -498,10 +505,18 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
     }
 
     func didRequestPackage(book: NSDictionary) {
+        if self.tempInfo.getValueFromKey("book_released") == "0" {
+            self.showToast("Truyện sắp phát hành. Hãy thử lại sau.", andPos: 0)
+            return
+        }
         if book.getValueFromKey("price") != "0" {
             self.didRequestUrl(info: book, callBack: { value in
                 if (value as! NSDictionary).response(forKey: "fail") {
-                    
+                    if self.tempInfo.getValueFromKey("has_preview") == "0" {
+                        self.didPressBuy(isAudio: false)
+                    } else {
+                        self.showReader(book: book, urlPath: self.tempInfo.getValueFromKey("demo_path"), preview: true)
+                    }
                 } else {
                     self.didRequestUrlBook(book: book)
                 }

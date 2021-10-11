@@ -35,7 +35,7 @@ typedef enum __playerState
 
 @property (strong, nonatomic) NSString *uID;
 
-@property (assign, nonatomic) BOOL retract;
+@property (assign, nonatomic) BOOL retract, isRestricted;
 
 - (void)didStartPlayWith:(NSString*)vID andInfo:(NSDictionary*)info;
 

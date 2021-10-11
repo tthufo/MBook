@@ -22,7 +22,7 @@
 
 #import <StoreKit/StoreKit.h>
 
-@interface HT_Root_ViewController ()<SKStoreProductViewControllerDelegate, UIGestureRecognizerDelegate>
+@interface HT_Root_ViewController ()<SKStoreProductViewControllerDelegate, UIGestureRecognizerDelegate, UITabBarControllerDelegate>
 {
     UIView * banner;
     
@@ -39,6 +39,8 @@
     [self initTabBar];
     
     [self preCachePayment];
+    
+    self.delegate = self;
     
 //    UIScreenEdgePanGestureRecognizer *pan = [[UIScreenEdgePanGestureRecognizer alloc] initWithTarget:self
 //                                                                                              action:@selector(handlePan:)];
@@ -146,6 +148,13 @@
 //    line.backgroundColor = [UIColor redColor];
 //    [self.tabBar addSubview: line];
 //    [self checkVipStatus];
+}
+
+- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
+    if ([((UINavigationController*)viewController).viewControllers.firstObject isKindOfClass:[User_Infor_ViewController class]]) {
+        User_Infor_ViewController * userInfo = ((UINavigationController*)viewController).viewControllers.firstObject;
+        [userInfo didGetInfoWithShow: NO];
+    }
 }
 
 - (void)reAdsAdd

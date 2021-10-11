@@ -629,7 +629,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view clipsSubviews="YES" alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L8M-1n-lcB">
+                <view clipsSubviews="YES" alpha="0.29999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L8M-1n-lcB">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
@@ -687,7 +687,7 @@
                 </label>
             </subviews>
             <viewLayoutGuide key="safeArea" id="a5K-kO-j7Q"/>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="cwm-ot-1a8" firstAttribute="centerX" secondItem="zp0-84-Aal" secondAttribute="centerX" id="6l5-DN-hav"/>
                 <constraint firstItem="L8M-1n-lcB" firstAttribute="bottom" secondItem="a5K-kO-j7Q" secondAttribute="bottom" id="7Fs-g3-3RF"/>
