@@ -111,7 +111,7 @@ class Payment_Option_Cell: UITableViewCell, UICollectionViewDelegate, UICollecti
 
         let image = self.withView(cell, tag: 1) as! UIImageView
          
-        image.imageUrlHolder(url: data.getValueFromKey("avatar_url"), holder: "icon_payment")
+        image.imageUrlHolder(url: data.getValueFromKey("avatar_url"), holder: "icon_payment_square")
         
         let image_temp = image.image
 

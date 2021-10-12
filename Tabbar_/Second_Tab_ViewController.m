@@ -473,7 +473,7 @@
 
 - (NSInteger)tableView:(UITableView *)_tableView numberOfRowsInSection:(NSInteger)section
 {
-    return section == 2 ? proList.count : section == 0 ? config.count : isHot ? dataList.count == 0 ? 0 : ([state[@"hot"] isEqualToString:@"0"] ? 3 : dataList.count) :topList.count == 0 ? 0 : ([state[@"top"] isEqualToString:@"0"] ? 3 : topList.count);
+    return section == 2 ? proList.count : section == 0 ? config.count : isHot ? dataList.count == 0 ? 0 : ([state[@"hot"] isEqualToString:@"0"] ? dataList.count < 3 ? dataList.count : 3 : dataList.count) : topList.count == 0 ? 0 : ([state[@"top"] isEqualToString:@"0"] ? topList.count < 3 ? topList.count : 3 : topList.count);
 }
 
 - (CGFloat)tableView:(UITableView *)_tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
