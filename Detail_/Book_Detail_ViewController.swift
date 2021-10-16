@@ -486,8 +486,8 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
            }
         
         if (result["result"] as! NSDictionary).getValueFromKey("status") == "1" {
-//            self.showToast("Mua sách đọc \"%@\" thành công".format(parameters: self.config.getValueFromKey("name")) , andPos: 0)
-            self.didRequestUrlBook(book: self.tempInfo)
+            self.showToast("Mua sách đọc \"%@\" thành công".format(parameters: self.config.getValueFromKey("name")) , andPos: 0)
+//            self.didRequestUrlBook(book: self.tempInfo)
         } else {
             let checkInfo = NSMutableDictionary.init(dictionary: book)
             checkInfo["is_package"] = "0"
@@ -549,26 +549,51 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
         })
     }
     
+//    let keys = relate ? [["key": "header_cell", "tag": 1, "height": 44],
+//               ["key": "category", "title": "Thể loại", "tag": 2, "height": 35 ],
+////                   ["key": "author", "title": "Tác giả", "tag": 2, "height": 35],
+////                   ["key": "publisher", "title": "Nhà xuất bản", "tag": 2, "height": 35],
+////                   ["key": "events", "title": "Tuyển tập", "tag": 2, "height": 35],
+//               ["key": "publish_time", "title": "Ngày upload", "arrow": "1", "tag": 2, "height": 35],
+//               ["key": "price", "title": "Giá mua lẻ", "tag": 2, "height": 35, "unit": " VND"],
+//               ["key": "button_cell", "tag": 4, "height": 35],
+//               ["key": "read_cell", "tag": 6, "height": 90],
+//    ] :
+//    [["key": "header_cell", "tag": 1, "height": 44],
+//               ["key": "category", "title": "Thể loại", "tag": 2, "height": 35 ],
+////                   ["key": "author", "title": "Tác giả", "tag": 2, "height": 35],
+////                   ["key": "publisher", "title": "Nhà xuất bản", "tag": 2, "height": 35],
+////                   ["key": "events", "title": "Tuyển tập", "tag": 2, "height": 35],
+//               ["key": "publish_time", "title": "Ngày upload", "arrow": "1", "tag": 2, "height": 35],
+//               ["key": "price", "title": "Giá mua lẻ", "tag": 2, "height": 35, "unit": " VND"],
+////                   ["key": "button_cell", "tag": 4, "height": 35],
+//               ["key": "read_cell", "tag": 6, "height": 90],
+//    ]
+    
     func filter(info: NSDictionary, relate: Bool) -> NSArray {
-        let keys = relate ? [["key": "header_cell", "tag": 1, "height": 44],
+        let keys = relate ? Information.check == "1" ? [["key": "header_cell", "tag": 1, "height": 44],
                    ["key": "category", "title": "Thể loại", "tag": 2, "height": 35 ],
-//                   ["key": "author", "title": "Tác giả", "tag": 2, "height": 35],
-//                   ["key": "publisher", "title": "Nhà xuất bản", "tag": 2, "height": 35],
-//                   ["key": "events", "title": "Tuyển tập", "tag": 2, "height": 35],
                    ["key": "publish_time", "title": "Ngày upload", "arrow": "1", "tag": 2, "height": 35],
                    ["key": "price", "title": "Giá mua lẻ", "tag": 2, "height": 35, "unit": " VND"],
                    ["key": "button_cell", "tag": 4, "height": 35],
                    ["key": "read_cell", "tag": 6, "height": 90],
-        ] :
+        ] : [["key": "header_cell", "tag": 1, "height": 44],
+             ["key": "category", "title": "Thể loại", "tag": 2, "height": 35 ],
+             ["key": "publish_time", "title": "Ngày upload", "arrow": "1", "tag": 2, "height": 35],
+//             ["key": "price", "title": "Giá mua lẻ", "tag": 2, "height": 35, "unit": " VND"],
+             ["key": "button_cell", "tag": 4, "height": 35],
+             ["key": "read_cell", "tag": 6, "height": 90],
+        ] : Information.check == "1" ?
         [["key": "header_cell", "tag": 1, "height": 44],
                    ["key": "category", "title": "Thể loại", "tag": 2, "height": 35 ],
-//                   ["key": "author", "title": "Tác giả", "tag": 2, "height": 35],
-//                   ["key": "publisher", "title": "Nhà xuất bản", "tag": 2, "height": 35],
-//                   ["key": "events", "title": "Tuyển tập", "tag": 2, "height": 35],
                    ["key": "publish_time", "title": "Ngày upload", "arrow": "1", "tag": 2, "height": 35],
                    ["key": "price", "title": "Giá mua lẻ", "tag": 2, "height": 35, "unit": " VND"],
-//                   ["key": "button_cell", "tag": 4, "height": 35],
                    ["key": "read_cell", "tag": 6, "height": 90],
+        ] : [["key": "header_cell", "tag": 1, "height": 44],
+             ["key": "category", "title": "Thể loại", "tag": 2, "height": 35 ],
+             ["key": "publish_time", "title": "Ngày upload", "arrow": "1", "tag": 2, "height": 35],
+//             ["key": "price", "title": "Giá mua lẻ", "tag": 2, "height": 35, "unit": " VND"],
+             ["key": "read_cell", "tag": 6, "height": 90],
         ]
                  
         let tempArray = NSMutableArray()
@@ -886,6 +911,7 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
                 
                 let purchase = self.withView(cell, tag: 5) as! UIButton
                 purchase.isHidden = self.tempInfo.getValueFromKey("price") == "0"
+                purchase.isHidden = Information.check == "0"
                 purchase.action(forTouch: [:]) { (obj) in
                     self.didRequestItemInfo(book: self.tempInfo)
                 }

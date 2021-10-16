@@ -1585,16 +1585,16 @@
             NSDictionary * dict = [responseString objectFromJSONString][@"result"];
 
             if ([[dict getValueFromKey:@"status"] isEqualToString:@"1"]) {
-//                [self showToast: [NSString stringWithFormat:@"Mua sách nói \"%@\" thành công", [self->config getValueFromKey:@"name"]] andPos:0];
-                if(![self.playerView isPlaying])
-                {
-                    [self.playerView play];
-                    if (!isRestricted) {
-                        [self startTimer];
-                    }
-                    [self fadeVolume];
-                    [titleSong resumeAnimations];
-                }
+                [self showToast: [NSString stringWithFormat:@"Mua sách nói \"%@\" thành công", [self->config getValueFromKey:@"name"]] andPos:0];
+//                if(![self.playerView isPlaying])
+//                {
+//                    [self.playerView play];
+//                    if (!isRestricted) {
+//                        [self startTimer];
+//                    }
+//                    [self fadeVolume];
+//                    [titleSong resumeAnimations];
+//                }
             } else {
                 [self didCheckBuy];
                 NSMutableDictionary * checkInfo = [[NSMutableDictionary alloc] initWithDictionary:book];
@@ -1715,28 +1715,52 @@
     }];
 }
 
+//NSArray * keys = relate ? @[@{@"key": @"header_cell", @"tag": @1, @"height": @44},
+//                   @{@"key": @"category", @"title": @"Thể loại", @"tag": @2, @"height": @35},
+////                       @{@"key": @"author", @"title": @"Tác giả", @"tag": @2, @"height": @35},
+////                       @{@"key": @"publisher", @"title": @"Nhà xuất bản", @"tag": @2, @"height": @35},
+////                       @{@"key": @"events", @"title": @"Tuyển tập", @"tag": @2, @"height": @35},
+//                   @{@"key": @"publish_time", @"title": @"Ngày upload", @"arrow": @"1", @"tag": @2, @"height": @35},
+//                   @{@"key": @"price", @"title": @"Giá mua lẻ", @"tag": @2, @"height": @35, @"unit": @" VND"},
+//                   @{@"key": @"button_cell", @"tag": @4, @"height": @35},
+//                   @{@"key": @"read_cell", @"tag": @6, @"height": @20},
+//] :
+//@[@{@"key": @"header_cell", @"tag": @1, @"height": @44},
+//                   @{@"key": @"category", @"title": @"Thể loại", @"tag": @2, @"height": @35},
+////                       @{@"key": @"author", @"title": @"Tác giả", @"tag": @2, @"height": @35},
+////                       @{@"key": @"publisher", @"title": @"Nhà xuất bản", @"tag": @2, @"height": @35},
+////                       @{@"key": @"events", @"title": @"Tuyển tập", @"tag": @2, @"height": @35},
+//                   @{@"key": @"publish_time", @"title": @"Ngày upload", @"arrow": @"1", @"tag": @2, @"height": @35},
+//                   @{@"key": @"price", @"title": @"Giá mua lẻ", @"tag": @2, @"height": @35, @"unit": @" VND"},
+////                       @{@"key": @"button_cell", @"tag": @4, @"height": @35},
+//                   @{@"key": @"read_cell", @"tag": @6, @"height": @20},
+//];
+
 - (NSArray*)filter:(NSDictionary*)info relate:(BOOL)relate {
-    NSArray * keys = relate ? @[@{@"key": @"header_cell", @"tag": @1, @"height": @44},
+    NSArray * keys = relate ? [Information.check isEqualToString:@"1"] ? @[@{@"key": @"header_cell", @"tag": @1, @"height": @44},
                        @{@"key": @"category", @"title": @"Thể loại", @"tag": @2, @"height": @35},
-//                       @{@"key": @"author", @"title": @"Tác giả", @"tag": @2, @"height": @35},
-//                       @{@"key": @"publisher", @"title": @"Nhà xuất bản", @"tag": @2, @"height": @35},
-//                       @{@"key": @"events", @"title": @"Tuyển tập", @"tag": @2, @"height": @35},
                        @{@"key": @"publish_time", @"title": @"Ngày upload", @"arrow": @"1", @"tag": @2, @"height": @35},
                        @{@"key": @"price", @"title": @"Giá mua lẻ", @"tag": @2, @"height": @35, @"unit": @" VND"},
                        @{@"key": @"button_cell", @"tag": @4, @"height": @35},
                        @{@"key": @"read_cell", @"tag": @6, @"height": @20},
-    ] :
+    ] : @[@{@"key": @"header_cell", @"tag": @1, @"height": @44},
+          @{@"key": @"category", @"title": @"Thể loại", @"tag": @2, @"height": @35},
+          @{@"key": @"publish_time", @"title": @"Ngày upload", @"arrow": @"1", @"tag": @2, @"height": @35},
+//          @{@"key": @"price", @"title": @"Giá mua lẻ", @"tag": @2, @"height": @35, @"unit": @" VND"},
+          @{@"key": @"button_cell", @"tag": @4, @"height": @35},
+          @{@"key": @"read_cell", @"tag": @6, @"height": @20},
+    ] : [Information.check isEqualToString:@"1"] ?
     @[@{@"key": @"header_cell", @"tag": @1, @"height": @44},
                        @{@"key": @"category", @"title": @"Thể loại", @"tag": @2, @"height": @35},
-//                       @{@"key": @"author", @"title": @"Tác giả", @"tag": @2, @"height": @35},
-//                       @{@"key": @"publisher", @"title": @"Nhà xuất bản", @"tag": @2, @"height": @35},
-//                       @{@"key": @"events", @"title": @"Tuyển tập", @"tag": @2, @"height": @35},
                        @{@"key": @"publish_time", @"title": @"Ngày upload", @"arrow": @"1", @"tag": @2, @"height": @35},
                        @{@"key": @"price", @"title": @"Giá mua lẻ", @"tag": @2, @"height": @35, @"unit": @" VND"},
-//                       @{@"key": @"button_cell", @"tag": @4, @"height": @35},
                        @{@"key": @"read_cell", @"tag": @6, @"height": @20},
-    ]
-    ;
+    ] : @[@{@"key": @"header_cell", @"tag": @1, @"height": @44},
+          @{@"key": @"category", @"title": @"Thể loại", @"tag": @2, @"height": @35},
+          @{@"key": @"publish_time", @"title": @"Ngày upload", @"arrow": @"1", @"tag": @2, @"height": @35},
+//          @{@"key": @"price", @"title": @"Giá mua lẻ", @"tag": @2, @"height": @35, @"unit": @" VND"},
+          @{@"key": @"read_cell", @"tag": @6, @"height": @20},
+    ];
     NSMutableArray * tempArray = [NSMutableArray new];
     for (NSDictionary * key in keys) {
         NSString * keying = [key getValueFromKey:@"key"];
@@ -1971,6 +1995,7 @@
             }];
             UIButton * purchase = [self withView:cell tag: 5];
             purchase.hidden = [[self->tempInfo getValueFromKey:@"price"] isEqualToString:@"0"];
+            purchase.hidden = [Information.check isEqualToString:@"0"];
             [purchase actionForTouch:@{} and:^(NSDictionary *touchInfo) {
                 [self didRequestItemInfo:self->tempInfo];
             }];
