@@ -205,15 +205,17 @@ class PC_Forgot_ViewController: UIViewController , UITextFieldDelegate {
             let result = response?.dictionize() ?? [:]
                                     
             if result.getValueFromKey("error_code") != "0" {
-                EM_MenuView.init(confirm: ["image": "fail", "line1": "Lấy lại mật khẩu không thành công", "line2": "Xin lỗi bạn về sự cố này, vui lòng thử lại sau", "line3": "Thoát"]).show { (index, obj, menu) in
+                EM_MenuView.init(confirm: ["image": "fail", "line1": "Lấy lại mật khẩu không thành công", "line2": result .getValueFromKey("error_msg") == "" ? "Xin lỗi quý khách về sự cố này. Vui lòng thử lại sau!" : result.getValueFromKey("error_msg") as Any, "line3": "Thoát"]).show { (index, obj, menu) in
                     if index == 4 {
                     }
                     (menu!).close()
                 }
                 return
             }
+            
+//            "Vui lòng kiểm tra hòm thư hoặc tin nhắn\n để lấy mật khẩu mới"
 
-            EM_MenuView.init(confirm: ["image": "success", "line1": "Mật khẩu mới đã tạo", "line2": "Vui lòng kiểm tra hòm thư hoặc tin nhắn\n để lấy mật khẩu mới", "line3": "Về trang Đăng nhập"]).show { (index, obj, menu) in
+            EM_MenuView.init(confirm: ["image": "success", "line1": "Mật khẩu mới đã tạo", "line2": result .getValueFromKey("error_msg"), "line3": "Về trang Đăng nhập"]).show { (index, obj, menu) in
                 (menu!).close()
                 if index == 4 {
                     self.navigationController?.popToRootViewController(animated: true)

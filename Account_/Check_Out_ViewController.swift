@@ -180,7 +180,7 @@ extension Check_Out_ViewController: UITableViewDataSource, UITableViewDelegate {
 
                 let pricing = self.info.getValueFromKey("price")! as NSString
                         
-                price.text = addDot(number: pricing.integerValue) + "đ"
+                price.text = addDot(number: pricing.integerValue) + "VND"
 
                 let des = self.withView(cell, tag: 3) as! UILabel
 
@@ -196,7 +196,7 @@ extension Check_Out_ViewController: UITableViewDataSource, UITableViewDelegate {
 
                 let pricing = self.info.getValueFromKey("price")! as NSString
                         
-                price.text = addDot(number: pricing.integerValue) + "đ"
+                price.text = addDot(number: pricing.integerValue) + "VND"
             }
             
             if indexPath.row == 2 {
@@ -241,7 +241,7 @@ extension Check_Out_ViewController: UITableViewDataSource, UITableViewDelegate {
                 
                 let pricing = self.info.getValueFromKey("price")! as NSString
                         
-                price.text = addDot(number: pricing.integerValue) + "đ"
+                price.text = addDot(number: pricing.integerValue) + "VND"
                 
                 let backgroundImage = self.withView(cell, tag:11) as! UIImageView
                 backgroundImage.imageUrl(url: self.info.getValueFromKey("avatar"))

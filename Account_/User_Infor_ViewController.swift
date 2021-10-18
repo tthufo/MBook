@@ -230,15 +230,15 @@ class User_Infor_ViewController: UIViewController, UITextFieldDelegate {
         name.text = Information.userInfo?.getValueFromKey("name")
         userName.text = Information.userInfo?.getValueFromKey("name") == "" ? "(Chưa cài đặt)" : Information.userInfo?.getValueFromKey("name")
         if Information.userInfo?.getValueFromKey("name") == "" {
-            userName.textColor = .black
+            userName.textColor = .darkGray
         }
         phone.text = Information.userInfo?.getValueFromKey("phone") == "" ? "(Chưa cài đặt)" : Information.userInfo?.getValueFromKey("phone")
         if Information.userInfo?.getValueFromKey("phone") == "" {
-            phone.textColor = .black
+            phone.textColor = .darkGray
         }
         email.text = Information.userInfo?.getValueFromKey("email") == "" ? "(Chưa cài đặt)" : Information.userInfo?.getValueFromKey("email")
         if Information.userInfo?.getValueFromKey("email") == "" {
-            email.textColor = .black
+            email.textColor = .darkGray
         }
         if Information.avatar != nil {
             avatarTemp = Information.avatar

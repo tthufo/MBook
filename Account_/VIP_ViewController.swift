@@ -219,7 +219,7 @@ extension VIP_ViewController: UITableViewDataSource, UITableViewDelegate {
         
         let pricing = data.getValueFromKey("price")! as NSString
                 
-        price.text = addDot(number: pricing.integerValue) + "đ"
+        price.text = addDot(number: pricing.integerValue) + "VND"
 
         let icon = self.withView(cell, tag: 99) as! UIImageView
 
