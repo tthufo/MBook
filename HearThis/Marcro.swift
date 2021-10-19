@@ -475,6 +475,17 @@ extension UITextField {
 }
 
 extension UIViewController {
+    
+    @objc func addDot(number: Int) -> String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .currency
+        formatter.maximumFractionDigits = 0
+        formatter.currencySymbol = ""
+        formatter.decimalSeparator = ","
+        formatter.groupingSeparator = ""
+        let tem = formatter.string(from: NSNumber(value: number))!
+        return tem.replace(target: ",", withString: ",")
+    }
         
     @objc func preCachePayment() {
         LTRequest.sharedInstance()?.didRequestInfo(["CMD_CODE":"getPaymentChannel",

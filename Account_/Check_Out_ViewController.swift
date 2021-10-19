@@ -180,7 +180,7 @@ extension Check_Out_ViewController: UITableViewDataSource, UITableViewDelegate {
 
                 let pricing = self.info.getValueFromKey("price")! as NSString
                         
-                price.text = addDot(number: pricing.integerValue) + "VND"
+                price.text = addDot(number: pricing.integerValue) + " VND"
 
                 let des = self.withView(cell, tag: 3) as! UILabel
 
@@ -196,7 +196,7 @@ extension Check_Out_ViewController: UITableViewDataSource, UITableViewDelegate {
 
                 let pricing = self.info.getValueFromKey("price")! as NSString
                         
-                price.text = addDot(number: pricing.integerValue) + "VND"
+                price.text = addDot(number: pricing.integerValue) + " VND"
             }
             
             if indexPath.row == 2 {
@@ -241,7 +241,7 @@ extension Check_Out_ViewController: UITableViewDataSource, UITableViewDelegate {
                 
                 let pricing = self.info.getValueFromKey("price")! as NSString
                         
-                price.text = addDot(number: pricing.integerValue) + "VND"
+                price.text = addDot(number: pricing.integerValue) + " VND"
                 
                 let backgroundImage = self.withView(cell, tag:11) as! UIImageView
                 backgroundImage.imageUrl(url: self.info.getValueFromKey("avatar"))
@@ -280,16 +280,16 @@ extension Check_Out_ViewController: UITableViewDataSource, UITableViewDelegate {
         return cell
     }
     
-    func addDot(number: Int) -> String {
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .currency
-        formatter.maximumFractionDigits = 0
-        formatter.currencySymbol = ""
-        formatter.decimalSeparator = ","
-        formatter.groupingSeparator = ""
-        let tem = formatter.string(from: NSNumber(value: number))!
-        return tem.replace(target: ",", withString: ",")
-    }
+//    func addDot(number: Int) -> String {
+//        let formatter = NumberFormatter()
+//        formatter.numberStyle = .currency
+//        formatter.maximumFractionDigits = 0
+//        formatter.currencySymbol = ""
+//        formatter.decimalSeparator = ","
+//        formatter.groupingSeparator = ""
+//        let tem = formatter.string(from: NSNumber(value: number))!
+//        return tem.replace(target: ",", withString: ",")
+//    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)

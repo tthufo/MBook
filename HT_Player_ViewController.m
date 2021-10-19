@@ -1598,8 +1598,8 @@
             } else {
                 [self didCheckBuy];
                 NSMutableDictionary * checkInfo = [[NSMutableDictionary alloc] initWithDictionary:book];
+                checkInfo[@"price"] = [[checkInfo getValueFromKey:@"price"] stringByReplacingOccurrencesOfString:@"," withString:@""];
                 checkInfo[@"is_package"] = @"0";
-                
                 Check_Out_ViewController * checkOut = [Check_Out_ViewController new];
                 checkOut.info = checkInfo;
                 
@@ -1631,8 +1631,21 @@
         NSDictionary * dict = [responseString objectFromJSONString];
 
         if ([[dict getValueFromKey:@"error_code"] isEqualToString:@"0"] && dict[@"result"] != [NSNull null]) {
-            NSDictionary * result = [responseString objectFromJSONString][@"result"];
+            NSDictionary * tempResult = [responseString objectFromJSONString][@"result"];
            
+            NSMutableDictionary * result = [[NSMutableDictionary alloc] initWithDictionary:tempResult];
+            
+            if (![[result getValueFromKey:@"price"] isEqualToString:@"0"]) {
+                NSString * pricing = [result getValueFromKey:@"price"];
+                result[@"price"] = [self addDotWithNumber:pricing.integerValue];
+            }
+            
+//            let data = NSMutableDictionary.init(dictionary: dataTemp)
+//            if data.getValueFromKey("price") != "0" {
+//                let pricing = data.getValueFromKey("price")! as NSString
+//                data["price"] = self.addDot(number: pricing.integerValue)
+//            }
+            
             self->catId = ((NSArray*)result[@"category"]).count == 0 ? @"0" : result[@"category"][0][@"id"];
             
             [self didRequestData];
@@ -1652,8 +1665,10 @@
             [self->_likeBtn setImage: likeStatus ? [[UIImage imageNamed:@"ico_like_fill"] imageWithTintColor:[UIColor systemPinkColor]] : [UIImage imageNamed:@"ico_like_white"]
                     forState:UIControlStateNormal];
             
-            NSString * tem = ((NSArray*)result[@"publisher"]).count == 0 ? @"" : result[@"publisher"][0][@"description"];
+//            NSString * tem = ((NSArray*)result[@"publisher"]).count == 0 ? @"" : result[@"publisher"][0][@"description"];
             
+            NSString * tem = [result getValueFromKey:@"description"];
+
             self->tempBio = tem;
             
             self->bioString = [self iniBio:self->showMore];
@@ -1994,8 +2009,8 @@
                 [self didRequestReaderContent];
             }];
             UIButton * purchase = [self withView:cell tag: 5];
-            purchase.hidden = [[self->tempInfo getValueFromKey:@"price"] isEqualToString:@"0"];
-            purchase.hidden = [Information.check isEqualToString:@"0"];
+            purchase.hidden = [[self->tempInfo getValueFromKey:@"price"] isEqualToString:@"0"] || [Information.check isEqualToString:@"0"];
+//            purchase.hidden = [Information.check isEqualToString:@"0"];
             [purchase actionForTouch:@{} and:^(NSDictionary *touchInfo) {
                 [self didRequestItemInfo:self->tempInfo];
             }];

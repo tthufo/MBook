@@ -345,7 +345,14 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
                 return
             }
             
-            let data = result["result"] as! NSDictionary
+            let dataTemp = result["result"] as! NSDictionary
+            
+            let data = NSMutableDictionary.init(dictionary: dataTemp)
+            
+            if data.getValueFromKey("price") != "0" {
+                let pricing = data.getValueFromKey("price")! as NSString
+                data["price"] = self.addDot(number: pricing.integerValue)
+            }
             
             self.catId = (data["category"] as! NSArray).count == 0 ? "0" : ((data["category"] as! NSArray).firstObject as! NSDictionary).getValueFromKey("id")
             
@@ -353,7 +360,6 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
             
             self.detailList.removeAllObjects()
             
-                        
             self.detailList.addObjects(from: self.filter(info: data, relate: !(data["related"] is NSNull) || data.getValueFromKey("price") != "0") as! [Any])
             
             self.tempInfo.removeAllObjects()
@@ -366,7 +372,9 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
             
             self.likeBtn.setImage(likeStatus == "1" ? UIImage(named:"ico_like_fill")?.withTintColor(.systemPink) : UIImage(named:"ico_like_white"), for: .normal)
             
-            self.tempBio = (data["publisher"] as! NSArray).count == 0 ? "" : ((data["publisher"] as! NSArray).firstObject as! NSDictionary)["description"] as! String
+//            self.tempBio = (data["publisher"] as! NSArray).count == 0 ? "" : ((data["publisher"] as! NSArray).firstObject as! NSDictionary)["description"] as! String
+            
+            self.tempBio = data.getValueFromKey("description")
             
             self.bioString = self.initBio(show: self.showMore)
             
@@ -490,6 +498,7 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
 //            self.didRequestUrlBook(book: self.tempInfo)
         } else {
             let checkInfo = NSMutableDictionary.init(dictionary: book)
+            checkInfo["price"] = checkInfo.getValueFromKey("price").replace(target: ",", withString: "")
             checkInfo["is_package"] = "0"
             
             let checkOut = Check_Out_ViewController.init()
@@ -628,9 +637,22 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
                 tempArray.add(dict)
             }
         }
-                
+        
+        print("-->", tempArray)
+        
         return tempArray
     }
+    
+//    func addDot(number: Int) -> String {
+//        let formatter = NumberFormatter()
+//        formatter.numberStyle = .currency
+//        formatter.maximumFractionDigits = 0
+//        formatter.currencySymbol = ""
+//        formatter.decimalSeparator = ","
+//        formatter.groupingSeparator = ""
+//        let tem = formatter.string(from: NSNumber(value: number))!
+//        return tem.replace(target: ",", withString: ",")
+//    }
     
     func didGoToType(object: NSDictionary) {
         let type = object.getValueFromKey("key")
@@ -883,7 +905,7 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
                title.text = detail.getValueFromKey("title")
     
                let description = self.withView(cell, tag: 3) as! UILabel
-                description.text = "%@%@".format(parameters: detail.getValueFromKey("name"), detail.getValueFromKey("unit"))
+               description.text = "%@%@".format(parameters: detail.getValueFromKey("name"), detail.getValueFromKey("unit"))
                 
                 for v in cell.contentView.subviews {
                     v.isHidden = v.tag != 2 && v.tag != 3
@@ -910,8 +932,7 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
                 }
                 
                 let purchase = self.withView(cell, tag: 5) as! UIButton
-                purchase.isHidden = self.tempInfo.getValueFromKey("price") == "0"
-                purchase.isHidden = Information.check == "0"
+                purchase.isHidden = self.tempInfo.getValueFromKey("price") == "0" || Information.check == "0"
                 purchase.action(forTouch: [:]) { (obj) in
                     self.didRequestItemInfo(book: self.tempInfo)
                 }
