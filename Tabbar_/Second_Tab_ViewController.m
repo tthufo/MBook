@@ -99,6 +99,10 @@
     [tableView withCell: @"Book_Top_Cell"];
 
     [tableView withCell: @"TG_Room_Cell_0"];
+    
+    [tableView withCell: @"TG_Room_Cell_1"];
+
+    [tableView withCell: @"TG_Room_Cell_2"];
 
     refreshControl = [UIRefreshControl new];
     
@@ -106,11 +110,12 @@
     
     [refreshControl addTarget:self action:@selector(didReloadData) forControlEvents:UIControlEventValueChanged];
     
-    [self didRequestData:YES];
-    
-    [self didRequestTop:NO];
-    
-    [self didRequestPromo];
+    [self showSVHUD:@"" andOption:0];
+//    [self didRequestData:YES];
+//
+//    [self didRequestTop:NO];
+//
+//    [self didRequestPromo];
         
     __weak typeof(self) weakSelf = self;
     tagView.callBack = ^(NSDictionary *infor) {
@@ -174,13 +179,19 @@
                         @"CMD_CODE" : @"getListPromotionBook",
                         @"group_type":@(1),
                         @"page_index": @1,
-                        @"page_size": @24
+                        @"page_size": @25
                         } mutableCopy],
                 @"height": @0,
                 @"directon": @"horizontal",
                 @"loaded": @NO
             } mutableCopy]
     ] mutableCopy];
+    
+    NSTimeInterval delayInSeconds = 0.5;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [self didReloadData];
+    });
     
     [searchBtn imageColorWithColor:[UIColor lightGrayColor]];
     
@@ -214,12 +225,28 @@
 
 - (void)didReloadData
 {
+    for (NSMutableDictionary* dict in config) {
+        dict[@"loaded"] = @NO;
+    }
+    
+    NSTimeInterval delayInSeconds = 0.1;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [self->refreshControl endRefreshing];
+        [self->tableView reloadData];
+    });
+    
     isLoadMore = NO;
     pageIndex = 1;
     totalPage = 1;
-    [self didRequestData:YES];
-    [self didRequestTop:NO];
-    [self didRequestPromo];
+    
+    NSTimeInterval delayInSeconds_1 = 0.6;
+    dispatch_time_t popTime_1 = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds_1 * NSEC_PER_SEC));
+    dispatch_after(popTime_1, dispatch_get_main_queue(), ^(void){
+        [self didRequestData:YES];
+        [self didRequestTop:NO];
+        [self didRequestPromo];
+    });
 }
 
 - (void)didRequestPromo
@@ -483,7 +510,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)_tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell * cell = [_tableView dequeueReusableCellWithIdentifier: indexPath.section == 2 ? @"Book_List_Cell" : indexPath.section == 0 ? @"TG_Room_Cell_0" : isHot ? @"Book_List_Cell" : @"Book_Top_Cell" forIndexPath:indexPath];
+    UITableViewCell * cell = [_tableView dequeueReusableCellWithIdentifier: indexPath.section == 2 ? @"Book_List_Cell" : indexPath.section == 0 ? [NSString stringWithFormat:@"TG_Room_Cell_%li", (long)indexPath.row] : isHot ? @"Book_List_Cell" : @"Book_Top_Cell" forIndexPath:indexPath];
     
     if (indexPath.section == 1 || indexPath.section == 2) {
         
