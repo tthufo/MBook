@@ -466,7 +466,7 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
         let bookInfo = NSMutableDictionary.init(dictionary: book)
 
         bookInfo["file_url"] = urlPath
-
+        
         reader.config = bookInfo
 
         self.navigationController?.pushViewController(reader, animated: true)
@@ -520,6 +520,7 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
         }
         if book.getValueFromKey("price") != "0" {
             self.didRequestUrl(info: book, callBack: { value in
+                print("-->", self.tempInfo.getValueFromKey("has_preview"))
                 if (value as! NSDictionary).response(forKey: "fail") {
                     if self.tempInfo.getValueFromKey("has_preview") == "0" {
                         self.didPressBuy(isAudio: false)

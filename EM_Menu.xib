@@ -642,14 +642,14 @@
                     </constraints>
                 </view>
                 <button opaque="NO" clipsSubviews="YES" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qft-ch-R0L">
-                    <rect key="frame" x="102.5" y="415" width="170" height="52"/>
+                    <rect key="frame" x="102.5" y="415" width="170" height="50"/>
                     <color key="backgroundColor" red="0.1176470588" green="0.57254901960000004" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="52" id="WVG-BZ-H3z"/>
+                        <constraint firstAttribute="height" constant="50" id="WVG-BZ-H3z"/>
                         <constraint firstAttribute="width" constant="170" id="lpt-qf-zDa"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="21"/>
-                    <state key="normal" title="MUA GÓI    ">
+                    <state key="normal" title="MUA GÓI">
                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
                     <userDefinedRuntimeAttributes>
@@ -659,7 +659,7 @@
                     </userDefinedRuntimeAttributes>
                 </button>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ico_vip" translatesAutoresizingMaskIntoConstraints="NO" id="ZZZ-v0-lsR">
-                    <rect key="frame" x="228.5" y="410" width="61" height="61"/>
+                    <rect key="frame" x="239.5" y="409" width="61" height="61"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="61" id="Vfz-9s-5To"/>
                         <constraint firstAttribute="height" constant="61" id="mfi-Tv-in6"/>
@@ -695,8 +695,8 @@
                 <constraint firstItem="Qft-ch-R0L" firstAttribute="centerX" secondItem="zp0-84-Aal" secondAttribute="centerX" id="AIJ-cQ-2jc"/>
                 <constraint firstItem="L8M-1n-lcB" firstAttribute="trailing" secondItem="a5K-kO-j7Q" secondAttribute="trailing" id="FgR-VG-13N"/>
                 <constraint firstItem="L8M-1n-lcB" firstAttribute="top" secondItem="a5K-kO-j7Q" secondAttribute="top" id="MZV-tF-uu3"/>
-                <constraint firstItem="ZZZ-v0-lsR" firstAttribute="leading" secondItem="47I-5X-Xxz" secondAttribute="trailing" constant="31" id="VfL-T7-EAK"/>
-                <constraint firstItem="ZZZ-v0-lsR" firstAttribute="top" secondItem="CCv-Ux-XA3" secondAttribute="bottom" constant="56" id="gD4-fQ-Zn6"/>
+                <constraint firstItem="ZZZ-v0-lsR" firstAttribute="leading" secondItem="47I-5X-Xxz" secondAttribute="trailing" constant="42" id="VfL-T7-EAK"/>
+                <constraint firstItem="ZZZ-v0-lsR" firstAttribute="top" secondItem="CCv-Ux-XA3" secondAttribute="bottom" constant="55" id="gD4-fQ-Zn6"/>
                 <constraint firstItem="47I-5X-Xxz" firstAttribute="top" secondItem="CCv-Ux-XA3" secondAttribute="bottom" constant="25" id="jT6-YI-A0j"/>
                 <constraint firstItem="47I-5X-Xxz" firstAttribute="centerX" secondItem="zp0-84-Aal" secondAttribute="centerX" id="nNw-kB-uQt"/>
                 <constraint firstItem="L8M-1n-lcB" firstAttribute="leading" secondItem="zp0-84-Aal" secondAttribute="leading" id="rkP-cX-JaJ"/>

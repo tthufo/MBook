@@ -219,11 +219,12 @@ extension VIP_ViewController: UITableViewDataSource, UITableViewDelegate {
         
         let pricing = data.getValueFromKey("price")! as NSString
                 
-        price.text = addDot(number: pricing.integerValue) + " VND"
+        let finalPrice = pricing.replacingOccurrences(of: ".", with: "").replace(target: "đ/ngày", withString: "") as! NSString
+        price.text = addDot(number: finalPrice.integerValue) + " VND"
 
-        let icon = self.withView(cell, tag: 99) as! UIImageView
+//        let icon = self.withView(cell, tag: 99) as! UIImageView
 
-        icon.isHidden = data.getValueFromKey("normal") == "1" ? true : false
+//        icon.isHidden = data.getValueFromKey("normal") == "1" ? true : false
         
         let des = self.withView(cell, tag: 3) as! UILabel
 
@@ -231,17 +232,6 @@ extension VIP_ViewController: UITableViewDataSource, UITableViewDelegate {
         
         return cell
     }
-    
-//    func addDot(number: Int) -> String {
-//        let formatter = NumberFormatter()
-//        formatter.numberStyle = .currency
-//        formatter.maximumFractionDigits = 0
-//        formatter.currencySymbol = ""
-//        formatter.decimalSeparator = ","
-//        formatter.groupingSeparator = ""
-//        let tem = formatter.string(from: NSNumber(value: number))!
-//        return tem.replace(target: ",", withString: ",")
-//    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)

@@ -221,7 +221,7 @@ class Reader_ViewController: UIViewController {
         queueingScrollView?.showsHorizontalScrollIndicator = false
         subscribeToNotifications()
         
-        if !self.existingFile(fileName: self.config.getValueFromKey("id")) {
+        if !self.existingFile(fileName: isRestricted ? self.config.getValueFromKey("id") + "_preview" : self.config.getValueFromKey("id")) {
             didDownload()
             showHide(show: true)
         } else {
@@ -309,7 +309,6 @@ class Reader_ViewController: UIViewController {
     }
 
     func pdfToText(fromPDF: String) -> String {
-//        let urlPath = Bundle.main.url(forResource: fromPDF, withExtension: "pdf")
         let docContent = NSMutableAttributedString()
         if let pdf = PDFDocument(url: URL(fileURLWithPath: fromPDF)) {
             let pageCount = pdf.pageCount
@@ -326,8 +325,7 @@ class Reader_ViewController: UIViewController {
     
     func viewPDF() {
         showHide(show: false)
-        let path = self.pdfFile(fileName: self.config.getValueFromKey("id"))
-//        print("-->", self.pdfToText(fromPDF: path))
+        let path = self.pdfFile(fileName: isRestricted ? self.config.getValueFromKey("id") + "_preview" : self.config.getValueFromKey("id"))
         if let document = PDFDocument(url: URL(fileURLWithPath: path)) {
             self.pdfDocument = document
             self.pageNumber.text = "%i / %i".format(parameters: 1, document.documentRef?.numberOfPages as! CVarArg)
@@ -345,8 +343,8 @@ class Reader_ViewController: UIViewController {
 
     func didDownload() {
         downLoad.didProgress(["url": self.config.getValueFromKey("file_url") as Any,
-                                               "name": self.config.getValueFromKey("id") as Any,
-                                               "infor": self.config as Any
+                              "name": isRestricted ? self.config.getValueFromKey("id") + "_preview" : self.config.getValueFromKey("id") as Any,
+                              "infor": self.config as Any
             ], andCompletion: { (index, download, object) in
             if index == -1 {
                 self.failLabel.alpha = 1
@@ -373,8 +371,8 @@ class Reader_ViewController: UIViewController {
         self.restart.alpha = 0
         self.failLabel.alpha = 0
         self.downLoad.alpha = 1
-        if !self.existingFile(fileName: self.config.getValueFromKey("id")) {
-           self.deleteFile(fileName: self.pdfFile(fileName: self.config.getValueFromKey("id")))
+        if !self.existingFile(fileName: isRestricted ? self.config.getValueFromKey("id") + "_preview" : self.config.getValueFromKey("id")) {
+            self.deleteFile(fileName: self.pdfFile(fileName: isRestricted ? self.config.getValueFromKey("id") + "_preview" : self.config.getValueFromKey("id")))
         }
         showHide(show: true)
         self.didDownload()
@@ -408,8 +406,8 @@ class Reader_ViewController: UIViewController {
        }
        if downLoad.percentComplete > 0 && downLoad.percentComplete < 100 {
             downLoad.forceStop()
-            if !self.existingFile(fileName: self.config.getValueFromKey("id")) {
-                self.deleteFile(fileName: self.pdfFile(fileName: self.config.getValueFromKey("id")))
+           if !self.existingFile(fileName: isRestricted ? self.config.getValueFromKey("id") + "_preview" : self.config.getValueFromKey("id")) {
+               self.deleteFile(fileName: self.pdfFile(fileName: isRestricted ? self.config.getValueFromKey("id") + "_preview" : self.config.getValueFromKey("id")))
             }
         }
     }
