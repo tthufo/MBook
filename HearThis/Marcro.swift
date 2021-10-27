@@ -521,8 +521,12 @@ extension UIViewController {
     
     func callNumber(phoneNumber: String) {
         
+        if IS_IPAD {
+            self.showToast("Thiết bị của bạn không thể thực hiện cuộc gọi", andPos: 0)
+            return
+        }
+        
         if let phoneCallURL = URL(string: "telprompt://\(phoneNumber)") {
-            
             let application:UIApplication = UIApplication.shared
             if (application.canOpenURL(phoneCallURL)) {
                 if #available(iOS 10.0, *) {
@@ -531,6 +535,8 @@ extension UIViewController {
                     application.openURL(phoneCallURL as URL)
                 }
             }
+        } else {
+            self.showToast("Thiết bị của bạn không thể thực hiện cuộc gọi", andPos: 0)
         }
     }
     
@@ -885,7 +891,7 @@ extension UIViewController {
     }
     
     @objc func filterArray(data: NSArray) -> NSArray {
-        let ids = ["244", "242", "240", "225", "183", "189", "288", "290", "287", "289", "239"]
+        let ids = ["244", "242", "240", "225", "183", "189", "282", "288", "290", "287", "289", "239"]
         let tempArray = NSMutableArray.init()
         for dict in data {
             if !ids.contains((dict as! NSDictionary).getValueFromKey("id")) {

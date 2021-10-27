@@ -254,6 +254,8 @@ extension VIP_ViewController: UITableViewDataSource, UITableViewDelegate {
                     controller.recipients = [data.getValueFromKey("reg_shortcode")]
                     controller.messageComposeDelegate = self
                     self.present(controller, animated: true, completion: nil)
+                } else {
+                    self.showToast("Thiết bị của bạn không thể thực hiện gửi tin nhắn", andPos: 0)
                 }
             } else {
                 self.showToast("Bạn đã đăng ký " + data.getValueFromKey("name"), andPos: 0)

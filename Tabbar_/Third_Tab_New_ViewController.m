@@ -178,7 +178,7 @@
                     [dataList removeAllObjects];
                 }
                 
-                [dataList addObjectsFromArray:dict[@"result"][@"data"]];
+                [dataList addObjectsFromArray:[self filterArrayWithData: dict[@"result"][@"data"]]];
             } else {
                 [self showToast:[[dict getValueFromKey:@"error_msg"] isEqualToString:@""] ? @"Lỗi xảy ra, mời bạn thử lại" : [dict getValueFromKey:@"error_msg"] andPos:0];
             }
@@ -271,7 +271,7 @@
     
     Progress * progress = ((Progress*)[self withView:cell tag:12]);
     
-    progress.hidden = NO;
+    progress.hidden = YES;
     
     progress.percentage.text = indexPath.row % 2 == 0 ? @"16 %" : @"30 %";
     

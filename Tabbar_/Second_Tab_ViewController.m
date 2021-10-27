@@ -277,7 +277,7 @@
             
                 [proList removeAllObjects];
                 
-                [proList addObjectsFromArray:dict[@"result"][@"data"]];
+                [proList addObjectsFromArray:[self filterArrayWithData: dict[@"result"][@"data"]]];
             } else {
                 [self showToast:[[dict getValueFromKey:@"error_msg"] isEqualToString:@""] ? @"Lỗi xảy ra, mời bạn thử lại" : [dict getValueFromKey:@"error_msg"] andPos:0];
             }
@@ -348,7 +348,7 @@
             if (![dict[@"result"] isEqual:[NSNull null]]) {
                 [dataList removeAllObjects];
         
-                [dataList addObjectsFromArray:dict[@"result"]];
+                [dataList addObjectsFromArray:[self filterArrayWithData: dict[@"result"]]];
             } else {
                 [self showToast:[[dict getValueFromKey:@"error_msg"] isEqualToString:@""] ? @"Lỗi xảy ra, mời bạn thử lại" : [dict getValueFromKey:@"error_msg"] andPos:0];
             }
@@ -524,7 +524,7 @@
         cell.backgroundColor = indexPath.section == 1 ? [AVHexColor colorWithHexString: @"#ECECE7"] : [UIColor clearColor];
         
         NSDictionary * list = indexPath.section == 1 ? dataList[indexPath.row] : proList[indexPath.row];
-        
+                
         UIView * bg = (UIView*)[self withView:cell tag:100];
         
         UIImageView * booking = (UIImageView*)[self withView:cell tag:1];
@@ -548,9 +548,13 @@
         
         [(UILabel*)[self withView:cell tag:2] setText: [list getValueFromKey:@"name"]];
 
-        [(UILabel*)[self withView:cell tag:3] setText: ((NSArray*)list[@"author"]).count > 1 ? @"Nhiều tác giả" : list[@"author"][0][@"name"]];
+        NSString * author = [list[@"author"] isEqual: [NSNull null]] ? @"" : ((NSArray*)list[@"author"]).count > 1 ? @"Nhiều tác giả" : ((NSArray*)list[@"author"]).count == 0 ? @"Đang cập nhật" : list[@"author"][0][@"name"];
+        
+        [(UILabel*)[self withView:cell tag:3] setText: author];
+        
+        NSString * category = [list[@"category"] isEqual: [NSNull null]] ? @"" : ((NSArray*)list[@"category"]).count > 1 ? @"Đang cập nhật" : ((NSArray*)list[@"category"]).count == 0 ? @"Đang cập nhật" : list[@"category"][0][@"name"];
 
-        [(UILabel*)[self withView:cell tag:4] setText: ((NSArray*)list[@"category"]).count > 1 ? @"Đang cập nhật" : list[@"category"][0][@"name"]];
+        [(UILabel*)[self withView:cell tag:4] setText: category];
 
         [(UILabel*)[self withView:cell tag:5] setText: [NSString stringWithFormat:@"%@ chương", [list getValueFromKey:@"total_chapter"]]];
 

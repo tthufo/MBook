@@ -520,7 +520,6 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
         }
         if book.getValueFromKey("price") != "0" {
             self.didRequestUrl(info: book, callBack: { value in
-                print("-->", self.tempInfo.getValueFromKey("has_preview"))
                 if (value as! NSDictionary).response(forKey: "fail") {
                     if self.tempInfo.getValueFromKey("has_preview") == "0" {
                         self.didPressBuy(isAudio: false)

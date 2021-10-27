@@ -222,7 +222,7 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
 //            self.cover.alpha = 0
             }) { (done) in
                 
-            if NSDate.init().isPastTime("01/12/2021") {
+            if NSDate.init().isPastTime("05/12/2021") {
                 self.normalFlow(logged: logged, phoneNumber: phoneNumber, checking: "1")
             } else {
                 self.checking(logged: logged, phoneNumber: phoneNumber)
