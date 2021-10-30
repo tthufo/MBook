@@ -1599,7 +1599,7 @@
                 [self didCheckBuy];
                 NSMutableDictionary * checkInfo = [[NSMutableDictionary alloc] initWithDictionary:book];
                 checkInfo[@"price"] = [[[checkInfo getValueFromKey:@"price"] stringByReplacingOccurrencesOfString:@"," withString:@""] stringByReplacingOccurrencesOfString:@"." withString:@""];
-                NSLog(@"%@", checkInfo);
+//                NSLog(@"%@", checkInfo);
                 checkInfo[@"is_package"] = @"0";
                 Check_Out_ViewController * checkOut = [Check_Out_ViewController new];
                 checkOut.info = checkInfo;

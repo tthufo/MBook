@@ -94,7 +94,7 @@
     __weak typeof(self) weakSelf = self;
 
     tagView.callBack = ^(NSDictionary *infor) {
-        NSLog(@"%@", infor);
+//        NSLog(@"%@", infor);
         if ([[infor getValueFromKey:@"action"] isEqualToString:@"custom"]) {
             ((HT_Root_ViewController*)[weakSelf TABBAR]).selectedIndex = 1;
         } else {
@@ -202,7 +202,7 @@
 - (IBAction)didPressBuy:(id)sender {
     VIP_ViewController * vip = [VIP_ViewController new];
     vip.callBack = ^(NSDictionary *infor) {
-        NSLog(@"%@", infor);
+//        NSLog(@"%@", infor);
     };
     UINavigationController * nav = [[UINavigationController alloc] initWithRootViewController:vip];
     nav.navigationBarHidden = YES;

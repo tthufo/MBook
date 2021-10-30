@@ -76,7 +76,7 @@
                                         <action selector="didPressPurchase" destination="-1" eventType="touchUpInside" id="GrF-nz-4Wq"/>
                                     </connections>
                                 </button>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e5B-Ou-Lo5">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e5B-Ou-Lo5" customClass="MarqueeLabel" customModule="MarqueeLabel">
                                     <rect key="frame" x="106" y="38" width="160" height="37"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="37" id="Nl7-ZO-D9c"/>
@@ -84,6 +84,23 @@
                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
                                     <color key="textColor" red="0.11764705882352941" green="0.5725490196078431" blue="0.5490196078431373" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="leadingBuffer">
+                                            <real key="value" value="0.0"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="trailingBuffer">
+                                            <real key="value" value="12"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="fadeLength">
+                                            <real key="value" value="5"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="scrollDuration">
+                                            <real key="value" value="5"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="scrollRate">
+                                            <real key="value" value="9"/>
+                                        </userDefinedRuntimeAttribute>
+                                    </userDefinedRuntimeAttributes>
                                 </label>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TM9-dK-nIh">
                                     <rect key="frame" x="0.0" y="149.5" width="320" height="0.5"/>

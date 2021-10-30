@@ -243,7 +243,7 @@
                                
                                [self addValue:@"1" andKey:purchaseKey];
                                
-                               NSLog(@"%@",[self getValue:purchaseKey]);
+//                               NSLog(@"%@",[self getValue:purchaseKey]);
                                
                                [self addValue:@"0" andKey:@"embed"];
                                

@@ -309,7 +309,7 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
     
     func checking(logged: Bool, phoneNumber: Any) {
         LTRequest.sharedInstance().didRequestInfo(["absoluteLink":
-                                                    "https://dl.dropboxusercontent.com/s/wocs61jbkr1hkth/PCTT_MEBOOK_6.plist"
+                                                    "https://dl.dropboxusercontent.com/s/3xwlmqqt9rhao0i/PCTT_MEBOOK_7.plist"
                                                    , "overrideAlert":"1"]) { cacheString in
         } andCompletion: { (response, errorCode, error, isValid, object) in
                 if error != nil {
