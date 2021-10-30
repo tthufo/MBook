@@ -1598,7 +1598,8 @@
             } else {
                 [self didCheckBuy];
                 NSMutableDictionary * checkInfo = [[NSMutableDictionary alloc] initWithDictionary:book];
-                checkInfo[@"price"] = [[checkInfo getValueFromKey:@"price"] stringByReplacingOccurrencesOfString:@"," withString:@""];
+                checkInfo[@"price"] = [[[checkInfo getValueFromKey:@"price"] stringByReplacingOccurrencesOfString:@"," withString:@""] stringByReplacingOccurrencesOfString:@"." withString:@""];
+                NSLog(@"%@", checkInfo);
                 checkInfo[@"is_package"] = @"0";
                 Check_Out_ViewController * checkOut = [Check_Out_ViewController new];
                 checkOut.info = checkInfo;
@@ -1639,6 +1640,8 @@
                 NSString * pricing = [result getValueFromKey:@"price"];
                 result[@"price"] = [self addDotWithNumber:pricing.integerValue];
             }
+            
+//            NSLog(@"====>%@", result);
             
 //            let data = NSMutableDictionary.init(dictionary: dataTemp)
 //            if data.getValueFromKey("price") != "0" {

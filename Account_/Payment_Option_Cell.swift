@@ -50,7 +50,7 @@ class Payment_Option_Cell: UITableViewCell, UICollectionViewDelegate, UICollecti
     func didRequestPaymentChannel() {
         LTRequest.sharedInstance()?.didRequestInfo(["CMD_CODE":"getPaymentChannel",
                                                     "header":["session":Information.token == nil ? "" : Information.token!],
-                                                    "item_price":Int(self.config.getValueFromKey("itemPrice")) as Any,
+                                                    "item_price":Int(self.config.getValueFromKey("itemPrice").trimmingCharacters(in: .whitespacesAndNewlines)) as Any,
                                                     "overrideAlert":"1",
                                                     "overrideLoading":"1",
                                                     "host":self], withCache: { (cacheString) in

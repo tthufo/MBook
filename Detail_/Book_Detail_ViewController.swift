@@ -498,7 +498,7 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
 //            self.didRequestUrlBook(book: self.tempInfo)
         } else {
             let checkInfo = NSMutableDictionary.init(dictionary: book)
-            checkInfo["price"] = checkInfo.getValueFromKey("price").replace(target: ",", withString: "")
+            checkInfo["price"] = checkInfo.getValueFromKey("price").replace(target: ",", withString: "").replace(target: ".", withString: "")
             checkInfo["is_package"] = "0"
             
             let checkOut = Check_Out_ViewController.init()
