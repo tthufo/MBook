@@ -215,7 +215,6 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
         logo.alpha = 0
         
         UIView.animate(withDuration: 1, animations: {
-//            self.cover.alpha = bbgg ? 0.3 : 0
         }) { (done) in
             
             UIView.animate(withDuration: 1, animations: {
