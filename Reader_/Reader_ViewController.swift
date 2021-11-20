@@ -201,15 +201,15 @@ class Reader_ViewController: UIViewController {
 
         downLoad.transform = downLoad.transform.scaledBy(x: 1.2, y: 1.9)
 
-//        pdfView.translatesAutoresizingMaskIntoConstraints = false
-//        NSLayoutConstraint.activate([
-//            pdfView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-//            pdfView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-//            pdfView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-//            pdfView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
-//        ])
+        pdfView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            pdfView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            pdfView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            pdfView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            pdfView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ])
 
-        pdfView.pageShadowsEnabled = true
+        pdfView.pageShadowsEnabled = false
         pdfView.autoScales = true
         pdfView.displaysPageBreaks = false
         pdfView.displayMode = .singlePage

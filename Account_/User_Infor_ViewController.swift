@@ -75,6 +75,8 @@ class User_Infor_ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var searchView: UITextField!
 
     @IBOutlet var buyBtn: UIButton!
+    
+    @IBOutlet var notiBtn: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -146,6 +148,7 @@ class User_Infor_ViewController: UIViewController, UITextFieldDelegate {
         super.viewWillAppear(animated)
         vipIcon.isHidden = Information.check == "0" ? true : !Information.isVip
         vipIcon_B.isHidden = Information.isVip
+        buyBtn.widthConstaint?.constant = Information.isVip ? 0 : 44
         buyBtn.isHidden = Information.isVip
         buyBtn_B.isHidden = Information.isVip
         searchView.text = Information.searchValue ?? ""

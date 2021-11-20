@@ -26,6 +26,8 @@
     
     IBOutlet UIButton * buyBtn;
 
+    IBOutlet UIButton * notiBtn;
+
     NSMutableArray * dataList, *topList, *proList;
     
     NSMutableArray * config;
@@ -55,6 +57,8 @@
     state = [@{@"hot": @"0", @"top": @"0"} mutableCopy];
     
     buyBtn.hidden = Information.isVip;
+    
+    notiBtn.widthConstaint.constant = Information.isVip ? 0 : 44;
     
     tagView.hidden = Information.isVip;
     

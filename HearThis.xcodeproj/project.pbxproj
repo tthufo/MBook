@@ -156,6 +156,9 @@
 		FCB0055126CACC7000222D26 /* Table_Content_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCB0054F26CACC7000222D26 /* Table_Content_ViewController.xib */; };
 		FCB0055426CACE3000222D26 /* Table_Content_Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCB0055326CACE3000222D26 /* Table_Content_Cell.xib */; };
 		FCB0055726CB563500222D26 /* Tag_View_Vip.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB0055626CB563400222D26 /* Tag_View_Vip.swift */; };
+		FCB158B927496EFB007C3B0A /* PC_Notification_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCB158B627496EFA007C3B0A /* PC_Notification_ViewController.xib */; };
+		FCB158BA27496EFB007C3B0A /* PC_Notification_Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCB158B727496EFB007C3B0A /* PC_Notification_Cell.xib */; };
+		FCB158BB27496EFC007C3B0A /* PC_Notification_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCB158B827496EFB007C3B0A /* PC_Notification_ViewController.swift */; };
 		FCB238B92441858D0034B40B /* TG_Book_Detail_Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCB238B82441858D0034B40B /* TG_Book_Detail_Cell.xib */; };
 		FCB238BB244186E10034B40B /* Book_Detail_Title.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCB238BA244186E10034B40B /* Book_Detail_Title.xib */; };
 		FCB238BD2441B6960034B40B /* TG_Book_Chap_Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCB238BC2441B6960034B40B /* TG_Book_Chap_Cell.xib */; };
@@ -410,6 +413,9 @@
 		FCB0054F26CACC7000222D26 /* Table_Content_ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Table_Content_ViewController.xib; sourceTree = "<group>"; };
 		FCB0055326CACE3000222D26 /* Table_Content_Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Table_Content_Cell.xib; sourceTree = "<group>"; };
 		FCB0055626CB563400222D26 /* Tag_View_Vip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag_View_Vip.swift; sourceTree = "<group>"; };
+		FCB158B627496EFA007C3B0A /* PC_Notification_ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PC_Notification_ViewController.xib; sourceTree = "<group>"; };
+		FCB158B727496EFB007C3B0A /* PC_Notification_Cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PC_Notification_Cell.xib; sourceTree = "<group>"; };
+		FCB158B827496EFB007C3B0A /* PC_Notification_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PC_Notification_ViewController.swift; sourceTree = "<group>"; };
 		FCB238B82441858D0034B40B /* TG_Book_Detail_Cell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TG_Book_Detail_Cell.xib; sourceTree = "<group>"; };
 		FCB238BA244186E10034B40B /* Book_Detail_Title.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Book_Detail_Title.xib; sourceTree = "<group>"; };
 		FCB238BC2441B6960034B40B /* TG_Book_Chap_Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TG_Book_Chap_Cell.xib; sourceTree = "<group>"; };
@@ -543,6 +549,7 @@
 		FC1AD7C21DA40CA8002BA7EC = {
 			isa = PBXGroup;
 			children = (
+				FCB158B527496EEB007C3B0A /* Notification_ */,
 				FC7F32AD244A0724007429F7 /* Parser_ */,
 				FCD979862447692400970A4E /* Reader_ */,
 				FC7A98C92444ABB20038C226 /* Search_ */,
@@ -880,6 +887,16 @@
 			path = Left_Menu_;
 			sourceTree = "<group>";
 		};
+		FCB158B527496EEB007C3B0A /* Notification_ */ = {
+			isa = PBXGroup;
+			children = (
+				FCB158B727496EFB007C3B0A /* PC_Notification_Cell.xib */,
+				FCB158B827496EFB007C3B0A /* PC_Notification_ViewController.swift */,
+				FCB158B627496EFA007C3B0A /* PC_Notification_ViewController.xib */,
+			);
+			path = Notification_;
+			sourceTree = "<group>";
+		};
 		FCB238BE244217C30034B40B /* Author_ */ = {
 			isa = PBXGroup;
 			children = (
@@ -1098,6 +1115,7 @@
 				FC69D42F24405879006D57D9 /* TG_Room_Cell_8.xib in Resources */,
 				FC40A0FC243EFE5C0096B9DB /* TG_Room_Cell_4.xib in Resources */,
 				FC69D43224405879006D57D9 /* TG_Room_Cell_6.xib in Resources */,
+				FCB158B927496EFB007C3B0A /* PC_Notification_ViewController.xib in Resources */,
 				FC908BA02644786000176E13 /* Book_Detail_Infor.xib in Resources */,
 				FCAD4AA92434FD1A00387AF6 /* SC_Menu.xib in Resources */,
 				FC23EB91243A4087003E5E1A /* Book_List_Cell.xib in Resources */,
@@ -1129,6 +1147,7 @@
 				FCB3CD721DA4E3FA002FABDD /* ItemCell.xib in Resources */,
 				FC01776D24529BA80097957C /* Publisher_Cell_Large.xib in Resources */,
 				FCB238DF24435BF60034B40B /* Publisher_ViewController.xib in Resources */,
+				FCB158BA27496EFB007C3B0A /* PC_Notification_Cell.xib in Resources */,
 				FC130B8F2446236B00D64012 /* Package_ViewController.xib in Resources */,
 				FCD9798A2447693D00970A4E /* Reader_ViewController.xib in Resources */,
 				FC48C25A26DA8B8F006D18DD /* Rating_ViewController.xib in Resources */,
@@ -1262,6 +1281,7 @@
 				FCB238C1244218DB0034B40B /* Author_ViewController.swift in Sources */,
 				FC78AC0826D2D532000D5209 /* TG_Release_Cell.swift in Sources */,
 				FC43399C2436493A00CFD50E /* Navigation_ViewController.m in Sources */,
+				FCB158BB27496EFC007C3B0A /* PC_Notification_ViewController.swift in Sources */,
 				FC640A851DAAAD8C00DAEF55 /* Item.m in Sources */,
 				FC0A8FB7243779F0001A75AF /* Marcro.swift in Sources */,
 				FC771C49263B1FB2005851FA /* Check_Out_ViewController.swift in Sources */,

@@ -24,6 +24,8 @@
     
     IBOutlet UIButton * buyBtn;
 
+    IBOutlet UIButton * notiBtn;
+
     NSMutableArray * dataList;
     
     NSMutableDictionary * config;
@@ -48,6 +50,8 @@
     [super viewWillAppear:animated];
     
     buyBtn.hidden = Information.isVip;
+
+    notiBtn.widthConstaint.constant = Information.isVip ? 0 : 44;
 
     searchView.text = Information.searchValue == nil ? @"" : Information.searchValue;
     

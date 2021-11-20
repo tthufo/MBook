@@ -32,6 +32,8 @@ class First_Tab_ViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet var buyBtn: UIButton!
     
+    @IBOutlet var notiBtn: UIButton!
+    
     var bg_view: UIImageView!
 
     override func viewDidLoad() {
@@ -186,6 +188,7 @@ class First_Tab_ViewController: UIViewController, UITextFieldDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         buyBtn.isHidden = Information.isVip
+        buyBtn.widthConstaint?.constant = Information.isVip ? 0 : 44
         searchView.text = Information.searchValue ?? ""
     }
     
@@ -208,6 +211,11 @@ class First_Tab_ViewController: UIViewController, UITextFieldDelegate {
     @IBAction func didPressMenu() {
         self.view.endEditing(true)
         self.root()?.toggleLeftPanel(nil)
+    }
+    
+    @IBAction func didPressNoti() {
+        self.view.endEditing(true)
+        self.center()?.pushViewController(PC_Notification_ViewController.init(), animated: true)
     }
     
     @IBAction func didPressBuy() {

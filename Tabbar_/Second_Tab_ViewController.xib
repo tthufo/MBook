@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -13,6 +13,7 @@
             <connections>
                 <outlet property="buyBtn" destination="UcN-iD-eMZ" id="NVi-4f-OyU"/>
                 <outlet property="login_bg_height" destination="jOy-2u-mPt" id="WEQ-Vj-BQn"/>
+                <outlet property="notiBtn" destination="zRE-Ac-w7j" id="2e2-bu-ErY"/>
                 <outlet property="searchBtn" destination="u0j-Oz-Cu9" id="NEZ-JM-c0j"/>
                 <outlet property="searchView" destination="0Vg-X7-wdo" id="tlC-bR-z1P"/>
                 <outlet property="tableView" destination="Qza-1l-HTV" id="g3G-5y-vCB"/>
@@ -47,7 +48,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UcN-iD-eMZ">
-                            <rect key="frame" x="268" y="10" width="44" height="44"/>
+                            <rect key="frame" x="236" y="10" width="44" height="44"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="44" id="MSa-Ph-TQP"/>
                                 <constraint firstAttribute="height" constant="44" id="gHU-ua-4aB"/>
@@ -58,10 +59,10 @@
                             </connections>
                         </button>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HJq-nI-cCu">
-                            <rect key="frame" x="60" y="13" width="200" height="38"/>
+                            <rect key="frame" x="60" y="13" width="168" height="38"/>
                             <subviews>
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_search" translatesAutoresizingMaskIntoConstraints="NO" id="u0j-Oz-Cu9">
-                                    <rect key="frame" x="167" y="6.5" width="25" height="25"/>
+                                    <rect key="frame" x="135" y="6.5" width="25" height="25"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="25" id="SKu-1N-pgG"/>
                                         <constraint firstAttribute="width" constant="25" id="V3I-L7-RKv"/>
@@ -81,7 +82,7 @@
                             </userDefinedRuntimeAttributes>
                         </view>
                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Từ khóa tìm kiếm" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0Vg-X7-wdo">
-                            <rect key="frame" x="68" y="15" width="155" height="34"/>
+                            <rect key="frame" x="68" y="15" width="123" height="34"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="34" id="25q-zc-ih3"/>
                             </constraints>
@@ -91,14 +92,25 @@
                                 <outlet property="delegate" destination="-1" id="8po-VP-0bw"/>
                             </connections>
                         </textField>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zRE-Ac-w7j">
+                            <rect key="frame" x="276" y="10" width="44" height="44"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="44" id="Yzd-aC-0wU"/>
+                                <constraint firstAttribute="width" constant="44" id="lTN-bg-op2"/>
+                            </constraints>
+                            <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                            <state key="normal" image="img_bell"/>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" red="0.1176470588" green="0.57254901960000004" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstItem="HJq-nI-cCu" firstAttribute="top" secondItem="Gur-fu-bRv" secondAttribute="top" constant="13" id="66X-oy-P24"/>
                         <constraint firstItem="UcN-iD-eMZ" firstAttribute="leading" secondItem="HJq-nI-cCu" secondAttribute="trailing" constant="8" symbolic="YES" id="9fB-4L-32W"/>
-                        <constraint firstAttribute="trailing" secondItem="UcN-iD-eMZ" secondAttribute="trailing" constant="8" id="Exl-vR-SP8"/>
+                        <constraint firstAttribute="trailing" secondItem="UcN-iD-eMZ" secondAttribute="trailing" constant="40" id="Exl-vR-SP8"/>
                         <constraint firstItem="HJq-nI-cCu" firstAttribute="leading" secondItem="JX1-Fa-cbG" secondAttribute="trailing" constant="8" symbolic="YES" id="Hoy-Fg-rbn"/>
                         <constraint firstAttribute="height" constant="64" id="SOo-ih-HTs"/>
+                        <constraint firstAttribute="trailing" secondItem="zRE-Ac-w7j" secondAttribute="trailing" id="Zmd-bs-NLT"/>
+                        <constraint firstItem="zRE-Ac-w7j" firstAttribute="top" secondItem="Gur-fu-bRv" secondAttribute="top" constant="10" id="kvP-9n-Ck9"/>
                         <constraint firstItem="JX1-Fa-cbG" firstAttribute="leading" secondItem="Gur-fu-bRv" secondAttribute="leading" constant="8" id="pAq-rj-LWe"/>
                         <constraint firstItem="UcN-iD-eMZ" firstAttribute="top" secondItem="Gur-fu-bRv" secondAttribute="top" constant="10" id="prR-MW-Zic"/>
                         <constraint firstItem="UcN-iD-eMZ" firstAttribute="leading" secondItem="0Vg-X7-wdo" secondAttribute="trailing" constant="45" id="rPz-Ot-UhY"/>
@@ -164,6 +176,7 @@
         <image name="ic_search" width="50.5" height="50.5"/>
         <image name="ico_menu" width="31.5" height="31.5"/>
         <image name="ico_vip" width="58.5" height="58.5"/>
+        <image name="img_bell" width="33" height="33"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
