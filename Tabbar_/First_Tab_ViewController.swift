@@ -190,12 +190,44 @@ class First_Tab_ViewController: UIViewController, UITextFieldDelegate {
         buyBtn.isHidden = Information.isVip
         buyBtn.widthConstaint?.constant = Information.isVip ? 0 : 44
         searchView.text = Information.searchValue ?? ""
+        notiBtn.shouldHideBadgeAtZero = true
+        if Information.userInfo?.getValueFromKey("total_unread") != "0" {
+            notiBtn.badgeValue = Information.userInfo?.getValueFromKey("total_unread")
+        }
+        notiBtn.badgeOriginX = 20
+        notiBtn.badgeOriginY = 5
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
         self.view.endEditing(true)
+    }
+    
+    func didRequestNotification() {
+        LTRequest.sharedInstance()?.didRequestInfo(["CMD_CODE":"getListNotification",
+                                                    "header":["session":Information.token == nil ? "" : Information.token!],
+                                                    "user_id":Information.userInfo?.getValueFromKey("user_id") ?? "",
+                                                    "page_index": 1,
+                                                    "page_size": 10,
+                                                    "overrideAlert":"1",
+                                                    "overrideLoading":"0",
+                                                    "host":nil
+            ], withCache: { (cacheString) in
+        }, andCompletion: { (response, errorCode, error, isValid, object) in
+            let result = response?.dictionize() ?? [:]
+            
+            if result.getValueFromKey("error_code") != "0" {
+                self.showToast(response?.dictionize().getValueFromKey("ERR_MSG"), andPos: 0)
+                return
+            }
+            
+            Information.changeInfo(notification: ((result["result"] as! NSDictionary)["total_unread"] as! Int))
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(0), execute: {
+                self.notiBtn.badgeValue = Information.userInfo?.getValueFromKey("total_unread")
+            })
+        })
     }
     
     @objc func didReload() {
@@ -206,6 +238,7 @@ class First_Tab_ViewController: UIViewController, UITextFieldDelegate {
             self.refreshControl.endRefreshing()
             self.tableView.reloadData()
         })
+        self.didRequestNotification()
     }
     
     @IBAction func didPressMenu() {

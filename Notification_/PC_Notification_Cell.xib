@@ -24,21 +24,21 @@
                         </userDefinedRuntimeAttributes>
                     </view>
                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="1" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1Dj-IN-Ldv">
-                        <rect key="frame" x="12" y="12" width="55" height="55"/>
+                        <rect key="frame" x="12" y="12" width="44" height="44"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="55" id="2iP-H9-2sH"/>
-                            <constraint firstAttribute="width" constant="55" id="n0y-M6-8uV"/>
+                            <constraint firstAttribute="height" constant="44" id="2iP-H9-2sH"/>
+                            <constraint firstAttribute="width" constant="44" id="n0y-M6-8uV"/>
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="boolean" keyPath="isSkeletonable" value="NO"/>
                         </userDefinedRuntimeAttributes>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ux6-Ia-R0h">
-                        <rect key="frame" x="75" y="12" width="229" height="25"/>
+                        <rect key="frame" x="64" y="12" width="240" height="25"/>
                         <constraints>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="25" id="AM5-Zg-06P"/>
                         </constraints>
-                        <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                        <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                         <userDefinedRuntimeAttributes>
@@ -46,7 +46,7 @@
                         </userDefinedRuntimeAttributes>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" tag="10" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WcH-00-Puj">
-                        <rect key="frame" x="75" y="42" width="229" height="14"/>
+                        <rect key="frame" x="64" y="42" width="240" height="14"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="14" id="6MJ-ct-UpG"/>
                         </constraints>
@@ -58,7 +58,7 @@
                         </userDefinedRuntimeAttributes>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" tag="3" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bdc-tN-YU7">
-                        <rect key="frame" x="75" y="63" width="229" height="21"/>
+                        <rect key="frame" x="64" y="63" width="240" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="gYA-uz-SRl"/>
                         </constraints>

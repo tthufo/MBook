@@ -598,6 +598,8 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
         
             self.add((info as! [AnyHashable : Any]), andKey: "social")
                         
+            self.remove("log")
+
 //            if Information.check == "0" { // --------> Check This shit
 //                print("package")
 //                self.didRequestPackage()   //CHECK PACKAGE

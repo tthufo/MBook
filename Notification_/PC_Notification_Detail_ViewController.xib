@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PC_Notification_Detail_ViewController" customModule="MeBook" customModuleProvider="target">
+            <connections>
+                <outlet property="titleLabel" destination="hUv-xI-x1H" id="89Z-RW-dzK"/>
+                <outlet property="view" destination="C9C-cJ-vXd" id="7kn-OH-HKU"/>
+                <outlet property="webView" destination="BRU-dI-JKj" id="3fp-Mz-JB4"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="C9C-cJ-vXd">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5c5-UB-7Do">
+                    <rect key="frame" x="0.0" y="44" width="414" height="64"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="diw-S7-v6k">
+                            <rect key="frame" x="8" y="10" width="44" height="44"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="44" id="4X9-n5-toA"/>
+                                <constraint firstAttribute="height" constant="44" id="uZM-oA-g3Q"/>
+                            </constraints>
+                            <state key="normal" image="icon_back"/>
+                            <connections>
+                                <action selector="didPressBack" destination="-1" eventType="touchUpInside" id="1VC-xE-PUh"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hUv-xI-x1H" customClass="MarqueeLabel" customModule="MarqueeLabel">
+                            <rect key="frame" x="50" y="20.5" width="314" height="23"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="23" id="aoU-qB-8mi"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                            <userDefinedRuntimeAttributes>
+                                <userDefinedRuntimeAttribute type="number" keyPath="scrollDuration">
+                                    <real key="value" value="6"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="scrollRate">
+                                    <real key="value" value="5"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="leadingBuffer">
+                                    <real key="value" value="6"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="trailingBuffer">
+                                    <real key="value" value="6"/>
+                                </userDefinedRuntimeAttribute>
+                                <userDefinedRuntimeAttribute type="number" keyPath="fadeLength">
+                                    <real key="value" value="6"/>
+                                </userDefinedRuntimeAttribute>
+                            </userDefinedRuntimeAttributes>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" red="0.1176470588" green="0.57254901960000004" blue="0.54901960780000003" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstItem="diw-S7-v6k" firstAttribute="centerY" secondItem="5c5-UB-7Do" secondAttribute="centerY" id="82O-z7-o4C"/>
+                        <constraint firstAttribute="height" constant="64" id="GiY-ev-MuQ"/>
+                        <constraint firstItem="hUv-xI-x1H" firstAttribute="leading" secondItem="5c5-UB-7Do" secondAttribute="leading" constant="50" id="HFZ-gu-4ND"/>
+                        <constraint firstAttribute="trailing" secondItem="hUv-xI-x1H" secondAttribute="trailing" constant="50" id="N5O-Eh-bfX"/>
+                        <constraint firstItem="hUv-xI-x1H" firstAttribute="centerY" secondItem="5c5-UB-7Do" secondAttribute="centerY" id="e2i-Bp-ZCh"/>
+                        <constraint firstItem="diw-S7-v6k" firstAttribute="leading" secondItem="5c5-UB-7Do" secondAttribute="leading" constant="8" id="kzw-0m-B0q"/>
+                        <constraint firstItem="hUv-xI-x1H" firstAttribute="top" secondItem="5c5-UB-7Do" secondAttribute="top" constant="20.5" id="ugj-sB-WQr"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="bgColorHex" value="#1E928C"/>
+                    </userDefinedRuntimeAttributes>
+                </view>
+                <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BRU-dI-JKj">
+                    <rect key="frame" x="0.0" y="108" width="414" height="754"/>
+                    <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <wkWebViewConfiguration key="configuration">
+                        <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                        <wkPreferences key="preferences"/>
+                    </wkWebViewConfiguration>
+                </wkWebView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="HWr-2m-azP"/>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <gestureRecognizers/>
+            <constraints>
+                <constraint firstItem="5c5-UB-7Do" firstAttribute="top" secondItem="HWr-2m-azP" secondAttribute="top" id="AIC-Jy-GCG"/>
+                <constraint firstItem="BRU-dI-JKj" firstAttribute="trailing" secondItem="HWr-2m-azP" secondAttribute="trailing" id="gt7-MK-LUt"/>
+                <constraint firstItem="BRU-dI-JKj" firstAttribute="leading" secondItem="HWr-2m-azP" secondAttribute="leading" id="nwE-TJ-OLL"/>
+                <constraint firstItem="5c5-UB-7Do" firstAttribute="trailing" secondItem="HWr-2m-azP" secondAttribute="trailing" id="pja-9X-aam"/>
+                <constraint firstItem="5c5-UB-7Do" firstAttribute="leading" secondItem="HWr-2m-azP" secondAttribute="leading" id="rRy-5T-Ddi"/>
+                <constraint firstItem="BRU-dI-JKj" firstAttribute="bottom" secondItem="HWr-2m-azP" secondAttribute="bottom" id="waa-cC-Exo"/>
+                <constraint firstItem="BRU-dI-JKj" firstAttribute="top" secondItem="5c5-UB-7Do" secondAttribute="bottom" id="zmq-Lb-7mZ"/>
+            </constraints>
+            <point key="canvasLocation" x="431.8840579710145" y="-33.482142857142854"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="icon_back" width="33" height="33"/>
+    </resources>
+</document>

@@ -21,7 +21,7 @@ class Information: NSObject {
     
     @objc static var avatar: UIImage?
     
-    static var userInfo: NSDictionary?
+    @objc static var userInfo: NSDictionary?
     
     static var offLine: NSArray?
     
@@ -62,7 +62,7 @@ class Information: NSObject {
         if self.getObject("info") != nil {
             userInfo = self.getObject("info")! as NSDictionary
             let temp = userInfo?.reFormat()
-            temp!["count_notification"] = notification >= 0 ? notification : Int((temp?.getValueFromKey("count_notification"))!)! - 1
+            temp!["total_unread"] = notification >= 0 ? notification : Int((temp?.getValueFromKey("total_unread"))!)! - 1
             self.add((temp as! [AnyHashable : Any]), andKey: "info")
             userInfo = self.getObject("info")! as NSDictionary
         }

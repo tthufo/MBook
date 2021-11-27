@@ -55,6 +55,14 @@
 
     searchView.text = Information.searchValue == nil ? @"" : Information.searchValue;
     
+    notiBtn.shouldHideBadgeAtZero = YES;
+    
+    if (![[Information.userInfo getValueFromKey: @"total_unread"]  isEqualToString:@"0"]) {
+        notiBtn.badgeValue = [Information.userInfo getValueFromKey: @"total_unread"];
+    }
+    notiBtn.badgeOriginX = 20;
+    notiBtn.badgeOriginY = 5;
+    
     [self didEmbed];
 }
 
@@ -201,6 +209,11 @@
 - (IBAction)didPressMenu:(id)sender {
     [self.view endEditing:YES];
     [[self ROOT] toggleLeftPanel:sender];
+}
+
+- (IBAction)didPressNoti:(id)sender {
+    [self.view endEditing:YES];
+    [[self CENTER] presentViewController: [PC_Notification_ViewController new] animated:YES completion:nil];
 }
 
 - (IBAction)didPressBuy:(id)sender {

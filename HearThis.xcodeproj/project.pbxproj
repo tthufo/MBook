@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		1C4D84C1CEDC423884030E84 /* libPods-HearThis.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EB075356C7261DC57790B0A /* libPods-HearThis.a */; };
 		FC01776D24529BA80097957C /* Publisher_Cell_Large.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC01776C24529BA80097957C /* Publisher_Cell_Large.xib */; };
+		FC06A96D275203CF001A8115 /* PC_Notification_Detail_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC06A96B275203CF001A8115 /* PC_Notification_Detail_ViewController.swift */; };
+		FC06A96E275203CF001A8115 /* PC_Notification_Detail_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC06A96C275203CF001A8115 /* PC_Notification_Detail_ViewController.xib */; };
 		FC0A8FB02437770E001A75AF /* PC_Register_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0A8FAA2437770C001A75AF /* PC_Register_ViewController.swift */; };
 		FC0A8FB12437770E001A75AF /* PC_Forgot_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC0A8FAB2437770D001A75AF /* PC_Forgot_ViewController.xib */; };
 		FC0A8FB22437770E001A75AF /* PC_Login_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0A8FAC2437770D001A75AF /* PC_Login_ViewController.swift */; };
@@ -234,6 +236,8 @@
 		57B771C8FC9DB06500C15CB5 /* Pods-HearThis.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HearThis.release.xcconfig"; path = "Pods/Target Support Files/Pods-HearThis/Pods-HearThis.release.xcconfig"; sourceTree = "<group>"; };
 		A9269A55EA96317478696AD0 /* Pods-HearThis.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HearThis.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HearThis/Pods-HearThis.debug.xcconfig"; sourceTree = "<group>"; };
 		FC01776C24529BA80097957C /* Publisher_Cell_Large.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Publisher_Cell_Large.xib; sourceTree = "<group>"; };
+		FC06A96B275203CF001A8115 /* PC_Notification_Detail_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PC_Notification_Detail_ViewController.swift; sourceTree = "<group>"; };
+		FC06A96C275203CF001A8115 /* PC_Notification_Detail_ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PC_Notification_Detail_ViewController.xib; sourceTree = "<group>"; };
 		FC0A8FA92437770A001A75AF /* HearThis-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HearThis-Bridging-Header.h"; sourceTree = "<group>"; };
 		FC0A8FAA2437770C001A75AF /* PC_Register_ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PC_Register_ViewController.swift; sourceTree = "<group>"; };
 		FC0A8FAB2437770D001A75AF /* PC_Forgot_ViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PC_Forgot_ViewController.xib; sourceTree = "<group>"; };
@@ -893,6 +897,8 @@
 				FCB158B727496EFB007C3B0A /* PC_Notification_Cell.xib */,
 				FCB158B827496EFB007C3B0A /* PC_Notification_ViewController.swift */,
 				FCB158B627496EFA007C3B0A /* PC_Notification_ViewController.xib */,
+				FC06A96B275203CF001A8115 /* PC_Notification_Detail_ViewController.swift */,
+				FC06A96C275203CF001A8115 /* PC_Notification_Detail_ViewController.xib */,
 			);
 			path = Notification_;
 			sourceTree = "<group>";
@@ -1111,6 +1117,7 @@
 				FC40A0FE243EFE5C0096B9DB /* TG_Room_Cell_3.xib in Resources */,
 				FC40A0FD243EFE5C0096B9DB /* TG_Room_Cell_1.xib in Resources */,
 				FC48C25426DA4499006D18DD /* Book_Rating_Cell.xib in Resources */,
+				FC06A96E275203CF001A8115 /* PC_Notification_Detail_ViewController.xib in Resources */,
 				FC7AFA8526C054FF00D3C2D2 /* Payment_Option_Cell.xib in Resources */,
 				FC69D42F24405879006D57D9 /* TG_Room_Cell_8.xib in Resources */,
 				FC40A0FC243EFE5C0096B9DB /* TG_Room_Cell_4.xib in Resources */,
@@ -1350,6 +1357,7 @@
 				FC1AD7D01DA40CA8002BA7EC /* main.m in Sources */,
 				FC640A821DAAAD8C00DAEF55 /* DownLoad.m in Sources */,
 				FC69D43F2440D435006D57D9 /* Book_Detail_ViewController.swift in Sources */,
+				FC06A96D275203CF001A8115 /* PC_Notification_Detail_ViewController.swift in Sources */,
 				FCAD4AAA2434FD1A00387AF6 /* SC_Menu_ViewController.m in Sources */,
 				FC78398E2439C23700470148 /* Third_Tab_ViewController.m in Sources */,
 				FC0A8FB02437770E001A75AF /* PC_Register_ViewController.swift in Sources */,

@@ -95,6 +95,11 @@
     [[self ROOT] toggleLeftPanel:sender];
 }
 
+- (IBAction)didPressNoti:(id)sender {
+    [self.view endEditing:YES];
+    [[self CENTER] presentViewController: [PC_Notification_ViewController new] animated:YES completion:nil];
+}
+
 - (IBAction)didPressSearch:(id)sender {
     [[self CENTER] pushViewController:[Search_ViewController new] animated:YES];
 }

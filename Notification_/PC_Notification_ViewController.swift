@@ -17,16 +17,10 @@ class PC_Notification_ViewController: UIViewController , UITextFieldDelegate {
             tableView.estimatedRowHeight = 92.0
         }
     }
-    
-//    @IBOutlet var bg: UIImageView!
-//
-//    @IBOutlet var blurView: UIView!
-    
+
     @IBOutlet var alert: UILabel!
     
     @IBOutlet var menu: UIButton!
-    
-    
     
     @IBOutlet var cover: UIButton!
     
@@ -45,8 +39,6 @@ class PC_Notification_ViewController: UIViewController , UITextFieldDelegate {
     @IBOutlet var alert3: UILabel!
     
     var isShow: Bool = false
-    
-    
     
     var dataList: NSMutableArray!
     
@@ -72,16 +64,12 @@ class PC_Notification_ViewController: UIViewController , UITextFieldDelegate {
             tableView.addSubview(refreshControl)
         }
         
-        refreshControl.tintColor = UIColor.white
+        refreshControl.tintColor = AVHexColor.color(withHexString: "#1E928C")
         refreshControl.addTarget(self, action: #selector(didReloadNotification(_:)), for: .valueChanged)
-        
-        if Information.bg != nil && Information.bg != "" {
-//            bg.imageUrlNoCache(url: Information.bg ?? "")
-        }
         
         
 //        if Reachability.isConnectedToNetwork(){
-            self.didRequestNotification(isShow: true)
+        self.didRequestNotification(isShow: true)
 //        }else{
 //            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
 //                self.tableView.reloadData()
@@ -113,7 +101,7 @@ class PC_Notification_ViewController: UIViewController , UITextFieldDelegate {
             self.alert1.alpha = !self.isShow ? 1 : 0
             self.alert2.alpha = !self.isShow ? 1 : 0
             self.alert3.alpha = !self.isShow ? 1 : 0
-            self.cover.alpha = !self.isShow ? 0.1 : 0
+            self.cover.alpha = !self.isShow ? 0.4 : 0
             
             (sender as! UIButton).setImage(UIImage(named: !self.isShow ? "xxxx" : "menu"), for: .normal)
         }
@@ -140,9 +128,6 @@ class PC_Notification_ViewController: UIViewController , UITextFieldDelegate {
         self.didPressBottomMenu(self.menuBottom)
     }
     
-    override func viewDidLayoutSubviews() {
-    }
-    
     @objc func didReloadNotification(_ sender: Any) {
         isLoadMore = false
         pageIndex = 1
@@ -157,7 +142,7 @@ class PC_Notification_ViewController: UIViewController , UITextFieldDelegate {
                                                     "page_index": pageIndex,
                                                     "page_size": 10,
                                                     "overrideAlert":"1",
-                                                    "overrideLoading":isShow ? 1 : 0,
+                                                    "overrideLoading":isShow ? "1" : "0",
                                                     "host":self
             ], withCache: { (cacheString) in
         }, andCompletion: { (response, errorCode, error, isValid, object) in
@@ -182,7 +167,7 @@ class PC_Notification_ViewController: UIViewController , UITextFieldDelegate {
             
             DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
                 self.tableView.reloadData()
-                self.alert.isHidden = self.dataList.count != 0
+//                self.alert.isHidden = self.dataList.count != 0
                 self.menu.isEnabled = self.dataList.count != 0
                 self.menuBottom.isEnabled = self.dataList.count != 0
             })
@@ -305,8 +290,6 @@ extension PC_Notification_ViewController: UITableViewDataSource, UITableViewDele
 //        let contentSkeleton1 = self.withView(cell, tag: 12) as! UIView
         
         
-        
-        
         let timeline = self.withView(cell, tag: 10) as! UILabel
         
 //        let dateTime = data.getValueFromKey("timeline")?.components(separatedBy: " ").last
@@ -321,7 +304,10 @@ extension PC_Notification_ViewController: UITableViewDataSource, UITableViewDele
         
         let image = self.withView(cell, tag: 1) as! UIImageView
         
-        image.image = UIImage(named: data.getValueFromKey("type") == "0" ? "icon_rain" : data.getValueFromKey("type") == "1" ? "exclamation" : "mail")
+//        image.image = UIImage(named: data.getValueFromKey("type") == "0" ? "icon_rain" : data.getValueFromKey("type") == "1" ? "exclamation" : "mail")
+//
+        image.image = UIImage(named: "img_bell")?.withTintColor(.darkGray)
+        
         
         if data.getValueFromKey("type") == "0" || data.getValueFromKey("type") == "1" {
             image.imageColor(color: AVHexColor.color(withHexString: data.getValueFromKey("color")))
@@ -333,7 +319,10 @@ extension PC_Notification_ViewController: UITableViewDataSource, UITableViewDele
         
         let content = self.withView(cell, tag: 3) as! UILabel
                 
-        content.text = data.getValueFromKey("content")
+        let modifiedFont = String(format:"<span style=\"font-family: '-apple-system', 'HelveticaNeue'; font-size:16 \">%@</span>", data.getValueFromKey("content")
+         )
+        
+        content.text = modifiedFont.html2String
         
         let bg = self.withView(cell, tag: 5) as! UIView
         
@@ -368,7 +357,7 @@ extension PC_Notification_ViewController: UITableViewDataSource, UITableViewDele
         
         let status = data.getValueFromKey("status")
         
-        if status == "0" {
+        if status == "1" {
             (dataList[indexPath.row] as! NSMutableDictionary)["status"] = 1
             
             tableView.reloadData()
@@ -378,25 +367,21 @@ extension PC_Notification_ViewController: UITableViewDataSource, UITableViewDele
             self.didRequestStatusNotification(idNotification: data.getValueFromKey("notification_id")! as NSString)
         }
         
-        let dataMonitorExtra = NSMutableArray.init()
+//        let dataMonitorExtra = NSMutableArray.init()
         
         for con in conditions {
             for key in data.allKeys {
                 if (con as! NSDictionary)["key"] as! String == key as! String && data.getValueFromKey((key as! String)) == "1"  {
-                    dataMonitorExtra.add((con as! NSDictionary).getValueFromKey("forcast"))
+//                    dataMonitorExtra.add((con as! NSDictionary).getValueFromKey("forcast"))
                 }
             }
         }
         
-//        let foreCast = PC_ForCast_ViewController.init()
-//        
-//        foreCast.stationCode = data.getValueFromKey("station_code") as NSString?
-//        
-//        foreCast.station = data.getValueFromKey("station_name") as NSString?
-//        
-//        foreCast.dataMonitorExtra = dataMonitorExtra
-//        
-//        self.navigationController?.pushViewController(foreCast, animated: true)
+        let detail = PC_Notification_Detail_ViewController.init()
+        
+        detail.info = data
+        
+        self.navigationController?.pushViewController(detail, animated: true)
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {

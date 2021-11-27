@@ -158,6 +158,13 @@ class User_Infor_ViewController: UIViewController, UITextFieldDelegate {
         totalBook.text = (Information.userInfo?.getValueFromKey("total_book") == "" ? "0" : (Information.userInfo?.getValueFromKey("total_book"))!) + " cuốn"
         totalTime.text = (Information.userInfo?.getValueFromKey("total_time") == "" ? "0" : (Information.userInfo?.getValueFromKey("total_time"))!) + " giờ"
         tableView.reloadData()
+        
+        notiBtn.shouldHideBadgeAtZero = true
+        if Information.userInfo?.getValueFromKey("total_unread") != "0" {
+            notiBtn.badgeValue = Information.userInfo?.getValueFromKey("total_unread")
+        }
+        notiBtn.badgeOriginX = 20
+        notiBtn.badgeOriginY = 5
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -226,6 +233,11 @@ class User_Infor_ViewController: UIViewController, UITextFieldDelegate {
         nav.isNavigationBarHidden = true
         nav.modalPresentationStyle = .fullScreen
         self.center().present(nav, animated: true, completion: nil)
+    }
+    
+    @IBAction func didPressNoti() {
+        self.view.endEditing(true)
+        self.center()?.pushViewController(PC_Notification_ViewController.init(), animated: true)
     }
     
     func viewInfor() {
