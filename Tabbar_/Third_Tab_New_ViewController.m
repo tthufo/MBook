@@ -51,15 +51,16 @@
     
     buyBtn.hidden = Information.isVip;
 
-    notiBtn.widthConstaint.constant = Information.isVip ? 0 : 44;
+    buyBtn.widthConstaint.constant = Information.isVip ? 0 : 44;
 
     searchView.text = Information.searchValue == nil ? @"" : Information.searchValue;
-    
-    notiBtn.shouldHideBadgeAtZero = YES;
-    
+        
     if (![[Information.userInfo getValueFromKey: @"total_unread"]  isEqualToString:@"0"]) {
         notiBtn.badgeValue = [Information.userInfo getValueFromKey: @"total_unread"];
+    } else {
+        notiBtn.badgeValue = @"";
     }
+    notiBtn.shouldHideBadgeAtZero = YES;
     notiBtn.badgeOriginX = 20;
     notiBtn.badgeOriginY = 5;
     
@@ -213,7 +214,7 @@
 
 - (IBAction)didPressNoti:(id)sender {
     [self.view endEditing:YES];
-    [[self CENTER] presentViewController: [PC_Notification_ViewController new] animated:YES completion:nil];
+    [[self CENTER] pushViewController: [PC_Notification_ViewController new] animated:YES];
 }
 
 - (IBAction)didPressBuy:(id)sender {

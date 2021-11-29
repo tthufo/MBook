@@ -99,6 +99,9 @@
             <point key="canvasLocation" x="431.8840579710145" y="-33.482142857142854"/>
         </view>
     </objects>
+    <designables>
+        <designable name="hUv-xI-x1H"/>
+    </designables>
     <resources>
         <image name="icon_back" width="33" height="33"/>
     </resources>

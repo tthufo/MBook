@@ -228,6 +228,8 @@ class Payment_ViewController: UIViewController, WKUIDelegate, WKNavigationDelega
                    
             let preInfo: NSMutableDictionary = (response?.dictionize()["result"] as! NSDictionary).reFormat()
                         
+            preInfo["total_unread"] = Information.userInfo?.getValueFromKey("total_unread")
+
             self.add(preInfo as? [AnyHashable : Any], andKey: "info")
 
             Information.isVip = true

@@ -142,7 +142,7 @@ class PC_Notification_ViewController: UIViewController , UITextFieldDelegate {
                                                     "page_index": pageIndex,
                                                     "page_size": 10,
                                                     "overrideAlert":"1",
-                                                    "overrideLoading":isShow ? "1" : "0",
+                                                    "overrideLoading": "1",// isShow ? "1" : "0",
                                                     "host":self
             ], withCache: { (cacheString) in
         }, andCompletion: { (response, errorCode, error, isValid, object) in
@@ -156,7 +156,7 @@ class PC_Notification_ViewController: UIViewController , UITextFieldDelegate {
             self.totalPage = (result["result"] as! NSDictionary)["total_page"] as! Int
             
             self.pageIndex += 1
-            
+                        
             if !self.isLoadMore {
                 self.dataList.removeAllObjects()
                 Information.changeInfo(notification: ((result["result"] as! NSDictionary)["total_unread"] as! Int))
@@ -184,7 +184,7 @@ class PC_Notification_ViewController: UIViewController , UITextFieldDelegate {
             ], withCache: { (cacheString) in
         }, andCompletion: { (response, errorCode, error, isValid, object) in
             let result = response?.dictionize() ?? [:]
-            if result.getValueFromKey("ERR_CODE") != "0" {
+            if result.getValueFromKey("error_code") != "0" {
                 return
             }
             
@@ -208,7 +208,7 @@ class PC_Notification_ViewController: UIViewController , UITextFieldDelegate {
             ], withCache: { (cacheString) in
         }, andCompletion: { (response, errorCode, error, isValid, object) in
             let result = response?.dictionize() ?? [:]
-            if result.getValueFromKey("ERR_CODE") != "0" {
+            if result.getValueFromKey("error_code") != "0" {
                 return
             }
             if idNotification == "-1" {
@@ -357,7 +357,7 @@ extension PC_Notification_ViewController: UITableViewDataSource, UITableViewDele
         
         let status = data.getValueFromKey("status")
         
-        if status == "1" {
+        if status == "0" {
             (dataList[indexPath.row] as! NSMutableDictionary)["status"] = 1
             
             tableView.reloadData()

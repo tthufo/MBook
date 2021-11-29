@@ -38,6 +38,15 @@ class First_Tab_ViewController: UIViewController, UITextFieldDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if Information.userInfo?.getValueFromKey("total_unread") != "0" {
+            notiBtn.badgeValue = Information.userInfo?.getValueFromKey("total_unread")
+        } else {
+            notiBtn.badgeValue = ""
+        }
+        notiBtn.shouldHideBadgeAtZero = true
+        notiBtn.badgeOriginX = 20
+        notiBtn.badgeOriginY = 5
 
         bg_banner.imageColor(color: AVHexColor.color(withHexString: "#1E928C"))
         
@@ -190,10 +199,12 @@ class First_Tab_ViewController: UIViewController, UITextFieldDelegate {
         buyBtn.isHidden = Information.isVip
         buyBtn.widthConstaint?.constant = Information.isVip ? 0 : 44
         searchView.text = Information.searchValue ?? ""
-        notiBtn.shouldHideBadgeAtZero = true
         if Information.userInfo?.getValueFromKey("total_unread") != "0" {
             notiBtn.badgeValue = Information.userInfo?.getValueFromKey("total_unread")
+        } else {
+            notiBtn.badgeValue = ""
         }
+        notiBtn.shouldHideBadgeAtZero = true
         notiBtn.badgeOriginX = 20
         notiBtn.badgeOriginY = 5
     }
@@ -224,9 +235,16 @@ class First_Tab_ViewController: UIViewController, UITextFieldDelegate {
             
             Information.changeInfo(notification: ((result["result"] as! NSDictionary)["total_unread"] as! Int))
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(0), execute: {
+//            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(0), execute: {
+            if Information.userInfo?.getValueFromKey("total_unread") != "0" {
                 self.notiBtn.badgeValue = Information.userInfo?.getValueFromKey("total_unread")
-            })
+            } else {
+                self.notiBtn.badgeValue = ""
+            }
+            self.notiBtn.shouldHideBadgeAtZero = true
+            self.notiBtn.badgeOriginX = 20
+            self.notiBtn.badgeOriginY = 5
+//            })
         })
     }
     

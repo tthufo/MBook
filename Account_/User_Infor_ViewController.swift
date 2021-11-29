@@ -81,6 +81,15 @@ class User_Infor_ViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        if Information.userInfo?.getValueFromKey("total_unread") != "0" {
+            notiBtn.badgeValue = Information.userInfo?.getValueFromKey("total_unread")
+        } else {
+            notiBtn.badgeValue = ""
+        }
+        notiBtn.shouldHideBadgeAtZero = true
+        notiBtn.badgeOriginX = 20
+        notiBtn.badgeOriginY = 5
+        
         if IS_IPAD {
 //            sideGapLeft.constant = 100
 //            
@@ -159,10 +168,12 @@ class User_Infor_ViewController: UIViewController, UITextFieldDelegate {
         totalTime.text = (Information.userInfo?.getValueFromKey("total_time") == "" ? "0" : (Information.userInfo?.getValueFromKey("total_time"))!) + " giờ"
         tableView.reloadData()
         
-        notiBtn.shouldHideBadgeAtZero = true
         if Information.userInfo?.getValueFromKey("total_unread") != "0" {
             notiBtn.badgeValue = Information.userInfo?.getValueFromKey("total_unread")
+        } else {
+            notiBtn.badgeValue = ""
         }
+        notiBtn.shouldHideBadgeAtZero = true
         notiBtn.badgeOriginX = 20
         notiBtn.badgeOriginY = 5
     }
@@ -284,6 +295,8 @@ class User_Infor_ViewController: UIViewController, UITextFieldDelegate {
                    
             let preInfo: NSMutableDictionary = (response?.dictionize()["result"] as! NSDictionary).reFormat()
                         
+            preInfo["total_unread"] = Information.userInfo?.getValueFromKey("total_unread")
+
             self.add(preInfo as? [AnyHashable : Any], andKey: "info")
 
             Information.saveInfo()
