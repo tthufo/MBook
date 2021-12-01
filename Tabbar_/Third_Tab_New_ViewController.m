@@ -39,6 +39,8 @@
     BOOL isLoadMore, isHot;
     
     float tempHeight;
+    
+    IBOutlet NSLayoutConstraint * buy_width;
 }
 
 @end
@@ -49,9 +51,7 @@
 {
     [super viewWillAppear:animated];
     
-    buyBtn.hidden = Information.isVip;
-
-    buyBtn.widthConstaint.constant = Information.isVip ? 0 : 44;
+    [self reLayout];
 
     searchView.text = Information.searchValue == nil ? @"" : Information.searchValue;
         
@@ -67,8 +67,14 @@
     [self didEmbed];
 }
 
-- (void)viewWillDisappear:(BOOL)animated
-{
+- (void)reLayout{
+    buyBtn.hidden = Information.isVip;
+    buyBtn.widthConstaint.constant = Information.isVip ? 0 : 44;
+    buy_width.constant = Information.isVip ? 0 : 44;
+    [self.view layoutIfNeeded];
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
         
     [self.view endEditing:YES];

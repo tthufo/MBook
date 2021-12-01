@@ -42,23 +42,19 @@
     
     float tempHeight;
     
-    IBOutlet NSLayoutConstraint * login_bg_height;
-
+    IBOutlet NSLayoutConstraint * login_bg_height, * buy_width;
 }
 
 @end
 
 @implementation Second_Tab_ViewController
 
-- (void)viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
     state = [@{@"hot": @"0", @"top": @"0"} mutableCopy];
     
-    buyBtn.hidden = Information.isVip;
-    
-    buyBtn.widthConstaint.constant = Information.isVip ? 0 : 44;
+    [self reLayout];
     
     tagView.hidden = Information.isVip;
     
@@ -78,15 +74,20 @@
     [self didEmbed];
 }
 
-- (void)viewWillDisappear:(BOOL)animated
-{
+- (void)reLayout{
+    buyBtn.hidden = Information.isVip;
+    buyBtn.widthConstaint.constant = Information.isVip ? 0 : 44;
+    buy_width.constant = Information.isVip ? 0 : 44;
+    [self.view layoutIfNeeded];
+}
+
+- (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
         
     [self.view endEditing:YES];
 }
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad{
     [super viewDidLoad];
     
     if (IS_IPAD) {

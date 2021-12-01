@@ -15,10 +15,12 @@
                 <outlet property="bg_banner" destination="HtY-hz-uT7" id="Rav-7f-udE"/>
                 <outlet property="bg_top" destination="g5P-W0-jZw" id="AgT-nY-SR8"/>
                 <outlet property="buyBtn" destination="iSg-GY-BhK" id="wEl-aT-Ixg"/>
+                <outlet property="buy_width" destination="Axh-6q-ZVa" id="bzY-iK-jT6"/>
                 <outlet property="login_bg_height" destination="TdY-Ze-5ia" id="P9h-th-2B0"/>
                 <outlet property="notiBtn" destination="4Qv-TI-Oah" id="naU-2I-Gju"/>
                 <outlet property="searchBtn" destination="8oi-PT-8yx" id="sRS-eH-WZK"/>
                 <outlet property="searchView" destination="qCj-lZ-8Dn" id="6qc-eA-Kp8"/>
+                <outlet property="tabbarView" destination="g5P-W0-jZw" id="EZW-FK-ZEC"/>
                 <outlet property="tableView" destination="JxR-HW-6v5" id="uBb-3h-age"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -88,7 +90,7 @@
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iSg-GY-BhK">
                             <rect key="frame" x="236" y="10" width="44" height="44"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="44" id="Axh-6q-ZVa"/>
+                                <constraint firstAttribute="width" relation="lessThanOrEqual" constant="44" id="Axh-6q-ZVa"/>
                                 <constraint firstAttribute="height" constant="44" id="uxI-kW-ltn"/>
                             </constraints>
                             <state key="normal" image="ico_vip"/>
@@ -166,6 +168,11 @@
             <point key="canvasLocation" x="138.75" y="115.14084507042254"/>
         </view>
     </objects>
+    <designables>
+        <designable name="JxR-HW-6v5">
+            <size key="intrinsicContentSize" width="320" height="882.5"/>
+        </designable>
+    </designables>
     <resources>
         <image name="bg" width="208.5" height="114"/>
         <image name="bg_banner" width="373" height="115.5"/>

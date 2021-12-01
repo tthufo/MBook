@@ -162,6 +162,8 @@ class PC_Notification_ViewController: UIViewController , UITextFieldDelegate {
                 Information.changeInfo(notification: ((result["result"] as! NSDictionary)["total_unread"] as! Int))
             }
             
+            print("-->", result)
+            
             let data = ((result["result"] as! NSDictionary)["data"] as! NSArray)
             self.dataList.addObjects(from: data.withMutable())
             
@@ -320,7 +322,7 @@ extension PC_Notification_ViewController: UITableViewDataSource, UITableViewDele
         let content = self.withView(cell, tag: 3) as! UILabel
                 
         let modifiedFont = String(format:"<span style=\"font-family: '-apple-system', 'HelveticaNeue'; font-size:16 \">%@</span>", data.getValueFromKey("content")
-         )
+        )
         
         content.text = modifiedFont.html2String
         
@@ -376,12 +378,37 @@ extension PC_Notification_ViewController: UITableViewDataSource, UITableViewDele
                 }
             }
         }
+                
+        if !(data["book_item"] is NSDictionary) && !(data["event_item"] is NSDictionary) {
+            let detail = PC_Notification_Detail_ViewController.init()
+            detail.info = data
+            self.navigationController?.pushViewController(detail, animated: true)
+        }
         
-        let detail = PC_Notification_Detail_ViewController.init()
+        if (data["book_item"] is NSDictionary) && !(data["event_item"] is NSDictionary) {
+            let info = data["book_item"] as! NSDictionary
+            if info.getValueFromKey("book_type") == "3" {
+                self.didRequestMP3Link(info: info)
+                return
+            }
+            let bookDetail = Book_Detail_ViewController.init()
+            let bookInfo = NSMutableDictionary.init(dictionary: info)
+//            bookInfo.addEntries(from: info as! [AnyHashable : Any])
+            bookDetail.config = bookInfo
+            self.navigationController?.pushViewController(bookDetail, animated: true)
+        }
         
-        detail.info = data
-        
-        self.navigationController?.pushViewController(detail, animated: true)
+        if !(data["book_item"] is NSDictionary) && (data["event_item"] is NSDictionary) {
+            let detail = PC_Notification_Detail_ViewController.init()
+            detail.info = data
+            self.navigationController?.pushViewController(detail, animated: true)
+            
+//            let info = data["event_item"] as! NSDictionary
+//            let eventDetail = Event_Detail_ViewController.init()
+//            eventDetail.config = info
+////            eventDetail.chapList = (info as! NSDictionary)["data"] as! NSMutableArray
+//            self.navigationController?.pushViewController(eventDetail, animated: true)
+        }
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {

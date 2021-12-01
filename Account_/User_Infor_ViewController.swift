@@ -10,6 +10,8 @@ import UIKit
 
 class User_Infor_ViewController: UIViewController, UITextFieldDelegate {
 
+    @IBOutlet var buy_width: NSLayoutConstraint!
+
     @IBOutlet var tableView: UITableView!
     
     @IBOutlet var headerCell: UITableViewCell!
@@ -158,8 +160,7 @@ class User_Infor_ViewController: UIViewController, UITextFieldDelegate {
         vipIcon.isHidden = Information.check == "0" ? true : !Information.isVip
         vipIcon_B.isHidden = Information.isVip
         buyBtn.widthConstaint?.constant = Information.isVip ? 0 : 44
-        buyBtn.isHidden = Information.isVip
-        buyBtn_B.isHidden = Information.isVip
+        self.reLayout()
         searchView.text = Information.searchValue ?? ""
         des.text = Information.packageInfo
         des.isHidden = Information.check == "0"
@@ -176,6 +177,13 @@ class User_Infor_ViewController: UIViewController, UITextFieldDelegate {
         notiBtn.shouldHideBadgeAtZero = true
         notiBtn.badgeOriginX = 20
         notiBtn.badgeOriginY = 5
+    }
+    
+    func reLayout() {
+        buyBtn.isHidden = Information.isVip
+        buyBtn.widthConstaint?.constant = Information.isVip ? 0 : 44
+        buy_width.constant = Information.isVip ? 0 : 44
+        self.view.layoutIfNeeded()
     }
     
     override func viewWillDisappear(_ animated: Bool) {

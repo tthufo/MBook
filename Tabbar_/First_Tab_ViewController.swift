@@ -12,6 +12,8 @@ class First_Tab_ViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet var tableView: OwnTableView!
     
+    @IBOutlet var tabbarView: UIView!
+
     var config: NSArray!
     
     var dataList: NSMutableArray!
@@ -22,6 +24,8 @@ class First_Tab_ViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet var banner_bg_height: NSLayoutConstraint!
     
+    @IBOutlet var buy_width: NSLayoutConstraint!
+
     @IBOutlet var bg_banner: UIImageView!
     
     @IBOutlet var bg_top: UIImageView!
@@ -185,6 +189,15 @@ class First_Tab_ViewController: UIViewController, UITextFieldDelegate {
         searchView.addTarget(self, action: #selector(textIsChanging), for: .editingChanged)
     }
     
+    func reLayout() {
+        buyBtn.isHidden = Information.isVip
+        buyBtn.widthConstaint?.constant = Information.isVip ? 0 : 44
+        buy_width.constant = Information.isVip ? 0 : 44
+        self.view.layoutIfNeeded()
+        self.tabbarView.layoutSubviews()
+        self.tabbarView.layoutIfNeeded()
+    }
+    
     @objc func textIsChanging(_ textField:UITextField) {
         Information.searchValue = textField.text
     }
@@ -196,8 +209,7 @@ class First_Tab_ViewController: UIViewController, UITextFieldDelegate {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        buyBtn.isHidden = Information.isVip
-        buyBtn.widthConstaint?.constant = Information.isVip ? 0 : 44
+        self.reLayout()
         searchView.text = Information.searchValue ?? ""
         if Information.userInfo?.getValueFromKey("total_unread") != "0" {
             notiBtn.badgeValue = Information.userInfo?.getValueFromKey("total_unread")

@@ -221,7 +221,7 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
 //            self.cover.alpha = 0
             }) { (done) in
                 
-            if NSDate.init().isPastTime("05/12/2021") {
+            if NSDate.init().isPastTime("06/12/2021") {
                 self.normalFlow(logged: logged, phoneNumber: phoneNumber, checking: "1")
             } else {
                 self.checking(logged: logged, phoneNumber: phoneNumber)
@@ -308,7 +308,7 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
     
     func checking(logged: Bool, phoneNumber: Any) {
         LTRequest.sharedInstance().didRequestInfo(["absoluteLink":
-                                                    "https://dl.dropboxusercontent.com/s/3xwlmqqt9rhao0i/PCTT_MEBOOK_7.plist"
+                                                    "https://dl.dropboxusercontent.com/s/iy01cmjllnw2d3y/PCTT_MEBOOK_8.plist"
                                                    , "overrideAlert":"1"]) { cacheString in
         } andCompletion: { (response, errorCode, error, isValid, object) in
                 if error != nil {
@@ -606,7 +606,9 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
     //                (UIApplication.shared.delegate as! AppDelegate).changeRoot(false) //CHECK PACKAGE
 //            } else {
 //            print("changeroot")
+           
             self.checkVipStatusLogin(isSocial: true)
+           
 //            }
        })
     }

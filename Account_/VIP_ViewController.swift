@@ -176,9 +176,7 @@ class VIP_ViewController: UIViewController, MFMessageComposeViewControllerDelega
 
             let descriptor: NSSortDescriptor = NSSortDescriptor(key: "price", ascending: true)
             let sortedResults: NSArray = data.sortedArray(using: [descriptor]) as NSArray
-        
-           print(sortedResults)
-        
+                
            self.dataList.addObjects(from: sortedResults.withMutable())
         
            self.tableView.reloadData()
@@ -186,6 +184,14 @@ class VIP_ViewController: UIViewController, MFMessageComposeViewControllerDelega
     }
     
     @IBAction func didPressBack() {
+//        Information.isVip = true
+//        for control in self.tabbar().viewControllers! {
+//            DispatchQueue.main.asyncAfter(deadline: .now() + .seconds(1), execute: {
+//                if (control as! UINavigationController).viewControllers.first is First_Tab_ViewController {
+////                    ((control as! UINavigationController).viewControllers.first as! First_Tab_ViewController).reLayout()
+//                }
+//            })
+//        }
         if self.isModal {
             self.dismiss(animated: true, completion: nil)
         } else {

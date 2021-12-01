@@ -35,9 +35,12 @@ class PC_Notification_Detail_ViewController: UIViewController, WKUIDelegate, WKN
 //            self.didRequestContent()
         }
         
+        let modifiedFont = String(format:"<span style=\"font-family: '-apple-system', 'HelveticaNeue'; font-size:16 \">%@</span>", info.getValueFromKey("content")
+        )
+        
         let headerString = "<header><meta name='viewport' content='width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no'></header>"
 
-        webView.loadHTMLString(headerString + info.getValueFromKey("content"), baseURL: nil)
+        webView.loadHTMLString(headerString + modifiedFont, baseURL: nil)
     }
     
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {

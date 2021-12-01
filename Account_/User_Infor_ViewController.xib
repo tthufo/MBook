@@ -15,6 +15,7 @@
                 <outlet property="avatar" destination="VWS-9P-tOy" id="h1X-RC-uLH"/>
                 <outlet property="buyBtn" destination="Fph-g8-pOc" id="DDs-yH-htP"/>
                 <outlet property="buyBtn_B" destination="myg-1P-nsh" id="Axc-Yy-AJs"/>
+                <outlet property="buy_width" destination="eDX-nd-81W" id="aqb-HE-cqQ"/>
                 <outlet property="changePass" destination="gzH-29-mGR" id="MwU-Az-1hb"/>
                 <outlet property="des" destination="Rqs-V2-2fq" id="UmC-BH-xcl"/>
                 <outlet property="des_B" destination="iY4-Mq-eKc" id="cMa-BA-eCZ"/>

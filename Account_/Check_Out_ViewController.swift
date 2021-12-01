@@ -118,7 +118,7 @@ class Check_Out_ViewController: UIViewController {
         })
     }
 
-    @IBAction func didPressBack() {
+    @IBAction func didPressBack() {        
         if self.isPackage {
             self.navigationController?.popViewController(animated: true)
             return

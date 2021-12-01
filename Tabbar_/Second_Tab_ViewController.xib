@@ -12,6 +12,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="Second_Tab_ViewController">
             <connections>
                 <outlet property="buyBtn" destination="UcN-iD-eMZ" id="NVi-4f-OyU"/>
+                <outlet property="buy_width" destination="MSa-Ph-TQP" id="Iiy-C4-QKf"/>
                 <outlet property="login_bg_height" destination="jOy-2u-mPt" id="WEQ-Vj-BQn"/>
                 <outlet property="notiBtn" destination="zRE-Ac-w7j" id="2e2-bu-ErY"/>
                 <outlet property="searchBtn" destination="u0j-Oz-Cu9" id="NEZ-JM-c0j"/>

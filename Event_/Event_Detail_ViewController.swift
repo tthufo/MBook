@@ -51,6 +51,8 @@ class Event_Detail_ViewController: UIViewController, UICollectionViewDataSource,
         dataList = NSMutableArray.init()
         
         tempList = NSMutableArray.init(array: chapList)
+        
+        print("====>", chapList)
                 
         collectionView.withCell("TG_Map_Cell")
                         
