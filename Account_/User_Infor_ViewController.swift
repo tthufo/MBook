@@ -159,7 +159,7 @@ class User_Infor_ViewController: UIViewController, UITextFieldDelegate {
         super.viewWillAppear(animated)
         vipIcon.isHidden = Information.check == "0" ? true : !Information.isVip
         vipIcon_B.isHidden = Information.isVip
-        buyBtn.widthConstaint?.constant = Information.isVip ? 0 : 44
+//        buyBtn.widthConstaint?.constant = Information.isVip ? 0 : 44
         self.reLayout()
         searchView.text = Information.searchValue ?? ""
         des.text = Information.packageInfo

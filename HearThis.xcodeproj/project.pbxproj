@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1C4D84C1CEDC423884030E84 /* libPods-HearThis.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EB075356C7261DC57790B0A /* libPods-HearThis.a */; };
 		FC01776D24529BA80097957C /* Publisher_Cell_Large.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC01776C24529BA80097957C /* Publisher_Cell_Large.xib */; };
+		FC02C008275E7F8F0031E85E /* Reader_Cell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC02C007275E7F8F0031E85E /* Reader_Cell.xib */; };
 		FC06A96D275203CF001A8115 /* PC_Notification_Detail_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC06A96B275203CF001A8115 /* PC_Notification_Detail_ViewController.swift */; };
 		FC06A96E275203CF001A8115 /* PC_Notification_Detail_ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC06A96C275203CF001A8115 /* PC_Notification_Detail_ViewController.xib */; };
 		FC0A8FB02437770E001A75AF /* PC_Register_ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC0A8FAA2437770C001A75AF /* PC_Register_ViewController.swift */; };
@@ -236,6 +237,7 @@
 		57B771C8FC9DB06500C15CB5 /* Pods-HearThis.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HearThis.release.xcconfig"; path = "Pods/Target Support Files/Pods-HearThis/Pods-HearThis.release.xcconfig"; sourceTree = "<group>"; };
 		A9269A55EA96317478696AD0 /* Pods-HearThis.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HearThis.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HearThis/Pods-HearThis.debug.xcconfig"; sourceTree = "<group>"; };
 		FC01776C24529BA80097957C /* Publisher_Cell_Large.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Publisher_Cell_Large.xib; sourceTree = "<group>"; };
+		FC02C007275E7F8F0031E85E /* Reader_Cell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Reader_Cell.xib; sourceTree = "<group>"; };
 		FC06A96B275203CF001A8115 /* PC_Notification_Detail_ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PC_Notification_Detail_ViewController.swift; sourceTree = "<group>"; };
 		FC06A96C275203CF001A8115 /* PC_Notification_Detail_ViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PC_Notification_Detail_ViewController.xib; sourceTree = "<group>"; };
 		FC0A8FA92437770A001A75AF /* HearThis-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "HearThis-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -1016,6 +1018,7 @@
 				FCB0054E26CACC7000222D26 /* Table_Content_ViewController.swift */,
 				FCB0054F26CACC7000222D26 /* Table_Content_ViewController.xib */,
 				FCB0055326CACE3000222D26 /* Table_Content_Cell.xib */,
+				FC02C007275E7F8F0031E85E /* Reader_Cell.xib */,
 			);
 			path = Reader_;
 			sourceTree = "<group>";
@@ -1134,6 +1137,7 @@
 				FCB3CD6A1DA4DDE9002FABDD /* HT_Genres_ViewController.xib in Resources */,
 				FC783989243922C100470148 /* PC_Sub_Cell.xib in Resources */,
 				FCB238C2244218DB0034B40B /* Author_ViewController.xib in Resources */,
+				FC02C008275E7F8F0031E85E /* Reader_Cell.xib in Resources */,
 				FC7A98D12444AD010038C226 /* Tag_Cell.xib in Resources */,
 				FCB0054B26C9132900222D26 /* Bank_List_ViewController.xib in Resources */,
 				FCF8A5B6244F54AD00E815E8 /* Package_Reg_Cell.xib in Resources */,
@@ -1576,7 +1580,7 @@
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/nanopb\"",
 					"$(SDKROOT)/usr/include/libxml2",
 				);
-				MARKETING_VERSION = 1.5;
+				MARKETING_VERSION = 1.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.agri.ebook;
 				PRODUCT_NAME = MeBook;
 				PROVISIONING_PROFILE = "d4f4ddc3-6615-47d3-9900-2f2822cb0a06";
@@ -1683,7 +1687,7 @@
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/nanopb\"",
 					"$(SDKROOT)/usr/include/libxml2",
 				);
-				MARKETING_VERSION = 1.5;
+				MARKETING_VERSION = 1.6;
 				PRODUCT_BUNDLE_IDENTIFIER = com.agri.ebook;
 				PRODUCT_NAME = MeBook;
 				PROVISIONING_PROFILE = "d4f4ddc3-6615-47d3-9900-2f2822cb0a06";

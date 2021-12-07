@@ -124,8 +124,9 @@ extension UIResponder {
 import UIKit
 import PDFKit
 import MarqueeLabel
+import WebKit
 
-class Reader_ViewController: UIViewController {
+class Reader_ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UIGestureRecognizerDelegate {
 
     @objc var config: NSDictionary!
     
@@ -152,7 +153,17 @@ class Reader_ViewController: UIViewController {
     @IBOutlet var downLoad: DownLoad!
 
     @IBOutlet var topHeight: NSLayoutConstraint!
+    
+    @IBOutlet var collectionView: UICollectionView!
 
+    var dataList: NSMutableArray!
+
+    @IBOutlet var reader: UIButton!
+
+    @IBOutlet var activity: UIActivityIndicatorView!
+
+    var isReader: Bool = false
+    
     var show: Bool = false
     
     var success: Bool = false
@@ -160,6 +171,8 @@ class Reader_ViewController: UIViewController {
     var isRestricted: Bool = false
 
     var readTime: Int = 0
+    
+    var currentPage: Int = 0
     
     var pdfDocument: PDFDocument!
 
@@ -195,19 +208,23 @@ class Reader_ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        dataList = NSMutableArray()
+        
         cover.imageUrl(url: config.getValueFromKey("avatar"))
 
-        titleLabel.text = config.getValueFromKey("name")
-
+//        titleLabel.text = config.getValueFromKey("name")
+        
         downLoad.transform = downLoad.transform.scaledBy(x: 1.2, y: 1.9)
 
-        pdfView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            pdfView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            pdfView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            pdfView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            pdfView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
-        ])
+        collectionView.withCell("Reader_Cell")
+        
+//        pdfView.translatesAutoresizingMaskIntoConstraints = false
+//        NSLayoutConstraint.activate([
+//            pdfView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+//            pdfView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+//            pdfView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+//            pdfView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+//        ])
 
         pdfView.pageShadowsEnabled = false
         pdfView.autoScales = true
@@ -264,6 +281,7 @@ class Reader_ViewController: UIViewController {
                 }
             }
         }
+        self.currentPage = Int(currentPageIndex().map(String.init)!)!
         print("Page changed: \(currentPageIndex().map(String.init) ?? "nil")")
     }
     
@@ -291,6 +309,15 @@ class Reader_ViewController: UIViewController {
 
     fileprivate var queueingScrollView: UIScrollView? {
         return pdfView.firstSubview(withClassName: "_UIQueuingScrollView") as? UIScrollView
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offSet = scrollView.contentOffset.x
+        let width = scrollView.frame.width
+        let horizontalCenter = width / 2
+
+        self.currentPage = Int(offSet + horizontalCenter) / Int(width)
+        self.pageNumber.text = "%i / %i".format(parameters: self.currentPage + 1, self.pdfDocument.documentRef?.numberOfPages as! CVarArg)
     }
 
     @objc fileprivate func handlePDFScrollViewPinch(gesture: UIPinchGestureRecognizer) {
@@ -323,6 +350,29 @@ class Reader_ViewController: UIViewController {
         return docContent.string
     }
     
+    func readerMode(document: PDFDocument) {
+        let pageCount = document.pageCount
+        for i in 0 ..< pageCount {
+            guard let page = document.page(at: i) else { continue }
+            guard let pageContent = page.string else { continue }
+            self.dataList.add(pageContent)
+        }
+    }
+    
+    @IBAction func didPressReader() {
+        self.collectionView.isHidden = isReader
+        isReader = !isReader
+        if isReader {
+            self.collectionView.isPagingEnabled = false
+            let indexPath = IndexPath(item: self.currentPage, section: 0)
+            self.collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
+            self.collectionView.isPagingEnabled = true
+        } else {
+            let pagePdf = self.pdfDocument.page(at: self.currentPage)
+            self.pdfView.go(to: pagePdf!)
+        }
+    }
+    
     func viewPDF() {
         showHide(show: false)
         let path = self.pdfFile(fileName: isRestricted ? self.config.getValueFromKey("id") + "_preview" : self.config.getValueFromKey("id"))
@@ -333,6 +383,13 @@ class Reader_ViewController: UIViewController {
             self.pageNumber.isHidden = false
             self.success = true
             self.startTimer()
+            DispatchQueue.background(delay: 0.1, background: {
+                self.readerMode(document: document)
+            }, completion: {
+                self.activity.stopAnimating()
+                self.reader.isHidden = self.dataList.count == 0 ? true : false
+                self.collectionView.reloadData()
+            })
         } else {
             self.failLabel.alpha = 1
             self.failLabel.text = "Không mở được file PDF, mời bạn tải lại."
@@ -440,11 +497,44 @@ class Reader_ViewController: UIViewController {
     }
 
     @IBAction func didPressFull() {
-        UIView.animate(withDuration: 0.3) {
-            self.topHeight.constant = !self.show ? 0 : 64
-            self.showFull.alpha = !self.show ? 1 : 0
-            self.topView.layoutIfNeeded()
-        }
-        show = !show
+//        UIView.animate(withDuration: 0.3) {
+//            self.topHeight.constant = !self.show ? 0 : 64
+//            self.showFull.alpha = !self.show ? 1 : 0
+//            self.topView.layoutIfNeeded()
+//        }
+//        show = !show
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return dataList.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: Int(self.screenWidth()), height: Int(self.screenHeight()) - 100)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0.0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0.0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Reader_Cell", for: indexPath as IndexPath)
+        
+            let data = dataList[indexPath.item] as! String
+
+            let title = self.withView(cell, tag: 11) as! UITextView
+                    
+        title.setContentOffset(.zero, animated: false)
+        title.text = data
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+
     }
 }
