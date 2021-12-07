@@ -166,6 +166,8 @@ class Reader_ViewController: UIViewController, UICollectionViewDataSource, UICol
     
     var show: Bool = false
     
+    var isCartoon: Bool = false
+
     var success: Bool = false
     
     var isRestricted: Bool = false
@@ -339,7 +341,6 @@ class Reader_ViewController: UIViewController, UICollectionViewDataSource, UICol
         let docContent = NSMutableAttributedString()
         if let pdf = PDFDocument(url: URL(fileURLWithPath: fromPDF)) {
             let pageCount = pdf.pageCount
-
             for i in 1 ..< pageCount {
                 guard let page = pdf.page(at: i) else { continue }
                 guard let pageContent = page.attributedString else { continue }
@@ -352,11 +353,19 @@ class Reader_ViewController: UIViewController, UICollectionViewDataSource, UICol
     
     func readerMode(document: PDFDocument) {
         let pageCount = document.pageCount
+        var isHas = false
         for i in 0 ..< pageCount {
             guard let page = document.page(at: i) else { continue }
             guard let pageContent = page.string else { continue }
             self.dataList.add(pageContent)
+            if !isHas {
+                if pageContent.trimmingCharacters(in: .whitespaces) == "" {
+                    isHas = true
+                }
+            }
+//            print("",pageContent.count)
         }
+        self.isCartoon = isHas
     }
     
     @IBAction func didPressReader() {
@@ -387,7 +396,7 @@ class Reader_ViewController: UIViewController, UICollectionViewDataSource, UICol
                 self.readerMode(document: document)
             }, completion: {
                 self.activity.stopAnimating()
-                self.reader.isHidden = self.dataList.count == 0 ? true : false
+                self.reader.isHidden = self.isCartoon //self.dataList.count == 0 ? true : false
                 self.collectionView.reloadData()
             })
         } else {
@@ -444,8 +453,15 @@ class Reader_ViewController: UIViewController, UICollectionViewDataSource, UICol
             content.dataList = dict["Children"] as! NSArray
             content.callBack = { data in
                 let pageIndex = (data as! NSDictionary)["Destination"]
-                let pagePdf = self.pdfDocument.page(at: pageIndex as! Int)
-                self.pdfView.go(to: pagePdf!)
+                if !self.isReader {
+                    let pagePdf = self.pdfDocument.page(at: pageIndex as! Int)
+                    self.pdfView.go(to: pagePdf!)
+                } else {
+                    self.collectionView.isPagingEnabled = false
+                    let indexPath = IndexPath(item: pageIndex as! Int, section: 0)
+                    self.collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
+                    self.collectionView.isPagingEnabled = true
+                }
             }
             self.present(nav, animated: true, completion: nil)
         } else {
