@@ -124,7 +124,6 @@ extension UIResponder {
 import UIKit
 import PDFKit
 import MarqueeLabel
-import WebKit
 
 class Reader_ViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UIGestureRecognizerDelegate {
 
@@ -162,7 +161,15 @@ class Reader_ViewController: UIViewController, UICollectionViewDataSource, UICol
 
     @IBOutlet var activity: UIActivityIndicatorView!
 
+    @IBOutlet var gesture: UIView!
+
+    @IBOutlet var imageView: UIImageView!
+
+    @IBOutlet var textView: UITextView!
+
     var isReader: Bool = false
+    
+    var isReaderDone: Bool = false
     
     var show: Bool = false
     
@@ -214,7 +221,9 @@ class Reader_ViewController: UIViewController, UICollectionViewDataSource, UICol
         
         cover.imageUrl(url: config.getValueFromKey("avatar"))
 
-//        titleLabel.text = config.getValueFromKey("name")
+        imageView.imageUrl(url: config.getValueFromKey("avatar"))
+
+        titleLabel.text = config.getValueFromKey("name")
         
         downLoad.transform = downLoad.transform.scaledBy(x: 1.2, y: 1.9)
 
@@ -240,11 +249,46 @@ class Reader_ViewController: UIViewController, UICollectionViewDataSource, UICol
         queueingScrollView?.showsHorizontalScrollIndicator = false
         subscribeToNotifications()
         
-        if !self.existingFile(fileName: isRestricted ? self.config.getValueFromKey("id") + "_preview" : self.config.getValueFromKey("id")) {
+        var swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(self.swipedRight))
+        swipeRight.direction = UISwipeGestureRecognizer.Direction.right
+
+        var swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self.swipedLeft))
+        swipeLeft.direction = UISwipeGestureRecognizer.Direction.left
+
+        self.gesture.addGestureRecognizer(swipeLeft)
+
+        self.gesture.addGestureRecognizer(swipeRight)
+        
+        if !self.existingFile(fileName: self.file_name()) {
             didDownload()
             showHide(show: true)
         } else {
             viewPDF()
+        }
+    }
+    
+    @objc func swipedRight()
+    {
+        currentPage -= 1
+        if currentPage <= 0 {
+            currentPage = 0
+        }
+        self.pdfToText()
+        self.pageNumber.text = "%i / %i".format(parameters: currentPage + 1, self.pdfDocument.documentRef?.numberOfPages as! CVarArg)
+    }
+
+    @objc func swipedLeft()
+    {
+        currentPage += 1
+        if currentPage >= self.pdfDocument.pageCount {
+            currentPage = self.pdfDocument.pageCount - 1
+        }
+        self.pdfToText()
+        self.pageNumber.text = "%i / %i".format(parameters: currentPage + 1, self.pdfDocument.documentRef?.numberOfPages as! CVarArg)
+        if currentPage + 1 == self.pdfDocument.documentRef?.numberOfPages {
+            if self.isRestricted {
+                self.showRestricted()
+            }
         }
     }
     
@@ -337,18 +381,60 @@ class Reader_ViewController: UIViewController, UICollectionViewDataSource, UICol
         }
     }
 
-    func pdfToText(fromPDF: String) -> String {
-        let docContent = NSMutableAttributedString()
-        if let pdf = PDFDocument(url: URL(fileURLWithPath: fromPDF)) {
-            let pageCount = pdf.pageCount
-            for i in 1 ..< pageCount {
-                guard let page = pdf.page(at: i) else { continue }
-                guard let pageContent = page.attributedString else { continue }
-                docContent.append(pageContent)
+    func pdfToText() {
+//        let docContent = NSMutableAttributedString()
+        
+        let page = self.pdfDocument.page(at: currentPage)
+        let pageContent = page?.string
+        self.textView.setContentOffset(.zero, animated: false)
+        self.textView.text = pageContent
+        self.textView.isHidden = pageContent!.trimmingCharacters(in: .whitespaces) == "" && self.currentPage == 0
+//        UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseIn, animations: {
+//            self.textView.alpha = 0
+//        }) { _ in
+//            self.textView.alpha = 1
+//        }
+        
+        UIView.animate(withDuration: 1.0, animations: {
+                let animation = CATransition()
+                animation.duration = 1.2
+                animation.startProgress = 0.0
+                animation.endProgress = 0.6
+                animation.type = CATransitionType(rawValue: "pageCurl")
+                animation.subtype = CATransitionSubtype(rawValue: "fromRight")
+                animation.isRemovedOnCompletion = false
+                animation.fillMode = CAMediaTimingFillMode(rawValue: "extended")
+                animation.isRemovedOnCompletion = false
+                if let animation = animation as? CATransition{
+                    
+                }
+            })
+//        if let pdf = PDFDocument(url: URL(fileURLWithPath: fromPDF)) {
+//            let pageCount = pdf.pageCount
+//            for i in 1 ..< pageCount {
+//                guard let page = pdf.page(at: i) else { continue }
+//                guard let pageContent = page.attributedString else { continue }
+//                docContent.append(pageContent)
+//            }
+//        }
+    }
+    
+    func getMode(document: PDFDocument) -> Bool {
+//        let pageCount = document.pageCount
+        var isHas = false
+        for i in 0 ..< 5 {
+            guard let page = document.page(at: i) else { continue }
+            guard let pageContent = page.string else { continue }
+            self.dataList.add(pageContent)
+//            if !isHas {
+            if pageContent.trimmingCharacters(in: .whitespaces) != "" {
+                isHas = true
+                break
             }
+//            }
         }
-
-        return docContent.string
+//        self.isCartoon = isHas
+        return isHas
     }
     
     func readerMode(document: PDFDocument) {
@@ -359,11 +445,10 @@ class Reader_ViewController: UIViewController, UICollectionViewDataSource, UICol
             guard let pageContent = page.string else { continue }
             self.dataList.add(pageContent)
             if !isHas {
-                if pageContent.trimmingCharacters(in: .whitespaces) == "" {
+                if pageContent.trimmingCharacters(in: .whitespaces) != "" {
                     isHas = true
                 }
             }
-//            print("",pageContent.count)
         }
         self.isCartoon = isHas
     }
@@ -382,34 +467,61 @@ class Reader_ViewController: UIViewController, UICollectionViewDataSource, UICol
         }
     }
     
+    func file_name() -> String {
+        return self.isRestricted ? self.config.getValueFromKey("id") + "_preview" : self.config.getValueFromKey("id")
+    }
+    
+    func file_text() -> String {
+        return self.isRestricted ? self.config.getValueFromKey("id") + "_preview_text" : self.config.getValueFromKey("id") + "_text"
+    }
+    
     func viewPDF() {
         showHide(show: false)
-        let path = self.pdfFile(fileName: isRestricted ? self.config.getValueFromKey("id") + "_preview" : self.config.getValueFromKey("id"))
+        let path = self.pdfFile(fileName: self.file_name())
         if let document = PDFDocument(url: URL(fileURLWithPath: path)) {
+            self.pdfView.alpha  = 1
             self.pdfDocument = document
             self.pageNumber.text = "%i / %i".format(parameters: 1, document.documentRef?.numberOfPages as! CVarArg)
             self.chapter.isEnabled = true
             self.pageNumber.isHidden = false
             self.success = true
             self.startTimer()
-            DispatchQueue.background(delay: 0.1, background: {
-                self.readerMode(document: document)
-            }, completion: {
-                self.activity.stopAnimating()
-                self.reader.isHidden = self.isCartoon //self.dataList.count == 0 ? true : false
-                self.collectionView.reloadData()
-            })
+            if self.getMode(document: document) {
+                self.gesture.isHidden = false
+                self.pdfToText()
+            } else {
+                
+            }
+//            if self.getObject(self.file_text()) != nil {
+//                let cacheData = self.getObject(self.file_text())
+//                self.isCartoon = (cacheData as! NSDictionary).getValueFromKey("isCartoon") == "1"
+//                self.dataList.removeAllObjects()
+//                self.dataList.addObjects(from: (cacheData! as NSDictionary)["text"] as! [Any])
+//                self.collectionView.reloadData()
+//                self.reader.isHidden = !self.isCartoon
+//                self.activity.stopAnimating()
+//            } else {
+//                DispatchQueue.background(delay: 0.1, background: {
+//                    self.readerMode(document: document)
+//                }, completion: {
+//                    self.add(["text": self.dataList, "isCartoon": self.isCartoon ? "1" : "0"], andKey: self.file_text())
+//                    self.activity.stopAnimating()
+//                    self.reader.isHidden = !self.isCartoon
+//                    self.collectionView.reloadData()
+//                })
+//            }
         } else {
             self.failLabel.alpha = 1
             self.failLabel.text = "Không mở được file PDF, mời bạn tải lại."
             self.restart.alpha = 1
-            self.cover.alpha = 1
+            self.pdfView.alpha  = 0
+            self.cover.alpha = 0
         }
     }
 
     func didDownload() {
         downLoad.didProgress(["url": self.config.getValueFromKey("file_url") as Any,
-                              "name": isRestricted ? self.config.getValueFromKey("id") + "_preview" : self.config.getValueFromKey("id") as Any,
+                              "name": self.file_name(),
                               "infor": self.config as Any
             ], andCompletion: { (index, download, object) in
             if index == -1 {
@@ -437,8 +549,8 @@ class Reader_ViewController: UIViewController, UICollectionViewDataSource, UICol
         self.restart.alpha = 0
         self.failLabel.alpha = 0
         self.downLoad.alpha = 1
-        if !self.existingFile(fileName: isRestricted ? self.config.getValueFromKey("id") + "_preview" : self.config.getValueFromKey("id")) {
-            self.deleteFile(fileName: self.pdfFile(fileName: isRestricted ? self.config.getValueFromKey("id") + "_preview" : self.config.getValueFromKey("id")))
+        if !self.existingFile(fileName: self.file_name()) {
+            self.deleteFile(fileName: self.pdfFile(fileName: self.file_name()))
         }
         showHide(show: true)
         self.didDownload()
@@ -453,15 +565,22 @@ class Reader_ViewController: UIViewController, UICollectionViewDataSource, UICol
             content.dataList = dict["Children"] as! NSArray
             content.callBack = { data in
                 let pageIndex = (data as! NSDictionary)["Destination"]
-                if !self.isReader {
+                if self.getMode(document: self.pdfDocument) {
+                    self.currentPage = pageIndex as! Int
+                    self.pdfToText()
+                } else {
                     let pagePdf = self.pdfDocument.page(at: pageIndex as! Int)
                     self.pdfView.go(to: pagePdf!)
-                } else {
-                    self.collectionView.isPagingEnabled = false
-                    let indexPath = IndexPath(item: pageIndex as! Int, section: 0)
-                    self.collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
-                    self.collectionView.isPagingEnabled = true
                 }
+//                if !self.isReader {
+//                    let pagePdf = self.pdfDocument.page(at: pageIndex as! Int)
+//                    self.pdfView.go(to: pagePdf!)
+//                } else {
+//                    self.collectionView.isPagingEnabled = false
+//                    let indexPath = IndexPath(item: pageIndex as! Int, section: 0)
+//                    self.collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
+//                    self.collectionView.isPagingEnabled = true
+//                }
             }
             self.present(nav, animated: true, completion: nil)
         } else {
@@ -478,9 +597,9 @@ class Reader_ViewController: UIViewController, UICollectionViewDataSource, UICol
           self.embed()
        }
        if downLoad.percentComplete > 0 && downLoad.percentComplete < 100 {
-            downLoad.forceStop()
-           if !self.existingFile(fileName: isRestricted ? self.config.getValueFromKey("id") + "_preview" : self.config.getValueFromKey("id")) {
-               self.deleteFile(fileName: self.pdfFile(fileName: isRestricted ? self.config.getValueFromKey("id") + "_preview" : self.config.getValueFromKey("id")))
+           downLoad.forceStop()
+           if !self.existingFile(fileName: self.file_name()) {
+               self.deleteFile(fileName: self.pdfFile(fileName: self.file_name()))
             }
         }
     }
@@ -526,7 +645,7 @@ class Reader_ViewController: UIViewController, UICollectionViewDataSource, UICol
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: Int(self.screenWidth()), height: Int(self.screenHeight()) - 100)
+        return CGSize(width: Int(self.screenWidth()), height: Int(self.collectionView.frame.size.height))
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -541,12 +660,28 @@ class Reader_ViewController: UIViewController, UICollectionViewDataSource, UICol
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Reader_Cell", for: indexPath as IndexPath)
         
-            let data = dataList[indexPath.item] as! String
+        let data = dataList[indexPath.item] as! String
 
-            let title = self.withView(cell, tag: 11) as! UITextView
+        let title = self.withView(cell, tag: 11) as! UITextView
                     
         title.setContentOffset(.zero, animated: false)
         title.text = data
+        
+        if indexPath.item == 0 && data.trimmingCharacters(in: .whitespaces) == "" {
+            title.isHidden = true
+        } else {
+            title.isHidden = false
+        }
+        
+        let cover = self.withView(cell, tag: 12) as! UIImageView
+        cover.imageUrl(url: config.getValueFromKey("avatar"))
+        
+        if indexPath.item == 0 && data.trimmingCharacters(in: .whitespaces) == "" {
+            cover.isHidden = false
+        } else {
+            cover.isHidden = true
+        }
+        
         return cell
     }
     

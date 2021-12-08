@@ -18,19 +18,26 @@
                 <rect key="frame" x="0.0" y="0.0" width="148" height="134"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="12" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="s0S-cq-Z1r">
+                        <rect key="frame" x="0.0" y="0.0" width="148" height="134"/>
+                    </imageView>
                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" tag="11" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="justified" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1XI-Go-omp">
                         <rect key="frame" x="10" y="15" width="128" height="119"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <color key="textColor" systemColor="labelColor"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                     </textView>
                 </subviews>
                 <constraints>
+                    <constraint firstItem="s0S-cq-Z1r" firstAttribute="leading" secondItem="Sc9-45-vaY" secondAttribute="leading" id="Aqg-gD-Yv2"/>
+                    <constraint firstAttribute="bottom" secondItem="s0S-cq-Z1r" secondAttribute="bottom" id="D4Z-4C-wDv"/>
                     <constraint firstAttribute="trailing" secondItem="1XI-Go-omp" secondAttribute="trailing" constant="10" id="IeK-mq-aXw"/>
                     <constraint firstAttribute="bottom" secondItem="1XI-Go-omp" secondAttribute="bottom" id="Joh-oK-iWH"/>
+                    <constraint firstAttribute="trailing" secondItem="s0S-cq-Z1r" secondAttribute="trailing" id="Oe9-01-OBb"/>
                     <constraint firstItem="1XI-Go-omp" firstAttribute="leading" secondItem="Sc9-45-vaY" secondAttribute="leading" constant="10" id="loF-C2-YvX"/>
                     <constraint firstItem="1XI-Go-omp" firstAttribute="top" secondItem="Sc9-45-vaY" secondAttribute="top" constant="15" id="nBm-BR-d5w"/>
+                    <constraint firstItem="s0S-cq-Z1r" firstAttribute="top" secondItem="Sc9-45-vaY" secondAttribute="top" id="q4Q-bc-HHb"/>
                 </constraints>
             </collectionViewCellContentView>
             <size key="customSize" width="148" height="134"/>
