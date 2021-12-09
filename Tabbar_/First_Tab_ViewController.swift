@@ -39,6 +39,8 @@ class First_Tab_ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet var notiBtn: UIButton!
     
     var bg_view: UIImageView!
+    
+    let itemHeight = Int(screenWidth() * 9 / 16) + 10
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -113,7 +115,7 @@ class First_Tab_ViewController: UIViewController, UITextFieldDelegate {
                                           "book_type": 0,
                                           "price": 0,
                                           "sorting": 1,
-                                        ], "height": 0, "direction": "horizontal", "loaded": false],
+                                        ], "height": itemHeight, "direction": "horizontal", "loaded": false],
         
         
                                       ["title":"SÁCH NÓI",
@@ -393,9 +395,7 @@ extension First_Tab_ViewController: UITableViewDataSource, UITableViewDelegate {
             
             more.action(forTouch:[:]) { (obj) in
                 let list = List_Book_ViewController.init()
-                
                 list.config = self.removeKey(info: conf)
-                       
                 self.center()?.pushViewController(list, animated: true)
             }
         }

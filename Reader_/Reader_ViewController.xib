@@ -24,7 +24,6 @@
                 <outlet property="reader" destination="IUD-cD-kSZ" id="AjA-UF-ZNV"/>
                 <outlet property="restart" destination="I6S-Zs-M4F" id="Xw6-UP-G8G"/>
                 <outlet property="showFull" destination="LpR-aG-b8R" id="Jhr-IS-PhC"/>
-                <outlet property="textView" destination="4eX-c1-1C3" id="4hE-Ho-MMV"/>
                 <outlet property="titleLabel" destination="01M-kJ-3vo" id="J0m-eY-1zI"/>
                 <outlet property="topView" destination="tH1-YX-68o" id="iX1-wM-pMW"/>
                 <outlet property="view" destination="Xit-aY-mf9" id="cuU-c5-B1b"/>
@@ -136,29 +135,18 @@
                     <rect key="frame" x="0.0" y="108" width="414" height="704"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
-                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LGz-In-ncm">
+                <view hidden="YES" tag="8000" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LGz-In-ncm">
                     <rect key="frame" x="0.0" y="108" width="414" height="704"/>
                     <subviews>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Inh-qV-D8s">
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="999" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Inh-qV-D8s">
                             <rect key="frame" x="8" y="8" width="398" height="688"/>
                         </imageView>
-                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" textAlignment="justified" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4eX-c1-1C3">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="704"/>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                            <color key="textColor" systemColor="labelColor"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                        </textView>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
                         <constraint firstItem="Inh-qV-D8s" firstAttribute="top" secondItem="LGz-In-ncm" secondAttribute="top" constant="8" id="39s-yH-gnk"/>
-                        <constraint firstAttribute="trailing" secondItem="4eX-c1-1C3" secondAttribute="trailing" id="5IB-ew-mxx"/>
-                        <constraint firstAttribute="bottom" secondItem="4eX-c1-1C3" secondAttribute="bottom" id="5OR-ie-LUc"/>
-                        <constraint firstItem="4eX-c1-1C3" firstAttribute="top" secondItem="LGz-In-ncm" secondAttribute="top" id="7B8-0C-LX4"/>
                         <constraint firstItem="Inh-qV-D8s" firstAttribute="leading" secondItem="LGz-In-ncm" secondAttribute="leading" constant="8" id="Xvc-yF-mm5"/>
                         <constraint firstAttribute="bottom" secondItem="Inh-qV-D8s" secondAttribute="bottom" constant="8" id="f13-Xa-hsC"/>
-                        <constraint firstItem="4eX-c1-1C3" firstAttribute="leading" secondItem="LGz-In-ncm" secondAttribute="leading" id="mg3-a6-DGi"/>
                         <constraint firstAttribute="trailing" secondItem="Inh-qV-D8s" secondAttribute="trailing" constant="8" id="qMe-48-UzU"/>
                     </constraints>
                 </view>
@@ -284,6 +272,7 @@
         </view>
     </objects>
     <designables>
+        <designable name="01M-kJ-3vo"/>
         <designable name="BXk-iU-bGX">
             <size key="intrinsicContentSize" width="-1" height="1.5"/>
         </designable>
@@ -294,9 +283,6 @@
         <image name="ico_menu" width="31.5" height="31.5"/>
         <image name="icon_close" width="33" height="33"/>
         <image name="reload" width="42.5" height="42.5"/>
-        <systemColor name="labelColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

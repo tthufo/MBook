@@ -165,7 +165,7 @@ class Reader_ViewController: UIViewController, UICollectionViewDataSource, UICol
 
     @IBOutlet var imageView: UIImageView!
 
-    @IBOutlet var textView: UITextView!
+//    @IBOutlet var textView: UITextView!
 
     var isReader: Bool = false
     
@@ -236,7 +236,7 @@ class Reader_ViewController: UIViewController, UICollectionViewDataSource, UICol
 //            pdfView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
 //            pdfView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
 //        ])
-
+        
         pdfView.pageShadowsEnabled = false
         pdfView.autoScales = true
         pdfView.displaysPageBreaks = false
@@ -267,8 +267,47 @@ class Reader_ViewController: UIViewController, UICollectionViewDataSource, UICol
         }
     }
     
+    func replacePage(isLeft: Bool)
+    {
+        let page = self.pdfDocument.page(at: self.currentPage + (isLeft ? -1 : 1))
+        let pageContent = page?.string
+        
+        let textV = UITextView.init(frame: CGRect.init(x: isLeft ? -self.gesture.frame.size.width : self.gesture.frame.size.width, y: 0, width: self.gesture.frame.size.width, height: self.gesture.frame.size.height))
+        textV.isSelectable = false
+        textV.isEditable = false
+        textV.font = UIFont.systemFont(ofSize: IS_IPAD ? 26 : 22)
+        textV.showsVerticalScrollIndicator = false
+        textV.textAlignment = .justified
+        
+        textV.text = pageContent
+        self.gesture.addSubview(textV)
+        
+        textV.alpha = self.currentPage == 1 && pageContent?.trimmingCharacters(in: .whitespaces) == "" ? 0: 1
+        
+        
+        UIView.animate(withDuration: 0.3) {
+            var frameTextView = textV.frame
+            frameTextView.origin.x = isLeft ? 0 : 0
+            textV.frame = frameTextView
+            
+            let centerText = self.gesture.subviews[1] as! UITextView
+            var gesturTextView = centerText.frame
+            gesturTextView.origin.x = isLeft ? self.gesture.frame.size.width : -self.gesture.frame.size.width
+            centerText.frame = gesturTextView
+            
+        } completion: { done in
+        
+            (self.gesture.subviews[1] as! UITextView).removeFromSuperview()
+        }
+
+    }
+    
     @objc func swipedRight()
     {
+        if self.currentPage == 0 {
+            return
+        }
+        self.replacePage(isLeft: true)
         currentPage -= 1
         if currentPage <= 0 {
             currentPage = 0
@@ -279,6 +318,10 @@ class Reader_ViewController: UIViewController, UICollectionViewDataSource, UICol
 
     @objc func swipedLeft()
     {
+        if self.currentPage == self.pdfDocument.pageCount {
+            return
+        }
+        self.replacePage(isLeft: false)
         currentPage += 1
         if currentPage >= self.pdfDocument.pageCount {
             currentPage = self.pdfDocument.pageCount - 1
@@ -380,35 +423,16 @@ class Reader_ViewController: UIViewController, UICollectionViewDataSource, UICol
             pdfScrollView.setZoomScale(snapScaleFactor, animated: true)
         }
     }
-
+    
     func pdfToText() {
 //        let docContent = NSMutableAttributedString()
         
-        let page = self.pdfDocument.page(at: currentPage)
-        let pageContent = page?.string
-        self.textView.setContentOffset(.zero, animated: false)
-        self.textView.text = pageContent
-        self.textView.isHidden = pageContent!.trimmingCharacters(in: .whitespaces) == "" && self.currentPage == 0
-//        UIView.animate(withDuration: 0.4, delay: 0, options: .curveEaseIn, animations: {
-//            self.textView.alpha = 0
-//        }) { _ in
-//            self.textView.alpha = 1
-//        }
-        
-        UIView.animate(withDuration: 1.0, animations: {
-                let animation = CATransition()
-                animation.duration = 1.2
-                animation.startProgress = 0.0
-                animation.endProgress = 0.6
-                animation.type = CATransitionType(rawValue: "pageCurl")
-                animation.subtype = CATransitionSubtype(rawValue: "fromRight")
-                animation.isRemovedOnCompletion = false
-                animation.fillMode = CAMediaTimingFillMode(rawValue: "extended")
-                animation.isRemovedOnCompletion = false
-                if let animation = animation as? CATransition{
-                    
-                }
-            })
+//        let page = self.pdfDocument.page(at: currentPage)
+//        let pageContent = page?.string
+//        self.textView.setContentOffset(.zero, animated: false)
+//        self.textView.text = pageContent
+//        self.textView.isHidden = pageContent!.trimmingCharacters(in: .whitespaces) == "" && self.currentPage == 0
+
 //        if let pdf = PDFDocument(url: URL(fileURLWithPath: fromPDF)) {
 //            let pageCount = pdf.pageCount
 //            for i in 1 ..< pageCount {
@@ -419,21 +443,17 @@ class Reader_ViewController: UIViewController, UICollectionViewDataSource, UICol
 //        }
     }
     
-    func getMode(document: PDFDocument) -> Bool {
-//        let pageCount = document.pageCount
+    func getReadMode(document: PDFDocument) -> Bool {
         var isHas = false
-        for i in 0 ..< 5 {
+        for i in 0 ..< 10 {
             guard let page = document.page(at: i) else { continue }
             guard let pageContent = page.string else { continue }
             self.dataList.add(pageContent)
-//            if !isHas {
             if pageContent.trimmingCharacters(in: .whitespaces) != "" {
                 isHas = true
                 break
             }
-//            }
         }
-//        self.isCartoon = isHas
         return isHas
     }
     
@@ -486,7 +506,21 @@ class Reader_ViewController: UIViewController, UICollectionViewDataSource, UICol
             self.pageNumber.isHidden = false
             self.success = true
             self.startTimer()
-            if self.getMode(document: document) {
+            if self.getReadMode(document: document) {
+                let page = self.pdfDocument.page(at: currentPage)
+                let pageContent = page?.string
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
+                    let textV = UITextView.init(frame: CGRect.init(x: 0, y: 0, width: self.gesture.frame.size.width, height: self.gesture.frame.size.height))
+                    textV.isSelectable = false
+                    textV.isEditable = false
+                    textV.font = UIFont.systemFont(ofSize: IS_IPAD ? 26 :  22)
+                    textV.showsVerticalScrollIndicator = false
+                    textV.textAlignment = .justified
+                    self.gesture.addSubview(textV)
+                    textV.alpha = pageContent!.trimmingCharacters(in: .whitespaces) == "" ? 0 : 1
+                    (self.gesture.subviews[1] as! UITextView).text = pageContent
+
+                })
                 self.gesture.isHidden = false
                 self.pdfToText()
             } else {
@@ -565,8 +599,11 @@ class Reader_ViewController: UIViewController, UICollectionViewDataSource, UICol
             content.dataList = dict["Children"] as! NSArray
             content.callBack = { data in
                 let pageIndex = (data as! NSDictionary)["Destination"]
-                if self.getMode(document: self.pdfDocument) {
+                if self.getReadMode(document: self.pdfDocument) {
                     self.currentPage = pageIndex as! Int
+                    let pagePdf = self.pdfDocument.page(at: pageIndex as! Int)
+                    (self.gesture.subviews[1] as! UITextView).text = pagePdf?.string
+                    self.pageNumber.text = "%i / %i".format(parameters: self.currentPage + 1, self.pdfDocument.documentRef?.numberOfPages as! CVarArg)
                     self.pdfToText()
                 } else {
                     let pagePdf = self.pdfDocument.page(at: pageIndex as! Int)

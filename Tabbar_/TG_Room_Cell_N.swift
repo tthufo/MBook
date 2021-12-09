@@ -36,7 +36,9 @@ class TG_Room_Cell_N: UITableViewCell, UICollectionViewDelegate, UICollectionVie
         titleLabel.font = UIFont.boldSystemFont(ofSize: 15)
                 
         if !(self.config["loaded"] as! Bool) {
-            didRequestInfo()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
+                self.didRequestInfo()
+            })
         } else {
             titleLabel.text = config.getValueFromKey("title") != "" ? config.getValueFromKey("title").uppercased() : ""
             extraButton.alpha = 1

@@ -103,7 +103,7 @@ class TG_Room_Cell: UITableViewCell, FSPagerViewDataSource,FSPagerViewDelegate, 
               self.pageControl.numberOfPages = self.images!.count
             
               self.returnValue?(Float(self.images?.count == 0 ? 0 : self.itemHeight - 60))
-          })
+        })
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
