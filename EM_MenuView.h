@@ -42,6 +42,8 @@ typedef void (^MenuCompletion)(int index, id object, EM_MenuView * menu);
 
 - (id)initWithRestrict:(NSDictionary*)info;
 
+- (id)initWithPage:(NSDictionary*)info;
+
 - (EM_MenuView*)showWithCompletion:(MenuCompletion)_completion;
 
 - (EM_MenuView*)disableCompletion:(MenuCompletion)_completion;

@@ -12,7 +12,7 @@
 
 #import "MeBook-Swift.h"
 
-@interface EM_MenuView ()<UITableViewDataSource, UITableViewDelegate, UITextViewDelegate>
+@interface EM_MenuView ()<UITableViewDataSource, UITableViewDelegate, UITextViewDelegate, UITextFieldDelegate>
 {
     NSMutableArray * dataList;
 }
@@ -21,6 +21,56 @@
 @implementation EM_MenuView
 
 @synthesize menuCompletion;
+
+- (id)initWithPage:(NSDictionary*)info
+{
+    self = [self init];
+    
+    [self setContainerView:[self didCreatePageView:info]];
+    
+    [self setUseMotionEffects:true];
+    
+    return self;
+}
+
+- (UIView*)didCreatePageView:(NSDictionary*)dict
+{
+    UIView *commentView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 300, 166)];
+    
+    [commentView setBackgroundColor:[UIColor clearColor]];
+    
+    UIView *contentView = [[NSBundle mainBundle] loadNibNamed:@"EM_Menu" owner:self options:nil][15];
+    
+    contentView.frame = CGRectMake(0, 0, 300, 166);
+    
+    UITextField * paging = ((UITextField*)[self withView:contentView tag: 2]);
+            
+    [paging becomeFirstResponder];
+    
+    UILabel * total = ((UILabel*)[self withView:contentView tag: 3]);
+    
+    total.text = [dict getValueFromKey:@"total"];
+
+    UIButton * action = ((UIButton*)[self withView:contentView tag: 4]);
+        
+    [action actionForTouch:@{} and:^(NSDictionary *touchInfo) {
+        
+        if(self.menuCompletion)
+        {
+            self.menuCompletion(3, @{@"page": paging.text}, self);
+        }
+        
+    }];
+    
+    [commentView addSubview:contentView];
+    
+    return commentView;
+}
+
+- (BOOL)textFieldShouldEndEditing:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return YES;
+}
 
 - (id)initWithRate:(NSDictionary*)info
 {

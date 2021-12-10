@@ -265,6 +265,14 @@ class Reader_ViewController: UIViewController, UICollectionViewDataSource, UICol
         } else {
             viewPDF()
         }
+        
+//        self.pageNumber.action(forTouch: [:]) { objc in
+//            EM_MenuView.init(page: ["total": self.pdfDocument.pageCount]).show { (indexing, obj, menu) in
+//                if indexing == 3 {
+//                    let paging = (obj as! NSDictionary).getValueFromKey("page")
+//                }
+//            }
+//        }
     }
     
     func replacePage(isLeft: Bool)
@@ -318,7 +326,7 @@ class Reader_ViewController: UIViewController, UICollectionViewDataSource, UICol
 
     @objc func swipedLeft()
     {
-        if self.currentPage == self.pdfDocument.pageCount {
+        if self.currentPage == self.pdfDocument.pageCount - 1 {
             return
         }
         self.replacePage(isLeft: false)
