@@ -1358,5 +1358,40 @@ extension DispatchQueue {
             }
         }
     }
+    
+}
 
+extension UITextView {
+
+    func numberOfCharactersThatFitTextView() -> Int {
+        let fontRef = CTFontCreateWithName(font!.fontName as CFString, font!.pointSize, nil)
+        let attributes = [kCTFontAttributeName : fontRef]
+        let attributedString = NSAttributedString(string: text!, attributes: attributes as [NSAttributedString.Key : Any])
+        let frameSetterRef = CTFramesetterCreateWithAttributedString(attributedString as CFAttributedString)
+
+        var characterFitRange: CFRange = CFRange()
+
+        CTFramesetterSuggestFrameSizeWithConstraints(frameSetterRef, CFRangeMake(0, 0), nil, CGSize(width: bounds.size.width, height: bounds.size.height), &characterFitRange)
+        return Int(characterFitRange.length)
+
+    }
+    
+    public var visibleRange: NSRange? {
+           guard let start = closestPosition(to: contentOffset),
+                 let end = characterRange(at: CGPoint(x: contentOffset.x + bounds.maxX,
+                                                      y: contentOffset.y + bounds.maxY))?.end
+           else { return nil }
+           return NSMakeRange(offset(from: beginningOfDocument, to: start), offset(from: start, to: end))
+       }
+}
+
+extension String {
+    func substring(with nsrange: NSRange) -> String? {
+        guard let range = Range(nsrange, in: self) else { return nil }
+        return String(self[range])
+    }
+    
+    func removeString(with subString: String) -> String? {
+        return self.replace(target: subString, withString: "")
+    }
 }

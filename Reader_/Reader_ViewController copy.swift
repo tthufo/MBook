@@ -157,10 +157,6 @@ class Reader_ViewController: UIViewController, UICollectionViewDataSource, UICol
 
     var dataList: NSMutableArray!
 
-    var tempList: NSMutableArray!
-    
-    var tempIndex: Int = 0
-
     @IBOutlet var reader: UIButton!
 
     @IBOutlet var activity: UIActivityIndicatorView!
@@ -168,6 +164,8 @@ class Reader_ViewController: UIViewController, UICollectionViewDataSource, UICol
     @IBOutlet var gesture: UIView!
 
     @IBOutlet var imageView: UIImageView!
+
+//    @IBOutlet var textView: UITextView!
 
     var isReader: Bool = false
     
@@ -221,8 +219,6 @@ class Reader_ViewController: UIViewController, UICollectionViewDataSource, UICol
 
         dataList = NSMutableArray()
         
-        tempList = NSMutableArray()
-
         cover.imageUrl(url: config.getValueFromKey("avatar"))
 
         imageView.imageUrl(url: config.getValueFromKey("avatar"))
@@ -253,10 +249,10 @@ class Reader_ViewController: UIViewController, UICollectionViewDataSource, UICol
         queueingScrollView?.showsHorizontalScrollIndicator = false
         subscribeToNotifications()
         
-        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(self.swipedRight))
+        var swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(self.swipedRight))
         swipeRight.direction = UISwipeGestureRecognizer.Direction.right
 
-        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self.swipedLeft))
+        var swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self.swipedLeft))
         swipeLeft.direction = UISwipeGestureRecognizer.Direction.left
 
         self.gesture.addGestureRecognizer(swipeLeft)
@@ -279,131 +275,7 @@ class Reader_ViewController: UIViewController, UICollectionViewDataSource, UICol
 //        }
     }
     
-    func createStack(center: Int) -> UIView {
-        let stackView = UIView.init(frame: CGRect.init(x: CGFloat(center), y: 0, width: self.gesture.frame.size.width, height: self.gesture.frame.size.height))
-        
-        let textV = self.builtTextView()
-        
-        textV.text = self.tempList[center < 0 ? self.tempIndex : self.tempIndex] as! String
-        
-        stackView.addSubview(textV)
-        
-        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(self.swipedRight_Stack(sender:)))
-        swipeRight.direction = UISwipeGestureRecognizer.Direction.right
-
-        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(self.swipedLeft_Stack(sender:)))
-        swipeLeft.direction = UISwipeGestureRecognizer.Direction.left
-
-        stackView.addGestureRecognizer(swipeLeft)
-
-        stackView.addGestureRecognizer(swipeRight)
-        
-        return stackView
-    }
-    
-    @objc func swipedRight_Stack(sender: UIGestureRecognizer)
-    {
-        if self.tempIndex == 0 {
-            let pagePdf = self.pdfDocument.page(at: self.currentPage - 1)
-            if pagePdf == nil {
-                return
-            }
-            if self.getPages(pageString: (pagePdf?.string)!, isLeft: true) > 1 {
-                self.currentPage -= 1
-                self.replaceBaseView(isLeft: true)
-                self.pageNumber.text = "%i[%i] / %i".format(parameters: currentPage + 1, tempIndex + 1, self.pdfDocument.documentRef?.numberOfPages as! CVarArg)
-            } else {
-                self.swipedRight()
-            }
-            return
-        }
-        
-        self.tempIndex -= 1
-        self.replacePage_Stack(isLeft: true, parentView: sender.view!)
-        
-        self.pageNumber.text = "%i[%i] / %i".format(parameters: currentPage + 1, tempIndex + 1, self.pdfDocument.documentRef?.numberOfPages as! CVarArg)
-    }
-
-    @objc func swipedLeft_Stack(sender: UIGestureRecognizer)
-    {
-        if self.tempIndex == self.tempList.count - 1 {
-            let pagePdf = self.pdfDocument.page(at: self.currentPage + 1)
-            if pagePdf == nil {
-                return
-            }
-            if self.getPages(pageString: (pagePdf?.string)!, isLeft: false) > 1 {
-                self.currentPage += 1
-                self.replaceBaseView(isLeft: false)
-                self.pageNumber.text = "%i[%i] / %i".format(parameters: currentPage + 1, tempIndex + 1, self.pdfDocument.documentRef?.numberOfPages as! CVarArg)
-            } else {
-                self.swipedLeft()
-            }
-            return
-        }
-        
-        self.tempIndex += 1
-        self.replacePage_Stack(isLeft: false, parentView: sender.view!)
-
-        self.pageNumber.text = "%i[%i] / %i".format(parameters: currentPage + 1, tempIndex + 1, self.pdfDocument.documentRef?.numberOfPages as! CVarArg)
-    }
-    
-    func replacePage_Stack(isLeft: Bool, parentView: UIView) {
-        let pageContent = self.tempList[self.tempIndex] as! String
-        
-        let textV = UITextView.init(frame: CGRect.init(x: isLeft ? -self.gesture.frame.size.width : self.gesture.frame.size.width, y: 0, width: self.gesture.frame.size.width, height: self.gesture.frame.size.height))
-        textV.isSelectable = false
-        textV.isEditable = false
-        textV.isUserInteractionEnabled = false
-        textV.font = UIFont.systemFont(ofSize: IS_IPAD ? 22 : 19)
-        textV.showsVerticalScrollIndicator = false
-        textV.textAlignment = .justified
-        textV.text = pageContent
-        parentView.addSubview(textV)
-                
-        UIView.animate(withDuration: 0.3) {
-            var frameTextView = textV.frame
-            frameTextView.origin.x = isLeft ? 0 : 0
-            textV.frame = frameTextView
-            
-            let centerText = parentView.subviews[0] as! UITextView
-            var gesturTextView = centerText.frame
-            gesturTextView.origin.x = isLeft ? self.gesture.frame.size.width : -self.gesture.frame.size.width
-            centerText.frame = gesturTextView
-            
-        } completion: { done in
-            (parentView.subviews[0] as! UITextView).removeFromSuperview()
-        }
-    }
-    
-    func replaceBaseView(isLeft: Bool)
-    {
-        let textV = self.createStack(center: Int(isLeft ? -self.gesture.frame.size.width : self.gesture.frame.size.width))
-        self.gesture.addSubview(textV)
-        
-        UIView.animate(withDuration: 0.3) {
-            var frameTextView = textV.frame
-            frameTextView.origin.x = isLeft ? 0 : 0
-            textV.frame = frameTextView
-            
-            let centerText = self.gesture.subviews[1] as! UIView
-            var gesturTextView = centerText.frame
-            gesturTextView.origin.x = isLeft ? self.gesture.frame.size.width : -self.gesture.frame.size.width
-            centerText.frame = gesturTextView
-            
-        } completion: { done in
-            (self.gesture.subviews[1] as! UIView).removeFromSuperview()
-        }
-    }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    func replaceSinglePage(isLeft: Bool)
+    func replacePage(isLeft: Bool)
     {
         let page = self.pdfDocument.page(at: self.currentPage + (isLeft ? -1 : 1))
         let pageContent = page?.string
@@ -411,8 +283,7 @@ class Reader_ViewController: UIViewController, UICollectionViewDataSource, UICol
         let textV = UITextView.init(frame: CGRect.init(x: isLeft ? -self.gesture.frame.size.width : self.gesture.frame.size.width, y: 0, width: self.gesture.frame.size.width, height: self.gesture.frame.size.height))
         textV.isSelectable = false
         textV.isEditable = false
-        textV.isUserInteractionEnabled = false
-        textV.font = UIFont.systemFont(ofSize: IS_IPAD ? 22 : 19)
+        textV.font = UIFont.systemFont(ofSize: IS_IPAD ? 26 : 19)
         textV.showsVerticalScrollIndicator = false
         textV.textAlignment = .justified
         
@@ -421,41 +292,36 @@ class Reader_ViewController: UIViewController, UICollectionViewDataSource, UICol
         
         textV.alpha = self.currentPage == 1 && pageContent?.trimmingCharacters(in: .whitespaces) == "" ? 0: 1
         
+        
         UIView.animate(withDuration: 0.3) {
             var frameTextView = textV.frame
             frameTextView.origin.x = isLeft ? 0 : 0
             textV.frame = frameTextView
             
-            let centerText = self.gesture.subviews[1] as! UIView
+            let centerText = self.gesture.subviews[1] as! UITextView
             var gesturTextView = centerText.frame
             gesturTextView.origin.x = isLeft ? self.gesture.frame.size.width : -self.gesture.frame.size.width
             centerText.frame = gesturTextView
             
         } completion: { done in
-            (self.gesture.subviews[1] as! UIView).removeFromSuperview()
+        
+            (self.gesture.subviews[1] as! UITextView).removeFromSuperview()
         }
+
     }
-    
-    
-    
-    
     
     @objc func swipedRight()
     {
         if self.currentPage == 0 {
             return
         }
-        
-        let pagePdf = self.pdfDocument.page(at: self.currentPage - 1)
-        if self.getPages(pageString: (pagePdf?.string)!, isLeft: true) > 1 {
-            self.currentPage -= 1
-            self.replaceBaseView(isLeft: true)
-            self.pageNumber.text = "%i[%i] / %i".format(parameters: currentPage + 1, tempIndex + 1, self.pdfDocument.documentRef?.numberOfPages as! CVarArg)
-        } else {
-            self.replaceSinglePage(isLeft: true)
-            self.currentPage -= 1
-            self.pageNumber.text = "%i / %i".format(parameters: currentPage + 1, self.pdfDocument.documentRef?.numberOfPages as! CVarArg)
+        self.replacePage(isLeft: true)
+        currentPage -= 1
+        if currentPage <= 0 {
+            currentPage = 0
         }
+        self.pdfToText()
+        self.pageNumber.text = "%i / %i".format(parameters: currentPage + 1, self.pdfDocument.documentRef?.numberOfPages as! CVarArg)
     }
 
     @objc func swipedLeft()
@@ -463,18 +329,13 @@ class Reader_ViewController: UIViewController, UICollectionViewDataSource, UICol
         if self.currentPage == self.pdfDocument.pageCount - 1 {
             return
         }
-        
-        let pagePdf = self.pdfDocument.page(at: self.currentPage + 1)
-        if self.getPages(pageString: (pagePdf?.string)!, isLeft: false) > 1 {
-            self.currentPage += 1
-            self.replaceBaseView(isLeft: false)
-            self.pageNumber.text = "%i[%i] / %i".format(parameters: currentPage + 1, tempIndex + 1, self.pdfDocument.documentRef?.numberOfPages as! CVarArg)
-        } else {
-            self.replaceSinglePage(isLeft: false)
-            self.currentPage += 1
-            self.pageNumber.text = "%i / %i".format(parameters: currentPage + 1, self.pdfDocument.documentRef?.numberOfPages as! CVarArg)
+        self.replacePage(isLeft: false)
+        currentPage += 1
+        if currentPage >= self.pdfDocument.pageCount {
+            currentPage = self.pdfDocument.pageCount - 1
         }
-
+        self.pdfToText()
+        self.pageNumber.text = "%i / %i".format(parameters: currentPage + 1, self.pdfDocument.documentRef?.numberOfPages as! CVarArg)
         if currentPage + 1 == self.pdfDocument.documentRef?.numberOfPages {
             if self.isRestricted {
                 self.showRestricted()
@@ -509,9 +370,6 @@ class Reader_ViewController: UIViewController, UICollectionViewDataSource, UICol
 
     @objc private func pageChanged(notification: Notification) {
         if currentPageIndex() != nil && self.pdfDocument != nil {
-            if self.getReadMode(document: self.pdfDocument) {
-                return
-            }
             self.pageNumber.text = "%i / %i".format(parameters: Int(currentPageIndex().map(String.init)!)! + 1 ?? 1, self.pdfDocument.documentRef?.numberOfPages as! CVarArg)
             
             if Int(currentPageIndex().map(String.init)!)! + 1 == self.pdfDocument.documentRef?.numberOfPages {
@@ -521,6 +379,7 @@ class Reader_ViewController: UIViewController, UICollectionViewDataSource, UICol
             }
         }
         self.currentPage = Int(currentPageIndex().map(String.init)!)!
+        print("Page changed: \(currentPageIndex().map(String.init) ?? "nil")")
     }
     
     func showRestricted() {
@@ -550,9 +409,6 @@ class Reader_ViewController: UIViewController, UICollectionViewDataSource, UICol
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if self.getReadMode(document: self.pdfDocument) {
-            return
-        }
         let offSet = scrollView.contentOffset.x
         let width = scrollView.frame.width
         let horizontalCenter = width / 2
@@ -578,6 +434,7 @@ class Reader_ViewController: UIViewController, UICollectionViewDataSource, UICol
     
     func pdfToText() {
 //        let docContent = NSMutableAttributedString()
+        
 //        let page = self.pdfDocument.page(at: currentPage)
 //        let pageContent = page?.string
 //        self.textView.setContentOffset(.zero, animated: false)
@@ -609,20 +466,21 @@ class Reader_ViewController: UIViewController, UICollectionViewDataSource, UICol
     }
     
     func readerMode(document: PDFDocument) {
-//        let pageCount = document.pageCount
-//        var pages = 0
-//        for i in 0 ..< pageCount {
-//            guard let page = document.page(at: i) else { continue }
-//            guard let pageContent = page.string else { continue }
+        let pageCount = document.pageCount
+        var pages = 0
+        for i in 0 ..< pageCount {
+            guard let page = document.page(at: i) else { continue }
+            guard let pageContent = page.string else { continue }
+            pages += self.getPages(pageString: pageContent)
 //            self.dataList.add(pageContent)
 //            if !isHas {
 //                if pageContent.trimmingCharacters(in: .whitespaces) != "" {
 //                    isHas = true
 //                }
 //            }
-//        }
+        }
 //        self.isCartoon = isHas
-//        print("===>", pages)
+        print("===>", pages)
     }
     
     @IBAction func didPressReader() {
@@ -647,8 +505,7 @@ class Reader_ViewController: UIViewController, UICollectionViewDataSource, UICol
         return self.isRestricted ? self.config.getValueFromKey("id") + "_preview_text" : self.config.getValueFromKey("id") + "_text"
     }
     
-    func getPages(pageString: String, isLeft: Bool) -> Int {
-        self.tempList.removeAllObjects()
+    func getPages(pageString: String) -> Int {
         var pages = 0
         let textView = self.builtTextView()
         var pageContent = pageString
@@ -656,7 +513,6 @@ class Reader_ViewController: UIViewController, UICollectionViewDataSource, UICol
         while pageContent.trimmingCharacters(in: .whitespaces) != "" {
             textView.text = pageContent
             let subString = pageContent.substring(with: textView.visibleRange!)
-            self.tempList.add(subString! as String)
             let removed_subString = pageContent.removeString(with: subString!)
             pageContent = removed_subString!
             pages += 1
@@ -664,7 +520,6 @@ class Reader_ViewController: UIViewController, UICollectionViewDataSource, UICol
                 break
             }
         }
-        self.tempIndex = isLeft ? pages - 1 : 0
         return pages
     }
     
@@ -673,7 +528,6 @@ class Reader_ViewController: UIViewController, UICollectionViewDataSource, UICol
         textV.isPagingEnabled = true
         textV.isSelectable = false
         textV.isEditable = false
-        textV.isUserInteractionEnabled = false
         textV.font = UIFont.systemFont(ofSize: IS_IPAD ? 22 :  19)
         textV.showsVerticalScrollIndicator = false
         textV.textAlignment = .justified
@@ -686,29 +540,35 @@ class Reader_ViewController: UIViewController, UICollectionViewDataSource, UICol
         if let document = PDFDocument(url: URL(fileURLWithPath: path)) {
             self.pdfView.alpha  = 1
             self.pdfDocument = document
+            self.pageNumber.text = "%i / %i".format(parameters: 1, document.documentRef?.numberOfPages as! CVarArg)
             self.chapter.isEnabled = true
             self.pageNumber.isHidden = false
             self.success = true
             self.startTimer()
-
+            ///////
+//            self.readerMode(document: document)
+            ///////
             if self.getReadMode(document: document) {
                 let page = self.pdfDocument.page(at: currentPage)
                 let pageContent = page?.string
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: {
-                    let textV = self.builtTextView()
+                    let textV = UITextView.init(frame: CGRect.init(x: 0, y: 0, width: self.gesture.frame.size.width, height: self.gesture.frame.size.height))
+                    textV.isPagingEnabled = true
+                    textV.isSelectable = false
+                    textV.isEditable = false
+                    textV.font = UIFont.systemFont(ofSize: IS_IPAD ? 26 :  19)
+                    textV.showsVerticalScrollIndicator = false
+                    textV.textAlignment = .justified
+                    self.gesture.addSubview(textV)
                     textV.alpha = pageContent!.trimmingCharacters(in: .whitespaces) == "" ? 0 : 1
-                    if self.getPages(pageString: pageContent!, isLeft: false) > 1 {
-                        self.gesture.addSubview(self.createStack(center: 0))
-                        self.pageNumber.text = "%i[%i] / %i".format(parameters: 1, self.tempIndex + 1, document.documentRef?.numberOfPages as! CVarArg)
-                    } else {
-                        textV.text = pageContent
-                        self.gesture.addSubview(textV)
-                        self.pageNumber.text = "%i / %i".format(parameters: 1, document.documentRef?.numberOfPages as! CVarArg)
-                    }
+                    (self.gesture.subviews[1] as! UITextView).text = pageContent
+                    print("-->", self.getPages(pageString: pageContent!))
                 })
                 self.gesture.isHidden = false
+                self.pdfToText()
+            } else {
+                
             }
-            
 //            if self.getObject(self.file_text()) != nil {
 //                let cacheData = self.getObject(self.file_text())
 //                self.isCartoon = (cacheData as! NSDictionary).getValueFromKey("isCartoon") == "1"
@@ -718,16 +578,16 @@ class Reader_ViewController: UIViewController, UICollectionViewDataSource, UICol
 //                self.reader.isHidden = !self.isCartoon
 //                self.activity.stopAnimating()
 //            } else {
-//                DispatchQueue.background(delay: 0.1, background: {
+                DispatchQueue.background(delay: 0.1, background: {
 //                    self.readerMode(document: document)
 //                    self.readerMode(document: document)
-//                }, completion: {
+                }, completion: {
 //                    print("done")
 //                    self.add(["text": self.dataList, "isCartoon": self.isCartoon ? "1" : "0"], andKey: self.file_text())
 //                    self.activity.stopAnimating()
 //                    self.reader.isHidden = !self.isCartoon
 //                    self.collectionView.reloadData()
-//                })
+                })
 //            }
         } else {
             self.failLabel.alpha = 1
@@ -787,15 +647,9 @@ class Reader_ViewController: UIViewController, UICollectionViewDataSource, UICol
                 if self.getReadMode(document: self.pdfDocument) {
                     self.currentPage = pageIndex as! Int
                     let pagePdf = self.pdfDocument.page(at: pageIndex as! Int)
-                    if self.getPages(pageString: (pagePdf?.string)!, isLeft: false) > 1 {
-                        (self.gesture.subviews[1] as! UITextView).alpha = 1
-                        (self.gesture.subviews[1] as! UITextView).text = self.tempList[self.tempIndex] as! String
-                        self.pageNumber.text = "%i[%i] / %i".format(parameters: self.currentPage + 1, self.tempIndex + 1, self.pdfDocument.documentRef?.numberOfPages as! CVarArg)
-                    } else {
-                        (self.gesture.subviews[1] as! UITextView).alpha = 1
-                        (self.gesture.subviews[1] as! UITextView).text = pagePdf?.string
-                        self.pageNumber.text = "%i / %i".format(parameters: self.currentPage + 1, self.pdfDocument.documentRef?.numberOfPages as! CVarArg)
-                    }
+                    (self.gesture.subviews[1] as! UITextView).text = pagePdf?.string
+                    self.pageNumber.text = "%i / %i".format(parameters: self.currentPage + 1, self.pdfDocument.documentRef?.numberOfPages as! CVarArg)
+                    self.pdfToText()
                 } else {
                     let pagePdf = self.pdfDocument.page(at: pageIndex as! Int)
                     self.pdfView.go(to: pagePdf!)
