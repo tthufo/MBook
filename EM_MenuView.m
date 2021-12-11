@@ -35,25 +35,33 @@
 
 - (UIView*)didCreatePageView:(NSDictionary*)dict
 {
-    UIView *commentView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 300, 166)];
+    UIView *commentView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 300, 78)];
     
+    [commentView withBorder:@{@"Bcolor":[UIColor whiteColor], @"Bcorner":@(5), @"Bwidth":@(0)}];
+
     [commentView setBackgroundColor:[UIColor clearColor]];
     
-    UIView *contentView = [[NSBundle mainBundle] loadNibNamed:@"EM_Menu" owner:self options:nil][15];
+    UIView *contentView = [[NSBundle mainBundle] loadNibNamed:@"EM_Menu" owner:self options:nil][14];
     
-    contentView.frame = CGRectMake(0, 0, 300, 166);
+    contentView.frame = CGRectMake(0, 0, 300, 78);
     
     UITextField * paging = ((UITextField*)[self withView:contentView tag: 2]);
             
-    [paging becomeFirstResponder];
+//    [paging becomeFirstResponder];
     
-    UILabel * total = ((UILabel*)[self withView:contentView tag: 3]);
-    
-    total.text = [dict getValueFromKey:@"total"];
+//    UILabel * total = ((UILabel*)[self withView:contentView tag: 3]);
+//
+//    total.text = [dict getValueFromKey:@"total"];
 
     UIButton * action = ((UIButton*)[self withView:contentView tag: 4]);
         
     [action actionForTouch:@{} and:^(NSDictionary *touchInfo) {
+        
+//        if ([paging.text integerValue] > [[dict getValueFromKey:@"total"] integerValue]) {
+//            [paging resignFirstResponder];
+//            [self showToast:@"Số trang không chính xác" andPos:0];
+//            return;
+//        }
         
         if(self.menuCompletion)
         {
