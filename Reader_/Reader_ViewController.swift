@@ -133,6 +133,8 @@ class Reader_ViewController: UIViewController, UICollectionViewDataSource, UICol
 
     @IBOutlet var titleLabel: MarqueeLabel!
 
+    @IBOutlet var overView: UIView!
+    
     @IBOutlet var topView: UIView!
 
     @IBOutlet var cover: UIImageView!
@@ -300,6 +302,20 @@ class Reader_ViewController: UIViewController, UICollectionViewDataSource, UICol
 //                }
 //            }
 //        }
+        
+        print("++", ((self.pdfView.subviews[0]).subviews[0]).allSubviews)
+        
+        for v in ((self.pdfView.subviews[0]).subviews[0]).allSubviews {
+            
+            (v).action(forTouch: [:]) { objc in
+                UIView.animate(withDuration: 0.3) {
+                    self.topView.alpha = self.show ? 0 : 1
+                    self.pageNumber.alpha = self.show ? 0 : 1
+                } completion: { done in
+                    self.show = !self.show
+                }
+            }
+        }
         
         self.gesture.action(forTouch: [:]) { objc in
             UIView.animate(withDuration: 0.3) {
@@ -736,7 +752,9 @@ class Reader_ViewController: UIViewController, UICollectionViewDataSource, UICol
 //            self.pageNumber.isHidden = false
             self.success = true
             self.startTimer()
-
+            
+//            (self.pdfDocument.page(at: 0))
+            
             if self.getReadMode(document: document) {
                 let page = self.pdfDocument.page(at: currentPage)
                 let pageContent = page?.string
@@ -835,8 +853,13 @@ class Reader_ViewController: UIViewController, UICollectionViewDataSource, UICol
                     self.currentPage = pageIndex as! Int
                     let pagePdf = self.pdfDocument.page(at: pageIndex as! Int)
                     if self.getPages(pageString: (pagePdf?.string)!, isLeft: false) > 1 {
-                        (self.gesture.subviews[1] as! UITextView).alpha = 1
-                        (self.gesture.subviews[1] as! UITextView).text = self.tempList[self.tempIndex] as! String
+                        if (self.gesture.subviews[1]).isKind(of: UITextView.self) {
+                            (self.gesture.subviews[1] as! UITextView).alpha = 1
+                            (self.gesture.subviews[1] as! UITextView).text = self.tempList[self.tempIndex] as! String
+                        } else {
+                            ((self.gesture.subviews[1]).subviews[0] as! UITextView).alpha = 1
+                            ((self.gesture.subviews[1]).subviews[0] as! UITextView).text = self.tempList[self.tempIndex] as! String
+                        }
                         self.pageNumber.text = "%i[%i] / %i".format(parameters: self.currentPage + 1, self.tempIndex + 1, self.pdfDocument.documentRef?.numberOfPages as! CVarArg)
                     } else {
                         (self.gesture.subviews[1] as! UITextView).alpha = 1
@@ -847,6 +870,7 @@ class Reader_ViewController: UIViewController, UICollectionViewDataSource, UICol
                     let pagePdf = self.pdfDocument.page(at: pageIndex as! Int)
                     self.pdfView.go(to: pagePdf!)
                 }
+                
 //                if !self.isReader {
 //                    let pagePdf = self.pdfDocument.page(at: pageIndex as! Int)
 //                    self.pdfView.go(to: pagePdf!)
