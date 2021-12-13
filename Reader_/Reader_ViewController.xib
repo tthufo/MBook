@@ -276,9 +276,6 @@
     </objects>
     <designables>
         <designable name="01M-kJ-3vo"/>
-        <designable name="BXk-iU-bGX">
-            <size key="intrinsicContentSize" width="-1" height="1.5"/>
-        </designable>
         <designable name="ySy-S1-1mM"/>
     </designables>
     <resources>

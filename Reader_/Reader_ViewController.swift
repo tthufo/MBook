@@ -95,7 +95,6 @@ extension UIView {
     }
 
     func firstSubview(withClassName className: String) -> UIView? {
-        print("-->", allSubviews.first { type(of: $0).description() == className })
         return allSubviews.first { type(of: $0).description() == className }
     }
 }
@@ -729,12 +728,19 @@ class Reader_ViewController: UIViewController, UICollectionViewDataSource, UICol
         return self.isRestricted ? self.config.getValueFromKey("id") + "_preview_text" : self.config.getValueFromKey("id") + "_text"
     }
     
+    @IBAction func didLeft() {
+        print("left")
+    }
+    
     func getPages(pageString: String, isLeft: Bool) -> Int {
         self.tempList.removeAllObjects()
         var pages = 0
         let textView = self.builtTextView()
-        var pageContent = pageString
         
+        let array = pageString.components(separatedBy: CharacterSet.newlines)
+
+        var pageContent = array.joined(separator: "\n\n")
+
         while pageContent.trimmingCharacters(in: .whitespaces) != "" {
             textView.text = pageContent
             let subString = pageContent.substring(with: textView.visibleRange!)
