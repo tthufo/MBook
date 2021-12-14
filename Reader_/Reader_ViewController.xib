@@ -73,7 +73,7 @@
                             <rect key="frame" x="8" y="8" width="398" height="802"/>
                         </imageView>
                     </subviews>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="Inh-qV-D8s" firstAttribute="leading" secondItem="LGz-In-ncm" secondAttribute="leading" constant="8" id="Cpu-gT-ufh"/>
                         <constraint firstAttribute="trailing" secondItem="Inh-qV-D8s" secondAttribute="trailing" constant="8" id="Dx1-IB-MOO"/>
@@ -106,19 +106,19 @@
                                 <action selector="didPressBack" destination="-1" eventType="touchUpInside" id="2jr-GS-uqB"/>
                             </connections>
                         </button>
-                        <button hidden="YES" opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IUD-cD-kSZ">
-                            <rect key="frame" x="330" y="15.5" width="33" height="33"/>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IUD-cD-kSZ">
+                            <rect key="frame" x="329" y="10" width="44" height="44"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="33" id="g6c-ny-FWr"/>
-                                <constraint firstAttribute="height" constant="33" id="pFA-Od-9fz"/>
+                                <constraint firstAttribute="width" constant="44" id="g6c-ny-FWr"/>
+                                <constraint firstAttribute="height" constant="44" id="pFA-Od-9fz"/>
                             </constraints>
                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                            <state key="normal" image="book_default"/>
+                            <state key="normal" backgroundImage="night"/>
                             <connections>
-                                <action selector="didPressReader" destination="-1" eventType="touchUpInside" id="Y9B-uB-kbt"/>
+                                <action selector="didPressReaderWithSender:" destination="-1" eventType="touchUpInside" id="cCd-t4-Faz"/>
                             </connections>
                         </button>
-                        <activityIndicatorView opaque="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="Trf-6i-Moa">
+                        <activityIndicatorView hidden="YES" opaque="NO" alpha="0.0" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" animating="YES" style="medium" translatesAutoresizingMaskIntoConstraints="NO" id="Trf-6i-Moa">
                             <rect key="frame" x="336" y="22" width="20" height="20"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="20" id="vL2-tw-sNJ"/>
@@ -127,10 +127,7 @@
                             <color key="color" red="0.92549019610000005" green="0.92941176469999998" blue="0.90588235289999997" alpha="1" colorSpace="calibratedRGB"/>
                         </activityIndicatorView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="01M-kJ-3vo" customClass="MarqueeLabel" customModule="MarqueeLabel">
-                            <rect key="frame" x="60" y="22" width="303" height="21"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="21" id="vFe-eJ-uvW"/>
-                            </constraints>
+                            <rect key="frame" x="60" y="22" width="261" height="21"/>
                             <fontDescription key="fontDescription" type="system" pointSize="19"/>
                             <color key="textColor" red="0.92549019610000005" green="0.92941176469999998" blue="0.90588235289999997" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
@@ -138,17 +135,18 @@
                     </subviews>
                     <color key="backgroundColor" red="0.11764705882352941" green="0.5725490196078431" blue="0.5490196078431373" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
+                        <constraint firstItem="IUD-cD-kSZ" firstAttribute="leading" secondItem="01M-kJ-3vo" secondAttribute="trailing" constant="8" symbolic="YES" id="2uG-yK-CZ6"/>
+                        <constraint firstAttribute="bottom" secondItem="01M-kJ-3vo" secondAttribute="bottom" constant="21" id="A3l-7h-rwJ"/>
                         <constraint firstAttribute="height" constant="64" id="CCy-SP-z56"/>
-                        <constraint firstItem="01M-kJ-3vo" firstAttribute="top" secondItem="tH1-YX-68o" secondAttribute="top" constant="22" id="FWm-oQ-31W"/>
                         <constraint firstItem="41J-L5-vvB" firstAttribute="leading" secondItem="Trf-6i-Moa" secondAttribute="trailing" constant="15" id="I96-ju-jka"/>
                         <constraint firstItem="41J-L5-vvB" firstAttribute="centerY" secondItem="tH1-YX-68o" secondAttribute="centerY" id="JMa-Md-GbT"/>
+                        <constraint firstItem="01M-kJ-3vo" firstAttribute="leading" secondItem="E5Q-k8-K84" secondAttribute="trailing" constant="8" symbolic="YES" id="MaP-qu-NCK"/>
                         <constraint firstItem="Trf-6i-Moa" firstAttribute="centerY" secondItem="tH1-YX-68o" secondAttribute="centerY" id="NYm-E2-isC"/>
                         <constraint firstItem="E5Q-k8-K84" firstAttribute="top" secondItem="tH1-YX-68o" secondAttribute="top" constant="10" id="Nu6-3B-pfq"/>
-                        <constraint firstItem="41J-L5-vvB" firstAttribute="leading" secondItem="IUD-cD-kSZ" secondAttribute="trailing" constant="8" symbolic="YES" id="YNX-0i-Wsn"/>
-                        <constraint firstItem="41J-L5-vvB" firstAttribute="leading" secondItem="01M-kJ-3vo" secondAttribute="trailing" constant="8" symbolic="YES" id="fax-I0-t7z"/>
+                        <constraint firstItem="41J-L5-vvB" firstAttribute="leading" secondItem="IUD-cD-kSZ" secondAttribute="trailing" constant="-2" id="YNX-0i-Wsn"/>
                         <constraint firstItem="E5Q-k8-K84" firstAttribute="leading" secondItem="tH1-YX-68o" secondAttribute="leading" constant="8" id="l5L-J3-Cvh"/>
+                        <constraint firstItem="01M-kJ-3vo" firstAttribute="top" secondItem="tH1-YX-68o" secondAttribute="top" constant="22" id="pws-KN-hmK"/>
                         <constraint firstItem="IUD-cD-kSZ" firstAttribute="centerY" secondItem="tH1-YX-68o" secondAttribute="centerY" id="rld-hp-WJw"/>
-                        <constraint firstItem="01M-kJ-3vo" firstAttribute="leading" secondItem="E5Q-k8-K84" secondAttribute="trailing" constant="8" symbolic="YES" id="xgQ-ws-Iii"/>
                         <constraint firstAttribute="trailing" secondItem="41J-L5-vvB" secondAttribute="trailing" constant="8" id="xvd-Ni-FWm"/>
                     </constraints>
                     <userDefinedRuntimeAttributes>
@@ -276,12 +274,15 @@
     </objects>
     <designables>
         <designable name="01M-kJ-3vo"/>
+        <designable name="BXk-iU-bGX">
+            <size key="intrinsicContentSize" width="-1" height="1.5"/>
+        </designable>
         <designable name="ySy-S1-1mM"/>
     </designables>
     <resources>
-        <image name="book_default" width="33" height="33"/>
         <image name="ico_menu" width="31.5" height="31.5"/>
         <image name="icon_close" width="33" height="33"/>
+        <image name="night" width="33" height="33"/>
         <image name="reload" width="42.5" height="42.5"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

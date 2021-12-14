@@ -188,7 +188,7 @@ class Reader_ViewController: UIViewController, UICollectionViewDataSource, UICol
     
     var pdfDocument: PDFDocument!
 
-    var margin: Int = UIDevice.current.hasNotch ? 21 : IS_IPAD ? 0 : 21
+    var margin: Int = UIDevice.current.hasNotch ? 21 : IS_IPAD ? 0 : 16
     
     enum PDFError: Error {
         case failedToLoadPDFDocument
@@ -282,40 +282,33 @@ class Reader_ViewController: UIViewController, UICollectionViewDataSource, UICol
 //                    if self.getReadMode(document: self.pdfDocument) {
 //                        self.currentPage = pageIndex as! Int
 //                        let pagePdf = self.pdfDocument.page(at: pageIndex as! Int)
-//                        print("-->", self.gesture.subviews)
 //
 //                        if self.getPages(pageString: (pagePdf?.string)!, isLeft: false) > 1 {
-//                            print("-->", self.gesture.subviews)
-////                            (self.gesture.subviews[1] as! UITextView).alpha = 1
-//                            (self.gesture.subviews[1] as! UITextView).text = self.tempList[self.tempIndex] as! String
+//
+//                            if (self.gesture.subviews[1]).isKind(of: UITextView.self) {
+//                                (self.gesture.subviews[1] as! UITextView).alpha = 1
+//                                (self.gesture.subviews[1] as! UITextView).text = self.tempList[self.tempIndex] as! String
+//                            } else {
+//                                ((self.gesture.subviews[1]).subviews[0] as! UITextView).alpha = 1
+//                                ((self.gesture.subviews[1]).subviews[0] as! UITextView).text = self.tempList[self.tempIndex] as! String
+//                            }
 //                            self.pageNumber.text = "%i[%i] / %i".format(parameters: self.currentPage + 1, self.tempIndex + 1, self.pdfDocument.documentRef?.numberOfPages as! CVarArg)
 //                        } else {
-////                            (self.gesture.subviews[1] as! UITextView).alpha = 1
+//                            (self.gesture.subviews[1] as! UITextView).alpha = 1
 //                            (self.gesture.subviews[1] as! UITextView).text = pagePdf?.string
 //                            self.pageNumber.text = "%i / %i".format(parameters: self.currentPage + 1, self.pdfDocument.documentRef?.numberOfPages as! CVarArg)
-////                        }
+//                        }
 //                    } else {
 //                        let pagePdf = self.pdfDocument.page(at: pageIndex as! Int)
 //                        self.pdfView.go(to: pagePdf!)
 //                    }
 //                }
+//                menu?.close()
+//                self.hiding()
 //            }
 //        }
-        
-//        print("++", ((self.pdfView.subviews[0]).subviews[0]).allSubviews)
-        
-//        for v in ((self.pdfView.subviews[0]).subviews[0]).allSubviews {
-//
-//            (v).action(forTouch: [:]) { objc in
-//                UIView.animate(withDuration: 0.3) {
-//                    self.topView.alpha = self.show ? 0 : 1
-//                    self.pageNumber.alpha = self.show ? 0 : 1
-//                } completion: { done in
-//                    self.show = !self.show
-//                }
-//            }
-//        }
-        
+
+
         self.gesture.action(forTouch: [:]) { objc in
             UIView.animate(withDuration: 0.3) {
                 self.topView.alpha = self.show ? 0 : 1
@@ -414,11 +407,17 @@ class Reader_ViewController: UIViewController, UICollectionViewDataSource, UICol
         self.pageNumber.text = "%i[%i] / %i".format(parameters: currentPage + 1, tempIndex + 1, self.pdfDocument.documentRef?.numberOfPages as! CVarArg)
     }
     
+    func dark() -> UIColor {
+        return AVHexColor.color(withHexString: "#121212")
+    }
+    
     func replacePage_Stack(isLeft: Bool, parentView: UIView) {
         let pageContent = self.tempList[self.tempIndex] as! String
         
         let textV = UITextView.init(frame: CGRect.init(x: isLeft ? -self.gesture.frame.size.width : self.gesture.frame.size.width, y: 0, width: self.gesture.frame.size.width, height: self.gesture.frame.size.height - CGFloat(self.margin)))
-        textV.contentInset = UIEdgeInsets(top: 15, left: 15, bottom: 0, right: 15)
+        textV.backgroundColor = isReader ? self.dark() : .white
+        textV.textColor = isReader ? .white : self.dark()
+        textV.contentInset = UIEdgeInsets(top: 15, left: 10, bottom: 0, right: 10)
         textV.isSelectable = false
         textV.isEditable = false
         textV.isUserInteractionEnabled = false
@@ -477,7 +476,9 @@ class Reader_ViewController: UIViewController, UICollectionViewDataSource, UICol
         let pageContent = page?.string
         
         let textV = UITextView.init(frame: CGRect.init(x: isLeft ? -self.gesture.frame.size.width : self.gesture.frame.size.width, y: 0, width: self.gesture.frame.size.width, height: self.gesture.frame.size.height - CGFloat(self.margin)))
-        textV.contentInset = UIEdgeInsets(top: 15, left: 15, bottom: 0, right: 15)
+        textV.backgroundColor = isReader ? self.dark() : .white
+        textV.textColor = isReader ? .white : self.dark()
+        textV.contentInset = UIEdgeInsets(top: 15, left: 10, bottom: 0, right: 10)
         textV.isSelectable = false
         textV.isEditable = false
         textV.isUserInteractionEnabled = false
@@ -706,18 +707,27 @@ class Reader_ViewController: UIViewController, UICollectionViewDataSource, UICol
 //        print("===>", pages)
     }
     
-    @IBAction func didPressReader() {
-        self.collectionView.isHidden = isReader
-        isReader = !isReader
-        if isReader {
-            self.collectionView.isPagingEnabled = false
-            let indexPath = IndexPath(item: self.currentPage, section: 0)
-            self.collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
-            self.collectionView.isPagingEnabled = true
+    @IBAction func didPressReader(sender: UIButton) {
+//        self.collectionView.isHidden = isReader
+        sender.setBackgroundImage(UIImage(named: isReader ? "night" : "day"), for: .normal)
+        self.gesture.backgroundColor = isReader ? .white : self.dark()
+        if (self.gesture.subviews[1]).isKind(of: UITextView.self) {
+            (self.gesture.subviews[1] as! UITextView).backgroundColor = isReader ? .white : self.dark()
+            (self.gesture.subviews[1] as! UITextView).textColor = isReader ? self.dark() : .white
         } else {
-            let pagePdf = self.pdfDocument.page(at: self.currentPage)
-            self.pdfView.go(to: pagePdf!)
+            ((self.gesture.subviews[1]).subviews[0] as! UITextView).backgroundColor = isReader ? .white : self.dark()
+            ((self.gesture.subviews[1]).subviews[0] as! UITextView).textColor = isReader ? self.dark() : .white
         }
+        isReader = !isReader
+//        if isReader {
+//            self.collectionView.isPagingEnabled = false
+//            let indexPath = IndexPath(item: self.currentPage, section: 0)
+//            self.collectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: false)
+//            self.collectionView.isPagingEnabled = true
+//        } else {
+//            let pagePdf = self.pdfDocument.page(at: self.currentPage)
+//            self.pdfView.go(to: pagePdf!)
+//        }
     }
     
     func file_name() -> String {
@@ -758,7 +768,9 @@ class Reader_ViewController: UIViewController, UICollectionViewDataSource, UICol
     
     func builtTextView() -> UITextView {
         let textV = UITextView.init(frame: CGRect.init(x: 0, y: 0, width: self.gesture.frame.size.width, height: self.gesture.frame.size.height - CGFloat(self.margin)))
-        textV.contentInset = UIEdgeInsets(top: 15, left: 15, bottom: 0, right: 15)
+        textV.backgroundColor = isReader ? self.dark() : .white
+        textV.textColor = isReader ? .white : self.dark()
+        textV.contentInset = UIEdgeInsets(top: 15, left: 10, bottom: 0, right: 10)
         textV.isPagingEnabled = true
         textV.isSelectable = false
         textV.isEditable = false
@@ -779,8 +791,6 @@ class Reader_ViewController: UIViewController, UICollectionViewDataSource, UICol
 //            self.pageNumber.isHidden = false
             self.success = true
             self.startTimer()
-            
-            
             if self.getReadMode(document: document) {
                 let page = self.pdfDocument.page(at: currentPage)
                 let pageContent = page?.string
@@ -797,6 +807,10 @@ class Reader_ViewController: UIViewController, UICollectionViewDataSource, UICol
                     }
                 })
                 self.gesture.isHidden = false
+                self.reader.isHidden = false
+            } else {
+                self.reader.isHidden = true
+                self.reader.widthConstaint?.constant = 0
             }
             
 //            if self.getObject(self.file_text()) != nil {
