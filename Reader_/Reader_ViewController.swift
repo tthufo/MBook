@@ -188,7 +188,7 @@ class Reader_ViewController: UIViewController, UICollectionViewDataSource, UICol
     
     var pdfDocument: PDFDocument!
 
-    var margin: Int = UIDevice.current.hasNotch ? 21 : IS_IPAD ? 0 : 16
+    var margin: Int = UIDevice.current.hasNotch ? 21 : IS_IPAD ? 0 : 10
     
     enum PDFError: Error {
         case failedToLoadPDFDocument
