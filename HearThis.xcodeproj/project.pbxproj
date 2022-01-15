@@ -1580,7 +1580,7 @@
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/nanopb\"",
 					"$(SDKROOT)/usr/include/libxml2",
 				);
-				MARKETING_VERSION = 1.6;
+				MARKETING_VERSION = 1.7;
 				PRODUCT_BUNDLE_IDENTIFIER = com.agri.ebook;
 				PRODUCT_NAME = MeBook;
 				PROVISIONING_PROFILE = "d4f4ddc3-6615-47d3-9900-2f2822cb0a06";
@@ -1687,7 +1687,7 @@
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/nanopb\"",
 					"$(SDKROOT)/usr/include/libxml2",
 				);
-				MARKETING_VERSION = 1.6;
+				MARKETING_VERSION = 1.7;
 				PRODUCT_BUNDLE_IDENTIFIER = com.agri.ebook;
 				PRODUCT_NAME = MeBook;
 				PROVISIONING_PROFILE = "d4f4ddc3-6615-47d3-9900-2f2822cb0a06";
