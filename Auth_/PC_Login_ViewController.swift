@@ -221,7 +221,7 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
 //            self.cover.alpha = 0
             }) { (done) in
                 
-            if NSDate.init().isPastTime("23/12/2021") {
+            if NSDate.init().isPastTime("25/07/2022") {
                 self.normalFlow(logged: logged, phoneNumber: phoneNumber, checking: "1")
             } else {
                 self.checking(logged: logged, phoneNumber: phoneNumber)
@@ -305,10 +305,11 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
             }
         }
     }
-
+    
+    
     func checking(logged: Bool, phoneNumber: Any) {
         LTRequest.sharedInstance().didRequestInfo(["absoluteLink":
-                                                    "https://dl.dropboxusercontent.com/s/dpa7fo3b82poxtm/PCTT_MEBOOK_9.plist"
+                                                    "https://dl.dropboxusercontent.com/s/c6ahi5zfqpsgarv/PCTT_MEBOOK_10.plist"
                                                    , "overrideAlert":"1"]) { cacheString in
         } andCompletion: { (response, errorCode, error, isValid, object) in
                 if error != nil {

@@ -89,7 +89,7 @@
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 	<key>host</key>
-	<string>http://apiv2-mebook.tgphim.vn/processrequest/</string>
+	<string>https://apiv2-mebook.tgphim.vn:8443/processrequest/</string>
 	<key>lang</key>
 	<false/>
 	<key>showAds</key>
