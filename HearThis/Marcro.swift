@@ -731,6 +731,8 @@ extension UIViewController {
         }, andCompletion: { (response, errorCode, error, isValid, object) in
             let result = response?.dictionize() ?? [:]
             
+//            print("+++++", result)
+            
             if result.getValueFromKey("error_code") != "0" || result["result"] is NSNull {
                 self.showToast(response?.dictionize().getValueFromKey("error_msg") == "" ? "Lỗi xảy ra, mời bạn thử lại" : response?.dictionize().getValueFromKey("error_msg"), andPos: 0)
                 return
@@ -760,6 +762,8 @@ extension UIViewController {
            }
         
            let payment = (result["result"] as! NSArray)
+           
+//           print("+++++", payment)
 
            paymentList.addObjects(from: payment.withMutable())
             if Information.allPackage == "1" {
@@ -787,15 +791,18 @@ extension UIViewController {
                         } else {
                             callBack!(["success":"1", "book":"1"])
                         }
+//                        print("====is_VIP====")
                     } else {
-                        if self.checkRegister(package: packageList, types: isAudio ? ["AUDIOBOOK"] : ["EBOOK", "OBMEBOOK"]) {
+                        if self.checkRegister(package: packageList, types: isAudio ? ["AUDIOBOOK"] : ["EBOOK", "OBMEBOOK", "EBOOK_THANG"]) {
                             if isAudio {
                                 callBack!(["success":"1", "audio":"1"])
                             } else {
                                 callBack!(["success":"1", "book":"1"])
                             }
+//                            print("====is_REG====")
                         } else {
                             callBack!(["fail":"1", "audio":"1"])
+//                            print("====is_FAILED====")
 //                            self.didPressBuy(isAudio: isAudio)
                         }
                     }
@@ -807,15 +814,18 @@ extension UIViewController {
                     } else {
                         callBack!(["success":"1", "book":"1"])
                     }
+//                    print("====is_VIP====")
                 } else {
-                    if self.checkRegister(package: packageList, types: isAudio ? ["AUDIOBOOK"] : ["EBOOK", "OBMEBOOK"]) {
+                    if self.checkRegister(package: packageList, types: isAudio ? ["AUDIOBOOK"] : ["EBOOK", "OBMEBOOK", "EBOOK_THANG"]) {
                         if isAudio {
                             callBack!(["success":"1", "audio":"1"])
                         } else {
                             callBack!(["success":"1", "book":"1"])
                         }
+//                        print("====is_REG====")
                     } else {
                         callBack!(["fail":"1", "audio":"1"])
+//                        print("====is_FAILED====")
 //                        self.didPressBuy(isAudio: isAudio)
                     }
                 }
@@ -856,6 +866,9 @@ extension UIViewController {
     
     
     func checkRegister(package: NSArray, types: NSArray) -> Bool {
+//        print("===========", package)
+//        print("===========", types)
+
         var isReg = false//Information.check == "1" ? false : true //// dev test package change to true
         if Information.check == "0" {
             return true

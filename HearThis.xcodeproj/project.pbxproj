@@ -1051,7 +1051,7 @@
 		FC1AD7C31DA40CA8002BA7EC /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 1330;
 				ORGANIZATIONNAME = "Thanh Hai Tran";
 				TargetAttributes = {
 					FC1AD7CA1DA40CA8002BA7EC = {
@@ -1069,10 +1069,9 @@
 			};
 			buildConfigurationList = FC1AD7C61DA40CA8002BA7EC /* Build configuration list for PBXProject "HearThis" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				English,
 				en,
 				Base,
 			);
@@ -1397,20 +1396,31 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -1434,7 +1444,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				PROVISIONING_PROFILE = "d4f4ddc3-6615-47d3-9900-2f2822cb0a06";
@@ -1446,20 +1456,31 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_SUSPICIOUS_MOVES = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -1477,10 +1498,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PROVISIONING_PROFILE = "d4f4ddc3-6615-47d3-9900-2f2822cb0a06";
 				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -1492,11 +1514,12 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = HearThis/MeBook.entitlements;
-				CODE_SIGN_IDENTITY = "Apple Development: Nguyen Ngoc Quang (589UWV5PGW)";
+				CODE_SIGN_IDENTITY = "Apple Development: Thanh Hai Tran (YDYSCU95XJ)";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = 7546H2CFFT;
 				ENABLE_BITCODE = NO;
+				EXCLUDED_ARCHS = amd64;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1580,7 +1603,118 @@
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/nanopb\"",
 					"$(SDKROOT)/usr/include/libxml2",
 				);
-				MARKETING_VERSION = 1.7;
+				MARKETING_VERSION = 1.8;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"AFNetworking\"",
+					"-l\"AVHexColor\"",
+					"-l\"AllPod\"",
+					"-l\"AppAuth\"",
+					"-l\"CRToast\"",
+					"-l\"ExpandableLabel\"",
+					"-l\"FBPod\"",
+					"-l\"FBSDKCoreKit\"",
+					"-l\"FBSDKLoginKit\"",
+					"-l\"FBSDKShareKit\"",
+					"-l\"FSPagerView\"",
+					"-l\"FireBasePod\"",
+					"-l\"FirebaseCore\"",
+					"-l\"FirebaseCoreDiagnostics\"",
+					"-l\"FirebaseInstallations\"",
+					"-l\"FirebaseInstanceID\"",
+					"-l\"FirebaseMessaging\"",
+					"-l\"GGPod\"",
+					"-l\"GTMAppAuth\"",
+					"-l\"GTMSessionFetcher\"",
+					"-l\"GoogleDataTransport\"",
+					"-l\"GoogleDataTransportCCTSupport\"",
+					"-l\"GoogleUtilities\"",
+					"-l\"IAPHelper\"",
+					"-l\"JASidePanels\"",
+					"-l\"JSONKit-NoWarning\"",
+					"-l\"MBCircularProgressBar\"",
+					"-l\"MYNStickyFlowLayout\"",
+					"-l\"MarqueeLabel\"",
+					"-l\"NSDate+TimeAgo\"",
+					"-l\"ParallaxHeader\"",
+					"-l\"PromisesObjC\"",
+					"-l\"Protobuf\"",
+					"-l\"Reachability\"",
+					"-l\"ReachabilitySwift\"",
+					"-l\"SDWebImage\"",
+					"-l\"SVProgressHUD\"",
+					"-l\"SwipyCell\"",
+					"-l\"Toast\"",
+					"-l\"XCDYouTubeKit\"",
+					"-l\"c++\"",
+					"-l\"nanopb\"",
+					"-l\"sqlite3\"",
+					"-l\"stdc++\"",
+					"-l\"z\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"CoreTelephony\"",
+					"-framework",
+					"\"CoreText\"",
+					"-framework",
+					"\"FirebaseAnalytics\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"GoogleAppMeasurement\"",
+					"-framework",
+					"\"GoogleSignIn\"",
+					"-framework",
+					"\"ImageIO\"",
+					"-framework",
+					"\"JavaScriptCore\"",
+					"-framework",
+					"\"LocalAuthentication\"",
+					"-framework",
+					"\"MediaPlayer\"",
+					"-framework",
+					"\"MobileCoreServices\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"SafariServices\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"StoreKit\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"UIKit\"",
+					"-weak_framework",
+					"\"Accelerate\"",
+					"-weak_framework",
+					"\"Accounts\"",
+					"-weak_framework",
+					"\"AdSupport\"",
+					"-weak_framework",
+					"\"AudioToolbox\"",
+					"-weak_framework",
+					"\"AuthenticationServices\"",
+					"-weak_framework",
+					"\"CoreGraphics\"",
+					"-weak_framework",
+					"\"Foundation\"",
+					"-weak_framework",
+					"\"QuartzCore\"",
+					"-weak_framework",
+					"\"Security\"",
+					"-weak_framework",
+					"\"Social\"",
+					"-weak_framework",
+					"\"StoreKit\"",
+					"-weak_framework",
+					"\"UIKit\"",
+					"-weak_framework",
+					"\"UserNotifications\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.agri.ebook;
 				PRODUCT_NAME = MeBook;
 				PROVISIONING_PROFILE = "d4f4ddc3-6615-47d3-9900-2f2822cb0a06";
@@ -1601,9 +1735,10 @@
 				CODE_SIGN_ENTITLEMENTS = HearThis/MeBook.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Distribution: WEATHERPLUS SOLUTION JOINT STOCK COMPANY (7546H2CFFT)";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = 7546H2CFFT;
 				ENABLE_BITCODE = NO;
+				EXCLUDED_ARCHS = amd64;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -1687,7 +1822,118 @@
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/nanopb\"",
 					"$(SDKROOT)/usr/include/libxml2",
 				);
-				MARKETING_VERSION = 1.7;
+				MARKETING_VERSION = 1.8;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"AFNetworking\"",
+					"-l\"AVHexColor\"",
+					"-l\"AllPod\"",
+					"-l\"AppAuth\"",
+					"-l\"CRToast\"",
+					"-l\"ExpandableLabel\"",
+					"-l\"FBPod\"",
+					"-l\"FBSDKCoreKit\"",
+					"-l\"FBSDKLoginKit\"",
+					"-l\"FBSDKShareKit\"",
+					"-l\"FSPagerView\"",
+					"-l\"FireBasePod\"",
+					"-l\"FirebaseCore\"",
+					"-l\"FirebaseCoreDiagnostics\"",
+					"-l\"FirebaseInstallations\"",
+					"-l\"FirebaseInstanceID\"",
+					"-l\"FirebaseMessaging\"",
+					"-l\"GGPod\"",
+					"-l\"GTMAppAuth\"",
+					"-l\"GTMSessionFetcher\"",
+					"-l\"GoogleDataTransport\"",
+					"-l\"GoogleDataTransportCCTSupport\"",
+					"-l\"GoogleUtilities\"",
+					"-l\"IAPHelper\"",
+					"-l\"JASidePanels\"",
+					"-l\"JSONKit-NoWarning\"",
+					"-l\"MBCircularProgressBar\"",
+					"-l\"MYNStickyFlowLayout\"",
+					"-l\"MarqueeLabel\"",
+					"-l\"NSDate+TimeAgo\"",
+					"-l\"ParallaxHeader\"",
+					"-l\"PromisesObjC\"",
+					"-l\"Protobuf\"",
+					"-l\"Reachability\"",
+					"-l\"ReachabilitySwift\"",
+					"-l\"SDWebImage\"",
+					"-l\"SVProgressHUD\"",
+					"-l\"SwipyCell\"",
+					"-l\"Toast\"",
+					"-l\"XCDYouTubeKit\"",
+					"-l\"c++\"",
+					"-l\"nanopb\"",
+					"-l\"sqlite3\"",
+					"-l\"stdc++\"",
+					"-l\"z\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"CoreTelephony\"",
+					"-framework",
+					"\"CoreText\"",
+					"-framework",
+					"\"FirebaseAnalytics\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"GoogleAppMeasurement\"",
+					"-framework",
+					"\"GoogleSignIn\"",
+					"-framework",
+					"\"ImageIO\"",
+					"-framework",
+					"\"JavaScriptCore\"",
+					"-framework",
+					"\"LocalAuthentication\"",
+					"-framework",
+					"\"MediaPlayer\"",
+					"-framework",
+					"\"MobileCoreServices\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"SafariServices\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"StoreKit\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"UIKit\"",
+					"-weak_framework",
+					"\"Accelerate\"",
+					"-weak_framework",
+					"\"Accounts\"",
+					"-weak_framework",
+					"\"AdSupport\"",
+					"-weak_framework",
+					"\"AudioToolbox\"",
+					"-weak_framework",
+					"\"AuthenticationServices\"",
+					"-weak_framework",
+					"\"CoreGraphics\"",
+					"-weak_framework",
+					"\"Foundation\"",
+					"-weak_framework",
+					"\"QuartzCore\"",
+					"-weak_framework",
+					"\"Security\"",
+					"-weak_framework",
+					"\"Social\"",
+					"-weak_framework",
+					"\"StoreKit\"",
+					"-weak_framework",
+					"\"UIKit\"",
+					"-weak_framework",
+					"\"UserNotifications\"",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.agri.ebook;
 				PRODUCT_NAME = MeBook;
 				PROVISIONING_PROFILE = "d4f4ddc3-6615-47d3-9900-2f2822cb0a06";

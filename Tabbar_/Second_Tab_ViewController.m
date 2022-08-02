@@ -451,6 +451,9 @@
 {
     UIView * header = [[NSBundle mainBundle] loadNibNamed:@"Book_List_Header" owner:self options:nil][section == 2 ? 1 : isHot ? 0 : 2];
     
+    UIButton * top = [self withView:header tag:2];
+    top.hidden = [Information.check isEqualToString:@"0"];
+    
     if (section == 2) {
         UILabel * title = (UILabel*)[self withView:header tag:22];
     

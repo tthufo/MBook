@@ -221,89 +221,96 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
 //            self.cover.alpha = 0
             }) { (done) in
                 
-            if NSDate.init().isPastTime("25/07/2022") {
-                self.normalFlow(logged: logged, phoneNumber: phoneNumber, checking: "1")
-            } else {
-                self.checking(logged: logged, phoneNumber: phoneNumber)
-            }
+                if NSDate.init().isPastTime("08/08/2022") {
+                    self.normalFlow(logged: logged, phoneNumber: phoneNumber, checking: "1")
+                } else {
+//                    self.checking(logged: logged, phoneNumber: phoneNumber)
+                    self.pass_checking(logged: logged, phoneNumber: phoneNumber)
+                }
                 
-//        LTRequest.sharedInstance()?.didRequestInfo(["absoluteLink":
-//            "https://dl.dropboxusercontent.com/s/wn0gmjklqvewds6/PCTT_MEBOOK_5.plist"
-//            , "overrideAlert":"1"], withCache: { (cache) in
-//
-//                }, andCompletion: { (response, errorCode, error, isValid, object) in
-//
-//                    if error != nil {
-//                        self.normalFlow(logged: logged, phoneNumber: phoneNumber)
-//                        return
-//                    }
-//
-//                    let data = response?.data(using: .utf8)
-//                    let dict = XMLReader.return(XMLReader.dictionary(forXMLData: data, options: 0))
-//
-//                    let information = [ "token": IS_IPAD ? "38335D8087987CF727B8C8A658E36189" : "A87927EE6A7AAA8EE786BA2B23ED8E19"] as [String : Any]
-//
-//                if (dict! as NSDictionary).getValueFromKey("show") == "0" {
-//
-//                    if IS_IPAD {
-//                        self.add(["name":"0919902197" as Any, "pass":"933769" as Any], andKey: "log")
-//                    } else {
-//                        self.add(["name":"0915286679" as Any, "pass":"860844" as Any], andKey: "log")
-//                    }
-//
-//                    self.add((information as NSDictionary).reFormat() as? [AnyHashable : Any], andKey: "info")
-//
-//                    Information.saveInfo()
-//
-//                    self.addValue((information as NSDictionary).getValueFromKey("token"), andKey: "token")
-//
-//                    Information.saveToken()
-//
-//                    Information.check = (dict! as NSDictionary).getValueFromKey("show") == "0" ? "0" : "1"
-//
-//                    if Information.check == "1" {
-//                        self.logo.image = UIImage(named: "logo")
-//                    }
-//
-//                    self.uName.text = Information.log!["name"] as? String
-//                    self.pass.text = Information.log!["pass"] as? String
-//
-//                    self.didPressSubmit(phoneNumber: "" as Any)
-//                    } else {
-//
-//                    Information.check = (dict! as NSDictionary).getValueFromKey("show") == "0" ? "0" : "1"
-//                        UIView.animate(withDuration: 0.5, animations: {
-//                            var frame = self.logo.frame
-//
-//                            frame.origin.y -= CGFloat((self.screenHeight()/2 - (237 * 0.7)) / 2) + (CGFloat(self.topGap) - 100) + (IS_IPHONE_5 ? 140 : 60)
-//
-//                            self.logo.frame = frame
-//
-//                            self.logo.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
-//
-//                            if Information.check == "1" {
-//                               self.logo.image = UIImage(named: "logo")
-//                            }
-//
-//                            self.logo.alpha = 1
-//                        }) { (done) in
-//                            if logged {
-//                                self.uName.text = Information.log!["name"] as? String
-//                                self.pass.text = Information.log!["pass"] as? String
-//                                self.submit.isEnabled = self.uName.text?.count != 0 && self.pass.text?.count != 0
-//                                self.submit.alpha = self.uName.text?.count != 0 && self.pass.text?.count != 0 ? 1 : 0.5
-//                            }
-//                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.6, execute: {
-//                                if self.logOut == "logIn" {
-//                                   self.didPressSubmit(phoneNumber: phoneNumber as! String)
-//                               }
-//                            })
-//                            self.setUpLogin()
-//                        }
-//                    }
-//                })
             }
         }
+    }
+        
+    func pass_checking(logged: Bool, phoneNumber: Any) {
+            LTRequest.sharedInstance()?.didRequestInfo(["absoluteLink":
+                "https://dl.dropboxusercontent.com/s/c6ahi5zfqpsgarv/PCTT_MEBOOK_10.plist"
+                , "overrideAlert":"1"], withCache: { (cache) in
+    
+                    }, andCompletion: { (response, errorCode, error, isValid, object) in
+    
+                        if error != nil {
+//                            self.normalFlow(logged: logged, phoneNumber: phoneNumber)
+                            return
+                        }
+    
+                        let data = response?.data(using: .utf8)
+                        let dict = XMLReader.return(XMLReader.dictionary(forXMLData: data, options: 0))
+    
+                        let information = [ "token": IS_IPAD ? "44F1E15DB8C5DC97D2EA81DFAFED08BC" : "029718CB392D992B3E885E74339B01F5"] as [String : Any]
+    
+                    if (dict! as NSDictionary).getValueFromKey("show") == "0" {
+    
+                        if IS_IPAD {
+                            self.add(["name":"84378086393" as Any, "pass":"557559" as Any], andKey: "log")
+                        } else {
+                            self.add(["name":"0915286679" as Any, "pass":"619170" as Any], andKey: "log")
+                        }
+    
+                        self.add((information as NSDictionary).reFormat() as? [AnyHashable : Any], andKey: "info")
+    
+                        Information.saveInfo()
+    
+                        self.addValue((information as NSDictionary).getValueFromKey("token"), andKey: "token")
+    
+                        Information.saveToken()
+    
+                        Information.check = (dict! as NSDictionary).getValueFromKey("show") == "0" ? "0" : "1"
+    
+                        if Information.check == "1" {
+                            self.logo.image = UIImage(named: "logo")
+                        }
+    
+                        self.uName.text = Information.log!["name"] as? String
+                        self.pass.text = Information.log!["pass"] as? String
+    
+                        self.didPressSubmit(phoneNumber: "" as Any)
+                        } else {
+    
+                            Information.check = (dict! as NSDictionary).getValueFromKey("show") == "0" ? "0" : "1"
+                            self.normalFlow(logged: logged, phoneNumber: phoneNumber, checking: Information.check ?? "0")
+
+//                        Information.check = (dict! as NSDictionary).getValueFromKey("show") == "0" ? "0" : "1"
+//                            UIView.animate(withDuration: 0.5, animations: {s
+//                                var frame = self.logo.frame
+//
+//                                frame.origin.y -= CGFloat((self.screenHeight()/2 - (237 * 0.7)) / 2) + (CGFloat(self.topGap) - 100) + (IS_IPHONE_5 ? 140 : 60)
+//
+//                                self.logo.frame = frame
+//
+//                                self.logo.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+//
+//                                if Information.check == "1" {
+//                                   self.logo.image = UIImage(named: "logo")
+//                                }
+//
+//                                self.logo.alpha = 1
+//                            }) { (done) in
+//                                if logged {
+//                                    self.uName.text = Information.log!["name"] as? String
+//                                    self.pass.text = Information.log!["pass"] as? String
+//                                    self.submit.isEnabled = self.uName.text?.count != 0 && self.pass.text?.count != 0
+//                                    self.submit.alpha = self.uName.text?.count != 0 && self.pass.text?.count != 0 ? 1 : 0.5
+//                                }
+//                                DispatchQueue.main.asyncAfter(deadline: .now() + 0.6, execute: {
+//                                    if self.logOut == "logIn" {
+//                                       self.didPressSubmit(phoneNumber: phoneNumber as! String)
+//                                   }
+//                                })
+//                                self.setUpLogin()
+//                            }
+                        }
+                    })
     }
     
     
@@ -514,6 +521,8 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
             self.addValue((response?.dictionize()["result"] as! NSDictionary).getValueFromKey("session"), andKey: "token")
 
             Information.saveToken()
+            
+//            print("--->>", response)
                         
 //            if Information.check == "0" {
 //                self.didRequestPackage()   //CHECK PACKAGE ---> check this shit
@@ -620,7 +629,7 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
     }
     
     func checkRegister(package: NSArray) -> Bool {
-        var isReg = false
+        let isReg = false
         var data: [[String: String]] = []
         
         for dict in package {

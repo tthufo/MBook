@@ -727,6 +727,10 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
         })
     }
     
+    func condition() -> Bool {
+        return Information.check == "0"
+    }
+    
     @IBAction func didPressBack() {
         self.navigationController?.popViewController(animated: true)
     }
@@ -805,7 +809,7 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return indexPath.section == 0 ? size(for: indexPath) : indexPath.section == 1 ? sizeBio(for: indexPath) : indexPath.section == 2 ? CGSize(width: collectionView.frame.width, height: detailList.count == 0 ? 0 : (detailList[indexPath.item] as! NSDictionary)["height"] as! CGFloat) : indexPath.section == 3 ? CGSize(width: collectionView.frame.width, height: 65) : indexPath.section == 4 ? sizeForRating(for: indexPath) : CGSize(width: Int((self.screenWidth() / (IS_IPAD ? 5 : 3)) - 15), height: Int(((self.screenWidth() / (IS_IPAD ? 5 : 3)) - 15) * 1.72))
+        return indexPath.section == 0 ? size(for: indexPath) : indexPath.section == 1 ? sizeBio(for: indexPath) : indexPath.section == 2 ? CGSize(width: collectionView.frame.width, height: detailList.count == 0 ? 0 : (detailList[indexPath.item] as! NSDictionary)["height"] as! CGFloat) : indexPath.section == 3 ? CGSize(width: collectionView.frame.width, height: 65) : indexPath.section == 4 ? condition() ? CGSize.init(width: 0, height: 0) : sizeForRating(for: indexPath) : CGSize(width: Int((self.screenWidth() / (IS_IPAD ? 5 : 3)) - 15), height: Int(((self.screenWidth() / (IS_IPAD ? 5 : 3)) - 15) * 1.72))
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -838,6 +842,9 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
             rate.rating = Double(self.tempInfo.getValueFromKey("rating")) ?? 0
             
             rate.action(forTouch: [:]) { (obj) in
+                if self.condition() {
+                    return
+                }
                 EM_MenuView.init(rate: [:])?.disableCompletion({ (indexing, obj, menu) in
                     if indexing == 3 {
                         self.didRequestComment(comment: obj as! NSDictionary, menu: menu!)
@@ -852,6 +859,9 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
             likeCount.setTitle(self.tempInfo.getValueFromKey("like_count"), for: .normal)
             likeCount.setImage(self.tempInfo.getValueFromKey("like_status") == "1" ? UIImage(named:"ico_like")?.withTintColor(.systemPink) : UIImage(named:"ico_like"), for: .normal)
             likeCount.action(forTouch: [:]) { (obj) in
+                if self.condition() {
+                    return
+                }
                 self.didRequestLike()
             }
             
@@ -859,6 +869,9 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
             voteCount.setTitle(self.tempInfo.getValueFromKey("comment_count"), for: .normal)
             
             voteCount.action(forTouch: [:]) { (obj) in
+                if self.condition() {
+                    return
+                }
                 let feedBack = PC_FeedBack_ViewController.init()
                 feedBack.config = self.tempInfo
                 feedBack.callBack = { infor in
@@ -876,6 +889,7 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
                 self.center()?.present(nav, animated: true, completion: nil)
             }
         }
+        
         
         
         
@@ -1109,7 +1123,7 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: collectionView.frame.width, height: section == 3 ? chapList.count <= 1 ? 0 : 55 : section == 4 ? 55 : section == 5 ? 40 : 0)
+        return CGSize(width: collectionView.frame.width, height: section == 3 ? chapList.count <= 1 ? 0 : 55 : section == 4 ? condition() ? 0 : 55 : section == 5 ? 40 : 0)
     }
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {

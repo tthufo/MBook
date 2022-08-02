@@ -1070,11 +1070,15 @@
             if([info responseForKey:@"fail"]) {
                 if ([[tempInfo getValueFromKey: @"has_preview"] isEqualToString:@"0"]) {
                     [self didPressBuyWithIsAudio: YES];
+//                    NSLog(@"%@", @"vào buy");
                 } else {
                     self.isRestricted = YES;
                     [self didPlayingWithUrl: [NSURL URLWithString: [tempInfo getValueFromKey:@"demo_path"]]];
+//                    NSLog(@"%@", tempInfo);
+//                    NSLog(@"%@", @"vào demo");
                 }
                 [self stoptimer];
+//                NSLog(@"%@", @"vào 1");
             } else {
                 NSTimeInterval delayInSeconds = 0.8;
                 dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
@@ -1581,6 +1585,8 @@
     } andCompletion:^(NSString *responseString, NSString *errorCode, NSError *error, BOOL isValidated, NSDictionary *header) {
         NSDictionary * dict = [responseString objectFromJSONString];
 
+        NSLog(@"---->%@", dict);
+        
         if ([[dict getValueFromKey:@"error_code"] isEqualToString:@"0"] && dict[@"result"] != [NSNull null]) {
             NSDictionary * dict = [responseString objectFromJSONString][@"result"];
 
@@ -1877,6 +1883,10 @@
     return size;
 }
 
+- (BOOL)condition {
+    return [Information.check isEqualToString:@"0"];
+}
+
 #pragma Collection
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
@@ -1890,7 +1900,7 @@
 
 - (CGSize)collectionView:(UICollectionView *)_collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return indexPath.section == 0 ? [self sizeFor:indexPath] : indexPath.section == 1 ? [self sizeForBio:indexPath] : indexPath.section == 2 ? CGSizeMake(_collectionView.frame.size.width, detailList.count == 0 ? 0 : [[((NSDictionary*)detailList[indexPath.item]) getValueFromKey:@"height"] doubleValue]) : indexPath.section == 3 ? CGSizeMake(_collectionView.frame.size.width, 65) : indexPath.section == 4 ? [self sizeForRating:indexPath] : CGSizeMake((screenWidth1 / (IS_IPAD ? 5 : 3)) - 15, ((screenWidth1 / (IS_IPAD ? 5 : 3)) - 15) * 1.72);
+    return indexPath.section == 0 ? [self sizeFor:indexPath] : indexPath.section == 1 ? [self sizeForBio:indexPath] : indexPath.section == 2 ? CGSizeMake(_collectionView.frame.size.width, detailList.count == 0 ? 0 : [[((NSDictionary*)detailList[indexPath.item]) getValueFromKey:@"height"] doubleValue]) : indexPath.section == 3 ? CGSizeMake(_collectionView.frame.size.width, 65) : indexPath.section == 4 ? [self condition] ? CGSizeMake(0, 0) : [self sizeForRating:indexPath] : CGSizeMake((screenWidth1 / (IS_IPAD ? 5 : 3)) - 15, ((screenWidth1 / (IS_IPAD ? 5 : 3)) - 15) * 1.72);
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
@@ -1925,6 +1935,10 @@
         rate.rating = [[self->tempInfo getValueFromKey:@"rating"] isEqualToString:@""] ? 0 : [[self->tempInfo getValueFromKey:@"rating"] doubleValue];
         
         [rate actionForTouch:@{} and:^(NSDictionary *touchInfo) {
+            if ([self condition]) {
+                return;
+            }
+            
             [[[EM_MenuView alloc] initWithRate:@{}] disableCompletion:^(int index, id object, EM_MenuView *menu) {
                 if (index == 3) {
                     [self didRequestComment:object andMenu:menu];
@@ -1942,6 +1956,9 @@
         [likeCount setImage: likeStatus ? [[UIImage imageNamed:@"ico_like"] imageWithTintColor:[UIColor systemPinkColor]] : [UIImage imageNamed:@"ico_like"]
                 forState:UIControlStateNormal];
         [likeCount actionForTouch:@{} and:^(NSDictionary *touchInfo) {
+            if ([self condition]) {
+                return;
+            }
             [self senderdidRequestLike:nil];
         }];
         
@@ -1949,6 +1966,9 @@
         [commentCount setTitle:[self->tempInfo getValueFromKey:@"comment_count"] forState: UIControlStateNormal];
         
         [commentCount actionForTouch:@{} and:^(NSDictionary *touchInfo) {
+            if ([self condition]) {
+                return;
+            }
             PC_FeedBack_ViewController * rating = [PC_FeedBack_ViewController new];
             NSDictionary * tempo = [[NSDictionary alloc] initWithDictionary:self->tempInfo];
             rating.config = tempo;
@@ -2163,7 +2183,7 @@
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section {
-    return CGSizeMake(collectionView.frame.size.width, section == 3 ? chapList.count <= 1 ? 0 : 55 : section == 4 ? 55 : section == 5 ? 40 : 0);
+    return CGSizeMake(collectionView.frame.size.width, section == 3 ? chapList.count <= 1 ? 0 : 55 : section == 4 ? [self condition] ? 0 : 55 : section == 5 ? 40 : 0);
 }
 
 
