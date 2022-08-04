@@ -175,7 +175,7 @@
 
 - (void)updateTime {
     readTime += 1;
-    NSLog(@"--->%i", readTime);
+//    NSLog(@"--->%i", readTime);
 }
 
 - (void)stoptimer {
@@ -1067,18 +1067,15 @@
     
     if (![[tempInfo getValueFromKey:@"price"] isEqualToString:@"0"]) {
         [self didRequestUrlWithInfo:tempInfo callBack:^(NSDictionary * info) {
+            NSLog(@"%@", tempInfo);
             if([info responseForKey:@"fail"]) {
                 if ([[tempInfo getValueFromKey: @"has_preview"] isEqualToString:@"0"]) {
                     [self didPressBuyWithIsAudio: YES];
-//                    NSLog(@"%@", @"vào buy");
                 } else {
                     self.isRestricted = YES;
                     [self didPlayingWithUrl: [NSURL URLWithString: [tempInfo getValueFromKey:@"demo_path"]]];
-//                    NSLog(@"%@", tempInfo);
-//                    NSLog(@"%@", @"vào demo");
                 }
                 [self stoptimer];
-//                NSLog(@"%@", @"vào 1");
             } else {
                 NSTimeInterval delayInSeconds = 0.8;
                 dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
@@ -1584,8 +1581,6 @@
         
     } andCompletion:^(NSString *responseString, NSString *errorCode, NSError *error, BOOL isValidated, NSDictionary *header) {
         NSDictionary * dict = [responseString objectFromJSONString];
-
-        NSLog(@"---->%@", dict);
         
         if ([[dict getValueFromKey:@"error_code"] isEqualToString:@"0"] && dict[@"result"] != [NSNull null]) {
             NSDictionary * dict = [responseString objectFromJSONString][@"result"];

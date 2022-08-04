@@ -462,7 +462,7 @@ class Book_Detail_ViewController: UIViewController, UICollectionViewDataSource, 
         let reader = Reader_ViewController()
         
         reader.isRestricted = preview
-        
+                
         let bookInfo = NSMutableDictionary.init(dictionary: book)
 
         bookInfo["file_url"] = urlPath

@@ -1516,7 +1516,7 @@
 				CODE_SIGN_ENTITLEMENTS = HearThis/MeBook.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development: Thanh Hai Tran (YDYSCU95XJ)";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7546H2CFFT;
 				ENABLE_BITCODE = NO;
 				EXCLUDED_ARCHS = amd64;
@@ -1603,7 +1603,7 @@
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/nanopb\"",
 					"$(SDKROOT)/usr/include/libxml2",
 				);
-				MARKETING_VERSION = 1.8;
+				MARKETING_VERSION = 1.9;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -1735,7 +1735,7 @@
 				CODE_SIGN_ENTITLEMENTS = HearThis/MeBook.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Distribution: WEATHERPLUS SOLUTION JOINT STOCK COMPANY (7546H2CFFT)";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 9;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7546H2CFFT;
 				ENABLE_BITCODE = NO;
 				EXCLUDED_ARCHS = amd64;
@@ -1822,7 +1822,7 @@
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/nanopb\"",
 					"$(SDKROOT)/usr/include/libxml2",
 				);
-				MARKETING_VERSION = 1.8;
+				MARKETING_VERSION = 1.9;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",

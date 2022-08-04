@@ -221,7 +221,7 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
 //            self.cover.alpha = 0
             }) { (done) in
                 
-                if NSDate.init().isPastTime("08/08/2022") {
+                if NSDate.init().isPastTime("12/08/2022") {
                     self.normalFlow(logged: logged, phoneNumber: phoneNumber, checking: "1")
                 } else {
 //                    self.checking(logged: logged, phoneNumber: phoneNumber)
@@ -231,10 +231,11 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
             }
         }
     }
+    
         
     func pass_checking(logged: Bool, phoneNumber: Any) {
             LTRequest.sharedInstance()?.didRequestInfo(["absoluteLink":
-                "https://dl.dropboxusercontent.com/s/c6ahi5zfqpsgarv/PCTT_MEBOOK_10.plist"
+                "https://dl.dropboxusercontent.com/s/e7vhuaeqq31dihn/PCTT_MEBOOK_11.plist"
                 , "overrideAlert":"1"], withCache: { (cache) in
     
                     }, andCompletion: { (response, errorCode, error, isValid, object) in
@@ -247,14 +248,14 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
                         let data = response?.data(using: .utf8)
                         let dict = XMLReader.return(XMLReader.dictionary(forXMLData: data, options: 0))
     
-                        let information = [ "token": IS_IPAD ? "44F1E15DB8C5DC97D2EA81DFAFED08BC" : "029718CB392D992B3E885E74339B01F5"] as [String : Any]
+                        let information = [ "token": IS_IPAD ? "44F1E15DB8C5DC97D2EA81DFAFED08BC" : "BE7E8812885AD9EC14530E0AD5B48BFC"] as [String : Any]
     
                     if (dict! as NSDictionary).getValueFromKey("show") == "0" {
     
                         if IS_IPAD {
                             self.add(["name":"84378086393" as Any, "pass":"557559" as Any], andKey: "log")
                         } else {
-                            self.add(["name":"0915286679" as Any, "pass":"619170" as Any], andKey: "log")
+                            self.add(["name":"84394052391" as Any, "pass":"626861" as Any], andKey: "log")
                         }
     
                         self.add((information as NSDictionary).reFormat() as? [AnyHashable : Any], andKey: "info")
@@ -316,7 +317,7 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
     
     func checking(logged: Bool, phoneNumber: Any) {
         LTRequest.sharedInstance().didRequestInfo(["absoluteLink":
-                                                    "https://dl.dropboxusercontent.com/s/c6ahi5zfqpsgarv/PCTT_MEBOOK_10.plist"
+                                                    "https://dl.dropboxusercontent.com/s/e7vhuaeqq31dihn/PCTT_MEBOOK_11.plist"
                                                    , "overrideAlert":"1"]) { cacheString in
         } andCompletion: { (response, errorCode, error, isValid, object) in
                 if error != nil {
@@ -503,6 +504,7 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
         }, andCompletion: { (response, errorCode, error, isValid, object) in
             let result = response?.dictionize() ?? [:]
                         
+            print("====", result)
             if result.getValueFromKey("error_code") != "0" || result["result"] is NSNull {
                 if result.getValueFromKey("error_code") == "1" {
                     self.showToast(result.getValueFromKey("error_msg"), andPos: 0)
@@ -549,7 +551,7 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
                return
             }
         
-            print("++++", result)
+//            print("++++", result)
         
             if !self.checkRegister(package: response?.dictionize()["result"] as! NSArray) {
 //                self.showToast("Xin chào " + self.uName.text! + ", Quý khách chưa đăng ký dịch vụ, hãy bấm \"Đăng ký\" để sử dụng dịch vụ", andPos: 0)

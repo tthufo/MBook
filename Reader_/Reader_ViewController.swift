@@ -334,7 +334,7 @@ class Reader_ViewController: UIViewController, UICollectionViewDataSource, UICol
     }
 
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return true
+        return false
     }
     
     func createStack(center: Int) -> UIView {
@@ -405,6 +405,16 @@ class Reader_ViewController: UIViewController, UICollectionViewDataSource, UICol
         self.replacePage_Stack(isLeft: false, parentView: sender.view!)
 
         self.pageNumber.text = "%i[%i] / %i".format(parameters: currentPage + 1, tempIndex + 1, self.pdfDocument.documentRef?.numberOfPages as! CVarArg)
+        
+//        print("current page --> %i tempIndex --> %i +++ page ---> %i", currentPage + 1, self.tempIndex + 1, self.pdfDocument.documentRef?.numberOfPages as Any? ?? 0)
+//
+//        print("-->", self.tempList.count)
+
+        if currentPage + 1 == self.pdfDocument.documentRef?.numberOfPages && self.tempIndex == self.tempList.count - 1 {
+            if self.isRestricted {
+                self.showRestricted()
+            }
+        }
     }
     
     func dark() -> UIColor {
@@ -556,6 +566,8 @@ class Reader_ViewController: UIViewController, UICollectionViewDataSource, UICol
             self.pageNumber.text = "%i / %i".format(parameters: currentPage + 1, self.pdfDocument.documentRef?.numberOfPages as! CVarArg)
         }
 
+        print("current page --> %i +++ page ---> %i", currentPage + 1, self.pdfDocument.documentRef?.numberOfPages as Any? ?? 0)
+        
         if currentPage + 1 == self.pdfDocument.documentRef?.numberOfPages {
             if self.isRestricted {
                 self.showRestricted()
