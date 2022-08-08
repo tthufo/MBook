@@ -168,7 +168,7 @@ extension PC_Info_ViewController: UITableViewDataSource, UITableViewDelegate {
         
         let cell = tableView.dequeueReusableCell(withIdentifier:"PC_Info_Cell", for: indexPath)
         
-        let data = indexPath.section == 0 ? packageList![indexPath.row] as! NSDictionary :  dataList![indexPath.row] as! NSDictionary
+        let data = indexPath.section == 0 ? packageList![indexPath.row] as! NSDictionary : dataList![indexPath.row] as! NSDictionary
 
         
         let image = self.withView(cell, tag: 11) as! UIImageView

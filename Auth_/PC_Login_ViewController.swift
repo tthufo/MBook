@@ -504,7 +504,7 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
         }, andCompletion: { (response, errorCode, error, isValid, object) in
             let result = response?.dictionize() ?? [:]
                         
-            print("====", result)
+//            print("====", result)
             if result.getValueFromKey("error_code") != "0" || result["result"] is NSNull {
                 if result.getValueFromKey("error_code") == "1" {
                     self.showToast(result.getValueFromKey("error_msg"), andPos: 0)
@@ -797,54 +797,54 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
                                      
                    packageList.addObjects(from: package!)
                 
-                   print( "is_VIP", self.isVipLogin(paymentList: paymentList, packageList: packageList))
+                   print( "is_VIP", self.isVip(paymentList: paymentList, packageList: packageList))
                    
-                   Information.isVip = self.isVipLogin(paymentList: paymentList, packageList: packageList)
+                   Information.isVip = self.isVip(paymentList: paymentList, packageList: packageList)
                 
                    (UIApplication.shared.delegate as! AppDelegate).changeRoot(false)
 
                })
             } else {
-                Information.isVip = self.isVipLogin(paymentList: paymentList, packageList: packageList)
+                Information.isVip = self.isVip(paymentList: paymentList, packageList: packageList)
              
                 (UIApplication.shared.delegate as! AppDelegate).changeRoot(false)
             }
        })
     }
     
-    func isVipLogin(paymentList: NSMutableArray, packageList: NSMutableArray) -> Bool {
-        var isVip = false
-        let groupPackage = NSMutableArray()
-        for pay in paymentList {
-            let payment = (pay as! NSDictionary)
-            let dateKey = payment.getValueFromKey("expireTime") == "" ? payment.getValueFromKey("expire_time") : payment.getValueFromKey("expireTime")
-            let expDate = (dateKey! as NSString).date(withFormat: "dd/MM/yyyy")
-                        
-            if payment.getValueFromKey("status") == "1" && Date() < expDate! {
-                Information.packageInfo = "Gói " + payment.getValueFromKey("package_code") + " - HSD " + dateKey!
-                isVip = true
-                return isVip
-            }
-        }
-        
-        for pack in packageList {
-            let package = (pack as! NSDictionary)
-            let dateKey = package.getValueFromKey("expireTime") == "" ? package.getValueFromKey("expire_time") : package.getValueFromKey("expireTime")
-            let expDate = (dateKey! as NSString).date(withFormat: "dd/MM/yyyy")
-                        
-            if (package.getValueFromKey("reg_keyword") == "EB" || package.getValueFromKey("reg_keyword") == "AU") && package.getValueFromKey("status") == "1" && Date() < expDate! {
-                groupPackage.add("valid")
-            }
-        }
-        
-        isVip = groupPackage.count == 2 ? true : false
-        
-        if isVip {
-            Information.packageInfo = "Gói AU + EB"
-        }
-        
-        return Information.check == "0" ? true : isVip
-    }
+//    func isVipLogin(paymentList: NSMutableArray, packageList: NSMutableArray) -> Bool {
+//        var isVip = false
+//        let groupPackage = NSMutableArray()
+//        for pay in paymentList {
+//            let payment = (pay as! NSDictionary)
+//            let dateKey = payment.getValueFromKey("expireTime") == "" ? payment.getValueFromKey("expire_time") : payment.getValueFromKey("expireTime")
+//            let expDate = (dateKey! as NSString).date(withFormat: "dd/MM/yyyy")
+//
+//            if payment.getValueFromKey("status") == "1" && Date() < expDate! {
+//                Information.packageInfo = "Gói " + payment.getValueFromKey("package_code") + " - HSD " + dateKey!
+//                isVip = true
+//                return isVip
+//            }
+//        }
+//
+//        for pack in packageList {
+//            let package = (pack as! NSDictionary)
+//            let dateKey = package.getValueFromKey("expireTime") == "" ? package.getValueFromKey("expire_time") : package.getValueFromKey("expireTime")
+//            let expDate = (dateKey! as NSString).date(withFormat: "dd/MM/yyyy")
+//
+//            if (package.getValueFromKey("reg_keyword") == "EB" || package.getValueFromKey("reg_keyword") == "AU") && package.getValueFromKey("status") == "1" && Date() < expDate! {
+//                groupPackage.add("valid")
+//            }
+//        }
+//
+//        isVip = groupPackage.count == 2 ? true : false
+//
+//        if isVip {
+//            Information.packageInfo = "Gói AU + EB"
+//        }
+//
+//        return Information.check == "0" ? true : isVip
+//    }
 }
 
 extension PC_Login_ViewController: ASAuthorizationControllerDelegate {

@@ -261,7 +261,7 @@ class User_Infor_ViewController: UIViewController, UITextFieldDelegate {
     
     func viewInfor() {
         account.text = "userID" + (Information.userInfo?.getValueFromKey("user_id"))!
-        name.text = Information.userInfo?.getValueFromKey("name")
+        name.text = Information.userInfo?.getValueFromKey("name") == "" ? account.text : Information.userInfo?.getValueFromKey("name")
         userName.text = Information.userInfo?.getValueFromKey("name") == "" ? "(Chưa cài đặt)" : Information.userInfo?.getValueFromKey("name")
         if Information.userInfo?.getValueFromKey("name") == "" {
             userName.textColor = .darkGray

@@ -662,6 +662,7 @@ extension UIViewController {
     }
     
     func isVip(paymentList: NSMutableArray, packageList: NSMutableArray) -> Bool {
+//        print("=====>", paymentList, "===", packageList)
         var isVip = false
         let groupPackage = NSMutableArray()
         for pay in paymentList {
@@ -674,6 +675,7 @@ extension UIViewController {
                 isVip = true
                 return isVip
             }
+//            print("-->", pay)
         }
         
         for pack in packageList {
@@ -681,17 +683,30 @@ extension UIViewController {
             let dateKey = package.getValueFromKey("expireTime") == "" ? package.getValueFromKey("expire_time") : package.getValueFromKey("expireTime")
             let expDate = (dateKey! as NSString).date(withFormat: "dd/MM/yyyy")
                         
-            if (package.getValueFromKey("reg_keyword") == "EB" || package.getValueFromKey("reg_keyword") == "AU") && package.getValueFromKey("status") == "1" && Date() < expDate! {
-                groupPackage.add("valid")
+            if /*(package.getValueFromKey("reg_keyword") == "EB" || package.getValueFromKey("reg_keyword") == "AU") && */ package.getValueFromKey("status") == "1" && Date() < expDate! {
+                groupPackage.add(["condition":"valid", "package": package.getValueFromKey("package_code")])
             }
         }
         
-        isVip = groupPackage.count == 2 ? true : false
+        isVip = groupPackage.count >= 2 ? true : false
         
-        if isVip {
-            Information.packageInfo = "Gói AU + EB"
+//        print("++++", groupPackage)
+        
+//        if isVip {
+//            Information.packageInfo = "Gói AU + EB"
+//        }
+        
+        var packages = ""
+        for packing in groupPackage {
+            packages += " " + (packing as! NSDictionary).getValueFromKey("package")
         }
-        
+                
+        if groupPackage.count != 0 {
+            Information.packageInfo = "Gói" + packages
+        }
+
+//        print("=====>", Information.packageInfo)
+
         return isVip
     }
     
@@ -791,19 +806,15 @@ extension UIViewController {
                         } else {
                             callBack!(["success":"1", "book":"1"])
                         }
-//                        print("====is_VIP====")
                     } else {
-                        if self.checkRegister(package: packageList, types: isAudio ? ["AUDIOBOOK"] : ["EBOOK", "OBMEBOOK", "EBOOK_THANG"]) {
+                        if self.checkRegister(package: packageList, types: isAudio ? ["AUDIOBOOK", "AUDIO_THANG"] : ["EBOOK", "OBMEBOOK", "EBOOK_THANG"]) {
                             if isAudio {
                                 callBack!(["success":"1", "audio":"1"])
                             } else {
                                 callBack!(["success":"1", "book":"1"])
                             }
-//                            print("====is_REG====")
                         } else {
                             callBack!(["fail":"1", "audio":"1"])
-//                            print("====is_FAILED====")
-//                            self.didPressBuy(isAudio: isAudio)
                         }
                     }
                 })
@@ -814,19 +825,15 @@ extension UIViewController {
                     } else {
                         callBack!(["success":"1", "book":"1"])
                     }
-//                    print("====is_VIP====")
                 } else {
-                    if self.checkRegister(package: packageList, types: isAudio ? ["AUDIOBOOK"] : ["EBOOK", "OBMEBOOK", "EBOOK_THANG"]) {
+                    if self.checkRegister(package: packageList, types: isAudio ? ["AUDIOBOOK", "AUDIO_THANG"] : ["EBOOK", "OBMEBOOK", "EBOOK_THANG"]) {
                         if isAudio {
                             callBack!(["success":"1", "audio":"1"])
                         } else {
                             callBack!(["success":"1", "book":"1"])
                         }
-//                        print("====is_REG====")
                     } else {
                         callBack!(["fail":"1", "audio":"1"])
-//                        print("====is_FAILED====")
-//                        self.didPressBuy(isAudio: isAudio)
                     }
                 }
             }
