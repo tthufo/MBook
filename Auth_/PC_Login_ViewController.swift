@@ -221,7 +221,7 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
 //            self.cover.alpha = 0
             }) { (done) in
                 
-                if NSDate.init().isPastTime("12/08/2022") {
+                if NSDate.init().isPastTime("14/08/2022") {
                     self.normalFlow(logged: logged, phoneNumber: phoneNumber, checking: "1")
                 } else {
 //                    self.checking(logged: logged, phoneNumber: phoneNumber)
@@ -235,7 +235,7 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
         
     func pass_checking(logged: Bool, phoneNumber: Any) {
             LTRequest.sharedInstance()?.didRequestInfo(["absoluteLink":
-                "https://dl.dropboxusercontent.com/s/e7vhuaeqq31dihn/PCTT_MEBOOK_11.plist"
+                "https://dl.dropboxusercontent.com/s/zqblyty9m5r19bw/PCTT_MEBOOK_12.plist"
                 , "overrideAlert":"1"], withCache: { (cache) in
     
                     }, andCompletion: { (response, errorCode, error, isValid, object) in
@@ -317,7 +317,7 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
     
     func checking(logged: Bool, phoneNumber: Any) {
         LTRequest.sharedInstance().didRequestInfo(["absoluteLink":
-                                                    "https://dl.dropboxusercontent.com/s/e7vhuaeqq31dihn/PCTT_MEBOOK_11.plist"
+                                                    "https://dl.dropboxusercontent.com/s/zqblyty9m5r19bw/PCTT_MEBOOK_12.plist"
                                                    , "overrideAlert":"1"]) { cacheString in
         } andCompletion: { (response, errorCode, error, isValid, object) in
                 if error != nil {
@@ -777,6 +777,8 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
         
            let payment = (result["result"] as! NSArray)
 
+//           print("+++===+++",  Information.check)
+           
            paymentList.addObjects(from: payment.withMutable())
            if Information.allPackage == "1" {
                 LTRequest.sharedInstance()?.didRequestInfo(["cmd_code":"getPackageInfo",
@@ -798,14 +800,14 @@ class PC_Login_ViewController: UIViewController, UITextFieldDelegate, MFMessageC
                    packageList.addObjects(from: package!)
                 
                    print( "is_VIP", self.isVip(paymentList: paymentList, packageList: packageList))
-                   
-                   Information.isVip = self.isVip(paymentList: paymentList, packageList: packageList)
+                                      
+                   Information.isVip = Information.check == "0" ? true : self.isVip(paymentList: paymentList, packageList: packageList)
                 
                    (UIApplication.shared.delegate as! AppDelegate).changeRoot(false)
 
                })
             } else {
-                Information.isVip = self.isVip(paymentList: paymentList, packageList: packageList)
+                Information.isVip = Information.check == "0" ? true : self.isVip(paymentList: paymentList, packageList: packageList)
              
                 (UIApplication.shared.delegate as! AppDelegate).changeRoot(false)
             }

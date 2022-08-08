@@ -675,7 +675,6 @@ extension UIViewController {
                 isVip = true
                 return isVip
             }
-//            print("-->", pay)
         }
         
         for pack in packageList {
@@ -690,7 +689,6 @@ extension UIViewController {
         
         isVip = groupPackage.count >= 2 ? true : false
         
-//        print("++++", groupPackage)
         
 //        if isVip {
 //            Information.packageInfo = "Gói AU + EB"
@@ -704,8 +702,6 @@ extension UIViewController {
         if groupPackage.count != 0 {
             Information.packageInfo = "Gói" + packages
         }
-
-//        print("=====>", Information.packageInfo)
 
         return isVip
     }

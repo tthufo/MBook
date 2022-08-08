@@ -1603,7 +1603,7 @@
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/nanopb\"",
 					"$(SDKROOT)/usr/include/libxml2",
 				);
-				MARKETING_VERSION = 1.9;
+				MARKETING_VERSION = 2.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -1822,7 +1822,7 @@
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/nanopb\"",
 					"$(SDKROOT)/usr/include/libxml2",
 				);
-				MARKETING_VERSION = 1.9;
+				MARKETING_VERSION = 2.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
