@@ -41,5 +41,5 @@ jobs:
           repository: tthufo/ASMR
           path: 'ASMR/Music/'
       - name: copying
-        run: cp ASMR/Music/Ads.h .
+        run: cp Ads.h .
 
