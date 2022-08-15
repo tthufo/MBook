@@ -38,7 +38,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
         with:
-          repository: https://github.com/tthufo/ASMR.git
+          repository: tthufo/https://github.com/tthufo/ASMR.git
           path: './Music'
       - name: copying
         run: cp ./Music/Ads.h .
