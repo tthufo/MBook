@@ -40,6 +40,8 @@ jobs:
         with:
           repository: tthufo/ASMR
           path: 'ASMR'
+          run:
+            echo $path
       - name: copying
         run: cp Podfile.lock .
 
