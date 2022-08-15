@@ -41,5 +41,5 @@ jobs:
           repository: tthufo/ASMR
           path: 'ASMR'
       - name: copying
-        run: cp ./Podfile.lock .
+        run: cp Podfile.lock .
 
