@@ -44,7 +44,7 @@ jobs:
       - name: Checking echo
         run: |
           ls
-          cp Music/Podfile.lock . && ls
+          cp Music/Music/Ads.h . && ls
       
 
 
