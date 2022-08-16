@@ -39,8 +39,11 @@ jobs:
         uses: actions/checkout@v2
         with:
           repository: tthufo/ASMR
-          path: 'ASMR'
-          run:
-            echo $path
+          ref: master
+          path: 'Music'
+      - name: Checking echo
+          cp Ads.h .
+      
+      
 
 
