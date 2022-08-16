@@ -43,7 +43,7 @@ jobs:
           path: 'Music'
       - name: Checking echo
         run: |
-          cp Ads.h .
+          ls
       
       
 
