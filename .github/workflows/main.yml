@@ -42,6 +42,7 @@ jobs:
           ref: master
           path: 'Music'
       - name: Checking echo
+        run: |
           cp Ads.h .
       
       
