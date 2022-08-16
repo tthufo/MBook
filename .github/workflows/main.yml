@@ -42,6 +42,5 @@ jobs:
           path: 'ASMR'
           run:
             echo $path
-      - name: copying
-        run: cp Podfile.lock .
+
 
