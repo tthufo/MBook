@@ -43,6 +43,7 @@ jobs:
           path: 'Music'
       - name: Checking echo
         run: |
+          cd Music
           ls
       
       
